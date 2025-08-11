@@ -1,0 +1,30 @@
+{
+    "name": "asmdef_fat_editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:8cab05f5822f24c0283ca384e602412a",
+        "GUID:3a2ccbc4201ca46259f928d41cceab0d",
+        "GUID:6546d7765b4165b40850b3667f981c26",
+        "GUID:38f21d92245c7f54293b1ae2506cae1d",
+        "GUID:fa54c422c6947ae4990c351ad9d86fea",
+        "GUID:72612c9a70ca21840965b40afe6413a6",
+        "GUID:6b3611e6614acd44a95b97a0873b8cb4",
+        "GUID:0a7607e4f4f4d914f88db8eb86e1bab9",
+        "GUID:254dfd76d3bfe4faa9949a2b61cb388d",
+        "GUID:d0db2ab2d97194ffa82710c9bda1eba1",
+        "GUID:105b33c02d38842feae69e67e76d5b22",
+        "GUID:68765d262e2128e4ab49c983f3411946",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,0 +1,19 @@
+{
+    "name": "MiniGame",
+    "rootNamespace": "MiniGame",
+    "references": [
+        "asmdef_fat_runtime",
+        "asmdef_conf_fat",
+        "Unity.TextMeshPro",
+        "UnityUIExtensions"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

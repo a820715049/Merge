@@ -1,0 +1,11 @@
+<linker>
+    <assembly fullname="Assembly-CSharp-firstpass">
+        <type fullname="IFix.WrappersManagerImpl" preserve="all" />
+    </assembly>
+    <assembly fullname="Assembly-CSharp">
+        <type fullname="IFix.WrappersManagerImpl" preserve="all" />
+    </assembly>
+    <assembly fullname="asmdef_fat_runtime">
+        <type fullname="IFix.WrappersManagerImpl" preserve="all" />
+    </assembly>
+</linker>
