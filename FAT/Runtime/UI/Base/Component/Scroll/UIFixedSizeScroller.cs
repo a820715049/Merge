@@ -321,21 +321,14 @@ namespace FAT
         // 简单实现 只适用垂直方向 从上到下排列
         protected void ScrollToIdx(int idx)
         {
-            // to 表示item的上边界
             var item = mProxyList[idx];
-
-            // 中部对齐
-            // var pos = (item.to + item.from) * 0.5f;
-            // var workingAreaSize = (transform as RectTransform).rect.height;
-            // var scrollPos = -pos - workingAreaSize * 0.5f;
-            // scrollPos = Mathf.Max(0f, scrollPos);
-            // scrollPos = Mathf.Min((mContentSize - workingAreaSize), scrollPos);
-
+            var viewportH = (transform as RectTransform).rect.height;
+            var maxScroll = Mathf.Max(0f, mContentSize - viewportH);
             // 顶部对齐
-            var scrollPos = -item.to;
-            var workingAreaSize = (transform as RectTransform).rect.height;
-            if (scrollPos > mContentSize - workingAreaSize)
-                scrollPos = mContentSize - workingAreaSize;
+            // 目标位置：把 item.to 对齐到顶部，再 Clamp 到合理区间
+            var scrollPos = -item.to;   // to 表示item的上边界
+            // 当内容不足一屏时 maxScroll == 0，这里会把 scrollPos 强制为 0
+            scrollPos = Mathf.Clamp(scrollPos, 0, maxScroll);
             transform.GetComponent<ScrollRect>().velocity = Vector2.zero;
             content.anchoredPosition = new Vector2(0f, scrollPos);
         }

@@ -141,14 +141,20 @@ namespace FAT {
             price1.Enabled(valid, pack.Price1);
             price2.Enabled(valid, pack.Price2);
             price3.Enabled(valid, pack.Price3);
+            confirm1.interactable = valid;
+            confirm2.interactable = valid;
+            confirm3.interactable = valid;
             if (!valid)
             {
-                confirm1.interactable = false;
-                confirm2.interactable = false;
-                confirm3.interactable = false;
                 GameUIUtility.SetGrayShader(confirm1.image);
                 GameUIUtility.SetGrayShader(confirm2.image);
                 GameUIUtility.SetGrayShader(confirm3.image);
+            }
+            else
+            {
+                GameUIUtility.SetDefaultShader(confirm1.image);
+                GameUIUtility.SetDefaultShader(confirm2.image);
+                GameUIUtility.SetDefaultShader(confirm3.image);
             }
         }
 

@@ -28,7 +28,7 @@ namespace FAT
 
         public void Refresh()
         {
-            var conf = BingoUtility.GetBoardConfig(actInst.ConfBoardID);
+            var conf = ItemBingoUtility.GetBoardConfig(actInst.ConfBoardID);
             var categoryIds = conf.ConnectSpawner;
             for (var i = 0; i < itemRoot.childCount; i++)
             {
@@ -48,7 +48,7 @@ namespace FAT
 
         private void RefreshItem(Transform trans, int catId)
         {
-            var itemId = BingoUtility.GetHighestLevelItemIdInCategory(catId);
+            var itemId = ItemBingoUtility.GetHighestLevelItemIdInCategory(catId);
             if (itemId <= 0)
             {
                 trans.gameObject.SetActive(false);
@@ -57,7 +57,7 @@ namespace FAT
             trans.gameObject.SetActive(true);
             var cfg = Env.Instance.GetItemConfig(itemId);
             trans.Access<UIImageRes>("Root/Icon").SetImage(cfg.Icon);
-            var hasItemInBoard = BingoUtility.HasActiveItemInMainBoard(itemId);
+            var hasItemInBoard = ItemBingoUtility.HasActiveItemInMainBoard(itemId);
             // 对勾
             trans.Find("Root/Check").gameObject.SetActive(hasItemInBoard);
             // 按钮
@@ -75,8 +75,8 @@ namespace FAT
 
         private void RefreshItemAnim(Transform trans, int catId, bool skip)
         {
-            var itemId = BingoUtility.GetHighestLevelItemIdInCategory(catId);
-            var hasItemInBoard = BingoUtility.HasActiveItemInMainBoard(itemId);
+            var itemId = ItemBingoUtility.GetHighestLevelItemIdInCategory(catId);
+            var hasItemInBoard = ItemBingoUtility.HasActiveItemInMainBoard(itemId);
             // skip情况下直接切换到最终状态
             // 非skip时需要播放切换
             var trigger = skip ?

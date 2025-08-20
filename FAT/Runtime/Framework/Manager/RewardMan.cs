@@ -28,18 +28,21 @@ namespace FAT
         private List<RoundTool> mRoundToolList = new();
         private List<RoundLifeTime> mRoundLifeTimeList = new();
         //每次begin时都记录一下需要被commit的数据 用于在Reset时检查 避免有需要commit的奖励被遗漏
-        private List<RewardCommitData> _needCommitDataList = new List<RewardCommitData>();      
+        private List<RewardCommitData> _needCommitDataList = new List<RewardCommitData>();
 
         private const int kRewardStringNoCountMask = /* (int)ObjConfigType.Deco | (int)ObjConfigType.RolePart | (int)ObjConfigType.Role | */(int)ObjConfigType.RewardVip;
 
-        public void ReportCommit() {
+        public void ReportCommit()
+        {
             var b = new StringBuilder("reward commit data:").AppendLine();
-            if (_needCommitDataList.Count == 0) {
+            if (_needCommitDataList.Count == 0)
+            {
                 b.Append("none");
                 DebugEx.Warning(b.ToString());
                 return;
             }
-            foreach(var d in _needCommitDataList) {
+            foreach (var d in _needCommitDataList)
+            {
                 b.Append(d.rewardId).Append(':').Append(d.rewardCount).Append(' ');
                 b.Append("reason:").Append(d.reason).Append(' ');
                 if (d.flags != RewardFlags.None) b.Append("flags:").Append(d.flags).Append(' ');
@@ -50,25 +53,26 @@ namespace FAT
                 b.AppendLine();
                 var s = "Scripts";
                 var ss = d._f.IndexOf(s);
-                var f = ss > 0 ? d._f[(ss+s.Length+1)..] : d._f;
+                var f = ss > 0 ? d._f[(ss + s.Length + 1)..] : d._f;
                 b.Append('>').Append(d._m).Append('@').Append(f).Append('#').Append(d._l);
                 b.AppendLine();
             }
             DebugEx.Warning(b.ToString());
         }
 
-        public void TestCommit() {
+        public void TestCommit()
+        {
             var w = Game.Manager.mergeBoardMan.activeWorld;
             var d = _GenerateReward(100, 10, ReasonString.daily_event);
             _needCommitDataList.Add(d);
-            d = _GenerateReward(101, 10, ReasonString.free, flags:RewardFlags.IsEventPriority);
+            d = _GenerateReward(101, 10, ReasonString.free, flags: RewardFlags.IsEventPriority);
             _needCommitDataList.Add(d);
             d = _GenerateReward(102, 10, ReasonString.order, context_: new() { targetWorld = w });
             _needCommitDataList.Add(d);
-            d = _GenerateReward(103, 10, ReasonString.free, flags:RewardFlags.IsUseIAP, context_: new() { targetWorld = w });
+            d = _GenerateReward(103, 10, ReasonString.free, flags: RewardFlags.IsUseIAP, context_: new() { targetWorld = w });
             d.WaitCommit = true;
             _needCommitDataList.Add(d);
-            d = _GenerateReward(103, 10, ReasonString.free, flags:RewardFlags.IsUseIAP, context_: new() { targetWorld = w });
+            d = _GenerateReward(103, 10, ReasonString.free, flags: RewardFlags.IsUseIAP, context_: new() { targetWorld = w });
             d.isFake = true;
             _needCommitDataList.Add(d);
         }
@@ -85,11 +89,12 @@ namespace FAT
         }
         public void CommitReward(RewardCommitData data)
         {
-            DataTracker.TrackLogInfo($"RewardMan.CommitReward: waitCommit: {data.WaitCommit}, rewardId: {data.rewardId}, rewardCount: {data.rewardCount}, reason: {data.reason}");
+            var info = $"RewardMan.CommitReward ----> for reward: {data.ToString()}";
+            DataTracker.TrackLogInfo(info);
+            DebugEx.Info(info);
             //只有奖励数据被标记为WaitCommit时才会执行CommitReward逻辑，并在执行完后将其移出List
             if (data.WaitCommit)
             {
-                DebugEx.FormatInfo("RewardMan.CommitReward ----> for reward = {0}", data.ToString());
                 _CommitReward(data);
                 _needCommitDataList.Remove(data);
                 data.WaitCommit = false;
@@ -101,10 +106,10 @@ namespace FAT
         //仅供UIFlyManager执行飞图标逻辑时使用
         public void CommitSplitReward(RewardCommitData data, int splitCount)
         {
+            DebugEx.FormatInfo("RewardMan.CommitSplitReward ----> splitCount = {0}, for reward = {1}", splitCount, data.ToString());
             //reward飞行过程中会保持WaitCommit为true,在最后飞完时会走CommitReward,在其中将WaitCommit置为false
             if (data.WaitCommit && splitCount < data.rewardCount)
             {
-                DebugEx.FormatInfo("RewardMan.CommitSplitReward ----> splitCount = {0}, for reward = {0}", splitCount, data.ToString());
                 data.rewardCount -= splitCount;
                 //每次commit被分割的部分
                 _CommitReward(data, splitCount);
@@ -143,6 +148,18 @@ namespace FAT
                                 MessageCenter.Get<MSG.ORDERLIKE_TOKEN_CHANGE>().Dispatch();
                             }
                             break;
+                        case FeatureEntry.FeatureDecorate:
+                            if (rewardId == Game.Manager.decorateMan.Activity?.confD.RequireScoreId)
+                            {
+                                Game.Manager.decorateMan.FinishFlyCoin(rewardCount);
+                            }
+                            break;
+                        case FeatureEntry.FeatureClawOrder:
+                            if (Game.Manager.activity.LookupAny(EventType.ClawOrder, out var _clawOrder))
+                            {
+                                (_clawOrder as ActivityClawOrder).ResolveFlyingToken(rewardCount);
+                            }
+                            break;
                     }
                     break;
                 default:
@@ -155,24 +172,25 @@ namespace FAT
                             Game.Manager.mergeLevelMan.FinishFlyExp(rewardCount);
                             break;
                         default:
-                        {
-                            if(Game.Manager.decorateMan.Activity == null)
-                                break;
-                            if (rewardId == Game.Manager.decorateMan.Activity.confD.RequireScoreId)
                             {
-                                Game.Manager.decorateMan.FinishFlyCoin(rewardCount);
+                                if (Game.Manager.decorateMan.Activity == null)
+                                    break;
+                                if (rewardId == Game.Manager.decorateMan.Activity.confD.RequireScoreId)
+                                {
+                                    Game.Manager.decorateMan.FinishFlyCoin(rewardCount);
+                                }
+                                break;
                             }
-                            break;
-                        }
                     }
                     break;
             }
         }
 
         private RewardCommitData _GenerateReward(int rewardId, int rewardCount, ReasonString reason, RewardFlags flags = RewardFlags.None, RewardContext context_ = default,
-            [CallerLineNumber]int _l = 0, [CallerFilePath]string _f = null, [CallerMemberName]string _m = null)
+            [CallerLineNumber] int _l = 0, [CallerFilePath] string _f = null, [CallerMemberName] string _m = null)
         {
-            if (string.IsNullOrEmpty(reason?.ToString())) {
+            if (string.IsNullOrEmpty(reason?.ToString()))
+            {
                 DebugEx.Error($"empty reason for reward {rewardId} {rewardCount}");
             }
             DebugEx.FormatInfo("RewardMan._GenerateReward ----> for id:{0}, count:{1}, reason:{2}", rewardId, rewardCount, reason);
@@ -189,7 +207,7 @@ namespace FAT
 
         private RewardCommitData _BeginReward(RewardCommitData data)
         {
-            DebugEx.FormatInfo("RewardMan.BeginReward ----> for id:{0}, type:{1}, count:{2}, reason:{3}, fake:{4}", data.rewardId, data.rewardType, data.rewardCount, data.reason, data.isFake);
+            DebugEx.FormatInfo("RewardMan.BeginReward ----> for reward = {0}", data.ToString());
             if (mContextStack.Count > 0)
             {
                 data.context = mContextStack.Peek();
@@ -219,7 +237,8 @@ namespace FAT
                     break;
                 case ObjConfigType.ActivityToken:
                     var tokenConf = Game.Manager.objectMan.GetTokenConfig(data.rewardId);
-                    switch (tokenConf.Feature) {
+                    switch (tokenConf.Feature)
+                    {
                         case FeatureEntry.FeatureDem:
                             Game.Manager.dailyEvent.UpdateMilestone(data.rewardId, data.rewardCount);
                             break;
@@ -248,9 +267,17 @@ namespace FAT
                             }
                             break;
                         case FeatureEntry.FeatureGuess:
-                            if (Game.Manager.activity.LookupAny(EventType.Guess, out var actGuess)) {
+                            if (Game.Manager.activity.LookupAny(EventType.Guess, out var actGuess))
+                            {
                                 var activityGuess = (ActivityGuess)actGuess;
                                 activityGuess.UpdateScoreOrToken(data.rewardId, data.rewardCount);
+                            }
+                            break;
+                        case FeatureEntry.FeatureCastleMilestone:
+                            if (Game.Manager.activity.LookupAny(EventType.CastleMilestone, out var actCastle))
+                            {
+                                var activityCastle = (ActivityCastle)actCastle;
+                                activityCastle.AddMilestoneScore(data.rewardCount);
                             }
                             break;
                         case FeatureEntry.FeatureDecorate:
@@ -315,6 +342,21 @@ namespace FAT
                                     orderId = orderLikeParamProvider.orderId;
                                 }
                                 (_orderlike as ActivityOrderLike).AddToken(data.rewardId, data.rewardCount, orderId);
+                            }
+                            break;
+                        case FeatureEntry.FeatureBp:
+                            Game.Manager.activity.LookupAny(EventType.Bp, out var actBp);
+                            if (actBp != null)
+                            {
+                                var activityBp = (BPActivity)actBp;
+                                activityBp.TryAddMilestoneNum(data.rewardId, data.rewardCount, data.reason);
+                            }
+                            break;
+                        case FeatureEntry.FeatureClawOrder:
+                            if (Game.Manager.activity.LookupAny(EventType.ClawOrder, out var _clawOrder))
+                            {
+                                data.WaitCommit = true;
+                                (_clawOrder as ActivityClawOrder).AddToken(data.rewardId, data.rewardCount);
                             }
                             break;
                         default:
@@ -431,9 +473,9 @@ namespace FAT
         }
 
         public RewardCommitData BeginReward(int rewardId, int rewardCount, ReasonString reason, RewardFlags flags = RewardFlags.None, RewardContext context_ = default,
-            [CallerLineNumber]int _l = 0, [CallerFilePath]string _f = null, [CallerMemberName]string _m = null)
+            [CallerLineNumber] int _l = 0, [CallerFilePath] string _f = null, [CallerMemberName] string _m = null)
         {
-            return _BeginReward(_GenerateReward(rewardId, rewardCount, reason, flags, context_:context_, _l, _f, _m));
+            return _BeginReward(_GenerateReward(rewardId, rewardCount, reason, flags, context_: context_, _l, _f, _m));
         }
 
         public string GetRewardName(int id)
@@ -568,14 +610,14 @@ namespace FAT
             // }
             // else
             // {
-                if (!string.IsNullOrEmpty(basicInfo.Image))
-                {
-                    return basicInfo.Image.ConvertToAssetConfig();
-                }
-                else
-                {
-                    return GetRewardIcon(id, count);
-                }
+            if (!string.IsNullOrEmpty(basicInfo.Image))
+            {
+                return basicInfo.Image.ConvertToAssetConfig();
+            }
+            else
+            {
+                return GetRewardIcon(id, count);
+            }
             // }
         }
 
@@ -621,8 +663,7 @@ namespace FAT
 
         void IGameModule.Reset()
         {
-            //Reset时检查目前还没有commit的数据 直接commit
-            _CheckNeedCommitDataList(true);
+            _CheckNeedCommitDataList();
             mContextStack.Clear();
             mRoundCoinList.Clear();
             mRoundToolList.Clear();
@@ -640,18 +681,13 @@ namespace FAT
         {
         }
 
-        //Reset时检查目前还没有commit的数据 直接commit
-        private void _CheckNeedCommitDataList(bool isRestart)
+        //Reset时直接清理目前还没有commit的数据 不再帮忙commit 一切以服务器存档为准
+        private void _CheckNeedCommitDataList()
         {
             if (_needCommitDataList == null || _needCommitDataList.Count < 1)
                 return;
             foreach (var data in _needCommitDataList)
             {
-                // 现在不再使用本地存档 在restart时不再特意结算 以服务器存档为准
-                if (!isRestart)
-                {
-                    _CommitReward(data);
-                }
                 data.WaitCommit = false;
             }
             _needCommitDataList.Clear();
@@ -740,7 +776,8 @@ namespace FAT
             {
                 DebugEx.Error($"RewardMan::_RoundLifeTime no valid data found by {raw}");
                 idx = 0;
-            };
+            }
+            ;
             return mRoundLifeTimeList[idx].LifeTime;
         }
 
@@ -766,7 +803,8 @@ namespace FAT
             {
                 DebugEx.Error($"RewardMan::_RoundTool no valid reward found by {raw}");
                 idx = 0;
-            };
+            }
+            ;
             var reward = mRoundToolList[idx].Reward.ConvertToRewardConfig();
             return (reward.Id, reward.Count);
         }

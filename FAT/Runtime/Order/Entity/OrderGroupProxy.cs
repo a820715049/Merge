@@ -171,6 +171,11 @@ namespace FAT
             return orderHelper.ActiveOrderCount;
         }
 
+        public IOrderProvider GetProvider(OrderProviderType type)
+        {
+            return orderProviders[type];
+        }
+
         public bool TryFinishOrder(IOrderData order, ICollection<RewardCommitData> rewards)
         {
             var providerType = (OrderProviderType)order.ProviderType;
@@ -304,6 +309,7 @@ namespace FAT
         {
             Game.Manager.audioMan.TriggerSound("OrderFinish");  //订单完成时播音效
             DataTracker.order_end.Track(order);
+            DataTracker.board_info.Track(Game.Manager.mainMergeMan.world.activeBoard);
             MessageCenter.Get<MSG.GAME_ORDER_COMPLETED>().Dispatch(order);
         }
 

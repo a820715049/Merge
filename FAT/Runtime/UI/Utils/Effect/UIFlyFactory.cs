@@ -66,10 +66,14 @@ namespace FAT
                     ft = FlyType.PackDiscountToken;
                 else if (tokenConf.Feature == FeatureEntry.FeatureOrderLike)
                     ft = FlyType.OrderLikeToken;
+                else if (tokenConf.Feature == FeatureEntry.FeatureClawOrder)
+                    ft = FlyType.ClawOrderToken;
                 else if (tokenConf.Feature == FeatureEntry.FeatureWeeklyTask)
                     ft = FlyType.WeeklyTaskEntry;
                 else if (tokenConf.Feature == FeatureEntry.FeatureFarmBoard)
                     ft = FlyType.FarmToken;
+                else if (tokenConf.Feature == FeatureEntry.FeatureCastleMilestone)
+                    ft = FlyType.CastleToken;
                 else if (tokenConf.Feature == FeatureEntry.FeatureGuess)
                 {
                     var acti = (ActivityGuess)Game.Manager.activity.LookupAny(fat.rawdata.EventType.Guess);
@@ -99,6 +103,10 @@ namespace FAT
                         _ when acti.MilestoneTokenId == tokenConf.Id => FlyType.DuelMilestone,
                         _ => FlyType.DuelToken,
                     };
+                }
+                else if (tokenConf.Feature == FeatureEntry.FeatureBp)
+                {
+                    ft = FlyType.BPExp;
                 }
             }
             else if (mgr.IsType(rewardId, ObjConfigType.Coin))

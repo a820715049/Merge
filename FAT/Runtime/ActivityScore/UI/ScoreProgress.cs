@@ -46,7 +46,7 @@ namespace FAT
 #if UNITY_EDITOR
         private void OnValidate()
         {
-            if (Application.isPlaying) 
+            if (Application.isPlaying)
                 return;
             var root = transform.Find("group");
             group = root.gameObject;
@@ -77,6 +77,21 @@ namespace FAT
             MessageCenter.Get<MSG.UI_REWARD_FEEDBACK>().RemoveListener(ScoreIconScaleAnimate);
             MessageCenter.Get<MSG.SCORE_PROGRESS_ANIMATE>().RemoveListener(BeginProgressAnimate);
             MessageCenter.Get<MSG.GAME_ONE_SECOND_DRIVER>().RemoveListener(whenCd);
+
+            //当玩家离开棋盘时 尝试commit奖励 确保数据和显示正确
+            if (activityScore != null)
+            {
+                if (activityScore.ShouldPopup())
+                {
+                    activityScore.TryPopRewardUI();
+                }
+                else
+                {
+                    activityScore.TryCommitReward();
+                }
+                activityScore.PrevFinalMileStoneRewardId = 0;
+                activityScore.PrevFinalMileStoneRewardCount = 0;
+            }
         }
 
         public void OnEnable()
@@ -117,7 +132,7 @@ namespace FAT
             if (doTween != null)
                 doTween.Kill();
             Refresh(currentValue, targetValue);
-            Game.Instance.StartCoroutineGlobal(CoScoreProgressMove());   
+            Game.Instance.StartCoroutineGlobal(CoScoreProgressMove());
         }
 
         private IEnumerator CoScoreProgressMove()
@@ -144,7 +159,7 @@ namespace FAT
             if (doTween != null)
                 doTween.Kill();
             Refresh(currentValue, targetValue);
-            Game.Instance.StartCoroutineGlobal(CoScoreProgressMove());   
+            Game.Instance.StartCoroutineGlobal(CoScoreProgressMove());
         }
 
         private void Visible(bool v_)
@@ -211,7 +226,7 @@ namespace FAT
         private void RefreshCD()
         {
             if (!group.activeSelf)
-                return;            
+                return;
             var v = activityScore.Countdown;
             UIUtility.CountDownFormat(cd, v);
             if (v <= 0)
@@ -250,12 +265,12 @@ namespace FAT
             reward.Refresh(node.reward);
             return (node, prev);
         }
-        
+
         private void Progress(int v_, int p_)
         {
             progress.RefreshSegment((int)Math.Floor(currentV), v_, p_, 0, p_);
         }
-        
+
         private IEnumerator Animate()
         {
             Game.Manager.activity.LookupAny(EventType.Score, out var activity);
@@ -279,6 +294,13 @@ namespace FAT
                     Progress(node.value, prev);
                     var milestoneScore = node.value - prev;
                     progress.text.text = $"{milestoneScore}/{milestoneScore}";
+
+                    // 里程碑达成时检查是否需要弹窗
+                    if (activityScore.ShouldPopup())
+                    {
+                        activityScore.TryPopRewardUI();
+                    }
+
                     yield return new WaitForSeconds(1.5f);
                     if (next >= 0)
                         ++next;

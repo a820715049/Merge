@@ -276,6 +276,22 @@ public partial class DataTracker
         }
     }
 
+    // 生成器丢失
+    [Serializable]
+    internal class missing_item : MergeCommonData
+    {
+        public List<int> category_list;
+        public string from;
+
+        public static void Track(List<int> _missList, ReasonString reason)
+        {
+            var data = _GetTrackData<missing_item>();
+            data.category_list = _missList;
+            data.from = reason;
+            _TrackData(data);
+        }
+    }
+
     //物品过期转化
     [Serializable]
     internal class expire : MergeCommonData
@@ -1322,6 +1338,31 @@ public partial class DataTracker
         }
     }
 
+    internal class event_spinpack_claim : MergeCommonData
+    {
+        public int event_id;
+        public int event_from;
+        public int event_param;
+        public int milestone_queue;
+        public int milestone_num;
+        public int milestone_difficulty;
+        public int reward_id;
+        public bool is_free;
+        public bool is_final;
+        public static void Track(ActivityLike activity, int queue, int num, int diff, int id, bool free, bool final)
+        {
+            var data = _GetTrackData<event_spinpack_claim>();
+            (data.event_id, data.event_from, data.event_param) = activity.Info3;
+            data.milestone_queue = queue;
+            data.milestone_num = num;
+            data.milestone_difficulty = diff;
+            data.reward_id = id;
+            data.is_free = free;
+            data.is_final = final;
+            _TrackData(data);
+        }
+    }
+
     #region 印章活动
 
     //盖章成功时
@@ -1485,13 +1526,15 @@ public partial class DataTracker
         public string type;
         public string from_uid;
         public bool is_treasure;
+        public bool is_link;
 
-        public static void Track(string type, string fromUid, bool isTreasure)
+        public static void Track(string type, string fromUid, bool isTreasure, bool isLink)
         {
             var data = _GetTrackData<mail_read>();
             data.type = type;
             data.from_uid = fromUid;
             data.is_treasure = isTreasure;
+            data.is_link = isLink;
             _TrackData(data);
         }
     }
@@ -1504,14 +1547,16 @@ public partial class DataTracker
         public string json;
         public string extInfo;
         public bool is_treasure;
+        public bool is_link;
 
-        public static void Track(string type, string fromUid, string titleOrKey, IDictionary<int, int> rewards, bool isTreasure)
+        public static void Track(string type, string fromUid, string titleOrKey, IDictionary<int, int> rewards, bool isTreasure, bool isLink)
         {
             var data = _GetTrackData<mail_reward>();
             data.type = type;
             data.from_uid = fromUid;
             data.extInfo = titleOrKey;
             data.is_treasure = isTreasure;
+            data.is_link = isLink;
             using (ObjectPool<StringBuilder>.GlobalPool.AllocStub(out var sb))
             {
                 var count = 0;
@@ -1540,14 +1585,16 @@ public partial class DataTracker
         public bool is_treasure;
         public string json;
         public string extInfo;
+        public bool is_link;
 
-        public static void Track(string type, string fromUid, bool isTreasure, string titleOrKey, IDictionary<int, int> rewards)
+        public static void Track(string type, string fromUid, bool isTreasure, string titleOrKey, IDictionary<int, int> rewards, bool isLink)
         {
             var data = _GetTrackData<mail_receive>();
             data.type = type;
             data.from_uid = fromUid;
             data.is_treasure = isTreasure;
             data.extInfo = titleOrKey;
+            data.is_link = isLink;
             using (ObjectPool<StringBuilder>.GlobalPool.AllocStub(out var sb))
             {
                 var count = 0;
@@ -1563,6 +1610,42 @@ public partial class DataTracker
                 data.json = sb.ToString();
             }
 
+            _TrackData(data);
+        }
+    }
+
+    [Serializable]
+    internal class mail_link : MergeCommonData
+    {
+        public string type;
+        public string from_uid;
+        public string json;
+        public string extInfo;
+        public bool is_treasure;
+        public bool is_link;
+
+        public static void Track(string type, string fromUid, string titleOrKey, IDictionary<int, int> rewards, bool isTreasure, bool isLink)
+        {
+            var data = _GetTrackData<mail_link>();
+            data.type = type;
+            data.from_uid = fromUid;
+            data.extInfo = titleOrKey;
+            data.is_treasure = isTreasure;
+            data.is_link = isLink;
+            using (ObjectPool<StringBuilder>.GlobalPool.AllocStub(out var sb))
+            {
+                var count = 0;
+                sb.Append("{");
+                foreach (var kv in rewards)
+                {
+                    ++count;
+                    sb.Append($"\"{kv.Key}\":{kv.Value}");
+                    if (count < rewards.Count) sb.Append(",");
+                }
+
+                sb.Append("}");
+                data.json = sb.ToString();
+            }
             _TrackData(data);
         }
     }
@@ -2136,6 +2219,29 @@ public partial class DataTracker
 
     #region 挖沙
     [Serializable]
+    internal class digging_token_use : MergeCommonData
+    {
+        public int event_id;
+        public int event_from;
+        public int event_param;
+        public int level_num;
+        public int digging_board_id;
+        public int digging_item;
+        public string item_info;
+
+        public static void Track(ActivityLike acti_, int level_num, int digging_board_id, int digging_item, string item_info)
+        {
+            var data = _GetTrackData<digging_token_use>();
+            (data.event_id, data.event_from, data.event_param) = acti_.Info3;
+            data.level_num = level_num;
+            data.digging_board_id = digging_board_id;
+            data.digging_item = digging_item;
+            data.item_info = item_info;
+            _TrackData(data);
+        }
+    }
+
+    [Serializable]
     internal class digging_random_reward : MergeCommonData
     {
         public int event_id;
@@ -2266,6 +2372,33 @@ public partial class DataTracker
             (data.event_id, data.event_from, data.event_param) = acti_.Info3;
             data.level_num = level_num;
             data.digging_board_id = digging_board_id;
+            _TrackData(data);
+        }
+    }
+    #endregion
+
+    #region 连续订单
+    [Serializable]
+    internal class event_orderstreak_complete : MergeCommonData
+    {
+        public int event_id;
+        public int event_from;
+        public int event_param;
+        public int milestone_num;
+        public int milestone_difficulty;
+        public int order_id;
+        public int milestone_sequence;
+        public bool is_final;
+
+        public static void Track(ActivityLike acti_, int milestone_num, int milestone_difficulty, int order_id, int milestone_sequence, bool is_final)
+        {
+            var data = _GetTrackData<event_orderstreak_complete>();
+            (data.event_id, data.event_from, data.event_param) = acti_.Info3;
+            data.milestone_num = milestone_num;
+            data.milestone_difficulty = milestone_difficulty;
+            data.order_id = order_id;
+            data.milestone_sequence = milestone_sequence;
+            data.is_final = is_final;
             _TrackData(data);
         }
     }
@@ -2961,6 +3094,31 @@ public partial class DataTracker
     }
     #endregion
 
+    #region 沙堡里程碑
+    internal class event_castle_milestone : MergeCommonData
+    {
+        public int event_id;
+        public int event_from;
+        public int event_param;
+        public int milestone_queue;
+        public int milestone_num;
+        public int milestone_difficulty;
+        public int round_num;
+        public bool is_final;
+        public static void Track(ActivityLike act, int milestoneQueue, int milestoneNum, int milestoneDifficulty, int roundNum, bool isFinal)
+        {
+            var data = _GetTrackData<event_castle_milestone>();
+            (data.event_id, data.event_from, data.event_param) = act.Info3;
+            data.milestone_queue = milestoneQueue;
+            data.milestone_num = milestoneNum;
+            data.milestone_difficulty = milestoneDifficulty;
+            data.round_num = roundNum;
+            data.is_final = isFinal;
+            _TrackData(data);
+        }
+    }
+    #endregion
+
     #region 钓鱼棋盘
     internal class event_fish_get_fish : MergeCommonData
     {
@@ -3173,6 +3331,198 @@ public partial class DataTracker
 
     #endregion
 
+    #region BP-通行证
+
+    //成功购买通行证时
+    [Serializable]
+    internal class bp_purchase : MergeCommonData
+    {
+        public int event_id;
+        public int event_from; //活动来源（0：EventTime，1：EventTrigger）
+        public int event_param;
+        public int event_diff;  //活动难度（对应RFM分层）
+        public int iap_product_name;  //属于哪一档付费（1：付费1档，2：付费2档，3：升级礼包，4：结束礼包）
+        public bool is_late;    //是否是补单
+
+        public static void Track(ActivityLike acti_, int diff, int productName, bool isLate)
+        {
+            var data = _GetTrackData<bp_purchase>();
+            data.event_id = acti_.Id;
+            data.event_from = acti_.From;
+            data.event_param = acti_.Param;
+            data.event_diff = diff;
+            data.iap_product_name = productName;
+            data.is_late = isLate;
+            _TrackData(data);
+        }
+    }
+
+    //任务领奖时（每个任务打1个点，循环任务每1个循环打1次点）
+    [Serializable]
+    internal class bp_task_complete : MergeCommonData
+    {
+        public int event_id;
+        public int event_from; //活动来源（0：EventTime，1：EventTrigger）
+        public int event_param;
+        public int event_diff;  //活动难度（对应RFM分层）
+        public int task_id;  //任务id（BpTask.id）
+        public int type_id;  //bp激活状态（0：免费，1：付费1档-补领也算，2：付费2档-升级也算）
+        public int type;  //任务领取方式（1：手动领取，2：刷新时刻系统领取）
+        public int reward_num;  //奖励数量（bp积分数量）
+
+        public static void Track(ActivityLike acti_, int diff, int taskId, int typeId, int type, int rewardNum)
+        {
+            var data = _GetTrackData<bp_task_complete>();
+            data.event_id = acti_.Id;
+            data.event_from = acti_.From;
+            data.event_param = acti_.Param;
+            data.event_diff = diff;
+            data.task_id = taskId;
+            data.type_id = typeId;
+            data.type = type;
+            data.reward_num = rewardNum;
+            _TrackData(data);
+        }
+    }
+
+    //达成里程碑（每达成1档，打一个点）
+    [Serializable]
+    internal class bp_milestone_complete : MergeCommonData
+    {
+        public int event_id;
+        public int event_from; //活动来源（0：EventTime，1：EventTrigger）
+        public int event_param;
+        public int event_diff;  //活动难度（对应RFM分层）
+        public int milestone_queue;  //第几档里程碑（从1开始）
+        public int milestone_num;  //本轮里程碑个数
+        public bool is_final;   //是否是最后一档里程碑（不包括循环）
+        public int level_num;  //里程碑id（BpMilestone.id）
+        public int type_id;  //bp激活状态（0：免费，1：付费1档-补领也算，2：付费2档-升级也算）
+        public int level_queue;  //里程碑累计计数（从1开始。包含循环档位，循环档位每完成1次+1）
+
+        public static void Track(ActivityLike acti_, int diff, int queue, int num, bool isFinal, int levelNum, int typeId, int levelQueue)
+        {
+            var data = _GetTrackData<bp_milestone_complete>();
+            data.event_id = acti_.Id;
+            data.event_from = acti_.From;
+            data.event_param = acti_.Param;
+            data.event_diff = diff;
+            data.milestone_queue = queue;
+            data.milestone_num = num;
+            data.is_final = isFinal;
+            data.level_num = levelNum;
+            data.type_id = typeId;
+            data.level_queue = levelQueue;
+            _TrackData(data);
+        }
+    }
+
+    //领取里程碑奖励时（每领取1档，打一个点）
+    [Serializable]
+    internal class bp_milestone_claim : MergeCommonData
+    {
+        public int event_id;
+        public int event_from; //活动来源（0：EventTime，1：EventTrigger）
+        public int event_param;
+        public int event_diff;  //活动难度（对应RFM分层）
+        public int milestone_queue;  //第几档里程碑（从1开始）
+        public int milestone_num;  //本轮里程碑个数
+        public int level_num;  //里程碑id（BpMilestone.id）
+        public bool is_free;  //是否是免费奖励（bool）
+        public int type_id;  //bp激活状态（0：免费，1：付费1档-补领也算，2：付费2档-升级也算）
+
+        public static void Track(ActivityLike acti_, int diff, int queue, int num, int levelNum, bool isFree, int typeId)
+        {
+            var data = _GetTrackData<bp_milestone_claim>();
+            data.event_id = acti_.Id;
+            data.event_from = acti_.From;
+            data.event_param = acti_.Param;
+            data.event_diff = diff;
+            data.milestone_queue = queue;
+            data.milestone_num = num;
+            data.level_num = levelNum;
+            data.is_free = isFree;
+            data.type_id = typeId;
+            _TrackData(data);
+        }
+    }
+
+    //达成循环奖励时
+    [Serializable]
+    internal class bp_cycle_complete : MergeCommonData
+    {
+        public int event_id;
+        public int event_from; //活动来源（0：EventTime，1：EventTrigger）
+        public int event_param;
+        public int event_diff;  //活动难度（对应RFM分层）
+        public int num;  //可领取次数
+        public int level_num;  //已领取次数
+        public int level_queue;  //里程碑累计计数（从1开始。包含循环档位，循环档位每完成1次+1）
+
+        public static void Track(ActivityLike acti_, int diff, int num, int levelNum, int levelQueue)
+        {
+            var data = _GetTrackData<bp_cycle_complete>();
+            data.event_id = acti_.Id;
+            data.event_from = acti_.From;
+            data.event_param = acti_.Param;
+            data.event_diff = diff;
+            data.num = num;
+            data.level_num = levelNum;
+            data.level_queue = levelQueue;
+            _TrackData(data);
+        }
+    }
+
+    //领取循环奖励时
+    [Serializable]
+    internal class bp_cycle_claim : MergeCommonData
+    {
+        public int event_id;
+        public int event_from; //活动来源（0：EventTime，1：EventTrigger）
+        public int event_param;
+        public int event_diff;  //活动难度（对应RFM分层）
+        public int num;  //本次共领取了几个循环奖励
+        public int level_num;    //里程碑id（BpMilestone.id）
+
+        public static void Track(ActivityLike acti_, int diff, int num, int levelNum)
+        {
+            var data = _GetTrackData<bp_cycle_claim>();
+            data.event_id = acti_.Id;
+            data.event_from = acti_.From;
+            data.event_param = acti_.Param;
+            data.event_diff = diff;
+            data.num = num;
+            data.level_num = levelNum;
+            _TrackData(data);
+        }
+    }
+
+    //活动结束结算
+    [Serializable]
+    internal class bp_end_settle : MergeCommonData
+    {
+        public int event_id;
+        public int event_from; //活动来源（0：EventTime，1：EventTrigger）
+        public int event_param;
+        public int event_diff;  //活动难度（对应RFM分层）
+        public int type_id;  //bp激活状态（0：免费，1：付费1档，2：付费2档-升级也算）
+        public int level_queue;    //里程碑累计计数（从1开始。包含循环档位，循环档位每完成1次+1）
+
+        public static void Track(ActivityLike acti_, int diff, int typeId, int levelQueue)
+        {
+            var data = _GetTrackData<bp_end_settle>();
+            data.event_id = acti_.Id;
+            data.event_from = acti_.From;
+            data.event_param = acti_.Param;
+            data.event_diff = diff;
+            data.type_id = typeId;
+            data.level_queue = levelQueue;
+            _TrackData(data);
+        }
+    }
+
+    #endregion
+
     #region 好评订单
 
     internal class event_orderlike_start : MergeCommonData
@@ -3376,7 +3726,7 @@ public partial class DataTracker
         public int event_revive;    //当前Trigger.id的开启次数，默认为1，之后每次重复开启+1
         public int milestone_queue; //3日登入签到中，当前签到的天数（1,2,3）
         public bool is_final;       //是否是本轮最后一个签到
-        
+
         public static void Track(ActivityLike act, int queue, bool isFinal)
         {
             var data = _GetTrackData<threesign_rwd>();
@@ -3387,7 +3737,7 @@ public partial class DataTracker
             _TrackData(data);
         }
     }
-    
+
     //三天签到结束时发送
     [Serializable]
     internal class threesign_finish : MergeCommonData
@@ -3398,7 +3748,7 @@ public partial class DataTracker
         public int event_revive;    //当前Trigger.id的开启次数，默认为1，之后每次重复开启+1
         public int milestone_queue; //3日登入签到中，当前签到的天数（1,2,3）
         public bool is_break;       //3日登入签到中，是否断签（本次活动结束时是否签满3天）
-        
+
         public static void Track(ActivityLike act, int queue, bool isBreak)
         {
             var data = _GetTrackData<threesign_finish>();
@@ -3855,6 +4205,229 @@ public partial class DataTracker
 
     #endregion
 
+    #region 抓宝大师
+
+    /// <summary>
+    /// 成功指定订单时
+    /// </summary>
+    internal class event_claworder_pick_success : MergeCommonData
+    {
+        // 活动ID（EventTime.id）
+        public int event_id;
+        // 活动来源（0：EventTime，1：EventTrigger）
+        public int event_from;
+        // 活动参数（EventTime.eventParam）
+        public int event_param;
+        // 活动期间的第几轮（固定为1）
+        public int round_num = 1;
+        // 本轮活动难度（EventClawOrderGroup.diff）
+        public int milestone_difficulty;
+        // 本轮的进度条第几个token里程碑（EventClawOrderGroup.tokenMilestone加工）
+        public int milestone_queue;
+        // 本轮进度条token里程碑总个数
+        public int milestone_num;
+        // 累计收集 token数量（EventClawOrderToken.tokenCollectCount）
+        public int token_num;
+        // 本轮第几个获得抽奖机会（EventClawOrderGroup.drawMilestone加工）
+        public int draw_queue;
+        // 本轮获得抽奖机会的里程碑总个数
+        public int draw_num;
+        // 累计获得抽奖次数（EventClawOrderDraw.drawCount）
+        public int draw_count;
+        // 指定订单目标总付出难度
+        public int pay_difficulty;
+        // 上次提交订单 至 指定成功时 时间差s（第一次指定为0）
+        public int time;
+        // 挂在哪个槽位
+        public int order_id;
+
+        public static void Track(ActivityLike acti_, int milestoneDifficulty, int milestoneQueue, int milestoneNum, int tokenNum,
+            int drawQueue, int drawNum, int drawCount, int payDifficulty, int time, int orderId)
+        {
+            var data = _GetTrackData<event_claworder_pick_success>();
+            data.event_id = acti_.Id;
+            data.event_from = acti_.From;
+            data.event_param = acti_.Param;
+            data.milestone_difficulty = milestoneDifficulty;
+            data.milestone_queue = milestoneQueue;
+            data.milestone_num = milestoneNum;
+            data.token_num = tokenNum;
+            data.draw_queue = drawQueue;
+            data.draw_num = drawNum;
+            data.draw_count = drawCount;
+            data.pay_difficulty = payDifficulty;
+            data.time = time;
+            data.order_id = orderId;
+            _TrackData(data);
+        }
+    }
+
+    /// <summary>
+    /// 提交指定订单时
+    /// </summary>
+    internal class event_claworder_submit : MergeCommonData
+    {
+        // 活动ID（EventTime.id）
+        public int event_id;
+        // 活动来源（0：EventTime，1：EventTrigger）
+        public int event_from;
+        // 活动参数（EventTime.eventParam）
+        public int event_param;
+        // 活动期间的第几轮（固定为1）
+        public int round_num = 1;
+        // 本轮活动难度（EventClawOrderGroup.diff）
+        public int milestone_difficulty;
+        // 本轮的进度条第几个token里程碑（EventClawOrderGroup.tokenMilestone加工）
+        public int milestone_queue;
+        // 本轮进度条token里程碑总个数
+        public int milestone_num;
+        // 累计收集 token数量（EventClawOrderToken.tokenCollectCount）
+        public int token_num;
+        // 本轮第几个获得抽奖机会（EventClawOrderGroup.drawMilestone加工）
+        public int draw_queue;
+        // 本轮获得抽奖机会的里程碑总个数
+        public int draw_num;
+        // 累计获得抽奖次数（EventClawOrderDraw.drawCount）
+        public int draw_count;
+        // 提交订单目标总付出难度
+        public int pay_difficulty;
+        // 挂在哪个槽位
+        public int order_id;
+        // 是否是最后一次获得token
+        public bool is_final;
+        // 订单指定开始时到提交订单时，时间差s
+        public int time;
+        // tokenId:数量
+        public string reward_map;
+
+        public static void Track(ActivityLike acti_, int milestoneDifficulty, int milestoneQueue, int milestoneNum, int tokenNum,
+            int drawQueue, int drawNum, int drawCount, int payDifficulty, int time, int orderId, bool isFinal, string rewardMap)
+        {
+            var data = _GetTrackData<event_claworder_submit>();
+            data.event_id = acti_.Id;
+            data.event_from = acti_.From;
+            data.event_param = acti_.Param;
+            data.milestone_difficulty = milestoneDifficulty;
+            data.milestone_queue = milestoneQueue;
+            data.milestone_num = milestoneNum;
+            data.token_num = tokenNum;
+            data.draw_queue = drawQueue;
+            data.draw_num = drawNum;
+            data.draw_count = drawCount;
+            data.pay_difficulty = payDifficulty;
+            data.order_id = orderId;
+            data.is_final = isFinal;
+            data.time = time;
+            data.reward_map = rewardMap;
+            _TrackData(data);
+        }
+    }
+
+    /// <summary>
+    /// 消耗抽奖次数, 获得棋子时
+    /// </summary>
+    internal class event_claworder_drawitem_spawn : MergeCommonData
+    {
+        // 活动ID（EventTime.id）
+        public int event_id;
+        // 活动来源（0：EventTime，1：EventTrigger）
+        public int event_from;
+        // 活动参数（EventTime.eventParam）
+        public int event_param;
+        // 活动期间的第几轮（固定为1）
+        public int round_num = 1;
+        // 本轮活动难度（EventClawOrderGroup.diff）
+        public int milestone_difficulty;
+        // 本轮的进度条第几个token里程碑（EventClawOrderGroup.tokenMilestone）
+        public int milestone_queue;
+        // 本轮进度条token里程碑总个数
+        public int milestone_num;
+        // 累计收集 token数量（EventClawOrderToken.tokenCollectCount）
+        public int token_num;
+        // 本轮第几个获得抽奖机会（EventClawOrderGroup.drawMilestone）
+        public int draw_queue;
+        // 本轮获得抽奖机会的里程碑总个数
+        public int draw_num;
+        // 累计获得抽奖次数（EventClawOrderDraw.drawCount）
+        public int draw_count;
+        // 本轮第几个抽奖区间（EventClawOrderGroup.rewardDiffMilestone）
+        public int use_draw_queue;
+        // 本轮抽奖区间里程碑总个数
+        public int use_draw_num;
+        // 累计消耗抽奖次数
+        public int use_draw_count;
+        // 是否是最后一次抽棋子
+        public bool is_final;
+        // 选择棋子时 随机的实际难度（EventClawOrderReDiff.rewardDiffRange)
+        public string draw_pay_difficulty;
+        // 生成的棋子ID（ObjBasic.id）
+        public int item_id;
+        // 生成的物品的难度
+        public int item_diff;
+        // 生成的棋子等在合成链内的等级
+        public int item_level;
+        // 是否无法找到订单，默认区间产出棋子
+        public bool is_default;
+
+        public static void Track(ActivityLike acti_, int milestoneDifficulty, int milestoneQueue, int milestoneNum, int tokenNum,
+            int drawQueue, int drawNum, int drawCount,
+            int useDrawQueue, int useDrawNum, int useDrawCount,
+            bool isFinal, string drawPayDifficulty, int itemId, int itemDiff, int itemLevel, bool isDefault)
+        {
+            var data = _GetTrackData<event_claworder_drawitem_spawn>();
+            data.event_id = acti_.Id;
+            data.event_from = acti_.From;
+            data.event_param = acti_.Param;
+            data.milestone_difficulty = milestoneDifficulty;
+            data.milestone_queue = milestoneQueue;
+            data.milestone_num = milestoneNum;
+            data.token_num = tokenNum;
+            data.draw_queue = drawQueue;
+            data.draw_num = drawNum;
+            data.draw_count = drawCount;
+            data.use_draw_queue = useDrawQueue;
+            data.use_draw_num = useDrawNum;
+            data.use_draw_count = useDrawCount;
+            data.is_final = isFinal;
+            data.draw_pay_difficulty = drawPayDifficulty;
+            data.item_id = itemId;
+            data.item_diff = itemDiff;
+            data.item_level = itemLevel;
+            data.is_default = isDefault;
+            _TrackData(data);
+        }
+    }
+
+    /// <summary>
+    /// 活动结束, 存在剩余抽奖次数转化时
+    /// </summary>
+    internal class event_claworder_end_reward : MergeCommonData
+    {
+        // 活动ID（EventTime.id）
+        public int event_id;
+        // 活动来源（0：EventTime，1：EventTrigger）
+        public int event_from;
+        // 活动模板ID
+        public int event_param;
+        // 剩余抽奖次数
+        public int remain_draw_count;
+        // 奖励ID:数量（EventClawOrderExpire.expireItem)
+        public string reward_map;
+
+        public static void Track(ActivityLike acti_, int remainDrawCount, string rewardMap)
+        {
+            var data = _GetTrackData<event_claworder_end_reward>();
+            data.event_id = acti_.Id;
+            data.event_from = acti_.From;
+            data.event_param = acti_.Param;
+            data.remain_draw_count = remainDrawCount;
+            data.reward_map = rewardMap;
+            _TrackData(data);
+        }
+    }
+
+    #endregion
+
     #region 补单弹窗
 
     [Serializable]
@@ -3891,5 +4464,203 @@ public partial class DataTracker
         }
     }
 
+    #endregion
+
+    #region 社区链接
+
+    [Serializable]
+    internal class community_link : MergeCommonData
+    {
+        public int id; //跳转条目(linkId)
+        public int type; //跳转入口类型(1:设置页 2:商店 3:社区弹窗)
+        public bool get_reward; //本次跳转是否发放关注奖励
+
+        public static void Track(int id, int type, bool getReward)
+        {
+            var data = _GetTrackData<community_link>();
+            data.id = id;
+            data.type = type;
+            data.get_reward = getReward;
+            _TrackData(data);
+        }
+    }
+
+    #endregion
+
+    #region 社区礼物外链
+
+    [Serializable]
+    internal class gift_link : MergeCommonData
+    {
+        public string key; //礼包码
+        public string local_time; //客户端认为的活动时间
+        public bool get_reward; //本次是否成功领取礼物奖励
+        public static void Track(string key, bool getReward)
+        {
+            var data = _GetTrackData<gift_link>();
+            data.key = key;
+            data.local_time = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss");
+            data.get_reward = getReward;
+        }
+    }
+    #endregion
+
+    #region 钻石二次确认弹窗
+
+    [Serializable]
+    internal class gem_tips : MergeCommonData
+    {
+        public int amount_change;
+        public string from;
+        public bool is_buy;
+        public static void Track(int costAmount, ReasonString reason, bool isBuy)
+        {
+            var data = _GetTrackData<gem_tips>();
+            data.amount_change = costAmount;
+            data.from = reason.ToString();
+            data.is_buy = isBuy;
+            _TrackData(data);
+        }
+    }
+    #endregion
+
+    #region hotfix
+
+    internal class hotfix : DataTrackBase
+    {
+        // 配置版本发生变动后的配置版本号（没有进行配置变更时，记作“not change”）
+        public string version_change_data;
+        // 资源版本发生变动后的资源版本号（没有进行资源热更时，记作“not change”）
+        public string version_change_res;
+        public static void Track(string versionChangeData, string versionChangeRes)
+        {
+            var data = _GetTrackData<hotfix>();
+            data.version_change_data = versionChangeData;
+            data.version_change_res = versionChangeRes;
+            _TrackData(data);
+        }
+    }
+
+    internal class hotfix_popup : MergeCommonData
+    {
+        public static void Track()
+        {
+            _TrackData(_GetTrackData<hotfix_popup>());
+        }
+    }
+
+    #endregion
+
+    internal class board_info : DataTrackBase
+    {
+        public int board_id;
+        public string cell_list;
+        public static void Track(FAT.Merge.Board board)
+        {
+            var data = _GetTrackData<board_info>();
+            var width = board.size.x;
+            var height = board.size.y;
+            using var sb = Cysharp.Text.ZString.CreateStringBuilder();
+            sb.Append("[");
+            for (var j = 0; j < height; ++j)
+            {
+                for (var i = 0; i < width; ++i)
+                {
+                    if (i != 0 && j != 0)
+                    {
+                        sb.Append(",");
+                    }
+                    var tid = board.GetItemByCoord(i, j)?.tid ?? 0;
+                    sb.Append(@$"{{""x"":{i},");
+                    sb.Append(@$"""y"":{j},");
+                    if (tid > 0)
+                        sb.Append(@$"""id"":""{tid}""}}");
+                    else
+                        sb.Append(@$"""id"":""""}}");
+                }
+            }
+            sb.Append("]");
+            data.board_id = board.boardId;
+            data.cell_list = sb.ToString();
+#if UNITY_EDITOR
+            DebugEx.Info($"board_info: {data.board_id} {data.cell_list}");
+#endif
+            _TrackData(data);
+        }
+    }
+
+    #region bingo任务
+    internal class event_bingotask_complete : MergeCommonData
+    {
+        public int event_id;
+        public int event_from;
+        public int event_param;
+        public int milestone_queue;
+        public int task_id;
+        public int milestone_num;
+        public int milestone_difficulty;
+        public bool is_bingo;
+        public bool is_final;
+        public int round_num;
+        public static void Track(ActivityLike activity, int queue, int id, int num, int diff, bool bingo, bool final, int round)
+        {
+            var data = _GetTrackData<event_bingotask_complete>();
+            (data.event_id, data.event_from, data.event_param) = activity.Info3;
+            data.milestone_queue = queue;
+            data.task_id = id;
+            data.milestone_num = num;
+            data.milestone_difficulty = diff;
+            data.is_bingo = bingo;
+            data.is_final = final;
+            data.round_num = round;
+            _TrackData(data);
+        }
+    }
+
+    internal class event_bingotask_reward : MergeCommonData
+    {
+        public int event_id;
+        public int event_from;
+        public int event_param;
+        public int milestone_queue;
+        public int milestone_num;
+        public int milestone_difficulty;
+        public bool is_final;
+        public int round_num;
+        public static void Track(ActivityLike activity, int queue, int num, int diff, bool final, int round)
+        {
+            var data = _GetTrackData<event_bingotask_reward>();
+            (data.event_id, data.event_from, data.event_param) = activity.Info3;
+            data.milestone_queue = queue;
+            data.milestone_num = num;
+            data.milestone_difficulty = diff;
+            data.is_final = final;
+            data.round_num = round;
+            _TrackData(data);
+        }
+    }
+
+    internal class event_bingotask_bingo : MergeCommonData
+    {
+        public int event_id;
+        public int event_from;
+        public int event_param;
+        public int milestone_queue;
+        public int milestone_difficulty;
+        public int bingo_line;
+        public bool is_final;
+        public int round_num;
+        public static void Track(ActivityLike activity, int queue, int diff, int line, bool final, int round)
+        {
+            var data = _GetTrackData<event_bingotask_bingo>();
+            (data.event_id, data.event_from, data.event_param) = activity.Info3;
+            data.milestone_queue = queue;
+            data.milestone_difficulty = diff;
+            data.bingo_line = line;
+            data.is_final = final;
+            data.round_num = round;
+            _TrackData(data);
+        }
+    }
     #endregion
 }

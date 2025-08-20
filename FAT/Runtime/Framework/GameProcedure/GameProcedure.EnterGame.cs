@@ -129,6 +129,8 @@ namespace FAT
             UIManager.Instance.OpenWindow(UIConfig.UIMergeBoardMain);
             UIManager.Instance.OpenWindow(UIConfig.UIDEReward);
             UIManager.Instance.OpenWindow(UIConfig.UIStatus);
+            // 检查生成器丢失 打点
+            Game.Manager.mainMergeMan.CheckMissingItem();
             await UniTask.WaitUntil(() => UIManager.Instance.IsOpen(UIConfig.UIMergeBoardMain) && UIManager.Instance.IsOpen(UIConfig.UIStatus)).
                 AttachExternalCancellation(token);
 
@@ -166,6 +168,7 @@ namespace FAT
             MBGlobalLoading.Instance.loadingBg.TryPrepareLoadingImage();
 
             DataTracker.game_start.Track();
+            DataTracker.board_info.Track(Game.Manager.mainMergeMan.world.activeBoard);
             AdjustTracker.TrackEvent(AdjustEventType.GameStart);
             DebugEx.Info("[GameProcedure] AsyncStartGame ---> finish");
         }
@@ -228,13 +231,18 @@ namespace FAT
             AppUpdaterManager.AppUpdaterHint(CenturyGame.AppUpdaterLib.Runtime.AppUpdaterHintName.ENABLE_UNITY_RES_UPDATE, 0);
 #endif
 
-            var hasResUpdate = false; ;
+            var hasResUpdate = false;
+            var hasDataUpdate = false;
             GameUpdateManager.Instance.onUpdateConfirm = (bytes, confirm, cancel) =>
             {
                 var phase = GameUpdateManager.Instance.progressData?.CurrentUpdateResourceType ?? CenturyGame.AppUpdaterLib.Runtime.UpdateResourceType.UnKnow;
                 if (phase == CenturyGame.AppUpdaterLib.Runtime.UpdateResourceType.NormalResource)
                 {
                     hasResUpdate = true;
+                }
+                if (phase == CenturyGame.AppUpdaterLib.Runtime.UpdateResourceType.TableData)
+                {
+                    hasDataUpdate = true;
                 }
                 confirm?.Invoke();
             };
@@ -278,6 +286,13 @@ namespace FAT
             {
                 DebugEx.FormatInfo("GameProcedure::_CoAppUpdate ----> reset version to :{0}", appInfoAfterUpdate.version);
                 Game.Instance.appSettings.version = appInfoAfterUpdate.version;
+            }
+
+            // track
+            if (hasResUpdate || hasDataUpdate)
+            {
+                DataTracker.hotfix.Track(hasDataUpdate ? appInfoAfterUpdate.dataResVersion : "not change",
+                                        hasResUpdate ? appInfoAfterUpdate.unityDataResVersion : "not change");
             }
 
             if (isRestarting || hasResUpdate || resChange)

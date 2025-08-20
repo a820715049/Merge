@@ -30,6 +30,7 @@ namespace FAT
             _context.RegisterModuleMisc(transform, "Adapter/Root/CompOrder/SV/Viewport/Content/Misc");
             _context.RegisterModuleDragRoot(transform, "Adapter/Root/CompMoveOverride");
             _context.RegisterOrderBagTips(transform, "Adapter/Root/Bottom/OrderNeedBagBoard");
+            _context.RegisterModuleActivityTips(transform, "Adapter/Root/CompOrder/ActivityTipsRoot");
             _context.Install();
             transform.FindEx("Adapter/Root", out _boardRoot);
             _animator = transform.FindEx<Animator>("Adapter/Root");

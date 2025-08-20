@@ -17,7 +17,7 @@ namespace FAT
         public void Setup()
         {
             animator = transform.GetComponent<Animator>();
-            RedPoint = transform.Find("RedPoint").gameObject;
+            RedPoint = transform.Find("dot").gameObject;
             transform.AddButton(null, _OnBtnInventory).FixPivot();
         }
 

@@ -80,7 +80,7 @@ namespace FAT
             var ui = UIManager.Instance.TryGetUI(UIConfig.UIFarmBoardMain);
             if (ui != null && ui is UIFarmBoardMain main)
             {
-                main.Exit();
+                main.Exit(true); // 退出活动时默认返回主棋盘
                 Close();
             }
         }

@@ -149,6 +149,7 @@ namespace FAT
             }
 
             RefreshTheme();
+            _RefreshCD();
         }
 
         private void InitRaffleItem()

@@ -7,6 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using EL;
 using fat.rawdata;
+using System;
 
 namespace FAT.Merge
 {
@@ -128,17 +129,23 @@ namespace FAT.Merge
         {
             return Game.Manager.coinMan.GetCoin(CoinType.MergeCoin) >= cost;
         }
-        bool IMergeEnvironment.UseCoin(int coin, ReasonString reason)
+        void IMergeEnvironment.UseCoin(int coin, ReasonString reason)
         {
-            return Game.Manager.coinMan.UseCoin(CoinType.MergeCoin, coin, reason);
+            Game.Manager.coinMan.UseCoin(CoinType.MergeCoin, coin, reason).Execute();
         }
         bool IMergeEnvironment.CanUseGem(int cost)
         {
             return Game.Manager.coinMan.GetCoin(CoinType.Gem) >= cost;
         }
-        bool IMergeEnvironment.UseGem(int gem, ReasonString reason)
+        void IMergeEnvironment.UseGem(int gem, ReasonString reason, Action whenSuccess, bool dynamicPrice)
         {
-            return Game.Manager.coinMan.UseCoin(CoinType.Gem, gem, reason);
+            var builder = Game.Manager.coinMan.UseCoin(CoinType.Gem, gem, reason)
+            .OnSuccess(whenSuccess);
+            if (dynamicPrice)
+            {
+                builder.WithDynamicPrice();
+            }
+            builder.Execute();
         }
         bool IMergeEnvironment.IsOrderItem(int id)
         {

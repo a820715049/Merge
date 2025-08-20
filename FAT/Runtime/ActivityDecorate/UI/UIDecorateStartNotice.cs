@@ -34,6 +34,7 @@ namespace FAT
             _activity = Game.Manager.decorateMan.Activity;
             RefreshTheme();
             MessageCenter.Get<MSG.GAME_ONE_SECOND_DRIVER>().AddListener(RefreshCD);
+            RefreshCD();
         }
 
         private void RefreshTheme()

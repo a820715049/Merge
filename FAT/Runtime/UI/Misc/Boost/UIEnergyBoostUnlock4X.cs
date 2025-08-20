@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
+using EL;
 
 namespace FAT
 {
@@ -22,7 +23,7 @@ namespace FAT
         [SerializeField] private float flyDuration = 0.5f;
         [SerializeField] private float flyScaleCoe = 1f;
         [SerializeField] private Ease flyCurve = Ease.OutSine;
-
+        [SerializeField] private TextMeshProUGUI tip;
         private readonly int rewardNum = 101;
         private Tween flyAnim;
         private GameObject flyObj;
@@ -34,8 +35,21 @@ namespace FAT
 
         protected override void OnPreOpen()
         {
+            var cfg = Game.Manager.configMan.GetEnergyBoostConfig((int)Merge.EnergyBoostState.X4);
+
+            int requireEnergyNum = cfg.RequireEnergyNum;
+            if (requireEnergyNum == 0)
+            {
+                tip.text = I18N.Text("#SysComDesc1419");
+            }
+            else
+            {
+                tip.text = I18N.FormatText("#SysComDesc780", requireEnergyNum);
+            }
+
             MBI18NText.SetKey(txtTitle.gameObject, "#SysComDesc779");
             txtRewardNum.text = $"{rewardNum}";
+
             ResetFlyAnim();
         }
 

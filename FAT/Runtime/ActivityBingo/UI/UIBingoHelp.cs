@@ -40,7 +40,7 @@ namespace FAT
 
         private void Refresh()
         {
-            var (straight, slash, all) = BingoUtility.GetBoardRewardInfo(actInst.ConfBoardID);
+            var (straight, slash, all) = ItemBingoUtility.GetBoardRewardInfo(actInst.ConfBoardID);
             rewardStraight.Refresh(straight);
             rewardSlash.Refresh(slash);
             rewardAll.Refresh(all);

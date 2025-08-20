@@ -24,22 +24,22 @@ namespace FAT
         public int PayPassNum;      //根据LimitId确定的本卡片在本次活动中要想获得的话，需要满足的充值金额限制值 单位美分，-1代表无论累充金额是多少，都无法满足条件
         public int MinEryPassNum;   //根据LimitId确定的本卡片在本次活动中要想获得的话，需要满足的最低能量限制值，-1代表无论能量是多少，都无法满足条件
         public int DayPassNum;      //根据LimitId确定的本卡片在本次活动中要想获得的话，需要满足的当前活动已经开了多少天的限制值 单位天，-1代表无论活动开了多少天，都无法满足条件
-        
+
         public bool IsOwn = false;  //此卡片是否已拥有
         public bool IsSee = false;  //此卡片是否在获得后被查看过,用于红点显示 需要与IsOwn结合使用 默认false,查看完此卡后此值设为true
         public int OwnCount;        //此卡片已拥有的张数 默认为0
-        
+
         //获取本卡片对应的配置表数据
         public ObjCard GetConfig()
         {
             return Game.Manager.objectMan.GetCardConfig(CardId);
         }
-        
+
         public ObjBasic GetObjBasicConfig()
         {
             return Game.Manager.objectMan.GetBasicConfig(CardId);
         }
-        
+
         //根据存档初始化数据
         public void SetData(CardInfo info)
         {
@@ -67,6 +67,7 @@ namespace FAT
             {
                 IsOwn = true;
                 OwnCount++;
+                MessageCenter.Get<MSG.GAME_CARD_ADD>().Dispatch();
             }
             else if (OwnCount > 1)  //只有自己拥有大于1张卡时才允许卡片减少(换卡)
             {
@@ -83,7 +84,7 @@ namespace FAT
             }
             Game.Manager.cardMan.TrackCardReduction(CardId, reduceNum, reduceType, reduceParam);
         }
-        
+
         //获取当前卡片对应的星星总数量 计算方式为重复卡数量*卡片星级 
         //调用此方法获得的值认为是星星的虚拟库存
         public int GetVirtualStarNum()
@@ -119,7 +120,7 @@ namespace FAT
             var resultId = randomList.RandomChooseByWeight();
             if (resultId <= 0)
             {
-                DebugEx.FormatError("[CardMan.CardData.RandomLimitId : ] random LimitInfoId Fail! CardId = {0}, resultId = {1}, LimitInfo = {2}", 
+                DebugEx.FormatError("[CardMan.CardData.RandomLimitId : ] random LimitInfoId Fail! CardId = {0}, resultId = {1}, LimitInfo = {2}",
                     CardId, resultId, limitInfo);
             }
             else
@@ -155,7 +156,7 @@ namespace FAT
         public int CheckBelongGroup(ulong totalEnergy, int totalIap, int goldPayPass, int payRate, long curTS, long actStartTs)
         {
             var config = GetConfig();
-            if (config == null) 
+            if (config == null)
                 return 0;
             bool isGold = config.IsGold;
             if (IsOwn)
@@ -192,8 +193,8 @@ namespace FAT
         public bool CheckIsPassEnergy(bool isGold, bool canGoldPass, ulong totalEnergy, int totalIap, int goldPayPass, int payRate)
         {
             //如果是金卡且canGoldPass为true 则说明此卡可以被goldPayPass加成 否则只看totalEnergy + (totalIap * payRate)
-            bool isPassEnergy = (isGold && canGoldPass) 
-                ? (EnergyPassNum != -1 && (ulong)EnergyPassNum <= totalEnergy + (ulong)((totalIap + goldPayPass) * payRate / 100)) 
+            bool isPassEnergy = (isGold && canGoldPass)
+                ? (EnergyPassNum != -1 && (ulong)EnergyPassNum <= totalEnergy + (ulong)((totalIap + goldPayPass) * payRate / 100))
                 : (EnergyPassNum != -1 && (ulong)EnergyPassNum <= totalEnergy + (ulong)(totalIap * payRate / 100));
             return isPassEnergy;
         }
@@ -201,8 +202,8 @@ namespace FAT
         public bool CheckIsPassPay(bool isGold, bool canGoldPass, int totalIap, int goldPayPass)
         {
             //如果是金卡且canGoldPass为true 则说明此卡可以被goldPayPass加成 否则只看totalIap
-            bool isPassPay = (isGold && canGoldPass) 
-                ? (PayPassNum != -1 && PayPassNum <= (totalIap + goldPayPass)) 
+            bool isPassPay = (isGold && canGoldPass)
+                ? (PayPassNum != -1 && PayPassNum <= (totalIap + goldPayPass))
                 : (PayPassNum != -1 && PayPassNum <= totalIap);
             return isPassPay;
         }

@@ -1,6 +1,6 @@
 /*
  * @Author: tang.yan
- * @Description: 设置界面 
+ * @Description: 设置界面
  * @Date: 2023-12-01 17:12:03
  */
 using FAT.Platform;
@@ -9,6 +9,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using EL;
 using TMPro;
+using System.Collections.Generic;
 
 namespace FAT
 {
@@ -38,57 +39,66 @@ namespace FAT
         [SerializeField] private Button btnDelete;
         [SerializeField] private Button btnCommunity;
         [SerializeField] private Button btnAccount;
+        [SerializeField] private Button btnChestInfo;
+        [SerializeField] private GameObject LinkBtnItem;
+        [SerializeField] private Transform LinkBtnRoot;
         //隐私协议
         [SerializeField] private Button btnService;
         [SerializeField] private Button btnPrivacy;
         //版本号
         [SerializeField] private TMP_Text versionText;
-
         private TextEditor _textEditor;
-        
+        private PoolItemType _mItemType = PoolItemType.SETTING_COMMUNITY_TYPE_ITEM;
+        private List<GameObject> _cellList = new();
+
         protected override void OnCreate()
         {
             transform.AddButton("Mask", base.Close);
             transform.AddButton("Content/Root/BtnClose", base.Close).FixPivot();
             btnCopyId.WithClickScale().FixPivot().onClick.AddListener(_OnBtnCopyIdClick);
-            
+
             btnMusic.FixPivot().onClick.AddListener(_OnBtnMusicClick);
             btnSound.FixPivot().onClick.AddListener(_OnBtnSoundClick);
             btnVibration.FixPivot().onClick.AddListener(_OnBtnVibrationClick);
             btnNotification.FixPivot().onClick.AddListener(_OnBtnNotificationClick);
             btnPlot.FixPivot().onClick.AddListener(_OnBtnPlotClick);
-            
+
             btnContact.WithClickScale().FixPivot().onClick.AddListener(_OnBtnContactClick);
             btnDelete.WithClickScale().FixPivot().onClick.AddListener(_OnBtnDeleteClick);
             btnService.onClick.AddListener(_OnBtnServiceClick);
             btnPrivacy.onClick.AddListener(_OnBtnPrivacyClick);
             btnCommunity.WithClickScale().FixPivot().onClick.AddListener(_OnBtnCommunityClick);
             btnAccount.WithClickScale().FixPivot().onClick.AddListener(() => UIManager.Instance.OpenWindow(UIConfig.UIAccountBind));
+            btnChestInfo.WithClickScale().FixPivot().onClick.AddListener(_OnBtnChestInfoClick);
+            GameObjectPoolManager.Instance.PreparePool(_mItemType, LinkBtnItem);
         }
 
         protected override void OnPreOpen()
         {
             _Refresh();
+            _InitAllLinkBtn();
         }
 
         protected override void OnAddListener()
         {
             MessageCenter.Get<MSG.NOTIFICATION_STATE>().AddListener(NotificationStateChange);
+            MessageCenter.Get<MSG.APP_ENTER_FOREGROUND_EVENT>().AddListener(RefreshCommunityLinkReward);
         }
 
         protected override void OnPostOpen()
         {
-            
+
         }
 
         protected override void OnRemoveListener()
         {
             MessageCenter.Get<MSG.NOTIFICATION_STATE>().RemoveListener(NotificationStateChange);
+            MessageCenter.Get<MSG.APP_ENTER_FOREGROUND_EVENT>().RemoveListener(RefreshCommunityLinkReward);
         }
 
         protected override void OnPostClose()
         {
-            
+            _CloseLinkItem();
         }
 
         private void _Refresh()
@@ -101,6 +111,10 @@ namespace FAT
             _RefreshVibrationState();
             _RefreshNotificationState();
             _RefreshPlotState();
+            if (btnChestInfo != null)
+            {
+                btnChestInfo.gameObject.SetActive(Game.Manager.featureUnlockMan.IsFeatureEntryUnlocked(FeatureEntry.FeatureDropProbability));
+            }
         }
 
         private void _RefreshBaseInfo()
@@ -108,7 +122,7 @@ namespace FAT
             useIdText.text = I18N.FormatText("#SysComDesc129", PlatformSDK.Instance.GetUserId());
             versionText.text = I18N.FormatText("#SysComDesc140", Game.Instance.appSettings.version);
             var feature = Game.Manager.featureUnlockMan;
-            btnCommunity.gameObject.SetActive(feature.IsFeatureEntryUnlocked(FeatureEntry.FeatureSettingsCommunity));
+            //btnCommunity.gameObject.SetActive(feature.IsFeatureEntryUnlocked(FeatureEntry.FeatureSettingsCommunity));
             var bindAvailable = feature.IsFeatureEntryUnlocked(FeatureEntry.FeatureAccountBind)
                 && AccountBindList.AnyAvailable();
             btnAccount.gameObject.SetActive(bindAvailable);
@@ -129,7 +143,7 @@ namespace FAT
             stateVibration.Enabled(SettingManager.Instance.VibrationIsOn);
         }
 
-        private void _RefreshNotificationState() 
+        private void _RefreshNotificationState()
         {
             stateNotification.Enabled(Game.Manager.notification.Enabled);
         }
@@ -144,7 +158,7 @@ namespace FAT
                 Game.Manager.commonTipsMan.ShowClientTips(toastText);
             }
         }
-        
+
         private void _RefreshPlotState()
         {
             statePlot.Enabled(SettingManager.Instance.PlotIsOn);
@@ -164,12 +178,12 @@ namespace FAT
             }
             loginTypeText.text = I18N.FormatText("#SysComDesc138", type);
         }
-        
+
         private bool _IsBind(AccountLoginType bt)
         {
             return PlatformSDK.Instance.Adapter.LoginType == bt;
         }
-        
+
         private void _RefreshVisibility()
         {
             btnContact.gameObject.SetActive(true);
@@ -209,10 +223,11 @@ namespace FAT
             Game.Manager.commonTipsMan.ShowClientTips(toastText);
         }
 
-        private void _OnBtnNotificationClick() {
+        private void _OnBtnNotificationClick()
+        {
             Game.Manager.notification.ToggleEnabled();
         }
-        
+
         private void _OnBtnPlotClick()
         {
             SettingManager.Instance.OnSwitchPlotState();
@@ -237,6 +252,11 @@ namespace FAT
             UIManager.Instance.OpenWindow(UIConfig.UISettingCommunity);
         }
 
+        private void _OnBtnChestInfoClick()
+        {
+            UIManager.Instance.OpenWindow(UIConfig.UIProbabilityTips, false);
+        }
+
         private void _OnBtnServiceClick()
         {
             var gt = GameType.Asia;
@@ -250,11 +270,50 @@ namespace FAT
             var cfg = _GetGameDiffConfig(gt) ?? _GetGameDiffConfig(GameType.Mainland);
             UIBridgeUtility.OpenURL(cfg.Privacy);
         }
-        
+
         private GameDiff _GetGameDiffConfig(GameType gt)
         {
             return Game.Manager.configMan.GetGameDiffConfigs().FindEx(x => x.Type == gt);
         }
+
+        private void _InitAllLinkBtn()
+        {
+            var settingList = Game.Manager.communityLinkMan.GetCommunityList();
+            foreach (var settingData in settingList)
+            {
+                var cellItem = GameObjectPoolManager.Instance.CreateObject(_mItemType, LinkBtnRoot.transform);
+                cellItem.SetActive(true);
+                cellItem.gameObject.SetActive(settingData.IsOn);
+                var btnItem = cellItem.GetComponent<UIBtnLinkItem>();
+                btnItem.UpdateContent(settingData, LinkType.CommunityLink);
+                _cellList.Add(cellItem);
+            }
+        }
+
+        private void RefreshCommunityLinkReward()
+        {
+            if (!Game.Manager.communityLinkMan.IsShowRewardUI())
+            {
+                return;
+            }
+            CommunityLinkRewardData data = new CommunityLinkRewardData()
+            {
+                CommunityPopupType = CommunityPopupType.CommunityLinkReward,
+                LinkId = Game.Manager.communityLinkMan.RecordClickLinkId
+            };
+            UIManager.Instance.OpenWindow(UIConfig.UICommunityPlanReward, data);
+            Game.Manager.communityLinkMan.RecordClickLinkId = -1;
+            _CloseLinkItem();
+            _InitAllLinkBtn();
+        }
+
+        private void _CloseLinkItem()
+        {
+            foreach (var item in _cellList)
+            {
+                GameObjectPoolManager.Instance.ReleaseObject(_mItemType, item);
+            }
+            _cellList.Clear();
+        }
     }
 }
-

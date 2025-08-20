@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace FAT
 {
-    //UI Tips基类方法 主要处理了区域外点击关闭以及tips根据宽度适配位置的逻辑 
+    //UI Tips基类方法 主要处理了区域外点击关闭以及tips根据宽度适配位置的逻辑
     public class UITipsBase : UIBase, INavBack
     {
         [SerializeField] private RectTransform contentTrans;
@@ -81,7 +81,7 @@ namespace FAT
         ///                            若传false则保持界面原始位置不变(如居中展示) 但会有y轴上的偏移</param>
         protected void _RefreshTipsPos(float baseOffset = 0f, bool needFitWidth = true)
         {
-            contentTrans.pivot = _bottomPivot; //适配时默认锚点在底部  
+            contentTrans.pivot = _bottomPivot; //适配时默认锚点在底部
             contentTrans.localScale = Vector3.one; //适配时默认Scale为1
             _curOffset += baseOffset; //固定偏移
             //如果外部没有主动设置，则以contentTrans当时的宽高为准进行适配
@@ -214,7 +214,7 @@ namespace FAT
 
         private void CheckNeedClose(UILayer layer)
         {
-            if(layer == UILayer.AboveStatus || layer == UILayer.SubStatus)
+            if (layer == UILayer.AboveStatus || layer == UILayer.SubStatus)
                 _PlayHideTween();
         }
     }

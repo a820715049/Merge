@@ -52,6 +52,11 @@ namespace FAT
 
         #endregion
 
+        public IOrderProvider GetProvider(OrderProviderType type)
+        {
+            return orderGroupProxy.GetProvider(type);
+        }
+
         public int GetActiveOrderNum()
         {
             return orderGroupProxy.GetActiveOrderNum();
@@ -66,6 +71,10 @@ namespace FAT
                     Game.Manager.featureUnlockMan.OnMainOrderFinished();
                     GuideUtility.OnMainOrderFinished();
                 }
+                
+                // 检查生成器丢失 打点
+                Game.Manager.mainMergeMan.CheckMissingItem();
+                
                 return true;
             }
             return false;

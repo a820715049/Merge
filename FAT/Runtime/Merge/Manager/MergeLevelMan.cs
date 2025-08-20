@@ -113,7 +113,7 @@ namespace FAT
                 }
                 Game.Manager.rewardMan.PopContext();
                 //统一处理升级后的业务逻辑
-                _OnMergeLevelChange();
+                _OnMergeLevelChange(config);
                 //Dispatch升级事件
                 MessageCenter.Get<MSG.GAME_MERGE_LEVEL_CHANGE>().Dispatch(mLevel - 1);
                 PlatformSDK.Instance.UpdateGameUserInfo();
@@ -127,12 +127,16 @@ namespace FAT
             }
         }
 
-        private void _OnMergeLevelChange()
+        private void _OnMergeLevelChange(MergeLevel levelConfig)
         {
             //升级时TGA打点
             DataTracker.TrackMergeLevelUp();
             //升级时Adjust打点
-            AdjustTracker.TrackLevelEvent(level);
+#if UNITY_ANDROID
+            AdjustTracker.TrackLevelEvent(levelConfig.Level, levelConfig.AndToken);
+#elif UNITY_IOS
+            AdjustTracker.TrackLevelEvent(levelConfig.Level, levelConfig.IosToken);
+#endif
             Game.Manager.featureUnlockMan.OnMergeLevelChange();
             Game.Manager.npcMan.OnMergeLevelChange();
             Game.Manager.bagMan.OnMergeLevelChange();

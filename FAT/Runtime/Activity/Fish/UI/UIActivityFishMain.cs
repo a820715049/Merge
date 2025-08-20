@@ -87,7 +87,7 @@ namespace FAT
         {
             ActivityTransit.Exit(_activity, ResConfig, () => {
                 UIConfig.UIMessageBox.Close();
-            });
+            }, true); // 退出时默认返回主棋盘
         }
 
         private void ClickMilestone()
@@ -245,15 +245,26 @@ namespace FAT
             var item = FindFishItem(info.fishId);
             if (item == null) yield break;
             item.GetComponent<MBFishItem>().PlayAnim(info);
-            yield return new WaitForSeconds(0.58f + 0.5f + waitForFly);
-            if (info.nowStar >= item.GetComponent<MBFishItem>().fish.Star.Count)
+            var hasCollect = info.nowStar >= item.GetComponent<MBFishItem>().fish.Star.Count;
+            var hasNewStar = info.nowStar - info.preStar > 0;
+            var wait = 0f;
+            if (hasCollect || hasNewStar)
+            {
+                wait = 0.58f + 0.5f + waitForFly;
+            }
+            else
+            {
+                wait = 0.58f + 0.5f;
+            }
+            yield return new WaitForSeconds(wait);
+            if (hasCollect)
             {
                 _activity.VisualCollect.res.ActiveR.Open(_activity, info);
                 yield return new WaitForSeconds(0.5f);
                 UIManager.Instance.Block(false);
                 yield break;
             }
-            if (info.nowStar - info.preStar > 0)
+            if (hasNewStar)
             {
                 TryFlyToMilestoneStar(item, info);
             }

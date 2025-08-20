@@ -94,10 +94,12 @@ namespace FAT
             MessageCenter.Get<MSG.UI_BOARD_ORDER_TRY_RELEASE>().AddListener(_OnMessageBoardOrderTryRelease);
             MessageCenter.Get<MSG.UI_BOARD_ORDER_ANIMATING>().AddListener(_OnMessageBoardOrderAnimating);
             MessageCenter.Get<MSG.UI_ORDER_ADJUST_SCROLL>().AddListener(_OnMessageAdjustOrderScrollToPos);
-            MessageCenter.Get<MSG.UI_ORDER_QUERY_TRANSFORM>().AddListener(_OnMessageQueryFinishedCommonOrderTrasnform);
+            MessageCenter.Get<MSG.UI_ORDER_QUERY_COMMON_FINISHED_TRANSFORM>().AddListener(_OnMessageQueryFinishedCommonOrderTrasnform);
+            MessageCenter.Get<MSG.UI_ORDER_QUERY_RANDOMER_TRANSFORM>().AddListener(_OnMessageQueryRandomerOrderTrasnformById);
             MessageCenter.Get<MSG.UI_ORDER_QUERY_TRANSFORM_BY_ORDER>().AddListener(_OnMessageQueryOrderTrasnformByOrder);
             MessageCenter.Get<MSG.UI_ORDER_BOX_TIPS_POSITION_REFRESH>().AddListener(_OnMessageOrderBoxTipPosRefresh);
             MessageCenter.Get<MSG.UI_NEWLY_FINISHED_ORDER_SHOW>().AddListener(_OnMessageNewlyFinishedOrderShow);
+            MessageCenter.Get<MSG.UI_ORDER_REQUEST_SCROLL>().AddListener(_OnMessageOrderRequestScroll);
             MessageCenter.Get<MSG.BOARD_ORDER_SCROLL_RESET>().AddListener(_OnMessageOrderScrollResetWithAnim);
             spawn_delay_interval = Game.Manager.configMan.globalConfig.OrderEnterDelay / 1000f;
             spawn_delay_api = Game.Manager.configMan.globalConfig.OrderEnterApiDelay / 1000f;
@@ -118,10 +120,12 @@ namespace FAT
             MessageCenter.Get<MSG.UI_BOARD_ORDER_TRY_RELEASE>().RemoveListener(_OnMessageBoardOrderTryRelease);
             MessageCenter.Get<MSG.UI_BOARD_ORDER_ANIMATING>().RemoveListener(_OnMessageBoardOrderAnimating);
             MessageCenter.Get<MSG.UI_ORDER_ADJUST_SCROLL>().RemoveListener(_OnMessageAdjustOrderScrollToPos);
-            MessageCenter.Get<MSG.UI_ORDER_QUERY_TRANSFORM>().RemoveListener(_OnMessageQueryFinishedCommonOrderTrasnform);
+            MessageCenter.Get<MSG.UI_ORDER_QUERY_COMMON_FINISHED_TRANSFORM>().RemoveListener(_OnMessageQueryFinishedCommonOrderTrasnform);
+            MessageCenter.Get<MSG.UI_ORDER_QUERY_RANDOMER_TRANSFORM>().RemoveListener(_OnMessageQueryRandomerOrderTrasnformById);
             MessageCenter.Get<MSG.UI_ORDER_QUERY_TRANSFORM_BY_ORDER>().RemoveListener(_OnMessageQueryOrderTrasnformByOrder);
             MessageCenter.Get<MSG.UI_ORDER_BOX_TIPS_POSITION_REFRESH>().RemoveListener(_OnMessageOrderBoxTipPosRefresh);
             MessageCenter.Get<MSG.UI_NEWLY_FINISHED_ORDER_SHOW>().RemoveListener(_OnMessageNewlyFinishedOrderShow);
+            MessageCenter.Get<MSG.UI_ORDER_REQUEST_SCROLL>().RemoveListener(_OnMessageOrderRequestScroll);
             MessageCenter.Get<MSG.BOARD_ORDER_SCROLL_RESET>().RemoveListener(_OnMessageOrderScrollResetWithAnim);
             _Cleanup();
         }
@@ -560,6 +564,7 @@ namespace FAT
             if (trans.rect.width < scroll.viewport.rect.width)
             {
                 // 无需滚动
+                GuideUtility.TriggerGuide();
                 return;
             }
 
@@ -579,7 +584,7 @@ namespace FAT
                 },
                 1f,
                 duration
-            ).SetEase(Ease.InOutSine);
+            ).SetEase(Ease.InOutSine).OnComplete(GuideUtility.TriggerGuide);
         }
 
         private void _RequestScrollToTarget(Transform trans)
@@ -657,6 +662,23 @@ namespace FAT
             resolver?.Invoke(null);
         }
 
+        private void _OnMessageQueryRandomerOrderTrasnformById(int orderId, Action<Transform> resolver)
+        {
+            foreach (var kv in orderInstTable)
+            {
+                var order = kv.Key;
+                if (orderId < 0 || orderId == order.Id)
+                {
+                    if (order.ProviderType == (int)OrderProviderType.Random)
+                    {
+                        resolver?.Invoke(kv.Value.transform);
+                        return;
+                    }
+                }
+            }
+            resolver?.Invoke(null);
+        }
+
         private void _OnMessageQueryOrderTrasnformByOrder(IOrderData order, Action<Transform> resolver)
         {
             orderInstTable.TryGetValue(order, out var inst);
@@ -682,6 +704,11 @@ namespace FAT
         }
 
         private void _OnMessageNewlyFinishedOrderShow(Transform trans)
+        {
+            _RequestScrollToTarget(trans);
+        }
+
+        private void _OnMessageOrderRequestScroll(Transform trans)
         {
             _RequestScrollToTarget(trans);
         }

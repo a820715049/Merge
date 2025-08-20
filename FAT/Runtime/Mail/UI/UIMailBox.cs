@@ -58,7 +58,7 @@ namespace FAT
 
         private void _RefreshClaimAllBtn()
         {
-            if(Game.Manager.mailMan.HasReward())
+            if(Game.Manager.mailMan.HasReward() && Game.Manager.mailMan.IsNoneLinkMail())
             {
                 mBtnClaimAll.GetComponent<UIImageState>().Select(0);
                 mBtnClaimAll.interactable = true;

@@ -243,6 +243,7 @@ namespace FAT
                 Game.Manager.mergeEnergyMan.ToForeground();
                 Game.Manager.remoteApiMan.ToForeground();
                 GameUpdateManager.Instance.ToForeground();
+                MessageCenter.Get<MSG.APP_ENTER_FOREGROUND_EVENT>().Dispatch();
             }
             DeviceNotificationHelper.CheckRespondedNotification();
         }

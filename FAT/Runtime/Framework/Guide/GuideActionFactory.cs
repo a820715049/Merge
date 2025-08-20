@@ -70,6 +70,7 @@ namespace FAT
                 case "open_help_card_trade": imp = new GuideActImpOpenHelpCardTrade(); break;
                 case "open_ui_album_unlock": imp = new GuideActImpOpenAlbumUnlock(); break;
                 case "open_ui_album_start": imp = new GuideActImpOpenAlbumStart(); break;
+                case "open_ui_bingo_guide": imp = new GuideActImpOpenBingoGuide(); break;
                 case "open_ui_bingo_help": imp = new GuideActImpOpenBingoHelp(); break;
                 case "open_ui_boost": imp = new GuideActImpOpenUIBoost(); break;
                 case "open_ui_boost_4x": imp = new GuideActImpOpenEnergyBoostUnlock4X(); break;
@@ -94,12 +95,15 @@ namespace FAT
                 case "wait_select": imp = new GuideActImpWaitSelect(); break;
                 case "wait_uistate": imp = new GuideActWaitUIState(); break;
                 case "token_mask": imp = new GuideActImpTokenMask(); break; // 签到抽奖活动
+
                 #region sp
+                case "claw_order_mask_show": imp = new GuideActImpClawOrderMaskShow(); break;
+                case "claw_order_help": imp = new GuideActImpClawOrderHelp(); break;
                 case "gameplayhelp": imp = new GuideActImpSpShowGameplayHelp(); break;
                 case "merge_entry_hide": imp = new GuideActImpSpMergeEntryHide(); break;
                 case "merge_entry_hijack": imp = new GuideActImpSpMergeEntryHijack(); break;
                 case "merge_entry_show": imp = new GuideActImpSpMergeEntryShow(); break;
-                    #endregion
+                #endregion
             }
             return imp;
         }

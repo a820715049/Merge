@@ -67,18 +67,6 @@ namespace FAT
         private Action<IMapBuilding> WhenFocus;
         private Action WhenTick;
 
-#if UNITY_EDITOR
-        private void OnValidate()
-        {
-            if (Application.isPlaying) return;
-            var root = transform.Find("group");
-            group = root.gameObject;
-            list.Clear();
-            var template = root.Find("entry").gameObject;
-            list.Add(ParseEntry(template));
-        }
-#endif
-
         public static Entry ParseEntry(GameObject obj_)
         {
             var root = obj_.transform;
@@ -95,8 +83,8 @@ namespace FAT
                 start = root.Access<TextMeshProUGUI>("img/start"),
                 actCd = root.Access<TextMeshProUGUI>("img/actCd"),
                 orderCd = root.Access<TextMeshProUGUI>("orderCd"),
-                dot = root.TryFind("dot"),
-                dotCount = root.Access<TextMeshProUGUI>("dot/count"),
+                dot = root.TryFind("dotCount"),
+                dotCount = root.Access<TextMeshProUGUI>("dotCount/Count"),
                 sale = root.TryFind("icon/sale"),
                 token = root.Access<TextMeshProUGUI>("icon/token"),
                 discount = root.Access<TextMeshProUGUI>("icon/discount"),
@@ -135,7 +123,7 @@ namespace FAT
                 e.setup = null;
                 e.activity = null;
             }
-            foreach(var e in list) ClearE(e);
+            foreach (var e in list) ClearE(e);
             Get<ACTIVITY_UPDATE>().RemoveListener(WhenUpdate);
             Get<MAP_FOCUS_CHANGE>().RemoveListener(WhenFocus);
             Get<GAME_ONE_SECOND_DRIVER>().RemoveListener(WhenTick);
@@ -240,6 +228,7 @@ namespace FAT
             e_.discount.gameObject.SetActive(false);
             e_.frame.gameObject.SetActive(false);
             e_.up.gameObject.SetActive(false);
+            e_.flag.gameObject.SetActive(false);
             if (e_.img != null)
                 e_.img.gameObject.SetActive(false);
             if (e_.progress != null)
@@ -265,10 +254,14 @@ namespace FAT
                 ActivityFishing fishing => new FishingEntry(e_, fishing),
                 FarmBoardActivity farm => new FarmBoardEntry(e_, farm),
                 ActivityWeeklyTask weeklyTask => new WeeklyTaskEntry(e_, weeklyTask),
+                BPActivity bpActivity => new BPEntry(e_, bpActivity),
                 PackErgList packErgList => packErgList.SetupEntry(e_),
                 ActivityRedeemShopLike redeemShop => new RedeemShopEntry(e_, redeemShop),
                 WishBoardActivity wishBoard => new WishBoardEntry(e_, wishBoard),
                 ActivityWeeklyRaffle weeklyRaffle => new WeeklyRaffleEntry(e_, weeklyRaffle),
+                PackSpin packSpin => new EntrySpin(e_, packSpin),
+                FightBoardActivity fightBoard => new FightBoardEntry(e_, fightBoard),
+                ActivityBingoTask bingoTask => new BingoTaskEntry(e_, bingoTask),
                 _ => null
             };
         }

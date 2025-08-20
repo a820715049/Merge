@@ -154,7 +154,7 @@ namespace fat.rawdata {
         = pb::FieldCodec.ForInt32(34);
     private readonly pbc::RepeatedField<int> includeTrainMission_ = new pbc::RepeatedField<int>();
     /// <summary>
-    /// 包含的订单
+    /// 包含的火车
     /// (milestoneGroup.id)
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

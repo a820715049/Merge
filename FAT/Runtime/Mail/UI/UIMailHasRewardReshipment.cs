@@ -145,20 +145,40 @@ namespace FAT
             {
                 var (valid, id, from, _, _) = ActivityLite.InfoUnwrap(_delivery.context.ProductName);
                 var id2 = valid ? (id, from) : ActivityLite.IdUnwrap((int)_delivery.context.OrderId);
-                var packId = _delivery.context.PayStoreId;
+                var packId = _delivery.pack.Id;
                 DebugEx.Info("mailReshipment is Init PackId: +" + packId);
                 var iap = Game.Manager.iap;
-                if (ActivityLite.Exist(id2) && iap.FindIAPPack(packId, out var p))
+                if (Activity.map.TryGetValue(id2, out var acti) && acti is GiftPack pack)
                 {
                     DebugEx.Info("mailReshipment: get pack " + packId);
-                    var iapPackConfig = Data.GetIAPPack(packId);
-                    if (iapPackConfig != null)
+                    SetDescText(packId);
+                    var rewardMan = Game.Manager.rewardMan;
+                    var goods = pack.MatchPack(packId);
+                    if (goods == null)
                     {
-                        var name = I18N.Text(iapPackConfig.PackName);
-                        _desc.text = I18N.FormatText("#SysComDesc1166", name);
+                        DebugEx.Info("mailReshipment: goods is null");
+                        return;
                     }
+                    if (goods.reward.Count == 0)
+                    {
+                        DebugEx.Info($"mailReshipment: rewardData is empty {id2}");
+                        return;
+                    }
+                    RefreshShopReward(goods.reward);
+                    return;
+                }
+
+                if (ActivityLite.Exist(id2) && iap.FindIAPPack(packId, out var p))
+                {
+                    DebugEx.Info("mailReshipment: check Giftpack " + packId);
+                    SetDescText(packId);
                     var AlbumActive = Game.Manager.activity.IsActive(fat.rawdata.EventType.CardAlbum);
                     var rewardList = AlbumActive ? p.RewardAlbum : p.Reward;
+                    if (rewardList.Count == 0)
+                    {
+                        DebugEx.Info($"mailReshipment: rewardList is empty {id2}");
+                        return;
+                    }
                     RefreshReward(rewardList);
                 }
             }
@@ -219,6 +239,16 @@ namespace FAT
                 cellList.Add(cell);
             }
         }
+
+        private void SetDescText(int packId)
+        {
+            var iapPackConfig = Data.GetIAPPack(packId);
+            if (iapPackConfig != null)
+            {
+                var name = I18N.Text(iapPackConfig.PackName);
+                _desc.text = I18N.FormatText("#SysComDesc1166", name);
+            }
+        }
     }
 
     public enum MailReshipmentMoudleType
@@ -227,4 +257,3 @@ namespace FAT
         NotHasReward = 2,
     }
 }
-

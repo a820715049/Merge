@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using Config;
 using fat.gamekitdata;
+using fat.rawdata;
 
 namespace FAT
 {
@@ -18,6 +19,7 @@ namespace FAT
         Challenge = 4,  // 连续限时订单活动 零度挑战
         MagicHour = 5,  // 星想事成活动 随机订单
         OrderDash = 6,
+        Streak = 7,      // 连续订单活动
     }
 
     // 只增不删 避免错误解析用户存档
@@ -53,7 +55,16 @@ namespace FAT
         ExtraSlot_TR_EventParam,     // 额外奖励槽 右上角 活动配置id
         ExtraSlot_TR_RewardId,       // 额外奖励槽 右上角 奖励id
         ExtraSlot_TR_RewardNum,      // 额外奖励槽 右上角 奖励数量
-        ScoreRewardBR,  //  订单右下角奖励id
+        ScoreRewardBR,               // 订单右下角奖励id
+        TAG_MASK,                   // 订单标签 | 订单可能同时具备多个标签
+    }
+
+    [Flags]
+    public enum OrderTag
+    {
+        None = 0,
+        // 抓宝订单
+        ClawOrder = 1 << 0,
     }
 
     public enum OrderState
@@ -95,6 +106,10 @@ namespace FAT
         public int DffyStrategy { get => Record.DffyStrategy; set => Record.DffyStrategy = value; }
         public int GetValue(OrderParamType paramKey) { return RecordStateHelper.ReadInt((int)paramKey, Record.Extra); }
 
+        #region conf
+        public OrderRandomer ConfRandomer { get; set; }
+        #endregion
+
         #region 星想事成
         public int FallbackItemId { get; set; }
         public (int min, int max) RewardDffyRange { get; set; }
@@ -110,6 +125,10 @@ namespace FAT
         public bool needBonusAnim { get; set; }
         #endregion
 
+        #region 订单滚屏需求
+        public bool HasScrollRequest { get; set; }
+        #endregion
+
         public bool ShouldNotChange { get; set; }
         public Func<IOrderData, bool> RemoteOrderResolver { get; set; }
 
@@ -122,6 +141,19 @@ namespace FAT
             }
             return null;
         }
+
+        public void AddTag(OrderTag flag)
+        {
+            var mask = GetValue(OrderParamType.TAG_MASK);
+            RecordStateHelper.UpdateRecord((int)OrderParamType.TAG_MASK, mask | (int)flag, Record.Extra);
+        }
+
+        public void RemoveTag(OrderTag flag)
+        {
+            var mask = GetValue(OrderParamType.TAG_MASK);
+            RecordStateHelper.UpdateRecord((int)OrderParamType.TAG_MASK, mask & ~(int)flag, Record.Extra);
+        }
+
         public OrderRecord Record { get; set; }
     }
 
@@ -142,6 +174,10 @@ namespace FAT
 
         bool ShouldNotChange { get; set; }
         Func<IOrderData, bool> RemoteOrderResolver { get; set; }
+
+        #region tag
+        bool HasTag(OrderTag flag) => (GetValue(OrderParamType.TAG_MASK) & (int)flag) != 0;
+        #endregion
 
         #region pay/act difficulty
         int PayDifficulty => GetValue(OrderParamType.PayDifficulty);
@@ -177,7 +213,7 @@ namespace FAT
 
         #region flash
         // 限时订单 | 共用了倒计时的逻辑
-        bool IsFlash => OrderType == (int)FAT.OrderType.Flash || OrderType == (int)FAT.OrderType.Challenge || OrderType == (int)FAT.OrderType.OrderDash;
+        bool IsFlash => OrderType == (int)FAT.OrderType.Flash || OrderType == (int)FAT.OrderType.Challenge || OrderType == (int)FAT.OrderType.OrderDash || OrderType == (int)FAT.OrderType.Streak;
         #endregion
 
         #region score
@@ -218,6 +254,10 @@ namespace FAT
         (int id, int num) ExtraRewardMini => (GetValue(OrderParamType.ExtraBonusRewardId_Mini), GetValue(OrderParamType.ExtraBonusRewardNum_Mini));
         #endregion
 
+        #region claw order
+        bool IsClawOrder => HasTag(OrderTag.ClawOrder);
+        #endregion
+
         #region OrderBonus
         int BonusEventID { get; set; }
         int BonusID { get; set; }
@@ -225,6 +265,10 @@ namespace FAT
         int BonusPhase { get; set; }
         bool needBonusAnim { get; set; }
         bool HasBonus => BonusEventID != 0;
+        #endregion
+
+        #region 订单滚屏需求
+        bool HasScrollRequest { get; set; }
         #endregion
 
         int CalcRealDifficulty()
@@ -240,9 +284,10 @@ namespace FAT
 
         bool ShouldOverrideOrderRes()
         {
-            return IsFlash || IsStep || IsMagicHour || HasExtraReward || (HasBonus && !needBonusAnim);
+            return IsFlash || IsStep || IsMagicHour || HasExtraReward || IsClawOrder || (HasBonus && !needBonusAnim);
         }
 
+        #region 订单prefab
         bool TryGetOverrideRes(out string res)
         {
             res = null;
@@ -260,6 +305,10 @@ namespace FAT
                 {
                     res = ActivityFlashOrder.GetOrderThemeRes(GetValue(OrderParamType.EventId), GetValue(OrderParamType.EventParam));
                 }
+                else if (OrderType == (int)FAT.OrderType.Streak)
+                {
+                    res = ActivityOrderStreak.GetOrderThemeRes(GetValue(OrderParamType.EventId), GetValue(OrderParamType.EventParam));
+                }
             }
             else if (HasBonus)
             {
@@ -273,13 +322,19 @@ namespace FAT
             {
                 res = ActivityMagicHour.GetOrderThemeRes(GetValue(OrderParamType.EventId), GetValue(OrderParamType.EventParam));
             }
+            else if (IsClawOrder)
+            {
+                res = ActivityClawOrder.GetOrderThemeRes();
+            }
             else if (HasExtraReward)
             {
                 res = ActivityExtraRewardOrder.GetOrderThemeRes(GetValue(OrderParamType.ExtraBonusEventId), GetValue(OrderParamType.ExtraBonusEventParam));
             }
             return !string.IsNullOrEmpty(res);
         }
+        #endregion
 
+        #region 订单挂件
         bool TryGetExtraRewardMiniRes(out string res)
         {
             res = ActivityExtraRewardOrder.GetExtraRewardMiniThemeRes(GetValue(OrderParamType.ExtraBonusEventId_Mini), GetValue(OrderParamType.ExtraBonusEventParam_Mini));
@@ -292,16 +347,26 @@ namespace FAT
             return !string.IsNullOrEmpty(res);
         }
 
+        // 进度礼盒
         bool TryGetOrderRateRes(out string res)
         {
             res = ActivityOrderRate.GetExtraRewardMiniThemeRes(GetValue(OrderParamType.ExtraSlot_TR_EventId), GetValue(OrderParamType.ExtraSlot_TR_EventParam));
             return !string.IsNullOrEmpty(res);
         }
 
+        // 订单助力
         bool TryGetOrderBonusRes(out string res)
         {
             res = ActivityOrderBonus.GetExtraRewardMiniThemeRes(GetValue(OrderParamType.ExtraSlot_TR_EventId), GetValue(OrderParamType.ExtraSlot_TR_EventParam));
             return !string.IsNullOrEmpty(res);
         }
+
+        // 抓宝订单
+        bool TryGetClawOrderRes(out string res)
+        {
+            res = ActivityClawOrder.GetOrderAttachmentRes();
+            return !string.IsNullOrEmpty(res);
+        }
+        #endregion
     }
 }

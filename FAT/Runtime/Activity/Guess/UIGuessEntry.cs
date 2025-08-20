@@ -176,7 +176,7 @@ namespace FAT
         private void RefreshRedDot()
         {
             var token = activityGuess.Token;
-            redNum.text = token.ToString();
+            redNum.SetRedPoint(token);
             redGo.SetActive(token > 0);
         }
 

@@ -219,16 +219,18 @@ namespace FAT
             string bonusAdsType = entryData.AdsName;
             DebugEx.FormatInfo("AdsMan::_TryPlayAdsVideo ----> start to watch ads, bonusAdsType = {0}", bonusAdsType);
             //播广告前关闭所有音乐
-            var isMusicOn = SettingManager.Instance.MusicIsOn;
-            if (isMusicOn)
-                Game.Manager.audioMan.Pause();
+            // var isMusicOn = SettingManager.Instance.MusicIsOn;
+            // if (isMusicOn)
+            //     Game.Manager.audioMan.Pause();
+            Game.Manager.audioMan.TurnOff();
             //播广告
             AsyncTaskBase adsTask = AdsCenter.Instance.TryPlayAdsVideo(bonusAdsType);
             task.SetTask(adsTask);
             yield return adsTask;
             //广告播完后开启音乐
-            if (isMusicOn)
-                Game.Manager.audioMan.UnPause();
+            // if (isMusicOn)
+            //     Game.Manager.audioMan.UnPause();
+            Game.Manager.audioMan.TurnOn();
             //检查广告的播放结果
             if(adsTask.isSuccess)
             {

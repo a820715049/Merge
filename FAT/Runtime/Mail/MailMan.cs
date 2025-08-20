@@ -9,20 +9,25 @@ using System;
 using fat.gamekitdata;
 using fat.msg;
 
-namespace FAT {
+namespace FAT
+{
     public class MailMan : IGameModule
     {
         public int MailCount => mMailList.Count;
+        public Mail RecordClickLinkMail = null;
         private readonly List<Mail> mMailList = new();
 
         public void LoadConfig() { }
 
-        public void Reset() {
+        public void Reset()
+        {
             mMailList.Clear();
+            RecordClickLinkMail = null;
             MessageCenter.Get<MSG.GAME_LOGIN_FIRST_SYNC>().AddListenerUnique(RequestMail);
         }
 
-        public void Startup() {
+        public void Startup()
+        {
             RequestMail();
         }
 
@@ -165,7 +170,7 @@ namespace FAT {
             {
                 DebugEx.FormatInfo("[MAIL] mail read success");
 
-                DataTracker.mail_read.Track(m.Type.ToString(), m.FromUid.ToString(), Game.Manager.mailMan.SingleMailHasReward(m));
+                DataTracker.mail_read.Track(m.Type.ToString(), m.FromUid.ToString(), Game.Manager.mailMan.SingleMailHasReward(m), IsLinkMail(m));
             }
         }
 
@@ -206,11 +211,11 @@ namespace FAT {
                 {
                     if (!mail.IsRead)
                     {
-                        DataTracker.mail_read.Track(mail.Type.ToString(), mail.FromUid.ToString(), Game.Manager.mailMan.SingleMailHasReward(mail));
+                        DataTracker.mail_read.Track(mail.Type.ToString(), mail.FromUid.ToString(), Game.Manager.mailMan.SingleMailHasReward(mail), IsLinkMail(mail));
                     }
                     if (!mail.IsClaimed)
                     {
-                        DataTracker.mail_reward.Track(mail.Type.ToString(), mail.FromUid.ToString(), mail.Title, mail.Rewards, Game.Manager.mailMan.SingleMailHasReward(mail));
+                        DataTracker.mail_reward.Track(mail.Type.ToString(), mail.FromUid.ToString(), mail.Title, mail.Rewards, Game.Manager.mailMan.SingleMailHasReward(mail), IsLinkMail(mail));
                     }
 
                     mail.IsRead = true;
@@ -223,7 +228,6 @@ namespace FAT {
             _MergeRewards(body.Rewards, rewardList);
             Game.Manager.archiveMan.SendImmediately(true);            //save immediately to local
             holder.Success(rewardList);
-
             _NotifyStateChange();
         }
 
@@ -255,7 +259,7 @@ namespace FAT {
             if (m != null)
             {
                 m.IsClaimed = true;
-                DataTracker.mail_reward.Track(m.Type.ToString(), m.FromUid.ToString(), m.Title, m.Rewards, Game.Manager.mailMan.SingleMailHasReward(m));
+                DataTracker.mail_reward.Track(m.Type.ToString(), m.FromUid.ToString(), m.Title, m.Rewards, Game.Manager.mailMan.SingleMailHasReward(m), IsLinkMail(m));
             }
 
             var body = resp.result as GetMailRewardResp;
@@ -302,7 +306,7 @@ namespace FAT {
         {
             foreach (var mail in mMailList)
             {
-                DataTracker.mail_receive.Track(mail.Type.ToString(), mail.FromUid.ToString(), SingleMailHasReward(mail), mail.Title, mail.Rewards);
+                DataTracker.mail_receive.Track(mail.Type.ToString(), mail.FromUid.ToString(), SingleMailHasReward(mail), mail.Title, mail.Rewards, IsLinkMail(mail));
             }
         }
 
@@ -314,6 +318,28 @@ namespace FAT {
                 {
                     return true;
                 }
+            }
+            return false;
+        }
+
+        public bool IsNoneLinkMail()
+        {
+            foreach (var mail in mMailList)
+            {
+                if (mail.LinkType == MailLinkType.MailExternalLink)
+                    continue;
+                if (!mail.IsClaimed && mail.Rewards.Count > 0)
+                    return true;
+            }
+            return false;
+        }
+
+        public bool IsLinkMail(Mail mail)
+        {
+            if (mail != null)
+            {
+                if (mail.LinkType == MailLinkType.MailExternalLink)
+                    return true;
             }
             return false;
         }

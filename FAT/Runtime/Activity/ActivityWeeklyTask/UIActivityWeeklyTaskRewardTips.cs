@@ -43,13 +43,10 @@ namespace FAT
         {
             if (items.Length >= 2) _SetTipsPosInfo(items);
             if (items.Length >= 3) _RefreshReward(items[2] as List<RewardConfig>);
-            if (items.Length >= 4) isFinial = (bool)items[3];
         }
 
         protected override void OnPreOpen()
         {
-            title.SetActive(isFinial);
-            titleReplace.SetActive(!isFinial);
             StartCoroutine(DelayOpen());
         }
 

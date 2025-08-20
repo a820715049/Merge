@@ -35,6 +35,7 @@ namespace FAT
             {
                 (e, bingo) = (e_, bingo_);
                 e_.flag.SetImage(bingo_.BadgeAsset);
+                RefreshFlag();
                 MessageCenter.Get<MSG.BINGO_ITEM_COMPLETE_DIRTY>().AddListener(RefreshFlag);
                 MessageCenter.Get<MSG.BINGO_PROGRESS_UPDATE>().AddListener(RefreshFlag);
             }
@@ -136,8 +137,8 @@ namespace FAT
             BingoGroupPhase = ReadInt(i++, any);
             BingoGroupPhaseTotal = ReadInt(i++, any);
             BingoTotal = ReadInt(i++, any);
-            if (BingoGroupID > 0) BingoItems.AddRange(BingoUtility.CreateBingoItemList(BingoGroupID, BingoGroupPhase));
-            if (BingoItems.Count > 0) BingoUtility.LoadBingoItemData(BingoItems, data_, i);
+            if (BingoGroupID > 0) BingoItems.AddRange(ItemBingoUtility.CreateBingoItemList(BingoGroupID, BingoGroupPhase));
+            if (BingoItems.Count > 0) ItemBingoUtility.LoadBingoItemData(BingoItems, data_, i);
             RefreshBingoItemMap();
             InitConf();
             RefreshTheme();
@@ -250,8 +251,8 @@ namespace FAT
         /// <returns>key值为bingogroup的ID，value为生成器链条List</returns>
         public Dictionary<int, List<int>> GetOptionalBingoGroup()
         {
-            var confRound = BingoUtility.GetEventItemBingoRound(Param);
-            return BingoUtility.GetBingoGroup(confRound?.IncludeItemBingoId.FirstOrDefault() ?? 0);
+            var confRound = ItemBingoUtility.GetEventItemBingoRound(Param);
+            return ItemBingoUtility.GetBingoGroup(confRound?.IncludeItemBingoId.FirstOrDefault() ?? 0);
         }
 
         /// <summary>
@@ -260,21 +261,21 @@ namespace FAT
         /// <param name="groupId">选择的关卡组ID</param>
         public void ChooseGroup(int groupId)
         {
-            var group = BingoUtility.GetGroupDetail(groupId);
+            var group = ItemBingoUtility.GetGroupDetail(groupId);
             if (group == null) return;
             BingoGroupID = groupId;
             BingoGroupPhase = 0;
             ConfBoardID = group.IncludeBoard[BingoGroupPhase];
             BingoItems.Clear();
-            BingoItems.AddRange(BingoUtility.CreateBingoItemList(groupId, BingoGroupPhase));
+            BingoItems.AddRange(ItemBingoUtility.CreateBingoItemList(groupId, BingoGroupPhase));
             BingoItemMap.Clear();
             RefreshBingoItemMap();
             MessageCenter.Get<MSG.BINGO_PROGRESS_UPDATE>().Dispatch();
             MessageCenter.Get<MSG.BINGO_ITEM_COMPLETE_DIRTY>().Dispatch();
             Invalidate?.Invoke();
             DataTracker.event_bingo_restart.Track(this, phase + 1);
-            BoardColNum = BingoUtility.GetBoardConfig(ConfBoardID)?.BoardColNum ?? 0;
-            BoardRowNum = BingoUtility.GetBoardConfig(ConfBoardID)?.BoardRowNum ?? 0;
+            BoardColNum = ItemBingoUtility.GetBoardConfig(ConfBoardID)?.BoardColNum ?? 0;
+            BoardRowNum = ItemBingoUtility.GetBoardConfig(ConfBoardID)?.BoardRowNum ?? 0;
         }
 
         /// <summary>
@@ -315,7 +316,7 @@ namespace FAT
         /// </summary>
         public void PreviewCompleteBingo(BingoItem item, out List<(int, int)> reward)
         {
-            reward = BingoUtility.PreviewCompleteBingo(item.CoordX, item.CoordY, BingoItems, ConfBoardID);
+            reward = ItemBingoUtility.PreviewCompleteBingo(item.CoordX, item.CoordY, BingoItems, ConfBoardID);
         }
         /// <summary>
         /// 提交bingo棋子时调用
@@ -324,13 +325,13 @@ namespace FAT
         /// <param name="enterNextBoard">是否进入下一关</param>
         /// <param name="enterNextRound">是否进入下一轮</param>
         /// <returns>bingo完成的状态</returns>
-        public BingoState CompleteBingo(BingoItem item, out List<RewardCommitData> rewardCommitDatas, out bool enterNextBoard, out bool enterNextRound)
+        public ItemBingoState CompleteBingo(BingoItem item, out List<RewardCommitData> rewardCommitDatas, out bool enterNextBoard, out bool enterNextRound)
         {
             rewardCommitDatas = null;
             enterNextBoard = false;
             enterNextRound = false;
             //已经提交过的奖励不能重复提交
-            if (item.IsClaimed) return BingoState.None;
+            if (item.IsClaimed) return ItemBingoState.None;
             using (ObjectPool<List<ItemConsumeRequest>>.GlobalPool.AllocStub(out var toConsume))
             {
                 toConsume.Add(new ItemConsumeRequest()
@@ -339,24 +340,24 @@ namespace FAT
                     itemCount = 1
                 });
                 var consumeSuccess = Game.Manager.mainMergeMan.world.TryConsumeOrderItem(toConsume, null, false);
-                if (!consumeSuccess) return BingoState.None;
+                if (!consumeSuccess) return ItemBingoState.None;
                 item.IsClaimed = true;
-                var completedLines = BingoUtility.PreviewCompleteBingo(item.CoordX, item.CoordY, BingoItems, ConfBoardID);
-                rewardCommitDatas = BingoUtility.GetRewardCommitDatas(completedLines);
-                var state = BingoUtility.GetBingoState(BingoItems, item);
-                BingoUtility.UpdateBingoItemState(BingoItems, state, item);
+                var completedLines = ItemBingoUtility.PreviewCompleteBingo(item.CoordX, item.CoordY, BingoItems, ConfBoardID);
+                rewardCommitDatas = ItemBingoUtility.GetRewardCommitDatas(completedLines);
+                var state = ItemBingoUtility.GetBingoState(BingoItems, item);
+                ItemBingoUtility.UpdateBingoItemState(BingoItems, state, item);
                 var rewardstring = string.Join(",", rewardCommitDatas.Select(r => ZString.Format("{0}:{1}", r.rewardId, r.rewardCount)));
                 DataTracker.event_bingo_submit.Track(this, ZString.Format("{0}:{1}:{2}", item.ItemId, item.CoordX, item.CoordY), rewardstring,
-                    state.HasFlag(BingoState.RowCompleted) || state.HasFlag(BingoState.ColumnCompleted) || state.HasFlag(BingoState.Diagonal1Completed) || state.HasFlag(BingoState.Diagonal2Completed),
-                    state.HasFlag(BingoState.FullHouse), BingoItems.Count(), BingoItems.Count(item => item.IsClaimed), BingoGroupPhaseTotal + 1, phase + 1);
-                if (state.HasFlag(BingoState.ColumnCompleted) || state.HasFlag(BingoState.RowCompleted) || state.HasFlag(BingoState.Diagonal1Completed) || state.HasFlag(BingoState.Diagonal2Completed))
-                    DataTracker.event_bingo_complete.Track(this, state.HasFlag(BingoState.RowCompleted) || state.HasFlag(BingoState.ColumnCompleted),
-                        state.HasFlag(BingoState.Diagonal1Completed) || state.HasFlag(BingoState.Diagonal2Completed), state.HasFlag(BingoState.FullHouse),
-                        BingoGroupPhase + 1, ++BingoTotal, phase + 1, state.HasFlag(BingoState.FullHouse));
-                if (state.HasFlag(BingoState.ItemCompleted)) RefreshBingoItemMap(item);
-                if (state.HasFlag(BingoState.ItemCompleted)) MessageCenter.Get<MSG.BINGO_PROGRESS_UPDATE>().Dispatch();
-                enterNextBoard = state.HasFlag(BingoState.FullHouse) && TryEnterNextBoard();
-                if (!enterNextBoard) enterNextRound = state.HasFlag(BingoState.FullHouse) && TryEnterNextRound();
+                    state.HasFlag(ItemBingoState.RowCompleted) || state.HasFlag(ItemBingoState.ColumnCompleted) || state.HasFlag(ItemBingoState.MainDiagonalCompleted) || state.HasFlag(ItemBingoState.AntiDiagonalCompleted),
+                    state.HasFlag(ItemBingoState.FullHouse), BingoItems.Count(), BingoItems.Count(item => item.IsClaimed), BingoGroupPhaseTotal + 1, phase + 1);
+                if (state.HasFlag(ItemBingoState.ColumnCompleted) || state.HasFlag(ItemBingoState.RowCompleted) || state.HasFlag(ItemBingoState.MainDiagonalCompleted) || state.HasFlag(ItemBingoState.AntiDiagonalCompleted))
+                    DataTracker.event_bingo_complete.Track(this, state.HasFlag(ItemBingoState.RowCompleted) || state.HasFlag(ItemBingoState.ColumnCompleted),
+                        state.HasFlag(ItemBingoState.MainDiagonalCompleted) || state.HasFlag(ItemBingoState.AntiDiagonalCompleted), state.HasFlag(ItemBingoState.FullHouse),
+                        BingoGroupPhase + 1, ++BingoTotal, phase + 1, state.HasFlag(ItemBingoState.FullHouse));
+                if (state.HasFlag(ItemBingoState.ItemCompleted)) RefreshBingoItemMap(item);
+                if (state.HasFlag(ItemBingoState.ItemCompleted)) MessageCenter.Get<MSG.BINGO_PROGRESS_UPDATE>().Dispatch();
+                enterNextBoard = state.HasFlag(ItemBingoState.FullHouse) && TryEnterNextBoard();
+                if (!enterNextBoard) enterNextRound = state.HasFlag(ItemBingoState.FullHouse) && TryEnterNextRound();
                 Invalidate?.Invoke();
                 return state;
             }
@@ -369,7 +370,7 @@ namespace FAT
         /// <returns>true为取出成功，需要修改UI显示状态</returns>
         public bool TryTakeOutItem(int ID)
         {
-            return BingoUtility.TryTakeOutItem(ID);
+            return ItemBingoUtility.TryTakeOutItem(ID);
         }
         /// <summary>
         /// 检测当前是否有bingo item可以提交
@@ -387,7 +388,7 @@ namespace FAT
             var index = 0;
             foreach (var item in BingoItems)
             {
-                if (BingoUtility.HasActiveItemInMainBoardAndInventory(item.ItemId) || BingoUtility.HasItemInMainBoardRewardTrack(item.ItemId))
+                if (ItemBingoUtility.HasActiveItemInMainBoardAndInventory(item.ItemId) || ItemBingoUtility.HasItemInMainBoardRewardTrack(item.ItemId))
                     return index;
                 index++;
             }
@@ -399,7 +400,7 @@ namespace FAT
         private bool TryEnterNextBoard()
         {
             BingoBoardTotal++;
-            var confGroup = BingoUtility.GetGroupDetail(BingoGroupID);
+            var confGroup = ItemBingoUtility.GetGroupDetail(BingoGroupID);
             DataTracker.event_bingo_level_complete.Track(this, ConfBoardID, BingoGroupPhase + 1, phase + 1);
             if (confGroup.IncludeBoard.Count > BingoGroupPhase + 1)
             {
@@ -409,12 +410,12 @@ namespace FAT
                 BingoItemMap.Clear();
                 ConfBoardID = confGroup.IncludeBoard[BingoGroupPhase];
                 Debug.Log($"Enter next board: {ConfBoardID}");
-                BingoItems.AddRange(BingoUtility.CreateBingoItemList(BingoGroupID, BingoGroupPhase));
+                BingoItems.AddRange(ItemBingoUtility.CreateBingoItemList(BingoGroupID, BingoGroupPhase));
                 RefreshBingoItemMap();
                 MessageCenter.Get<MSG.BINGO_ENTER_NEXT_ROUND>().Dispatch();
 
-                BoardColNum = BingoUtility.GetBoardConfig(ConfBoardID)?.BoardColNum ?? 0;
-                BoardRowNum = BingoUtility.GetBoardConfig(ConfBoardID)?.BoardRowNum ?? 0;
+                BoardColNum = ItemBingoUtility.GetBoardConfig(ConfBoardID)?.BoardColNum ?? 0;
+                BoardRowNum = ItemBingoUtility.GetBoardConfig(ConfBoardID)?.BoardRowNum ?? 0;
                 return true;
             }
             return false;
@@ -422,7 +423,7 @@ namespace FAT
 
         private bool TryEnterNextRound()
         {
-            var confRound = BingoUtility.GetEventItemBingoRound(Param);
+            var confRound = ItemBingoUtility.GetEventItemBingoRound(Param);
             if (phase + 1 < confRound.IncludeItemBingoId.Count)
             {
                 BingoTotal = 0;
@@ -432,16 +433,16 @@ namespace FAT
                 ConfBingoID = confRound.IncludeItemBingoId[phase];
                 Debug.Log($"Enter next round: {ConfBingoID}");
                 BingoItems.Clear();
-                var confGroup = BingoUtility.GetGroupDetail(BingoGroupID);
+                var confGroup = ItemBingoUtility.GetGroupDetail(BingoGroupID);
                 ConfBoardID = confGroup.IncludeBoard[BingoGroupPhase];
                 Debug.Log($"Enter next board: {ConfBoardID}");
                 BingoItemMap.Clear();
-                BingoItems.AddRange(BingoUtility.CreateBingoItemList(BingoGroupID, BingoGroupPhase));
+                BingoItems.AddRange(ItemBingoUtility.CreateBingoItemList(BingoGroupID, BingoGroupPhase));
                 RefreshBingoItemMap();
                 MessageCenter.Get<MSG.BINGO_ENTER_NEXT_ROUND>().Dispatch();
                 DataTracker.event_bingo_restart.Track(this, phase + 1);
-                BoardColNum = BingoUtility.GetBoardConfig(ConfBoardID)?.BoardColNum ?? 0;
-                BoardRowNum = BingoUtility.GetBoardConfig(ConfBoardID)?.BoardRowNum ?? 0;
+                BoardColNum = ItemBingoUtility.GetBoardConfig(ConfBoardID)?.BoardColNum ?? 0;
+                BoardRowNum = ItemBingoUtility.GetBoardConfig(ConfBoardID)?.BoardRowNum ?? 0;
                 return true;
             }
             phase++;
@@ -451,10 +452,10 @@ namespace FAT
 
         private void InitConf()
         {
-            var confRound = BingoUtility.GetEventItemBingoRound(Param);
+            var confRound = ItemBingoUtility.GetEventItemBingoRound(Param);
             ConfBingoID = confRound.IncludeItemBingoId[phase];
-            var confGroup = BingoUtility.GetGroupDetail(BingoGroupID);
-            var boardConf = BingoUtility.GetBoardConfig(confGroup?.IncludeBoard[BingoGroupPhase] ?? 0);
+            var confGroup = ItemBingoUtility.GetGroupDetail(BingoGroupID);
+            var boardConf = ItemBingoUtility.GetBoardConfig(confGroup?.IncludeBoard[BingoGroupPhase] ?? 0);
             BoardColNum = boardConf?.BoardColNum ?? 0;
             BoardRowNum = boardConf?.BoardRowNum ?? 0;
             ConfBoardID = boardConf?.Id ?? 0;
@@ -462,7 +463,7 @@ namespace FAT
 
         private void RefreshTheme()
         {
-            var BingoConf = BingoUtility.GetEventItemBingoConfig(ConfBingoID);
+            var BingoConf = ItemBingoUtility.GetEventItemBingoConfig(ConfBingoID);
             MainVisual.Setup(BingoConf.MainTheme, MainRes);
             BingoVisual.Setup(BingoConf.BingoTheme, BingoRes);
             ItemVisual.Setup(BingoConf.ItemTheme, ItemRes);

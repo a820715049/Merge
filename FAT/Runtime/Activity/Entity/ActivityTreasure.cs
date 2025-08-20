@@ -1215,7 +1215,7 @@ namespace FAT
         {
             e_.dot.SetActive(GetKeyNum() > 0);
             e_.dotCount.gameObject.SetActive(GetKeyNum() > 0);
-            e_.dotCount.SetText(GetKeyNum().ToString());
+            e_.dotCount.SetRedPoint(GetKeyNum());
             return null;
         }
 

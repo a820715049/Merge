@@ -171,9 +171,8 @@ namespace FAT
         
         public void Reset()
         {
-            _ClearFinishRewardDisplayData();
-            //reset时清理所有已经ready的特殊奖励
-            _ClearReadyRewardDisplayData();
+            //reset时清理所有特殊奖励 无论其是否commit
+            _rewardDisplayList.Clear();
         }
 
         public void LoadConfig() { }

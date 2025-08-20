@@ -61,7 +61,7 @@ namespace FAT
             var isEntryShow = Game.Manager.featureUnlockMan.IsFeatureEntryShow(FeatureEntry.FeatureCardAlbum);
             return isInCardActivity && isEntryShow;
         }
-        
+
         //检查目前是否为卡册可以重玩的状态，检查时机为：当玩家领取完卡册集齐奖励后检查并弹出； 每次上线时利用popup系统检测弹出
         //需满足两个条件：1、当前卡册所有奖励都已领取 2、EventCardRound.includeAlbumId中，有下一个可以开启的EventCardAlbum.id
         //不过不满足条件 则维持现状 无事发生
@@ -101,7 +101,7 @@ namespace FAT
                 MessageCenter.Get<MSG.ACTIVITY_SUCCESS>().Dispatch(GetCardActivity());
             }
         }
-        
+
         //获取当前卡牌活动 可能为空 外部调用时需要判空
         public CardActivity GetCardActivity()
         {
@@ -119,7 +119,7 @@ namespace FAT
         {
             return _allCardRoundDataDict.TryGetValue(cardActId, out var roundData) ? roundData.GetCurOpenAlbumIndex() : 0;
         }
-        
+
         //获取当前集卡轮次配置
         public EventCardRound GetCardRoundConfig()
         {
@@ -137,7 +137,7 @@ namespace FAT
         {
             return GetCardAlbumData(needFake)?.GetConfig();
         }
-        
+
         //传入卡组id 返回当前卡册中对应的卡组数据
         public CardGroupData GetCardGroupData(int groupId)
         {
@@ -163,7 +163,7 @@ namespace FAT
                 }
             }
         }
-        
+
         //传入cardPackId尝试开启卡包，返回开卡包是否成功
         //后续如果有打点需求 bool值可以换成Enum用于表示结果类型 
         public bool TryOpenCardPack(int cardPackId, Vector3 fromPos)
@@ -210,7 +210,7 @@ namespace FAT
             TryOpenPackDisplay();
             return true;
         }
-        
+
         //尝试执行开卡包流程相关界面表现
         public void TryOpenPackDisplay()
         {
@@ -258,7 +258,7 @@ namespace FAT
                 }
             }
         }
-        
+
         public void OpenJokerEntranceUI()
         {
             if (!CheckValid())
@@ -288,7 +288,8 @@ namespace FAT
             if (expireItem != null)
             {
                 var world = Game.Manager.mainMergeMan.world;
-                foreach (var (f, t) in expireItem) {
+                foreach (var (f, t) in expireItem)
+                {
                     var count = world.ConvertItem(f, t);
                     if (count > 0)
                     {
@@ -301,7 +302,7 @@ namespace FAT
             //活动结束后清理当前缓存卡池
             _specialPackRewardPool.Clear();
         }
-        
+
         //集卡活动结束时打点
         public void TrackCardAlbumEnd(int actId)
         {
@@ -313,12 +314,12 @@ namespace FAT
                 {
                     albumData.GetAllCollectProgress(out var ownCount, out _);
                     albumData.CheckFinishGroupNum(out var finishGroupNum);
-                    DataTracker.TrackCardAlbumEnd(roundData.CardActId, GetCardActivity()?.From ?? 0, albumData.CardAlbumId, albumData.CardLimitTempId, 
+                    DataTracker.TrackCardAlbumEnd(roundData.CardActId, GetCardActivity()?.From ?? 0, albumData.CardAlbumId, albumData.CardLimitTempId,
                         ownCount, finishGroupNum, albumData.StartTotalIAP, roundData.GetCurFinishNum());
                 }
             }
         }
-        
+
         //卡片数量减少时打点
         //reduceType为1代表新一轮转化为星星  2代表系统兑换 3代表好友卡片交换
         public void TrackCardReduction(int cardId, int reduceNum, int reduceType, int reduceParam)
@@ -335,14 +336,14 @@ namespace FAT
             DataTracker.TrackCardReduction(CurCardActId, activity.From, albumData.CardAlbumId, roundData.GetCurRoundNum(),
                 cardId, cardConf.Star, cardConf.IsGold, cardData.OwnCount, reduceNum, reduceType, exchangeId);
         }
-        
+
         #region 典藏版/普通版卡册UI切换逻辑
 
         //只供外部UI使用 用于决定目前是否使用假的卡册数据刷新界面
         public bool IsNeedFakeAlbumData => CheckIsRestartAlbum() && !_isShowGoldAlbum;
         //记录典藏版和普通版卡册UI切换状态 默认false则显示普通版
-        private bool _isShowGoldAlbum = false;  
-        
+        private bool _isShowGoldAlbum = false;
+
         //设置典藏版和普通版卡册UI切换状态 默认false则显示普通版
         public void SwitchShowGoldAlbumState()
         {
@@ -357,7 +358,7 @@ namespace FAT
         #endregion
 
         #region 内部基础数据构造逻辑
-        
+
         //累计参与集卡活动的次数
         private int _totalJoinCount;
         //存储最近两次的集卡活动数据 key为卡牌活动id 若当前已经存了两期活动数据，如果有新一期活动要开，会删除存档中最老的活动数据
@@ -423,16 +424,16 @@ namespace FAT
             //倒序遍历 靠后的元素先入栈
             if (data.SpecialPackInfoList != null)
             {
-                for (var i = data.SpecialPackInfoList.Count - 1; i >= 0 ; i--)
+                for (var i = data.SpecialPackInfoList.Count - 1; i >= 0; i--)
                 {
                     var packInfo = data.SpecialPackInfoList[i];
                     _specialPackRewardPool.Push((packInfo.PackId, packInfo.CardIdPool));
                 }
             }
             //卡册星星兑换入口红点刷新时间
-            _nextShowExchangeRPTs = data.NextShowExchangeRPTs; 
+            _nextShowExchangeRPTs = data.NextShowExchangeRPTs;
         }
-        
+
         public void FillData(LocalSaveData archive)
         {
             var data = archive.ClientData.PlayerGameData;
@@ -462,7 +463,7 @@ namespace FAT
             //卡册星星兑换入口红点刷新时间
             data.CardActivity.NextShowExchangeRPTs = _nextShowExchangeRPTs;
         }
-        
+
         public void SecondUpdate(float dt)
         {
             if (!CheckValid())
@@ -514,7 +515,7 @@ namespace FAT
                 var albumData = roundData.TryGetCardAlbumData();
                 if (albumData != null)
                 {
-                    DataTracker.TrackCardAlbumStart(roundData.CardActId, GetCardActivity()?.From ?? 0, albumData.CardAlbumId, albumData.CardLimitTempId, albumData.StartTotalIAP);  
+                    DataTracker.TrackCardAlbumStart(roundData.CardActId, GetCardActivity()?.From ?? 0, albumData.CardAlbumId, albumData.CardLimitTempId, albumData.StartTotalIAP);
                 }
             }
         }
@@ -566,13 +567,13 @@ namespace FAT
                 }
             }
         }
-        
+
         #endregion
 
         #region 开卡包相关逻辑
 
         private List<int> _curCardPackResult = new List<int>(); //当前卡包开的结果
-        
+
         private void _OpenCardPack(int cardPackId)
         {
             _curCardPackResult.Clear();
@@ -612,10 +613,10 @@ namespace FAT
             _PrintDrawResult(resultStr, drawStr, errorLog);
             //检查是否有卡组/卡册的集齐奖励 构建表现回调
             _BuildOpenCardDisplayCb(cardPackId);
-            //立即存档
-            Game.Manager.archiveMan.SendImmediately(true);
             //抽卡结束后广播事件
             MessageCenter.Get<MSG.GAME_CARD_DRAW_FINISH>().Dispatch();
+            //立即存档
+            Game.Manager.archiveMan.SendImmediately(true);
         }
 
         private void _NormalDrawCard(ObjCardPack cardPackConfig, CardAlbumData curAlbumData, ref string drawStr, ref string errorLog)
@@ -708,14 +709,14 @@ namespace FAT
             //构造抽卡结果日志
             drawStr = $"[CardMan.OpenCardPack Draw Special Card Result]: cardPackId = {cardPackId}, totalCostEnergy = {curAlbumData.TotalCostEnergy}, needCount = {needCount}";
         }
-        
+
         //1/n金卡必得礼包中用于显示的卡片id, needCount外部指定要显示的卡片数量  cardIdList卡片id信息
         public void FillShowCardIdList(int needCount, List<int> cardIdList)
         {
             if (!CheckValid() || needCount <= 0 || cardIdList == null)
                 return;
             var curAlbumData = GetCardAlbumData();
-            if (curAlbumData == null) 
+            if (curAlbumData == null)
                 return;
             var result = _SpecialSortGoldCard(curAlbumData);
             var count = 0;
@@ -729,7 +730,7 @@ namespace FAT
             cardIdList.Sort(_ShowCardIdSortFunc);
         }
 
-        private List<int> _cacheCardIdList = new List<int>(); 
+        private List<int> _cacheCardIdList = new List<int>();
         public void OnGetSpecialCardPack(int cardPackId)
         {
             _cacheCardIdList.Clear();
@@ -845,7 +846,7 @@ namespace FAT
                     _openPackDisplayCb.Add((_OpenUICardGroupReward, groupData.CardGroupId, rewardList));
                     groupData.IsRecReward = true;
                     //领取卡组奖励时打点
-                    DataTracker.TrackCardGroupComplete(CurCardActId, GetCardActivity()?.From ?? 0, curAlbumData.CardAlbumId, curAlbumData.CardLimitTempId, 
+                    DataTracker.TrackCardGroupComplete(CurCardActId, GetCardActivity()?.From ?? 0, curAlbumData.CardAlbumId, curAlbumData.CardLimitTempId,
                         groupData.CardGroupId, curAlbumData.StartTotalIAP, GetCardRoundData().GetCurRoundNum(), index, allGroupInfo.Count);
                 }
                 index++;
@@ -903,13 +904,13 @@ namespace FAT
             if (groupId <= 0) return;
             UIManager.Instance.OpenWindow(UIConfig.UICardGroupReward, groupId, rewards);
         }
-        
+
         private void _OpenUICardAlbumReward(int albumId, List<RewardCommitData> rewards)
         {
             if (albumId <= 0) return;
             UIManager.Instance.OpenWindow(UIConfig.UICardAlbumReward, albumId, rewards);
         }
-        
+
         private void _OpenUICardAlbumRestart(int id = 0, List<RewardCommitData> empty = null)
         {
             TryOpenPackDisplay();
@@ -917,11 +918,11 @@ namespace FAT
             UIManager.Instance.CloseWindow(UIConfig.UICardAlbum);
             UIManager.Instance.OpenWindow(UIConfig.UICardAlbumRestart);
         }
-        
+
         #endregion
 
         #region 开卡包核心逻辑
-        
+
         private int _GetRandomStarId(ObjCardPack cardPackConfig)
         {
             var configMan = Game.Manager.configMan;
@@ -989,12 +990,12 @@ namespace FAT
             //按照Item3(LimitId)从小到大排序
             _newGoldList.Sort((a, b) => a.Item3 - b.Item3);
         }
-        
+
         //卡包星级信息 使用RewardConfig处理 Id代表需要的卡片星级 Count代表需要的数量 当数量变为0时 本信息失效
         //配置上，pendingGoldPriority是pendingStarReward的子集
         private List<RewardConfig> _pendingGoldPriority = new List<RewardConfig>();
         private List<RewardConfig> _pendingStarReward = new List<RewardConfig>();
-        
+
         //执行抽卡流程
         private void _ExecuteDrawCard(int randomStarId, int goldLimitNew, int goldLimit, ref string errorLog)
         {
@@ -1079,7 +1080,7 @@ namespace FAT
                         //查找pendingStarReward中和本次target一样的星级信息，对应次数也减1
                         //配置上，pendingGoldPriority是pendingStarReward的子集，如果找到了满足前者条件的卡片，则也需要在后者对应数据处-1
                         var otherTarget = _pendingStarReward.FindEx(x => x.Id == targetCardStar);
-                        if (otherTarget != null) 
+                        if (otherTarget != null)
                             otherTarget.Count--;
                         else
                             errorLog = "[_ExecuteGoldDraw]: 配置错误! RandomStar表中goldPriority不是starReward的子集！";
@@ -1112,7 +1113,7 @@ namespace FAT
                         //查找pendingStarReward中和本次target一样的星级信息，对应次数也减1
                         //配置上，pendingGoldPriority是pendingStarReward的子集，如果找到了满足前者条件的卡片，则也需要在后者对应数据处-1
                         var otherTarget = _pendingStarReward.FindEx(x => x.Id == targetCardStar);
-                        if (otherTarget != null) 
+                        if (otherTarget != null)
                             otherTarget.Count--;
                         else
                             errorLog = "[_ExecuteGoldDraw]: 配置错误! RandomStar表中goldPriority不是starReward的子集！";
@@ -1136,7 +1137,7 @@ namespace FAT
                 _ExecuteGoldDraw(goldLimitNew, goldLimit, ref doneGold, ref doneGoldNew, ref errorLog);
             }
         }
-        
+
         private void _ExecuteNormalDraw(int goldLimitNew, int goldLimit, ref int doneGold, ref int doneGoldNew, ref string errorLog)
         {
             //找到list中数量大于0且还有效的第一个元素 如果找不到说明没有要找的星级信息了
@@ -1155,7 +1156,7 @@ namespace FAT
                     _curCardPackResult.Add(resultCardInfo.Item1);
                     //判断抽出来的卡是否是金卡
                     var cardData = GetCardData(resultCardInfo.Item1);
-                    bool isGold = cardData?.GetConfig()?.IsGold ?? false;   
+                    bool isGold = cardData?.GetConfig()?.IsGold ?? false;
                     //是新的金卡
                     if (isGold)
                     {
@@ -1188,7 +1189,7 @@ namespace FAT
                         _curCardPackResult.Add(resultCardInfo.Item1);
                         //判断抽出来的卡是否是金卡
                         var cardData = GetCardData(resultCardInfo.Item1);
-                        bool isGold = cardData?.GetConfig()?.IsGold ?? false;   
+                        bool isGold = cardData?.GetConfig()?.IsGold ?? false;
                         //是旧的金卡
                         if (isGold)
                         {
@@ -1251,7 +1252,7 @@ namespace FAT
                             _curCardPackResult.Add(resultCardInfo.Item1);
                             //判断抽出来的卡是否是金卡
                             var cardData = GetCardData(resultCardInfo.Item1);
-                            bool isGold = cardData?.GetConfig()?.IsGold ?? false;   
+                            bool isGold = cardData?.GetConfig()?.IsGold ?? false;
                             //是旧的金卡
                             if (isGold)
                             {
@@ -1311,7 +1312,7 @@ namespace FAT
                 _ExecuteNormalDraw(goldLimitNew, goldLimit, ref doneGold, ref doneGoldNew, ref errorLog);
             }
         }
-        
+
         //指定targetCardStar在_newGoldList中查找
         private (int, int, int) _DrawInNewGoldList(int targetCardStar)
         {
@@ -1324,31 +1325,31 @@ namespace FAT
         {
             return _DrawInTargetList(targetCardStar, 2);
         }
-        
+
         //指定targetCardStar在_newGoldList+_newWhiteList中随机
         private (int, int, int) _DrawInNewGoldWhiteList(int targetCardStar)
         {
             return _DrawInTargetList(targetCardStar, 4, 3);
         }
-        
+
         //指定targetCardStar在_oldGoldList+_oldWhiteList中随机
         private (int, int, int) _DrawInOldGoldWhiteList(int targetCardStar)
         {
             return _DrawInTargetList(targetCardStar, 2, 1);
         }
-        
+
         //指定targetCardStar在_newWhiteList中随机
         private (int, int, int) _DrawInNewWhiteList(int targetCardStar)
         {
             return _DrawInTargetList(targetCardStar, 3);
         }
-        
+
         //指定targetCardStar在_oldWhiteList中随机
         private (int, int, int) _DrawInOldWhiteList(int targetCardStar)
         {
             return _DrawInTargetList(targetCardStar, 1);
         }
-        
+
         private (int, int, int) _DrawInTargetList(int targetCardStar, params int[] typeList)
         {
             _tempList.Clear();
@@ -1375,7 +1376,7 @@ namespace FAT
             //除了_newGoldList以外的其他list 在查找时都是等概率随机
             return _tempList.Count > 0 ? _tempList.RandomChooseByWeight() : default;
         }
-        
+
         //特殊开卡包逻辑中获取排序好的所有金卡List
         private List<int> _SpecialSortGoldCard(CardAlbumData curAlbumData)
         {
@@ -1457,7 +1458,7 @@ namespace FAT
         }
 
         #endregion
-        
+
         #endregion
 
         #region 红点相关逻辑
@@ -1468,7 +1469,7 @@ namespace FAT
             GetCardAlbumData()?.SetGroupCardSee(groupId);
             MessageCenter.Get<MSG.GAME_CARD_REDPOINT_UPDATE>().Dispatch(0);
         }
-        
+
         //设置指定卡片为已查看
         public void SetCardSee(int cardId)
         {
@@ -1587,12 +1588,12 @@ namespace FAT
             if (_curCardPackResult == null || _curCardPackResult.Count < 1) return;
             //构建打开万能卡兑换卡片成功界面回调 需要使用数据更新前的卡牌数据
             _BuildStartDisplayCb(targetCardId);
-            
+
             //刷新卡片相关数据 打印日志 并构建表现流程
             _UpdateCardData(jokerData.IsGoldCard == 0 ? 1 : 2); //打点万能卡类型 1代表白卡万能卡 2代表金卡万能卡
             //通知数据层万能卡使用成功
             GetCardRoundData().OnUseCardJokerSucc();
-            
+
             //构建展示获得的卡片icon飞向所在卡组对应位置的表现回调
             _openPackDisplayCb.Add((_DisplayFlyToTargetCard, targetCardId, null));
             //检查是否有卡组/卡册的集齐奖励 构建表现回调
@@ -1610,9 +1611,10 @@ namespace FAT
             var isComplete = !cardData.IsOwn && ownCount == allCount - 1;
             var cardCount = cardData.OwnCount;
             _openPackDisplayCb.Add((
-                (id, empty) => {
+                (id, empty) =>
+                {
                     UIManager.Instance.CloseWindow(UIConfig.UICardJokerSelect);
-                    UIManager.Instance.OpenWindow(UIConfig.UICardJokerSet, targetCardId, isOwn, isComplete, cardCount); 
+                    UIManager.Instance.OpenWindow(UIConfig.UICardJokerSet, targetCardId, isOwn, isComplete, cardCount);
                 }, 0, null));
         }
 

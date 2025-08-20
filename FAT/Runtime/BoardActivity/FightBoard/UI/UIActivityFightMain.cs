@@ -141,7 +141,7 @@ namespace FAT
         {
             ActivityTransit.Exit(_activity, ResConfig, () => {
                 UIConfig.UIMessageBox.Close();
-            });
+            }, true); // 退出时默认返回主棋盘
         }
 
         private void ClickMilestone()

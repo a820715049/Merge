@@ -130,5 +130,8 @@ namespace FAT
         WishBoardMilestone,
         WishBoardScore,
         WeeklyRaffleToken, // 签到抽奖
+        BPExp, //BP经验
+        CastleToken,
+        ClawOrderToken,     // 抓宝活动代币
     }
 }

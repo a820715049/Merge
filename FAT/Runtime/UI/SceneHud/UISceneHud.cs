@@ -30,6 +30,7 @@ namespace FAT
         //小游戏相关
         private GameObject _btnMiniGameGo;  //小游戏入口
         private GameObject _miniGameDotGo;  //小游戏入口红点
+        private GameObject _settingDotGo;  //设置入口红点
 
         private int _useHighBLLeftState = 0; //1为普通状态 高度值192; 2为拉高状态 高度值为324
 
@@ -59,6 +60,7 @@ namespace FAT
             _rootBLLeft.AddButton("BtnMiniGame", _OnClickBtnMiniGame).FixPivot();
             _rootBLLeft.FindEx("BtnMiniGame", out _btnMiniGameGo);
             _rootBLLeft.FindEx("BtnMiniGame/dot", out _miniGameDotGo);
+            transform.FindEx("Content/UL/BtnSetting/dot", out _settingDotGo);
         }
 
         protected override void OnParse(params object[] items)
@@ -83,6 +85,7 @@ namespace FAT
             MessageCenter.Get<MSG.GAME_HANDBOOK_REWARD>().AddListener(OnHandBookReward);
             MessageCenter.Get<MSG.GAME_MERGE_LEVEL_CHANGE>().AddListener(_OnMessageLevelChange);
             MessageCenter.Get<MSG.GAME_ONE_SECOND_DRIVER>().AddListener(_OnOneSecondDriver);
+            MessageCenter.Get<MSG.COMMUNITY_LINK_REFRESH_RED_DOT>().AddListener(_RefreshSettingDot);
         }
 
         protected override void OnRemoveListener()
@@ -93,6 +96,7 @@ namespace FAT
             MessageCenter.Get<MSG.GAME_HANDBOOK_REWARD>().RemoveListener(OnHandBookReward);
             MessageCenter.Get<MSG.GAME_MERGE_LEVEL_CHANGE>().RemoveListener(_OnMessageLevelChange);
             MessageCenter.Get<MSG.GAME_ONE_SECOND_DRIVER>().RemoveListener(_OnOneSecondDriver);
+            MessageCenter.Get<MSG.COMMUNITY_LINK_REFRESH_RED_DOT>().RemoveListener(_RefreshSettingDot);
         }
 
         protected override void OnPostClose()
@@ -140,6 +144,7 @@ namespace FAT
             _RefreshHandbookDot();
             _RefreshCardDot();
             _RefreshMiniGameDot();
+            _RefreshSettingDot();
         }
 
         private void _OnMessageLevelChange(int lvl)
@@ -310,6 +315,11 @@ namespace FAT
         private void _RefreshMiniGameDot()
         {
             _miniGameDotGo.SetActive(Game.Manager.miniGameDataMan.CheckHasRP());
+        }
+
+        private void _RefreshSettingDot()
+        {
+            _settingDotGo.SetActive(Game.Manager.communityLinkMan.IsShowRedDot());
         }
     }
 }

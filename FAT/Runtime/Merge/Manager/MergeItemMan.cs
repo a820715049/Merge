@@ -285,6 +285,24 @@ namespace FAT
             OnMergeBoardVersionUpdate(0);
         }
 
+        #region 生成器丢失检查
+        // 活动需要 持有状况检查 的链条ID
+        public List<int> GetAliveCheckChain()
+        {
+            var aliveCheckChain = new List<int>();
+            foreach (var (key, value) in mCategoryConfigs)
+            {
+                if (value.config.IsAliveCheck)
+                {
+                    aliveCheckChain.Add(key);
+                }
+            }
+
+            return aliveCheckChain;
+        }
+        #endregion
+        
+
         private int mPreviousVersion = -1;
         private int mPreviousTapSourceVersion = -1;
         private int mPreviousCategoryVersion = -1;

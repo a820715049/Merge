@@ -31,12 +31,12 @@ namespace FAT {
             DebugEx.Info($"activity enter {acti_.Info3}");
         }
 
-        public static void Exit(ActivityLike acti_, UIResource ui_, Action afterFadeIn = null) {
+        public static void Exit(ActivityLike acti_, UIResource ui_, Action afterFadeIn = null, bool ignoreFrom = false) {
             if (UIManager.Instance.IsClosed(ui_)) return;
             UIActivityLoading.Open(loading, () => {
                 ui_.Close();
                 UIConfig.UIStatus.Open();
-                if (fromMerge)
+                if (fromMerge || ignoreFrom)
                 {
                     UIConfig.UIMergeBoardMain.Open();
                 }

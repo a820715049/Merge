@@ -163,9 +163,7 @@ namespace FAT
 
             curBoard.WalkAllItem((item) =>
             {
-                if (item.parent != null &&
-                    !item.isDead &&
-                    !item.HasComponent(ItemComponentType.Bubble))
+                if (_CheckIsValid(item))
                 {
                     _cacheItemList.Add(item);
                 }
@@ -190,9 +188,21 @@ namespace FAT
                 for (int i = 0; i < _cacheItemList.Count; i++)
                 {
                     var first = _cacheItemList[i];
+                    //再次检查要合成的棋子是否合法
+                    if (!_CheckIsValid(first))
+                    {
+                        _cacheItemList.Remove(first);
+                        continue;
+                    }
                     for (int j = i + 1; j < _cacheItemList.Count; j++)
                     {
                         var second = _cacheItemList[j];
+                        //再次检查要合成的棋子是否合法
+                        if (!_CheckIsValid(second))
+                        {
+                            _cacheItemList.Remove(second);
+                            continue;
+                        }
                         //当前查找的棋子分别作为主棋子和副棋子进行检查，看看是否能合成，这里主要考虑其中一个棋子是蜘蛛网的情况，主棋子不能是蜘蛛网
                         if (ItemUtility.CanMerge(first, second))
                         {
@@ -236,5 +246,12 @@ namespace FAT
             _canMergeItemList.Clear();
         }
 
+        private static bool _CheckIsValid(Item item)
+        {
+            return item != null && 
+                   item.parent != null &&
+                   !item.isDead &&
+                   !item.HasComponent(ItemComponentType.Bubble);
+        }
     }
 }

@@ -337,7 +337,15 @@ namespace FAT {
 
         public bool TryNextRound() {
             if (!MilestoneComplete) return false;
-            Exit(VisualMain.res.ActiveR);
+            if (UIManager.Instance.IsOpen(UIConfig.UIActivityGuess))
+            {
+                DebugEx.Info("TryNextRound inside UIActivityGuess");
+                Exit(VisualMain.res.ActiveR);
+            }
+            else
+            {
+                DebugEx.Info("TryNextRound outside UIActivityGuess");
+            }
             if (SetupNextRound()) {
                 VisualRestart.Popup();
                 return true;
@@ -378,7 +386,7 @@ namespace FAT {
         {
             e_.dot.SetActive(Token > 0);
             e_.dotCount.gameObject.SetActive(Token > 0);
-            e_.dotCount.SetText($"{Token}");
+            e_.dotCount.SetRedPoint(Token);
             return null;
         }
 

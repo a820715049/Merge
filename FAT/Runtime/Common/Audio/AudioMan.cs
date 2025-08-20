@@ -83,6 +83,27 @@ namespace FAT
             SetSfxVolume(isMute ? 0f : 1f);
         }
 
+        public void TurnOff()
+        {
+            _sourceBgm.enabled = false;
+            _sourceSfx.enabled = false;
+            _sourceSfx_loop.enabled = false;
+        }
+
+        public void TurnOn()
+        {
+            _sourceBgm.enabled = true;
+            _sourceSfx.enabled = true;
+            _sourceSfx_loop.enabled = true;
+            RestoreAudio();
+        }
+
+        // ref: https://discussions.unity.com/t/ironsource-levelplay-ios-audio-is-muted-after-ad-is-played/912955/27
+        private static void RestoreAudio()
+        {
+            AudioSettings.Reset(AudioSettings.GetConfiguration());
+        }
+
         private void _OnConfigLoaded()
         {
             _bgmPlaylist.Clear();
@@ -254,7 +275,10 @@ namespace FAT
         {
             try
             {
-                await UniTask.WaitWhile(() => _sourceBgm != null && _sourceBgm.isPlaying, cancellationToken: token);
+                // 在播放或者未启用(广告暂停)
+                await UniTask.WaitWhile(() =>
+                    _sourceBgm != null && (_sourceBgm.isPlaying || !_sourceBgm.enabled),
+                    cancellationToken: token);
 
                 _currentBgmTime = 0;
 

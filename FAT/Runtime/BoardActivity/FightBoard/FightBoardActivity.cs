@@ -624,6 +624,21 @@ namespace FAT
         #endregion
     }
 
+    public class FightBoardEntry : ListActivity.IEntrySetup
+    {
+        public FightBoardEntry(ListActivity.Entry ent, FightBoardActivity act)
+        {
+            var showRedPoint = act.CheckIsShowRedPoint(out var redNum);
+            ent.dot.SetActive(showRedPoint && redNum > 0);
+            ent.dotCount.SetText(redNum.ToString());
+            ent.dotCount.gameObject.SetActive(showRedPoint && redNum > 0);
+        }
+
+        public override void Clear(ListActivity.Entry e_)
+        {
+        }
+    }
+
     public class AttackInfo
     {
         /// <summary>

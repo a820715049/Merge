@@ -34,10 +34,6 @@ namespace FAT
         public ActivityVisual EndRemindVisual = new();
         public PopupActivity EndRemindPop = new();
 
-        //活动彻底结束弹板
-        public ActivityVisual EndCompletelyVisual = new();
-        public PopupActivity EndCompletelyPop = new();
-
         //活动回收弹板
         public ActivityVisual ReContinueVisual = new();
         public PopupActivity ReContinuePop = new();
@@ -94,7 +90,6 @@ namespace FAT
         //弹板ui资源字段
         public UIResAlt EndRemindUI = new(UIConfig.UIDecorateEndNotice);
         public UIResAlt StartRemindUI = new(UIConfig.UIDecorateStartNotice);
-        public UIResAlt EndCompletelyUI = new(UIConfig.UIDecorateEnd);
         public UIResAlt ReContinueUI = new(UIConfig.UIDecorateConvert);
         public UIResAlt DecoratePanel = new(UIConfig.UIDecoratePanel);
         public UIResAlt RestartUI = new(UIConfig.UIDecorateRestartNotice);
@@ -108,7 +103,6 @@ namespace FAT
             foreach (var v in StartRemindVisual.ResEnumerate()) yield return v;
             foreach (var v in EndRemindVisual.ResEnumerate()) yield return v;
             foreach (var v in HelpVisual.ResEnumerate()) yield return v;
-            foreach (var v in EndCompletelyVisual.ResEnumerate()) yield return v;
             foreach (var v in ReStartVisual.ResEnumerate()) yield return v;
             foreach (var v in ChoiceVisual.ResEnumerate()) yield return v;
         }
@@ -183,8 +177,6 @@ namespace FAT
         {
             if (EndRemindVisual.Setup(confD.EndTipTheme, EndRemindUI))
                 EndRemindPop.Setup(this, EndRemindVisual, EndRemindUI);
-            if (EndCompletelyVisual.Setup(confD.EndTheme, EndCompletelyUI))
-                EndCompletelyPop.Setup(this, EndCompletelyVisual, EndCompletelyUI, false, false);
             if (ReContinueVisual.Setup(confD.RecontinueTheme, ReContinueUI))
                 ReContinuePop.Setup(this, ReContinueVisual, ReContinueUI, false, false);
             if (StartRemindVisual.Setup(confD.EventTheme, StartRemindUI))
@@ -416,15 +408,11 @@ namespace FAT
                 UIManager.Instance.RegisterIdleAction("decorate_end", 201, () =>
                 {
                     if (needConvert) Game.Manager.screenPopup.Queue(ReContinuePop, listT);
-
-                    Game.Manager.screenPopup.Queue(EndCompletelyPop);
                 });
             }
             else
             {
                 if (needConvert) Game.Manager.screenPopup.Queue(ReContinuePop, listT);
-
-                Game.Manager.screenPopup.Queue(EndCompletelyPop);
             }
         }
 

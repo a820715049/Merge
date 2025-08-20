@@ -20,14 +20,14 @@ namespace FAT
             if (param.Length < 1)
             {
                 // 任意可完成订单
-                MessageCenter.Get<MSG.UI_ORDER_QUERY_TRANSFORM>().Dispatch(-1, _OnOrderFound);
+                MessageCenter.Get<MSG.UI_ORDER_QUERY_COMMON_FINISHED_TRANSFORM>().Dispatch(-1, _OnOrderFound);
             }
             else
             {
                 // 指定id的可完成订单
                 float.TryParse(param[0], System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out var value);
                 // 任意可完成订单
-                MessageCenter.Get<MSG.UI_ORDER_QUERY_TRANSFORM>().Dispatch(Mathf.RoundToInt(value), _OnOrderFound);
+                MessageCenter.Get<MSG.UI_ORDER_QUERY_COMMON_FINISHED_TRANSFORM>().Dispatch(Mathf.RoundToInt(value), _OnOrderFound);
             }
         }
 

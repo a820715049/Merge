@@ -666,7 +666,7 @@ namespace FAT
             var showRedPoint = p.CheckIsShowRedPoint(out var rpNum);
             e_.dot.SetActive(showRedPoint && rpNum > 0);
             e_.dotCount.gameObject.SetActive(showRedPoint && rpNum > 0);
-            e_.dotCount.SetText(rpNum.ToString());
+            e_.dotCount.SetRedPoint(rpNum);
         }
 
         public override void Clear(ListActivity.Entry e_)

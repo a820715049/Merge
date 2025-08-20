@@ -1,24 +1,26 @@
 /*
  * @Author: tang.yan
+ * @LastEditors: ange.shentu
  * @Description: 随机宝箱Tips界面
  * @doc 随机宝箱案子：https://centurygames.yuque.com/ywqzgn/ne0fhm/ev8gk5lizqglu3fc
  * @doc 随机宝箱优化改造案子：https://centurygames.yuque.com/ywqzgn/ne0fhm/epyoema5l99gfgv1
+ * @doc 概率公示案子：https://centurygames.feishu.cn/wiki/SQVLw3tsSiHxEOkqdq3c85kXnMf?fromScene=spaceOverview
  * @Date: 2023-11-30 16:11:26
+ * @LastEditTime: 2025-07-03 14:41:26
  */
-using System;
-using System.Collections;
+
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
-using Config;
 using TMPro;
 using EL;
+using fat.rawdata;
 
 namespace FAT
 {
     public class UIRandomBoxTips : UITipsBase
     {
-        
+
         [SerializeField] private HorizontalLayoutGroup layoutGroup;
         [SerializeField] private GameObject jokerGo;
         [SerializeField] private UIImageRes jokerBg;
@@ -26,6 +28,7 @@ namespace FAT
         [SerializeField] private TMP_Text jokerTitle;
         [SerializeField] private TMP_Text jokerBgTitle;
         [SerializeField] private List<UICommonItem> _cellList;
+        [SerializeField] private Button btnProbability;
         private List<(int, string)> _rewardList = new();
         private int _curBoxId; //目前正在查看的宝箱id
         private float _baseOffset = 18f;    //竖直方向固定偏移(下方箭头宽度的一半)
@@ -37,6 +40,14 @@ namespace FAT
             foreach (var cell in _cellList)
             {
                 cell.Setup();
+            }
+            if (btnProbability != null)
+            {
+                btnProbability.onClick.AddListener(() =>
+                {
+                    Close();
+                    UIManager.Instance.OpenWindow(UIConfig.UIProbabilityTips, false);
+                });
             }
         }
 
@@ -56,11 +67,15 @@ namespace FAT
             _RefreshShowReward();
             //刷新tips位置
             _RefreshTipsPos(_baseOffset);
+            if (btnProbability != null)
+            {
+                btnProbability.gameObject.SetActive(Game.Manager.featureUnlockMan.IsFeatureEntryUnlocked(FeatureEntry.FeatureDropProbability));
+            }
         }
 
         protected override void OnPostClose()
         {
-            
+
         }
 
         private void _RefreshShowReward()
@@ -76,7 +91,7 @@ namespace FAT
                     _rewardList.Add((reward.ConvertToRewardConfig().Id, reward.ConvertToRewardConfig().Count.ToString()));
                 }
             }
-            
+
             foreach (var info in boxConfig.Info)
             {
                 var showReward = info.ConvertToRandomBoxShowReward();
@@ -85,7 +100,7 @@ namespace FAT
                     _rewardList.Add((showReward.Id, showReward.MinCount + "-" + showReward.MaxCount));
                 }
             }
-            
+
             if (!boxConfig.IsFixedFirst && boxConfig.FixedReward.Count > 0)
             {
                 foreach (var reward in boxConfig.FixedReward)
@@ -135,7 +150,7 @@ namespace FAT
             var padding = layoutGroup.padding;
             var finalWidth = padding.left + padding.right + showCellNum * _cellWidth + layoutGroup.spacing * (showCellNum - 1);
             _SetCurTipsWidth(finalWidth);
-            
+
             var height = padding.bottom + padding.top + _cellHeight;
             if (boxConfig.JokerReward > 0)
             {
@@ -144,10 +159,10 @@ namespace FAT
             }
             _SetCurTipsHeight(height);
         }
-        
+
         private void _OnTipsBtnClick(int groupIndex)
         {
-            
+
         }
     }
 }

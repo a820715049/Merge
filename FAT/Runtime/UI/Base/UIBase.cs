@@ -295,6 +295,14 @@ namespace FAT
                 _lockEventObject.SetActive(false);
             }
         }
+
+        /// <summary>
+        /// 是否正在启用阻挡
+        /// </summary>
+        protected bool IsLocked()
+        {
+            return _lockEventObject != null && _lockEventObject.activeSelf;
+        }
         #endregion
 
         #region Animator动画相关

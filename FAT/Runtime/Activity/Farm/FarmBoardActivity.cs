@@ -1016,7 +1016,7 @@ namespace FAT
             (entry, this.activity) = (_entry, _activity);
             entry.dot.SetActive(activity.TokenNum > 0);
             entry.dotCount.gameObject.SetActive(activity.TokenNum > 0);
-            entry.dotCount.SetText(activity.TokenNum.ToString());
+            entry.dotCount.SetRedPoint(activity.TokenNum);
             MessageCenter.Get<MSG.FARM_BOARD_TOKEN_CHANGE>().AddListener(RefreshEntry);
         }
 
@@ -1027,7 +1027,7 @@ namespace FAT
         
         private void RefreshEntry()
         {
-            entry.dotCount.SetText(activity.TokenNum.ToString());
+            entry.dotCount.SetRedPoint(activity.TokenNum);
         }
 
         public override string TextCD(long diff_)

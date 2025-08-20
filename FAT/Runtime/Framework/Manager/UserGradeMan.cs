@@ -123,6 +123,8 @@ namespace FAT
                 return _GetDebugGetUserGradeValue(gradeId);
             }
             //否则返回服务器发来的对应信息
+            //这里取值时没有排除<=0的情况，因为策划配置上只会配>0的id,所以真返回<=0的值时，会导致业务逻辑报错
+            //但目前认为所有的流程上都不会返回<=0的值，遭遇这种情况时若这里直接使配置的默认值的话会盖掉原本存在的错误，所以不做处理
             if (_userGradeValueDict.TryGetValue(gradeId, out var value))
             {
                 //获取UserGrade时尝试使用难度API获取到的值进行替换
@@ -304,7 +306,7 @@ namespace FAT
                     var data = new UserGardeAPIData
                     {
                         conf = conf,
-                        tagValue = 0,
+                        tagValue = conf.DefaultGradeValue,  //初始时先拿配置赋予默认值 请求到服务器数据后再刷新
                     };
                     _userGradeAPIDict.Add(conf.Id, data);
                 }
@@ -348,6 +350,8 @@ namespace FAT
                 DataTracker.api_diff_send.Track();
                 foreach (var info in _userGradeAPIDict)
                 {
+                    //在请求难度API时 先用服务器返回的值作为保底
+                    info.Value.tagValue = GetUserGradeValue(info.Key);
                     _wrapper.SendRequest(info.Value.conf.ModelVersion, _OnReqAPISuccess);
                 }
             }
@@ -448,7 +452,7 @@ namespace FAT
                             }
                         }
                     }
-                    //如果允许则可用；如果不允许则弃掉这个值，同时按超时处理
+                    //如果允许则可用；如果不允许则弃掉这个值，同时按超时处理，此时tagValue使用的还是服务器发来的值
                     if (isConfAllow)
                     {
                         data.Value.tagValue = diff;

@@ -9,7 +9,6 @@ using UnityEngine.UI;
 using EL;
 using fat.gamekitdata;
 using TMPro;
-using System;
 
 namespace FAT
 {
@@ -27,6 +26,7 @@ namespace FAT
         {
             transform.AddButton("Content/Panel/Top/BtnClose", base.Close);
             compReward?.SetCallback(_OnBtnClaim);
+            compReward?.SetLinkCallback(_OnBtnLink);
         }
 
         protected override void OnParse(params object[] items)
@@ -52,6 +52,15 @@ namespace FAT
         {
             _ClearReward();
             ClearDetail();
+        }
+        protected override void OnAddListener()
+        {
+            MessageCenter.Get<MSG.APP_ENTER_FOREGROUND_EVENT>().AddListener(RefreshCommunityLinkReward);
+        }
+
+        protected override void OnRemoveListener()
+        {
+            MessageCenter.Get<MSG.APP_ENTER_FOREGROUND_EVENT>().RemoveListener(RefreshCommunityLinkReward);
         }
 
         protected virtual void ShowDetail()
@@ -87,7 +96,7 @@ namespace FAT
                 var rewards = new List<RewardValue>();
                 foreach (var item in dict)
                 {
-                    rewards.Add(new RewardValue { id = item.Key, count = item.Value });
+                    rewards.Add(new RewardValue { id = item.Key, count = item.Value, isClaimed = mMail.IsClaimed });
                 }
                 rewards.Sort((a, b) => a.id - b.id);
 
@@ -102,7 +111,14 @@ namespace FAT
 
         private void _RefreshClaimBtn()
         {
-            compReward?.SetClaimState(!mMail.IsClaimed);
+            if (mMail.LinkType == MailLinkType.MailExternalLink)
+            {
+                compReward?.SetLinkBtnState(mMail.LinkType == MailLinkType.MailExternalLink);
+            }
+            else
+            {
+                compReward?.SetClaimState(!mMail.IsClaimed);
+            }
         }
 
         private void _OnBtnClaim()
@@ -114,6 +130,7 @@ namespace FAT
                 while (task.keepWaiting) yield return null;
                 _RequestRewardCallback(task);
                 UIManager.Instance.Block(false);
+                MessageCenter.Get<MSG.MAIL_ITEM_REFRESH>().Dispatch();
             }
             Game.Instance.StartCoroutineGlobal(Routine());
         }
@@ -150,6 +167,49 @@ namespace FAT
                     postImg.SetUrl(mMail.ImageUrl);
                 }
             }
+        }
+
+        private void _OnBtnLink()
+        {
+            if (string.IsNullOrEmpty(mMail.Link))
+            {
+                return;
+            }
+            UIBridgeUtility.OpenURL(mMail.Link);
+            DebugEx.Info("mMail.Link:" + mMail.Link);
+            Game.Manager.mailMan.RecordClickLinkMail = mMail;
+            var mailMan = Game.Manager.mailMan;
+            DataTracker.mail_link.Track(mMail.Type.ToString(), mMail.FromUid.ToString(), mMail.Title, mMail.Rewards, mailMan.SingleMailHasReward(mMail), mailMan.IsLinkMail(mMail));
+        }
+
+        private void RefreshCommunityLinkReward()
+        {
+            var mail = Game.Manager.mailMan.RecordClickLinkMail;
+            if (!IsGetLinkReward(mail))
+            {
+                return;
+            }
+            if (mail.LinkType == MailLinkType.MailExternalLink)
+            {
+                //返回进行领取奖励流程
+                _OnBtnClaim();
+                Game.Manager.mailMan.RecordClickLinkMail = null;
+            }
+        }
+
+        private bool IsGetLinkReward(Mail mail)
+        {
+            if (mail == null)
+            {
+                DebugEx.Info("RefreshCommunityLinkReward: mail is null");
+                return false;
+            }
+            if (mail.IsClaimed)
+            {
+                DebugEx.Info("RefreshCommunityLinkReward: mail is claimed");
+                return false;
+            }
+            return true;
         }
     }
 }

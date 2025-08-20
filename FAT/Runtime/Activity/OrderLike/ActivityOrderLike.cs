@@ -75,7 +75,11 @@ namespace FAT
             }
             if (_flyingToken <= 0 && ReadyToClaim)
             {
-                Game.Manager.screenPopup.TryQueue(MainPopup, PopupType.Login, true);
+                // 仅允许在主棋盘上弹出
+                if (UIManager.Instance.IsOpen(UIConfig.UIMergeBoardMain))
+                {
+                    Game.Manager.screenPopup.TryQueue(MainPopup, PopupType.Login, true);
+                }
             }
         }
 

@@ -24,7 +24,7 @@ namespace fat.rawdata {
     static ToastReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChNyYXdkYXRhL1RvYXN0LnByb3RvEgdyYXdkYXRhKr8NCgVUb2FzdBIOCgpU",
+            "ChNyYXdkYXRhL1RvYXN0LnByb3RvEgdyYXdkYXRhKtINCgVUb2FzdBIOCgpU",
             "b2FzdEVtcHR5EAASEgoOVG9hc3RCb2FyZEZ1bGwQARIQCgxUb2FzdE5ld0l0",
             "ZW0QAhIXChNUb2FzdFByb2RNZWRpdW1JdGVtEAMSFQoRVG9hc3RQcm9kSGln",
             "aEl0ZW0QBBIYChRUb2FzdE1lcmdlTWVkaXVtSXRlbRAFEhYKElRvYXN0TWVy",
@@ -63,8 +63,9 @@ namespace fat.rawdata {
             "Z2luU2lnbhBBEhQKEFRvYXN0RmFybU5vVG9rZW4QQhIWChJUb2FzdFJlZGVl",
             "bU5vVG9rZW4QQxIVChFUb2FzdFJlZGVlbUxvY2tlZBBEEhgKFFRvYXN0RmFy",
             "bUNsb3VkTG9ja2VkEEUSEAoMVG9hc3RCYXR0ZXJ5EEYSEAoMVG9hc3ROb01l",
-            "cmdlEEdCPVotZ2l0bGFiLmZ1bnBsdXMuaW8vZmF0L2NvbmYvZ2VuL2dvbGFu",
-            "Zy9yYXdkYXRhqgILZmF0LnJhd2RhdGFiBnByb3RvMw=="));
+            "cmdlEEcSEQoNVG9hc3ROb1BpZWNlcxBIQj1aLWdpdGxhYi5mdW5wbHVzLmlv",
+            "L2ZhdC9jb25mL2dlbi9nb2xhbmcvcmF3ZGF0YaoCC2ZhdC5yYXdkYXRhYgZw",
+            "cm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::fat.rawdata.Toast), }, null, null));
@@ -359,6 +360,10 @@ namespace fat.rawdata {
     /// 棋盘无法合成
     /// </summary>
     [pbr::OriginalName("ToastNoMerge")] NoMerge = 71,
+    /// <summary>
+    ///重新整理
+    /// </summary>
+    [pbr::OriginalName("ToastNoPieces")] NoPieces = 72,
   }
 
   #endregion

@@ -42,6 +42,8 @@ namespace FAT
         private bool _isForceChoose = false;
         //目前卡片是否值得被使用
         private bool _isUseful = false;
+        //记录目前是否在滚动
+        private bool _isScrolling = false;
         
         protected override void OnCreate()
         {
@@ -71,7 +73,7 @@ namespace FAT
             _RefreshExpire();
             _RefreshSelectBtn();
             _RefreshConfirmBtn();
-            _RefreshGroupScroll();
+            _RefreshGroupScroll(true);
         }
 
         protected override void OnAddListener()
@@ -103,6 +105,7 @@ namespace FAT
                 }
             }
             _isShowNext = false;
+            _isScrolling = false;
         }
 
         private void _RefreshBaseInfo()
@@ -171,14 +174,13 @@ namespace FAT
             unselectGo.SetActive(_curSelectCardId <= 0);
         }
         
-        private void _RefreshGroupScroll()
+        private void _RefreshGroupScroll(bool isFirst = false)
         {
-            _RefreshGroupData();
+            _RefreshGroupData(out var firstNormalGroupId, out var firstGoldGroupId);
             infoScrollRect.StopMovement();
             infoScrollView.Clear();
             infoScrollView.BuildByGroupData(_groupCellDataDict);
             //切换显示时 检查一下当前有没有选择的卡牌id
-            //如果没有 则默认scroll滑到最顶处
             //如果有 检查一下_groupCellDataDict是否含有卡牌所在的组 如果有则跳转显示该组  如果没有则清空选择并滑到最顶处
             var curSelectCardData = Game.Manager.cardMan.GetCardAlbumData()?.TryGetCardData(_curSelectCardId);
             if (curSelectCardData != null)
@@ -202,6 +204,25 @@ namespace FAT
                     _curSelectJokerData.SetCurSelectCardId(0);
                 }
             }
+            //如果没有 且 这张卡片值得被使用 则走自动定位逻辑
+            //a. 白卡使用弹窗：自动定位到未获得的白卡处（按卡组顺序在前的）
+            //b. 闪卡使用弹窗：
+            //   i. 自动定位到未获得的金卡处（按卡组顺序在前的）
+            //   ii. 如果没有未获得的金卡，定位到未获得的白卡处（按卡组顺序在前的）
+            else if (_isUseful)
+            {
+                var isGold = _curSelectJokerData.IsGoldCard == 1;
+                var belongGroupId = !isGold ? firstNormalGroupId : (firstGoldGroupId > 0 ? firstGoldGroupId : firstNormalGroupId);
+                if (isFirst)
+                {
+                    _isScrolling = true;
+                    infoScrollView.ScrollToMatch(x => x.data.GroupId == belongGroupId, () => { _isScrolling = false;});
+                }
+                else
+                {
+                    infoScrollView.JumpToMatch(x => x.data.GroupId == belongGroupId, null);
+                }
+            }
         }
 
         private void _OnBtnTipsClick()
@@ -211,6 +232,8 @@ namespace FAT
 
         private void _OnSelectBtnClick()
         {
+            if (_isScrolling)
+                return;
             _isShowAll = !_isShowAll;
             _RefreshSelectBtn();
             _RefreshGroupScroll();
@@ -225,12 +248,15 @@ namespace FAT
         private void _OnBtnClose()
         {
             if (_isForceChoose) return;
+            if (_isScrolling) return;
             _isShowNext = true;
             Close();
         }
 
-        private void _RefreshGroupData()
+        private void _RefreshGroupData(out int firstNormalGroupId, out int firstGoldGroupId)
         {
+            firstNormalGroupId = 0;    //第一个未获得的白卡id
+            firstGoldGroupId = 0;      //第一个未获得的金卡id
             _groupCellDataDict.Clear();
             var cardMan = Game.Manager.cardMan;
             var albumData = cardMan.GetCardAlbumData();
@@ -243,15 +269,33 @@ namespace FAT
                     var cardList = new List<int>();
                     foreach (var cardId in groupData.GetConfig().CardInfo)
                     {
+                        var cardData = albumData.TryGetCardData(cardId);
+                        if (cardData == null)
+                            continue;
                         if (_isShowAll)
                         {
                             cardList.Add(cardId);
                         }
                         else
                         {
-                            var cardData = albumData.TryGetCardData(cardId);
-                            if (cardData != null && !cardData.IsOwn)
+                            if (!cardData.IsOwn)
                                 cardList.Add(cardId);
+                        }
+                        //尝试设置第一个未获得的白卡id
+                        if (firstNormalGroupId <= 0)
+                        {
+                            if (!cardData.IsOwn && !cardData.GetConfig().IsGold)
+                            {
+                                firstNormalGroupId = cardData.BelongGroupId;
+                            }
+                        }
+                        //尝试设置第一个未获得的金卡id
+                        if (firstGoldGroupId <= 0)
+                        {
+                            if (!cardData.IsOwn && cardData.GetConfig().IsGold)
+                            {
+                                firstGoldGroupId = cardData.BelongGroupId;
+                            }
                         }
                     }
 

@@ -233,6 +233,14 @@ namespace FAT
                 t.count = ReadInt(3, any);
                 Setup(t);
             }
+
+            // 配置有 但 存档里没有 也尝试Setup
+            foreach (var (id, trigger) in info)
+            {
+                if (record.ContainsKey(id))
+                    continue;
+                Setup(trigger);
+            }
         }
 
         public void Setup(Trigger t_) {

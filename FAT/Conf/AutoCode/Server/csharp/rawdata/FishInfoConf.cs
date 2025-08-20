@@ -60,7 +60,7 @@ namespace fat.rawdata {
   /// <summary>
   /// annotation@annotation_type(type="rawdata")
   /// annotation@rawdata(row="FishInfo",table="FishInfoMap",table_wrapper="FishInfoConf",map="true",map_key_type="int32",data="FishInfoConf")
-  /// annotation@ab(table_ab="FishInfoMapAB",table_ab_patch="FishInfoMapABPatch",table_ab_value="FishInfoMapABValue",ab_patch="false")
+  /// annotation@ab(table_ab="FishInfoMapAB",table_ab_patch="FishInfoMapABPatch",table_ab_value="FishInfoMapABValue",ab_patch="true")
   /// annotation@filter(just_server="false",just_client="false")
   /// annotation@FishInfo(id="id")
   /// </summary>

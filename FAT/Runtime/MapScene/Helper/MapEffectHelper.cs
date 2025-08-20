@@ -33,7 +33,11 @@ namespace FAT
         public void OnRenderImage(RenderTexture src, RenderTexture dst)
         {
             if (!_canPost)
+            {
+                //不做高斯模糊时也执行一次默认输出 避免报Waring
+                Graphics.Blit(src, dst);
                 return;
+            }
             // 1) 申请两个降采样 RT
             RenderTexture rt1, rt2;
             int width = src.width / _downgrade;

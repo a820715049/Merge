@@ -1,6 +1,6 @@
 /*
  * @Author: tang.yan
- * @Description: Debug面板ProMax版本 
+ * @Description: Debug面板ProMax版本
  * @Date: 2025-02-28 10:02:37
  */
 
@@ -108,7 +108,7 @@ namespace FAT
         {
             scrollLog?.Clear();
         }
-        
+
         public void Update()
         {
 #if UNITY_EDITOR
@@ -285,10 +285,16 @@ namespace FAT
             //弹珠活动
             _RegisterButton("Pachinko Debug", _OnBtnPachinkoDebug);
             //积分活动
-            _RegisterButton("ChefAddScore", () =>
+            _RegisterButton("ScoreActivity +100", () =>
             {
                 var act = Game.Manager.activity.LookupAny(EventType.Score) as ActivityScore;
                 if (act != null) act.DebugAddScore(ScoreEntity.ScoreType.OrderRight, 100);
+            });
+            _RegisterButtonWithInput("ScoreActivity +N", (str) =>
+            {
+                int.TryParse(str, out var score);
+                var act = Game.Manager.activity.LookupAny(EventType.Score) as ActivityScore;
+                if (act != null) act.DebugAddScore(ScoreEntity.ScoreType.OrderRight, score);
             });
             //迷你游戏
             _RegisterButtonWithInput("MiniGame", _OnBtnSetMIniGame);
@@ -326,6 +332,21 @@ namespace FAT
 
             _StartGroupA("打怪");
             _RegisterDisplayButton("一刀999:" + FightDebug, _ChangeFightDebugState);
+
+            _StartGroupA("Bingo Item");
+            _RegisterButton("一键发棋子", ItemBingoUtility.DebugBingoItem);
+
+            _StartGroupA("签到");
+            _RegisterButton("Show", () => UIManager.Instance.OpenWindow(UIConfig.UISignInpanel));
+            _RegisterButton("Reset", () => Game.Manager.loginSignMan.DebugReset());
+            _RegisterButtonWithInput("SetTotalSign", (str) =>
+            {
+                int.TryParse(str, out var day);
+                Game.Manager.loginSignMan.DebugSetTotalSign(day);
+            });
+
+            _StartGroupA("ClawOrder");
+            _RegisterButton("clear", ActivityClawOrder.DebugReset);
         }
 
         private void _UnfrozenAndUnlockAllItems()
@@ -337,7 +358,7 @@ namespace FAT
             }
             var board = world.activeBoard;
             var size = board.size;
-            
+
             for (int x = 0; x < size.x; x++)
             {
                 for (int y = 0; y < size.y; y++)
@@ -403,7 +424,7 @@ namespace FAT
             //展示用户分层grade标签信息
             _RegisterButton("UserGrade info", _ShowUserTagInfo);
             //重置难度API结果过期时间
-            _RegisterButton("Reset Api ExpireTime", _OnBtnResetApiExpireTs); 
+            _RegisterButton("Reset Api ExpireTime", _OnBtnResetApiExpireTs);
             //设置难度API请求延迟时间
             _RegisterButtonWithInput("SetApiDelayTime(s)", _OnBtnSetApiDelayTime, Game.Manager.userGradeMan.DebugDelayTime.ToString);
 
@@ -447,11 +468,13 @@ namespace FAT
             _RegisterButton("deeplink share", () => PlatformSDK.Instance.shareLink.TestSend(true));
             _RegisterButton("deeplink send", () => PlatformSDK.Instance.shareLink.TestSend(false));
             _RegisterButton("deeplink payload", () => PlatformSDK.Instance.shareLink.LinkPayload(null));
+            _RegisterButtonWithInput("cdkey", Game.Manager.cdKeyMan.DebugExchangeGiftCode);
             _RegisterDisplayButton("switch track", () =>
             {
                 DataTracker.TrackEnable = !DataTracker.TrackEnable;
                 return DataTracker.TrackEnable ? "track ON" : "track OFF";
             });
+            _RegisterButton("clear LinkData", () => Game.Manager.communityLinkMan.DebugClearCommunityLinkData());
         }
 
         //构建日志页签里的相关功能
@@ -763,7 +786,7 @@ namespace FAT
             if (!add)
             {
                 var c = Mathf.Max(1, Game.Manager.coinMan.GetCoin(ct));
-                Game.Manager.coinMan.UseCoin(ct, c, ReasonString.cheat);
+                Game.Manager.coinMan.UseCoin(ct, c, ReasonString.cheat).Execute();
             }
             else
             {
@@ -802,7 +825,7 @@ namespace FAT
                 while (world.rewardCount > 0) world.RemoveItem(world.nextReward);
             }
         }
-        
+
         //一键把当前场上所有相同的棋子合成1次
         private void _OnBtnQuickMerge()
         {
@@ -810,7 +833,7 @@ namespace FAT
             //自动缩小面板
             _SetState(false);
         }
-        
+
         //打开自动快速合成功能
         private void _OnBtnAutoQuickMerge()
         {
@@ -1138,7 +1161,7 @@ namespace FAT
         {
             Game.Manager.userGradeMan.DebugResetApiExpireTs();
         }
-        
+
         private void _OnBtnSetApiDelayTime(string str)
         {
             var isNumber = float.TryParse(str, out var delayTime);

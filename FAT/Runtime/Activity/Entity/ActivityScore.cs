@@ -1,9 +1,9 @@
 /**
  * @Author: zhangpengjian
  * @Date: 2024-2-28 15:17:26
- * @LastEditors: zhangpengjian
- * @LastEditTime: 2024/9/24 18:15:10
- * Description: 积分活动 https://centurygames.yuque.com/ywqzgn/ne0fhm/vw9cnufckkt2wnez#EPlBv 
+ * @LastEditors: shentuange
+ * @LastEditTime: 2025/06/27 16:37:11
+ * Description: 积分活动 https://centurygames.yuque.com/ywqzgn/ne0fhm/vw9cnufckkt2wnez#EPlBv
     https://centurygames.yuque.com/ywqzgn/ne0fhm/ogvldlvkdcg6hbd5
  */
 
@@ -45,6 +45,13 @@ namespace FAT
 
         #region theme key
         public string themeFontStyleId_Score => "score";
+        #endregion
+
+        #region 需要向 领奖时主动弹窗 的UI传递的 纯表现用参数
+        public int TotalShowScore_UI;//UI动画结束时，总分该显示多少
+        public int LastShowScore_UI;//UI弹出时，总分该显示多少
+        public PopupScoreReward PopupReward;//领奖弹窗,轨道活动中和Popup是同一个UI,原因是Popup会受到弹窗次数限制
+        private bool m_hasRegisteredIdleAction;
         #endregion
 
         #region 存储
@@ -117,6 +124,8 @@ namespace FAT
             if (ConfD != null && Visual.Setup(ConfD.EventThemeId, Res))
             {
                 Popup = new(this, Visual, Res, false);
+                //如果后续需要和Popup不同的领奖弹窗,可以在这里改
+                PopupReward = new(this, Visual, Res);
             }
             MessageCenter.Get<MSG.SCORE_ENTITY_ADD_COMPLETE>().AddListener(OnUpdateScore);
         }
@@ -197,6 +206,9 @@ namespace FAT
                 InitCurScoreActData(TotalScore);
                 scoreEntity.Setup(TotalScore, this, ConfD.RequireCoinId, ConfDetail.ExtraScore, ReasonString.score, prefab, ConfD.BoardId);
             }
+            //初始化的时候，这两个值是一样的
+            TotalShowScore_UI = TotalScore;
+            LastShowScore_UI = TotalScore;
         }
 
         private void OnUpdateScore((int prev, int total, int coinId) data)
@@ -206,6 +218,8 @@ namespace FAT
             if (!HasCycleMilestone())
                 return;
             InitCurScoreActData(data.total, false);
+            TotalShowScore_UI = TotalScore;
+            m_hasRegisteredIdleAction = false;
             MessageCenter.Get<MSG.SCORE_DATA_UPDATE>().Dispatch(data.prev, data.total);
         }
 
@@ -222,19 +236,29 @@ namespace FAT
             var goalScore = eventScoreConfig.FinalMilestoneScore;
             var mileStone = eventScoreConfig.MilestoneScore;
             var mileStoneMax = mileStone[mileStone.Count - 1];
-            //累计积分已经达到普通里程的最大值
             var configList = rewardConfigList;
             var index = curMileStoneIndex;
+            //累计积分已经达到普通里程的最大值
             if (TotalScore >= mileStoneMax)
             {
-                //如果没有循环奖励，发最后一个普通里程碑的奖励
+                //如果没有循环奖励且完成了所有里程碑
+                //发放从当前里程碑到最后一个里程碑之间的所有奖励
                 if (goalScore == 0)
                 {
-                    var id = configList[configList.Count - 1].Id;
-                    var count = configList[configList.Count - 1].Count;
-                    var commitData = Game.Manager.rewardMan.BeginReward(id, count, ReasonString.score);
-                    DataTracker.event_score_milestone.Track(Id, Param, mileStone.Count, From, mileStone.Count, ConfDetail.Diff, true, false);
-                    commitRewardList.Add(commitData);
+                    if (ConfDetail.FinalMilestoneReward.Count > 0)
+                    {
+                        //发最终大奖，这里不考虑多个配置的情况，如果后续有不同的需求，可以在这里修改
+                        var finalReward = ConfDetail.FinalMilestoneReward[0].ConvertToRewardConfig();
+                        var commitFinalRewardData = Game.Manager.rewardMan.BeginReward(finalReward.Id, finalReward.Count, ReasonString.score);
+                        commitRewardList.Add(commitFinalRewardData);
+                    }
+                    for (var i = index; i < configList.Count; i++)
+                    {
+                        var commitData = Game.Manager.rewardMan.BeginReward(configList[i].Id,
+                            configList[i].Count, ReasonString.score);
+                        commitRewardList.Add(commitData);
+                        DataTracker.event_score_milestone.Track(Id, Param, i + 1, From, mileStone.Count, ConfDetail.Diff, i + 1 == mileStone.Count, false);
+                    }
                     return;
                 }
                 curMileStoneIndex = mileStone.Count - 1;
@@ -244,21 +268,37 @@ namespace FAT
                     var count = (TotalScore - mileStoneMax) / goalScore;
                     if (count != FinalMileStoneCount && FinalMileStoneCount < count)
                     {
-                        FinalMileStoneCount += 1;
-                        //如果不是初始化数据 发放随机奖励
-                        if (!isInitScore && (curScore - mileStoneMax) >= goalScore * FinalMileStoneCount)
+                        // 计算需要发放的循环奖励次数
+                        var rewardCount = count - FinalMileStoneCount;
+
+                        // 如果不是初始化数据，需要发放循环奖励
+                        if (!isInitScore)
                         {
-                            //如果一次性获得大额积分 从普通里程碑跨越到循环里程碑时 需要随机奖励
-                            if (RecordFinalMileStoneRewardId <= 0 || RecordFinalMileStoneRewardCount <= 0)
+                            // 发放所有应得的循环奖励
+                            for (int i = 0; i < rewardCount; i++)
+                            {
+                                // 如果还没有随机奖励，先随机一个
+                                if (RecordFinalMileStoneRewardId <= 0 || RecordFinalMileStoneRewardCount <= 0)
+                                    RandomFinalReward();
+
+                                // 发奖
+                                var commitData = Game.Manager.rewardMan.BeginReward(RecordFinalMileStoneRewardId,
+                                    RecordFinalMileStoneRewardCount, ReasonString.score);
+                                commitRewardList.Add(commitData);
+                                // 发放完奖励后，重新随机下一循环里程碑奖励
                                 RandomFinalReward();
-                            //发奖
-                            var commitData = Game.Manager.rewardMan.BeginReward(RecordFinalMileStoneRewardId,
-                                RecordFinalMileStoneRewardCount, ReasonString.score);
-                            commitRewardList.Add(commitData);
-                            //发放完奖励后 重新随机下一循环里程碑奖励
-                            RandomFinalReward();
-                            DataTracker.event_score_milestone.Track(Id, Param,
-                                mileStone.Count + FinalMileStoneCount, From, mileStone.Count, ConfDetail.Diff, false, true);
+
+                                // 更新循环里程碑计数
+                                FinalMileStoneCount += 1;
+
+                                DataTracker.event_score_milestone.Track(Id, Param,
+                                    mileStone.Count + FinalMileStoneCount, From, mileStone.Count, ConfDetail.Diff, false, true);
+                            }
+                        }
+                        else
+                        {
+                            // 如果是初始化数据，直接更新计数
+                            FinalMileStoneCount = count;
                         }
                     }
 
@@ -272,20 +312,14 @@ namespace FAT
                     CurShowScore = TotalScore - mileStoneMax;
                     if (RecordFinalMileStoneRewardId <= 0 || RecordFinalMileStoneRewardCount <= 0)
                     {
-                        if (index < configList.Count - 1)
+                        // 发放从当前里程碑到最后一个里程碑之间的所有奖励
+                        for (var i = index; i < configList.Count; i++)
                         {
-                            for (var i = 0; i < configList.Count - 1 - index; i++)
-                            {
-                                Game.Manager.rewardMan.CommitReward(Game.Manager.rewardMan.BeginReward(
-                                    configList[index + i].Id,
-                                    configList[index + i].Count, ReasonString.score));
-                            }
+                            Game.Manager.rewardMan.CommitReward(Game.Manager.rewardMan.BeginReward(
+                                configList[i].Id,
+                                configList[i].Count, ReasonString.score));
+                            DataTracker.event_score_milestone.Track(Id, Param, i + 1, From, mileStone.Count, ConfDetail.Diff, i + 1 == mileStone.Count, false);
                         }
-
-                        var commitData = Game.Manager.rewardMan.BeginReward(configList[configList.Count - 1].Id,
-                            configList[configList.Count - 1].Count, ReasonString.score);
-                        DataTracker.event_score_milestone.Track(Id, Param, mileStone.Count, From, mileStone.Count, ConfDetail.Diff, true, false);
-                        commitRewardList.Add(commitData);
                         //完成所有里程碑（到达循环）
                         MessageCenter.Get<MSG.ACTIVITY_SUCCESS>().Dispatch(this);
                         if (ConfDetail.FinalMilestoneReward.Count > 0)
@@ -510,14 +544,26 @@ namespace FAT
                 return t;
             }
         }
-
+        /// <summary>
+        ///这个方法名和实际作用有些不同，实际作用更像IsComplete。
+        /// </summary>
+        /// <returns></returns>
         public bool HasCycleMilestone()
         {
             if (ConfDetail != null)
             {
+                //是否有循环里程碑
+                var hasCycle = ConfDetail.FinalMilestoneScore > 0 && ConfDetail.FinalMilestoneReward.Count > 0;
+                //如果有循环里程碑，这么写是考虑可读性
+                if (hasCycle)
+                {
+                    return true;
+                }
+
                 var mileStone = ConfDetail.MilestoneScore;
                 var mileStoneMax = mileStone[mileStone.Count - 1];
-                return !(TotalScore >= mileStoneMax && ConfDetail.FinalMilestoneReward.Count <= 0);
+                //是否还没有完成所有里程碑。
+                return TotalScore < mileStoneMax;
             }
             return true;
         }
@@ -564,6 +610,127 @@ namespace FAT
             return !HasCycleMilestone();
         }
 
+        /// <summary>
+        /// 检查是否需要弹窗
+        /// </summary>
+        /// <returns>当有新的里程碑奖励且RewardPopup为true时返回true</returns>
+        public bool ShouldPopup()
+        {
+            return commitRewardList.Count > 0 && ConfD.RewardPopup && TotalShowScore_UI != LastShowScore_UI;
+        }
+        public void OnGetRewardUIPostClose()
+        {
+            // 保底处理：如果UI被其他弹窗打断，自动提交未Commit的奖励
+            if (commitRewardList.Count > 0)
+            {
+                DebugEx.FormatInfo("[ActivityScore.OnGetRewardUIPostClose] 保底处理：UI被其他弹窗打断，自动提交未Commit的奖励");
+                TryCommitReward();
+            }
+
+            TotalShowScore_UI = TotalScore;
+            LastShowScore_UI = TotalScore;
+        }
         public bool BoardEntryVisible => HasCycleMilestone();
+
+        /// <summary>
+        /// 计算给定分数对应的里程碑索引和在进度条中应该显示的分数
+        /// 此方法基于InitCurScoreActData中的逻辑，用于UI表现计算
+        /// 注意：此版本不考虑循环里程碑，只处理普通里程碑
+        /// </summary>
+        /// <param name="score">要计算的分数</param>
+        /// <returns>(里程碑索引, 在进度条中显示的分数, 当前里程碑目标分数)</returns>
+        public (int milestoneIndex, int showScore, int milestoneScore) CalculateScoreDisplayData(int score)
+        {
+            // 获取配置数据
+            var eventScoreConfig = ConfDetail;
+            var mileStone = eventScoreConfig.MilestoneScore;             // 普通里程碑分数列表
+
+            // 边界检查：确保配置有效
+            if (mileStone == null || mileStone.Count == 0)
+            {
+                DebugEx.FormatError("[CalculateScoreDisplayData] mileStone配置为空");
+                return (0, score, score);
+            }
+
+            // 情况1：分数小于第一个里程碑要求分数
+            if (score < mileStone[0])
+            {
+                // milestoneIndex: 0（第一个里程碑）
+                // showScore: 直接显示当前分数
+                // milestoneScore: 第一个里程碑的目标分数
+                return (0, score, mileStone[0]);
+            }
+
+            // 情况2：分数在某个里程碑区间内
+            // 遍历里程碑列表，找到当前分数所在的区间
+            for (var i = 0; i < mileStone.Count - 1; i++)
+            {
+                var currentMilestone = mileStone[i];     // 当前里程碑分数
+                var nextMilestone = mileStone[i + 1];    // 下一个里程碑分数
+
+                // 检查分数是否在当前里程碑区间内：[currentMilestone, nextMilestone)
+                if (score >= currentMilestone && score < nextMilestone)
+                {
+                    var milestoneScore = nextMilestone - currentMilestone;  // 当前里程碑的目标分数
+                    var showScore = score - currentMilestone;               // 在当前里程碑内的进度
+
+                    // milestoneIndex: i+1（里程碑索引从1开始）
+                    // showScore: 在当前里程碑内的相对进度
+                    // milestoneScore: 当前里程碑的目标分数
+                    return (i + 1, showScore, milestoneScore);
+                }
+            }
+
+            // 情况3：分数达到或超过最后一个里程碑
+            var lastMilestone = mileStone[mileStone.Count - 1] - mileStone[mileStone.Count - 2];
+            return (mileStone.Count - 1, lastMilestone, lastMilestone);
+        }
+
+        /// <summary>
+        /// 根据里程碑索引获取该里程碑区间内的目标分数
+        /// 用于进度条显示，返回的是该里程碑区间内需要达到的分数（当前里程碑分数减去前一个里程碑分数）
+        /// </summary>
+        /// <param name="milestoneIndex">里程碑索引（从1开始）</param>
+        /// <returns>该里程碑区间内的目标分数</returns>
+        public int GetMilestoneEndValue(int milestoneIndex)
+        {
+            var mileStone = ConfDetail.MilestoneScore;
+
+            // 边界检查：确保配置有效
+            if (mileStone == null || mileStone.Count == 0)
+            {
+                DebugEx.FormatError("[GetMilestoneEndValue] mileStone配置为空");
+                return 0;
+            }
+
+            // 边界检查：确保索引有效
+            if (milestoneIndex <= 0 || milestoneIndex > mileStone.Count)
+            {
+                return mileStone[^1] - mileStone[^2];
+            }
+
+            // 计算里程碑区间内的目标分数
+            if (milestoneIndex == 0)
+            {
+                // 第一个里程碑：直接返回第一个里程碑的分数
+                return mileStone[0];
+            }
+            else
+            {
+                // 其他里程碑：当前里程碑分数减去前一个里程碑分数
+                return mileStone[milestoneIndex] - mileStone[milestoneIndex - 1];
+            }
+        }
+        public void TryPopRewardUI()
+        {
+            if (!m_hasRegisteredIdleAction)
+            {
+                m_hasRegisteredIdleAction = true;
+                if (!UIManager.Instance.IsOpen(PopupReward.PopupRes))
+                {
+                    Game.Manager.screenPopup.Queue(PopupReward);
+                }
+            }
+        }
     }
 }

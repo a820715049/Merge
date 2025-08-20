@@ -84,7 +84,7 @@ namespace FAT
                 if (num > 0)
                 {
                     _dot.SetActive(true);
-                    _num.text = num.ToString();
+                    _num.SetRedPoint(num);
                 }
                 else
                 {

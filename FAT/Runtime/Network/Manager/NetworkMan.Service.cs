@@ -27,6 +27,13 @@ namespace GameNet {
         #endregion info
         #region IAP
 
+        public NetTask MakeThroughCargo(int chargeId, ThroughCargoType type, PayContext context)
+            => PostMessage(new MakeThroughCargoReq() {
+                ChargeId = chargeId,
+                Type = type,
+                PayContext = context
+            }, PlatformService_MakeThroughCargo.QueryPath, PlatformService_MakeThroughCargo.URIRequest);
+
         public NetTask IAPPurchase(int productId, PayContext context)
             => PostMessage(new MakeThroughCargoReq () {
                 ChargeId = productId,
@@ -37,6 +44,15 @@ namespace GameNet {
             => PostMessage(new DeliverCargoReq(), PlatformService_DeliverCargo.QueryPath, PlatformService_DeliverCargo.URIRequest);
 
         #endregion IAP
+
+        #region cdkey
+
+        public NetTask RequestDeliverGiftCode(string code)
+            => PostMessage(new DeliverGiftCodeReq() {
+                GiftCode = code,
+            }, PlatformService_DeliverGiftCode.QueryPath, PlatformService_DeliverGiftCode.URIRequest);
+
+        #endregion cdkey
 
         #region mail
 

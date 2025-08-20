@@ -1,8 +1,8 @@
 /**
  * @Author: zhangpengjian
  * @Date: 2024-04-25 10:18:02
- * @LastEditors: zhangpengjian
- * @LastEditTime: 2024/12/13 14:22:49
+ * @LastEditors: ange.shentu
+ * @LastEditTime: 2025/07/04 15:57:05
  * Description: 寻宝开启弹窗
  */
 
@@ -25,7 +25,6 @@ namespace FAT
         private UIImageRes bg;
         private UIImageRes titleBg;
         private ActivityTreasure activityTreasure;
-
         protected override void OnCreate()
         {
             title = transform.Find("Content/Panel/TitleBg/Title").GetComponent<TextProOnACircle>();
@@ -33,6 +32,7 @@ namespace FAT
             desc = transform.Find("Content/Panel/Desc3").GetComponent<TextMeshProUGUI>();
             rewardLayout = transform.Find("Content/Panel/_group").GetComponent<MBRewardLayout>();
             transform.AddButton("Content/Panel/BtnConfirm", _ClickConfirm);
+            transform.AddButton("Content/Panel/close", Close);
             bg = transform.Find("Content/Panel/Bg").GetComponent<UIImageRes>();
             titleBg = transform.Find("Content/Panel/TitleBg").GetComponent<UIImageRes>();
         }
@@ -55,6 +55,7 @@ namespace FAT
             var c = Game.Manager.objectMan.GetTokenConfig(activityTreasure.ConfD.RequireCoinId);
             desc.SetText(I18N.FormatText(d, c.SpriteName));
             activityTreasure.Visual.Refresh(title, "mainTitle");
+            _RefreshCD();
         }
 
         protected override void OnPreClose()

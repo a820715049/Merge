@@ -102,28 +102,31 @@ namespace fat.gamekitdata {
             "ZXIYASABKAUSFQoNT3V0cHV0Q291bnRlchgCIAEoBRIWCg5JdGVtSW5SZWNo",
             "YXJnZRgDIAEoBRIRCglJdGVtQ291bnQYBCABKAUSEwoLT3V0cHV0Q291bnQY",
             "BSABKAUSFQoNSXNGaXJzdFJldml2ZRgGIAEoCBISCgpNaXhlZEl0ZW1zGAcg",
-            "AygFIiUKDUNvbVRyaWdTb3VyY2USFAoMVHJpZ2dlckNvdW50GAEgASgFIswF",
-            "CglNZXJnZUl0ZW0SCgoCSWQYASABKAUSCwoDVGlkGAIgASgFEg0KBVN0YXRl",
-            "GAMgASgFEgkKAVgYBCABKAUSCQoBWRgFIAEoBRILCgNDb20YBiABKA0SJwoI",
-            "Q29tRHlpbmcYByABKAsyFS5nYW1la2l0ZGF0YS5Db21EeWluZxIzCg5Db21D",
-            "bGlja1NvdXJjZRgIIAEoCzIbLmdhbWVraXRkYXRhLkNvbUNsaWNrU291cmNl",
-            "EicKCENvbUNoZXN0GAkgASgLMhUuZ2FtZWtpdGRhdGEuQ29tQ2hlc3QSKQoJ",
-            "Q29tQnViYmxlGAogASgLMhYuZ2FtZWtpdGRhdGEuQ29tQnViYmxlEjEKDUNv",
-            "bUF1dG9Tb3VyY2UYCyABKAsyGi5nYW1la2l0ZGF0YS5Db21BdXRvU291cmNl",
-            "EiMKBkNvbUJveBgMIAEoCzITLmdhbWVraXRkYXRhLkNvbUJveBI1Cg9Db21F",
-            "YXRpbmdTb3VyY2UYDSABKAsyHC5nYW1la2l0ZGF0YS5Db21FYXRpbmdTb3Vy",
-            "Y2USJwoIQ29tU2tpbGwYDiABKAsyFS5nYW1la2l0ZGF0YS5Db21Ta2lsbBIt",
-            "CgtDb21BY3Rpdml0eRgPIAEoCzIYLmdhbWVraXRkYXRhLkNvbUFjdGl2aXR5",
-            "EhEKCVN0YXRlQ29uZhgQIAEoBRIxCg1Db21Ub29sU291cmNlGBEgASgLMhou",
-            "Z2FtZWtpdGRhdGEuQ29tVG9vbFNvdXJjZRIxCg1Db21TcGVjaWFsQm94GBIg",
-            "ASgLMhouZ2FtZWtpdGRhdGEuQ29tU3BlY2lhbEJveBIvCgxDb21NaXhTb3Vy",
-            "Y2UYEyABKAsyGS5nYW1la2l0ZGF0YS5Db21NaXhTb3VyY2USMQoNQ29tVHJp",
-            "Z1NvdXJjZRgUIAEoCzIaLmdhbWVraXRkYXRhLkNvbVRyaWdTb3VyY2UiKAoL",
-            "UmVjb3JkU3RhdGUSCgoCSWQYASABKAUSDQoFU3RhdGUYAiABKAUqaQoKR29v",
-            "ZHNTdGF0ZRIWChJHb29kc1N0YXRlQ2FuQ2xhaW0QABIWChJHb29kc1N0YXRl",
-            "Tm90U3RhcnQQARIUChBHb29kc1N0YXRlTWlzc2VkEAISFQoRR29vZHNTdGF0",
-            "ZUNsYWltZWQQA0JFWjFnaXRsYWIuZnVucGx1cy5pby9mYXQvY29uZi9nZW4v",
-            "Z29sYW5nL2dhbWVraXRkYXRhqgIPZmF0LmdhbWVraXRkYXRhYgZwcm90bzM="));
+            "AygFIiUKDUNvbVRyaWdTb3VyY2USFAoMVHJpZ2dlckNvdW50GAEgASgFIiQK",
+            "D0NvbUFjdGl2ZVNvdXJjZRIRCglJdGVtQ291bnQYASABKAUigwYKCU1lcmdl",
+            "SXRlbRIKCgJJZBgBIAEoBRILCgNUaWQYAiABKAUSDQoFU3RhdGUYAyABKAUS",
+            "CQoBWBgEIAEoBRIJCgFZGAUgASgFEgsKA0NvbRgGIAEoDRInCghDb21EeWlu",
+            "ZxgHIAEoCzIVLmdhbWVraXRkYXRhLkNvbUR5aW5nEjMKDkNvbUNsaWNrU291",
+            "cmNlGAggASgLMhsuZ2FtZWtpdGRhdGEuQ29tQ2xpY2tTb3VyY2USJwoIQ29t",
+            "Q2hlc3QYCSABKAsyFS5nYW1la2l0ZGF0YS5Db21DaGVzdBIpCglDb21CdWJi",
+            "bGUYCiABKAsyFi5nYW1la2l0ZGF0YS5Db21CdWJibGUSMQoNQ29tQXV0b1Nv",
+            "dXJjZRgLIAEoCzIaLmdhbWVraXRkYXRhLkNvbUF1dG9Tb3VyY2USIwoGQ29t",
+            "Qm94GAwgASgLMhMuZ2FtZWtpdGRhdGEuQ29tQm94EjUKD0NvbUVhdGluZ1Nv",
+            "dXJjZRgNIAEoCzIcLmdhbWVraXRkYXRhLkNvbUVhdGluZ1NvdXJjZRInCghD",
+            "b21Ta2lsbBgOIAEoCzIVLmdhbWVraXRkYXRhLkNvbVNraWxsEi0KC0NvbUFj",
+            "dGl2aXR5GA8gASgLMhguZ2FtZWtpdGRhdGEuQ29tQWN0aXZpdHkSEQoJU3Rh",
+            "dGVDb25mGBAgASgFEjEKDUNvbVRvb2xTb3VyY2UYESABKAsyGi5nYW1la2l0",
+            "ZGF0YS5Db21Ub29sU291cmNlEjEKDUNvbVNwZWNpYWxCb3gYEiABKAsyGi5n",
+            "YW1la2l0ZGF0YS5Db21TcGVjaWFsQm94Ei8KDENvbU1peFNvdXJjZRgTIAEo",
+            "CzIZLmdhbWVraXRkYXRhLkNvbU1peFNvdXJjZRIxCg1Db21UcmlnU291cmNl",
+            "GBQgASgLMhouZ2FtZWtpdGRhdGEuQ29tVHJpZ1NvdXJjZRI1Cg9Db21BY3Rp",
+            "dmVTb3VyY2UYFSABKAsyHC5nYW1la2l0ZGF0YS5Db21BY3RpdmVTb3VyY2Ui",
+            "KAoLUmVjb3JkU3RhdGUSCgoCSWQYASABKAUSDQoFU3RhdGUYAiABKAUqaQoK",
+            "R29vZHNTdGF0ZRIWChJHb29kc1N0YXRlQ2FuQ2xhaW0QABIWChJHb29kc1N0",
+            "YXRlTm90U3RhcnQQARIUChBHb29kc1N0YXRlTWlzc2VkEAISFQoRR29vZHNT",
+            "dGF0ZUNsYWltZWQQA0JFWjFnaXRsYWIuZnVucGx1cy5pby9mYXQvY29uZi9n",
+            "ZW4vZ29sYW5nL2dhbWVraXRkYXRhqgIPZmF0LmdhbWVraXRkYXRhYgZwcm90",
+            "bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::fat.gamekitdata.GoodsState), }, null, new pbr::GeneratedClrTypeInfo[] {
@@ -150,7 +153,8 @@ namespace fat.gamekitdata {
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.gamekitdata.ComSpecialBox), global::fat.gamekitdata.ComSpecialBox.Parser, new[]{ "ItemCount" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.gamekitdata.ComMixSource), global::fat.gamekitdata.ComMixSource.Parser, new[]{ "ReviveCounter", "OutputCounter", "ItemInRecharge", "ItemCount", "OutputCount", "IsFirstRevive", "MixedItems" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.gamekitdata.ComTrigSource), global::fat.gamekitdata.ComTrigSource.Parser, new[]{ "TriggerCount" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::fat.gamekitdata.MergeItem), global::fat.gamekitdata.MergeItem.Parser, new[]{ "Id", "Tid", "State", "X", "Y", "Com", "ComDying", "ComClickSource", "ComChest", "ComBubble", "ComAutoSource", "ComBox", "ComEatingSource", "ComSkill", "ComActivity", "StateConf", "ComToolSource", "ComSpecialBox", "ComMixSource", "ComTrigSource" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::fat.gamekitdata.ComActiveSource), global::fat.gamekitdata.ComActiveSource.Parser, new[]{ "ItemCount" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::fat.gamekitdata.MergeItem), global::fat.gamekitdata.MergeItem.Parser, new[]{ "Id", "Tid", "State", "X", "Y", "Com", "ComDying", "ComClickSource", "ComChest", "ComBubble", "ComAutoSource", "ComBox", "ComEatingSource", "ComSkill", "ComActivity", "StateConf", "ComToolSource", "ComSpecialBox", "ComMixSource", "ComTrigSource", "ComActiveSource" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.gamekitdata.RecordState), global::fat.gamekitdata.RecordState.Parser, new[]{ "Id", "State" }, null, null, null, null)
           }));
     }
@@ -6782,6 +6786,181 @@ namespace fat.gamekitdata {
 
   }
 
+  public sealed partial class ComActiveSource : pb::IMessage<ComActiveSource>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<ComActiveSource> _parser = new pb::MessageParser<ComActiveSource>(() => new ComActiveSource());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ComActiveSource> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::fat.gamekitdata.MergeReflection.Descriptor.MessageTypes[23]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ComActiveSource() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ComActiveSource(ComActiveSource other) : this() {
+      itemCount_ = other.itemCount_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ComActiveSource Clone() {
+      return new ComActiveSource(this);
+    }
+
+    /// <summary>Field number for the "ItemCount" field.</summary>
+    public const int ItemCountFieldNumber = 1;
+    private int itemCount_;
+    /// <summary>
+    /// 库存
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int ItemCount {
+      get { return itemCount_; }
+      set {
+        itemCount_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ComActiveSource);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ComActiveSource other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (ItemCount != other.ItemCount) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (ItemCount != 0) hash ^= ItemCount.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (ItemCount != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(ItemCount);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (ItemCount != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(ItemCount);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (ItemCount != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(ItemCount);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ComActiveSource other) {
+      if (other == null) {
+        return;
+      }
+      if (other.ItemCount != 0) {
+        ItemCount = other.ItemCount;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            ItemCount = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            ItemCount = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
   public sealed partial class MergeItem : pb::IMessage<MergeItem>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
@@ -6794,7 +6973,7 @@ namespace fat.gamekitdata {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::fat.gamekitdata.MergeReflection.Descriptor.MessageTypes[23]; }
+      get { return global::fat.gamekitdata.MergeReflection.Descriptor.MessageTypes[24]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -6831,6 +7010,7 @@ namespace fat.gamekitdata {
       comSpecialBox_ = other.comSpecialBox_ != null ? other.comSpecialBox_.Clone() : null;
       comMixSource_ = other.comMixSource_ != null ? other.comMixSource_.Clone() : null;
       comTrigSource_ = other.comTrigSource_ != null ? other.comTrigSource_.Clone() : null;
+      comActiveSource_ = other.comActiveSource_ != null ? other.comActiveSource_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -7080,6 +7260,17 @@ namespace fat.gamekitdata {
       }
     }
 
+    /// <summary>Field number for the "ComActiveSource" field.</summary>
+    public const int ComActiveSourceFieldNumber = 21;
+    private global::fat.gamekitdata.ComActiveSource comActiveSource_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::fat.gamekitdata.ComActiveSource ComActiveSource {
+      get { return comActiveSource_; }
+      set {
+        comActiveSource_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as MergeItem);
@@ -7113,6 +7304,7 @@ namespace fat.gamekitdata {
       if (!object.Equals(ComSpecialBox, other.ComSpecialBox)) return false;
       if (!object.Equals(ComMixSource, other.ComMixSource)) return false;
       if (!object.Equals(ComTrigSource, other.ComTrigSource)) return false;
+      if (!object.Equals(ComActiveSource, other.ComActiveSource)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -7139,6 +7331,7 @@ namespace fat.gamekitdata {
       if (comSpecialBox_ != null) hash ^= ComSpecialBox.GetHashCode();
       if (comMixSource_ != null) hash ^= ComMixSource.GetHashCode();
       if (comTrigSource_ != null) hash ^= ComTrigSource.GetHashCode();
+      if (comActiveSource_ != null) hash ^= ComActiveSource.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -7235,6 +7428,10 @@ namespace fat.gamekitdata {
         output.WriteRawTag(162, 1);
         output.WriteMessage(ComTrigSource);
       }
+      if (comActiveSource_ != null) {
+        output.WriteRawTag(170, 1);
+        output.WriteMessage(ComActiveSource);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -7324,6 +7521,10 @@ namespace fat.gamekitdata {
         output.WriteRawTag(162, 1);
         output.WriteMessage(ComTrigSource);
       }
+      if (comActiveSource_ != null) {
+        output.WriteRawTag(170, 1);
+        output.WriteMessage(ComActiveSource);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -7392,6 +7593,9 @@ namespace fat.gamekitdata {
       }
       if (comTrigSource_ != null) {
         size += 2 + pb::CodedOutputStream.ComputeMessageSize(ComTrigSource);
+      }
+      if (comActiveSource_ != null) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(ComActiveSource);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -7502,6 +7706,12 @@ namespace fat.gamekitdata {
           ComTrigSource = new global::fat.gamekitdata.ComTrigSource();
         }
         ComTrigSource.MergeFrom(other.ComTrigSource);
+      }
+      if (other.comActiveSource_ != null) {
+        if (comActiveSource_ == null) {
+          ComActiveSource = new global::fat.gamekitdata.ComActiveSource();
+        }
+        ComActiveSource.MergeFrom(other.ComActiveSource);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -7634,6 +7844,13 @@ namespace fat.gamekitdata {
               ComTrigSource = new global::fat.gamekitdata.ComTrigSource();
             }
             input.ReadMessage(ComTrigSource);
+            break;
+          }
+          case 170: {
+            if (comActiveSource_ == null) {
+              ComActiveSource = new global::fat.gamekitdata.ComActiveSource();
+            }
+            input.ReadMessage(ComActiveSource);
             break;
           }
         }
@@ -7769,6 +7986,13 @@ namespace fat.gamekitdata {
             input.ReadMessage(ComTrigSource);
             break;
           }
+          case 170: {
+            if (comActiveSource_ == null) {
+              ComActiveSource = new global::fat.gamekitdata.ComActiveSource();
+            }
+            input.ReadMessage(ComActiveSource);
+            break;
+          }
         }
       }
     }
@@ -7788,7 +8012,7 @@ namespace fat.gamekitdata {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::fat.gamekitdata.MergeReflection.Descriptor.MessageTypes[24]; }
+      get { return global::fat.gamekitdata.MergeReflection.Descriptor.MessageTypes[25]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

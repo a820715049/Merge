@@ -19,5 +19,13 @@ namespace EL
         {
             UIUtility.CountDownFormat(target, totalSec, style);
         }
+        
+        /// <summary>
+        /// 红点数量
+        /// </summary>
+        public static void SetRedPoint(this TMP_Text target, int count)
+        {
+            target.SetText(count > 999 ? "999+" : $"{count}");
+        }
     }
 }

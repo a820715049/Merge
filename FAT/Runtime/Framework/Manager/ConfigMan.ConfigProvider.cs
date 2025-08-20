@@ -1131,6 +1131,35 @@ namespace FAT
 
         #endregion
 
+        #region 通行证 BP BattlePass
+
+        public EventBp GetEventBpConfig(int id)
+        {
+            return conf.Data.GetEventBp(id);
+        }
+        
+        public BpDetail GetBpDetailConfig(int id)
+        {
+            return conf.Data.GetBpDetail(id);
+        }
+        
+        public BpMilestone GetBpMilestoneConfig(int id)
+        {
+            return conf.Data.GetBpMilestone(id);
+        }
+        
+        public BpPackInfo GetBpPackInfoConfig(int id)
+        {
+            return conf.Data.GetBpPackInfo(id);
+        }
+        
+        public BpTask GetBpTaskConfig(int id)
+        {
+            return conf.Data.GetBpTask(id);
+        }
+
+        #endregion
+
         #region 打怪棋盘
         public EventFight GetEventFightById(int id)
         {
@@ -1157,6 +1186,7 @@ namespace FAT
             return conf.Data.GetMonsterTalk(id);
         }
         #endregion
+
         #region 许愿棋盘
         public EventWishBoard GetEventWishBoardConfig(int id)
         {
@@ -1196,7 +1226,13 @@ namespace FAT
         {
             return conf.Data.GetEventWishBarReward(id);
         }
+        #endregion
 
+        #region 能量加倍
+        public EnergyBoost GetEnergyBoostConfig(int id)
+        {
+            return conf.Data.GetEnergyBoost(id);
+        }
         #endregion
 
         private IEnumerable<T> _ChooseVersionAndFilterConfig<T>(IEnumerable<T> rawData, int targetVersion,

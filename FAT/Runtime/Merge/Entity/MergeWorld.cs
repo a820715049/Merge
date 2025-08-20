@@ -305,7 +305,8 @@ namespace FAT.Merge
                     else if (Env.Instance.CanUseCoin(num))
                     {
                         // 配置实际上仅支持coin 非任意reward
-                        costSuc = Env.Instance.UseCoin(num, ReasonString.undo_sell_item);
+                        costSuc = true;
+                        Env.Instance.UseCoin(num, ReasonString.undo_sell_item);
                     }
                 }
                 else

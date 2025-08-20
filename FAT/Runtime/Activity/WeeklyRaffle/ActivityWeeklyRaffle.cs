@@ -647,7 +647,7 @@ namespace FAT
 
             if (rConfig.Reward.Count > 0)
             {
-                // 发事件 通知抽奖结束 告诉表现层奖励 
+                // 发事件 通知抽奖结束 告诉表现层奖励
                 MessageCenter.Get<WEEKLYRAFFLE_RAFFLE_END>().Dispatch(rewardDataList, boxId, rConfig.Id);
             }
             else
@@ -673,7 +673,7 @@ namespace FAT
                 {
                     jackPot = reward;
                 }
-                
+
                 if (!HasRaffle(reward.Id))
                 {
                     unDrawnRewards.Add(reward);
@@ -744,17 +744,21 @@ namespace FAT
 
             // 计算需要多少钻石
             var gemCount = CalBuyGem(1);
-            if (!Game.Manager.coinMan.UseCoin(CoinType.Gem, gemCount, ReasonString.weekly_raffle_reward))
+            if (!Game.Manager.coinMan.CanUseCoin(CoinType.Gem, gemCount))
             {
                 ret = CheckRet.GemNotEnough;
                 return;
             }
-
-            SaveSignIdx(day);
-            MessageCenter.Get<WEEKLYRAFFLE_REFILL>().Dispatch(day, false);
-
-            // 埋点
-            DataTracker.event_weeklyraffle_tokenget.Track(this, day + 1, 1, 1, ConfDetail.Diff);
+            Game.Manager.coinMan.UseCoin(CoinType.Gem, gemCount, ReasonString.weekly_raffle_reward)
+            .OnSuccess(() =>
+            {
+                SaveSignIdx(day);
+                MessageCenter.Get<WEEKLYRAFFLE_REFILL>().Dispatch(day, false);
+                // 埋点
+                DataTracker.event_weeklyraffle_tokenget.Track(this, day + 1, 1, 1, ConfDetail.Diff);
+            })
+            .FromActivity(Lite)
+            .Execute();
         }
 
         // 补签所有
@@ -767,23 +771,27 @@ namespace FAT
 
             var dayCount = GetConfigSignDayCount() - GetSignCount();
             var gemCount = CalBuyGem(dayCount);
-            if (!Game.Manager.coinMan.UseCoin(CoinType.Gem, gemCount, ReasonString.weekly_raffle_reward))
+            if (!Game.Manager.coinMan.CanUseCoin(CoinType.Gem, gemCount))
             {
                 ret = CheckRet.GemNotEnough;
                 return;
             }
-
-            for (var i = 0; i < GetConfigSignDayCount(); i++)
+            Game.Manager.coinMan.UseCoin(CoinType.Gem, gemCount, ReasonString.weekly_raffle_reward)
+            .OnSuccess(() =>
             {
-                if (CheckSignInEnable(i, out var _))
+                for (var i = 0; i < GetConfigSignDayCount(); i++)
                 {
-                    SaveSignIdx(i);
-                    // 埋点
-                    DataTracker.event_weeklyraffle_tokenget.Track(this, i + 1, 1, 1, ConfDetail.Diff);
+                    if (CheckSignInEnable(i, out var _))
+                    {
+                        SaveSignIdx(i);
+                        // 埋点
+                        DataTracker.event_weeklyraffle_tokenget.Track(this, i + 1, 1, 1, ConfDetail.Diff);
+                    }
                 }
-            }
-
-            MessageCenter.Get<WEEKLYRAFFLE_REFILL>().Dispatch(-1, true);
+                MessageCenter.Get<WEEKLYRAFFLE_REFILL>().Dispatch(-1, true);
+            })
+            .FromActivity(Lite)
+            .Execute();
         }
 
         public int CalBuyGem(int count)
@@ -830,7 +838,7 @@ namespace FAT
             var showRedPoint = activity.CheckIsShowRedPoint();
             ent.dot.SetActive(showRedPoint);
             ent.dotCount.gameObject.SetActive(showRedPoint);
-            ent.dotCount.SetText(activity.TokenNum.ToString());
+            ent.dotCount.SetRedPoint(activity.TokenNum);
         }
 
         public override void Clear(ListActivity.Entry e_)
@@ -839,6 +847,14 @@ namespace FAT
 
         public override string TextCD(long diff_)
         {
+            // 借助每秒刷新 刷红点显示
+            var showRedPoint = activity.CheckIsShowRedPoint();
+            entry.dot.SetActive(showRedPoint);
+            if (showRedPoint)
+            {
+                entry.dotCount.SetRedPoint(activity.TokenNum);
+            }
+
             return UIUtility.CountDownFormat(diff_);
         }
     }

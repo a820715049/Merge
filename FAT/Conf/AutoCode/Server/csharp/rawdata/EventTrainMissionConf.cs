@@ -194,7 +194,7 @@ namespace fat.rawdata {
     private readonly pbc::RepeatedField<string> endRecycle_ = new pbc::RepeatedField<string>();
     /// <summary>
     /// 活动结束回收棋子
-    /// (最小难度:最大难度:奖励id:奖励数量,）
+    /// (≤难度值:奖励id:奖励数量,）
     /// 难度区间闭口
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -238,7 +238,7 @@ namespace fat.rawdata {
     public const int HelpThemeFieldNumber = 9;
     private int helpTheme_;
     /// <summary>
-    /// 提交棋子界面
+    /// 玩法说明界面
     /// （EventTheme.id）
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

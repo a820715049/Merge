@@ -749,7 +749,9 @@ namespace FAT
                     }
                 }
             }
-            StartCoroutine(UIDiggingUtility.CoOnCellDigging(state, sandList[index].transform, rewardCommits, level, OnFlyComplete));
+            
+            var rewardsCopy = new List<RewardCommitData>(rewardCommits);
+            Game.Instance.StartCoroutineGlobal(UIDiggingUtility.CoOnCellDigging(state, sandList[index].transform, rewardsCopy, level, OnFlyComplete));
         }
 
         private void OnFlyComplete()

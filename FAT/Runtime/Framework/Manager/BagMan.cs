@@ -24,7 +24,7 @@ namespace FAT
             Producer = 2,   //生成器背包
             Tool = 3        //工具背包
         }
-        
+
         //背包格子数据类 BagMan中自己维护对应list 在数据变化时进行刷新
         public class BagGirdData
         {
@@ -49,7 +49,7 @@ namespace FAT
         public int ItemBagEmptyGirdNum { get; private set; }   //背包中目前空着的可用的格子数
 
         //棋子背包 生成棋背包的总容器
-        private Inventory _mergeInventory; 
+        private Inventory _mergeInventory;
         //当前棋子背包解锁到的格子id(id也代表具体解锁的格子总数量)
         private int _curItemBagUnlockId = 0;
         //所有背包格子数据
@@ -79,7 +79,7 @@ namespace FAT
                 }
             }
         }
-        
+
         public bool CheckBagUnlock(params BagType[] typeList)
         {
             if (typeList.Length <= 0)
@@ -102,7 +102,7 @@ namespace FAT
             }
             return isUnlock;
         }
-        
+
         private bool _CheckBagIsUnlock(BagType type)
         {
             if (type == BagType.Item)
@@ -119,7 +119,7 @@ namespace FAT
             }
             return false;
         }
-        
+
         public List<BagGirdData> GetBagGirdDataList(int bagId)
         {
             if (_allBagGirdData.TryGetValue((BagType)bagId, out var girdDataList))
@@ -131,7 +131,7 @@ namespace FAT
                 return null;
             }
         }
-        
+
         public void OnMergeLevelChange()
         {
             _CheckProducerBagCapacity();
@@ -165,30 +165,30 @@ namespace FAT
         }
 
         //购买棋子背包格子
-        public bool PurchaseItemBagGird(int price)
+        public void PurchaseItemBagGird(int price)
         {
             if (!CanBuyNewItemBagGird())
             {
-                return false;
+                return;
             }
             if (price <= 0)
             {
                 DebugEx.FormatWarning("BagMan::PurchaseSlot ----> gird price is error, id = {0}", _curItemBagUnlockId + 1);
-                return false;
+                return;
             }
-            if(Game.Manager.coinMan.UseCoin(CoinType.Gem, price, ReasonString.inventory))
+            if (Game.Manager.coinMan.CanUseCoin(CoinType.Gem, price))
             {
-                _curItemBagUnlockId++;
-                _mergeInventory.SetCapacity(_curItemBagUnlockId, (int)BagType.Item);
-                DataTracker.bag_item_unlock.Track(_curItemBagUnlockId);
-                //购买了新格子后刷新
-                _UpdateBagGirdData(BagType.Item);
-                DebugEx.FormatInfo("BagMan::PurchaseSlot ----> purchased new girdId = {0}", _curItemBagUnlockId);
-                return true;
-            }
-            else
-            {
-                return false;
+                Game.Manager.coinMan.UseCoin(CoinType.Gem, price, ReasonString.inventory)
+                .OnSuccess(() =>
+                {
+                    _curItemBagUnlockId++;
+                    _mergeInventory.SetCapacity(_curItemBagUnlockId, (int)BagType.Item);
+                    DataTracker.bag_item_unlock.Track(_curItemBagUnlockId);
+                    //购买了新格子后刷新
+                    _UpdateBagGirdData(BagType.Item);
+                    DebugEx.FormatInfo("BagMan::PurchaseSlot ----> purchased new girdId = {0}", _curItemBagUnlockId);
+                })
+                .Execute();
             }
         }
 
@@ -225,7 +225,7 @@ namespace FAT
             }
             return produceId;
         }
-        
+
         public void Reset()
         {
             _mergeInventory = null;
@@ -309,7 +309,7 @@ namespace FAT
             producerBag.SetCapacity(maxId);
             //生成器背包固定多显示(InventoryProducerExtraGrid)个格子 同时保证不会超出配置的最大格子数
             int maxShowGirdNum = maxId + Game.Manager.configMan.globalConfig.InventoryProducerExtraGrid;
-            producerBag.MaxShowGirdNum = maxShowGirdNum <= bagProducerConfig.Count ? maxShowGirdNum :bagProducerConfig.Count;
+            producerBag.MaxShowGirdNum = maxShowGirdNum <= bagProducerConfig.Count ? maxShowGirdNum : bagProducerConfig.Count;
         }
 
         private void _CheckProducerBagRedPoint()
@@ -321,7 +321,7 @@ namespace FAT
                 //如果配置缺失或者等级不够就break
                 if (config.ObjBasicId > 0 && curLevel >= config.UnlockLevel)
                 {
-                    if(curLevel == config.UnlockLevel)
+                    if (curLevel == config.UnlockLevel)
                         _mergeInventory.GetBagByType(BagType.Producer).TryAddRedPointItem(config.ObjBasicId);
                 }
                 else
@@ -367,7 +367,7 @@ namespace FAT
             _allBagGirdData.Add(BagType.Item, itemBagGirdDataList);
             ItemBagEmptyGirdNum = _curItemBagUnlockId - hasItemNum;
         }
-        
+
         private void _InitProducerGirdData()
         {
             //初始化生成器背包
@@ -391,7 +391,7 @@ namespace FAT
             }
             _allBagGirdData.Add(BagType.Producer, producerBagGirdDataList);
         }
-        
+
         private void _InitToolGirdData()
         {
             //初始化工具背包
@@ -464,7 +464,7 @@ namespace FAT
                 ItemBagEmptyGirdNum = _curItemBagUnlockId - hasItemNum;
             }
         }
-        
+
         private void _UpdateProducerGirdData()
         {
             if (_allBagGirdData.TryGetValue(BagType.Producer, out var girdDataList))
@@ -502,11 +502,11 @@ namespace FAT
                 {
                     var itemBag = _mergeInventory.GetBagByType(BagType.Item);
                     //遍历移出物品时 从大往小遍历
-                    for(int i = itemBag.capacity - 1; i >= 0 ; i--)
+                    for (int i = itemBag.capacity - 1; i >= 0; i--)
                     {
                         var girdData = CheckCanPutProducerBag(itemBag.PeekItem(i));
                         //找到了对应棋子
-                        if(girdData != null)
+                        if (girdData != null)
                         {
                             //将棋子转移到生成器背包对应格子
                             var removeItem = itemBag.RemoveItem(i);
@@ -523,7 +523,7 @@ namespace FAT
                 }
             }
         }
-        
+
         private void _UpdateToolGirdData()
         {
             if (_allBagGirdData.TryGetValue(BagType.Tool, out var girdDataList))

@@ -10,9 +10,9 @@ using fat.gamekitdata;
 
 namespace FAT.Merge
 {
-    public class ItemBubbleComponent: ItemComponentBase
+    public class ItemBubbleComponent : ItemComponentBase
     {
-        public int breakCost => Env.Instance.IsBubbleGuidePassed()?mBreakCost:0;
+        public int breakCost => Env.Instance.IsBubbleGuidePassed() ? mBreakCost : 0;
         public int lifeLeftMilli => Mathf.Max(0, bubbleExpireTime - mLifeCounter);
         private int bubbleExpireTime => Game.Manager.configMan.globalConfig.BubbleExpired;
         private int mLifeCounter;
@@ -21,7 +21,7 @@ namespace FAT.Merge
 
         public static bool SerializeDelta(MergeItem newData, MergeItem oldData)
         {
-            if(oldData.ComBubble != null && oldData.ComBubble.Equals(newData.ComBubble))
+            if (oldData.ComBubble != null && oldData.ComBubble.Equals(newData.ComBubble))
             {
                 newData.ComBubble = null;
                 return false;
@@ -53,7 +53,7 @@ namespace FAT.Merge
         public override void OnDeserialize(MergeItem itemData)
         {
             base.OnDeserialize(itemData);
-            if(itemData.ComBubble != null)
+            if (itemData.ComBubble != null)
             {
                 // if(itemData.ComBubble.Start > 0)
                 // {
@@ -61,23 +61,20 @@ namespace FAT.Merge
                 // }
                 // else
                 // {
-                    mLifeCounter = itemData.ComBubble.Life;
+                mLifeCounter = itemData.ComBubble.Life;
                 // }
             }
         }
 
-        public bool BreakBubble()
+        public void BreakBubble()
         {
             var env = Env.Instance;
-            if(item.parent != null && env.CanUseGem(breakCost))
+            if (item.parent != null && env.CanUseGem(breakCost))
             {
-                env.UseGem(breakCost, ReasonString.bubble);
-                item.parent.UnleashBubbleItem(item);
-                return true;
-            }
-            else
-            {
-                return false;
+                env.UseGem(breakCost, ReasonString.bubble, () =>
+                {
+                    item.parent.UnleashBubbleItem(item);
+                });
             }
         }
 
@@ -102,7 +99,7 @@ namespace FAT.Merge
         {
             base.OnPostAttach();
             var config = Env.Instance.GetItemMergeConfig(item.tid);
-            if(config == null)
+            if (config == null)
             {
                 DebugEx.FormatWarning("ItemBubbleComponent ----> no config for item {0}", item.id);
                 mBreakCost = 0;
@@ -119,12 +116,12 @@ namespace FAT.Merge
                 return;
 
             base.OnUpdate(dt);
-            if(item.parent != null)
+            if (item.parent != null)
             {
-                if(Env.Instance.IsBubbleGuidePassed())
+                if (Env.Instance.IsBubbleGuidePassed())
                 {
                     mLifeCounter += dt;
-                    if(mLifeCounter >= bubbleExpireTime && !_IsInteracting())
+                    if (mLifeCounter >= bubbleExpireTime && !_IsInteracting())
                     {
                         item.parent.KillBubbleItem(item);
                     }

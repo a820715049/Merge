@@ -14,6 +14,7 @@ namespace FAT
         [ModuleMark(AppLaunch)] public ArchiveMan archiveMan;
         [ModuleMark(ConfReady)] public UserGradeMan userGradeMan;
         [ModuleMark(ConfReady)] public IAP iap;
+        [ModuleMark(ConfReady)] public CDKeyMan cdKeyMan;
         [ModuleMark(ConfReady)] public ObjectMan objectMan;
         [ModuleMark(ConfReady)] public HandbookMan handbookMan;
         [ModuleMark(ConfReady)] public RewardMan rewardMan;
@@ -35,6 +36,7 @@ namespace FAT
         [ModuleMark(ArchiveLoaded)] public AccountMan accountMan;
         [ModuleMark(ArchiveLoaded)] public GuideMan guideMan;
         [ModuleMark(ArchiveLoaded)] public AdsMan adsMan;
+        [ModuleMark(ArchiveLoaded)] public CommunityLinkMan communityLinkMan;
         //must be before than activity to receive de activity
         [ModuleMark(ArchiveLoaded)] public DailyEvent dailyEvent;
         [ModuleMark(ArchiveLoaded)] public CardMan cardMan;

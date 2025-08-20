@@ -33,11 +33,6 @@ namespace FAT
 
         private void RefreshTheme()
         {
-            var visual = _activity.EndCompletelyVisual;
-            visual.Refresh(_bg, "bgimage");
-            visual.Refresh(_titleBg, "titleImage");
-            visual.Refresh(_title, "mainTitle");
-            visual.Refresh(_desc, "desc2");
         }
     }
 }

@@ -3,6 +3,7 @@
  * @Date: 2025-03-06 10:49:27
  */
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 using EL;
 
@@ -14,9 +15,15 @@ namespace FAT
         [SerializeField] private UICommonProgressBar progressBar;
         [SerializeField] private UICommonItem finalRewardItem;
         [SerializeField] private GameObject goCheck;
+        [SerializeField] private Button btnSpawnerInfo;
 
         private UIBingoMain uiMain;
         private ActivityBingo actInst => uiMain.ActInst;
+
+        private void Awake()
+        {
+            btnSpawnerInfo.onClick.AddListener(OnBtnClickSpawnerInfo);
+        }
 
         public void InitOnPreOpen(UIBingoMain main)
         {
@@ -34,7 +41,7 @@ namespace FAT
         {
             if (actInst == null)
                 return;
-            var confGroup = BingoUtility.GetGroupDetail(actInst.ConfBingoID);
+            var confGroup = ItemBingoUtility.GetGroupDetail(actInst.ConfBingoID);
             var round_max = confGroup.IncludeBoard.Count;
             var round_cur = actInst.GetBingoBoardIndex();
             // 轮次
@@ -59,7 +66,7 @@ namespace FAT
             {
                 goCheck.SetActive(false);
                 finalRewardItem.gameObject.SetActive(true);
-                var (_, _, all) = BingoUtility.GetBoardRewardInfo(actInst.ConfBoardID);
+                var (_, _, all) = ItemBingoUtility.GetBoardRewardInfo(actInst.ConfBoardID);
                 finalRewardItem.Refresh(all.Id, all.Count);
             }
         }
@@ -68,6 +75,11 @@ namespace FAT
         {
             progressBar.SetProgress(actInst.GetBingoCount());
             RefreshReward();
+        }
+
+        private void OnBtnClickSpawnerInfo()
+        {
+            UIConfig.UIBingoSpawnerInfo.Open(actInst);
         }
     }
 }

@@ -599,7 +599,33 @@ namespace FAT.Platform {
         }
 
         #endregion DeepLink
-        
+
+        #region CDKey
+
+        public override bool CDKeyCanMakePurchases()
+        {
+            return CGCDKey.Instance.CDKeyCanMakePurchases();
+        }
+
+        public override void CDKeyExchange(string code, string channel, string section, string throughCargo, string serverId, bool isUsedRoleId, Action<bool, SDKError> WhenComplete_)
+        {
+            OnCDKeyExchangeResult.Setup(WhenComplete_);
+            CGCDKey.Instance.CDKeyExchange(code, channel, section, throughCargo, serverId, isUsedRoleId);
+        }
+
+        public override void CDKeyExchangeSuccess(string cdkey, string throughCargo)
+        {
+            OnCDKeyExchangeResult.Invoke(true, null);
+        }
+
+        public override void CDKeyExchangeFail(long errCode, string msg)
+        {
+            LastError = new(errCode, msg);
+            OnCDKeyExchangeResult.Invoke(false, LastError);
+        }
+
+        #endregion CDKey
+
         #region Facebook
 
         public override bool IsNeedLimitedLogin()

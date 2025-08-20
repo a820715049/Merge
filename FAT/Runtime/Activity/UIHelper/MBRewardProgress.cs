@@ -65,5 +65,38 @@ namespace FAT
             if (duration_ == 0) R();
             else rect.DOSizeDelta(v, duration_).OnComplete(R);
         }
+
+        /// <summary>
+        /// 刷新进度条并播放Text递增动画
+        /// 自动从当前文本状态获取起始值
+        /// </summary>
+        public void RefreshWithTextAnimation(int endValue, int targetValue, float duration, System.Action onComplete = null)
+        {
+            // 从当前文本状态获取起始值
+            int startValue = 0;
+            if (text != null && !string.IsNullOrEmpty(text.text))
+            {
+                var textParts = text.text.Split('/');
+                if (textParts.Length >= 1 && int.TryParse(textParts[0], out int parsedValue))
+                {
+                    startValue = parsedValue;
+                }
+            }
+
+            var p = Mathf.Clamp01((float)endValue / targetValue);
+
+            // 复用现有逻辑，text_传空，让进度条动画使用原有逻辑
+            TryRefreshP(p, null, duration, onComplete);
+
+            // 同步播放Text递增动画
+            if (text != null)
+            {
+                DOTween.To(() => startValue, x =>
+                {
+                    text.text = $"{x}/{targetValue}";
+                }, endValue, duration)
+                .SetEase(Ease.OutCubic);
+            }
+        }
     }
 }

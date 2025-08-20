@@ -155,7 +155,7 @@ namespace FAT
             MessageCenter.Get<MSG.UI_BOARD_SELECT_ITEM>().AddListener(_OnMessageBoardSelectItem);
             MessageCenter.Get<MSG.UI_ENERGY_BOOST_UNLOCK_FLY_FEEDBACK>().AddListener(_OnMessageEnergyBoostUnlockFlyFeedback);
             MessageCenter.Get<MSG.GAME_ONE_SECOND_DRIVER>().AddListener(_OnSecondPass);
-            
+
             _ClearUsage();
 
             var lastSelectedItem = Game.Manager.mergeBoardMan.recentActiveItem;
@@ -338,7 +338,7 @@ namespace FAT
                 return op == ItemUtility.ItemSpeedUpType.FreeBubble;
             }
             return false;
-         }
+        }
 
         #endregion
 
@@ -471,13 +471,13 @@ namespace FAT
                 boostGroup.TryShowTip4x(state);
             }
         }
-        
+
         private bool _CheckCanShowEnergyBoost()
         {
             bool canShow = false;
             if (mItem != null)
             {
-                var clickSourceConfig = Env.Instance.GetItemComConfig(mItem.tid)?.clickSourceConfig; 
+                var clickSourceConfig = Env.Instance.GetItemComConfig(mItem.tid)?.clickSourceConfig;
                 canShow = clickSourceConfig != null && clickSourceConfig.IsBoostable && Env.Instance.IsFeatureEnable(MergeFeatureType.EnergyBoost);
             }
             return canShow;

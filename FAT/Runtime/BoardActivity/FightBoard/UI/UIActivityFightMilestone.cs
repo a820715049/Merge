@@ -35,6 +35,7 @@ namespace FAT
 
         [SerializeField] private Transform cur;
         [SerializeField] private Transform goal;
+        [SerializeField] private Transform done;
         [SerializeField] private Transform goalLock;
         [SerializeField] private Transform bg1;
         [SerializeField] private Transform bg2;
@@ -127,7 +128,8 @@ namespace FAT
             num.Text = nodeLast.showNum.ToString();
             cur.gameObject.SetActive(nodeLast.isCur);
             goal.gameObject.SetActive(!nodeLast.isCur);
-            goalLock.gameObject.SetActive(!nodeLast.isCur);
+            done.gameObject.SetActive(nodeLast.isDone);
+            goalLock.gameObject.SetActive(!nodeLast.isCur && !nodeLast.isDone);
             bg1.gameObject.SetActive(!nodeLast.isCur);
             bg2.gameObject.SetActive(nodeLast.isCur);
             for (int i = 0; i < nodeLast.reward.Length; i++)

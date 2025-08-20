@@ -1,6 +1,6 @@
 /*
  * @Author: tang.yan
- * @Description: 无限礼包三格版数据类 
+ * @Description: 无限礼包三格版数据类
  * @Doc: https://centurygames.yuque.com/ywqzgn/ne0fhm/dzsfo3rsrqly3u5s
  * @Date: 2024-07-04 15:07:03
  */
@@ -13,9 +13,11 @@ using EL;
 using static fat.conf.Data;
 using static FAT.RecordStateHelper;
 
-namespace FAT {
-    public class PackGemEndlessThree : GiftPack {
-        
+namespace FAT
+{
+    public class PackGemEndlessThree : GiftPack
+    {
+
         //礼包数据结构
         public class GemEndlessThreePkgData
         {
@@ -33,7 +35,7 @@ namespace FAT {
                 FreeId = freeId;
                 IapPackId = iapPackId;
             }
-            
+
             public void RefreshReward(bool albumActive)
             {
                 //付费奖励
@@ -87,7 +89,7 @@ namespace FAT {
                 }
             }
         }
-        
+
         //配置数据
         private GemEndlessThree _conf;
         //当前rTag对应的礼包数据  顺序决定界面显示顺序
@@ -97,10 +99,10 @@ namespace FAT {
         //当前可领取的奖励index  本活动借用底层的buycount字段，用于记录礼包奖励的购买/领取次数
         private int _curRecIndex;
         //基于用户分层确定的CurrencyPack.id和IAPFree.id对应的List  会按照礼包组的顺序进行记录  没有相关配置时默认以0占位
-        private List<int> _gradeIdList = new List<int>();   
+        private List<int> _gradeIdList = new List<int>();
         //购买成功Action
         private Action<IList<RewardCommitData>> _purchaseSuccCb = null;
-        
+
         public override UIResAlt Res { get; } = new(UIConfig.UIEndlessPack);
         public override int PackId { get => _GetCurPackId(); set => _SetCurPackId(value); }
         public override int ThemeId => _conf.EventTheme;
@@ -111,7 +113,7 @@ namespace FAT {
         {
             Lite = lite_;
             _conf = GetGemEndlessThree(lite_.Param);
-            RefreshTheme(popupCheck_:true);
+            RefreshTheme(popupCheck_: true);
         }
 
         public override void SetupFresh()
@@ -121,8 +123,9 @@ namespace FAT {
             _UpdateCurRecIndex();
             _purchaseSuccCb = null;
         }
-        
-        public override void SaveSetup(ActivityInstance data_) {
+
+        public override void SaveSetup(ActivityInstance data_)
+        {
             base.SaveSetup(data_);
             var any = data_.AnyState;
             int startIndex = 3;
@@ -133,7 +136,8 @@ namespace FAT {
             }
         }
 
-        public override void LoadSetup(ActivityInstance data_) {
+        public override void LoadSetup(ActivityInstance data_)
+        {
             base.LoadSetup(data_);
             var any = data_.AnyState;
             int startIndex = 3;
@@ -200,7 +204,7 @@ namespace FAT {
                 return null;
             }
         }
-        
+
         //检查传入的index对应的奖励是否可以领取
         public bool CheckCanGetReward(int targetIndex)
         {
@@ -208,14 +212,14 @@ namespace FAT {
                 return false;
             return true;
         }
-        
+
         public bool CheckHasGetReward(int targetIndex)
         {
             if (targetIndex < 0 || targetIndex > _totalIndex || targetIndex >= _curRecIndex)
                 return false;
             return true;
         }
-        
+
         //尝试领取格子上的免费/付费奖励 默认只能领取第一个格子 后面的格子都为上锁状态
         public void TryGetReward(int targetIndex)
         {
@@ -251,17 +255,24 @@ namespace FAT {
                 {
                     using (ObjectPool<List<RewardCommitData>>.GlobalPool.AllocStub(out var rewards))
                     {
-                        if (!Game.Manager.coinMan.UseCoin(coinType, currencyPackConf.Price, ReasonString.purchase))
-                            return;
-                        foreach (var reward in rewardData.PayRewardInfo)
+                        if (Game.Manager.coinMan.CanUseCoin(coinType, currencyPackConf.Price))
                         {
-                            //构造基础奖励
-                            rewards.Add(Game.Manager.rewardMan.BeginReward(reward.Id, reward.Count, ReasonString.purchase));
+                            Game.Manager.coinMan.UseCoin(coinType, currencyPackConf.Price, ReasonString.purchase)
+                            .OnSuccess(() =>
+                            {
+                                foreach (var reward in rewardData.PayRewardInfo)
+                                {
+                                    //构造基础奖励
+                                    rewards.Add(Game.Manager.rewardMan.BeginReward(reward.Id, reward.Count, ReasonString.purchase));
+                                }
+                                //购买次数+1 这里认为免费领取也算购买 便于逻辑计算index
+                                BuyCount++;
+                                //领奖后续处理
+                                _CollectRewardFinish(rewards, targetIndex, false, currencyPackConf);
+                            })
+                            .FromActivity(Lite)
+                            .Execute();
                         }
-                        //购买次数+1 这里认为免费领取也算购买 便于逻辑计算index
-                        BuyCount++;
-                        //领奖后续处理
-                        _CollectRewardFinish(rewards, targetIndex, false, currencyPackConf);
                     }
                 }
                 else if (currencyPackConf.CoinType == CoinType.Iapcoin)
@@ -280,7 +291,7 @@ namespace FAT {
                 }
             }
         }
-        
+
         //正常购买成功或补单成功后的回调
         public override void PurchaseSuccess(int packId_, IList<RewardCommitData> rewards_, bool late_)
         {
@@ -321,7 +332,7 @@ namespace FAT {
             _purchaseSuccCb?.Invoke(rewards_);
             _purchaseSuccCb = null;
         }
-        
+
         //补单发生时 根据packId找到其所在的轮次 发放这一轮中所有的免费奖励
         private void _CollectAllFreeRewardByPackId(int packId)
         {
@@ -333,7 +344,7 @@ namespace FAT {
             for (int i = 0; i < pkgDataCount; i++)
             {
                 var pkgData = _curPkgDataList[i];
-                if (pkgData.IapPackId <= 0) 
+                if (pkgData.IapPackId <= 0)
                     continue;
                 if (payIndex < 0 && pkgData.IapPackId == packId)
                     payIndex = i;
@@ -382,7 +393,7 @@ namespace FAT {
             //检查活动是否结束
             _CheckWillEnd();
         }
-        
+
         //若当前礼包不循环或循环次数有限 则在每次领完奖励后检查一下活动是否可以结束
         private void _CheckWillEnd()
         {
@@ -395,10 +406,10 @@ namespace FAT {
             }
             else if (cycleNum == 0)
             {
-                //只进行一轮 不循环 
+                //只进行一轮 不循环
                 if (_curRecIndex > _totalIndex)
                 {
-                    Game.Manager.activity.EndImmediate(this,false);
+                    Game.Manager.activity.EndImmediate(this, false);
                 }
             }
             else
@@ -407,11 +418,11 @@ namespace FAT {
                 //当前进行的循环次数已超过指定循环次数 则活动结束
                 if (curCycleNum > cycleNum)
                 {
-                    Game.Manager.activity.EndImmediate(this,false);
+                    Game.Manager.activity.EndImmediate(this, false);
                 }
             }
         }
-        
+
         //当活动结束时 如果有未领取的免费奖励 则自动领取
         public override void WhenEnd()
         {
@@ -419,12 +430,12 @@ namespace FAT {
             _TryHelpCollectReward();
             //重置数据
             _curRecIndex = 0;
-            _startLoopIndex = 0; 
+            _startLoopIndex = 0;
             _totalIndex = 0;
             _curPkgDataList.Clear();
             _purchaseSuccCb = null;
         }
-        
+
         private void _InitInfoWithUserGrade()
         {
             if (_conf == null)
@@ -445,7 +456,7 @@ namespace FAT {
                 }
             }
         }
-        
+
         private void _InitConfigList()
         {
             _curPkgDataList.Clear();
@@ -465,7 +476,7 @@ namespace FAT {
                     {
                         _startLoopIndex = _curPkgDataList.Count;
                     }
-                    
+
                     //当前礼包配置了内购商品
                     if (pkgConf.PackGrpId > 0 && _gradeIdList.TryGetByIndex(index, out var packId))
                     {
@@ -500,11 +511,11 @@ namespace FAT {
                         }
                         else
                         {
-                            //配了免费奖励但构造时发现没有配置，则跳过不构造数据类 
+                            //配了免费奖励但构造时发现没有配置，则跳过不构造数据类
                         }
                     }
                     index++;
-                    
+
                     //当前礼包配置了赠品2
                     if (pkgConf.FreeTwoGrpId > 0 && _gradeIdList.TryGetByIndex(index, out var freeId2))
                     {
@@ -516,7 +527,7 @@ namespace FAT {
                         }
                         else
                         {
-                            //配了免费奖励但构造时发现没有配置，则跳过不构造数据类 
+                            //配了免费奖励但构造时发现没有配置，则跳过不构造数据类
                         }
                     }
                     index++;
@@ -524,7 +535,7 @@ namespace FAT {
             }
             _totalIndex = _curPkgDataList.Count - 1;
         }
-        
+
         //更新当前index 超过上限后重新从循环index开始
         private void _UpdateCurRecIndex()
         {
@@ -566,20 +577,23 @@ namespace FAT {
             return rewardData?.IapPackId ?? 0;
         }
 
-        private void _SetCurPackId(int value_) {
+        private void _SetCurPackId(int value_)
+        {
             if (_curRecIndex < 0 || _curRecIndex > _totalIndex || _curPkgDataList.Count < 1)
                 return;
             GemEndlessThreePkgData rewardData = _curPkgDataList[_curRecIndex];
             if (rewardData != null) rewardData.IapPackId = value_;
         }
-        
+
         //无限礼包允许Content为空(免费档)的情况
-        public override void RefreshContent() {
+        public override void RefreshContent()
+        {
             Content = GetIAPPack(PackId);
             RefreshPack();
         }
 
-        public override void RefreshPack() {
+        public override void RefreshPack()
+        {
             base.RefreshPack();
             var albumActive = Game.Manager.activity.IsActive(fat.rawdata.EventType.CardAlbum);
             //刷新奖励
@@ -588,7 +602,7 @@ namespace FAT {
                 endlessPkgData.RefreshReward(albumActive);
             }
         }
-        
+
         public override BonusReward MatchPack(int packId_)
         {
             //如果想要的packId和当前序号对应的goods.packId不一致，说明发生了补单，这时new一个返回去，避免补单对应的奖励发不出去
@@ -605,7 +619,7 @@ namespace FAT {
             }
             return Goods;
         }
-        
+
         //填充list 超过上限时直接从循环位置开始继续填充
         private void _FillListWithCycle(ICollection<int> indexList)
         {
@@ -668,7 +682,7 @@ namespace FAT {
             }
             return curCycleNum;
         }
-        
+
         private void _TryHelpCollectReward()
         {
             if (_conf == null || _curPkgDataList == null || _curPkgDataList.Count < 1)

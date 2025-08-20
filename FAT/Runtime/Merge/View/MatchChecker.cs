@@ -86,9 +86,36 @@ namespace FAT
             return mHasMatchItem;
         }
 
+        private bool IsMatchHintItemReady()
+        {
+            var itemA = mMatchHintItemA;
+            var itemB = mMatchHintItemB;
+
+            if (itemA == null || itemB == null)
+                return false;
+            if (itemA.isDead || itemB.isDead)
+                return false;
+            if (itemA.parent == null || itemB.parent == null)
+                return false;
+
+            // 额外的匹配动画
+            var mgr = BoardViewManager.Instance;
+            var v1 = mgr.boardView.boardHolder.FindItemView(itemA.id);
+            var v2 = mgr.boardView.boardHolder.FindItemView(itemB.id);
+            if (v1 == null || v2 == null)
+            {
+                // item有可能还未落地 / 比如从背包延迟发出
+                return false;
+            }
+            if (!v1.IsViewIdle() || !v2.IsViewIdle())
+                return false;            
+
+            return true;
+        }
+
         public bool ShouldPlayMatchHintAnim()
         {
-            return HasMatchPair() && mResolveTime > 0 && (Time.time - mResolveTime) > 2f;
+            return HasMatchPair() && IsMatchHintItemReady() && mResolveTime > 0 && (Time.time - mResolveTime) > 2f;
         }
 
         public void PlayMatchHintAnim()

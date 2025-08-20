@@ -405,7 +405,7 @@ namespace FAT
             (e, p) = (e_, p_);
             e.dot.SetActive(p.GetTokenNum() > 0);
             e.dotCount.gameObject.SetActive(p.GetTokenNum() > 0);
-            e.dotCount.SetText(p.GetTokenNum().ToString());
+            e.dotCount.SetRedPoint(p.GetTokenNum());
         }
 
         public void RefreshDot(MineBoardActivity activity)
@@ -413,7 +413,7 @@ namespace FAT
             if (activity != p) return;
             e.dot.SetActive(p.GetTokenNum() > 0);
             e.dotCount.gameObject.SetActive(p.GetTokenNum() > 0);
-            e.dotCount.SetText(p.GetTokenNum().ToString());
+            e.dotCount.SetRedPoint(p.GetTokenNum());
         }
 
         public override void Clear(ListActivity.Entry e_)

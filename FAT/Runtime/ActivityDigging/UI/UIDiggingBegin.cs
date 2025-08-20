@@ -1,8 +1,8 @@
 /**
  * @Author: zhangpengjian
  * @Date: 2024/8/19 10:27:30
- * @LastEditors: zhangpengjian
- * @LastEditTime: 2024/8/19 10:27:30
+ * @LastEditors: ange.shentu
+ * @LastEditTime: 2025/07/04 15:57:01
  * Description: 挖沙活动开启界面
  */
 
@@ -33,6 +33,7 @@ namespace FAT
             desc = transform.Find("Content/Panel/Desc3").GetComponent<TextMeshProUGUI>();
             rewardLayout = transform.Find("Content/Panel/_group").GetComponent<MBRewardLayout>();
             transform.AddButton("Content/Panel/BtnConfirm", _ClickConfirm);
+            transform.AddButton("Content/Panel/close", Close);
             bg = transform.Find("Content/Panel/Bg").GetComponent<UIImageRes>();
             titleBg = transform.Find("Content/Panel/TitleBg").GetComponent<UIImageRes>();
         }
@@ -62,6 +63,7 @@ namespace FAT
             activityDigging.VisualStart.Refresh(titleBg, "titleBg");
             activityDigging.VisualStart.Refresh(title, "mainTitle");
             title.SetText(I18N.Text(config.Name));
+            _RefreshCD();
         }
 
         protected override void OnPreClose()

@@ -249,7 +249,7 @@ namespace FAT
         private void RefreshRedDot()
         {
             var keyNum = activityTreasure.GetKeyNum();
-            redNum.text = keyNum.ToString();
+            redNum.SetRedPoint(keyNum);
             redGo.SetActive(keyNum > 0);
         }
 

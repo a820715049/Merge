@@ -13,6 +13,7 @@ namespace FAT
         public static UIResource UIMergeBoardMain = new UIResource("UIMergeBoardMain.prefab", UILayer.BelowStatus, "fat_global");
         public static UIResource UIEnergyBoostTips = new UIResource("UIEnergyBoostTips.prefab", UILayer.BelowStatus, "fat_global");
         public static UIResource UIDebugPanelProMax = new UIResource("UIDebugPanelProMax.prefab", UILayer.Top, "fat_global").SupportNavBack();
+        public static UIResource UIOrderDebug = new UIResource("UIOrderDebug.prefab", UILayer.Top, "fat_global").SupportNavBack();
         public static UIResource UIGuide = new UIResource("UIGuide.prefab", UILayer.Top, "fat_global");
         public static UIResource UIStatus = new UIResource("UIStatus.prefab", UILayer.Status, "fat_global").IgnoreNavBack();
         public static UIResource UISceneHud = new UIResource("UISceneHud.prefab", UILayer.Hud, "fat_global_ext");
@@ -25,6 +26,8 @@ namespace FAT
         public static UIResource UILevelUp = new UIResource("UILevelUp.prefab", UILayer.SubStatus, "fat_global_ext").CustomSoundEvent("LevelUp", null).AllowHideUI();
         public static UIResource UISetting = new UIResource("UISetting.prefab", UILayer.AboveStatus, "fat_global").SupportNavBack().AllowHideUI();
         public static UIResource UISettingCommunity = new UIResource("UISettingCommunity.prefab", UILayer.AboveStatus, "fat_global").SupportNavBack();
+        //这个界面放在global里是因为会在Setting界面呼出，呼出按钮的显示隐藏是单独的配置，global的级别更高，更安全
+        public static UIResource UIProbabilityTips = new UIResource("UIProbabilityTips.prefab", UILayer.SubStatus, "fat_global").SupportNavBack();//概率公示弹窗
         public static UIResource UISupport = new UIResource("UISupport.prefab", UILayer.AboveStatus, "fat_global").SupportNavBack().AllowHideUI();
         public static UIResource UIAccountBind = new UIResource("UIAccountBind.prefab", AboveStatus, "fat_global").SupportNavBack();
         public static UIResource UIFacebookBindNotice = new UIResource("UIFacebookBindNotice.prefab", SubStatus, "fat_global").SupportNavBack();
@@ -86,7 +89,7 @@ namespace FAT
         public static UIResource UIGuideBoost = new UIResource("UIGuideBoost.prefab", AboveStatus, "fat_global").AllowHideUI();
         public static UIResource UIEnergyBoostUnlock4X = new UIResource("UIEnergyBoostUnlock4X.prefab", AboveStatus, "fat_global").AllowHideUI();
         public static UIResource UITimeBoosterDetails = new UIResource("UITimeBoosterDetails.prefab", SubStatus, "fat_global").SupportNavBack().IsTips();
-        public static UIResource UITotalRewardPanel = new UIResource("UITotalRewardPanel.prefab", AboveStatus, "fat_global").AllowHideUI();
+        public static UIResource UITotalRewardPanel = new UIResource("UITotalRewardPanel.prefab", SubStatus, "fat_global").AllowHideUI();
         public static UIResource UIItemUseConfirm = new UIResource("UIItemUseConfirm.prefab", AboveStatus, "fat_global").SupportNavBack().AllowHideUI();
         public static UIResource UISpecialBoxInfo = new UIResource("UISpecialBoxInfo.prefab", SubStatus, "fat_global").SupportNavBack().AllowHideUI();
         public static UIResource UIChoiceBox = new UIResource("UIChoiceBox.prefab", SubStatus, "fat_global").SupportNavBack().AllowHideUI();
@@ -105,7 +108,7 @@ namespace FAT
         public static UIResource UIErgListPack = new UIResource("UIErgListPack.prefab", AboveStatus, "event_erglist_default").SupportNavBack();
         public static UIResource UIErgListPackBuyTips = new UIResource("UIErgListPackBuyTips.prefab", SubStatus, "event_erglist_default");
         public static UIResource UIErgListPackEnd = new UIResource("UIErgListPackEnd.prefab", SubStatus, "event_erglist_default");
-
+        public static UIResource UIGemSecondConfirm = new UIResource("UIGemSecondConfirm.prefab", SubStatus, "fat_global").SupportNavBack();
         #region 卡册系统相关界面
 
         //debug 模拟抽卡界面
@@ -121,12 +124,12 @@ namespace FAT
         public static UIResource UICardPackOpen = new UIResource("UICardPackOpen.prefab", UILayer.SubStatus, "fat_card_common").SetMute();
         public static UIResource UICardAlbumGuide = new UIResource("UICardAlbumGuide.prefab", UILayer.SubStatus, "fat_card_common").SupportNavBack();
         public static UIResource UIGuideCardUnlock = new UIResource("UIGuideCardUnlock.prefab", UILayer.SubStatus, "fat_card_common").AllowHideUI();
+
         //卡册活动相关
         public static UIResource UICardActivityEnd = new UIResource("UICardActivityEnd.prefab", UILayer.AboveStatus, "fat_card_common").AllowHideUI();
         public static UIResource UICardActivityEndNotice = new UIResource("UICardActivityEndNotice.prefab", UILayer.AboveStatus, "fat_card_common").SupportNavBack().AllowHideUI();
         public static UIResource UICardActivityStartNotice = new UIResource("UICardActivityStartNotice.prefab", UILayer.AboveStatus, "fat_card_common").SupportNavBack().AllowHideUI();
         public static UIResource UICardActivityTips = new UIResource("UICardActivityTips.prefab", UILayer.SubStatus, "fat_card_common").SetMute().IsTips();
-
         public static UIResource UICardFinalRewardTips = new UIResource("UICardFinalRewardTips.prefab", UILayer.SubStatus, "fat_card_common").SetMute().IsTips();
         //万能卡相关界面
         public static UIResource UIJokerCardTips = new UIResource("UIJokerCardTips.prefab", UILayer.SubStatus, "fat_card_common").SupportNavBack().IsTips();
@@ -146,6 +149,12 @@ namespace FAT
         public static UIResource UICardTradeSuccess = new("UICardTradeSuccess.prefab", SubStatus, "fat_card_common");
         public static UIResource UICardReceive = new("UICardReceive.prefab", SubStatus, "fat_card_common");
         public static UIResource UICardSendTips = new("CardSendTips.prefab", SubStatus, "fat_card_common");
+        #endregion
+
+        #region 沙堡里程碑活动
+        public static UIResource UIActivityCastleBegin = new UIResource("UIActivityCastleBegin.prefab", AboveStatus, "event_castle_default");
+        public static UIResource UIActivityCastleConvert = new UIResource("UIActivityCastleConvert.prefab", AboveStatus, "event_castle_default");
+        public static UIResource UIActivityCastleMain = new UIResource("UIActivityCastleMain.prefab", AboveStatus, "event_castle_default");
         #endregion
 
         #region 寻宝活动
@@ -168,6 +177,8 @@ namespace FAT
         public static UIResource UIScoreProgress = new UIResource("UIScoreProgress.prefab", Top, "event_score_common").IgnoreNavBack();
         public static UIResource UIScoreGuide = new UIResource("UIScoreGuide_concert.prefab", AboveStatus, "event_score_concert").SupportNavBack().AllowHideUI();
         public static UIResource UIScoreMilestone = new UIResource("UIScoreMilestone_cook.prefab", AboveStatus, "event_score_cook").SupportNavBack().AllowHideUI();
+        public static UIResource UIScoreFinish_Track = new UIResource("UIScoreFinish_track.prefab", AboveStatus, "event_score_track").SupportNavBack();
+        public static UIResource UIScoreFinish_Piece = new UIResource("UIScoreFinish_piece.prefab", AboveStatus, "event_score_piece").SupportNavBack();
         #endregion
 
         #region 订单额外奖励活动
@@ -352,16 +363,33 @@ namespace FAT
         public static UIResource UIActivityWeeklyTaskNotice = new UIResource("UIActivityWeeklyTaskNotice.prefab", Top, "event_weeklytask_default").SupportNavBack();
         #endregion
 
+        #region 连续订单活动
+        public static UIResource UIActivityOrderStreakMain = new UIResource("UIActivityOrderStreakMain.prefab", AboveStatus, "event_orderstreak_default").SupportNavBack();
+        public static UIResource UIActivityOrderStreakHelp = new UIResource("UIActivityOrderStreakHelp.prefab", SubStatus, "event_orderstreak_default").SupportNavBack();
+        public static UIResource UIActivityOrderStreakConvert = new UIResource("UIActivityOrderStreakConvert.prefab", AboveStatus, "event_orderstreak_default");
+        public static UIResource UIActivityOrderStreakRewardTips = new UIResource("UIActivityOrderStreakRewardTips.prefab", SubStatus, "event_orderstreak_default").SupportNavBack();
+        #endregion
+
         #region bingo活动
 
         public static UIResource UIBingoEnd = new("UIBingoEnd.prefab", AboveStatus, "event_bingo_default");
         public static UIResource UIBingoHelp = new UIResource("UIBingoHelp.prefab", SubStatus, "event_bingo_default").SupportNavBack();
         public static UIResource UIBingoItem = new UIResource("UIBingoItem.prefab", SubStatus, "event_bingo_default").SupportNavBack();
         public static UIResource UIBingoMain = new UIResource("UIBingoMain.prefab", AboveStatus, "event_bingo_default").SupportNavBack();
-        // public static UIResource UIBingoStart = new("UIBingoStart.prefab", AboveStatus, "event_bingo_common");
-        // public static UIResource UIBingoRestart = new("UIBingoRestart.prefab", AboveStatus, "event_bingo_common");
-        // public static UIResource UIBingoReward = new("UIBingoReward.prefab", SubStatus, "event_bingo_common");
+        public static UIResource UIBingoGuide = new UIResource("UIBingoGuide.prefab", SubStatus, "event_bingo_default").SupportNavBack();
+        public static UIResource UIBingoSpawnerInfo = new UIResource("UIBingoSpawnerInfo.prefab", SubStatus, "event_bingo_default").SupportNavBack();
+
         #endregion
+
+        #region Bingo任务
+        public static UIResource UIBingoTaskMain = new UIResource("UIBingoTaskMain_s001.prefab", AboveStatus, "event_bingotask_s001").SupportNavBack();
+        public static UIResource UIBingoTaskHelp = new UIResource("UIBingoTaskHelp_s001.prefab", SubStatus, "event_bingotask_s001").SupportNavBack();
+        public static UIResource UIBingoTaskBingo = new UIResource("UIBingoTaskBingo.prefab", SubStatus, "event_bingotask_common");
+        public static UIResource UIBingoTaskItemTips = new UIResource("UIBingoTaskItemTips.prefab", SubStatus, "event_bingotask_common").IsTips();
+        public static UIResource UIBingoTaskEnd = new UIResource("UIBingoTaskEnd_s001.prefab", AboveStatus, "event_bingotask_s001");
+        #endregion
+
+
         #region 挖矿棋盘
         public static UIResource UIMineBoardMain = new UIResource("UIMineBoardMain.prefab", BelowStatus, "event_mineboard_s001");
         public static UIResource UIMineBoardMilestoneReward = new UIResource("UIMineBoardMilestoneReward.prefab", SubStatus, "event_mineboard_common");
@@ -412,7 +440,7 @@ namespace FAT
         public static UIResource UIActivityWeeklyRaffleDraw = new UIResource("UIActivityWeeklyRaffleDraw.prefab", SubStatus, "event_weeklyraffle_default").SupportNavBack();
         public static UIResource UIActivityWeeklyRaffleRewardTips = new UIResource("UIActivityWeeklyRaffleRewardTips.prefab", SubStatus, "event_weeklyraffle_default").SupportNavBack().IsTips();
         #endregion
-        
+
         #region 三日签到
         public static UIResource UIThreeSign = new UIResource("UIThreeSign.prefab", AboveStatus, "event_threesign_default");
         #endregion
@@ -432,6 +460,25 @@ namespace FAT
         public static UIResource UIRedeemShopSettlement = new UIResource("UIRedeemShopSettlement.prefab", SubStatus, "event_shopredeem_default");
 
         #endregion
+
+
+        #region BP
+        public static UIResource UIBPStart = new UIResource("UIBPStart.prefab", SubStatus, "event_bp_common");
+        public static UIResource UIBPMain = new UIResource("UIBPMain_s001.prefab", AboveStatus, "event_bp_s001").SupportNavBack();
+        public static UIResource UIBPTaskComplete = new UIResource("UIBPTaskComplete.prefab", SubStatus, "event_bp_common").SupportNavBack();
+        public static UIResource UIBPEnd = new UIResource("UIBPEnd.prefab", SubStatus, "event_bp_common");
+        public static UIResource UIBPBuyBoth = new UIResource("UIBPBuyBoth.prefab", SubStatus, "event_bp_common").SupportNavBack();
+        public static UIResource UIBPBuyUpgrade = new UIResource("UIBPBuyUpgrade.prefab", SubStatus, "event_bp_common").SupportNavBack();
+        public static UIResource UIBPBuyBothPop = new UIResource("UIBPBuyBothPop.prefab", SubStatus, "event_bp_common").SupportNavBack();
+        public static UIResource UIBPBuyOneSuccess = new UIResource("UIBPBuyOneSuccess.prefab", SubStatus, "event_bp_common").SupportNavBack().SetMute();
+        public static UIResource UIBPBuyTwoSuccess = new UIResource("UIBPBuyTwoSuccess.prefab", SubStatus, "event_bp_common").SupportNavBack().SetMute();
+        public static UIResource UIBPDoubleCheck = new UIResource("UIBPDoubleCheck.prefab", SubStatus, "event_bp_common").SupportNavBack();
+        public static UIResource UIBPReward = new UIResource("UIBPReward.prefab", SubStatus, "event_bp_common").SupportNavBack().SetMute();
+        public static UIResource UIBPRewardTip = new UIResource("UIBPRewardTip.prefab", SubStatus, "event_bp_common").SupportNavBack().IsTips().SetMute();
+        public static UIResource UIBPMileStoneTip = new UIResource("UIBPMileStoneTip.prefab", SubStatus, "event_bp_common").SupportNavBack().IsTips();
+        #endregion
+
+
         #region 订单助力
         public static UIResource UIOrderBonusReward = new UIResource("UIOrderbonusReward.prefab", SubStatus, "event_orderbonus_default");
         public static UIResource UIOrderBonusPanel = new UIResource("UIOrderBonusPanel.prefab", AboveStatus, "event_orderbonus_default");
@@ -439,10 +486,18 @@ namespace FAT
         public static UIResource UIOrderBonusRewardTips = new UIResource("UIOrderBonusRewardTips.prefab", SubStatus, "event_orderbonus_default");
         #endregion
 
+        #region 抓宝订单
+        public static UIResource UIClawOrderPanel = new UIResource("UIClawOrderPanel.prefab", AboveStatus, "event_claworder_default").SupportNavBack();
+        public static UIResource UIClawOrderHelp = new UIResource("UIClawOrderHelp.prefab", AboveStatus, "event_claworder_default").SupportNavBack();
+        public static UIResource UIClawOrderEnd = new UIResource("UIClawOrderEnd.prefab", AboveStatus, "event_claworder_default");
+        public static UIResource UIClawOrderTips = new UIResource("UIClawOrderTips.prefab", SubStatus, "event_claworder_default").SupportNavBack();
+        #endregion
+
         #region  邮件补单
         public static UIResource UIMailHasRewardReshipment = new UIResource("UIMailHasRewardReshipment.prefab", AboveStatus, "fat_global");
         public static UIResource UIMailNotRewardReshipment = new UIResource("UIMailNotRewardReshipment.prefab", AboveStatus, "fat_global");
         #endregion
+
         #region 许愿棋盘
         public static UIResource UIWishBoardMain = new UIResource("UIWishBoardMain.prefab", BelowStatus, "event_wishboard_default").SupportNavBack();
         public static UIResource UIWishBoardHelp = new UIResource("UIWishBoardHelp.prefab", AboveStatus, "event_wishboard_default").SupportNavBack();
@@ -455,7 +510,17 @@ namespace FAT
         public static UIResource UIWishBoardLoading = new UIResource("UIWishBoardLoading.prefab", Loading, "event_wishboard_default");
         public static UIResource UIWishBoardMilestoneTips = new UIResource("UIWishBoardMilestoneTips.prefab", SubStatus, "event_wishboard_default").SupportNavBack().IsTips();
         public static UIResource UIWishBoardTip = new UIResource("UIWishBoardTip.prefab", SubStatus, "event_wishboard_default");
+        #endregion
 
+        #region 社区计划
+        public static UIResource UICommunityPlanReward = new UIResource("UICommunityPlanReward.prefab", SubStatus, "fat_global");
+        public static UIResource UICommunityPlanGiftReward = new UIResource("UICommunityPlanGiftReward.prefab", AboveStatus, "fat_global");
+        public static UIResource UICommunityMailStartNotice = new UIResource("UICommunityMailStartNotice.prefab", AboveStatus, "fat_global");
+        #endregion
+        #region 跑马灯抽奖
+        public static UIResource UISpinPackPanel = new UIResource("UISpinPackPanel.prefab", AboveStatus, "event_spinpack_s001");
+        public static UIResource UISpinPackTip = new UIResource("UISpinPackTips.prefab", SubStatus, "event_spinpack_default");
+        public static UIResource UISpinRewardPanel = new UIResource("UISpinRewardPanel.prefab", SubStatus, "event_spinpack_default");
         #endregion
     }
 }

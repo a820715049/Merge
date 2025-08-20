@@ -185,6 +185,7 @@ namespace FAT
 
         public override void Open()
         {
+            if (!Active) { return; }
             if (HasStartRound) { UIManager.Instance.OpenWindow(UIConfig.UIRacePanel); }
             else { UIManager.Instance.OpenWindow(UIConfig.UIRaceStart); }
         }
@@ -210,7 +211,14 @@ namespace FAT
             }
 
             if (!HasPop && !HasStartRound)
+            {
+                if (Round >= ConfD.NormalRoundId.Count && ActivityRaceType == RaceType.Once)
+                {
+                    endTS = Game.TimestampNow();
+                    return;
+                }
                 popup_.TryQueue(StartPopup, state_);
+            }
         }
 
         public override void WhenEnd()
@@ -262,6 +270,7 @@ namespace FAT
         private void AddOfflineScore()
         {
             var cur = Game.Instance.GetTimestampSeconds();
+            if (CurRaceRound == null) { return; }
             var offline = cur - LastUpdateTime;
             if (offline > 0)
                 CheckBotScoreOffline(offline);

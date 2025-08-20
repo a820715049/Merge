@@ -22,9 +22,10 @@ namespace FAT {
         public static readonly string Market = "\U0000F008";
         public static readonly string Score = "\U0000F009";
 
-        public static string FromId(int id_) {
-            
-            return id_ switch {
+        public static string FromId(int id_)
+        {
+            var ret = id_ switch
+            {
                 1 => Diamond,
                 5 => Coin,
                 //30 => Exp,
@@ -35,6 +36,13 @@ namespace FAT {
                 14 => Ceramics,
                 _ => string.Empty,
             };
+
+            if (string.IsNullOrEmpty(ret))
+            {
+                ret = UIUtility.FormatTMPString(id_);
+            }
+
+            return ret;
         }
 
         public static string FromType(CoinType type_) {

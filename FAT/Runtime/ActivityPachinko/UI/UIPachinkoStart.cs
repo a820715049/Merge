@@ -26,6 +26,7 @@ namespace FAT
             transform.Access("Content/Panel/desc1", out _desc);
             transform.Access("Content/Panel/_group", out _group);
             transform.AddButton("Content/Panel/confirm", OnClick);
+            transform.AddButton("Content/Panel/close", Close);
         }
 
         protected override void OnPreOpen()

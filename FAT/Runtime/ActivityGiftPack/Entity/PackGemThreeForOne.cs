@@ -145,17 +145,23 @@ namespace FAT
             {
                 var reason = ReasonString.purchase;
                 var coinMan = Game.Manager.coinMan;
-                if (coinMan.UseCoin(cp.CoinType, cp.Price, reason))
+                if (coinMan.CanUseCoin(cp.CoinType, cp.Price))
                 {
-                    using var _ = PoolMappingAccess.Borrow<List<RewardCommitData>>(out var list);
-                    foreach (var r in cp.Reward)
+                    coinMan.UseCoin(cp.CoinType, cp.Price, reason)
+                    .OnSuccess(() =>
                     {
-                        var reward = r.ConvertToRewardConfig();
-                        list.Add(Game.Manager.rewardMan.BeginReward(reward.Id, reward.Count, reason));
-                    }
-                    OnPurchaseSuccess(list, whenSuccess, cp);
-                    // 货币购买需要自行记录购买次数
-                    ++BuyCount;
+                        using var _ = PoolMappingAccess.Borrow<List<RewardCommitData>>(out var list);
+                        foreach (var r in cp.Reward)
+                        {
+                            var reward = r.ConvertToRewardConfig();
+                            list.Add(Game.Manager.rewardMan.BeginReward(reward.Id, reward.Count, reason));
+                        }
+                        OnPurchaseSuccess(list, whenSuccess, cp);
+                        // 货币购买需要自行记录购买次数
+                        ++BuyCount;
+                    })
+                    .FromActivity(Lite)
+                    .Execute();
                 }
                 else
                 {

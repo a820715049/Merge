@@ -24,7 +24,7 @@ namespace fat.rawdata {
     static EventTypeReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChdyYXdkYXRhL0V2ZW50VHlwZS5wcm90bxIHcmF3ZGF0YSq0DgoJRXZlbnRU",
+            "ChdyYXdkYXRhL0V2ZW50VHlwZS5wcm90bxIHcmF3ZGF0YSrkDgoJRXZlbnRU",
             "eXBlEhQKEEV2ZW50VHlwZURlZmF1bHQQABITCg9FdmVudFR5cGVFbmVyZ3kQ",
             "ARIVChFFdmVudFR5cGVEYWlseVBvcBACEhQKEEV2ZW50VHlwZU5ld1VzZXIQ",
             "AxIXChNFdmVudFR5cGVPbmVQbHVzT25lEAQSGAoURXZlbnRUeXBlRW5kbGVz",
@@ -65,9 +65,10 @@ namespace fat.rawdata {
             "dFR5cGVDbGF3T3JkZXIQRBIVChFFdmVudFR5cGVNaW5lQ2FydBBFEhsKF0V2",
             "ZW50VHlwZUNhcnRPbmVQbHVzT25lEEYSHgoaRXZlbnRUeXBlTXVsdGlwbGll",
             "clJhbmtpbmcQRxIVChFFdmVudFR5cGVXaXNoVXBvbhBIEhkKFUV2ZW50VHlw",
-            "ZVRyYWluTWlzc2lvbhBJEhMKD0V2ZW50VHlwZVB1enpsZRBLQj1aLWdpdGxh",
-            "Yi5mdW5wbHVzLmlvL2ZhdC9jb25mL2dlbi9nb2xhbmcvcmF3ZGF0YaoCC2Zh",
-            "dC5yYXdkYXRhYgZwcm90bzM="));
+            "ZVRyYWluTWlzc2lvbhBJEhMKD0V2ZW50VHlwZVB1enpsZRBLEhUKEUV2ZW50",
+            "VHlwZUxhbmRtYXJrEEwSFwoTRXZlbnRUeXBlRnJvemVuSXRlbRBNQj1aLWdp",
+            "dGxhYi5mdW5wbHVzLmlvL2ZhdC9jb25mL2dlbi9nb2xhbmcvcmF3ZGF0YaoC",
+            "C2ZhdC5yYXdkYXRhYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::fat.rawdata.EventType), }, null, null));
@@ -374,6 +375,14 @@ namespace fat.rawdata {
     /// 拼图活动
     /// </summary>
     [pbr::OriginalName("EventTypePuzzle")] Puzzle = 75,
+    /// <summary>
+    /// 每日路径里程碑
+    /// </summary>
+    [pbr::OriginalName("EventTypeLandmark")] Landmark = 76,
+    /// <summary>
+    /// 冰冻棋子
+    /// </summary>
+    [pbr::OriginalName("EventTypeFrozenItem")] FrozenItem = 77,
   }
 
   #endregion

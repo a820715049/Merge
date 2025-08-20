@@ -42,10 +42,10 @@ public class UICommonScrollRect<_TData, _TContext> : FancyScrollRect<_TData, _TC
         Context.SelectedIndex = -1;
     }
 
-    public void ScrollTo(int index, float duration, Ease easing = Ease.InOutQuint, Alignment alignment = Alignment.Middle)
+    public void ScrollTo(int index, float duration, Ease easing = Ease.InOutQuint, Alignment alignment = Alignment.Middle, Action onComplete = null)
     {
         UpdateSelection(index);
-        base.ScrollTo(index, duration, easing, GetAlignment(alignment));
+        base.ScrollTo(index, duration, easing, GetAlignment(alignment), onComplete);
     }
 
     public void JumpTo(int index, Alignment alignment = Alignment.Middle)
@@ -65,7 +65,7 @@ public class UICommonScrollRect<_TData, _TContext> : FancyScrollRect<_TData, _TC
         }
     }
 
-    void UpdateSelection(int index)
+    protected void UpdateSelection(int index)
     {
         if (Context.SelectedIndex == index)
         {

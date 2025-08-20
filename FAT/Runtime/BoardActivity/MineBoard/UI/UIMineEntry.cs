@@ -15,9 +15,9 @@ namespace FAT
         private void Awake()
         {
             _root = transform.Find("Root").gameObject;
-            _num = transform.Find("Root/RedPoint/Num").GetComponent<TextMeshProUGUI>();
+            _num = transform.Find("Root/dotCount/Count").GetComponent<TextMeshProUGUI>();
             _cd = transform.Find("Root/cd").GetComponent<TextMeshProUGUI>();
-            _redPoint = transform.Find("Root/RedPoint").gameObject;
+            _redPoint = transform.Find("Root/dotCount").gameObject;
             _animator = transform.GetComponent<Animator>();
             transform.AddButton("Root/Bg", EntryClick);
         }
@@ -50,7 +50,7 @@ namespace FAT
                 return;
             }
             _root.SetActive(true);
-            _num.text = _activity.GetTokenNum().ToString();
+            _num.SetRedPoint(_activity.GetTokenNum());
             _redPoint.SetActive(_activity.GetTokenNum() > 0);
             UIUtility.CountDownFormat(_cd, _activity.Countdown);
         }
@@ -66,7 +66,7 @@ namespace FAT
             if (_activity == null) return;
             if (slice.FlyType != FlyType.MineToken) return;
             if (slice.CurIdx != 1) return;
-            _num.text = _activity.GetTokenNum().ToString();
+            _num.SetRedPoint(_activity.GetTokenNum());
             _redPoint.SetActive(_activity.GetTokenNum() > 0);
             _animator.SetTrigger("Punch");
         }

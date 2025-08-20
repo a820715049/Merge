@@ -82,17 +82,17 @@ namespace FAT
         }
 
         /// <param name="possibleOutputs">记录平级可选项</param> // 或许需求是指某一阶段的候选
-        public int CalcSpecialBox(List<int> possibleOutputs)
+        public (int itemId, bool fallback) CalcSpecialBox(List<int> possibleOutputs)
         {
             isSpecialBox = true;
             CommonProcess();
             if (possibleOutputs != null)
                 FillPossibleOutputs(possibleOutputs, true);
-            var itemId = ChooseResultForSpecialBox();
+            var (itemId, fallback) = ChooseResultForSpecialBox();
             var diff = Game.Manager.mergeItemDifficultyMan;
             DebugEx.FormatInfo("棋子难度 itemId {0}, difficulty {1}", itemId, diff.GetItemAvgDifficulty(itemId));
             ResetCache();
-            return itemId;
+            return (itemId, fallback);
         }
 
         public void CalcChoiceBox(List<int> container, int choiceCount)
@@ -157,7 +157,7 @@ namespace FAT
                 {
                     // 需求池不为空且最终棋子备选池不为空 允许产出
                     targetOrder = order;
-                    targetId = ChooseResultForSpecialBox();
+                    (targetId, _) = ChooseResultForSpecialBox();
                     ResetCache();
                     break;
                 }
@@ -529,13 +529,13 @@ namespace FAT
         }
 
         // 魔盒 / 提供一个结果
-        private int ChooseResultForSpecialBox()
+        private (int itemId, bool fallback) ChooseResultForSpecialBox()
         {
             var list = bestItemList;
             if (list.Count < 1)
             {
                 // 没有结果
-                return RandomPickFromOrigCandidate();
+                return (RandomPickFromOrigCandidate(), true);
             }
 
             // 根据分数线范围取一批最优项
@@ -552,7 +552,7 @@ namespace FAT
             }
             var rand = UnityEngine.Random.Range(0, valid_result_count);
             DebugEx.Info($"{logTag} roll {rand}/{valid_result_count} => {list[rand].itemId}");
-            return list[rand].itemId;
+            return (list[rand].itemId, false);
         }
 
         // 三选一盒子

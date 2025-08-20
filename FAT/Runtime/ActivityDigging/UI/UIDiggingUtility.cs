@@ -177,6 +177,9 @@ namespace FAT
             else if (state == ActivityDigging.DiggingCellState.GetRandom)
             {
                 yield return new WaitForSeconds(0.5f);
+                var completedCount = 0;
+                var totalRewards = rewards.Count;
+                
                 foreach (var item in rewards)
                 {
                     UIFlyUtility.FlyReward(item, t.position, () => 
@@ -185,9 +188,15 @@ namespace FAT
                         {
                             callback?.Invoke();
                         }
+                        
+                        // 当所有奖励都飞完后再清空列表
+                        completedCount++;
+                        if (completedCount >= totalRewards)
+                        {
+                            rewards.Clear();
+                        }
                     }, 142f);
                 }
-                rewards.Clear();
             }
             else if (state == ActivityDigging.DiggingCellState.Get || state == ActivityDigging.DiggingCellState.BombAndGet)
             {

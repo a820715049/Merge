@@ -53,7 +53,21 @@ namespace FAT
             return CalcSpecialBoxOutput(tracer, helper, minDffy, maxDffy, candidates);
         }
 
+        public (int itemId, bool fallback) CalcSpecialBoxOutputWithFallbackState(int minDffy, int maxDffy, List<int> candidates = null)
+        {
+            var tracer = Game.Manager.mainMergeMan.worldTracer;
+            var helper = Game.Manager.mainOrderMan.curOrderHelper;
+            return CalcSpecialBoxOutputWithFallbackState(tracer, helper, minDffy, maxDffy, candidates);
+        }
+
         private int CalcSpecialBoxOutput(MergeWorldTracer tracer, IOrderHelper helper, int minDffy, int maxDffy, List<int> candidates = null)
+        {
+            boxOutputResolver.BindEnv(tracer, helper, minDffy, maxDffy);
+            var (itemId, _) = boxOutputResolver.CalcSpecialBox(candidates);
+            return itemId;
+        }
+
+        private (int itemId, bool fallback) CalcSpecialBoxOutputWithFallbackState(MergeWorldTracer tracer, IOrderHelper helper, int minDffy, int maxDffy, List<int> candidates = null)
         {
             boxOutputResolver.BindEnv(tracer, helper, minDffy, maxDffy);
             return boxOutputResolver.CalcSpecialBox(candidates);

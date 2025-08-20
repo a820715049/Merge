@@ -16,9 +16,9 @@ namespace FAT
         public void Setup()
         {
             transform.Access("Root/BoardReward/Icon", out _rewardIcon);
-            transform.Access("Root/Point/Num", out _rewardCount);
+            transform.Access("Root/dotCount/Count", out _rewardCount);
             _animator = transform.GetComponent<Animator>();
-            _redPoint = transform.Find("Root/Point").gameObject;
+            _redPoint = transform.Find("Root/dotCount").gameObject;
             _root = transform.Find("Root").gameObject;
             transform.AddButton("Root/BoardReward", ClickReward);
         }
@@ -51,7 +51,7 @@ namespace FAT
             _rewardIcon.SetImage(obj.Icon);
             if (Game.Manager.mineBoardMan.World.rewardCount > 1)
             {
-                _rewardCount.text = Game.Manager.mineBoardMan.World.rewardCount.ToString();
+                _rewardCount.SetRedPoint(Game.Manager.mineBoardMan.World.rewardCount);
                 _redPoint.SetActive(true);
             }
             else

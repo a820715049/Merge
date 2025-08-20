@@ -21,8 +21,8 @@ namespace FAT {
             element = transform.GetComponent<LayoutElement>();
             var root = transform.Find("group");
             group = root.gameObject;
-            dot = root.Find("dot")?.gameObject;
-            text = root.FindEx<TextMeshProUGUI>("text");
+            dot = root.Find("dotCount")?.gameObject;
+            text = root.FindEx<TextMeshProUGUI>("dotCount/Count");
         }
         #endif
 
@@ -58,7 +58,7 @@ namespace FAT {
             focus = next;
             Visible(ready);
             if (!ready) return;
-            text.text = $"{count}";
+            text.SetRedPoint(count);
         }
 
         private void Visible(bool v_) {

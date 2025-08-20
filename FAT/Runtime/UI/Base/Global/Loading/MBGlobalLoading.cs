@@ -25,6 +25,8 @@ namespace FAT
         private Func<float> progressReporter;
         private float progressFrom;
         private float progressTo;
+        // 记录目标进度 用于避免进度倒退
+        private long targetProgress;
 
         private void Awake()
         {
@@ -35,7 +37,7 @@ namespace FAT
         {
             if (progressReporter != null)
             {
-                progressBar.SetProgress((long)((progressFrom + progressReporter?.Invoke() * (progressTo - progressFrom)) * progressMax));
+                RefreshProgress(progressFrom + progressReporter.Invoke() * (progressTo - progressFrom));
             }
         }
 
@@ -75,10 +77,21 @@ namespace FAT
             _RefreshFpid();
         }
 
+        private void RefreshProgress(float p)
+        {
+            var progress = (long)(p * progressMax);
+            if (progress > targetProgress)
+            {
+                targetProgress = progress;
+                progressBar.SetProgress(targetProgress);
+            }
+        }
+
         #region imp
 
         public void ShowDefault()
         {
+            targetProgress = 0;
             _RefreshFpid();
             loadingBg.Show = true;
             loadingImp.SetActive(true);
@@ -116,7 +129,7 @@ namespace FAT
         void IGameLoading.SetProgress(float p)
         {
             progressReporter = null;
-            progressBar.SetProgress((long)(p * progressMax));
+            RefreshProgress(p);
         }
 
         void IGameLoading.SetProgress(float from, float to, Func<float> reporter)

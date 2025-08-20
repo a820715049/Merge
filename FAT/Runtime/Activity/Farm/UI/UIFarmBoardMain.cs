@@ -291,7 +291,7 @@ namespace FAT
 
         private void AddButton()
         {
-            transform.AddButton($"{TopBgPath}/CloseBtn", Exit).WithClickScale().FixPivot();
+            transform.AddButton($"{TopBgPath}/CloseBtn", OnClickClose).WithClickScale().FixPivot();
             transform.AddButton($"{TopBgPath}/HelpBtn", OnClickHelp).WithClickScale().FixPivot();
             transform.AddButton($"{CompBoardPath}/Root/Pack/Icon", OnClickPack).WithClickScale().FixPivot();
         }
@@ -340,13 +340,18 @@ namespace FAT
             }
         }
 
-        public void Exit()
+        public void Exit(bool ignoreFrom = false)
         {
             _activity.VisualAnimalTip.res.ActiveR.Close();
             _activity.VisualTokenTip.res.ActiveR.Close();
-            ActivityTransit.Exit(_activity, ResConfig);
+            ActivityTransit.Exit(_activity, ResConfig, null, ignoreFrom); // 退出活动时默认返回主棋盘
         }
 
+        private void OnClickClose()
+        {
+           Exit();
+        }
+        
         public void OnClickHelp()
         {
             _activity.VisualHelp.res.ActiveR.Open(_activity);

@@ -215,7 +215,7 @@ namespace FAT
         {
             e_.dot.SetActive(GetKeyNum() > 0);
             e_.dotCount.gameObject.SetActive(GetKeyNum() > 0);
-            e_.dotCount.SetText(GetKeyNum().ToString());
+            e_.dotCount.SetRedPoint(GetKeyNum());
             return null;
         }
 
@@ -455,6 +455,7 @@ namespace FAT
                 obtainedItems = new List<DiggingItem>(),
                 explodedCells = new List<int>()
             };
+            var itemState = 0;
             rewards.Clear();
             var rewardMgr = Game.Manager.rewardMan;
             state = DiggingCellState.None;
@@ -485,9 +486,10 @@ namespace FAT
                 bool isBomb = diggingItem.item.BoomType > 0;
                 bool hasGotItem = false;
                 bool hasGotAll = false;
-
+                itemState = 2;
                 if (isBomb)
                 {
+                    itemState = 3;
                     result.bombItems.Add(diggingItem);  // 添加第一个炸弹
                     // 处理炸弹连锁反应
                     var (row, col) = GetBoardSize();
@@ -660,50 +662,59 @@ namespace FAT
             else
             {
                 state = DiggingCellState.Fail;
-                // 没挖到东西时，有概率获得随机奖励
-                var curLevel = GetCurrentLevel();
-                if (curLevel != null && curLevel.RandomRewardInfo.Count > 0)
+                itemState = 0;
+                // 没挖到东西时，有概率获得随机奖励（但炸弹炸开的空格子不触发随机奖励）
+                if (!isChainReaction)
                 {
-                    // 随机奖励概率 = 配置值/100
-                    var probability = curLevel.RandomRewardProbability / 100f;
-                    if (Random.value < probability)
+                    var curLevel = GetCurrentLevel();
+                    if (curLevel != null && curLevel.RandomRewardInfo.Count > 0)
                     {
-                        // 根据权重随机选择一个奖励
-                        var totalWeight = 0;
-                        using (ObjectPool<List<(int index, int weight)>>.GlobalPool.AllocStub(out var list))
+                        // 随机奖励概率 = 配置值/100
+                        var probability = curLevel.RandomRewardProbability / 100f;
+                        if (Random.value < probability)
                         {
-                            for (int i = 0; i < curLevel.RandomRewardInfo.Count; i++)
+                            itemState = 1;
+                            // 根据权重随机选择一个奖励
+                            var totalWeight = 0;
+                            using (ObjectPool<List<(int index, int weight)>>.GlobalPool.AllocStub(out var list))
                             {
-                                var rewardInfo = curLevel.RandomRewardInfo[i];
-                                var (id, count, weight) = rewardInfo.ConvertToInt3();
-                                totalWeight += weight;
-                                list.Add((i, weight));
-                            }
-                            
-                            var roll = Random.Range(1, totalWeight + 1);
-                            var weightSum = 0;
-                            int selectedIndex = 0;
-                            
-                            foreach (var item in list)
-                            {
-                                weightSum += item.weight;
-                                if (weightSum >= roll)
+                                for (int i = 0; i < curLevel.RandomRewardInfo.Count; i++)
                                 {
-                                    selectedIndex = item.index;
-                                    break;
+                                    var rewardInfo = curLevel.RandomRewardInfo[i];
+                                    var (id, count, weight) = rewardInfo.ConvertToInt3();
+                                    totalWeight += weight;
+                                    list.Add((i, weight));
                                 }
+                                
+                                var roll = Random.Range(1, totalWeight + 1);
+                                var weightSum = 0;
+                                int selectedIndex = 0;
+                                
+                                foreach (var item in list)
+                                {
+                                    weightSum += item.weight;
+                                    if (weightSum >= roll)
+                                    {
+                                        selectedIndex = item.index;
+                                        break;
+                                    }
+                                }
+                                
+                                var selectedRewardInfo = curLevel.RandomRewardInfo[selectedIndex];
+                                var rewardConfig = selectedRewardInfo.ConvertToRewardConfig();
+                                var r = rewardMgr.BeginReward(rewardConfig.Id, rewardConfig.Count, ReasonString.digging_random);
+                                rewards.Add(r);
+                                state = DiggingCellState.GetRandom;
+                                DataTracker.digging_random_reward.Track(this, GetCurrentLevel().ShowNum, diggingBoardId, rewardConfig.Id, rewardConfig.Count);
                             }
-                            
-                            var selectedRewardInfo = curLevel.RandomRewardInfo[selectedIndex];
-                            var rewardConfig = selectedRewardInfo.ConvertToRewardConfig();
-                            var r = rewardMgr.BeginReward(rewardConfig.Id, rewardConfig.Count, ReasonString.digging_random);
-                            rewards.Add(r);
-                            state = DiggingCellState.GetRandom;
-                            DataTracker.digging_random_reward.Track(this, GetCurrentLevel().ShowNum, diggingBoardId, rewardConfig.Id, rewardConfig.Count);
                         }
                     }
                 }
             }
+
+            var itemInfo = GetCellCoordString(cellIndex);
+
+            DataTracker.digging_token_use.Track(this, GetCurrentLevel().ShowNum, diggingBoardId, itemState, itemInfo);
             Game.Manager.archiveMan.SendImmediately(true);
             return true;
         }
@@ -1040,6 +1051,22 @@ namespace FAT
             }
 
             return 0;
+        }
+
+        /// <summary>
+        /// 将格子索引转换为x:y格式的坐标字符串
+        /// </summary>
+        /// <param name="cellIndex">格子索引</param>
+        /// <returns>格式为"x:y"的坐标字符串</returns>
+        private string GetCellCoordString(int cellIndex)
+        {
+            var (row, col) = GetBoardSize();
+            if (row <= 0 || col <= 0) return "";
+            
+            var x = cellIndex % col + 1;
+            var y = cellIndex / col + 1;
+            
+            return $"{x}:{y}";
         }
 
         #region 棋盘入口相关

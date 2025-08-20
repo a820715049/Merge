@@ -30,21 +30,19 @@ namespace FAT.Merge
         public override void OnSerialize(MergeItem itemData)
         {
             base.OnSerialize(itemData);
-            // itemData.ComActiveSource = new ComActiveSource
-            // {
-            //     ActivityId = activityId,
-            //     ActivityEnergy = activityEnergy
-            // };
+            itemData.ComActiveSource = new ComActiveSource
+            {
+                ItemCount = _itemCount
+            };
         }
 
         public override void OnDeserialize(MergeItem itemData)
         {
             base.OnDeserialize(itemData);
-            // if (itemData.ComActiveSource != null)
-            // {
-            //     activityId = itemData.ComActiveSource.ActivityId;
-            //     activityEnergy = itemData.ComActiveSource.ActivityEnergy;
-            // }
+            if (itemData.ComActiveSource != null)
+            {
+                _itemCount = itemData.ComActiveSource.ItemCount;
+            }
         }
 
         protected override void OnPostAttach()

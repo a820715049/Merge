@@ -59,6 +59,7 @@ namespace FAT
                 default:
                     break;
             }
+            RefreshCD();
         }
 
         protected override void OnPostOpen()

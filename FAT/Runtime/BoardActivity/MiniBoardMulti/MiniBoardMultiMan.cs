@@ -113,7 +113,7 @@ namespace FAT
         }
 
         //离开迷你棋盘
-        public void ExitMiniBoard(MiniBoardMultiActivity act)
+        public void ExitMiniBoard(MiniBoardMultiActivity act, bool ignoreFromMain = false)
         {
             if(act == null)
                 return;
@@ -122,8 +122,14 @@ namespace FAT
             //关闭迷你棋盘界面
             UIManager.Instance.CloseWindow(act.BoardResAlt.ActiveR);
             //返回来源处
-            if (_isEnterFromMain)
+            if (_isEnterFromMain || ignoreFromMain)
             {
+                if (!UIManager.Instance.IsOpen(UIConfig.UIMergeBoardMain))
+                {
+                    GameProcedure.SceneToMerge();
+                    return;
+                }
+                
                 MessageCenter.Get<MSG.GAME_MAIN_BOARD_STATE_CHANGE>().Dispatch(true);
             }
         }

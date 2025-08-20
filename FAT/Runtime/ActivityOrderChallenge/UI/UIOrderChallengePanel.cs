@@ -279,7 +279,7 @@ namespace FAT
             var min = totalSec / 60;
             var sec = totalSec % 60;
             _levelTime.SetTextFormat("{0:D2}:{1:D2}", min, sec);
-            if ((_activity.Countdown < 0 || totalSec <= 0) && !UIManager.Instance.IsBlocked) { Close(); }
+            if ((_activity.Countdown < 0) && !UIManager.Instance.IsBlocked) { Close(); }
         }
 
         private void ClickStand(int index, MBOrderChallengeStand stand)

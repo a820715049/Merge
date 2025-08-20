@@ -22,6 +22,7 @@ namespace FAT
         public static readonly ReasonString init = new("default");
         public static readonly ReasonString purchase = new(nameof(purchase));
         public static readonly ReasonString use_item = new(nameof(use_item));
+        public static readonly ReasonString missing_item = new(nameof(missing_item));
         public static readonly ReasonString merge_item = new(nameof(merge_item));
         public static readonly ReasonString trig_auto_source = new(nameof(trig_auto_source)); //trig棋子
         public static readonly ReasonString handbook = new(nameof(handbook));
@@ -93,6 +94,22 @@ namespace FAT
 
         #endregion
 
+        #region BP-通行证
+
+        public static readonly ReasonString bp_task = new(nameof(bp_task)); //bp任务奖励
+        public static readonly ReasonString bp_milestone = new(nameof(bp_milestone)); //bp手动领取里程碑免费奖励
+        public static readonly ReasonString bp_milestone_purchase = new(nameof(bp_milestone_purchase)); //bp手动领取里程碑付费奖励
+        public static readonly ReasonString bp_cycle_reward = new(nameof(bp_cycle_reward)); //bp循环奖励(付费)
+        public static readonly ReasonString bp_lastpurchase = new(nameof(bp_lastpurchase)); //bp结束补买奖励（花钱：包含里程碑+循环奖励）
+        public static readonly ReasonString bp_end = new(nameof(bp_end)); //bp结束自动领取免费奖励
+        public static readonly ReasonString bp_end_purchase = new(nameof(bp_end_purchase)); //bp结束自动领取付费奖励
+        #endregion
+
+        #region 沙堡里程碑
+        public static readonly ReasonString castle_convert = new(nameof(castle_convert));
+        public static readonly ReasonString castle_milestone = new(nameof(castle_milestone));
+        #endregion
+
         #region 挖沙
         public static readonly ReasonString digging_start = new(nameof(digging_start));// 挖沙活动参与时
         public static readonly ReasonString digging_end = new(nameof(digging_end));// 挖沙活动结束时
@@ -118,6 +135,10 @@ namespace FAT
         public static readonly ReasonString pachinko_use = new(nameof(pachinko_use));
 
 
+        #region 连续限时订单活动
+        public static readonly ReasonString order_streak = new(nameof(order_streak));
+        #endregion
+
         #endregion
 
         #region Bingo
@@ -127,8 +148,11 @@ namespace FAT
         #region OrderLike
         public static readonly ReasonString order_like = new(nameof(order_like));
         #endregion
-        #region  OrderRate
+        #region OrderRate
         public static readonly ReasonString order_rate = new(nameof(order_rate));
+        #endregion
+        #region ClawOrder
+        public static readonly ReasonString order_claw = new(nameof(order_claw));
         #endregion
 
         #region 钓鱼棋盘
@@ -159,6 +183,10 @@ namespace FAT
         public static readonly ReasonString fight_milestone = new(nameof(fight_milestone));
         #endregion
 
+        #region CDKey / 礼品码
+        public static readonly ReasonString gift_code = new(nameof(gift_code));
+        #endregion
+
         //legacy?
         public static readonly ReasonString unfrozen = new(nameof(unfrozen));
         public static readonly ReasonString SignIn = new(nameof(SignIn));
@@ -178,7 +206,19 @@ namespace FAT
         public static readonly ReasonString wish_order = new(nameof(wish_order));
         public static readonly ReasonString wish_start = new(nameof(wish_start));
         public static readonly ReasonString wish_bar_reward = new(nameof(wish_bar_reward));
+        #endregion
 
+        #region 跑马灯礼包
+        public static readonly ReasonString spin_pack = new(nameof(spin_pack));  //兑换商店兑换物品
+        #endregion
+
+        #region 社区计划
+        public static readonly ReasonString community_reward = new(nameof(community_reward));  //社群关注奖励
+        public static readonly ReasonString giftLink_reward = new(nameof(giftLink_reward));  //礼物链接奖励
+        #endregion
+
+        #region bingoTask
+        public static readonly ReasonString bingo_task_milestone = new(nameof(bingo_task_milestone));
         #endregion
     }
 }

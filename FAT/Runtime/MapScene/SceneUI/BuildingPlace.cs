@@ -30,7 +30,6 @@ namespace FAT {
             base.WillClose();
             Game.Manager.mapSceneMan.interact.ClearSelect(target);
             target.asset.Preview(false);
-            target.asset.PauseSpineAnim(false);
         }
 
         public override void RefreshView(IMapBuilding target_) {
@@ -41,7 +40,6 @@ namespace FAT {
             target = (MapBuildingForEvent)target_;
             target.asset.SetActive(true);
             target.asset.Preview(true);
-            target.asset.PauseSpineAnim(true);
             Game.Manager.audioMan.TriggerSound("DecoratePreview");
             title.text = I18N.Text(target.Name);
             var cost0 = target.cost;
@@ -53,7 +51,6 @@ namespace FAT {
             if (!TryPlace(target) || !TryConclude()) return;
             Game.Manager.audioMan.TriggerSound("DecoratePlaceClick");
             target.asset.Preview(false);
-            target.asset.PauseSpineAnim(false);
             confirm.State(false, "...");
         }
 

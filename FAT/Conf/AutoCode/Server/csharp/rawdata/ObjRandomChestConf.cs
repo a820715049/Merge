@@ -24,35 +24,35 @@ namespace fat.rawdata {
     static ObjRandomChestConfReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CiByYXdkYXRhL09ialJhbmRvbUNoZXN0Q29uZi5wcm90bxIHcmF3ZGF0YSLU",
+            "CiByYXdkYXRhL09ialJhbmRvbUNoZXN0Q29uZi5wcm90bxIHcmF3ZGF0YSLq",
             "AQoOT2JqUmFuZG9tQ2hlc3QSCgoCaWQYASABKAUSEwoLZml4ZWRSZXdhcmQY",
-            "BSADKAkSDAoEaW5mbxgDIAMoCRIUCgxpc0ZpeGVkRmlyc3QYBiABKAgSEQoJ",
-            "am9rZXJQcm9iGAcgASgFEhUKDWpva2VyUHJvYlNob3cYCCABKAUSEwoLam9r",
-            "ZXJSZXdhcmQYCSABKAUSFAoMcmFuZG9tUmV3YXJkGAIgAygFEhkKEXNwZWNp",
-            "YWxUaXBzUHJlZmFiGAwgASgJEg0KBXNwaW5lGAQgASgJIsIBChhPYmpSYW5k",
-            "b21DaGVzdE1hcEFCVmFsdWUSUwoRT2JqUmFuZG9tQ2hlc3RNYXAYASADKAsy",
-            "OC5yYXdkYXRhLk9ialJhbmRvbUNoZXN0TWFwQUJWYWx1ZS5PYmpSYW5kb21D",
-            "aGVzdE1hcEVudHJ5GlEKFk9ialJhbmRvbUNoZXN0TWFwRW50cnkSCwoDa2V5",
-            "GAEgASgFEiYKBXZhbHVlGAIgASgLMhcucmF3ZGF0YS5PYmpSYW5kb21DaGVz",
-            "dDoCOAEiqQQKEk9ialJhbmRvbUNoZXN0Q29uZhJNChFPYmpSYW5kb21DaGVz",
-            "dE1hcBgBIAMoCzIyLnJhd2RhdGEuT2JqUmFuZG9tQ2hlc3RDb25mLk9ialJh",
-            "bmRvbUNoZXN0TWFwRW50cnkSUQoTT2JqUmFuZG9tQ2hlc3RNYXBBQhgCIAMo",
-            "CzI0LnJhd2RhdGEuT2JqUmFuZG9tQ2hlc3RDb25mLk9ialJhbmRvbUNoZXN0",
-            "TWFwQUJFbnRyeRJbChhPYmpSYW5kb21DaGVzdE1hcEFCUGF0Y2gYAyADKAsy",
-            "OS5yYXdkYXRhLk9ialJhbmRvbUNoZXN0Q29uZi5PYmpSYW5kb21DaGVzdE1h",
-            "cEFCUGF0Y2hFbnRyeRpRChZPYmpSYW5kb21DaGVzdE1hcEVudHJ5EgsKA2tl",
-            "eRgBIAEoBRImCgV2YWx1ZRgCIAEoCzIXLnJhd2RhdGEuT2JqUmFuZG9tQ2hl",
-            "c3Q6AjgBGl0KGE9ialJhbmRvbUNoZXN0TWFwQUJFbnRyeRILCgNrZXkYASAB",
-            "KAkSMAoFdmFsdWUYAiABKAsyIS5yYXdkYXRhLk9ialJhbmRvbUNoZXN0TWFw",
-            "QUJWYWx1ZToCOAEaYgodT2JqUmFuZG9tQ2hlc3RNYXBBQlBhdGNoRW50cnkS",
-            "CwoDa2V5GAEgASgJEjAKBXZhbHVlGAIgASgLMiEucmF3ZGF0YS5PYmpSYW5k",
-            "b21DaGVzdE1hcEFCVmFsdWU6AjgBQj1aLWdpdGxhYi5mdW5wbHVzLmlvL2Zh",
-            "dC9jb25mL2dlbi9nb2xhbmcvcmF3ZGF0YaoCC2ZhdC5yYXdkYXRhYgZwcm90",
-            "bzM="));
+            "BSADKAkSDAoEaW5mbxgDIAMoCRIUCgxpc0ZpeGVkRmlyc3QYBiABKAgSFAoM",
+            "aXNTaG93UmVzdWx0GA0gASgIEhEKCWpva2VyUHJvYhgHIAEoBRIVCg1qb2tl",
+            "clByb2JTaG93GAggASgFEhMKC2pva2VyUmV3YXJkGAkgASgFEhQKDHJhbmRv",
+            "bVJld2FyZBgCIAMoBRIZChFzcGVjaWFsVGlwc1ByZWZhYhgMIAEoCRINCgVz",
+            "cGluZRgEIAEoCSLCAQoYT2JqUmFuZG9tQ2hlc3RNYXBBQlZhbHVlElMKEU9i",
+            "alJhbmRvbUNoZXN0TWFwGAEgAygLMjgucmF3ZGF0YS5PYmpSYW5kb21DaGVz",
+            "dE1hcEFCVmFsdWUuT2JqUmFuZG9tQ2hlc3RNYXBFbnRyeRpRChZPYmpSYW5k",
+            "b21DaGVzdE1hcEVudHJ5EgsKA2tleRgBIAEoBRImCgV2YWx1ZRgCIAEoCzIX",
+            "LnJhd2RhdGEuT2JqUmFuZG9tQ2hlc3Q6AjgBIqkEChJPYmpSYW5kb21DaGVz",
+            "dENvbmYSTQoRT2JqUmFuZG9tQ2hlc3RNYXAYASADKAsyMi5yYXdkYXRhLk9i",
+            "alJhbmRvbUNoZXN0Q29uZi5PYmpSYW5kb21DaGVzdE1hcEVudHJ5ElEKE09i",
+            "alJhbmRvbUNoZXN0TWFwQUIYAiADKAsyNC5yYXdkYXRhLk9ialJhbmRvbUNo",
+            "ZXN0Q29uZi5PYmpSYW5kb21DaGVzdE1hcEFCRW50cnkSWwoYT2JqUmFuZG9t",
+            "Q2hlc3RNYXBBQlBhdGNoGAMgAygLMjkucmF3ZGF0YS5PYmpSYW5kb21DaGVz",
+            "dENvbmYuT2JqUmFuZG9tQ2hlc3RNYXBBQlBhdGNoRW50cnkaUQoWT2JqUmFu",
+            "ZG9tQ2hlc3RNYXBFbnRyeRILCgNrZXkYASABKAUSJgoFdmFsdWUYAiABKAsy",
+            "Fy5yYXdkYXRhLk9ialJhbmRvbUNoZXN0OgI4ARpdChhPYmpSYW5kb21DaGVz",
+            "dE1hcEFCRW50cnkSCwoDa2V5GAEgASgJEjAKBXZhbHVlGAIgASgLMiEucmF3",
+            "ZGF0YS5PYmpSYW5kb21DaGVzdE1hcEFCVmFsdWU6AjgBGmIKHU9ialJhbmRv",
+            "bUNoZXN0TWFwQUJQYXRjaEVudHJ5EgsKA2tleRgBIAEoCRIwCgV2YWx1ZRgC",
+            "IAEoCzIhLnJhd2RhdGEuT2JqUmFuZG9tQ2hlc3RNYXBBQlZhbHVlOgI4AUI9",
+            "Wi1naXRsYWIuZnVucGx1cy5pby9mYXQvY29uZi9nZW4vZ29sYW5nL3Jhd2Rh",
+            "dGGqAgtmYXQucmF3ZGF0YWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.ObjRandomChest), global::fat.rawdata.ObjRandomChest.Parser, new[]{ "Id", "FixedReward", "Info", "IsFixedFirst", "JokerProb", "JokerProbShow", "JokerReward", "RandomReward", "SpecialTipsPrefab", "Spine" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.ObjRandomChest), global::fat.rawdata.ObjRandomChest.Parser, new[]{ "Id", "FixedReward", "Info", "IsFixedFirst", "IsShowResult", "JokerProb", "JokerProbShow", "JokerReward", "RandomReward", "SpecialTipsPrefab", "Spine" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.ObjRandomChestMapABValue), global::fat.rawdata.ObjRandomChestMapABValue.Parser, new[]{ "ObjRandomChestMap" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.ObjRandomChestConf), global::fat.rawdata.ObjRandomChestConf.Parser, new[]{ "ObjRandomChestMap", "ObjRandomChestMapAB", "ObjRandomChestMapABPatch" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, null, })
           }));
@@ -101,6 +101,7 @@ namespace fat.rawdata {
       fixedReward_ = other.fixedReward_.Clone();
       info_ = other.info_.Clone();
       isFixedFirst_ = other.isFixedFirst_;
+      isShowResult_ = other.isShowResult_;
       jokerProb_ = other.jokerProb_;
       jokerProbShow_ = other.jokerProbShow_;
       jokerReward_ = other.jokerReward_;
@@ -171,6 +172,20 @@ namespace fat.rawdata {
       get { return isFixedFirst_; }
       set {
         isFixedFirst_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "isShowResult" field.</summary>
+    public const int IsShowResultFieldNumber = 13;
+    private bool isShowResult_;
+    /// <summary>
+    /// 是否显示宝箱打开的结果
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool IsShowResult {
+      get { return isShowResult_; }
+      set {
+        isShowResult_ = value;
       }
     }
 
@@ -282,6 +297,7 @@ namespace fat.rawdata {
       if(!fixedReward_.Equals(other.fixedReward_)) return false;
       if(!info_.Equals(other.info_)) return false;
       if (IsFixedFirst != other.IsFixedFirst) return false;
+      if (IsShowResult != other.IsShowResult) return false;
       if (JokerProb != other.JokerProb) return false;
       if (JokerProbShow != other.JokerProbShow) return false;
       if (JokerReward != other.JokerReward) return false;
@@ -298,6 +314,7 @@ namespace fat.rawdata {
       hash ^= fixedReward_.GetHashCode();
       hash ^= info_.GetHashCode();
       if (IsFixedFirst != false) hash ^= IsFixedFirst.GetHashCode();
+      if (IsShowResult != false) hash ^= IsShowResult.GetHashCode();
       if (JokerProb != 0) hash ^= JokerProb.GetHashCode();
       if (JokerProbShow != 0) hash ^= JokerProbShow.GetHashCode();
       if (JokerReward != 0) hash ^= JokerReward.GetHashCode();
@@ -351,6 +368,10 @@ namespace fat.rawdata {
         output.WriteRawTag(98);
         output.WriteString(SpecialTipsPrefab);
       }
+      if (IsShowResult != false) {
+        output.WriteRawTag(104);
+        output.WriteBool(IsShowResult);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -391,6 +412,10 @@ namespace fat.rawdata {
         output.WriteRawTag(98);
         output.WriteString(SpecialTipsPrefab);
       }
+      if (IsShowResult != false) {
+        output.WriteRawTag(104);
+        output.WriteBool(IsShowResult);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -406,6 +431,9 @@ namespace fat.rawdata {
       size += fixedReward_.CalculateSize(_repeated_fixedReward_codec);
       size += info_.CalculateSize(_repeated_info_codec);
       if (IsFixedFirst != false) {
+        size += 1 + 1;
+      }
+      if (IsShowResult != false) {
         size += 1 + 1;
       }
       if (JokerProb != 0) {
@@ -442,6 +470,9 @@ namespace fat.rawdata {
       info_.Add(other.info_);
       if (other.IsFixedFirst != false) {
         IsFixedFirst = other.IsFixedFirst;
+      }
+      if (other.IsShowResult != false) {
+        IsShowResult = other.IsShowResult;
       }
       if (other.JokerProb != 0) {
         JokerProb = other.JokerProb;
@@ -514,6 +545,10 @@ namespace fat.rawdata {
             SpecialTipsPrefab = input.ReadString();
             break;
           }
+          case 104: {
+            IsShowResult = input.ReadBool();
+            break;
+          }
         }
       }
     #endif
@@ -567,6 +602,10 @@ namespace fat.rawdata {
           }
           case 98: {
             SpecialTipsPrefab = input.ReadString();
+            break;
+          }
+          case 104: {
+            IsShowResult = input.ReadBool();
             break;
           }
         }

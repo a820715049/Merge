@@ -108,6 +108,7 @@ namespace FAT
             var isShowBtn = Game.Manager.mapSceneMan.scene.Active;
             playBtn.gameObject.SetActive(isShowBtn);
             hint.gameObject.SetActive(!isShowBtn);
+            RefreshCD();
         }
 
         private IEnumerator CoDelayHideHelp()

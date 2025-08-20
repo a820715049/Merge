@@ -6,6 +6,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using fat.rawdata;
+using System;
 
 namespace FAT.Merge
 {
@@ -53,11 +54,11 @@ namespace FAT.Merge
         #endregion
         #region diamond
         bool CanUseGem(int cost);
-        bool UseGem(int gem, ReasonString reason);
+        void UseGem(int gem, ReasonString reason, Action whenSuccess, bool dynamicPrice = false);
         #endregion
         #region coin
         bool CanUseCoin(int cost);
-        bool UseCoin(int coin, ReasonString reason);
+        void UseCoin(int coin, ReasonString reason);
         #endregion
         #region misc
         int GetBoardLevel();    // 主棋盘: 合成等级 / 活动棋盘: 活动进度等

@@ -49,6 +49,7 @@ namespace FAT
             InitReward();
             wishBoardActivity.Visual.Refresh(title, "mainTitle");
             wishBoardActivity.Visual.Refresh(desc, "desc1");
+            RefreshCD();
         }
         protected override void OnAddListener()
         {

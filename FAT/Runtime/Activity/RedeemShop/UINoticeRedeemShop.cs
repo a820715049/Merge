@@ -46,6 +46,7 @@ namespace FAT
             _activityRedeemShopLike.VisualUINoticeRedeemShop.visual.Refresh(_desc, "desc1");
             _activityRedeemShopLike.VisualUINoticeRedeemShop.visual.Refresh(_subTitle, "subTitle");
             _activityRedeemShopLike.Visual.Refresh(_title, "mainTitle");
+            RefreshCD();
         }
 
         protected override void OnAddListener()

@@ -145,7 +145,7 @@ namespace FAT
             goBlock.SetActive(false);
         }
 
-        private async UniTask PlayResult(BingoState state, BingoItem item, CancellationToken token)
+        private async UniTask PlayResult(ItemBingoState state, BingoItem item, CancellationToken token)
         {
             Effect_Congrat(state, item, token).Forget();
 
@@ -157,7 +157,7 @@ namespace FAT
             // 播放扩散效果
             await UniTask.WaitForSeconds(time_wait_item);
 
-            if (state.HasFlag(BingoState.FullHouse))
+            if (state.HasFlag(ItemBingoState.FullHouse))
             {
                 Game.Manager.audioMan.TriggerSound("BingoLevelComplete");
                 Effect_FullHouse(state, item, token).Forget();
@@ -197,7 +197,7 @@ namespace FAT
             }
         }
 
-        private async UniTask Effect_Congrat(BingoState state, BingoItem item, CancellationToken token)
+        private async UniTask Effect_Congrat(ItemBingoState state, BingoItem item, CancellationToken token)
         {
             // 如果有bingo 则播放庆祝效果
             if (item.HasBingo)
@@ -209,7 +209,7 @@ namespace FAT
             }
         }
 
-        private async UniTask Effect_FullHouse(BingoState state, BingoItem itemData, CancellationToken token)
+        private async UniTask Effect_FullHouse(ItemBingoState state, BingoItem itemData, CancellationToken token)
         {
             var orig_x = itemData.CoordX;
             var orig_y = itemData.CoordY;
@@ -224,7 +224,7 @@ namespace FAT
             }
         }
 
-        private async UniTask Effect_Spread(BingoState state, BingoItem itemData, CancellationToken token)
+        private async UniTask Effect_Spread(ItemBingoState state, BingoItem itemData, CancellationToken token)
         {
             var maxOffset = Mathf.Max(width, height);
             for (var offset = 1; offset <= maxOffset; offset++)
@@ -247,18 +247,18 @@ namespace FAT
                             item.PlayConvert(itemData);
                         if (dir.Item2 == 0) // 横
                         {
-                            if (state.HasFlag(BingoState.RowCompleted))
+                            if (state.HasFlag(ItemBingoState.RowCompleted))
                                 Effect_Star(pos);
                         }
                         else if (dir.Item1 == 0) // 纵
                         {
-                            if (state.HasFlag(BingoState.ColumnCompleted))
+                            if (state.HasFlag(ItemBingoState.ColumnCompleted))
                                 Effect_Star(pos);
                         }
                         else
                         {
-                            if ((state.HasFlag(BingoState.Diagonal1Completed) && x == y) ||
-                                (state.HasFlag(BingoState.Diagonal2Completed) && x + y == width + 1)) // 斜
+                            if ((state.HasFlag(ItemBingoState.MainDiagonalCompleted) && x == y) ||
+                                (state.HasFlag(ItemBingoState.AntiDiagonalCompleted) && x + y == width + 1)) // 斜
                                 Effect_Star(pos);
                         }
                     }

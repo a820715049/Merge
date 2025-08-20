@@ -6,30 +6,37 @@ using static fat.conf.Data;
 using EL;
 using Config;
 
-namespace FAT {
-    public class GroupExchange : ActivityGroup {
+namespace FAT
+{
+    public class GroupExchange : ActivityGroup
+    {
         private ToolExchange template;
         private (int id, int c, int m) coinConf;
 
-        public GroupExchange() {
+        public GroupExchange()
+        {
             SetupListener();
         }
 
-        public void SetupListener() {
+        public void SetupListener()
+        {
             MessageCenter.Get<MSG.GAME_COIN_ADD>().AddListenerUnique(CheckRefresh);
         }
 
-        public (bool, string) CheckTemplate((int id, int) id_) {
+        public (bool, string) CheckTemplate((int id, int) id_)
+        {
             if (template != null) return (true, null);
             template = GetToolExchange(id_.id);
-            if (template == null) {
+            if (template == null)
+            {
                 return Activity.Invalid(id_, $"no config for {nameof(ToolExchange)} {id_}");
             }
             coinConf = template.ActiveCoin.ConvertToInt3();
             return (true, null);
         }
 
-        public void CheckRefresh(CoinChange _) {
+        public void CheckRefresh(CoinChange _)
+        {
             var activity = Game.Manager.activity;
             var idP = 1;
             var id = (idP, 0);
@@ -49,7 +56,8 @@ namespace FAT {
             TryAdd(activity, id, EventType.ToolExchange);
         }
 
-        public override (bool, string) TryAdd(Activity activity_, (int, int) id_, EventType type_, ActivityInstance data_ = null, in Option option_ = default) {
+        public override (bool, string) TryAdd(Activity activity_, (int, int) id_, EventType type_, ActivityInstance data_ = null, in Option option_ = default)
+        {
             if (activity_.IsInvalid(id_, out var rsi)) return (false, rsi);
             var (r, rs) = CheckTemplate(id_);
             if (!r) return (r, rs);
@@ -61,19 +69,28 @@ namespace FAT {
             return (true, null);
         }
 
-        public void Purchase(ExchangeTool pack_, Action<IList<RewardCommitData>> WhenComplete_ = null) {
+        public void Purchase(ExchangeTool pack_, Action<IList<RewardCommitData>> WhenComplete_ = null)
+        {
             var coinMan = Game.Manager.coinMan;
-            var reason = ReasonString.tool_exchange;
-            if (!coinMan.UseCoin(CoinType.MergeCoin, pack_.price, reason)) return;
-            var rewardMan = Game.Manager.rewardMan;
-            using var _ = ObjectPool<List<RewardCommitData>>.GlobalPool.AllocStub(out var list);
-            foreach (var r in pack_.goods) {
-                var data = rewardMan.BeginReward(r.Id, r.Count, reason);
-                list.Add(data);
+            if (coinMan.CanUseCoin(CoinType.MergeCoin, pack_.price))
+            {
+                var reason = ReasonString.tool_exchange;
+                coinMan.UseCoin(CoinType.MergeCoin, pack_.price, reason)
+                .OnSuccess(() =>
+                {
+                    var rewardMan = Game.Manager.rewardMan;
+                    using var _ = ObjectPool<List<RewardCommitData>>.GlobalPool.AllocStub(out var list);
+                    foreach (var r in pack_.goods)
+                    {
+                        var data = rewardMan.BeginReward(r.Id, r.Count, reason);
+                        list.Add(data);
+                    }
+                    ++pack_.buyCount;
+                    if (pack_.WillEnd) Activity.EndImmediate(pack_, expire_: false);
+                    WhenComplete_?.Invoke(list);
+                })
+                .Execute();
             }
-            ++pack_.buyCount;
-            if (pack_.WillEnd) Activity.EndImmediate(pack_, expire_:false);
-            WhenComplete_?.Invoke(list);
         }
     }
 }

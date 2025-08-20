@@ -212,6 +212,7 @@ namespace FAT {
             var items = task.conf.RequireItemId;
             var difficulty = OrderUtility.CalcRealDifficultyForRequires(items);
             order = OrderUtility.MakeOrderByConfig(helper, OrderProviderType.Random, cfg.Id, task.conf.RoleId, 0, difficulty, items, task.conf.Reward);
+            order.ConfRandomer = cfg;
 
             order.OrderType = (int)OrderType.Step;
             order.Record.OrderType = order.OrderType;

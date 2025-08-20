@@ -377,13 +377,13 @@ namespace FAT
 
         private void AddButton()
         {
-            transform.AddButton($"{TopBgPath}/CloseBtn", Exit).WithClickScale().FixPivot();
+            transform.AddButton($"{TopBgPath}/CloseBtn", OnClickClose).WithClickScale().FixPivot();
             transform.AddButton($"{TopBgPath}/HelpBtn", OnClickHelp).WithClickScale().FixPivot();
             transform.AddButton($"{CompBoardPath}/Root/Pack/Icon", OnClickPack).WithClickScale().FixPivot();
             talkBtn.onClick.AddListener(OnClickTalk);
             milestoneBtn.onClick.AddListener(OnClickMilestone);
             rewardBtn.onClick.AddListener(OnClickReward);
-            goBtn.onClick.AddListener(Exit);
+            goBtn.onClick.AddListener(OnClickGo);
             tipBtn.onClick.AddListener(OnClickTip);
         }
 
@@ -516,9 +516,19 @@ namespace FAT
             }
         }
 
-        public void Exit()
+        public void Exit(bool ignoreFrom = false)
         {
-            ActivityTransit.Exit(_activity, ResConfig);
+            ActivityTransit.Exit(_activity, ResConfig, null, ignoreFrom);
+        }
+        
+        private void OnClickGo()
+        {
+            Exit(true);
+        }
+        
+        private void OnClickClose()
+        {
+            Exit();
         }
 
         public void OnClickHelp()

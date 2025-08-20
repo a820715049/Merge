@@ -44,7 +44,7 @@ namespace FAT.Merge
             if (UIUtility.ShowMoneyNotEnoughTip(CoinType.Gem, mCost))
                 return;
             var _item = mItem;
-            if (ItemUtility.SpeedUpEmptyItem(mItem))
+            ItemUtility.TrySpeedUpEmptyItem(mItem, () =>
             {
                 // 气泡加速后可能产生积分
                 if (_item.HasComponent(ItemComponentType.Bubble))
@@ -59,7 +59,7 @@ namespace FAT.Merge
                 // // 加速表现效果
                 // if (_item != null)
                 //     BoardViewManager.Instance.ShowSpeedUpTip(_item.coord);
-            }
+            });
         }
 
         private void _RefreshText()

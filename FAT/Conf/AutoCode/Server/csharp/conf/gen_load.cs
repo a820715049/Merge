@@ -248,6 +248,8 @@ using rawEventItemBingoDetail = fat.rawdata.EventItemBingoDetail;
 using EventItemBingoDetailVisitor = fat.conf.EventItemBingoDetailVisitor;
 using rawEventItemBingoRound = fat.rawdata.EventItemBingoRound;
 using EventItemBingoRoundVisitor = fat.conf.EventItemBingoRoundVisitor;
+using rawEventLandmark = fat.rawdata.EventLandmark;
+using EventLandmarkVisitor = fat.conf.EventLandmarkVisitor;
 using rawEventLoginGift = fat.rawdata.EventLoginGift;
 using EventLoginGiftVisitor = fat.conf.EventLoginGiftVisitor;
 using rawEventMarketIAPGift = fat.rawdata.EventMarketIAPGift;
@@ -332,6 +334,8 @@ using rawEventPuzzle = fat.rawdata.EventPuzzle;
 using EventPuzzleVisitor = fat.conf.EventPuzzleVisitor;
 using rawEventPuzzleDetaile = fat.rawdata.EventPuzzleDetaile;
 using EventPuzzleDetaileVisitor = fat.conf.EventPuzzleDetaileVisitor;
+using rawEventPuzzleRewards = fat.rawdata.EventPuzzleRewards;
+using EventPuzzleRewardsVisitor = fat.conf.EventPuzzleRewardsVisitor;
 using rawEventPuzzleRound = fat.rawdata.EventPuzzleRound;
 using EventPuzzleRoundVisitor = fat.conf.EventPuzzleRoundVisitor;
 using rawEventRace = fat.rawdata.EventRace;
@@ -472,6 +476,10 @@ using rawFishInfo = fat.rawdata.FishInfo;
 using FishInfoVisitor = fat.conf.FishInfoVisitor;
 using rawFishRarity = fat.rawdata.FishRarity;
 using FishRarityVisitor = fat.conf.FishRarityVisitor;
+using rawFrozenItem = fat.rawdata.FrozenItem;
+using FrozenItemVisitor = fat.conf.FrozenItemVisitor;
+using rawFrozenItemDetail = fat.rawdata.FrozenItemDetail;
+using FrozenItemDetailVisitor = fat.conf.FrozenItemDetailVisitor;
 using rawGalleryCategory = fat.rawdata.GalleryCategory;
 using GalleryCategoryVisitor = fat.conf.GalleryCategoryVisitor;
 using rawGallerySpecial = fat.rawdata.GallerySpecial;
@@ -514,46 +522,28 @@ using rawItemReplace = fat.rawdata.ItemReplace;
 using ItemReplaceVisitor = fat.conf.ItemReplaceVisitor;
 using rawLabel = fat.rawdata.Label;
 using LabelVisitor = fat.conf.LabelVisitor;
+using rawLandmarkDetail = fat.rawdata.LandmarkDetail;
+using LandmarkDetailVisitor = fat.conf.LandmarkDetailVisitor;
 using rawLangDe = fat.rawdata.LangDe;
 using LangDeVisitor = fat.conf.LangDeVisitor;
-using rawLangDeHotfix = fat.rawdata.LangDeHotfix;
-using LangDeHotfixVisitor = fat.conf.LangDeHotfixVisitor;
 using rawLangEn = fat.rawdata.LangEn;
 using LangEnVisitor = fat.conf.LangEnVisitor;
-using rawLangEnHotfix = fat.rawdata.LangEnHotfix;
-using LangEnHotfixVisitor = fat.conf.LangEnHotfixVisitor;
 using rawLangEs = fat.rawdata.LangEs;
 using LangEsVisitor = fat.conf.LangEsVisitor;
-using rawLangEsHotfix = fat.rawdata.LangEsHotfix;
-using LangEsHotfixVisitor = fat.conf.LangEsHotfixVisitor;
 using rawLangFr = fat.rawdata.LangFr;
 using LangFrVisitor = fat.conf.LangFrVisitor;
-using rawLangFrHotfix = fat.rawdata.LangFrHotfix;
-using LangFrHotfixVisitor = fat.conf.LangFrHotfixVisitor;
 using rawLangJa = fat.rawdata.LangJa;
 using LangJaVisitor = fat.conf.LangJaVisitor;
-using rawLangJaHotfix = fat.rawdata.LangJaHotfix;
-using LangJaHotfixVisitor = fat.conf.LangJaHotfixVisitor;
 using rawLangKo = fat.rawdata.LangKo;
 using LangKoVisitor = fat.conf.LangKoVisitor;
-using rawLangKoHotfix = fat.rawdata.LangKoHotfix;
-using LangKoHotfixVisitor = fat.conf.LangKoHotfixVisitor;
 using rawLangPt = fat.rawdata.LangPt;
 using LangPtVisitor = fat.conf.LangPtVisitor;
-using rawLangPtHotfix = fat.rawdata.LangPtHotfix;
-using LangPtHotfixVisitor = fat.conf.LangPtHotfixVisitor;
 using rawLangTr = fat.rawdata.LangTr;
 using LangTrVisitor = fat.conf.LangTrVisitor;
-using rawLangTrHotfix = fat.rawdata.LangTrHotfix;
-using LangTrHotfixVisitor = fat.conf.LangTrHotfixVisitor;
 using rawLangZhHansCn = fat.rawdata.LangZhHansCn;
 using LangZhHansCnVisitor = fat.conf.LangZhHansCnVisitor;
-using rawLangZhHansCnHotfix = fat.rawdata.LangZhHansCnHotfix;
-using LangZhHansCnHotfixVisitor = fat.conf.LangZhHansCnHotfixVisitor;
 using rawLangZhHantTw = fat.rawdata.LangZhHantTw;
 using LangZhHantTwVisitor = fat.conf.LangZhHantTwVisitor;
-using rawLangZhHantTwHotfix = fat.rawdata.LangZhHantTwHotfix;
-using LangZhHantTwHotfixVisitor = fat.conf.LangZhHantTwHotfixVisitor;
 using rawLanguage = fat.rawdata.Language;
 using LanguageVisitor = fat.conf.LanguageVisitor;
 using rawLevelGroups = fat.rawdata.LevelGroups;
@@ -742,6 +732,8 @@ using rawRoundTool = fat.rawdata.RoundTool;
 using RoundToolVisitor = fat.conf.RoundToolVisitor;
 using rawSettingsCommunity = fat.rawdata.SettingsCommunity;
 using SettingsCommunityVisitor = fat.conf.SettingsCommunityVisitor;
+using rawShake = fat.rawdata.Shake;
+using ShakeVisitor = fat.conf.ShakeVisitor;
 using rawShinnyGuarPack = fat.rawdata.ShinnyGuarPack;
 using ShinnyGuarPackVisitor = fat.conf.ShinnyGuarPackVisitor;
 using rawShopCommunity = fat.rawdata.ShopCommunity;
@@ -923,6 +915,7 @@ public static partial class Data {
 		    cur.EventItemBingoMap = new fat.rawdata.EventItemBingoConf();
 		    cur.EventItemBingoDetailMap = new fat.rawdata.EventItemBingoDetailConf();
 		    cur.EventItemBingoRoundMap = new fat.rawdata.EventItemBingoRoundConf();
+		    cur.EventLandmarkMap = new fat.rawdata.EventLandmarkConf();
 		    cur.EventLoginGiftMap = new fat.rawdata.EventLoginGiftConf();
 		    cur.EventMarketIAPGiftMap = new fat.rawdata.EventMarketIAPGiftConf();
 		    cur.EventMineMap = new fat.rawdata.EventMineConf();
@@ -965,6 +958,7 @@ public static partial class Data {
 		    cur.EventPachinkoRoundMap = new fat.rawdata.EventPachinkoRoundConf();
 		    cur.EventPuzzleMap = new fat.rawdata.EventPuzzleConf();
 		    cur.EventPuzzleDetaileMap = new fat.rawdata.EventPuzzleDetaileConf();
+		    cur.EventPuzzleRewardsMap = new fat.rawdata.EventPuzzleRewardsConf();
 		    cur.EventPuzzleRoundMap = new fat.rawdata.EventPuzzleRoundConf();
 		    cur.EventRaceMap = new fat.rawdata.EventRaceConf();
 		    cur.EventRaceGroupMap = new fat.rawdata.EventRaceGroupConf();
@@ -1035,6 +1029,8 @@ public static partial class Data {
 		    cur.FeatureUnlockSlice = new fat.rawdata.FeatureUnlockConf();
 		    cur.FishInfoMap = new fat.rawdata.FishInfoConf();
 		    cur.FishRarityMap = new fat.rawdata.FishRarityConf();
+		    cur.FrozenItemMap = new fat.rawdata.FrozenItemConf();
+		    cur.FrozenItemDetailMap = new fat.rawdata.FrozenItemDetailConf();
 		    cur.GalleryCategoryMap = new fat.rawdata.GalleryCategoryConf();
 		    cur.GallerySpecialMap = new fat.rawdata.GallerySpecialConf();
 		    cur.GameDiffSlice = new fat.rawdata.GameDiffConf();
@@ -1056,26 +1052,17 @@ public static partial class Data {
 		    cur.ItemBingoBoardMap = new fat.rawdata.ItemBingoBoardConf();
 		    cur.ItemReplaceMap = new fat.rawdata.ItemReplaceConf();
 		    cur.LabelMap = new fat.rawdata.LabelConf();
+		    cur.LandmarkDetailMap = new fat.rawdata.LandmarkDetailConf();
 		    cur.LangDeSlice = new fat.rawdata.LangDeConf();
-		    cur.LangDeHotfixSlice = new fat.rawdata.LangDeHotfixConf();
 		    cur.LangEnSlice = new fat.rawdata.LangEnConf();
-		    cur.LangEnHotfixSlice = new fat.rawdata.LangEnHotfixConf();
 		    cur.LangEsSlice = new fat.rawdata.LangEsConf();
-		    cur.LangEsHotfixSlice = new fat.rawdata.LangEsHotfixConf();
 		    cur.LangFrSlice = new fat.rawdata.LangFrConf();
-		    cur.LangFrHotfixSlice = new fat.rawdata.LangFrHotfixConf();
 		    cur.LangJaSlice = new fat.rawdata.LangJaConf();
-		    cur.LangJaHotfixSlice = new fat.rawdata.LangJaHotfixConf();
 		    cur.LangKoSlice = new fat.rawdata.LangKoConf();
-		    cur.LangKoHotfixSlice = new fat.rawdata.LangKoHotfixConf();
 		    cur.LangPtSlice = new fat.rawdata.LangPtConf();
-		    cur.LangPtHotfixSlice = new fat.rawdata.LangPtHotfixConf();
 		    cur.LangTrSlice = new fat.rawdata.LangTrConf();
-		    cur.LangTrHotfixSlice = new fat.rawdata.LangTrHotfixConf();
 		    cur.LangZhHansCnSlice = new fat.rawdata.LangZhHansCnConf();
-		    cur.LangZhHansCnHotfixSlice = new fat.rawdata.LangZhHansCnHotfixConf();
 		    cur.LangZhHantTwSlice = new fat.rawdata.LangZhHantTwConf();
-		    cur.LangZhHantTwHotfixSlice = new fat.rawdata.LangZhHantTwHotfixConf();
 		    cur.LanguageSlice = new fat.rawdata.LanguageConf();
 		    cur.LevelGroupsMap = new fat.rawdata.LevelGroupsConf();
 		    cur.LoginSignSlice = new fat.rawdata.LoginSignConf();
@@ -1170,6 +1157,7 @@ public static partial class Data {
 		    cur.RoundScoreSlice = new fat.rawdata.RoundScoreConf();
 		    cur.RoundToolSlice = new fat.rawdata.RoundToolConf();
 		    cur.SettingsCommunityMap = new fat.rawdata.SettingsCommunityConf();
+		    cur.ShakeMap = new fat.rawdata.ShakeConf();
 		    cur.ShinnyGuarPackMap = new fat.rawdata.ShinnyGuarPackConf();
 		    cur.ShopCommunityMap = new fat.rawdata.ShopCommunityConf();
 		    cur.SoundMap = new fat.rawdata.SoundConf();
@@ -2512,6 +2500,17 @@ public static partial class Data {
 		public static List<rawEventItemBingoRound> GetEventItemBingoRoundByFilter(Func<rawEventItemBingoRound, bool> filterFunc,string tag="") => EventItemBingoRoundVisitor.GetByFilter(filterFunc,tag);
 		public static rawEventItemBingoRound? GetOneEventItemBingoRoundByFilter(Func<rawEventItemBingoRound, bool> filterFunc,string tag="") => EventItemBingoRoundVisitor.GetOneByFilter(filterFunc,tag);
 	#endregion EventItemBingoRound
+	#region EventLandmark
+		public static int GetCountEventLandmarkMap(string tag="") => EventLandmarkVisitor.GetCount(tag);
+		public static string GetFileNameEventLandmarkMap() => EventLandmarkVisitor.GetFileName();
+		public static List<int> SortedKeysEventLandmarkMap(string tag="") => EventLandmarkVisitor.SortedKeys(tag);
+		public static PBC::MapField<int, rawEventLandmark> GetEventLandmarkMap(string tag="") => EventLandmarkVisitor.All(tag);
+		public static void RangeEventLandmarkMap(Action<int, rawEventLandmark> filter,string tag="") => EventLandmarkVisitor.Range(filter,tag);
+		public static List<int> KeysEventLandmarkMap(string tag="") => EventLandmarkVisitor.Keys(tag);
+		public static rawEventLandmark? GetEventLandmark(int key,string tag="") => EventLandmarkVisitor.Get(key,tag);
+		public static List<rawEventLandmark> GetEventLandmarkByFilter(Func<rawEventLandmark, bool> filterFunc,string tag="") => EventLandmarkVisitor.GetByFilter(filterFunc,tag);
+		public static rawEventLandmark? GetOneEventLandmarkByFilter(Func<rawEventLandmark, bool> filterFunc,string tag="") => EventLandmarkVisitor.GetOneByFilter(filterFunc,tag);
+	#endregion EventLandmark
 	#region EventLoginGift
 		public static int GetCountEventLoginGiftMap(string tag="") => EventLoginGiftVisitor.GetCount(tag);
 		public static string GetFileNameEventLoginGiftMap() => EventLoginGiftVisitor.GetFileName();
@@ -2974,6 +2973,17 @@ public static partial class Data {
 		public static List<rawEventPuzzleDetaile> GetEventPuzzleDetaileByFilter(Func<rawEventPuzzleDetaile, bool> filterFunc,string tag="") => EventPuzzleDetaileVisitor.GetByFilter(filterFunc,tag);
 		public static rawEventPuzzleDetaile? GetOneEventPuzzleDetaileByFilter(Func<rawEventPuzzleDetaile, bool> filterFunc,string tag="") => EventPuzzleDetaileVisitor.GetOneByFilter(filterFunc,tag);
 	#endregion EventPuzzleDetaile
+	#region EventPuzzleRewards
+		public static int GetCountEventPuzzleRewardsMap(string tag="") => EventPuzzleRewardsVisitor.GetCount(tag);
+		public static string GetFileNameEventPuzzleRewardsMap() => EventPuzzleRewardsVisitor.GetFileName();
+		public static List<int> SortedKeysEventPuzzleRewardsMap(string tag="") => EventPuzzleRewardsVisitor.SortedKeys(tag);
+		public static PBC::MapField<int, rawEventPuzzleRewards> GetEventPuzzleRewardsMap(string tag="") => EventPuzzleRewardsVisitor.All(tag);
+		public static void RangeEventPuzzleRewardsMap(Action<int, rawEventPuzzleRewards> filter,string tag="") => EventPuzzleRewardsVisitor.Range(filter,tag);
+		public static List<int> KeysEventPuzzleRewardsMap(string tag="") => EventPuzzleRewardsVisitor.Keys(tag);
+		public static rawEventPuzzleRewards? GetEventPuzzleRewards(int key,string tag="") => EventPuzzleRewardsVisitor.Get(key,tag);
+		public static List<rawEventPuzzleRewards> GetEventPuzzleRewardsByFilter(Func<rawEventPuzzleRewards, bool> filterFunc,string tag="") => EventPuzzleRewardsVisitor.GetByFilter(filterFunc,tag);
+		public static rawEventPuzzleRewards? GetOneEventPuzzleRewardsByFilter(Func<rawEventPuzzleRewards, bool> filterFunc,string tag="") => EventPuzzleRewardsVisitor.GetOneByFilter(filterFunc,tag);
+	#endregion EventPuzzleRewards
 	#region EventPuzzleRound
 		public static int GetCountEventPuzzleRoundMap(string tag="") => EventPuzzleRoundVisitor.GetCount(tag);
 		public static string GetFileNameEventPuzzleRoundMap() => EventPuzzleRoundVisitor.GetFileName();
@@ -3740,6 +3750,28 @@ public static partial class Data {
 		public static List<rawFishRarity> GetFishRarityByFilter(Func<rawFishRarity, bool> filterFunc,string tag="") => FishRarityVisitor.GetByFilter(filterFunc,tag);
 		public static rawFishRarity? GetOneFishRarityByFilter(Func<rawFishRarity, bool> filterFunc,string tag="") => FishRarityVisitor.GetOneByFilter(filterFunc,tag);
 	#endregion FishRarity
+	#region FrozenItem
+		public static int GetCountFrozenItemMap(string tag="") => FrozenItemVisitor.GetCount(tag);
+		public static string GetFileNameFrozenItemMap() => FrozenItemVisitor.GetFileName();
+		public static List<int> SortedKeysFrozenItemMap(string tag="") => FrozenItemVisitor.SortedKeys(tag);
+		public static PBC::MapField<int, rawFrozenItem> GetFrozenItemMap(string tag="") => FrozenItemVisitor.All(tag);
+		public static void RangeFrozenItemMap(Action<int, rawFrozenItem> filter,string tag="") => FrozenItemVisitor.Range(filter,tag);
+		public static List<int> KeysFrozenItemMap(string tag="") => FrozenItemVisitor.Keys(tag);
+		public static rawFrozenItem? GetFrozenItem(int key,string tag="") => FrozenItemVisitor.Get(key,tag);
+		public static List<rawFrozenItem> GetFrozenItemByFilter(Func<rawFrozenItem, bool> filterFunc,string tag="") => FrozenItemVisitor.GetByFilter(filterFunc,tag);
+		public static rawFrozenItem? GetOneFrozenItemByFilter(Func<rawFrozenItem, bool> filterFunc,string tag="") => FrozenItemVisitor.GetOneByFilter(filterFunc,tag);
+	#endregion FrozenItem
+	#region FrozenItemDetail
+		public static int GetCountFrozenItemDetailMap(string tag="") => FrozenItemDetailVisitor.GetCount(tag);
+		public static string GetFileNameFrozenItemDetailMap() => FrozenItemDetailVisitor.GetFileName();
+		public static List<int> SortedKeysFrozenItemDetailMap(string tag="") => FrozenItemDetailVisitor.SortedKeys(tag);
+		public static PBC::MapField<int, rawFrozenItemDetail> GetFrozenItemDetailMap(string tag="") => FrozenItemDetailVisitor.All(tag);
+		public static void RangeFrozenItemDetailMap(Action<int, rawFrozenItemDetail> filter,string tag="") => FrozenItemDetailVisitor.Range(filter,tag);
+		public static List<int> KeysFrozenItemDetailMap(string tag="") => FrozenItemDetailVisitor.Keys(tag);
+		public static rawFrozenItemDetail? GetFrozenItemDetail(int key,string tag="") => FrozenItemDetailVisitor.Get(key,tag);
+		public static List<rawFrozenItemDetail> GetFrozenItemDetailByFilter(Func<rawFrozenItemDetail, bool> filterFunc,string tag="") => FrozenItemDetailVisitor.GetByFilter(filterFunc,tag);
+		public static rawFrozenItemDetail? GetOneFrozenItemDetailByFilter(Func<rawFrozenItemDetail, bool> filterFunc,string tag="") => FrozenItemDetailVisitor.GetOneByFilter(filterFunc,tag);
+	#endregion FrozenItemDetail
 	#region GalleryCategory
 		public static int GetCountGalleryCategoryMap(string tag="") => GalleryCategoryVisitor.GetCount(tag);
 		public static string GetFileNameGalleryCategoryMap() => GalleryCategoryVisitor.GetFileName();
@@ -3965,6 +3997,17 @@ public static partial class Data {
 		public static List<rawLabel> GetLabelByFilter(Func<rawLabel, bool> filterFunc,string tag="") => LabelVisitor.GetByFilter(filterFunc,tag);
 		public static rawLabel? GetOneLabelByFilter(Func<rawLabel, bool> filterFunc,string tag="") => LabelVisitor.GetOneByFilter(filterFunc,tag);
 	#endregion Label
+	#region LandmarkDetail
+		public static int GetCountLandmarkDetailMap(string tag="") => LandmarkDetailVisitor.GetCount(tag);
+		public static string GetFileNameLandmarkDetailMap() => LandmarkDetailVisitor.GetFileName();
+		public static List<int> SortedKeysLandmarkDetailMap(string tag="") => LandmarkDetailVisitor.SortedKeys(tag);
+		public static PBC::MapField<int, rawLandmarkDetail> GetLandmarkDetailMap(string tag="") => LandmarkDetailVisitor.All(tag);
+		public static void RangeLandmarkDetailMap(Action<int, rawLandmarkDetail> filter,string tag="") => LandmarkDetailVisitor.Range(filter,tag);
+		public static List<int> KeysLandmarkDetailMap(string tag="") => LandmarkDetailVisitor.Keys(tag);
+		public static rawLandmarkDetail? GetLandmarkDetail(int key,string tag="") => LandmarkDetailVisitor.Get(key,tag);
+		public static List<rawLandmarkDetail> GetLandmarkDetailByFilter(Func<rawLandmarkDetail, bool> filterFunc,string tag="") => LandmarkDetailVisitor.GetByFilter(filterFunc,tag);
+		public static rawLandmarkDetail? GetOneLandmarkDetailByFilter(Func<rawLandmarkDetail, bool> filterFunc,string tag="") => LandmarkDetailVisitor.GetOneByFilter(filterFunc,tag);
+	#endregion LandmarkDetail
 	#region LangDe
 		public static int GetCountLangDeSlice(string tag="") => LangDeVisitor.GetCount(tag);
 		public static string GetFileNameLangDeSlice() => LangDeVisitor.GetFileName();
@@ -3974,15 +4017,6 @@ public static partial class Data {
 		public static List<rawLangDe> GetLangDeByFilter(Func<rawLangDe, bool> filterFunc,string tag="") => LangDeVisitor.GetByFilter(filterFunc,tag);
 		public static rawLangDe? GetOneLangDeByFilter(Func<rawLangDe, bool> filterFunc,string tag="") => LangDeVisitor.GetOneByFilter(filterFunc,tag);
 	#endregion LangDe
-	#region LangDeHotfix
-		public static int GetCountLangDeHotfixSlice(string tag="") => LangDeHotfixVisitor.GetCount(tag);
-		public static string GetFileNameLangDeHotfixSlice() => LangDeHotfixVisitor.GetFileName();
-		public static PBC::RepeatedField<rawLangDeHotfix> GetLangDeHotfixSlice(string tag="") => LangDeHotfixVisitor.All(tag);
-		public static void RangeLangDeHotfixSlice(Action<int, rawLangDeHotfix> filter,string tag="") => LangDeHotfixVisitor.Range(filter,tag);
-		public static rawLangDeHotfix? GetLangDeHotfixByIndex(int index,string tag="") => LangDeHotfixVisitor.GetByIndex(index,tag);
-		public static List<rawLangDeHotfix> GetLangDeHotfixByFilter(Func<rawLangDeHotfix, bool> filterFunc,string tag="") => LangDeHotfixVisitor.GetByFilter(filterFunc,tag);
-		public static rawLangDeHotfix? GetOneLangDeHotfixByFilter(Func<rawLangDeHotfix, bool> filterFunc,string tag="") => LangDeHotfixVisitor.GetOneByFilter(filterFunc,tag);
-	#endregion LangDeHotfix
 	#region LangEn
 		public static int GetCountLangEnSlice(string tag="") => LangEnVisitor.GetCount(tag);
 		public static string GetFileNameLangEnSlice() => LangEnVisitor.GetFileName();
@@ -3992,15 +4026,6 @@ public static partial class Data {
 		public static List<rawLangEn> GetLangEnByFilter(Func<rawLangEn, bool> filterFunc,string tag="") => LangEnVisitor.GetByFilter(filterFunc,tag);
 		public static rawLangEn? GetOneLangEnByFilter(Func<rawLangEn, bool> filterFunc,string tag="") => LangEnVisitor.GetOneByFilter(filterFunc,tag);
 	#endregion LangEn
-	#region LangEnHotfix
-		public static int GetCountLangEnHotfixSlice(string tag="") => LangEnHotfixVisitor.GetCount(tag);
-		public static string GetFileNameLangEnHotfixSlice() => LangEnHotfixVisitor.GetFileName();
-		public static PBC::RepeatedField<rawLangEnHotfix> GetLangEnHotfixSlice(string tag="") => LangEnHotfixVisitor.All(tag);
-		public static void RangeLangEnHotfixSlice(Action<int, rawLangEnHotfix> filter,string tag="") => LangEnHotfixVisitor.Range(filter,tag);
-		public static rawLangEnHotfix? GetLangEnHotfixByIndex(int index,string tag="") => LangEnHotfixVisitor.GetByIndex(index,tag);
-		public static List<rawLangEnHotfix> GetLangEnHotfixByFilter(Func<rawLangEnHotfix, bool> filterFunc,string tag="") => LangEnHotfixVisitor.GetByFilter(filterFunc,tag);
-		public static rawLangEnHotfix? GetOneLangEnHotfixByFilter(Func<rawLangEnHotfix, bool> filterFunc,string tag="") => LangEnHotfixVisitor.GetOneByFilter(filterFunc,tag);
-	#endregion LangEnHotfix
 	#region LangEs
 		public static int GetCountLangEsSlice(string tag="") => LangEsVisitor.GetCount(tag);
 		public static string GetFileNameLangEsSlice() => LangEsVisitor.GetFileName();
@@ -4010,15 +4035,6 @@ public static partial class Data {
 		public static List<rawLangEs> GetLangEsByFilter(Func<rawLangEs, bool> filterFunc,string tag="") => LangEsVisitor.GetByFilter(filterFunc,tag);
 		public static rawLangEs? GetOneLangEsByFilter(Func<rawLangEs, bool> filterFunc,string tag="") => LangEsVisitor.GetOneByFilter(filterFunc,tag);
 	#endregion LangEs
-	#region LangEsHotfix
-		public static int GetCountLangEsHotfixSlice(string tag="") => LangEsHotfixVisitor.GetCount(tag);
-		public static string GetFileNameLangEsHotfixSlice() => LangEsHotfixVisitor.GetFileName();
-		public static PBC::RepeatedField<rawLangEsHotfix> GetLangEsHotfixSlice(string tag="") => LangEsHotfixVisitor.All(tag);
-		public static void RangeLangEsHotfixSlice(Action<int, rawLangEsHotfix> filter,string tag="") => LangEsHotfixVisitor.Range(filter,tag);
-		public static rawLangEsHotfix? GetLangEsHotfixByIndex(int index,string tag="") => LangEsHotfixVisitor.GetByIndex(index,tag);
-		public static List<rawLangEsHotfix> GetLangEsHotfixByFilter(Func<rawLangEsHotfix, bool> filterFunc,string tag="") => LangEsHotfixVisitor.GetByFilter(filterFunc,tag);
-		public static rawLangEsHotfix? GetOneLangEsHotfixByFilter(Func<rawLangEsHotfix, bool> filterFunc,string tag="") => LangEsHotfixVisitor.GetOneByFilter(filterFunc,tag);
-	#endregion LangEsHotfix
 	#region LangFr
 		public static int GetCountLangFrSlice(string tag="") => LangFrVisitor.GetCount(tag);
 		public static string GetFileNameLangFrSlice() => LangFrVisitor.GetFileName();
@@ -4028,15 +4044,6 @@ public static partial class Data {
 		public static List<rawLangFr> GetLangFrByFilter(Func<rawLangFr, bool> filterFunc,string tag="") => LangFrVisitor.GetByFilter(filterFunc,tag);
 		public static rawLangFr? GetOneLangFrByFilter(Func<rawLangFr, bool> filterFunc,string tag="") => LangFrVisitor.GetOneByFilter(filterFunc,tag);
 	#endregion LangFr
-	#region LangFrHotfix
-		public static int GetCountLangFrHotfixSlice(string tag="") => LangFrHotfixVisitor.GetCount(tag);
-		public static string GetFileNameLangFrHotfixSlice() => LangFrHotfixVisitor.GetFileName();
-		public static PBC::RepeatedField<rawLangFrHotfix> GetLangFrHotfixSlice(string tag="") => LangFrHotfixVisitor.All(tag);
-		public static void RangeLangFrHotfixSlice(Action<int, rawLangFrHotfix> filter,string tag="") => LangFrHotfixVisitor.Range(filter,tag);
-		public static rawLangFrHotfix? GetLangFrHotfixByIndex(int index,string tag="") => LangFrHotfixVisitor.GetByIndex(index,tag);
-		public static List<rawLangFrHotfix> GetLangFrHotfixByFilter(Func<rawLangFrHotfix, bool> filterFunc,string tag="") => LangFrHotfixVisitor.GetByFilter(filterFunc,tag);
-		public static rawLangFrHotfix? GetOneLangFrHotfixByFilter(Func<rawLangFrHotfix, bool> filterFunc,string tag="") => LangFrHotfixVisitor.GetOneByFilter(filterFunc,tag);
-	#endregion LangFrHotfix
 	#region LangJa
 		public static int GetCountLangJaSlice(string tag="") => LangJaVisitor.GetCount(tag);
 		public static string GetFileNameLangJaSlice() => LangJaVisitor.GetFileName();
@@ -4046,15 +4053,6 @@ public static partial class Data {
 		public static List<rawLangJa> GetLangJaByFilter(Func<rawLangJa, bool> filterFunc,string tag="") => LangJaVisitor.GetByFilter(filterFunc,tag);
 		public static rawLangJa? GetOneLangJaByFilter(Func<rawLangJa, bool> filterFunc,string tag="") => LangJaVisitor.GetOneByFilter(filterFunc,tag);
 	#endregion LangJa
-	#region LangJaHotfix
-		public static int GetCountLangJaHotfixSlice(string tag="") => LangJaHotfixVisitor.GetCount(tag);
-		public static string GetFileNameLangJaHotfixSlice() => LangJaHotfixVisitor.GetFileName();
-		public static PBC::RepeatedField<rawLangJaHotfix> GetLangJaHotfixSlice(string tag="") => LangJaHotfixVisitor.All(tag);
-		public static void RangeLangJaHotfixSlice(Action<int, rawLangJaHotfix> filter,string tag="") => LangJaHotfixVisitor.Range(filter,tag);
-		public static rawLangJaHotfix? GetLangJaHotfixByIndex(int index,string tag="") => LangJaHotfixVisitor.GetByIndex(index,tag);
-		public static List<rawLangJaHotfix> GetLangJaHotfixByFilter(Func<rawLangJaHotfix, bool> filterFunc,string tag="") => LangJaHotfixVisitor.GetByFilter(filterFunc,tag);
-		public static rawLangJaHotfix? GetOneLangJaHotfixByFilter(Func<rawLangJaHotfix, bool> filterFunc,string tag="") => LangJaHotfixVisitor.GetOneByFilter(filterFunc,tag);
-	#endregion LangJaHotfix
 	#region LangKo
 		public static int GetCountLangKoSlice(string tag="") => LangKoVisitor.GetCount(tag);
 		public static string GetFileNameLangKoSlice() => LangKoVisitor.GetFileName();
@@ -4064,15 +4062,6 @@ public static partial class Data {
 		public static List<rawLangKo> GetLangKoByFilter(Func<rawLangKo, bool> filterFunc,string tag="") => LangKoVisitor.GetByFilter(filterFunc,tag);
 		public static rawLangKo? GetOneLangKoByFilter(Func<rawLangKo, bool> filterFunc,string tag="") => LangKoVisitor.GetOneByFilter(filterFunc,tag);
 	#endregion LangKo
-	#region LangKoHotfix
-		public static int GetCountLangKoHotfixSlice(string tag="") => LangKoHotfixVisitor.GetCount(tag);
-		public static string GetFileNameLangKoHotfixSlice() => LangKoHotfixVisitor.GetFileName();
-		public static PBC::RepeatedField<rawLangKoHotfix> GetLangKoHotfixSlice(string tag="") => LangKoHotfixVisitor.All(tag);
-		public static void RangeLangKoHotfixSlice(Action<int, rawLangKoHotfix> filter,string tag="") => LangKoHotfixVisitor.Range(filter,tag);
-		public static rawLangKoHotfix? GetLangKoHotfixByIndex(int index,string tag="") => LangKoHotfixVisitor.GetByIndex(index,tag);
-		public static List<rawLangKoHotfix> GetLangKoHotfixByFilter(Func<rawLangKoHotfix, bool> filterFunc,string tag="") => LangKoHotfixVisitor.GetByFilter(filterFunc,tag);
-		public static rawLangKoHotfix? GetOneLangKoHotfixByFilter(Func<rawLangKoHotfix, bool> filterFunc,string tag="") => LangKoHotfixVisitor.GetOneByFilter(filterFunc,tag);
-	#endregion LangKoHotfix
 	#region LangPt
 		public static int GetCountLangPtSlice(string tag="") => LangPtVisitor.GetCount(tag);
 		public static string GetFileNameLangPtSlice() => LangPtVisitor.GetFileName();
@@ -4082,15 +4071,6 @@ public static partial class Data {
 		public static List<rawLangPt> GetLangPtByFilter(Func<rawLangPt, bool> filterFunc,string tag="") => LangPtVisitor.GetByFilter(filterFunc,tag);
 		public static rawLangPt? GetOneLangPtByFilter(Func<rawLangPt, bool> filterFunc,string tag="") => LangPtVisitor.GetOneByFilter(filterFunc,tag);
 	#endregion LangPt
-	#region LangPtHotfix
-		public static int GetCountLangPtHotfixSlice(string tag="") => LangPtHotfixVisitor.GetCount(tag);
-		public static string GetFileNameLangPtHotfixSlice() => LangPtHotfixVisitor.GetFileName();
-		public static PBC::RepeatedField<rawLangPtHotfix> GetLangPtHotfixSlice(string tag="") => LangPtHotfixVisitor.All(tag);
-		public static void RangeLangPtHotfixSlice(Action<int, rawLangPtHotfix> filter,string tag="") => LangPtHotfixVisitor.Range(filter,tag);
-		public static rawLangPtHotfix? GetLangPtHotfixByIndex(int index,string tag="") => LangPtHotfixVisitor.GetByIndex(index,tag);
-		public static List<rawLangPtHotfix> GetLangPtHotfixByFilter(Func<rawLangPtHotfix, bool> filterFunc,string tag="") => LangPtHotfixVisitor.GetByFilter(filterFunc,tag);
-		public static rawLangPtHotfix? GetOneLangPtHotfixByFilter(Func<rawLangPtHotfix, bool> filterFunc,string tag="") => LangPtHotfixVisitor.GetOneByFilter(filterFunc,tag);
-	#endregion LangPtHotfix
 	#region LangTr
 		public static int GetCountLangTrSlice(string tag="") => LangTrVisitor.GetCount(tag);
 		public static string GetFileNameLangTrSlice() => LangTrVisitor.GetFileName();
@@ -4100,15 +4080,6 @@ public static partial class Data {
 		public static List<rawLangTr> GetLangTrByFilter(Func<rawLangTr, bool> filterFunc,string tag="") => LangTrVisitor.GetByFilter(filterFunc,tag);
 		public static rawLangTr? GetOneLangTrByFilter(Func<rawLangTr, bool> filterFunc,string tag="") => LangTrVisitor.GetOneByFilter(filterFunc,tag);
 	#endregion LangTr
-	#region LangTrHotfix
-		public static int GetCountLangTrHotfixSlice(string tag="") => LangTrHotfixVisitor.GetCount(tag);
-		public static string GetFileNameLangTrHotfixSlice() => LangTrHotfixVisitor.GetFileName();
-		public static PBC::RepeatedField<rawLangTrHotfix> GetLangTrHotfixSlice(string tag="") => LangTrHotfixVisitor.All(tag);
-		public static void RangeLangTrHotfixSlice(Action<int, rawLangTrHotfix> filter,string tag="") => LangTrHotfixVisitor.Range(filter,tag);
-		public static rawLangTrHotfix? GetLangTrHotfixByIndex(int index,string tag="") => LangTrHotfixVisitor.GetByIndex(index,tag);
-		public static List<rawLangTrHotfix> GetLangTrHotfixByFilter(Func<rawLangTrHotfix, bool> filterFunc,string tag="") => LangTrHotfixVisitor.GetByFilter(filterFunc,tag);
-		public static rawLangTrHotfix? GetOneLangTrHotfixByFilter(Func<rawLangTrHotfix, bool> filterFunc,string tag="") => LangTrHotfixVisitor.GetOneByFilter(filterFunc,tag);
-	#endregion LangTrHotfix
 	#region LangZhHansCn
 		public static int GetCountLangZhHansCnSlice(string tag="") => LangZhHansCnVisitor.GetCount(tag);
 		public static string GetFileNameLangZhHansCnSlice() => LangZhHansCnVisitor.GetFileName();
@@ -4118,15 +4089,6 @@ public static partial class Data {
 		public static List<rawLangZhHansCn> GetLangZhHansCnByFilter(Func<rawLangZhHansCn, bool> filterFunc,string tag="") => LangZhHansCnVisitor.GetByFilter(filterFunc,tag);
 		public static rawLangZhHansCn? GetOneLangZhHansCnByFilter(Func<rawLangZhHansCn, bool> filterFunc,string tag="") => LangZhHansCnVisitor.GetOneByFilter(filterFunc,tag);
 	#endregion LangZhHansCn
-	#region LangZhHansCnHotfix
-		public static int GetCountLangZhHansCnHotfixSlice(string tag="") => LangZhHansCnHotfixVisitor.GetCount(tag);
-		public static string GetFileNameLangZhHansCnHotfixSlice() => LangZhHansCnHotfixVisitor.GetFileName();
-		public static PBC::RepeatedField<rawLangZhHansCnHotfix> GetLangZhHansCnHotfixSlice(string tag="") => LangZhHansCnHotfixVisitor.All(tag);
-		public static void RangeLangZhHansCnHotfixSlice(Action<int, rawLangZhHansCnHotfix> filter,string tag="") => LangZhHansCnHotfixVisitor.Range(filter,tag);
-		public static rawLangZhHansCnHotfix? GetLangZhHansCnHotfixByIndex(int index,string tag="") => LangZhHansCnHotfixVisitor.GetByIndex(index,tag);
-		public static List<rawLangZhHansCnHotfix> GetLangZhHansCnHotfixByFilter(Func<rawLangZhHansCnHotfix, bool> filterFunc,string tag="") => LangZhHansCnHotfixVisitor.GetByFilter(filterFunc,tag);
-		public static rawLangZhHansCnHotfix? GetOneLangZhHansCnHotfixByFilter(Func<rawLangZhHansCnHotfix, bool> filterFunc,string tag="") => LangZhHansCnHotfixVisitor.GetOneByFilter(filterFunc,tag);
-	#endregion LangZhHansCnHotfix
 	#region LangZhHantTw
 		public static int GetCountLangZhHantTwSlice(string tag="") => LangZhHantTwVisitor.GetCount(tag);
 		public static string GetFileNameLangZhHantTwSlice() => LangZhHantTwVisitor.GetFileName();
@@ -4136,15 +4098,6 @@ public static partial class Data {
 		public static List<rawLangZhHantTw> GetLangZhHantTwByFilter(Func<rawLangZhHantTw, bool> filterFunc,string tag="") => LangZhHantTwVisitor.GetByFilter(filterFunc,tag);
 		public static rawLangZhHantTw? GetOneLangZhHantTwByFilter(Func<rawLangZhHantTw, bool> filterFunc,string tag="") => LangZhHantTwVisitor.GetOneByFilter(filterFunc,tag);
 	#endregion LangZhHantTw
-	#region LangZhHantTwHotfix
-		public static int GetCountLangZhHantTwHotfixSlice(string tag="") => LangZhHantTwHotfixVisitor.GetCount(tag);
-		public static string GetFileNameLangZhHantTwHotfixSlice() => LangZhHantTwHotfixVisitor.GetFileName();
-		public static PBC::RepeatedField<rawLangZhHantTwHotfix> GetLangZhHantTwHotfixSlice(string tag="") => LangZhHantTwHotfixVisitor.All(tag);
-		public static void RangeLangZhHantTwHotfixSlice(Action<int, rawLangZhHantTwHotfix> filter,string tag="") => LangZhHantTwHotfixVisitor.Range(filter,tag);
-		public static rawLangZhHantTwHotfix? GetLangZhHantTwHotfixByIndex(int index,string tag="") => LangZhHantTwHotfixVisitor.GetByIndex(index,tag);
-		public static List<rawLangZhHantTwHotfix> GetLangZhHantTwHotfixByFilter(Func<rawLangZhHantTwHotfix, bool> filterFunc,string tag="") => LangZhHantTwHotfixVisitor.GetByFilter(filterFunc,tag);
-		public static rawLangZhHantTwHotfix? GetOneLangZhHantTwHotfixByFilter(Func<rawLangZhHantTwHotfix, bool> filterFunc,string tag="") => LangZhHantTwHotfixVisitor.GetOneByFilter(filterFunc,tag);
-	#endregion LangZhHantTwHotfix
 	#region Language
 		public static int GetCountLanguageSlice(string tag="") => LanguageVisitor.GetCount(tag);
 		public static string GetFileNameLanguageSlice() => LanguageVisitor.GetFileName();
@@ -5149,6 +5102,17 @@ public static partial class Data {
 		public static List<rawSettingsCommunity> GetSettingsCommunityByFilter(Func<rawSettingsCommunity, bool> filterFunc,string tag="") => SettingsCommunityVisitor.GetByFilter(filterFunc,tag);
 		public static rawSettingsCommunity? GetOneSettingsCommunityByFilter(Func<rawSettingsCommunity, bool> filterFunc,string tag="") => SettingsCommunityVisitor.GetOneByFilter(filterFunc,tag);
 	#endregion SettingsCommunity
+	#region Shake
+		public static int GetCountShakeMap(string tag="") => ShakeVisitor.GetCount(tag);
+		public static string GetFileNameShakeMap() => ShakeVisitor.GetFileName();
+		public static List<int> SortedKeysShakeMap(string tag="") => ShakeVisitor.SortedKeys(tag);
+		public static PBC::MapField<int, rawShake> GetShakeMap(string tag="") => ShakeVisitor.All(tag);
+		public static void RangeShakeMap(Action<int, rawShake> filter,string tag="") => ShakeVisitor.Range(filter,tag);
+		public static List<int> KeysShakeMap(string tag="") => ShakeVisitor.Keys(tag);
+		public static rawShake? GetShake(int key,string tag="") => ShakeVisitor.Get(key,tag);
+		public static List<rawShake> GetShakeByFilter(Func<rawShake, bool> filterFunc,string tag="") => ShakeVisitor.GetByFilter(filterFunc,tag);
+		public static rawShake? GetOneShakeByFilter(Func<rawShake, bool> filterFunc,string tag="") => ShakeVisitor.GetOneByFilter(filterFunc,tag);
+	#endregion Shake
 	#region ShinnyGuarPack
 		public static int GetCountShinnyGuarPackMap(string tag="") => ShinnyGuarPackVisitor.GetCount(tag);
 		public static string GetFileNameShinnyGuarPackMap() => ShinnyGuarPackVisitor.GetFileName();

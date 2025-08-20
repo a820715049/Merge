@@ -90,10 +90,23 @@ namespace FAT
                     State = RandomBoxState.Begin
                 };
                 //通过充值获得的随机宝箱，其产物的from为rand_chest_iap
-                if (reason != null && reason == ReasonString.purchase)
-                    boxData.ProduceFrom = ReasonString.rand_chest_iap;
+                if (reason != null)
+                {
+                    //这里暂时代码写死 根据指定的ReasonString确定是否为rand_chest_iap
+                    if (reason == ReasonString.purchase || reason == ReasonString.bp_milestone_purchase || reason == ReasonString.bp_lastpurchase ||
+                        reason == ReasonString.bp_end_purchase || reason == ReasonString.bp_cycle_reward)
+                    {
+                        boxData.ProduceFrom = ReasonString.rand_chest_iap;
+                    }
+                    else
+                    {
+                        boxData.ProduceFrom = ReasonString.random_chest;
+                    }
+                }
                 else
+                {
                     boxData.ProduceFrom = ReasonString.random_chest;
+                }
                 //填充万能卡
                 _TryAddCardJoker(randomBoxConfig, boxData);
                 //填充普通奖励 分固定奖励和随机奖励
@@ -216,9 +229,8 @@ namespace FAT
         public void Reset()
         {
             _boxIndex = 0;
-            _ClearFinishBoxData();
-            //reset时清理所有已经ready的随机宝箱
-            _ClearReadyBoxData();
+            //reset时清理所有随机宝箱 无论其是否commit
+            _cacheRandomBoxList.Clear();
         }
 
         public void LoadConfig() { }

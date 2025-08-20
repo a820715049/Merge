@@ -35,6 +35,8 @@ public enum PoolItemType
     MAIL_DETAIL_REWARD_ITEM,
     AUTHENTICATION_TYPE_ITEM,
     SETTING_COMMUNITY_TYPE_ITEM,
+    SETTING_COMMUNITY_SHOP_ITEM,
+    COMMUNITY_PLAN_GIFT_REWARD_ITEM,
 
     CARD_CELL_LAYOUT,
     CARD_JOKER_GROUP_CELL,
@@ -57,6 +59,10 @@ public enum PoolItemType
 
     #endregion
 
+    #region 沙堡里程碑活动
+    CASTLE_MILESTONE_CELL,
+    #endregion
+
     #region 积分活动 里程碑样式
 
     SCORE_MILESTONE_CELL,
@@ -68,6 +74,17 @@ public enum PoolItemType
     MINE_BOARD_MILESTONE_CELL,
 
     #endregion
+    
+    #region 连续订单
+    ORDER_STREAK_CELL,
+    #endregion
+
+    #region 积分活动 轨道样式
+
+    SCORE_TRACK_CELL,
+
+    #endregion
+
 
     #region 周任务活动
 
@@ -134,7 +151,7 @@ public enum PoolItemType
     PACK_MARKET_SLIDE_CELL,
     MIX_COST_ITEM,
     PACK_ERG_LIST_CELL,
-    
+
     MAP_BUILDING_EFFECT,
 
     #region 小游戏相关

@@ -8,6 +8,7 @@ using Config;
 using fat.rawdata;
 using EL;
 using EventType = fat.rawdata.EventType;
+using System;
 
 namespace FAT
 {
@@ -39,6 +40,7 @@ namespace FAT
             WishBoard = 21,
             DecorateStart = 22,
             WeeklyRaffle = 23, //签到抽奖
+            Boost4XGuide = 24, //是否满足4倍加速引导弹出条件
         }
 
         private UIManager uiMan => UIManager.Instance;
@@ -164,6 +166,10 @@ namespace FAT
                     return _CheckCanPreview();
                 case GuideMergeRequireType.StockItem:
                     return _CheckStockItem(value, extra);
+                case GuideMergeRequireType.ClawOrderPickSuccess:
+                    return _CheckClawOrderPickSuccess();
+                case GuideMergeRequireType.LevelCanBoost:
+                    return _CheckLevelCanBoost(value);
             }
 
             return false;
@@ -301,6 +307,15 @@ namespace FAT
                 case UIState.WeeklyRaffle:
                     var raffle = Game.Manager.activity.LookupAny(EventType.WeeklyRaffle) as ActivityWeeklyRaffle;
                     return UIManager.Instance.IsOpen(raffle?.MainPopUp.res.ActiveR ?? UIConfig.UIActivityWeeklyRaffleMain);
+                case UIState.Boost4XGuide:
+                    // 这里描述的是一个约束引导打开的条件，目的是限制引导不要意外打断其他UI
+                    // 后续迷你棋盘也需要弹出这个引导的时候，在下面if里补个或的逻辑就可以了
+                    bool isSuccess = false;
+                    if (_IsBoardReady(UIConfig.UIMergeBoardMain))
+                    {
+                        isSuccess = true;
+                    }
+                    return isSuccess;
             }
 
             return false;
@@ -653,10 +668,27 @@ namespace FAT
             return Game.Manager.decorateMan.CheckCanPreview();
         }
 
+        private bool _CheckClawOrderPickSuccess()
+        {
+            if (Game.Manager.activity.LookupAny(EventType.ClawOrder) is not ActivityClawOrder act)
+                return false;
+            return act.SelectedOrderId > 0;
+        }
+
         private bool _CheckStockItem(int id, int num)
         {
             var world = Game.Manager.mergeBoardMan.activeWorld;
             return world.FindRewardCount(id) >= num;
+        }
+
+        private bool _CheckLevelCanBoost(int state)
+        {
+            var cfg = Game.Manager.configMan.GetEnergyBoostConfig(state);
+            if (cfg != null)
+            {
+                return Game.Manager.mergeLevelMan.level >= cfg.ActiveLv;
+            }
+            return false;
         }
     }
 }

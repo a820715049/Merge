@@ -131,6 +131,7 @@ namespace FAT
             
             // 延迟一帧执行滚动，确保UI已经更新
             Game.Instance.StartCoroutineGlobal(ScrollToUnfinishedTask(targetStage));
+            RefreshCD();
         }
 
         private IEnumerator ScrollToUnfinishedTask(int stageIndex)

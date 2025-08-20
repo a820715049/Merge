@@ -1,6 +1,6 @@
 /*
  * @Author: tang.yan
- * @Description: 商城界面 
+ * @Description: 商城界面
  * @Date: 2023-11-07 15:11:35
  */
 
@@ -26,6 +26,11 @@ namespace FAT
         private UIGemShopModule _gemShopModule;
         //能量商店
         [SerializeField] private List<UIShopEnergyCell> energyItemList;
+        [SerializeField] private Transform shopLinkItemCell;
+        [SerializeField] private Transform shopLinkItemRoot;
+        [SerializeField] private Transform shopLinkRoot;
+        private List<GameObject> cellList = new();
+        private PoolItemType linkItemType = PoolItemType.SETTING_COMMUNITY_SHOP_ITEM;
         //棋子商店
         [SerializeField] private ScrollRect chessShopScroll;
         [SerializeField] private List<UIShopChessCell> chessTopItemList;
@@ -42,7 +47,8 @@ namespace FAT
         private Color _colorNormal;
         private Color _colorHighlight;
         private Vector3 _doMoveOriginPos = new Vector3();   //滑动起始位置
-        
+        private Vector3 _linkdoMoveOriginPos = new Vector3();
+
         protected override void OnCreate()
         {
             transform.AddButton("Mask", base.Close);
@@ -80,6 +86,7 @@ namespace FAT
             }
             ColorUtility.TryParseHtmlString("#4A73AD", out _colorNormal);
             ColorUtility.TryParseHtmlString("#C0701E", out _colorHighlight);
+            GameObjectPoolManager.Instance.PreparePool(linkItemType, shopLinkItemCell.gameObject);
         }
 
         protected override void OnParse(params object[] items)
@@ -111,6 +118,7 @@ namespace FAT
             MessageCenter.Get<MSG.GAME_SHOP_ITEM_INFO_CHANGE>().AddListener(_OnShopItemInfoChange);
             MessageCenter.Get<MSG.IAP_INIT>().AddListener(_OnIapInit);
             MessageCenter.Get<MSG.GAME_ONE_SECOND_DRIVER>().AddListener(_OnSecondUpdate);
+            MessageCenter.Get<MSG.APP_ENTER_FOREGROUND_EVENT>().AddListener(_RefreshCommunityLinkReward);
         }
 
         protected override void OnRefresh()
@@ -118,7 +126,7 @@ namespace FAT
             _RefreshTabToggle();
             _DoMoveShopList(originXLeft);
         }
-        
+
         protected override void OnPause()
         {
             //调整顶部资源栏显示状态
@@ -136,6 +144,7 @@ namespace FAT
             MessageCenter.Get<MSG.GAME_SHOP_ITEM_INFO_CHANGE>().RemoveListener(_OnShopItemInfoChange);
             MessageCenter.Get<MSG.IAP_INIT>().RemoveListener(_OnIapInit);
             MessageCenter.Get<MSG.GAME_ONE_SECOND_DRIVER>().RemoveListener(_OnSecondUpdate);
+            MessageCenter.Get<MSG.APP_ENTER_FOREGROUND_EVENT>().RemoveListener(_RefreshCommunityLinkReward);
         }
 
         protected override void OnPreClose()
@@ -151,6 +160,7 @@ namespace FAT
             _ChangeTopBarState(false);
             // 商城关闭时尝试发起推送开启提醒
             Game.Manager.notification.TryRemindShopClose();
+            _ClearCommunityShopLinkItem();
         }
 
         //避免重复进入相同的状态
@@ -166,7 +176,7 @@ namespace FAT
             else
                 MessageCenter.Get<MSG.UI_TOP_BAR_POP_STATE>().Dispatch();
         }
-        
+
         private void _InitToggle()
         {
             //注册点击事件
@@ -211,8 +221,12 @@ namespace FAT
             shopGoList[_curSelectTabIndex].transform.position = _doMoveOriginPos;
             shopGoList[_curSelectTabIndex].transform.DOKill();
             shopGoList[_curSelectTabIndex].transform.DOLocalMoveX(0, moveDuration);
+            if (_curShowTabType == ShopTabType.Energy)
+            {
+                _DoMoveShopLinkList(offsetX);
+            }
         }
-        
+
         private void _RefreshTabToggle()
         {
             var shopMan = Game.Manager.shopMan;
@@ -253,6 +267,9 @@ namespace FAT
             {
                 shopGoList[i].gameObject.SetActive(i == _curSelectTabIndex);
             }
+            _ClearCommunityShopLinkItem();
+            var communityLinkMan = Game.Manager.communityLinkMan;
+            shopLinkRoot.gameObject.SetActive(_curShowTabType == ShopTabType.Energy && communityLinkMan.IsShowShopLink());
             if (_curShowTabType == ShopTabType.Gem)
                 _gemShopModule.Show();
             else
@@ -260,6 +277,7 @@ namespace FAT
             if (_curShowTabType == ShopTabType.Energy)
             {
                 _RefreshTabEnergy();
+                _OnRefreshCommunityShopLinkItem();
             }
             if (_curShowTabType == ShopTabType.Chess)
             {
@@ -407,8 +425,8 @@ namespace FAT
             var energyData = energyTabData.EnergyDataList[index];
             if (energyData == null)
                 return;
-            var from = energyItemList[index].energyIcon.transform.position - new Vector3(0, (energyItemList[index].energyIcon.transform as RectTransform).sizeDelta.y/2, 0);
-            Game.Manager.shopMan.TryBuyShopEnergyGoods(energyData, from, 256f);
+            var from = energyItemList[index].energyIcon.transform.position - new Vector3(0, (energyItemList[index].energyIcon.transform as RectTransform).sizeDelta.y / 2, 0);
+            Game.Manager.shopMan.TryBuyShopEnergyGoods(energyData, from, size: 256f);
         }
 
         private void _OnRandomChessBtnClick(int index)
@@ -416,7 +434,7 @@ namespace FAT
             var chessTabData = (ShopTabChessData)Game.Manager.shopMan.GetShopTabData(_curShowTabType);
             if (!chessTabData.GetChessRandomData(index, out var chessRandomData))
                 return;
-            var from = chessTopItemList[index].chessIcon.transform.position - new Vector3(0, (chessTopItemList[index].chessIcon.transform as RectTransform).sizeDelta.y/2, 0);
+            var from = chessTopItemList[index].chessIcon.transform.position - new Vector3(0, (chessTopItemList[index].chessIcon.transform as RectTransform).sizeDelta.y / 2, 0);
             Game.Manager.shopMan.TryBuyShopChessRandomGoods(chessRandomData, from, 196f);
         }
 
@@ -428,7 +446,7 @@ namespace FAT
             var reward = chessRandomData.CurSellGoodsConfig.Reward.ConvertToRewardConfig();
             if (reward != null)
             {
-                UIItemUtility.ShowItemPanelInfo(reward.Id); 
+                UIItemUtility.ShowItemPanelInfo(reward.Id);
             }
         }
 
@@ -445,7 +463,7 @@ namespace FAT
             var chessTabData = (ShopTabChessData)Game.Manager.shopMan.GetShopTabData(_curShowTabType);
             if (!chessTabData.GetChessOrderData(index, out var chessOrderData))
                 return;
-            var from = chessBottomItemList[index].chessIcon.transform.position - new Vector3(0, (chessBottomItemList[index].chessIcon.transform as RectTransform).sizeDelta.y/2, 0);
+            var from = chessBottomItemList[index].chessIcon.transform.position - new Vector3(0, (chessBottomItemList[index].chessIcon.transform as RectTransform).sizeDelta.y / 2, 0);
             Game.Manager.shopMan.TryBuyShopChessOrderGoods(chessOrderData, from, 196f);
         }
 
@@ -455,6 +473,58 @@ namespace FAT
             if (!chessTabData.GetChessOrderData(index, out var chessOrderData))
                 return;
             UIItemUtility.ShowItemPanelInfo(chessOrderData.CurSellGoodsId);
+        }
+
+        private void _OnRefreshCommunityShopLinkItem()
+        {
+            var communityLinkMan = Game.Manager.communityLinkMan;
+            if (!communityLinkMan.IsShowShopLink())
+            {
+                return;
+            }
+            var communityShopList = communityLinkMan.GetCommunityShopList();
+            foreach (var communityShop in communityShopList)
+            {
+                var cellItem = GameObjectPoolManager.Instance.CreateObject(linkItemType, shopLinkItemRoot);
+                cellItem.SetActive(true);
+                cellItem.gameObject.SetActive(communityLinkMan.IsShowShopLinkItem(communityShop));
+                var btnItem = cellItem.GetComponent<UIShopLinkItemCell>();
+                btnItem.UpdateContent(communityShop);
+                cellList.Add(cellItem);
+            }
+        }
+        private void _DoMoveShopLinkList(float offsetX)
+        {
+            _linkdoMoveOriginPos.Set(offsetX, shopLinkRoot.transform.position.y, shopLinkRoot.transform.position.z);
+            shopLinkRoot.transform.position = _linkdoMoveOriginPos;
+            shopLinkRoot.transform.DOKill();
+            shopLinkRoot.transform.DOLocalMoveX(0, moveDuration);
+        }
+        private void _ClearCommunityShopLinkItem()
+        {
+            foreach (var item in cellList)
+            {
+                GameObjectPoolManager.Instance.ReleaseObject(linkItemType, item);
+            }
+            cellList.Clear();
+        }
+        private void _RefreshCommunityLinkReward()
+        {
+            var communityLinkMan = Game.Manager.communityLinkMan;
+            if (!communityLinkMan.IsShowRewardUI())
+            {
+                return;
+            }
+            CommunityLinkRewardData data = new CommunityLinkRewardData()
+            {
+                CommunityPopupType = CommunityPopupType.CommunityLinkReward,
+                LinkId = communityLinkMan.RecordClickLinkId
+            };
+            UIManager.Instance.OpenWindow(UIConfig.UICommunityPlanReward, data);
+            communityLinkMan.RecordClickLinkId = -1;
+            _ClearCommunityShopLinkItem();
+            _OnRefreshCommunityShopLinkItem();
+            shopLinkRoot.gameObject.SetActive(_curShowTabType == ShopTabType.Energy && communityLinkMan.IsShowShopLink());
         }
     }
 }

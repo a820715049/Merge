@@ -218,9 +218,10 @@ namespace FAT
                                 item.FlyType != FlyType.GuessMilestone && item.FlyType != FlyType.OrderLikeToken &&
                                 item.FlyType != FlyType.MineToken && item.FlyType != FlyType.MineScore &&
                                 item.FlyType != FlyType.FarmToken &&
+                                item.FlyType != FlyType.BPExp &&
                                 item.FlyType != FlyType.DuelToken && item.FlyType != FlyType.DuelMilestone && item.FlyType != FlyType.FightBoardMonster
                                 && item.FlyType != FlyType.FightBoardTreasure
-                                && item.FlyType != FlyType.WishBoardScore)
+                                && item.FlyType != FlyType.WishBoardScore && item.FlyType != FlyType.CastleToken)
                                 _TweenRewardSingle(item, trans);
                             else if (item.FlyType == FlyType.Inventory)
                                 _TweenRewardSingle(item, trans);
@@ -236,7 +237,7 @@ namespace FAT
 
             if (item.FlyType == FlyType.DecorateToken)
                 _TweenTarget(item.FlyType, item);
-            if (item.FlyType == FlyType.MineScore || item.FlyType == FlyType.WishBoardScore)
+            if (item.FlyType == FlyType.MineScore || item.FlyType == FlyType.WishBoardScore || item.FlyType == FlyType.CastleToken)
             {
                 var trans = _CreateFlyNum(item);
                 _TweenNnum(item, trans);
@@ -349,9 +350,28 @@ namespace FAT
                 || item.FlyType == FlyType.GuessMilestone || item.FlyType == FlyType.DuelToken)
                 UIFlyFactory.CreateCurveTween(seq, trans, item.WorldTo);
             else
-                UIFlyFactory.CreateStraightTween(seq, trans, item.WorldTo);
+            {
+                if (item.FlyType == FlyType.CastleToken)
+                {
+                    seq.OnComplete(() => UIFlyManager.Instance.OnCollected(item, trans as RectTransform));
+                    Game.Instance.StartCoroutineGlobal(WaitAndFly(seq, trans, item.WorldTo, item.FlyType));
+                    return;
+                }
+                else
+                {
+                    UIFlyFactory.CreateStraightTween(seq, trans, item.WorldTo);
+                }
+            }
 
             seq.OnComplete(() => UIFlyManager.Instance.OnCollected(item, trans as RectTransform));
+            seq.Play();
+        }
+
+        private static IEnumerator WaitAndFly(Sequence seq, Transform trans, Vector3 to, FlyType flyType)
+        {
+            yield return null;
+            var t = UIFlyFactory.ResolveFlyTarget(flyType);
+            UIFlyFactory.CreateStraightTween(seq, trans, t);
             seq.Play();
         }
 

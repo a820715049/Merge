@@ -74,6 +74,8 @@ namespace FAT
             _cameraAll = new ChildCameraData(_parentCamera, "CameraAll", -1, (int)canvasRect.width, (int)canvasRect.height, false);
             _cameraBuilding = new ChildCameraData(_parentCamera, "CameraBuilding", LayerMask.GetMask("Building"),
                 (int)canvasRect.width / 4, (int)canvasRect.height / 4, true);
+            //初始时默认隐藏相机
+            SetCameraEnable(false);
         }
         
         //运行时从主相机拷贝创建出来的子相机数据类

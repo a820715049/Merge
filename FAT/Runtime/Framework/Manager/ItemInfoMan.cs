@@ -60,7 +60,7 @@ namespace FAT
                 Game.Manager.itemInfoMan.FillTipsItemDataList(ItemId, TipsDataList);
             }
         }
-        
+
         //当前正在展示的物品数据
         public ItemInfoData CurShowItemData = new ItemInfoData();
 
@@ -76,7 +76,7 @@ namespace FAT
         public bool CheckIsCurOutputItem(int checkItemId)
         {
             int itemId = CurShowItemData.ItemId;
-            var mergeItemMan =  Game.Manager.mergeItemMan;
+            var mergeItemMan = Game.Manager.mergeItemMan;
             var itemCompConfig = mergeItemMan.GetItemComConfig(itemId);
             var clickSourceConfig = itemCompConfig?.clickSourceConfig;
             var autoSourceConfig = itemCompConfig?.autoSourceConfig;
@@ -122,17 +122,17 @@ namespace FAT
             }
             return false;
         }
-        
+
         public RepeatedField<int> GetCurItemChainProgress()
         {
             var categoryConfig = Game.Manager.mergeItemMan.GetCategoryConfig(CurShowItemData.ChainId);
             return categoryConfig?.Progress;
         }
-        
+
         public (bool, string) CheckCanShowProduceTitle()
         {
             int itemId = CurShowItemData.ItemId;
-            var mergeItemMan =  Game.Manager.mergeItemMan;
+            var mergeItemMan = Game.Manager.mergeItemMan;
             var itemCompConfig = mergeItemMan.GetItemComConfig(itemId);
             var clickSourceConfig = itemCompConfig?.clickSourceConfig;
             var autoSourceConfig = itemCompConfig?.autoSourceConfig;
@@ -160,7 +160,7 @@ namespace FAT
                 return (canShow, title);
             }
         }
-        
+
         public bool CheckItemIsNeedInOrder(int itemId)
         {
             using (ObjectPool<List<IOrderData>>.GlobalPool.AllocStub(out var allOrderDataList))
@@ -191,26 +191,22 @@ namespace FAT
             }
         }
 
-        public bool TryBuyShopChessGoods(int itemId, Vector3 flyFromPos)
+        public void TryBuyShopChessGoods(int itemId, Vector3 flyFromPos)
         {
             var shopItemData = Game.Manager.shopMan.TryGetChessOrderDataById(itemId);
             if (shopItemData != null)
             {
-                return Game.Manager.shopMan.TryBuyShopChessOrderGoods(shopItemData, flyFromPos, 128f);
-            }
-            else
-            {
-                return false;
+                Game.Manager.shopMan.TryBuyShopChessOrderGoods(shopItemData, flyFromPos, 128f);
             }
         }
-        
+
         public void FillItemCellDataGroupList(List<List<int>> cellDataGroupList, out int panelSize)
         {
             panelSize = -1;
             int itemId = CurShowItemData.ItemId;
             if (itemId <= 0 || cellDataGroupList == null)
                 return;
-            var mergeItemMan =  Game.Manager.mergeItemMan;
+            var mergeItemMan = Game.Manager.mergeItemMan;
             var categoryConfig = mergeItemMan.GetCategoryConfig(CurShowItemData.ChainId);
             var itemCompConfig = mergeItemMan.GetItemComConfig(itemId);
             if (categoryConfig == null || itemCompConfig == null)
@@ -231,7 +227,7 @@ namespace FAT
             {
                 if (chainProgress.Count <= 1)
                 {
-                    // panelSize = CurShowItemData.IsSpecial ? 0 : 1;  //todo 后续要做的针对特殊棋子的提示 需要使用小面板 
+                    // panelSize = CurShowItemData.IsSpecial ? 0 : 1;  //todo 后续要做的针对特殊棋子的提示 需要使用小面板
                     panelSize = 1;
                 }
                 else
@@ -360,11 +356,11 @@ namespace FAT
             }
         }
 
-        private void FillOutputProgress(int itemId, List<int> tempList, List<List<int>> cellDataGroupList, IList<int> chainProgress, 
+        private void FillOutputProgress(int itemId, List<int> tempList, List<List<int>> cellDataGroupList, IList<int> chainProgress,
             IList<int> nextChainProgress = null, IList<int> subChainProgress = null)
         {
             List<int> mergeList = new List<int>();
-            //逻辑上认为chainProgress必不会为空 若出现这种情况会报错(一般为策划配错 检查IsHideProduce字段是否配对) 
+            //逻辑上认为chainProgress必不会为空 若出现这种情况会报错(一般为策划配错 检查IsHideProduce字段是否配对)
             if (chainProgress == null)
             {
                 DebugEx.FormatError("[ItemInfoMan.FillOutputProgress]: Item Config Error! Id = {0}", itemId);
@@ -424,7 +420,7 @@ namespace FAT
             CurShowItemData.Clear();
             CurShowItemData.ItemId = itemId;
             CurShowItemData.IsHideProduce = itemConfig.IsHideProd;
-            var mergeItemMan =  Game.Manager.mergeItemMan;
+            var mergeItemMan = Game.Manager.mergeItemMan;
             //获取到棋子所属链条和在链条中的等级
             mergeItemMan.GetItemCategoryIdAndLevel(itemId, out CurShowItemData.ChainId, out var level);
             CurShowItemData.ItemLevel = level + 1;
@@ -536,7 +532,7 @@ namespace FAT
                 //如果指定等级>0
                 if (directChainLevel > 0)
                 {
-                    //判断找到的实际棋子和配置上想要的目标棋子是否一样 
+                    //判断找到的实际棋子和配置上想要的目标棋子是否一样
                     //如果一样 则显示该棋子图标
                     if (wantItemId == directRealItemId)
                     {
@@ -562,7 +558,7 @@ namespace FAT
                     itemDataList.Add(tempData);
                 }
             }
-            
+
             //-----找当前链条id对应的直接来源链条id 用于推进下一轮递归流程------
             var nextChainConfig = mergeItemMan.GetCategoryConfig(directChainId);
             var directFrom = nextChainConfig?.DirectFrom;
@@ -642,7 +638,7 @@ namespace FAT
                             foreach (var costId in tapSourceConfig.CostId)
                             {
                                 var tapCost = mergeItemMan.GetMergeTapCostConfig(costId);
-                                if (tapCost != null && tapCost.Cost > 0 && tapCost.Cost != Constant.kMergeEnergyObjId 
+                                if (tapCost != null && tapCost.Cost > 0 && tapCost.Cost != Constant.kMergeEnergyObjId
                                     && tapCost.Outputs.FindEx(kv => kv.Key == findItemId).Key > 0)
                                 {
                                     consumeItemId = tapCost.Cost;
@@ -716,7 +712,7 @@ namespace FAT
             }
             else
             {
-                //判断找到的实际吃的棋子和配置上想要吃的目标棋子是否一样 
+                //判断找到的实际吃的棋子和配置上想要吃的目标棋子是否一样
                 //如果一样 则显示该吃的棋子图标 流程完成
                 if (eatItemId == showEatItemId)
                 {

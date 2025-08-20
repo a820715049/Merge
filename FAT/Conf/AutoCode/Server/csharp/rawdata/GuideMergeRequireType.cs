@@ -25,7 +25,7 @@ namespace fat.rawdata {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "CiNyYXdkYXRhL0d1aWRlTWVyZ2VSZXF1aXJlVHlwZS5wcm90bxIHcmF3ZGF0",
-            "YSrkBwoVR3VpZGVNZXJnZVJlcXVpcmVUeXBlEgsKB1Vpc3RhdGUQABINCglC",
+            "YSr/BwoVR3VpZGVNZXJnZVJlcXVpcmVUeXBlEgsKB1Vpc3RhdGUQABINCglC",
             "b2FyZEl0ZW0QARIUChBPcmRlckNvbW1pdHRhYmxlEAISEQoNT3JkZXJDb21w",
             "bGV0ZRADEg4KCkNhbkxldmVsVXAQBBIPCgtCb2FyZFJld2FyZBAFEg4KClNl",
             "bGVjdEl0ZW0QBhIPCgtDb2xsZWN0SXRlbRAHEgkKBUxldmVsEAgSDwoLSXNs",
@@ -47,8 +47,9 @@ namespace fat.rawdata {
             "FAoQQmluZ29Db21wbGV0ZU51bRArEhQKEE1pbmVCb251c0l0ZW1NYXgQLBIT",
             "Cg9GaXJzdEZpc2hVbmxvY2sQLRITCg9EZWNvcmF0ZVByZXZpZXcQLhINCglT",
             "dG9ja0l0ZW0QLxIRCg1MZXZlbENhbkJvb3N0EDASGAoUQ2xhd09yZGVyUGlj",
-            "a1N1Y2Nlc3MQMUI9Wi1naXRsYWIuZnVucGx1cy5pby9mYXQvY29uZi9nZW4v",
-            "Z29sYW5nL3Jhd2RhdGGqAgtmYXQucmF3ZGF0YWIGcHJvdG8z"));
+            "a1N1Y2Nlc3MQMRIZChVNaW5lQ2FydFJvdW5kQ29tcGxldGUQMkI9Wi1naXRs",
+            "YWIuZnVucGx1cy5pby9mYXQvY29uZi9nZW4vZ29sYW5nL3Jhd2RhdGGqAgtm",
+            "YXQucmF3ZGF0YWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::fat.rawdata.GuideMergeRequireType), }, null, null));
@@ -108,6 +109,7 @@ namespace fat.rawdata {
     [pbr::OriginalName("StockItem")] StockItem = 47,
     [pbr::OriginalName("LevelCanBoost")] LevelCanBoost = 48,
     [pbr::OriginalName("ClawOrderPickSuccess")] ClawOrderPickSuccess = 49,
+    [pbr::OriginalName("MineCartRoundComplete")] MineCartRoundComplete = 50,
   }
 
   #endregion

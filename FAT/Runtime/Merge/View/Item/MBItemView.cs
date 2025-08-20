@@ -96,6 +96,10 @@ namespace FAT.Merge
             debugName = null;
 
             RemoveFilter();
+
+            interactContext = null;
+            stateChangeContext = null;
+            spawnContext = null;
         }
 
         public void RefreshOnComponentChange()

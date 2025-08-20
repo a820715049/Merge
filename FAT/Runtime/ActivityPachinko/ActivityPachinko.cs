@@ -365,7 +365,7 @@ namespace FAT
         {
             e.dot.SetActive(_tokenNum > 0);
             e.dotCount.gameObject.SetActive(_tokenNum > 0);
-            e.dotCount.SetText(_tokenNum > 999 ? "999+" : _tokenNum.ToString());
+            e.dotCount.SetRedPoint(_tokenNum);
             return null;
         }
 
@@ -655,9 +655,7 @@ namespace FAT
         {
             e.dot.SetActive(Game.Manager.pachinkoMan.GetCoinCount() > 0);
             e.dotCount.gameObject.SetActive(Game.Manager.pachinkoMan.GetCoinCount() > 0);
-            e.dotCount.SetText(Game.Manager.pachinkoMan.GetCoinCount() > 999
-                ? "999+"
-                : Game.Manager.pachinkoMan.GetCoinCount().ToString());
+            e.dotCount.SetRedPoint(Game.Manager.pachinkoMan.GetCoinCount());
         }
 
         public override void Clear(ListActivity.Entry e_)

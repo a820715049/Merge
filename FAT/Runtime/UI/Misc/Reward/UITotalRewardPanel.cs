@@ -6,6 +6,7 @@
  * Description: 通用全部奖励界面
  */
 
+using System;
 using System.Collections.Generic;
 using EL;
 using TMPro;
@@ -116,11 +117,19 @@ namespace FAT
             Game.Manager.specialRewardMan.CheckSpecialRewardFinish();
         }
 
+        Action callBack;
         protected override void OnParse(params object[] items)
         {
+            callBack = null;
             _commitData = items[0] as List<RewardCommitData>;
+            if (items.Length > 1) callBack = items[1] as Action;
             PrepareCell();
             UpdateAllCell();
+        }
+
+        protected override void OnPostClose()
+        {
+            callBack?.Invoke();
         }
 
         private void PrepareCell()

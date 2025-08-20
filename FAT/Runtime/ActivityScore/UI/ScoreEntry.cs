@@ -1,8 +1,8 @@
 /**
  * @Author: zhangpengjian
  * @Date: 2024/9/7 11:54:26
- * @LastEditors: zhangpengjian
- * @LastEditTime: 2024/9/7 11:54:26
+ * @LastEditors: shentuange
+ * @LastEditTime: 2025/06/27 16:37:11
  * Description: 积分活动入口
  */
 
@@ -16,6 +16,7 @@ using System.Collections.Generic;
 using Config;
 using DG.Tweening;
 using EventType = fat.rawdata.EventType;
+using fat.rawdata;
 
 namespace FAT
 {
@@ -51,11 +52,11 @@ namespace FAT
         private float currentV;
         private Coroutine routine;
         private List<string> listC = new();
-        
+
 #if UNITY_EDITOR
         private void OnValidate()
         {
-            if (Application.isPlaying) 
+            if (Application.isPlaying)
                 return;
             var root = transform.Find("group");
             group = root.gameObject;
@@ -119,7 +120,14 @@ namespace FAT
             //当玩家离开棋盘时 尝试commit奖励 确保数据和显示正确
             if (activityScore != null)
             {
-                activityScore.TryCommitReward();
+                if (activityScore.ShouldPopup())
+                {
+                    activityScore.TryPopRewardUI();
+                }
+                else
+                {
+                    activityScore.TryCommitReward();
+                }
                 activityScore.PrevFinalMileStoneRewardId = 0;
                 activityScore.PrevFinalMileStoneRewardCount = 0;
             }
@@ -225,7 +233,6 @@ namespace FAT
         {
             var list = activityScore.ListM;
             var next = activityScore.MilestoneNext((int)currentV);
-
             (ActivityScore.Node, int) Node(int v_, int count)
             {
                 var finalScore = activityScore.ConfDetail.FinalMilestoneScore;
@@ -270,6 +277,13 @@ namespace FAT
                     Progress(node.value, prev);
                     var milestoneScore = node.value - prev;
                     progress.text.text = $"{milestoneScore}/{milestoneScore}";
+
+                    // 第一个里程碑达成时检查是否需要弹窗
+                    if (activityScore.ShouldPopup())
+                    {
+                        activityScore.TryPopRewardUI();
+                    }
+
                     yield return new WaitForSeconds(1.5f);
                     if (!activityScore.HasCycleMilestone())
                     {
@@ -286,7 +300,7 @@ namespace FAT
 
                     if (next < 0)
                     {
-                        //todo@eric 
+                        //todo@eric
                         activityScore.PrevFinalMileStoneRewardId = 0;
                         activityScore.PrevFinalMileStoneRewardCount = 0;
                     }
@@ -315,7 +329,7 @@ namespace FAT
             if (listC.Count > 0)
             {
                 var a = listC[0].Split("/");
-                var cur = targetV; 
+                var cur = targetV;
                 var tar = int.Parse(a[1]);
                 Refresh(cur, tar);
                 addNum.text = (tar - cur).ToString();
@@ -346,12 +360,24 @@ namespace FAT
         private void OnMileStoneChanged(RewardCommitData r)
         {
             animator.SetTrigger("Punch");
-            rewardIcon.transform.DOScale(1.5f, 0.2f).OnComplete(() =>
+            // 当RewardPopup为true时不飞奖励（奖励在UI中处理），为false时飞奖励
+            if (!activityScore.ConfD.RewardPopup)
             {
-                rewardIcon.transform.localScale = Vector3.one;
-                MessageCenter.Get<MSG.SCORE_FLY_REWARD_CENTER>().Dispatch((rewardIcon.transform.position, r,
-                    activityScore));
-            });
+                rewardIcon.transform.DOScale(1.5f, 0.2f).OnComplete(() =>
+                {
+                    rewardIcon.transform.localScale = Vector3.one;
+                    MessageCenter.Get<MSG.SCORE_FLY_REWARD_CENTER>().Dispatch((rewardIcon.transform.position, r,
+                        activityScore));
+                });
+            }
+            else
+            {
+                // 不飞奖励时，只播放缩放动画
+                rewardIcon.transform.DOScale(1.5f, 0.2f).OnComplete(() =>
+                {
+                    rewardIcon.transform.localScale = Vector3.one;
+                });
+            }
         }
 
         private void ScoreIconScaleAnimate(FlyType type)
@@ -401,12 +427,17 @@ namespace FAT
 
         private void BeginProgressAnimate()
         {
-            if (!activityScore.HasCycleMilestone())
+            //如果需要弹窗领奖，这里要播进度条动画，而不是直接消失，消失会在进度条动画中处理
+            if (!activityScore.ShouldPopup())
             {
-                Visible(false);
-                MessageCenter.Get<MSG.ACTIVITY_ENTRY_LAYOUT_REFRESH>().Dispatch();
-                return;
+                if (!activityScore.HasCycleMilestone())
+                {
+                    Visible(false);
+                    MessageCenter.Get<MSG.ACTIVITY_ENTRY_LAYOUT_REFRESH>().Dispatch();
+                    return;
+                }
             }
+
             if (routine != null)
                 return;
             routine = Game.Instance.StartCoroutineGlobal(Animate());
@@ -418,7 +449,6 @@ namespace FAT
             activityScore = (ActivityScore)activity;
             RefreshEntry(activityScore);
         }
-        
         /// <summary>
         /// 在棋盘内时，只有在积分活动入口被划出屏幕外，划入积分活动进度条
         /// </summary>

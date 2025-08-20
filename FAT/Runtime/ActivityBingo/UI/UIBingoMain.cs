@@ -48,6 +48,7 @@ namespace FAT
         [SerializeField] private GameObject[] objSelect;
         // 玩法进行状态时的组件
         [SerializeField] private GameObject[] objMain;
+        [SerializeField] private Button btnGuide;
         [SerializeField] private Button btnClose;
         [SerializeField] private Button btnGo;
         [SerializeField] private Button btnNotReady;
@@ -82,6 +83,7 @@ namespace FAT
 
             transform.Access<Button>("Mask").onClick.AddListener(Close);
             btnClose.onClick.AddListener(Close);
+            btnGuide.onClick.AddListener(OnBtnClickGuide);
             btnGo.onClick.AddListener(OnBtnClickStart);
             btnNotReady.onClick.AddListener(OnBtnClickNotReady);
         }
@@ -281,6 +283,11 @@ namespace FAT
         {
             // 只有未选择group时会出现此按钮
             Game.Manager.commonTipsMan.ShowPopTips(Toast.ItemBingoChoose);
+        }
+
+        private void OnBtnClickGuide()
+        {
+            UIConfig.UIBingoGuide.Open();
         }
 
         private void OnBtnClickStart()

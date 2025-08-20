@@ -4,6 +4,7 @@ using EL;
 using TMPro;
 using fat.rawdata;
 using static fat.conf.Data;
+using UnityEngine.UI;
 
 namespace FAT
 {
@@ -15,6 +16,7 @@ namespace FAT
         public float offset = 18f;
         private int id;
         private ObjCardPack conf;
+        [SerializeField] private Button btnProbability;
 
 #if UNITY_EDITOR
         public void OnValidate()
@@ -29,6 +31,14 @@ namespace FAT
 
         protected override void OnCreate()
         {
+            if (btnProbability != null)
+            {
+                btnProbability.onClick.AddListener(() =>
+                {
+                    Close();
+                    UIManager.Instance.OpenWindow(UIConfig.UIProbabilityTips, true);
+                });
+            }
         }
 
         protected override void OnParse(params object[] items)
@@ -51,6 +61,10 @@ namespace FAT
             RefreshInfo();
             //刷新tips位置
             _RefreshTipsPos(offset);
+            if (btnProbability != null)
+            {
+                btnProbability.gameObject.SetActive(Game.Manager.featureUnlockMan.IsFeatureEntryUnlocked(FeatureEntry.FeatureDropProbability));
+            }
         }
 
         public void RefreshInfo()

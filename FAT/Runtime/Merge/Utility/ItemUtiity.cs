@@ -444,7 +444,7 @@ namespace FAT.Merge
         {
             //check category
             var cateConfig = Env.Instance.GetCategoryByItem(itemId);
-            if (cateConfig != null && cateConfig.MergeStyle == 0)            //merge style = 0就是可合成 
+            if (cateConfig != null && cateConfig.MergeStyle == 0)            //merge style = 0就是可合成
             {
                 var idx = cateConfig.Progress.IndexOf(itemId);
                 if (idx + 1 < cateConfig.Progress.Count)
@@ -1461,26 +1461,31 @@ namespace FAT.Merge
             return false;
         }
 
-        public static bool SpeedUpEmptyItem(Item item)
+        public static void TrySpeedUpEmptyItem(Item item, System.Action whenSuccess)
         {
             if (TryGetItemSpeedUpInfo(item, out var component, out var operation, out var price))
             {
                 var componentType = ItemComponentTable.GetEnumByType(component.GetType());
                 var globalData = Env.Instance.GetGlobalData();
-                bool freeBubble = false;
-
+                bool isFree = false;
+                ReasonString reason;
                 switch (operation)
                 {
                     case ItemSpeedUpType.FreeBubble:
-                        freeBubble = true;
+                        isFree = true;
+                        reason = ReasonString.bubble;
                         globalData.FreeBubbleUsed++;
                         DebugEx.FormatInfo("Merge::ItemUtility::SpeedUpEmptyItem ----> free speed up used {0}:{1}.{2}", globalData.FreeBubbleUsed, item, componentType);
                         break;
                     case ItemSpeedUpType.FreeSpeedUp:
+                        isFree = true;
+                        reason = ReasonString.skip;
                         globalData.FreeSpeedUpUsed++;
                         DebugEx.FormatInfo("Merge::ItemUtility::SpeedUpEmptyItem ----> free speed up used {0}:{1}.{2}", globalData.FreeSpeedUpUsed, item, componentType);
                         break;
                     case ItemSpeedUpType.FreeRecharge:
+                        isFree = true;
+                        reason = ReasonString.skip;
                         globalData.FreeRechargeUsed++;
                         DebugEx.FormatInfo("Merge::ItemUtility::SpeedUpEmptyItem ----> free recharge used {0}:{1}.{2}", globalData.FreeRechargeUsed, item, componentType);
                         break;
@@ -1488,101 +1493,117 @@ namespace FAT.Merge
                         if (!Env.Instance.CanUseGem(price))
                         {
                             DebugEx.FormatWarning("Merge::ItemUtility::SpeedUpEmptyItem ----> recharge with money fail {0}:{1}.{2}({3})", globalData.FreeRechargeUsed, item, componentType, price);
-                            return false;
+                            return;
                         }
                         else
                         {
                             DebugEx.FormatInfo("Merge::ItemUtility::SpeedUpEmptyItem ----> recharge with money {0}:{1}.{2}({3})", globalData.FreeRechargeUsed, item, componentType, price);
                             if (componentType == ItemComponentType.Bubble)
-                                Env.Instance.UseGem(price, ReasonString.bubble);
+                            {
+                                reason = ReasonString.bubble;
+                            }
                             else
-                                Env.Instance.UseGem(price, ReasonString.skip);
+                            {
+                                reason = ReasonString.skip;
+                            }
                         }
                         break;
                 }
-                var com = item.GetItemComponent(componentType);
-                switch (componentType)
+                if (isFree)
                 {
-                    case ItemComponentType.Bubble:
-                        {
-                            if (com is ItemBubbleComponent)
+                    ProcessPaySuccess();
+                }
+                else
+                {
+                    Env.Instance.UseGem(price, reason, ProcessPaySuccess, componentType != ItemComponentType.Bubble);
+                }
+                // 消费成功之后的事情
+                void ProcessPaySuccess()
+                {
+                    var com = item.GetItemComponent(componentType);
+                    switch (componentType)
+                    {
+                        case ItemComponentType.Bubble:
                             {
-                                // 已经付费
-                                item.parent?.UnleashBubbleItem(item);
-                                // track
-                                DataTracker.TrackMergeActionBubble(item, ItemUtility.GetItemLevel(item.tid), false, freeBubble);
-                            }
-                        }
-                        break;
-                    case ItemComponentType.ClickSouce:
-                        {
-                            if (com is ItemClickSourceComponent _click)
-                            {
-                                if (_click.isOutputing)
+                                if (com is ItemBubbleComponent)
                                 {
-                                    _click.SpeedOutput();
-                                }
-                                else if (_click.isReviving)
-                                {
-                                    _click.SpeedRevive();
+                                    item.parent?.UnleashBubbleItem(item);
+                                    // track
+                                    //免费的情况不会弹窗，不用担心打点问题
+                                    DataTracker.TrackMergeActionBubble(item, ItemUtility.GetItemLevel(item.tid), false, isFree);
                                 }
                             }
-                        }
-                        break;
-                    case ItemComponentType.MixSource:
-                        {
-                            if (com is ItemMixSourceComponent _mix)
+                            break;
+                        case ItemComponentType.ClickSouce:
                             {
-                                if (_mix.isOutputing)
+                                if (com is ItemClickSourceComponent _click)
                                 {
-                                    _mix.SpeedOutput();
+                                    if (_click.isOutputing)
+                                    {
+                                        _click.SpeedOutput();
+                                    }
+                                    else if (_click.isReviving)
+                                    {
+                                        _click.SpeedRevive();
+                                    }
                                 }
-                                else if (_mix.isReviving)
+                            }
+                            break;
+                        case ItemComponentType.MixSource:
+                            {
+                                if (com is ItemMixSourceComponent _mix)
                                 {
-                                    _mix.SpeedRevive();
+                                    if (_mix.isOutputing)
+                                    {
+                                        _mix.SpeedOutput();
+                                    }
+                                    else if (_mix.isReviving)
+                                    {
+                                        _mix.SpeedRevive();
+                                    }
                                 }
                             }
-                        }
-                        break;
-                    case ItemComponentType.AutoSouce:
-                        {
-                            if (com is ItemAutoSourceComponent _auto)
+                            break;
+                        case ItemComponentType.AutoSouce:
                             {
-                                if (_auto.isOutputing)
-                                    _auto.SpeedOutput();
+                                if (com is ItemAutoSourceComponent _auto)
+                                {
+                                    if (_auto.isOutputing)
+                                        _auto.SpeedOutput();
+                                }
                             }
-                        }
-                        break;
-                    case ItemComponentType.EatSource:
-                        {
-                            if (com is ItemEatSourceComponent _eat)
+                            break;
+                        case ItemComponentType.EatSource:
                             {
-                                if (_eat.state == ItemEatSourceComponent.Status.Eating)
-                                    _eat.SpeedEat();
+                                if (com is ItemEatSourceComponent _eat)
+                                {
+                                    if (_eat.state == ItemEatSourceComponent.Status.Eating)
+                                        _eat.SpeedEat();
+                                }
                             }
-                        }
-                        break;
-                    case ItemComponentType.Chest:
-                        {
-                            if (com is ItemChestComponent _chest)
+                            break;
+                        case ItemComponentType.Chest:
                             {
-                                if (_chest.isWaiting)
-                                    _chest.SpeedOpen();
+                                if (com is ItemChestComponent _chest)
+                                {
+                                    if (_chest.isWaiting)
+                                        _chest.SpeedOpen();
+                                }
                             }
-                        }
-                        break;
-                        // case ItemComponentType.Dying:
-                        // {
-                        //     if(com is ItemDyingComponent _dying && _dying.isSelfTrigger)
-                        //     {
-                        //         if(!_dying.canTriggerDie)
-                        //             _dying.SpeedDie();
-                        //     }
-                        // }
-                        // break;
+                            break;
+                            // case ItemComponentType.Dying:
+                            // {
+                            //     if(com is ItemDyingComponent _dying && _dying.isSelfTrigger)
+                            //     {
+                            //         if(!_dying.canTriggerDie)
+                            //             _dying.SpeedDie();
+                            //     }
+                            // }
+                            // break;
+                    }
+                    whenSuccess?.Invoke();
                 }
             }
-            return true;
         }
 
         public static long GetItemEmptyWaitMilli(Item item)

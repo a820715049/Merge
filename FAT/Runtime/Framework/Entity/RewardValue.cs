@@ -11,6 +11,7 @@ public struct RewardValue
 {
     public int id;
     public int count;
+    public bool isClaimed;
 }
 
 public struct RewardFlySound

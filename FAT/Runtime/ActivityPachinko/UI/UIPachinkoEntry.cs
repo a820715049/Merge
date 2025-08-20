@@ -49,9 +49,9 @@ namespace FAT
         private void InitComp()
         {
             _group = transform.Find("group").gameObject;
-            _redPoint = transform.Find("group/redTarget/red").gameObject;
+            _redPoint = transform.Find("group/redTarget/dotCountGlow").gameObject;
             transform.Access("group/cdBg/cd", out _cd);
-            transform.Access("group/redTarget/red/redNum", out _count);
+            transform.Access("group/redTarget/dotCountGlow/redNum", out _count);
             transform.Access("group/progress/addNum", out _addNum);
             transform.Access("group/progress/addNumShow", out _addNumShow);
             transform.Access("group/progress", out _progress);
@@ -60,7 +60,7 @@ namespace FAT
             transform.Access("group/progress/mask", out _progressAnim);
             transform.Access("group/icon", out _scoreAnim);
             transform.Access("group/progress/addNum", out _addNumAnim);
-            transform.Access("group/redTarget/red", out _redPointAnim);
+            transform.Access("group/redTarget/dotCountGlow", out _redPointAnim);
         }
 
         private void OnClick()
@@ -117,7 +117,7 @@ namespace FAT
             if (!Game.Manager.pachinkoMan.Valid) return;
             var count = Game.Manager.pachinkoMan.GetCoinCount();
             _redPoint.SetActive(count != 0);
-            _count.text = count <= 999 ? count.ToString() : "999+";
+            _count.SetRedPoint(count);
         }
 
         /// <summary>

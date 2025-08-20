@@ -61,7 +61,7 @@ namespace FAT
             }
             int newCount = albumData.CheckNewCardCount(groupId);
             redPointGo.SetActive(newCount > 0);
-            redPointNum.text = newCount.ToString();
+            redPointNum.SetRedPoint(newCount);
         }
 
         private void _OnClickBtnGroup()

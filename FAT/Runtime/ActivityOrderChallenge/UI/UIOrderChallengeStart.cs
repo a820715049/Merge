@@ -59,6 +59,7 @@ namespace FAT
             var r = activityOrderChallenge.TotalReward;
             rewardIcon.SetImage(Game.Manager.rewardMan.GetRewardIcon(r.Id, r.Count));
             rewardCount.SetText(r.Count.ToString());
+            _RefreshCD();
         }
 
         protected override void OnPreClose()

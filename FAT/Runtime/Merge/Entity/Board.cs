@@ -49,7 +49,7 @@ namespace FAT.Merge
         MagicHour,  // 星想事成
         TrigAutoSource,
         OrderLike,  // 好评订单
-        OrderRate,  //  进度礼盒 
+        OrderRate,  //  进度礼盒
         ActiveSource,   // 外部触发式棋子产出
     }
 
@@ -90,7 +90,7 @@ namespace FAT.Merge
             MagicHour,
             TrigAutoSource,
             OrderLike,  // 好评订单
-            OrderRate,  //  进度礼盒 
+            OrderRate,  //  进度礼盒
             ActiveSource,   // 外部触发式棋子产出
             Fishing,        // 钓鱼
             Farm,       // 农场
@@ -1974,7 +1974,7 @@ namespace FAT.Merge
                 }
                 else if ((world.activeBoard?.boardId ?? 0) == Constant.MainBoardId)
                 {
-                    //检查是否有不属于主棋盘的棋子被发到了主棋盘奖励箱里 如果有的话 在点击时直接消耗掉 
+                    //检查是否有不属于主棋盘的棋子被发到了主棋盘奖励箱里 如果有的话 在点击时直接消耗掉
                     //本逻辑目前只针对迷你棋盘主链条棋子
                     var objConf = Env.Instance.GetItemMergeConfig(nextItem);
                     if (objConf != null && objConf.BoardId > Constant.MainBoardId)  //objConf.BoardId大于1说明本棋子不想发到主棋盘
@@ -2096,23 +2096,20 @@ namespace FAT.Merge
             onUseTimeSkipper?.Invoke(item);
         }
 
-        public bool UnfrozenItemByGem(Item item)
+        public void UnfrozenItemByGem(Item item)
         {
             if (item.parent != this)
             {
                 DebugEx.FormatWarning("Merge::Board ----> Unfrozen: not on me");
-                return false;
+                return;
             }
             int price = ItemUtility.GetUnfrozenPrice(item);
             if (price > 0 && Env.Instance.CanUseGem(price))
             {
-                Env.Instance.UseGem(price, ReasonString.unfrozen);
-                UnfrozenItem(item);
-                return true;
-            }
-            else
-            {
-                return false;
+                Env.Instance.UseGem(price, ReasonString.unfrozen, () =>
+                {
+                    UnfrozenItem(item);
+                });
             }
         }
 

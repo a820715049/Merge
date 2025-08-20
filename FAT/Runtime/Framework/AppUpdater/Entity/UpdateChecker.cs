@@ -74,6 +74,8 @@ namespace FAT.AppUpdater
             await UniTask.WaitUntil(() => entryPointRequester.RequestId != reqId, cancellationToken: token);
             if (HasHotUpdate(entryPointRequester.DataVersion, entryPointRequester.ResVersion))
             {
+                // track
+                DataTracker.hotfix_popup.Track();
                 Info("hot update");
                 Game.Manager.commonTipsMan.ShowMessageTipsCustom(I18N.Text("#SysComDesc1233"),
                                                             I18N.Text("#SysComDesc4"),

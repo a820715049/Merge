@@ -69,7 +69,7 @@ namespace FAT
 
             using var _ = PoolMapping.PoolMappingAccess.Borrow<List<int>>(out var itemIds);
             // 找到每个链条上的最高等级的item
-            BingoUtility.FillHighestLeveItemByCategory(categoryIds, itemIds);
+            ItemBingoUtility.FillHighestLeveItemByCategory(categoryIds, itemIds);
             for (var i = 0; i < itemRoot.childCount; i++)
             {
                 var item = itemRoot.GetChild(i);

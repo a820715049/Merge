@@ -18,6 +18,7 @@ namespace FAT
         public MBBoardMisc boardMisc { get; private set; }
         public MBOrderBagTips orderBagTips { get; private set; }
         public MBBoardMoveRoot boardDragRoot { get; private set; }
+        public MBBoardActivityTips boardActivityTips { get; private set; }
 
         public void RegisterModuleEntry(UIMergeBoardMain inst)
         {
@@ -63,6 +64,11 @@ namespace FAT
         {
             boardDragRoot = transform.Find(path).GetComponent<MBBoardMoveRoot>();
         }
+        
+        public void RegisterModuleActivityTips(Transform transform, string path)
+        {
+            boardActivityTips = transform.Find(path).GetComponent<MBBoardActivityTips>();
+        }
 
         public void Install()
         {
@@ -75,6 +81,7 @@ namespace FAT
             boardMisc.Setup();
             orderBagTips.Setup();
             boardDragRoot.Setup();
+            boardActivityTips.Setup();
         }
 
         public void InitOnPreOpen()
@@ -87,6 +94,7 @@ namespace FAT
             boardMisc.InitOnPreOpen();
             orderBagTips.InitOnPreOpen();
             boardDragRoot.InitOnPreOpen();
+            boardActivityTips.InitOnPreOpen();
         }
 
         public void CleanupOnPostClose()
@@ -99,6 +107,7 @@ namespace FAT
             boardMisc.CleanupOnPostClose();
             orderBagTips.CleanupOnPostClose();
             boardDragRoot.CleanupOnPostClose();
+            boardActivityTips.CleanupOnPostClose();
         }
     }
 }

@@ -190,7 +190,7 @@ namespace FAT
         {
             var changed = false;
             if (!IsOrderType()) { return changed; }
-            if (order.OrderType != (int)OrderType.Normal) { return changed; }
+            if (order.OrderType == (int)OrderType.MagicHour) { return changed; }
             var state = order.GetState((int)OrderParamType.ScoreEventIdBR);
             // 没有奖励 or 不是同一期活动时给这个订单生成右下角积分
             if (state == null || state.Value != Id)
@@ -941,7 +941,7 @@ namespace FAT
         {
             e.dot.SetActive(p.GetTokenNum() > 0);
             e.dotCount.gameObject.SetActive(p.GetTokenNum() > 0);
-            e.dotCount.SetText(p.GetTokenNum().ToString());
+            e.dotCount.SetRedPoint(p.GetTokenNum());
         }
 
         public override void Clear(ListActivity.Entry e_)

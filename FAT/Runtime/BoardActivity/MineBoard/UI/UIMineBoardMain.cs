@@ -296,6 +296,7 @@ namespace FAT
         }
         private void OnMoveUpReady()
         {
+            if (_isPlayingMove) { return; }
             _isPlayingMove = true;
             UIManager.Instance.Block(true);
             BoardViewManager.Instance.OnUserActive();

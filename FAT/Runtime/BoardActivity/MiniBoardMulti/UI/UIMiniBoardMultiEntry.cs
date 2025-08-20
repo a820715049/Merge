@@ -26,11 +26,11 @@ namespace FAT
         public void Awake()
         {
             transform.Access("Root/cd", out _cd);
-            transform.Access("Root/RedPoint/Num", out _redPointNum);
+            transform.Access("Root/dotCount/Count", out _redPointNum);
             transform.Access("Root/Progress/ProgressTxt", out _progressTxt);
             _animator = GetComponent<Animator>();
             _root = transform.GetChild(0).gameObject;
-            _redPoint = transform.Find("Root/RedPoint").gameObject;
+            _redPoint = transform.Find("Root/dotCount").gameObject;
             _mask = transform.Find("Root/Progress/Mask") as RectTransform;
             var button = transform.Find("Root/Bg").GetComponent<Button>().WithClickScale().FixPivot();
             button.onClick.AddListener(EntryClick);
@@ -86,7 +86,7 @@ namespace FAT
             if (!Game.Manager.miniBoardMultiMan.CheckIsShowRedPoint(out var num))
                 return;
             _redPoint.SetActive(num > 0);
-            _redPointNum.text = num.ToString();
+            _redPointNum.SetRedPoint(num);
         }
 
         private void RefreshProgress()

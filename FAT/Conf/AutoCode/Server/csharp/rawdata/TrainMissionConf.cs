@@ -109,7 +109,7 @@ namespace fat.rawdata {
     public const int IdFieldNumber = 1;
     private int id_;
     /// <summary>
-    /// 订单id
+    /// 火车id
     /// annotation@field_id(id="true")
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -126,7 +126,7 @@ namespace fat.rawdata {
         = pb::FieldCodec.ForString(18);
     private readonly pbc::RepeatedField<string> itemInfo_ = new pbc::RepeatedField<string>();
     /// <summary>
-    /// 订单需求棋子
+    /// 火车需求棋子
     /// (棋子id:奖励id:奖励数量)
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -140,7 +140,7 @@ namespace fat.rawdata {
         = pb::FieldCodec.ForString(26);
     private readonly pbc::RepeatedField<string> reward_ = new pbc::RepeatedField<string>();
     /// <summary>
-    /// 订单奖励
+    /// 火车奖励
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<string> Reward {

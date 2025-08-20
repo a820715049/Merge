@@ -16,8 +16,10 @@ namespace FAT
     using static ActivityLite;
     using static PoolMapping;
 
-    public class Activity : IGameModule, IUserDataHolder, IPostSetUserDataListener, IUpdate {
-        public class TypeInfo {
+    public class Activity : IGameModule, IUserDataHolder, IPostSetUserDataListener, IUpdate
+    {
+        public class TypeInfo
+        {
             public EventTypeInfo conf;
             public ConditionExpression.Expr expr;
             public bool ready;
@@ -70,6 +72,7 @@ namespace FAT
         internal readonly Dictionary<(int, int), ActivityLike> pending = new();
         private readonly List<ActivityLike> limbo = new();
         private readonly List<ActivityLike> observer = new();
+        private IDictionary<int, EventTime> allEvents;
         private long infoTS;
         private long confTS;
         internal readonly ActivityPopup popup;
@@ -114,6 +117,7 @@ namespace FAT
 
         public void LoadConfig()
         {
+            allEvents = GetEventTimeMap();
             var cond = Game.Manager.activityTrigger.cond;
             foreach (var v in GetEventTypeInfoSlice())
             {
@@ -213,7 +217,7 @@ namespace FAT
 
         private void _RegisterUpdate(IActivityUpdate obj) => _updateHelper.Register(obj);
         private void _UnregisterUpdate(IActivityUpdate obj) => _updateHelper.Unregister(obj);
-        
+
         void IUpdate.Update(float deltaTime)
         {
             _updateHelper.UpdateAll(deltaTime);
@@ -221,7 +225,8 @@ namespace FAT
 
         #endregion
 
-        public RankingActivity RankingData() {
+        public RankingActivity RankingData()
+        {
             var list = LookupActive(EventType.Rank);
             if (list == null || list.Count == 0) return null;
             var data = new RankingActivity();
@@ -449,6 +454,9 @@ namespace FAT
             LookupAny(type_, out var v);
             return v;
         }
+
+        public bool LookupConf(int id_, out EventTime conf_) => allEvents.TryGetValue(id_, out conf_);
+
         public bool LookupAny(EventType type_, out ActivityLike acti_)
         {
             var list = LookupActive(type_);
@@ -549,7 +557,8 @@ namespace FAT
                 EventType.Energy or EventType.DailyPop or EventType.OnePlusOne or EventType.MineOnePlusOne or EventType.EndlessPack or EventType.FarmEndlessPack or
                 EventType.NewSession or EventType.ThreeForOnePack or EventType.EndlessThreePack or EventType.GemEndlessThree or
                 EventType.GemThreeForOne or EventType.OnePlusTwo or EventType.ProgressPack or EventType.RetentionPack or EventType.MarketSlidePack or
-                EventType.EnergyMultiPack or EventType.ShinnyGuarPack or EventType.DiscountPack or EventType.ErgListPack or EventType.FightOnePlusOne or EventType.WishEndlessPack
+                EventType.EnergyMultiPack or EventType.ShinnyGuarPack or EventType.DiscountPack or EventType.ErgListPack or EventType.FightOnePlusOne or EventType.WishEndlessPack or
+                EventType.SpinPack or EventType.Bp
                     => giftpack,
                 EventType.De or EventType.Dem
                     => Game.Manager.dailyEvent.ActivityGroup,

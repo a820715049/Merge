@@ -694,6 +694,8 @@ namespace FAT
                     // 选中目标位置
                     _RefreshInfo(targetItem.coord.x, targetItem.coord.y);
                 }
+                //使用技能棋子成功时发事件
+                MessageCenter.Get<MSG.GAME_BOARD_ITEM_SKILL>().Dispatch(skillItem, skill.type);
             }
         }
 

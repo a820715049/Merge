@@ -58,7 +58,7 @@ namespace FAT
 
         private void _RrefreshNum(int num)
         {
-            txtNum.text = $"{num}";
+            txtNum.SetRedPoint(num);
             txtNum.transform.parent.gameObject.SetActive(num > 0);
         }
 

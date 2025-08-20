@@ -382,12 +382,12 @@ namespace FAT
             //等待一段时间播建筑建造音效
             Game.Manager.audioMan.TriggerSound("DecoratePlaceConfirm");
             yield return new WaitForSeconds(d1 - d11);
+            //建筑建造动画播完后  直接播建筑的idle动画
+            asset.PlayAny("ans_dyn_idle", true);
             //开启针对RT图的后处理 同时会触发建筑建造的一系列表现
             buildingEffect?.StartPostProcess();
             //等待一段播建造完成效果的时间
             yield return new WaitForSeconds(info.buildingFinishDelay);
-            //建筑建造表现的效果完成后播建筑的idle动画
-            asset.PlayAny("ans_dyn_idle", true);
             
             // (3).建筑建造结束
             //将建筑的层级设回原层级

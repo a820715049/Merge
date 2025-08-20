@@ -214,7 +214,8 @@ namespace FAT {
             (e, p) = (e_, p_);
             e.dot.SetActive(Game.Manager.miniBoardMultiMan.World?.rewardCount > 0);
             e.dotCount.gameObject.SetActive(Game.Manager.miniBoardMultiMan.World?.rewardCount > 0);
-            e.dotCount.SetText((Game.Manager.miniBoardMultiMan.World?.rewardCount.ToString()));
+            var rewardCount = Game.Manager.miniBoardMultiMan.World?.rewardCount ?? 0;
+            e.dotCount.SetRedPoint(rewardCount);
             MessageCenter.Get<CHECK_MINI_BOARD_MULTI_ENTRY_RED_POINT>().AddListenerUnique(RefreshDot);
         }
 
@@ -223,7 +224,8 @@ namespace FAT {
             if(activity != p) return;
             e.dot.SetActive(Game.Manager.miniBoardMultiMan.World?.rewardCount > 0);
             e.dotCount.gameObject.SetActive(Game.Manager.miniBoardMultiMan.World?.rewardCount > 0);
-            e.dotCount.SetText((Game.Manager.miniBoardMultiMan.World?.rewardCount.ToString()));
+            var rewardCount = Game.Manager.miniBoardMultiMan.World?.rewardCount ?? 0;
+            e.dotCount.SetRedPoint(rewardCount);
         }
 
         public override void Clear(ListActivity.Entry e_)

@@ -17,6 +17,7 @@ namespace FAT
         #region  FAT
         public class GAME_ORDER_CHANGE : MessageBase<List<IOrderData>, List<IOrderData>> { }  // channged， newlyAdded
         public class GAME_ORDER_COMPLETED : MessageBase<IOrderData> { }
+        public class GAME_ORDER_REFRESH : MessageBase<IOrderData> { }
         public class GAME_ORDER_TRY_FINISH_FROM_UI : MessageBase<IOrderData, bool> { }  // param1: order / param2: 是否需要确认消耗
         public class GAME_ORDER_ORDERBOX_BEGIN : MessageBase<Merge.Item> { }
         public class GAME_ORDER_ORDERBOX_END : MessageBase { }
@@ -27,6 +28,7 @@ namespace FAT
         public class UI_BOARD_ORDER_ANIMATING : MessageBase { }
         public class UI_BOARD_ORDER_RELOAD : MessageBase<IOrderData, string> { }    // 订单数据 订单theme
         public class UI_NEWLY_FINISHED_ORDER_SHOW : MessageBase<Transform> { } // 订单transform
+        public class UI_ORDER_REQUEST_SCROLL : MessageBase<Transform> { } // 订单transform
         public class BOARD_AREA_ADAPTER_COMPLETE : MessageBase<float> { }
 
         #endregion
@@ -66,6 +68,7 @@ namespace FAT
         public class GAME_HANDBOOK_REWARD : MessageBase<int> { }      //param: items that is rewarded
         public class GAME_MERGE_ITEM_EVENT : MessageBase<Merge.Item, Merge.ItemEventType> { }
         public class GAME_BOARD_ITEM_MERGE : MessageBase<Merge.Item> { }
+        public class GAME_BOARD_ITEM_SKILL : MessageBase<Merge.Item, SkillType> { }    //使用技能棋子成功时发事件 Item为技能棋子本身 SkillType为技能棋子类型
         public class GAME_BAG_ITEM_INFO_CHANGE : MessageBase { }    //背包
         public class GAME_SHOP_ENTRY_STATE_CHANGE : MessageBase<bool> { }  //控制顶部商城入口按钮显隐
         public class GAME_LEVEL_GO_STATE_CHANGE : MessageBase<bool> { }  //控制顶部等级Icon显隐
@@ -211,7 +214,8 @@ namespace FAT
         public class GAME_ERG_LIST_PACK_CLAIM_SUCC : MessageBase<PackErgList.ErgTaskData> { }  //体力列表礼包领取成功
 
         public class UI_ORDER_ADJUST_SCROLL : MessageBase<float, float> { }  // param1: posX, param2: duration
-        public class UI_ORDER_QUERY_TRANSFORM : MessageBase<int, Action<Transform>> { }  // orderId, callback
+        public class UI_ORDER_QUERY_RANDOMER_TRANSFORM : MessageBase<int, Action<Transform>> { }  // orderId, callback
+        public class UI_ORDER_QUERY_COMMON_FINISHED_TRANSFORM : MessageBase<int, Action<Transform>> { }  // orderId, callback
         public class UI_ORDER_QUERY_TRANSFORM_BY_ORDER : MessageBase<IOrderData, Action<Transform>> { }  // order, callback
         public class UI_ORDER_BOX_TIPS_POSITION_REFRESH : MessageBase<Vector3, Vector3> { }
 
@@ -236,6 +240,7 @@ namespace FAT
         public class UI_JUMP_TO_ALBUM_MAIN_VIEW : MessageBase { }    //通知卡册界面返回主视图
         public class UI_GIVE_CARD_SUCCESS : MessageBase { }     //赠送卡片成功时
         public class UI_PULL_PENDING_CARD_INFO_SUCCESS : MessageBase { }   //拉取服务器发来的待收取卡片信息成功
+        public class GAME_CARD_ADD : MessageBase { }
 
         #endregion
         #region score
@@ -271,6 +276,10 @@ namespace FAT
         public class TREASURE_OPENBOX : MessageBase<Vector3, int> { }    //寻宝开宝箱
 
 
+        #endregion
+
+        #region 沙堡里程碑
+        public class CASTLE_MILESTONE_CHANGE : MessageBase<int, List<RewardCommitData>, CastleMilestoneGroup> { }
         #endregion
 
         #region decorate
@@ -403,9 +412,20 @@ namespace FAT
         public class BINGO_ITEM_MAP_UPDATE : MessageBase { }
         #endregion
 
+        #region bingo task
+        public class UI_BINGO_TASK_COMPLETE_ITEM : MessageBase<BingoResult,int>{ }
+        public class UI_BINGO_CLOSE : MessageBase{ }
+        public class BINGO_TASK_QUIT_SPECIAL : MessageBase<int>{ }
+        #endregion
+
         #region orderlike | 好评订单
         public class ORDERLIKE_TOKEN_CHANGE : MessageBase { }
         public class ORDERLIKE_ROUND_CHANGE : MessageBase { }
+        #endregion
+
+        #region claworder | 抓宝大师
+        public class CLAWORDER_TOKEN_COMMIT : MessageBase { }
+        public class CLAWORDER_CHANGE : MessageBase { }
         #endregion
 
         #region 周任务
@@ -449,6 +469,22 @@ namespace FAT
         public class CLEAR_BONUS : MessageBase<int> { }
         #endregion
 
+        #region BP
+        public class UI_BP_TASK_COMPLETE : MessageBase<int> { } // 任务完成 int:任务id
+        //BP里程碑进度条表现事件 param1:最终进度值 param2:进度条涨满时对应的进度最大值 -1表示直接使用数据层最新的进度最大值
+        public class UI_BP_MILESTONE_CHANGE : MessageBase<int, int> { }
+        public class UI_BP_MILESTONECELL_PLAY_UP : MessageBase { } // 里程碑格子播放升级动画
+        public class UI_BP_MILESTONECELL_PLAY_PROGRESS : MessageBase<float, int, int> { } // 里程碑格子播放进度动画
+        public class UI_BP_OPEN_CYCLE_TIP : MessageBase { } // 打开循环奖励提示
+        //BP购买成功
+        public class GAME_BP_BUY_SUCCESS : MessageBase<BPActivity.BPPurchaseType, Ref<List<RewardCommitData>>, bool> { }
+        //BP任务状态发生改变 用于界面监听刷新红点等
+        public class GAME_BP_TASK_STATE_CHANGE : MessageBase { }
+        //BP任务刷新 用于主棋盘展示任务进度或状态发生变化时的Tips
+        public class GAME_BP_TASK_UPDATED : MessageBase<List<BPActivity.BPTaskUpdateInfo>> { }
+        
+        #endregion
+
         #region 兑换商店
         public class REDEEMSHOP_SCORE_UPDATE : MessageBase<int, int> { }
         public class REDEEMSHOP_ENTRY_REFRESH_RED_DOT : MessageBase { }    //兑换商店积分奖励飞完奖励刷新红点
@@ -464,7 +500,6 @@ namespace FAT
         #endregion
 
         #region 许愿棋盘
-
         public class WISH_BOARD_TOKEN_CHANGE : MessageBase { }    // 农场棋盘Token数量改变
         public class UI_WISH_BOARD_UNLOCK_ITEM : MessageBase<Item> { } // 农场盘棋子在图鉴中第一次解锁时发消息(用于界面表现)
         public class WISH_BOARD_SEED_CLOSE : MessageBase { } // 农场棋盘种子包界面关闭
@@ -472,6 +507,12 @@ namespace FAT
         public class UI_WISH_BOARD_MOVE_UP_FINISH : MessageBase<int> { } //农场棋盘处理完整个上升流程时 通知界面 做棋盘上升表现
         public class UI_WISH_EXTREME_CASE_BLOCK : MessageBase { }    // 农场棋盘发生卡死情况时，处理过程中打开界面block
         public class UI_WISH_PROGRESS_CHANGE : MessageBase<List<RewardCommitData>, string, int> { } //进度条更新
+        #endregion
+
+        #region 社区引流
+        public class APP_ENTER_FOREGROUND_EVENT : MessageBase { }
+        public class COMMUNITY_LINK_REFRESH_RED_DOT : MessageBase { }
+        public class MAIL_ITEM_REFRESH : MessageBase { }
         #endregion
     }
 }

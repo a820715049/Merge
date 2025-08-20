@@ -33,6 +33,7 @@ namespace FAT
                 {
                     keyEventId = (int)OrderParamType.ScoreEventIdBR,
                     keyRewardNum = (int)OrderParamType.ScoreBR,
+                    keyRewardId = (int)OrderParamType.ScoreRewardBR,
                 };
                 return slot;
             }
@@ -85,19 +86,29 @@ namespace FAT
                 return slot;
             }
 
-            public bool HasData(OrderData order)
+            public bool HasData(IOrderData order)
             {
-                return order.GetValue((OrderParamType)keyEventId) > 0;
+                return GetEventId(order) > 0;
             }
 
-            public int GetParam(OrderData order)
+            public int GetEventId(IOrderData order)
+            {
+                return order.GetValue((OrderParamType)keyEventId);
+            }
+
+            public int GetParam(IOrderData order)
             {
                 return order.GetValue((OrderParamType)keyEventParam);
             }
 
-            public bool IsMatchEventId(OrderData order, int eventId)
+            public bool IsMatchEventId(IOrderData order, int eventId)
             {
                 return order.GetValue((OrderParamType)keyEventId) == eventId;
+            }
+
+            public (int id, int num) GetReward(IOrderData order)
+            {
+                return (order.GetValue((OrderParamType)keyRewardId), order.GetValue((OrderParamType)keyRewardNum));
             }
 
             public void UpdateScoreData(OrderData order, int eventId, int rewardNum)
@@ -149,6 +160,10 @@ namespace FAT
         // 右上角slot | 类似积分
         public static readonly Slot slot_extra_tr = Slot.MakeSlot_ExtraTR();
 
+        // TODO: 挂件的清理逻辑现在都应该使用 TryRemove_ExtraTR 的做法(判断该id的活动不存在 则清理)
+        // 因为现在的很多活动已经不再是对所有订单都挂接, 而是对特定订单挂接
+        // 当活动过期后, 简单判断有下列模版一致的活动存在, 并不能认为订单上挂接的数据一定有效
+        // 现在这期活动可能需要关心的是别的订单
         public static bool TryRemoveInvalidEventData(OrderData order)
         {
             var changed = false;
@@ -178,15 +193,13 @@ namespace FAT
 
         private static bool TryRemove_Score_BR(OrderData order)
         {
-            if (!slot_score_br.HasData(order))
+            var eventId = slot_score_br.GetEventId(order);
+            if (eventId <= 0)
                 return false;
-            if (Game.Manager.activity.LookupAny(EventType.Mine) != null)
+            if (Game.Manager.activity.Lookup(eventId, out var acti) && acti.Active)
                 return false;
-            if (Game.Manager.activity.LookupAny(EventType.FarmBoard) != null)
-                return false;
-            var changed = true;
             slot_score_br.ClearData(order);
-            return changed;
+            return true;
         }
 
         private static bool TryRemove_Extra(OrderData order)
@@ -224,16 +237,33 @@ namespace FAT
             slot_extra_tl.ClearData(order);
             return true;
         }
+
         private static bool TryRemove_ExtraTR(OrderData order)
         {
-            var eventParam = slot_extra_tr.GetParam(order);
-            if (eventParam <= 0)
+            var eventId = slot_extra_tr.GetEventId(order);
+            if (eventId <= 0)
                 return false;
-            // 好评订单
-            if (Game.Manager.activity.LookupAny(EventType.OrderRate, eventParam, out _))
+            if (Game.Manager.activity.Lookup(eventId, out var acti) && acti.Active)
                 return false;
             slot_extra_tr.ClearData(order);
+            TryRemove_Tag(order, eventId);
             return true;
+        }
+
+        private static bool TryRemove_Tag(OrderData order, int eventId)
+        {
+            var eventType = Game.Manager.activity.LookupConf(eventId, out var conf) ? conf.EventType : EventType.Default;
+            var tag = eventType switch
+            {
+                EventType.ClawOrder => OrderTag.ClawOrder,
+                _ => OrderTag.None,
+            };
+            if (tag != OrderTag.None)
+            {
+                order.RemoveTag(tag);
+                return true;
+            }
+            return false;
         }
     }
 }

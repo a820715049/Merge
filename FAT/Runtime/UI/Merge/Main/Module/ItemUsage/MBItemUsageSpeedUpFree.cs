@@ -44,12 +44,12 @@ namespace FAT.Merge
             if (UIUtility.ShowMoneyNotEnoughTip(CoinType.Gem, mCost))
                 return;
             var _item = mItem;
-            if (ItemUtility.SpeedUpEmptyItem(mItem))
+            ItemUtility.TrySpeedUpEmptyItem(mItem, () =>
             {
                 // // 加速表现效果
                 // if (_item != null)
                 //     BoardViewManager.Instance.ShowSpeedUpTip(_item.coord);
-            }
+            });
         }
 
         private void _Refresh()

@@ -127,16 +127,21 @@ namespace FAT
         /// </summary>
         private void AddButton()
         {
-            transform.AddButton("Content/ScaleNode/CloseBtn", ClickExit);
+            transform.AddButton("Content/ScaleNode/CloseBtn", OnClickClose);
             transform.AddButton("Content/ScaleNode/HelpBtn", ClickHelp);
             transform.AddButton("Content/ScaleNode/PlayBtn", ClickPlay);
             transform.AddButton("Content/ScaleNode/CompReward/PlayBtn", ClickPlay);
         }
 
+        private void OnClickClose()
+        {
+            ClickExit();
+        }
+
         /// <summary>
         /// 点击关闭按钮
         /// </summary>
-        private void ClickExit()
+        private void ClickExit(bool ignoreFrom = false)
         {
             if (_showEnd)
             {
@@ -150,7 +155,7 @@ namespace FAT
             }
 
             if (_hasInit)
-                Game.Manager.miniBoardMultiMan.ExitMiniBoard(_activity);
+                Game.Manager.miniBoardMultiMan.ExitMiniBoard(_activity, ignoreFrom);
             else
                 Close();
         }
@@ -174,7 +179,7 @@ namespace FAT
             else if (!_activity.UIOpenState && Game.Manager.activity.mapR.ContainsKey(_activity))
                 PlayStartAnim();
             else
-                ClickExit();
+                ClickExit(true);
         }
 
         #endregion

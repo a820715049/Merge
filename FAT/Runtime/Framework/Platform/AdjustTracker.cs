@@ -67,23 +67,15 @@ public static class AdjustTracker
         }
     }
 
-    public static void TrackLevelEvent(int level)
+    public static void TrackLevelEvent(int level, string token)
     {
-        var events = mConfig?.levels;
-        if(events == null)
-        {
-            DebugEx.FormatInfo("AdjustTracker::TrackLevelEvent ----> no level event {0}", level);
-            return;
-        }
-        var e = events.FindEx((ea) => ea.intValue == level);
-        if(e == null)
+        if(string.IsNullOrEmpty(token))
         {
             DebugEx.FormatInfo("AdjustTracker::TrackLevelEvent ----> no level event {0}", level);
             return;
         }
         DebugEx.FormatInfo("AdjustTracker::TrackLevelEvent ----> track level:{0}", level);
-
-        _SendTrack(e);
+        PlatformSDK.Instance.TrackAdjust(token);
     }
     
     public static void TrackIAPPackEvent(int packageId)

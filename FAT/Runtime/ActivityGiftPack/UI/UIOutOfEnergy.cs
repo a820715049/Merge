@@ -9,8 +9,10 @@ using static fat.conf.Data;
 using System.Collections;
 using Config;
 
-namespace FAT {
-    public class UIOutOfEnergy : UIBase {
+namespace FAT
+{
+    public class UIOutOfEnergy : UIBase
+    {
         public Animator uiAnim;
         public GameObject groupStatus;
         public TextMeshProUGUI diamondCount;
@@ -33,7 +35,8 @@ namespace FAT {
         private bool isConfirmUsed;
 
 #if UNITY_EDITOR
-        public void OnValidate() {
+        public void OnValidate()
+        {
             if (Application.isPlaying) return;
             uiAnim = GetComponent<Animator>();
             transform.Access("Content", out Transform root);
@@ -53,13 +56,15 @@ namespace FAT {
         }
 #endif
 
-        protected override void OnCreate() {
+        protected override void OnCreate()
+        {
             close.WithClickScale().FixPivot().WhenClick = UserClose;
             confirm.WithClickScale().FixPivot().WhenClick = ConfirmClick;
             confirmAd.WithClickScale().FixPivot().WhenClick = AdClick;
         }
 
-        protected override void OnPreOpen() {
+        protected override void OnPreOpen()
+        {
             isConfirmUsed = false;
             UIUtility.FadeIn(this, uiAnim);
             RefreshInfo();
@@ -70,28 +75,34 @@ namespace FAT {
             MessageCenter.Get<MSG.AD_READY_ANY>().AddListener(RefreshAd);
         }
 
-        protected override void OnPreClose() {
+        protected override void OnPreClose()
+        {
             MessageCenter.Get<MSG.UI_TOP_BAR_POP_STATE>().Dispatch();
             MessageCenter.Get<MSG.GAME_COIN_CHANGE>().RemoveListener(OnCoinChange);
             MessageCenter.Get<MSG.AD_READY_ANY>().RemoveListener(RefreshAd);
         }
 
-        protected override void OnPostClose() {
-            if (!isConfirmUsed) {
+        protected override void OnPostClose()
+        {
+            if (!isConfirmUsed)
+            {
                 Game.Manager.notification.TryRemindEnergy();
             }
             isConfirmUsed = false;
         }
 
-        private void UserClose() {
+        private void UserClose()
+        {
             UIUtility.FadeOut(this, uiAnim);
         }
 
-        private void OnCoinChange(CoinType t_) {
+        private void OnCoinChange(CoinType t_)
+        {
             if (t_ == CoinType.Gem) RefreshStatus();
         }
 
-        private void RefreshStatus() {
+        private void RefreshStatus()
+        {
             groupStatus.SetActive(!free);
             if (free) return;
             var coinMan = Game.Manager.coinMan;
@@ -99,7 +110,8 @@ namespace FAT {
         }
 
 
-        private void RefreshInfo() {
+        private void RefreshInfo()
+        {
             board = Game.Manager.mainMergeMan.world.activeBoard;
             var id = board.boardId;
             eConf = GetMergeBoardEnergy(id);
@@ -109,10 +121,12 @@ namespace FAT {
             icon.SetImage(eConf.Image);
         }
 
-        private void RefreshPrice() {
+        private void RefreshPrice()
+        {
             confirm.enabled = true;
             discount.gameObject.SetActive(false);
-            if (free) {
+            if (free)
+            {
                 confirm.text.Text = I18N.Text("#SysComBtn8");
                 return;
             }
@@ -120,8 +134,10 @@ namespace FAT {
             var boardTarget = itemId[0];
             var itemTarget = itemId[1];
             var sData = (ShopTabEnergyData)Game.Manager.shopMan.GetShopTabData(ShopTabType.Energy, boardId: boardTarget);
-            foreach(var e in sData.EnergyDataList) {
-                if (e.GirdId == itemTarget) {
+            foreach (var e in sData.EnergyDataList)
+            {
+                if (e.GirdId == itemTarget)
+                {
                     item = e;
                     break;
                 }
@@ -130,14 +146,16 @@ namespace FAT {
             var price = conf.Price.ConvertToRewardConfig();
             confirm.text.Text = $"{price.Count}{TextSprite.Diamond}";
             var price1s = conf.OriginalPrice;
-            if (!string.IsNullOrEmpty(price1s)) {
+            if (!string.IsNullOrEmpty(price1s))
+            {
                 discount.gameObject.SetActive(true);
                 var price1 = price1s.ConvertToRewardConfig();
                 discount.Text = $"{price1.Count}{TextSprite.Diamond}";
             }
         }
 
-        private void RefreshAd() {
+        private void RefreshAd()
+        {
             var ads = Game.Manager.adsMan;
             var reward = eConf.AdReward.ConvertToRewardConfig();
             var ready = ads.CheckCanWatchAds(eConf.AdId);
@@ -149,34 +167,38 @@ namespace FAT {
             DataTracker.TrackAdIconShow(eConf.AdId);
         }
 
-        private void ConfirmUsed() {
+        private void ConfirmUsed()
+        {
             isConfirmUsed = true;
             confirm.enabled = false;
             Game.Manager.screenPopup.ResetState(PopupType.Energy);
             UserClose();
         }
 
-        private void ConfirmClick() {
-            bool success;
+        private void ConfirmClick()
+        {
             var pos = icon.transform.position;
-            if (free) {
+            if (free)
+            {
                 var r = eConf.FreeReward[claim].ConvertToRewardConfig();
                 var rData = Game.Manager.rewardMan.BeginReward(r.Id, r.Count, ReasonString.free);
                 Game.Manager.mergeEnergyMan.ClaimEnergy(board.boardId);
                 UIFlyUtility.FlyReward(rData, pos);
-                success = true;
+                ConfirmUsed();
             }
-            else {
-                success = Game.Manager.shopMan.TryBuyShopEnergyGoods(item, pos);
+            else
+            {
+                Game.Manager.shopMan.TryBuyShopEnergyGoods(item, pos, ConfirmUsed);
             }
-            if (success) ConfirmUsed();
         }
 
-        private void AdClick() {
+        private void AdClick()
+        {
             var ads = Game.Manager.adsMan;
             var pos = icon.transform.position;
             DataTracker.TrackAdIconClick(eConf.AdId);
-            ads.TryPlayAdsVideo(eConf.AdId, (_, r_) => {
+            ads.TryPlayAdsVideo(eConf.AdId, (_, r_) =>
+            {
                 if (!r_) return;
                 var r = eConf.AdReward.ConvertToRewardConfig();
                 DataTracker.TrackAdReward(eConf.AdId, r.Count, r.Id);

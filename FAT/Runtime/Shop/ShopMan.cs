@@ -1,8 +1,10 @@
 /*
  * @Author: tang.yan
- * @Description: 商城管理器 
+ * @Description: 商城管理器
  * @Doc: https://centurygames.yuque.com/ywqzgn/ne0fhm/rgceg0giq9to7nk5
  * @Date: 2023-11-08 11:11:38
+ * @LastEditors: ange.shentu
+ * @LastEditTime: 2025-07-08 16:18:00
  */
 
 using UnityEngine;
@@ -12,6 +14,7 @@ using fat.rawdata;
 using fat.gamekitdata;
 using static DataTracker;
 using EventType = fat.rawdata.EventType;
+using System;
 
 namespace FAT
 {
@@ -39,7 +42,7 @@ namespace FAT
 
         public void Startup()
         {
-            
+
         }
 
         public void SetData(LocalSaveData archive)
@@ -121,7 +124,7 @@ namespace FAT
             }
             return tabData.IsUnlock;
         }
-        
+
         public void TryOpenUIShop(ShopTabType type = ShopTabType.Gem)
         {
             if (CheckShopTabIsUnlock(type))
@@ -135,11 +138,12 @@ namespace FAT
             }
         }
 
-        public void TryPopup(ScreenPopup popup_, PopupType state_) {
+        public void TryPopup(ScreenPopup popup_, PopupType state_)
+        {
             if (state_ != PopupType.Diamond) return;
             popup_.Queue(popupOOG);
         }
-        
+
         public void AdjustTrackerShopOpen()
         {
             int openCount;
@@ -208,7 +212,7 @@ namespace FAT
                 delivery.ClaimReason = nameof(_ShopGemGoodsLateDelivery);
             }
         }
-        
+
         //处理购买结果逻辑
         private bool _ProcessShopGemIAP(bool isSuccess, IAPPack iapPack)
         {
@@ -222,7 +226,8 @@ namespace FAT
                 return false;
             using (ObjectPool<List<RewardCommitData>>.GlobalPool.AllocStub(out var rewards))
             {
-                foreach (var r in shopGemData.Reward.reward) {
+                foreach (var r in shopGemData.Reward.reward)
+                {
                     //构造基础奖励
                     rewards.Add(Game.Manager.rewardMan.BeginReward(r.Id, r.Count, ReasonString.purchase, RewardFlags.IsUseIAP));
                     market_buy.Track(1, gemTabData.BindBoardId, shopGemData.GirdId, shopGemData.PackId, r.Id);
@@ -236,16 +241,20 @@ namespace FAT
             }
         }
 
-        public void CheckActivity(ActivityLike acti_) {
-            if (acti_.Type == EventType.MarketIapgift) {
+        public void CheckActivity(ActivityLike acti_)
+        {
+            if (acti_.Type == EventType.MarketIapgift)
+            {
                 RefreshGemData();
             }
         }
 
-        public void RefreshGemData() {
+        public void RefreshGemData()
+        {
             var gemTabData = (ShopTabGemData)Game.Manager.shopMan.GetShopTabData(ShopTabType.Gem);
             if (gemTabData == null) return;
-            foreach(var d in gemTabData.GemDataList) {
+            foreach (var d in gemTabData.GemDataList)
+            {
                 d.Reward.RefreshShop(d.GirdId, d.ConfPackId);
             }
             MessageCenter.Get<MSG.GAME_SHOP_ITEM_INFO_CHANGE>().Dispatch();
@@ -256,43 +265,41 @@ namespace FAT
         #region 能量商店相关
 
         //尝试购买能量商品
-        public bool TryBuyShopEnergyGoods(ShopEnergyData data, Vector3 flyFromPos, float size = 0)
+        public void TryBuyShopEnergyGoods(ShopEnergyData data, Vector3 flyFromPos, Action whenSuccess = null, float size = 0)
         {
             _rewardFromPos = flyFromPos;
             _rewardSize = size;
             using (ObjectPool<List<RewardCommitData>>.GlobalPool.AllocStub(out var rewards))
             {
-                return ProcessShopEnergy(data, rewards);
+                if (data?.CurSellGoodsConfig == null)
+                    return;
+                var price = data.CurSellGoodsConfig.Price.ConvertToRewardConfig();
+                var reward = data.CurSellGoodsConfig.Reward.ConvertToRewardConfig();
+                if (price == null || reward == null)
+                    return;
+                CoinType type = Game.Manager.coinMan.GetCoinTypeById(price.Id);
+                if (Game.Manager.coinMan.CanUseCoin(type, price.Count))
+                {
+                    Game.Manager.coinMan.UseCoin(type, price.Count, ReasonString.market_energy)
+                    .OnSuccess(() =>
+                     {
+                         //构造基础奖励
+                         rewards.Add(Game.Manager.rewardMan.BeginReward(reward.Id, reward.Count, ReasonString.market_energy));
+                         market_buy.Track(2, data.BelongBoardId, data.GirdId, data.CurSellGoodsConfig.Id, reward.Id);
+                         // 发货
+                         UIFlyUtility.FlyRewardList(rewards, _rewardFromPos, null, _rewardSize);
+                         //在数据刷新前尝试Adjust打点
+                         _AdjustTrackerShopEnergy(data.CurSellGoodsConfig.Id);
+                         //数据刷新
+                         data.OnBuyGoodsSuccess();
+                         //Dispatch
+                         MessageCenter.Get<MSG.GAME_SHOP_ITEM_INFO_CHANGE>().Dispatch();
+                         whenSuccess?.Invoke();
+                     })
+                     .Execute();
+                }
             }
         }
-        
-        public bool ProcessShopEnergy(ShopEnergyData data, List<RewardCommitData> rewards)
-        {
-            if (data?.CurSellGoodsConfig == null)
-                return false;
-            var price = data.CurSellGoodsConfig.Price.ConvertToRewardConfig();
-            var reward = data.CurSellGoodsConfig.Reward.ConvertToRewardConfig();
-            if (price == null || reward == null)
-                return false;
-            CoinType type = Game.Manager.coinMan.GetCoinTypeById(price.Id);
-            if (Game.Manager.coinMan.UseCoin(type, price.Count, ReasonString.market_energy))
-            {
-                //构造基础奖励
-                rewards.Add(Game.Manager.rewardMan.BeginReward(reward.Id, reward.Count, ReasonString.market_energy));
-                market_buy.Track(2, data.BelongBoardId, data.GirdId, data.CurSellGoodsConfig.Id, reward.Id);
-                // 发货
-                UIFlyUtility.FlyRewardList(rewards, _rewardFromPos, null, _rewardSize);
-                //在数据刷新前尝试Adjust打点
-                _AdjustTrackerShopEnergy(data.CurSellGoodsConfig.Id);
-                //数据刷新
-                data.OnBuyGoodsSuccess();
-                //Dispatch
-                MessageCenter.Get<MSG.GAME_SHOP_ITEM_INFO_CHANGE>().Dispatch();
-                return true;
-            }
-            return false;
-        }
-
         private void _AdjustTrackerShopEnergy(int goodsId)
         {
             if (goodsId == 1)   //10钻石能量
@@ -306,94 +313,106 @@ namespace FAT
         }
 
         #endregion
-        
+
         #region 棋子商店相关
-        
+
         //尝试购买随机权重棋子商品
-        public bool TryBuyShopChessRandomGoods(ShopChessRandomData data, Vector3 flyFromPos, float size = 0)
+        public void TryBuyShopChessRandomGoods(ShopChessRandomData data, Vector3 flyFromPos, float size = 0)
         {
             if (data == null || !data.CheckCanBuy())
-                return false;
+                return;
             _rewardFromPos = flyFromPos;
             _rewardSize = size;
             using (ObjectPool<List<RewardCommitData>>.GlobalPool.AllocStub(out var rewards))
             {
-                return ProcessShopRandomChess(data, rewards);
+                ProcessShopRandomChess(data, rewards);
             }
         }
-        
-        public bool ProcessShopRandomChess(ShopChessRandomData data, List<RewardCommitData> rewards)
+
+        private void ProcessShopRandomChess(ShopChessRandomData data, List<RewardCommitData> rewards)
         {
             if (data?.CurSellGoodsConfig == null)
-                return false;
+                return;
             var price = data.CurSellGoodsConfig.Price.ConvertToRewardConfig();
             var reward = data.CurSellGoodsConfig.Reward.ConvertToRewardConfig();
             if (price == null || reward == null)
-                return false;
+                return;
             CoinType type = Game.Manager.coinMan.GetCoinTypeById(price.Id);
-            if (Game.Manager.coinMan.UseCoin(type, price.Count, ReasonString.market_item))
+            if (Game.Manager.coinMan.CanUseCoin(type, price.Count))
             {
-                //构造基础奖励
-                rewards.Add(Game.Manager.rewardMan.BeginReward(reward.Id, reward.Count, ReasonString.market_item));
-                market_buy.Track(3, data.BelongBoardId, data.GirdId, data.CurSellGoodsConfig.Id, reward.Id);
-                // 发货
-                UIFlyUtility.FlyRewardList(rewards, _rewardFromPos, null, _rewardSize);
-                //数据刷新
-                data.OnBuyGoodsSuccess();
-                //Dispatch
-                MessageCenter.Get<MSG.GAME_SHOP_ITEM_INFO_CHANGE>().Dispatch();
-                //尝试积分活动加分
-                MessageCenter.Get<MSG.ON_BUY_SHOP_ITEM>().Dispatch(price.Count, data.BelongBoardId);
-                return true;
+                Game.Manager.coinMan.UseCoin(type, price.Count, ReasonString.market_item)
+                .OnSuccess(() =>
+                {
+                    //构造基础奖励
+                    rewards.Add(Game.Manager.rewardMan.BeginReward(reward.Id, reward.Count, ReasonString.market_item));
+                    market_buy.Track(3, data.BelongBoardId, data.GirdId, data.CurSellGoodsConfig.Id, reward.Id);
+                    // 发货
+                    UIFlyUtility.FlyRewardList(rewards, _rewardFromPos, null, _rewardSize);
+                    //数据刷新
+                    data.OnBuyGoodsSuccess();
+                    //Dispatch
+                    MessageCenter.Get<MSG.GAME_SHOP_ITEM_INFO_CHANGE>().Dispatch();
+                    //尝试积分活动加分
+                    MessageCenter.Get<MSG.ON_BUY_SHOP_ITEM>().Dispatch(price.Count, data.BelongBoardId);
+                })
+                .CloseOnShopRefresh()
+                .Execute();
             }
-            return false;
         }
-        
-        public bool TryRefreshShopChessGoods(ShopTabChessData data)
+
+        public void TryRefreshShopChessGoods(ShopTabChessData data)
         {
-            //默认刷新时使用钻石
-            if (Game.Manager.coinMan.UseCoin(CoinType.Gem, Game.Manager.configMan.globalConfig.MarketRefreshNum, ReasonString.market_boost))
+            if (Game.Manager.coinMan.CanUseCoin(CoinType.Gem, Game.Manager.configMan.globalConfig.MarketRefreshNum))
             {
-                //数据刷新
-                data.RefreshCurSellGoods();
-                //Dispatch
-                MessageCenter.Get<MSG.GAME_SHOP_ITEM_INFO_CHANGE>().Dispatch();
-                return true;
+                //默认刷新时使用钻石
+                Game.Manager.coinMan.UseCoin(CoinType.Gem, Game.Manager.configMan.globalConfig.MarketRefreshNum, ReasonString.market_boost)
+                .OnSuccess(() =>
+                {
+                    //数据刷新
+                    data.RefreshCurSellGoods();
+                    //Dispatch
+                    MessageCenter.Get<MSG.GAME_SHOP_ITEM_INFO_CHANGE>().Dispatch();
+                })
+                .CloseOnShopRefresh()
+                .Execute();
             }
-            return false;
         }
-        
+
         //尝试购买订单棋子商品
-        public bool TryBuyShopChessOrderGoods(ShopChessOrderData data, Vector3 flyFromPos, float size = 0)
+        public void TryBuyShopChessOrderGoods(ShopChessOrderData data, Vector3 flyFromPos, float size = 0)
         {
             if (data == null || !data.CheckCanBuy())
-                return false;
+                return;
             _rewardFromPos = flyFromPos;
             _rewardSize = size;
             using (ObjectPool<List<RewardCommitData>>.GlobalPool.AllocStub(out var rewards))
             {
-                return ProcessShopOrderChess(data, rewards);
+                ProcessShopOrderChess(data, rewards);
             }
         }
-        
-        public bool ProcessShopOrderChess(ShopChessOrderData data, List<RewardCommitData> rewards)
+
+        private void ProcessShopOrderChess(ShopChessOrderData data, List<RewardCommitData> rewards)
         {
-            if (Game.Manager.coinMan.UseCoin(CoinType.Gem, data.CurSellGoodsPrice, ReasonString.market_boost))
+            if (Game.Manager.coinMan.CanUseCoin(CoinType.Gem, data.CurSellGoodsPrice))
             {
-                //构造基础奖励
-                rewards.Add(Game.Manager.rewardMan.BeginReward(data.CurSellGoodsId, 1, ReasonString.market_boost));
-                market_buy.Track(4, data.BelongBoardId, data.GirdId, 0, data.CurSellGoodsId);
-                // 发货
-                UIFlyUtility.FlyRewardList(rewards, _rewardFromPos, null, _rewardSize);
-                //数据刷新
-                data.OnBuyGoodsSuccess();
-                //Dispatch
-                MessageCenter.Get<MSG.GAME_SHOP_ITEM_INFO_CHANGE>().Dispatch();
-                //尝试积分活动加分
-                MessageCenter.Get<MSG.ON_BUY_SHOP_ITEM>().Dispatch(data.CurSellGoodsPrice, data.BelongBoardId);
-                return true;
+                Game.Manager.coinMan.UseCoin(CoinType.Gem, data.CurSellGoodsPrice, ReasonString.market_boost)
+                .OnSuccess(() =>
+                {
+                    //构造基础奖励
+                    rewards.Add(Game.Manager.rewardMan.BeginReward(data.CurSellGoodsId, 1, ReasonString.market_boost));
+                    market_buy.Track(4, data.BelongBoardId, data.GirdId, 0, data.CurSellGoodsId);
+                    // 发货
+                    UIFlyUtility.FlyRewardList(rewards, _rewardFromPos, null, _rewardSize);
+                    //数据刷新
+                    data.OnBuyGoodsSuccess();
+                    //Dispatch
+                    MessageCenter.Get<MSG.GAME_SHOP_ITEM_INFO_CHANGE>().Dispatch();
+                    //尝试积分活动加分
+                    MessageCenter.Get<MSG.ON_BUY_SHOP_ITEM>().Dispatch(data.CurSellGoodsPrice, data.BelongBoardId);
+                })
+                .CloseOnShopRefresh()
+                .Execute();
             }
-            return false;
         }
         #endregion
     }

@@ -80,7 +80,7 @@ namespace FAT
             if (_activity.TokenNum > 0)
             {
                 _dot.SetActive(true);
-                _num.text = _activity.TokenNum.ToString();
+                _num.SetRedPoint(_activity.TokenNum);
             }
             else
             {

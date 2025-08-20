@@ -37,7 +37,7 @@ namespace FAT
             iconRes.SetImage(cfg.Icon);
             var isBingo = item.HasBingo;
             var isClaimed = !isBingo && item.IsClaimed;
-            var canCommit = !item.IsClaimed && BingoUtility.HasActiveItemInMainBoardAndInventory(item.ItemId);
+            var canCommit = !item.IsClaimed && ItemBingoUtility.HasActiveItemInMainBoardAndInventory(item.ItemId);
             goBingo.SetActive(isBingo);
             goCommitted.SetActive(isClaimed);
             readyToCommitBg.SetActive(canCommit);

@@ -62,6 +62,7 @@ namespace FAT.Platform {
         internal ActionOnce<bool, AccountProfile> OnProfile = new();
         internal ActionOnce<List<string>, bool, SDKError> OnGetGameFriends = new();
         internal ActionOnce<string, bool, SDKError> OnAskPermission = new();
+        internal ActionOnce<bool, SDKError> OnCDKeyExchangeResult = new();
 
         public void LogInfo(string msg) => Debug.Log($"{nameof(PlatformSDKAdapter)} {msg}");
         public void LogError(string msg) => Debug.LogError($"{nameof(PlatformSDKAdapter)} {msg}");
@@ -171,52 +172,13 @@ namespace FAT.Platform {
 
         #region CDKey
 
-        //cdkey
         public virtual bool CDKeyCanMakePurchases() => !string.IsNullOrEmpty(Game.Instance.appSettings?.sdkId);
-        public virtual void CDKeyExchange(string code, string channel, string section, string throughCargo, string serverId, bool s) {
-            // FAT_TODO
-            // var jsonParam = new EL.SimpleJSON.JSONObject();
-            // jsonParam["game_id"] = Game.Instance.appSettings.sdkId;
-            // jsonParam["l"] = "zh";
-            // jsonParam["platform"] = GetOSName() ?? "android";
-            // jsonParam["channel"] = channel;
-            // jsonParam["fpid"] = Game.Manager.networkMan.fpId;
-            // jsonParam["section"] = section;
-            // jsonParam["cdkey"] = code;
-            // jsonParam["uid"] = Game.Manager.accountMan.uid.ToString();
-            // jsonParam["through_cargo"] = throughCargo ?? "";
-            // jsonParam["appservid"] = serverId;
-            // // var root = Game.Instance.appSettings.sdkEnv == AppSettings.SDKEnvironment.Sandbox?
-            // //              "http://cdkey-cn-endpoint-sandbox.campfiregames.cn":
-            // //              "http://cdkey-cn-endpoint.campfiregames.cn";
-            // EL.DianDianNetUtility.RequestMiddleProxyWithParamDefaultUrl("cdkey", "", jsonParam, Game.Instance.appSettings.sdkKey, (ret) =>
-            // {
-            //     var json = EL.SimpleJSON.JSON.Parse(ret);
-            //     if (json == null || json["status"].IsNull)
-            //     {
-            //         EL.DebugEx.FormatWarning("PlatformSDKAdapter::CDKeyExchange ----> error 1 {0}", ret);
-            //         Platform.PlatformSDK.Instance.OnExchangeError("服务器有问题，稍后再试", (long)GameErrorCode.HumanReadableError);
-            //     }
-            //     else
-            //     {
-            //         var retCode = json["status"].AsInt;
-            //         if (retCode != 1)
-            //         {
-            //             EL.DebugEx.FormatWarning("PlatformSDKAdapter::CDKeyExchange ----> error 2 {0}", ret);
-            //             Platform.PlatformSDK.Instance.OnExchangeError(json["reason"], ErrorCodeUtility.ConvertToCommonCode(retCode, ErrorCodeType.SDKError));
-            //         }
-            //         else
-            //         {
-            //             EL.DebugEx.FormatInfo("PlatformSDKAdapter::CDKeyExchange ----> success");
-            //             Platform.PlatformSDK.Instance.OnExchangeSuccess(code, throughCargo);
-            //         }
-            //     }
-            // }, (err, errCode) =>
-            // {
-            //     EL.DebugEx.FormatWarning("PlatformSDKAdapter::CDKeyExchange ----> error 3 {0},{1}", err, errCode);
-            //     Platform.PlatformSDK.Instance.OnExchangeError(err, errCode);
-            // });
+        public virtual void CDKeyExchange(string code, string channel, string section, string throughCargo, string serverId, bool isUsedRoleId, Action<bool, SDKError> WhenComplete_)
+        {
+            WhenComplete_?.Invoke(false, new(-1, "unsupported"));
         }
+        public virtual void CDKeyExchangeSuccess(string cdkey, string throughCargo) { }
+        public virtual void CDKeyExchangeFail(long errCode, string msg) { }
 
         #endregion CDKey
 

@@ -99,8 +99,12 @@ namespace FAT
         private MBBoardOrderAttachment att_extraRewardMini = new();
         // 好评订单
         private MBBoardOrderAttachment att_orderLike = new();
+        // 进度礼盒
         private MBBoardOrderAttachment att_orderRate = new();
+        // 订单助力
         private MBBoardOrderAttachment att_orderBonus = new();
+        // 抓宝订单
+        private MBBoardOrderAttachment att_clawOrder = new();
 
         private List<RewardCommitData> orderBoxRewardsToCommit;
         private List<RewardCommitData> normalRewardsToCommit;
@@ -133,7 +137,7 @@ namespace FAT
             seq.AppendInterval(bornDelayForApi);
             seq.AppendCallback(_OnBornDelayComplete);
             seq.Append(transform.DOScale(Vector3.one, .5f).From(Vector3.zero, true).OnUpdate(_OnAnimating).SetEase(Ease.OutCubic));
-            seq.AppendCallback(_OnAnimating);
+            seq.AppendCallback(_OnAnimComplete_Born);
             mTween = seq;
             seq.Play();
         }
@@ -212,6 +216,12 @@ namespace FAT
             MessageCenter.Get<MSG.UI_BOARD_ORDER_ANIMATING>().Dispatch();
         }
 
+        private void _OnAnimComplete_Born()
+        {
+            MessageCenter.Get<MSG.UI_BOARD_ORDER_ANIMATING>().Dispatch();
+            _TryResolveScrollRequest();
+        }
+
         private void _OnAnimComplete_Die()
         {
             MessageCenter.Get<MSG.UI_BOARD_ORDER_TRY_RELEASE>().Dispatch(this);
@@ -230,6 +240,11 @@ namespace FAT
             commitButton = GetComponent<ICommitButton>();
             btnCommit.WithClickScale().onClick.AddListener(() => _OnBtnFinish(true));
             orderBox.Init();
+#if UNITY_EDITOR
+            transform.Access<Button>("Debug", out var btnDebug);
+            btnDebug.onClick.AddListener(_OnBtnDebug);
+            btnDebug.gameObject.SetActive(true);
+#endif
         }
 
         protected override void UpdateOnDataChange()
@@ -259,12 +274,14 @@ namespace FAT
             att_orderLike.Clear();
             att_orderRate.Clear();
             att_orderBonus.Clear();
+            att_clawOrder.Clear();
         }
 
         private void _Register()
         {
             MessageCenter.Get<MSG.GAME_ONE_SECOND_DRIVER>().AddListener(_OnSecondPass);
             MessageCenter.Get<MSG.GAME_ORDER_CHANGE>().AddListener(_OnMessageOrderChange);
+            MessageCenter.Get<MSG.GAME_ORDER_REFRESH>().AddListener(_OnMessageOrderRefresh);
             MessageCenter.Get<MSG.GAME_ORDER_TRY_FINISH_FROM_UI>().AddListener(_OnMessageTryFinishOrderFromUI);
             MessageCenter.Get<MSG.GAME_SHOP_ITEM_INFO_CHANGE>().AddListener(_OnMessageShopItemInfoChange);
             MessageCenter.Get<MSG.GAME_ORDER_ORDERBOX_BEGIN>().AddListener(_OnMessageOrderBoxBegin);
@@ -282,6 +299,7 @@ namespace FAT
         {
             MessageCenter.Get<MSG.GAME_ONE_SECOND_DRIVER>().RemoveListener(_OnSecondPass);
             MessageCenter.Get<MSG.GAME_ORDER_CHANGE>().RemoveListener(_OnMessageOrderChange);
+            MessageCenter.Get<MSG.GAME_ORDER_REFRESH>().RemoveListener(_OnMessageOrderRefresh);
             MessageCenter.Get<MSG.GAME_ORDER_TRY_FINISH_FROM_UI>().RemoveListener(_OnMessageTryFinishOrderFromUI);
             MessageCenter.Get<MSG.GAME_SHOP_ITEM_INFO_CHANGE>().RemoveListener(_OnMessageShopItemInfoChange);
             MessageCenter.Get<MSG.GAME_ORDER_ORDERBOX_BEGIN>().RemoveListener(_OnMessageOrderBoxBegin);
@@ -322,6 +340,18 @@ namespace FAT
                 _RefreshOrderLike();
                 _RefreshOrderRate();
                 _RefreshOrderBonus();
+                _RefreshClawOrder();
+            }
+
+            _TryResolveScrollRequest();
+        }
+
+        private void _TryResolveScrollRequest()
+        {
+            if (mData.HasScrollRequest && mData.Displayed)
+            {
+                mData.HasScrollRequest = false;
+                MessageCenter.Get<MSG.UI_ORDER_REQUEST_SCROLL>().Dispatch(transform);
             }
         }
 
@@ -672,7 +702,7 @@ namespace FAT
 
         private void _RefreshClaimOffset()
         {
-            commitButton.RefreshOffset(att_extraRewardMini.HasLoaded || att_orderRate.HasLoaded || att_orderBonus.HasLoaded);
+            commitButton.RefreshOffset(att_extraRewardMini.HasLoaded || att_orderRate.HasLoaded || att_orderBonus.HasLoaded || att_clawOrder.HasLoaded);
         }
 
         private void _OnBtnFinish(bool needConfirm)
@@ -686,11 +716,18 @@ namespace FAT
             isCommitting = true;
             if (BoardViewWrapper.TryFinishOrder(mData, normalRewardsToCommit, orderBoxRewardsToCommit, needConfirm))
             {
+                // 好评订单
                 _TryClaimOrderLike();
+                // 积分
                 _TryClaimScore();
+                // 积分 - 右下角
                 _TryClaimScoreBR();
+                // 进度礼盒
                 _TryClaimOrderRate();
+                // 订单助力
                 _TryClaimOrderBonus();
+                // 抓宝订单
+                _TryClaimClawOrder();
                 StartCoroutine(_CoClaimRewards());
                 MessageCenter.Get<MSG.ORDER_FINISH>().Dispatch();
                 MessageCenter.Get<MSG.ORDER_FINISH_DATA>().Dispatch(mData);
@@ -771,6 +808,7 @@ namespace FAT
                     if (act != null && act is WishBoardActivity curActivity)
                     {
                         var reward = Game.Manager.rewardMan.BeginReward(mData.GetValue(OrderParamType.ScoreRewardBR), mData.GetValue(OrderParamType.ScoreBR), ReasonString.wish_order);
+                        Game.Manager.rewardMan.CommitReward(reward);
                         UIFlyUtility.FlyCustom(reward.rewardId, reward.rewardCount, scoreGroupBR.icon.transform.position, UIFlyFactory.ResolveFlyTarget(FlyType.WishBoardToken),
                             FlyStyle.Reward, FlyType.WishBoardToken);
                         DataTracker.event_wish_getitem_order.Track(curActivity, curActivity.GetCurProgressPhase() + 1, curActivity.GetCurGroupConfig().BarRewardId.Count,
@@ -937,6 +975,14 @@ namespace FAT
                     _Refresh();
                     break;
                 }
+            }
+        }
+
+        private void _OnMessageOrderRefresh(IOrderData order)
+        {
+            if (order == mData)
+            {
+                _Refresh();
             }
         }
 
@@ -1150,7 +1196,7 @@ namespace FAT
             {
                 return;
             }
-            if (mData.RateId <= 0)
+            if (mData.RateId <= 0 || mData.IsClawOrder)
             {
                 att_orderRate.Clear();
                 return;
@@ -1176,7 +1222,7 @@ namespace FAT
         {
             var id = mData.RateId;
             var num = mData.RateNum;
-            if (id <= 0 || num <= 0)
+            if (id <= 0 || num <= 0 || mData.IsClawOrder)
                 return false;
 
             Game.Manager.activity.LookupAny(fat.rawdata.EventType.OrderRate, out var act);
@@ -1203,6 +1249,7 @@ namespace FAT
             att_orderBonus.Clear();
             _RefreshTheme();
         }
+
         private void _RefreshOrderBonus()
         {
             if (mData.State == OrderState.Rewarded)
@@ -1236,6 +1283,7 @@ namespace FAT
                 att_orderBonus.Clear();
             }
         }
+
         private bool _TryClaimOrderBonus()
         {
             var id = mData.BonusID;
@@ -1266,7 +1314,59 @@ namespace FAT
                 _RefreshTheme();
             }
         }
+
         #endregion
+
+        #region ClawOrder / 抓宝订单
+
+        private void _RefreshClawOrder()
+        {
+            if (mData.State == OrderState.Rewarded)
+                return;
+            if (!mData.IsClawOrder)
+                return;
+            if (mData.TryGetClawOrderRes(out var res))
+            {
+                att_clawOrder.RefreshAttachment(res, extraRewardRoot, obj => _RefreshSlotReward(obj, OrderAttachmentUtility.slot_extra_tr));
+            }
+            else
+            {
+                att_clawOrder.Clear();
+            }
+        }
+
+        private void _TryClaimClawOrder()
+        {
+            if (!mData.IsClawOrder)
+                return;
+            var slot = OrderAttachmentUtility.slot_extra_tr;
+            var id = slot.GetEventId(mData);
+            if (id <= 0)
+                return;
+            if (Game.Manager.activity.Lookup(id, out var act) && act is ActivityClawOrder claw)
+            {
+                var reward = slot.GetReward(mData);
+                if (claw.TryClaimOrderToken(mData, reward.id, reward.num, out var commitData))
+                {
+                    var targetTrans = extraRewardRoot.GetChild(0) as RectTransform;
+                    var targetPos = targetTrans.TransformPoint(UIUtility.GetLocalCenterInRect(targetTrans));
+                    UIFlyUtility.FlyReward(commitData, targetPos);
+                    att_clawOrder.Clear();
+                }
+            }
+        }
+
+        #endregion
+
+        private void _RefreshSlotReward(GameObject obj, OrderAttachmentUtility.Slot slot)
+        {
+            var rewardItem = obj.GetComponent<MBBoardOrderRewardItem>();
+            UIItemUtility.SetCountStringStyle(UIItemUtility.CountStringStyle.SmartPlus);
+            var (id, num) = slot.GetReward(mData);
+            rewardItem.SetData(id, num);
+            UIItemUtility.SetCountStringStyle(UIItemUtility.CountStringStyle.NoPrefix);
+            _RefreshClaimOffset();
+        }
 
         #region orderbox
 
@@ -1361,18 +1461,19 @@ namespace FAT
             }
         }
 
-        private void _OnMessageMagicHourRewardEnd(IOrderData order, Item item)
-        {
-            if (mData == order)
-            {
-            }
-        }
-
         #endregion
 
         private void _OnMessageRaceRoundStart(bool start)
         {
             _RefreshScore();
+        }
+
+        private void _OnBtnDebug()
+        {
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                UIConfig.UIOrderDebug.Open(mData);
+            }
         }
     }
 }

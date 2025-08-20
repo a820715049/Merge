@@ -3,6 +3,7 @@
  * @Date: 2021-07-20 10:54:55
  */
 using EL;
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -17,7 +18,7 @@ namespace FAT
         [SerializeField] private Transform itemRoot;
         [SerializeField] private Button btnClaim;
         [SerializeField] private Button btnClaimUnable;
-
+        [SerializeField] private Button btnLink;
         public void SetCallback(UnityEngine.Events.UnityAction cb)
         {
             btnClaim.onClick.AddListener(cb);
@@ -28,6 +29,7 @@ namespace FAT
         {
             btnClaim.gameObject.SetActive(b);
             btnClaimUnable.gameObject.SetActive(!b);
+            btnLink.gameObject.SetActive(false);
         }
 
         public void SetData(IList<RewardValue> list)
@@ -48,6 +50,19 @@ namespace FAT
         public void ClearData()
         {
             UIUtility.ReleaseClearableItem(itemRoot, PoolItemType.MAIL_DETAIL_REWARD_ITEM);
+        }
+
+        public void SetLinkBtnState(bool b)
+        {
+            btnClaim.gameObject.SetActive(!b);
+            btnClaimUnable.gameObject.SetActive(!b);
+            btnLink.gameObject.SetActive(b);
+        }
+
+        public void SetLinkCallback(UnityEngine.Events.UnityAction cb)
+        {
+            btnLink.onClick.AddListener(cb);
+            ButtonExt.TryAddClickScale(btnLink);
         }
     }
 }

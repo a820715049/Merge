@@ -96,7 +96,7 @@ namespace FAT
         }
 
         public void SetupTheme() {
-            VisualMain.Setup(Conf.EventTheme, this);
+            VisualMain.Setup(Conf.EventTheme, this, active_ : false);
             VisualStart.Setup(Conf.StartTheme, this);
             VisualResult.Setup(Conf.ResultTheme);
         }
@@ -580,7 +580,10 @@ namespace FAT
             offsetStrategyUsedTimes = 0;
             var delay = win_ ? 2.5f : 0f;
             DOVirtual.DelayedCall(delay, () => {
-                Game.Manager.screenPopup.TryQueue(VisualMain.popup, PopupType.Login);
+                if (!UIManager.Instance.IsShow(VisualMain.res.ActiveR))
+                {
+                    Game.Manager.screenPopup.TryQueue(VisualMain.popup, PopupType.Login);
+                }
                 if (IsComplete()) {
                     Game.Manager.activity.EndImmediate(this, false);
                 }

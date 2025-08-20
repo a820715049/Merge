@@ -24,7 +24,7 @@ namespace fat.rawdata {
     static FeatureEntryReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChpyYXdkYXRhL0ZlYXR1cmVFbnRyeS5wcm90bxIHcmF3ZGF0YSqCEQoMRmVh",
+            "ChpyYXdkYXRhL0ZlYXR1cmVFbnRyeS5wcm90bxIHcmF3ZGF0YSquEQoMRmVh",
             "dHVyZUVudHJ5Eg8KC0ZlYXR1cmVOb25lEAASEwoPRmVhdHVyZUl0ZW1TYWxl",
             "EAESEgoORmVhdHVyZUJhZ0l0ZW0QAhIWChJGZWF0dXJlQmFnUHJvZHVjZXIQ",
             "AxISCg5GZWF0dXJlQmFnVG9vbBAEEhEKDUZlYXR1cmVCdWJibGUQBRIVChFG",
@@ -73,8 +73,9 @@ namespace fat.rawdata {
             "ZGVyEFkSEwoPRmVhdHVyZU1pbmVDYXJ0EFoSGQoVRmVhdHVyZUNhcnRPbmVQ",
             "bHVzT25lEFsSHAoYRmVhdHVyZU11bHRpcGxpZXJSYW5raW5nEFwSEwoPRmVh",
             "dHVyZVdpc2hVcG9uEF0SFwoTRmVhdHVyZVRyYWluTWlzc2lvbhBeEhEKDUZl",
-            "YXR1cmVQdXp6bGUQX0I9Wi1naXRsYWIuZnVucGx1cy5pby9mYXQvY29uZi9n",
-            "ZW4vZ29sYW5nL3Jhd2RhdGGqAgtmYXQucmF3ZGF0YWIGcHJvdG8z"));
+            "YXR1cmVQdXp6bGUQXxITCg9GZWF0dXJlTGFuZG1hcmsQYBIVChFGZWF0dXJl",
+            "RnJvemVuSXRlbRBhQj1aLWdpdGxhYi5mdW5wbHVzLmlvL2ZhdC9jb25mL2dl",
+            "bi9nb2xhbmcvcmF3ZGF0YaoCC2ZhdC5yYXdkYXRhYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::fat.rawdata.FeatureEntry), }, null, null));
@@ -161,7 +162,7 @@ namespace fat.rawdata {
     /// </summary>
     [pbr::OriginalName("FeatureEndlessPack")] FeatureEndlessPack = 18,
     /// <summary>
-    /// 能量加倍消耗功能-作废（36版本开始使用整合版）
+    /// 能量加倍消耗功能
     /// </summary>
     [pbr::OriginalName("FeatureErgBoost")] FeatureErgBoost = 19,
     /// <summary>
@@ -297,7 +298,7 @@ namespace fat.rawdata {
     /// </summary>
     [pbr::OriginalName("FeatureEnergyMultiPack")] FeatureEnergyMultiPack = 52,
     /// <summary>
-    /// 4倍能量-作废（36版本开始使用整合版）
+    /// 4倍能量
     /// </summary>
     [pbr::OriginalName("FeatureErgBoost4x")] FeatureErgBoost4X = 53,
     /// <summary>
@@ -468,6 +469,14 @@ namespace fat.rawdata {
     /// 拼图活动
     /// </summary>
     [pbr::OriginalName("FeaturePuzzle")] FeaturePuzzle = 95,
+    /// <summary>
+    /// 每日路径里程碑
+    /// </summary>
+    [pbr::OriginalName("FeatureLandmark")] FeatureLandmark = 96,
+    /// <summary>
+    /// 冰冻棋子
+    /// </summary>
+    [pbr::OriginalName("FeatureFrozenItem")] FeatureFrozenItem = 97,
   }
 
   #endregion

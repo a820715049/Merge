@@ -52,7 +52,7 @@ namespace FAT
 
         public override string ToString()
         {
-            return $"id:{rewardId}, type:{rewardType}, count:{rewardCount}, waitCommit:{WaitCommit}, isFake:{isFake}";
+            return $"id:{rewardId}, type:{rewardType}, count:{rewardCount}, waitCommit:{WaitCommit}, isFake:{isFake}, reason:{reason}";
         }
     }
 }

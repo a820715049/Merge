@@ -181,9 +181,20 @@ namespace FAT
                     mApiOrderSet.AddIfAbsent(cfg.Id);
             }
 
+            using var _ = PoolMapping.PoolMappingAccess.Borrow<Dictionary<int, OrderRandomer>>(out var dict);
+            foreach (var cfg in mDataHolder.orderConfigList)
+            {
+                dict.Add(cfg.Id, cfg);
+            }
+
             foreach (var rec in records)
             {
-                mDataHolder.activeOrderList.Add(OrderUtility.MakeOrderByRecord(rec));
+                var order = OrderUtility.MakeOrderByRecord(rec);
+                if (dict.TryGetValue(order.Id, out var cfg))
+                {
+                    order.ConfRandomer = cfg;
+                }
+                mDataHolder.activeOrderList.Add(order);
             }
         }
 
@@ -274,6 +285,11 @@ namespace FAT
                 return cfg.IsApiOrder;
             }
             return false;
+        }
+
+        public OrderData MakeOrder(OrderRandomer cfg)
+        {
+            return _MakeOrder_Passive(cfg);
         }
 
         private bool _IsWaitingForNextOrder()
@@ -643,10 +659,6 @@ namespace FAT
 
                     targetKey = catBundleList[_Random_Pick(catBundleList.Count)];
                     DebugEx.Info($"OrderProviderRandom::_FilterCandGroupByCatId catgroup => {targetKey}");
-                    if (targetKey < 10000 && candList[0].ItemCount > 1)
-                    {
-                        DebugEx.Error($"OrderProviderRandom::_FilterCandGroupByCatId unexpected catgroup => {targetKey}");
-                    }
                 }
             }
             // 仅保留目标链条组合
@@ -712,7 +724,7 @@ namespace FAT
             _PrepareRangeParams(cfg, dffyType);
             _EnsureCategoryRefInOrder();
             _EnsureCandidateCategory();
-            _PrepareCandidateItemPool(dffyType);
+            _PrepareCandidateItemPool(cfg, dffyType);
 
             _DebugPrint_CandCategoryPool();
             _DebugPrint_CandItemPool();
@@ -776,6 +788,9 @@ namespace FAT
             var newOrder = OrderUtility.MakeOrderByConfig(mHelper, OrderProviderType.Random, cfg.Id, cfg.RoleId, cfg.DisplayLevel,
                                                             realDffyRound,
                                                             mCacheRequireId, reward);
+            // 记录conf
+            newOrder.ConfRandomer = cfg;
+
             // 随机订单需要记录pay难度(付出难度)
             newOrder.Record.Extra.Add(RecordStateHelper.ToRecord((int)OrderParamType.PayDifficulty, payDffy));
             // 随机订单需要记录act难度(实际难度)
@@ -954,7 +969,7 @@ namespace FAT
             return catBoardDffy;
         }
 
-        private void _PrepareCandidateItemPool(CtrlDffyType dffyType)
+        private void _PrepareCandidateItemPool(OrderRandomer cfg, CtrlDffyType dffyType)
         {
             var candItemList = mCandItemList;
             candItemList.Clear();
@@ -976,11 +991,12 @@ namespace FAT
             var _realDffy = 0;
 
             var boardCfg = mDataHolder.mergeBoardOrder;
-            var wt_used = boardCfg.UsedWt;
-            var wt_care = boardCfg.CareWt;
-            var wt_oppose = boardCfg.OpposeWt;
-            var wt_recent = boardCfg.RecentWt;
-            var wt_origin = boardCfg.OriginWt;
+            var wt_used = cfg.IsSkipCategoryWt ? 0 : boardCfg.UsedWt;
+            var wt_care = cfg.IsSkipCategoryWt ? 0 : boardCfg.CareWt;
+            var wt_oppose = cfg.IsSkipCategoryWt ? 0 : boardCfg.OpposeWt;
+            var wt_recent = cfg.IsSkipCategoryWt ? 0 : boardCfg.RecentWt;
+            var wt_origin = cfg.IsSkipCategoryWt ? 0 : boardCfg.OriginWt;
+
             var wt_min = boardCfg.MinWt;
             var wt_max = boardCfg.MaxWt;
             var mergeLevel = Game.Manager.mergeLevelMan.level;

@@ -25,31 +25,32 @@ namespace fat.rawdata {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "CiJyYXdkYXRhL0V2ZW50UHV6emxlUm91bmRDb25mLnByb3RvEgdyYXdkYXRh",
-            "IkEKEEV2ZW50UHV6emxlUm91bmQSCgoCaWQYASABKAUSDwoHZ3JhZGVJZBgC",
-            "IAEoBRIQCghwcm9ncmVzcxgDIAEoBSLOAQoaRXZlbnRQdXp6bGVSb3VuZE1h",
-            "cEFCVmFsdWUSWQoTRXZlbnRQdXp6bGVSb3VuZE1hcBgBIAMoCzI8LnJhd2Rh",
-            "dGEuRXZlbnRQdXp6bGVSb3VuZE1hcEFCVmFsdWUuRXZlbnRQdXp6bGVSb3Vu",
-            "ZE1hcEVudHJ5GlUKGEV2ZW50UHV6emxlUm91bmRNYXBFbnRyeRILCgNrZXkY",
-            "ASABKAUSKAoFdmFsdWUYAiABKAsyGS5yYXdkYXRhLkV2ZW50UHV6emxlUm91",
-            "bmQ6AjgBIskEChRFdmVudFB1enpsZVJvdW5kQ29uZhJTChNFdmVudFB1enps",
-            "ZVJvdW5kTWFwGAEgAygLMjYucmF3ZGF0YS5FdmVudFB1enpsZVJvdW5kQ29u",
-            "Zi5FdmVudFB1enpsZVJvdW5kTWFwRW50cnkSVwoVRXZlbnRQdXp6bGVSb3Vu",
-            "ZE1hcEFCGAIgAygLMjgucmF3ZGF0YS5FdmVudFB1enpsZVJvdW5kQ29uZi5F",
-            "dmVudFB1enpsZVJvdW5kTWFwQUJFbnRyeRJhChpFdmVudFB1enpsZVJvdW5k",
-            "TWFwQUJQYXRjaBgDIAMoCzI9LnJhd2RhdGEuRXZlbnRQdXp6bGVSb3VuZENv",
-            "bmYuRXZlbnRQdXp6bGVSb3VuZE1hcEFCUGF0Y2hFbnRyeRpVChhFdmVudFB1",
-            "enpsZVJvdW5kTWFwRW50cnkSCwoDa2V5GAEgASgFEigKBXZhbHVlGAIgASgL",
-            "MhkucmF3ZGF0YS5FdmVudFB1enpsZVJvdW5kOgI4ARphChpFdmVudFB1enps",
-            "ZVJvdW5kTWFwQUJFbnRyeRILCgNrZXkYASABKAkSMgoFdmFsdWUYAiABKAsy",
-            "Iy5yYXdkYXRhLkV2ZW50UHV6emxlUm91bmRNYXBBQlZhbHVlOgI4ARpmCh9F",
-            "dmVudFB1enpsZVJvdW5kTWFwQUJQYXRjaEVudHJ5EgsKA2tleRgBIAEoCRIy",
-            "CgV2YWx1ZRgCIAEoCzIjLnJhd2RhdGEuRXZlbnRQdXp6bGVSb3VuZE1hcEFC",
-            "VmFsdWU6AjgBQj1aLWdpdGxhYi5mdW5wbHVzLmlvL2ZhdC9jb25mL2dlbi9n",
-            "b2xhbmcvcmF3ZGF0YaoCC2ZhdC5yYXdkYXRhYgZwcm90bzM="));
+            "IlIKEEV2ZW50UHV6emxlUm91bmQSCgoCaWQYASABKAUSDwoHYmdJbWFnZRgE",
+            "IAEoCRIPCgdncmFkZUlkGAIgASgFEhAKCHByb2dyZXNzGAMgASgFIs4BChpF",
+            "dmVudFB1enpsZVJvdW5kTWFwQUJWYWx1ZRJZChNFdmVudFB1enpsZVJvdW5k",
+            "TWFwGAEgAygLMjwucmF3ZGF0YS5FdmVudFB1enpsZVJvdW5kTWFwQUJWYWx1",
+            "ZS5FdmVudFB1enpsZVJvdW5kTWFwRW50cnkaVQoYRXZlbnRQdXp6bGVSb3Vu",
+            "ZE1hcEVudHJ5EgsKA2tleRgBIAEoBRIoCgV2YWx1ZRgCIAEoCzIZLnJhd2Rh",
+            "dGEuRXZlbnRQdXp6bGVSb3VuZDoCOAEiyQQKFEV2ZW50UHV6emxlUm91bmRD",
+            "b25mElMKE0V2ZW50UHV6emxlUm91bmRNYXAYASADKAsyNi5yYXdkYXRhLkV2",
+            "ZW50UHV6emxlUm91bmRDb25mLkV2ZW50UHV6emxlUm91bmRNYXBFbnRyeRJX",
+            "ChVFdmVudFB1enpsZVJvdW5kTWFwQUIYAiADKAsyOC5yYXdkYXRhLkV2ZW50",
+            "UHV6emxlUm91bmRDb25mLkV2ZW50UHV6emxlUm91bmRNYXBBQkVudHJ5EmEK",
+            "GkV2ZW50UHV6emxlUm91bmRNYXBBQlBhdGNoGAMgAygLMj0ucmF3ZGF0YS5F",
+            "dmVudFB1enpsZVJvdW5kQ29uZi5FdmVudFB1enpsZVJvdW5kTWFwQUJQYXRj",
+            "aEVudHJ5GlUKGEV2ZW50UHV6emxlUm91bmRNYXBFbnRyeRILCgNrZXkYASAB",
+            "KAUSKAoFdmFsdWUYAiABKAsyGS5yYXdkYXRhLkV2ZW50UHV6emxlUm91bmQ6",
+            "AjgBGmEKGkV2ZW50UHV6emxlUm91bmRNYXBBQkVudHJ5EgsKA2tleRgBIAEo",
+            "CRIyCgV2YWx1ZRgCIAEoCzIjLnJhd2RhdGEuRXZlbnRQdXp6bGVSb3VuZE1h",
+            "cEFCVmFsdWU6AjgBGmYKH0V2ZW50UHV6emxlUm91bmRNYXBBQlBhdGNoRW50",
+            "cnkSCwoDa2V5GAEgASgJEjIKBXZhbHVlGAIgASgLMiMucmF3ZGF0YS5FdmVu",
+            "dFB1enpsZVJvdW5kTWFwQUJWYWx1ZToCOAFCPVotZ2l0bGFiLmZ1bnBsdXMu",
+            "aW8vZmF0L2NvbmYvZ2VuL2dvbGFuZy9yYXdkYXRhqgILZmF0LnJhd2RhdGFi",
+            "BnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EventPuzzleRound), global::fat.rawdata.EventPuzzleRound.Parser, new[]{ "Id", "GradeId", "Progress" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EventPuzzleRound), global::fat.rawdata.EventPuzzleRound.Parser, new[]{ "Id", "BgImage", "GradeId", "Progress" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EventPuzzleRoundMapABValue), global::fat.rawdata.EventPuzzleRoundMapABValue.Parser, new[]{ "EventPuzzleRoundMap" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EventPuzzleRoundConf), global::fat.rawdata.EventPuzzleRoundConf.Parser, new[]{ "EventPuzzleRoundMap", "EventPuzzleRoundMapAB", "EventPuzzleRoundMapABPatch" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, null, })
           }));
@@ -95,6 +96,7 @@ namespace fat.rawdata {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public EventPuzzleRound(EventPuzzleRound other) : this() {
       id_ = other.id_;
+      bgImage_ = other.bgImage_;
       gradeId_ = other.gradeId_;
       progress_ = other.progress_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
@@ -117,6 +119,20 @@ namespace fat.rawdata {
       get { return id_; }
       set {
         id_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "bgImage" field.</summary>
+    public const int BgImageFieldNumber = 4;
+    private string bgImage_ = "";
+    /// <summary>
+    /// 每回合背景图
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string BgImage {
+      get { return bgImage_; }
+      set {
+        bgImage_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
@@ -164,6 +180,7 @@ namespace fat.rawdata {
         return true;
       }
       if (Id != other.Id) return false;
+      if (BgImage != other.BgImage) return false;
       if (GradeId != other.GradeId) return false;
       if (Progress != other.Progress) return false;
       return Equals(_unknownFields, other._unknownFields);
@@ -173,6 +190,7 @@ namespace fat.rawdata {
     public override int GetHashCode() {
       int hash = 1;
       if (Id != 0) hash ^= Id.GetHashCode();
+      if (BgImage.Length != 0) hash ^= BgImage.GetHashCode();
       if (GradeId != 0) hash ^= GradeId.GetHashCode();
       if (Progress != 0) hash ^= Progress.GetHashCode();
       if (_unknownFields != null) {
@@ -203,6 +221,10 @@ namespace fat.rawdata {
         output.WriteRawTag(24);
         output.WriteInt32(Progress);
       }
+      if (BgImage.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteString(BgImage);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -224,6 +246,10 @@ namespace fat.rawdata {
         output.WriteRawTag(24);
         output.WriteInt32(Progress);
       }
+      if (BgImage.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteString(BgImage);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -235,6 +261,9 @@ namespace fat.rawdata {
       int size = 0;
       if (Id != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Id);
+      }
+      if (BgImage.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(BgImage);
       }
       if (GradeId != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(GradeId);
@@ -255,6 +284,9 @@ namespace fat.rawdata {
       }
       if (other.Id != 0) {
         Id = other.Id;
+      }
+      if (other.BgImage.Length != 0) {
+        BgImage = other.BgImage;
       }
       if (other.GradeId != 0) {
         GradeId = other.GradeId;
@@ -288,6 +320,10 @@ namespace fat.rawdata {
             Progress = input.ReadInt32();
             break;
           }
+          case 34: {
+            BgImage = input.ReadString();
+            break;
+          }
         }
       }
     #endif
@@ -312,6 +348,10 @@ namespace fat.rawdata {
           }
           case 24: {
             Progress = input.ReadInt32();
+            break;
+          }
+          case 34: {
+            BgImage = input.ReadString();
             break;
           }
         }

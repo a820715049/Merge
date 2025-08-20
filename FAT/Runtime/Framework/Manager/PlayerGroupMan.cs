@@ -58,7 +58,16 @@ namespace FAT
             {
                 for(int i = 0; i < _playerGroups.Count; i++)
                 {
-                    sb.AppendFormat("group{0}[{1}], ", i + 1, _playerGroups[i]);
+                    var groupIndex = i + 1;
+                    var newline = groupIndex % 5 == 0;
+                    if (newline)
+                    {
+                        sb.AppendFormat("{0}[{1}]\n", groupIndex, _playerGroups[i]);
+                    }
+                    else
+                    {
+                        sb.AppendFormat("{0}[{1}], ", groupIndex, _playerGroups[i]);
+                    }
                 }
                 return sb.ToString();
             }

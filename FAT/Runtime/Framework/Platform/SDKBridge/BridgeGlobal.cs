@@ -36,6 +36,7 @@ namespace FAT.Platform {
             CGAdvertising.Instance.SetDelegate(this);
             CGSurvey.Instance.SetDelegate(this);
             CGFacebook.Instance.SetDelegate(this);
+            CGCDKey.Instance.SetDelegate(this);
 
             Adapter.InitSDKSuccess();
         }
@@ -281,10 +282,12 @@ namespace FAT.Platform {
 
         void CGCDKey.IDelegate.OnExchangeSuccess(string cdkey, string throughCargo) {
             Adapter.LogInfo($"OnExchangeSuccess {cdkey}-{throughCargo}");
+            Adapter.CDKeyExchangeSuccess(cdkey, throughCargo);
         }
 
         void CGCDKey.IDelegate.OnExchangeError(CGError error) {
             Adapter.LogError($"OnExchangeError {error.ToJsonString()}");
+            Adapter.CDKeyExchangeFail(error.GetErrorCode(), error.GetExtra());
         }
 
         #endregion

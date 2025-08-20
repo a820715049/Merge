@@ -97,7 +97,7 @@ namespace FAT
 
         private bool CanCommit()
         {
-            return BingoUtility.HasActiveItemInMainBoardAndInventory(bingoItem.ItemId);
+            return ItemBingoUtility.HasActiveItemInMainBoardAndInventory(bingoItem.ItemId);
         }
 
         private void OnBtnCommit()
@@ -108,7 +108,7 @@ namespace FAT
                 if (item.tid == bingoItem.ItemId) itemInInventory = item;
             }
 
-            if (CanCommit() && !BingoUtility.HasActiveItemInMainBoard(bingoItem.ItemId))
+            if (CanCommit() && !ItemBingoUtility.HasActiveItemInMainBoard(bingoItem.ItemId))
             {
                 // 在背包里 需要弹窗确认是否扣除
                 var world = Game.Manager.mainMergeMan.world;
