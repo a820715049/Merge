@@ -27,7 +27,7 @@ namespace GM7.AppBuilder.Editor.Builds.Actions.AppPrepare
 
         private void _EnsureConfBranch()
         {
-            const string ConfRepoPath = "../conf";
+            const string ConfRepoPath = "../fatr_conf";
             var branch = VariantEditorUtility.LoadCurrentAppSetting().builderConfig.branch;
             CommonEditorUtility.StartProcess("git", $"reset --hard", ConfRepoPath);
             CommonEditorUtility.StartProcess("git", $"clean -fd", ConfRepoPath);
