@@ -80,6 +80,15 @@ namespace FAT
             { EventType.WishEndlessPack, typeof(PackEndlessWishBoard) },
             { EventType.SpinPack, typeof(PackSpin) },
             { EventType.Bp, typeof(BPActivity) },
+            { EventType.NewUser, typeof(PackNU) },
+            { EventType.ToolExchange, typeof(ExchangeTool) },
+            { EventType.De, typeof(ActivityDE) },
+            { EventType.Dem, typeof(ActivityDEM) },
+            { EventType.CardAlbum, typeof(CardActivity) },
+            { EventType.Decorate, typeof(DecorateActivity) },
+            { EventType.MiniBoard, typeof(MiniBoardActivity) },
+            { EventType.Pachinko, typeof(ActivityPachinko) },
+            { EventType.MiniBoardMulti, typeof(MiniBoardMultiActivity) },
         };
         
         private static readonly HashSet<string> _ArtExtensions = new(StringComparer.OrdinalIgnoreCase)
