@@ -30,6 +30,9 @@ namespace FAT {
         public override int StockTotal => 1;
         public bool Sale => confD.Sale;
 
+        public Pack1in3() { }
+
+
         public Pack1in3(ActivityLite lite_) {
             Lite = lite_;
             confD = GetThreeForOnePack(lite_.Param);

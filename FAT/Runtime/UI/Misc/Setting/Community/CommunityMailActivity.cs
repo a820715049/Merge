@@ -17,6 +17,8 @@ namespace FAT
         public VisualPopup VisualUICommunityMailStartNotice { get; } = new(UIConfig.UICommunityMailStartNotice);
         public override ActivityVisual Visual => VisualUICommunityMailStartNotice.visual;
         private int _popupCount;
+        public CommunityMailActivity() { }
+
         public CommunityMailActivity(ActivityLite lite)
         {
             Lite = lite;

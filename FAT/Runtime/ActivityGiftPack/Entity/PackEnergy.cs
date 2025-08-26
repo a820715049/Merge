@@ -22,6 +22,9 @@ namespace FAT
         public bool UseAPI => confD.IsApiUse;
         public string ModelVersion => confD.ModelVersion;
 
+        public PackEnergy() { }
+
+
         public PackEnergy(ActivityLite lite_)
         {
             Lite = lite_;

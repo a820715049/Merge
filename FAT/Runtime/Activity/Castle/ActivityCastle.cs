@@ -40,6 +40,9 @@ namespace FAT
         private int hasPopup;
         private readonly OutputSpawnBonusHandler bonusHandler = new();
 
+        public ActivityCastle() { }
+
+
         public ActivityCastle(ActivityLite lite_)
         {
             Lite = lite_;

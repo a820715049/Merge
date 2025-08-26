@@ -40,6 +40,9 @@ namespace FAT
 
         public override ActivityVisual Visual => VisualRes.visual;
 
+        public ActivityOrderStreak() { }
+
+
         public ActivityOrderStreak(ActivityLite lite_)
         {
             Lite = lite_;

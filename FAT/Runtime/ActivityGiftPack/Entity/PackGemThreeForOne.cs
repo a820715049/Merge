@@ -55,6 +55,9 @@ namespace FAT
         private readonly int _saveDataBeginId = 4;
         private int _packEndTime;
 
+        public PackGemThreeForOne() { }
+
+
         public PackGemThreeForOne(ActivityLite lite_)
         {
             Lite = lite_;

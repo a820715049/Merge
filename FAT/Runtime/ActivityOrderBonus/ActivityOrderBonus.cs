@@ -41,6 +41,8 @@ namespace FAT
         #endregion
 
         #region ActivityLike
+        public ActivityOrderBonus() { }
+
         public ActivityOrderBonus(ActivityLite activityLite)
         {
             Lite = activityLite;

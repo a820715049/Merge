@@ -50,6 +50,9 @@ namespace FAT
         private readonly List<int> _milestoneList = new();
         #endregion
 
+        public ActivityOrderRate() { }
+
+
         public ActivityOrderRate(ActivityLite lite_)
         {
             Lite = lite_;

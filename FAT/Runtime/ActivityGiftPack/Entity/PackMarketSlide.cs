@@ -47,6 +47,9 @@ namespace FAT {
         public override int ThemeId { get; }
         public override int StockTotal => -1;   //设成-1 避免此字段的影响
         
+        public PackMarketSlide() { }
+
+        
         public PackMarketSlide(ActivityLite lite_) {
             Lite = lite_;
             confD = GetMarketSlidePack(lite_.Param);

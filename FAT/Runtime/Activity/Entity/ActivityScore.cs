@@ -109,6 +109,9 @@ namespace FAT
             }
         }
 
+        public ActivityScore() { }
+
+
         public ActivityScore(ActivityLite lite_)
         {
             Lite = lite_;

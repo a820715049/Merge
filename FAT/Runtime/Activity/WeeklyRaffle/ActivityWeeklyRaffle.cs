@@ -77,6 +77,8 @@ namespace FAT
         #endregion
 
         #region 活动基础
+        public ActivityWeeklyRaffle() { }
+
         public ActivityWeeklyRaffle(ActivityLite lite_)
         {
             Lite = lite_;

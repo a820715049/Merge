@@ -41,6 +41,8 @@ namespace FAT
 
         private long lifeTime => ConfD.Lifetime;
         private int actEndTime;
+        public ActivityExtraRewardOrder() { }
+
         public ActivityExtraRewardOrder(ActivityLite lite_)
         {
             Lite = lite_;

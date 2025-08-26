@@ -26,6 +26,9 @@ namespace FAT
 
         private readonly List<int> _packList = new();
 
+        public PackEnergyMultiPack() { }
+
+
         public PackEnergyMultiPack(ActivityLite lite_)
         {
             Lite = lite_;

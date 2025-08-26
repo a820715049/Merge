@@ -103,6 +103,9 @@ namespace FAT
             }
         }
 
+        public ActivityFlashOrder() { }
+
+
         public ActivityFlashOrder(ActivityLite lite_) {
             Lite = lite_;
             confD = Game.Manager.configMan.GetEventFlashOrderConfig(lite_.Param);

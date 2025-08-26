@@ -37,6 +37,8 @@ namespace FAT
         #endregion
 
         #region ActivityLike
+        public ActivityBingoTask() { }
+
         public ActivityBingoTask(ActivityLite lite_)
         {
             Lite = lite_;

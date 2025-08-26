@@ -41,6 +41,9 @@ namespace FAT
         public override int StockTotal => 3;
         public override UIResAlt Res { get; } = new(UIConfig.UIPackProgress);
 
+        public PackProgress() { }
+
+
         public PackProgress(ActivityLite lite_)
         {
             Lite = lite_;

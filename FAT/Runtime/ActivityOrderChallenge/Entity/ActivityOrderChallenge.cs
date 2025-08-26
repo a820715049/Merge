@@ -76,6 +76,9 @@ namespace FAT
         private bool isOrderSuccess;
         private bool isOrderFail;
 
+        public ActivityOrderChallenge() { }
+
+
         public ActivityOrderChallenge(ActivityLite lite_)
         {
             Lite = lite_;

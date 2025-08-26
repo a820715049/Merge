@@ -35,6 +35,9 @@ namespace FAT
             return Game.Manager.configMan.GetBpDetailConfig(_detailId);
         }
         
+        public BPActivity() { }
+
+        
         public BPActivity(ActivityLite lite_)
         {
             Lite = lite_;

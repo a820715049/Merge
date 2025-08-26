@@ -99,6 +99,9 @@ namespace FAT {
         public override int StockTotal => -1;    //限购次数默认设成-1次 代表可以无限购买
         public override bool Valid => _curRecIndex >= 0 && _curRecIndex <= _totalIndex;
 
+        public PackEndlessThree() { }
+
+
         public PackEndlessThree(ActivityLite lite_)
         {
             Lite = lite_;

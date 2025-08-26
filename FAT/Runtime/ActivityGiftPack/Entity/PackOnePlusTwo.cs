@@ -26,6 +26,9 @@ namespace FAT {
         private int _freeGrpId2 = 0;     //礼包中的第二列赠品id
         private bool _hasBuy = false;    //记录是否已经购买过礼包 用于区别是否为重复购买
 
+        public PackOnePlusTwo() { }
+
+
         public PackOnePlusTwo(ActivityLite lite_) {
             Lite = lite_;
             confD = GetOnePlusTwo(lite_.Param);

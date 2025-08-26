@@ -16,6 +16,9 @@ namespace FAT {
             return (r, r ? "not ready by config" : null);
         }
 
+        public PackNewSession() { }
+
+
         public PackNewSession(ActivityLite lite_) {
             Lite = lite_;
             confD = GetNewSessionPack(lite_.Param);

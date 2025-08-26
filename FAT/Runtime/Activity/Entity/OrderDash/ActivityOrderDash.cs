@@ -108,6 +108,9 @@ namespace FAT
             return slotId == list[orderIndex];
         }
 
+        public ActivityOrderDash() { }
+
+
         public ActivityOrderDash(ActivityLite lite_) {
             Lite = lite_;
             confD = GetEventOrderDash(lite_.Param);

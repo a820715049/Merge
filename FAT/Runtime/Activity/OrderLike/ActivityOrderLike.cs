@@ -57,6 +57,9 @@ namespace FAT
         private EventOrderLikeDetail _confDetail;
         private EventTheme _mainTheme;
 
+        public ActivityOrderLike() { }
+
+
         public ActivityOrderLike(ActivityLite lite_)
         {
             Lite = lite_;

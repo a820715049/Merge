@@ -112,6 +112,8 @@ namespace FAT
         private EventRedeemMilestone _curShowMilestoneConfig;
         private RedeemShopSpawnBonusHandler _spawnBonusHandler;
         public List<MliestoneNodeItem> ClonMilestoneNodeList = new();
+        public ActivityRedeemShopLike() { }
+
         public ActivityRedeemShopLike(ActivityLite lite)
         {
             Lite = lite;

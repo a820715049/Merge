@@ -76,6 +76,10 @@ namespace FAT
         public PopupDuelStart StartPopup;
 
 
+        public ActivityDuel() { }
+
+
+
         public ActivityDuel(ActivityLite lite_)
         {
             Lite = lite_;

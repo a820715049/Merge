@@ -49,6 +49,9 @@ namespace FAT
             _ClearFarmBoardData();
         }
         
+        public FarmBoardActivity() { }
+
+        
         public FarmBoardActivity(ActivityLite lite_)
         {
             Lite = lite_;

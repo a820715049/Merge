@@ -44,6 +44,9 @@ namespace FAT
         public override ActivityVisual Visual => VisualMain.visual;
         private List<int> phaseCompleteList = new List<int>();
 
+        public ActivityWeeklyTask() { }
+
+
         public ActivityWeeklyTask(ActivityLite lite_)
         {
             Lite = lite_;

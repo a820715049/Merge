@@ -85,6 +85,10 @@ namespace FAT
         private Dictionary<int, OrderData> _recordedOrderMap = new();
 
 
+        public ActivityClawOrder() { }
+
+
+
         public ActivityClawOrder(ActivityLite lite_)
         {
             Lite = lite_;

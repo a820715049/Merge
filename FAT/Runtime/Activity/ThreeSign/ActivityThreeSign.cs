@@ -38,6 +38,9 @@ namespace FAT
         //记录弹脸时要传入的奖励数据
         private PoolMapping.Ref<List<RewardCommitData>> signReward;
         
+        public ActivityThreeSign() { }
+
+        
         public ActivityThreeSign(ActivityLite lite_)
         {
             Lite = lite_;

@@ -39,6 +39,9 @@ namespace FAT {
         public int DecorateScore => confG.DecorateScore;
         private readonly OutputSpawnBonusHandler bonusHandler = new();
 
+        public ActivityStep() { }
+
+
         public ActivityStep(ActivityLite lite_) {
             Lite = lite_;
             confD = GetEventStep(lite_.Param);

@@ -49,6 +49,9 @@ namespace FAT
         public TokenOutputType OutputType { get; private set; } = TokenOutputType.None;
         public override ActivityVisual Visual => VisualStartNoticePopup.visual;
 
+        public WishBoardActivity() { }
+
+
         public WishBoardActivity(ActivityLite lite)
         {
             Lite = lite;

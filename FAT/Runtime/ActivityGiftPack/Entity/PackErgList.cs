@@ -46,6 +46,9 @@ namespace FAT {
             return GetErgListDetail(_detailId);
         }
         
+        public PackErgList() { }
+
+        
         public PackErgList(ActivityLite lite_)
         {
             Lite = lite_;

@@ -232,6 +232,9 @@ namespace FAT
             RaceManager.GetInstance().SetActivity(null);
         }
 
+        public ActivityRace() { }
+
+
         public ActivityRace(ActivityLite lite)
         {
             Lite = lite;

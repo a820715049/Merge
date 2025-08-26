@@ -131,6 +131,9 @@ namespace FAT
         private List<RewardCommitData> scoreCommitRewardList = new(); //积分兑换钥匙循环中：所有积分奖励对应的CommitData 待提交的积分奖励
         private List<RewardCommitData> tempRewardList = new();
 
+        public ActivityTreasure() { }
+
+
         public ActivityTreasure(ActivityLite lite_)
         {
             Lite = lite_;

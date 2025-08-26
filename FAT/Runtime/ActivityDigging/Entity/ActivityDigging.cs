@@ -124,6 +124,9 @@ namespace FAT
         public override ActivityVisual Visual => VisualPanel;
         private DiggingSpawnBonusHandler spawnBonusHandler;
 
+        public ActivityDigging() { }
+
+
         public ActivityDigging(ActivityLite lite_)
         {
             Lite = lite_;

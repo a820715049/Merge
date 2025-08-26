@@ -29,6 +29,9 @@ namespace FAT {
         private int _curFinishIndex = 0;  //当前轮次中已经完成到的序号,默认从0开始,代表一个也没完成,之后每完成一个+1
         private bool _ignorePopup;
 
+        public ActivityStamp() { }
+
+
         public ActivityStamp(ActivityLite lite_)
         {
             Lite = lite_;

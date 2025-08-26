@@ -34,6 +34,8 @@ namespace FAT
         private int _nextCollectTs = 0;     //下一个可领取的免费奖励时间戳
         private Entry _entry;
         private bool _willEnd = false;
+        public PackRetention() { }
+
         public PackRetention(ActivityLite lite_)
         {
             Lite = lite_;

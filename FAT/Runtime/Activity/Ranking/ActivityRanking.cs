@@ -93,6 +93,8 @@ namespace FAT
         }
 
         public UIResAlt MainRes = new(UIConfig.UIActivityRankMilestoneReward);
+        public ActivityRanking() { }
+
         public ActivityRanking(ActivityLite lite_)
         {
             Lite = lite_;

@@ -29,6 +29,9 @@ namespace FAT
             return (r, r ? "not ready by config" : null);
         }
         
+        public PackShinnyGuar() { }
+
+        
         public PackShinnyGuar(ActivityLite lite_)
         {
             Lite = lite_;

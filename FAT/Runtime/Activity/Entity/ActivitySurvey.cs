@@ -21,6 +21,9 @@ namespace FAT {
         public PopupActivity Popup { get; internal set; }
         public RewardConfig SurveyReward { get; private set; }
 
+        public ActivitySurvey() { }
+
+
         public ActivitySurvey(ActivityLite lite_) {
             Lite = lite_;
             confD = GetEventSurvey(lite_.Param);

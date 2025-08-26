@@ -19,6 +19,9 @@ namespace FAT {
         // 等待激活的星想事成slot
         private Dictionary<int, (int reqNum, int realDffy)> waitingMagicHourSlots = new();
 
+        public ActivityMagicHour() { }
+
+
         public ActivityMagicHour(ActivityLite lite_) {
             Lite = lite_;
             confD = GetEventWishing(lite_.Param);

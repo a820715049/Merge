@@ -14,6 +14,9 @@ namespace FAT {
         public UIResAlt Res { get; } = new(UIConfig.UINoticeMIG);
         public PopupActivity Popup { get; internal set; }
 
+        public ActivityMIG() { }
+
+
         public ActivityMIG(ActivityLite lite_) {
             Lite = lite_;
             confD = GetEventMarketIAPGift(lite_.Param);

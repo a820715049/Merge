@@ -104,6 +104,9 @@ namespace FAT
         // 已解锁的鱼
         private readonly HashSet<int> _fishUnlockSet = new();
 
+        public ActivityFishing() { }
+
+
         public ActivityFishing(ActivityLite lite_)
         {
             Lite = lite_;

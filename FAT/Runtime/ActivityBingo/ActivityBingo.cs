@@ -184,6 +184,10 @@ namespace FAT
         }
 
 
+        public ActivityBingo() { }
+
+
+
         public ActivityBingo(ActivityLite lite)
         {
             Lite = lite;

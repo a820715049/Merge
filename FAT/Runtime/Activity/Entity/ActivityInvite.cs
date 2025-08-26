@@ -33,6 +33,9 @@ namespace FAT {
             acti.UpdateValue(acti.value + 1);
         }
 
+        public ActivityInvite() { }
+
+
         public ActivityInvite(ActivityLite lite_) {
             Lite = lite_;
             confD = GetEventInvite(lite_.Param);

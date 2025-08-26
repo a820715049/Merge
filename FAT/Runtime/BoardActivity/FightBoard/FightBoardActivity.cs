@@ -109,6 +109,8 @@ namespace FAT
         #endregion
 
         #region ActivityLike
+        public FightBoardActivity() { }
+
         public FightBoardActivity(ActivityLite lite)
         {
             Lite = lite;

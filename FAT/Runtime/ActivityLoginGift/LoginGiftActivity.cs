@@ -17,6 +17,9 @@ namespace FAT
         public override bool Valid => confD != null;
         public PopupActivity Popup { get; internal set; }
 
+        public LoginGiftActivity() { }
+
+
         public LoginGiftActivity(ActivityLite lite_) {
             Lite = lite_;
             confD = GetEventLoginGift(lite_.Param);

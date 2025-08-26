@@ -44,6 +44,8 @@ namespace FAT
             e.dot.SetActive(_freeChanceCount > 0);
             return null;
         }
+        public PackSpin() { }
+
         public PackSpin(ActivityLite lite)
         {
             Lite = lite;

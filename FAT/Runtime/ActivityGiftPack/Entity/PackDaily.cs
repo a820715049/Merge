@@ -23,6 +23,9 @@ namespace FAT {
             return (r, r ? "not ready by config" : null);
         }
 
+        public PackDaily() { }
+
+
         public PackDaily(ActivityLite lite_) {
             Lite = lite_;
             confD = GetDailyPopPack(lite_.Param);
