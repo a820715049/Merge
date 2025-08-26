@@ -9,6 +9,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
+using System.Threading.Tasks;
 using fat.rawdata;
 using UnityEditor;
 using UnityEngine;
@@ -97,32 +98,34 @@ namespace FAT
         };
 
         // 期望的源路径前缀（用于裁剪）
-        private const string SrcPrefix = "Assets/Bundle/event/";
+        private const string SrcPrefix = "Assets/Bundle/";
         // 目标根目录（项目根相对路径）
         private const string DstRoot = "SpriteData/";
-        // 清单文件名
-        private const string ManifestName = "文件列表.txt";
         
         [MenuItem("Tools/Log Activity Resources")]
-        public static void LogActivityFishResources()
+        public static async void LogActivityFishResources()
         {
+            var projectRoot = Path.GetDirectoryName(Application.dataPath).Replace("\\", "/");
+            var dstRootAbs = Path.Combine(projectRoot, DstRoot).Replace("\\", "/");
+            Directory.Delete(dstRootAbs, true);
+            await Task.Delay(TimeSpan.FromSeconds(1));
+
             foreach (var activeKey in Map)
             {
                 var groups = GetUIResourceNames(activeKey.Value);
                 Debug.Log($"{activeKey.Key}: {string.Join(",", groups.ToArray())}");
-                // List<string> paths = new();
-                // foreach (var group in groups)
-                // {
-                //     Debug.Log($"Group: {group}");
-                //     foreach (var asset in _GetAssetsByGroup(group))
-                //     {
-                //         var bundle = AssetDatabase.GetImplicitAssetBundleName(asset);
-                //         paths.Add(asset);
-                //         // Debug.Log($"  {bundle}: {asset}");
-                //     }
-                // }
-                //
-                // CopyAll(paths, activeKey.Key);
+                HashSet<string> paths = new();
+                foreach (var group in groups)
+                {
+                    foreach (var asset in _GetAssetsByGroup(group))
+                    {
+                        var bundle = AssetDatabase.GetImplicitAssetBundleName(asset);
+                        paths.Add(asset);
+                        // Debug.Log($"  {bundle}: {asset}");
+                    }
+                }
+                
+                CopyAll(paths, activeKey.Key);
             }
         }
         
@@ -131,9 +134,9 @@ namespace FAT
         /// </summary>
         /// <param name="activityType">继承自 ActivityLike 的类型</param>
         /// <returns>UIConfig 常量名列表</returns>
-        public static List<string> GetUIResourceNames(Type activityType)
+        public static HashSet<string> GetUIResourceNames(Type activityType)
         {
-            var result = new List<string>();
+            var result = new HashSet<string>();
             if (activityType == null || !typeof(ActivityLike).IsAssignableFrom(activityType)) return result;
 
             ActivityLike instance = (ActivityLike)Activator.CreateInstance(activityType, true);
@@ -196,21 +199,8 @@ namespace FAT
 
             if (res == null) return false;
 
-            uiConfigName = FindUIConfigFieldName(res);
+            uiConfigName = res.prefabGroup;
             return uiConfigName != null;
-        }
-
-        private static string FindUIConfigFieldName(UIResource res)
-        {
-            var fields = typeof(UIConfig).GetFields(BindingFlags.Public | BindingFlags.Static);
-            foreach (var field in fields)
-            {
-                if (ReferenceEquals(field.GetValue(null), res))
-                {
-                    return field.Name;
-                }
-            }
-            return null;
         }
 
         private static HashSet<string> _CollectFishGroups(string key)
@@ -290,18 +280,15 @@ namespace FAT
             return null;
         }
         
-        public static void CopyAll(List<string> paths, string name)
+        public static void CopyAll(IEnumerable<string> paths, EventType name)
         {
             try
             {
                 // 项目根绝对路径（去掉末尾的 /Assets）
                 var projectRoot = Path.GetDirectoryName(Application.dataPath).Replace("\\", "/");
-                var dstRootAbs = Path.Combine(projectRoot, $"{DstRoot}{name}").Replace("\\", "/");
+                var dstRootAbs = Path.Combine(projectRoot, DstRoot).Replace("\\", "/");
 
-                if (!Directory.Exists(dstRootAbs))
-                {
-                    Directory.CreateDirectory(dstRootAbs);
-                }
+                Directory.CreateDirectory(dstRootAbs);
 
                 // 去重 + 只保留以 "Assets/" 开头的有效项
                 var items = paths
@@ -361,7 +348,7 @@ namespace FAT
                 }
 
                 // 写清单
-                var manifestAbs = Path.Combine(dstRootAbs, ManifestName).Replace("\\", "/");
+                var manifestAbs = Path.Combine(dstRootAbs, $"EventType{name}.txt").Replace("\\", "/");
                 File.WriteAllText(manifestAbs, written.ToString(), new UTF8Encoding(encoderShouldEmitUTF8Identifier: false));
 
                 AssetDatabase.Refresh();
