@@ -19,6 +19,8 @@ namespace FAT {
         public bool WillEnd => Stock == 0;
         public readonly List<Config.RewardConfig> goods = new();
 
+        public ExchangeTool() { }
+
         public ExchangeTool(ToolExchange conf_) {
             conf = conf_;
             var ts = Game.UtcNow;

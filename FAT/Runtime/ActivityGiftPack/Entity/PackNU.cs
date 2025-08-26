@@ -12,6 +12,8 @@ namespace FAT {
         public override UIResAlt Res { get; } = new(UIConfig.UIGiftPackNU);
         public override int StockTotal => conf.Paytimes;
 
+        public PackNU() { }
+
         public PackNU(NewUserPack conf_) {
             conf = conf_;
             var ts = Game.UtcNow;

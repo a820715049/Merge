@@ -132,6 +132,8 @@ namespace FAT
 
         #region 通用逻辑
 
+        public ActivityPachinko() { }
+
         public ActivityPachinko(ActivityLite lite)
         {
             Lite = lite;
