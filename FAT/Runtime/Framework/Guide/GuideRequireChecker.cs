@@ -41,6 +41,7 @@ namespace FAT
             DecorateStart = 22,
             WeeklyRaffle = 23, //签到抽奖
             Boost4XGuide = 24, //是否满足4倍加速引导弹出条件
+            MineCartBoard = 26, //矿车棋盘
         }
 
         private UIManager uiMan => UIManager.Instance;
@@ -170,10 +171,14 @@ namespace FAT
                     return _CheckClawOrderPickSuccess();
                 case GuideMergeRequireType.LevelCanBoost:
                     return _CheckLevelCanBoost(value);
+                case GuideMergeRequireType.MineCartRoundComplete:
+                    return _CheckMineCartBoardRoundFinish();
             }
 
             return false;
         }
+
+
 
         public bool IsMatchUIState(int state, int extra)
         {
@@ -316,6 +321,9 @@ namespace FAT
                         isSuccess = true;
                     }
                     return isSuccess;
+                case UIState.MineCartBoard:
+                    var mineCart = Game.Manager.activity.LookupAny(EventType.MineCart) as MineCartActivity;
+                    return UIManager.Instance.IsOpen(mineCart?.VisualBoard.res.ActiveR ?? UIConfig.UIMineCartBoardMain);
             }
 
             return false;
@@ -689,6 +697,12 @@ namespace FAT
                 return Game.Manager.mergeLevelMan.level >= cfg.ActiveLv;
             }
             return false;
+        }
+        private bool _CheckMineCartBoardRoundFinish()
+        {
+            if (!Game.Manager.activity.LookupAny(EventType.MineCart, out var acti) || acti is not MineCartActivity a)
+                return false;
+            return a.CanPlayFinishRoundGuide;
         }
     }
 }

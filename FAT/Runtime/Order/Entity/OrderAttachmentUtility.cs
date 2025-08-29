@@ -111,11 +111,21 @@ namespace FAT
                 return (order.GetValue((OrderParamType)keyRewardId), order.GetValue((OrderParamType)keyRewardNum));
             }
 
+            //订单左下角积分数据更新
             public void UpdateScoreData(OrderData order, int eventId, int rewardNum)
             {
                 var extra = order.Record.Extra;
                 UpdateRecord(keyEventId, eventId, extra);
                 UpdateRecord(keyRewardNum, rewardNum, extra);
+            }
+
+            //订单右下角奖励数据更新  rewardId=0时认为奖励id是什么由对应活动的配置决定
+            public void UpdateScoreDataBR(OrderData order, int eventId, int rewardNum, int rewardId = 0)
+            {
+                var extra = order.Record.Extra;
+                UpdateRecord(keyEventId, eventId, extra);
+                UpdateRecord(keyRewardNum, rewardNum, extra);
+                UpdateRecord(keyRewardId, rewardId, extra);
             }
 
             public void UpdateEventData(OrderData order, int eventId, int eventParam, int rewardId, int rewardNum)

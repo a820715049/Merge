@@ -32,7 +32,7 @@ namespace FAT
         public bool IsHideStatusUI = false; //记录状态栏显隐状态
         private bool isBlocked => _block.raycastTarget || _blockLayerObj.activeSelf;
         public bool IsBlocked => isBlocked;
-        private CanvasScaler _canvasScaler; 
+        private CanvasScaler _canvasScaler;
 
         #region safe area
         //UI安全区相关
@@ -51,7 +51,7 @@ namespace FAT
         private Graphic _block;
         //记录当前外部界面逻辑屏蔽点击的情况
         private int _miscBlockCount;
-        
+
         //当前正在加载的界面
         private Dictionary<UIResource, int> _loadRequestDict;
         //所有已经成功加载完成的界面
@@ -62,14 +62,14 @@ namespace FAT
         private int _curLoadingResCount;
         //记录当前内部逻辑屏蔽点击的情况
         private int _curBlockCount;
-        
+
         //当界面环境处于idle状态时要依次执行的回调List
         private List<(string key, int priority, Action callback)> _idleActionList;
         //上次注册请求回调时的游戏帧数
         private int _cbReqFrameCount = -1;
         //外部逻辑控制是否开关idle action逻辑运行
         private bool _isCloseIdleAction = false;
-        
+
         void IGameModule.Reset()
         {
             _Init();
@@ -89,28 +89,30 @@ namespace FAT
         {
             _OpenWindowImp(uiRes, null, args);
         }
-        
+
         //关闭指定界面
         public void CloseWindow(UIResource uiRes)
         {
             _CloseWindowImp(uiRes);
         }
-        
+
         public UIBase TryGetUI(UIResource res)
         {
             return _allCacheUIDict.TryGetValue(res, out var ui) ? ui : null;
         }
-        
+
         public RectTransform GetLayerRootByType(UILayer type)
         {
             return _uiLayerList[(int)type];
         }
 
-        public bool TryGetCache(UIResource res_, out UIBase root_) {
+        public bool TryGetCache(UIResource res_, out UIBase root_)
+        {
             return _allCacheUIDict.TryGetValue(res_, out root_);
         }
-        
-        public void DropCache(UIResource uiRes) {
+
+        public void DropCache(UIResource uiRes)
+        {
             _allCacheUIDict.Remove(uiRes);
             _loadRequestDict.Remove(uiRes);
         }
@@ -120,7 +122,8 @@ namespace FAT
             return _block.raycastTarget;
         }
 
-        public void Block(bool v_) {
+        public void Block(bool v_)
+        {
             if (v_)
             {
                 ++_miscBlockCount;
@@ -146,16 +149,20 @@ namespace FAT
             }
         }
 
-        public void Visible(bool v_, int from_ = 0, int to_ = int.MaxValue) {
+        public void Visible(bool v_, int from_ = 0, int to_ = int.MaxValue)
+        {
             to_ = Mathf.Min(to_, _uiLayerList.Count - 1) + 1;
-            for (var k = from_; k < to_; ++k) {
+            for (var k = from_; k < to_; ++k)
+            {
                 _uiLayerList[k].gameObject.SetActive(v_);
             }
         }
 
-        public void Visible(UIResource ui_, bool v_) {
+        public void Visible(UIResource ui_, bool v_)
+        {
             var e = TryGetCache(ui_, out var n);
-            if (!e) {
+            if (!e)
+            {
                 if (v_) OpenWindow(ui_);
                 return;
             }
@@ -180,7 +187,7 @@ namespace FAT
             }
             return false;
         }
-        
+
         //传入任意UI节点 返回其所属的UI界面名称
         public string GetBelongUIPrefabName(Transform node)
         {
@@ -210,7 +217,7 @@ namespace FAT
             // 处于加载状态时返回
             if (LoadingCount != 0)
                 return false;
-            if(isBlocked)
+            if (isBlocked)
                 return false;
             //弹脸系统有弹脸界面时返回
             if (Game.Manager.screenPopup.HasPopup())
@@ -249,7 +256,7 @@ namespace FAT
             if (Game.Manager.miniBoardMan.CheckMiniBoardUIOpen() || Game.Manager.miniBoardMultiMan.CheckMiniBoardUIOpen())
                 return false;
             //奖励显示时返回
-            if (IsOpen(UIConfig.UIRandomBox) || IsOpen(UIConfig.UICardPackOpen))
+            if (IsOpen(UIConfig.UIRandomBox) || IsOpen(UIConfig.UICardPackOpen) || IsOpen(UIConfig.UISingleReward))
                 return false;
             if (checkSpecialReward)
             {
@@ -274,7 +281,7 @@ namespace FAT
             }
             return false;
         }
-        
+
         public bool IsShow(UIResource res)
         {
             if (_allCacheUIDict.TryGetValue(res, out UIBase ui))
@@ -304,7 +311,7 @@ namespace FAT
             }
             return false;
         }
-        
+
         public bool IsIdleIn(UIResource res)
         {
             return _openingUIQueue.Count == 0 && IsShow(res)
@@ -314,12 +321,13 @@ namespace FAT
         public bool IsValid(UIResource res)
         {
             if (_allCacheUIDict.ContainsKey(res)) return true;
-            foreach(var (r, _) in _openingUIQueue) {
+            foreach (var (r, _) in _openingUIQueue)
+            {
                 if (r == res) return true;
             }
             return false;
         }
-        
+
         public bool IsVisible(UIResource res)
         {
             if (_allCacheUIDict.TryGetValue(res, out UIBase ui))
@@ -401,7 +409,7 @@ namespace FAT
         }
 
         #endregion
-        
+
         /// <summary>
         /// 注意：同一业务逻辑内不应该滥用此接口 最好是相应Manager中自己包好回调List再注册进来
         /// 注意：只应在可预见的时间段内需要idle action时才调用注册，不要一开始就注册进来 寄希望于UIManager帮忙检测！！！
@@ -451,7 +459,7 @@ namespace FAT
                 _DelayRefreshCanvasAndSafeArea().Forget();
             }
         }
-        
+
         //数据初始化
         private void _InitData()
         {
@@ -562,7 +570,7 @@ namespace FAT
             _lastScreenHeight = Screen.height;
             DebugEx.Info($"[SafeArea] rect is {_curSafeArea}, anchorMin = {anchorMin}, anchorMax = {anchorMax}");
         }
-        
+
         //初始化Canvas
         private void _InitCanvas()
         {
@@ -578,7 +586,7 @@ namespace FAT
             _canvasScaler = canvasRoot.GetComponent<CanvasScaler>();
             SafeRoot = canvasRoot.Find("SafeRoot") as RectTransform;
         }
-        
+
         private bool _RefreshCanvasScaler()
         {
             var preMatch = _canvasScaler.matchWidthOrHeight;
@@ -647,7 +655,7 @@ namespace FAT
         #endregion
 
         #region 界面打开/关闭流程相关
-        
+
         private void _OpenWindowImp(UIResource uiRes, Action openSuccessCb, params object[] args)
         {
             if (_openingUIQueue.Count > 0)
@@ -713,7 +721,7 @@ namespace FAT
                 }
             }
         }
-        
+
         private void _AddOpenRequest(UIResource uiRes, Action openSuccessCb, params object[] args)
         {
             Action imp = () =>
@@ -724,7 +732,7 @@ namespace FAT
             _openingUIQueue.Add((uiRes, imp));
             DebugEx.FormatInfo("[UIManager._AddOpenRequest] : uiRes = {0}, waitCount = {1}", uiRes.prefabPath, _openingUIQueue.Count);
         }
-        
+
         private bool _TryPrepareRes(UIResource uiRes)
         {
             if (!_allCacheUIDict.ContainsKey(uiRes))
@@ -742,7 +750,7 @@ namespace FAT
             }
             return true;
         }
-        
+
         private IEnumerator _CoLoadRequest(UIResource uiRes, Dictionary<UIResource, UIBase> container, Action<UIBase> callback)
         {
             _loadRequestDict.Add(uiRes, 0);
@@ -784,7 +792,7 @@ namespace FAT
                 _TryCancelOpenRequest(uiRes);
             }
         }
-        
+
         private void _TryResolveOpenRequest(UIBase _)
         {
             while (_openingUIQueue.Count > 0)
@@ -797,7 +805,7 @@ namespace FAT
                 imp?.Invoke();
             }
         }
-        
+
         private void _Open(UIBase ui, params object[] args)
         {
             _SetupBlock(true);
@@ -812,24 +820,26 @@ namespace FAT
             _TryPauseMainUI(ui.ResConfig);
             //检查above层级界面数量
             _CheckAboveStateChildCount(ui.ResConfig);
-            
-            try {
+
+            try
+            {
                 ui.PreOpen(args);
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 DebugEx.Error($"{e.Message}\n{e.StackTrace}");
             }
 
             Game.Manager.audioMan.TriggerSound(ui.ResConfig.openSound.eventName);
-            
-            void ResolveOpen() 
-            { 
-                _SetupBlock(false); 
+
+            void ResolveOpen()
+            {
+                _SetupBlock(false);
                 ui.PostOpen();
                 if (LoadingCount == 0)
                     GuideUtility.TriggerGuide();
             }
-            
+
             if (!ui.CheckAnimValid())
             {
                 ResolveOpen();
@@ -846,7 +856,7 @@ namespace FAT
                     ui.PlayOpenAnim(ResolveOpen);
             }
         }
-        
+
         private void _SetupBlock(bool b)
         {
             if (b)
@@ -873,7 +883,7 @@ namespace FAT
                 Debug.LogErrorFormat("[UIManager._SetupBlock] : block unbalance {0}", _curBlockCount);
             }
         }
-        
+
         private void _SetupConfig(UIBase ui, UIResource res)
         {
             ui.ResConfig = res;
@@ -894,7 +904,7 @@ namespace FAT
                 content.anchorMax = _safeAreaAnchorMax;
             }
         }
-        
+
         private void _SetupLayer(UIBase ui, UILayer _layer)
         {
             ui.BelongLayer = _layer;
@@ -910,7 +920,7 @@ namespace FAT
 
             ui.gameObject.SetActive(true);
         }
-        
+
         private void _CloseWindowImp(UIResource uiRes)
         {
             if (uiRes == null)
@@ -929,7 +939,7 @@ namespace FAT
 
             _ClosingEffectImplement(ui);
         }
-        
+
         private void _TryCancelOpenRequest(UIResource uiRes)
         {
             var idx = _openingUIQueue.FindIndex(item => item.ui == uiRes);
@@ -938,13 +948,13 @@ namespace FAT
                 _openingUIQueue.RemoveAt(idx);
             }
         }
-        
+
         private void _ClosingEffectImplement(UIBase ui)
         {
             _SetupBlock(true);
             ui.PreClose();
             Game.Manager.audioMan.TriggerSound(ui.ResConfig.closeSound.eventName);
-            
+
             void ResolveClose()
             {
                 _SetupBlock(false);
@@ -1041,7 +1051,7 @@ namespace FAT
                 MessageCenter.Get<MSG.GAME_MAIN_UI_STATE_CHANGE>().Dispatch(false);
             }
         }
-        
+
         private void _TryResumeMainUI(UIResource res)
         {
             if (res == null)
@@ -1058,7 +1068,7 @@ namespace FAT
             }
             for (var i = (int)UILayer.SubStatus; i >= (int)UILayer.AboveStatus; i--)
             {
-                var layerRoot =  _uiLayerList[i];
+                var layerRoot = _uiLayerList[i];
                 if (layerRoot.childCount < 1)
                     continue;
                 for (var j = layerRoot.childCount - 1; j >= 0; j--)
@@ -1182,7 +1192,7 @@ namespace FAT
             _isCloseIdleAction = false;
             _InitAnimListener();
         }
-        
+
         private void Update()
         {
             _UpdateGlobalNav();
@@ -1241,7 +1251,7 @@ namespace FAT
                 if (cur.ResConfig.IsIgnoreNavBack)
                     continue;
                 //此界面当前处于隐藏状态时，继续查找后续界面
-                if (cur.gameObject.activeInHierarchy==false)
+                if (cur.gameObject.activeInHierarchy == false)
                     continue;
                 //若此界面支持NavBack 则尝试处理
                 if (cur.ResConfig.IsSupportNavBack)
@@ -1330,17 +1340,17 @@ namespace FAT
             DebugEx.FormatInfo("[UIManager._UpdateIdleActionList] : reqKey = {0}, priority = {1}", first.key, first.priority);
             first.callback?.Invoke();
         }
-        
+
         private bool _HasIdleAction()
         {
             return _idleActionList.Count > 0;
         }
-        
+
         private bool _IsLayerEmpty(UILayer layer)
         {
             return _uiLayerList[(int)layer].childCount < 1;
         }
-        
+
         private void CloseAll()
         {
             _openingUIQueue.Clear();
@@ -1360,6 +1370,6 @@ namespace FAT
         }
 
         #endregion
-        
+
     }
 }

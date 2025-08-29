@@ -307,6 +307,9 @@ namespace FAT
             }
             entryPrefabs.Add(entry);
             _RefreshLayout();
+            
+            // 红点位置适配
+            entry.GetComponentInChildren<MBDotPosFit>()?.FitPos(entry);
         }
     }
 }

@@ -308,13 +308,14 @@ namespace FAT
                 yield return AssetBundleManager.Instance.CoPrepare();
                 // res 全局
                 yield return LoadingJob_CoLoadCommonRes();
-                DebugEx.Info($"[GameProcedure] hotfix after update");
-                yield return AsyncTaskUtility.ExtractAsyncTaskFromCoroutine<AsyncTaskBase>(out var taks, Hotfix.HotfixManager.Instance.ATInitPatch());
                 // res Sound&Music
                 LoadSoundAndMusic();
                 // 有更新 清理上次记录的语言路径 避免语言不重新加载
                 GameI18NHelper.GetOrCreate().ClearLastPath();
             }
+            //加载代码热更
+            DebugEx.Info($"[GameProcedure] hotfix after update");
+            yield return AsyncTaskUtility.ExtractAsyncTaskFromCoroutine<AsyncTaskBase>(out var taks, Hotfix.HotfixManager.Instance.ATInitPatch());
             // 加载字体材质Asset配置信息
             yield return LoadingJob_CoLoadFontMatRes();
             //根据当前语言加载对应字体Asset资源

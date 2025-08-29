@@ -1023,6 +1023,32 @@ public partial class DataTracker
         }
     }
 
+    // LandMark: 获得活动 token 时
+    [Serializable]
+    internal class event_landmark_token : MergeCommonData
+    {
+        public int event_id;                 // 活动ID（EventTime.id）
+        public int event_from;               // 活动来源（0：EventTime；1：EventTrigger）
+        public int event_param;              // 活动模版ID
+        public int milestone_difficulty;     // 活动难度（对应RFM分层）
+        public int milestone_num;            // 一共需要的token数
+        public int milestone_queue;          // 已获得token数
+        public int round_num;                // 里程碑轮数（固定为1）
+        public bool is_final;                // 在获得最后一个token时为true
+
+        public static void Track(ActivityLike act, int round, bool isFinal, int milestoneQueue, int milestoneNum, int milestoneDifficulty)
+        {
+            var data = _GetTrackData<event_landmark_token>();
+            (data.event_id, data.event_from, data.event_param) = act.Info3;
+            data.round_num = round;
+            data.is_final = isFinal;
+            data.milestone_queue = milestoneQueue;
+            data.milestone_num = milestoneNum;
+            data.milestone_difficulty = milestoneDifficulty;
+            _TrackData(data);
+        }
+    }
+
     //无限礼包领取奖励
     [Serializable]
     internal class endless_reward : MergeCommonData
@@ -2136,6 +2162,214 @@ public partial class DataTracker
 
     #endregion
 
+    #region 矿车棋盘
+    
+    //使用最高级进度棋子时
+    [Serializable]
+    internal class event_minecart_foward : MergeCommonData
+    {
+        public int event_id;
+        public int event_from; //活动来源（0：EventTime，1：EventTrigger）
+        public int event_param;
+        public int milestone_queue; //活动期间第几个里程碑（从1开始，累加）
+        public int milestone_num;   //活动里程碑总数（1轮总数，不计算循环里程碑）
+        public int milestone_difficulty;   //活动难度(EventMineCartDetail.diff)
+        public int board_id;    //来源棋盘（MergeBoard.id）
+        public int board_row;   //当前棋盘深度m（类似挖矿逻辑）
+        public int round_num; //本次活动第几轮（从1开始，递增）
+        public int score_num; //当前里程碑进度值（本次增加分数后）
+
+        public static void Track(ActivityLike acti_, int index, int milestoneNum, int diff, int boardId, int depth, int roundNum, int scoreNum)
+        {
+            var data = _GetTrackData<event_minecart_foward>();
+            data.event_id = acti_.Id;
+            data.event_from = acti_.From;
+            data.event_param = acti_.Param;
+            data.milestone_queue = index;
+            data.milestone_num = milestoneNum;
+            data.milestone_difficulty = diff;
+            data.board_id = boardId;
+            data.board_row = depth;
+            data.round_num = roundNum;
+            data.score_num = scoreNum;
+            _TrackData(data);
+        }
+    }
+
+    //获得回合奖励时（大奖）
+    [Serializable]
+    internal class event_minecart_reward : MergeCommonData
+    {
+        public int event_id;
+        public int event_from; //活动来源（0：EventTime，1：EventTrigger）
+        public int event_param;
+        public int milestone_queue; //第几个回合奖励
+        public int milestone_num;   //回合总数（EventMineCartDetail.rounId数量）
+        public int milestone_difficulty;   //活动难度(EventMineCartDetail.diff)
+        public bool is_final;   //是否为本轮最后一个里程碑
+        public int milestone_id;    //里程碑id（EventMineCartRound.id）
+        public int board_id;    //来源棋盘（MergeBoard.id）
+        public int board_row;   //当前棋盘深度m（类似挖矿逻辑）
+        public int round_num; //本次活动第几轮（从1开始，递增）
+
+        public static void Track(ActivityLike acti_, int index, int milestoneNum, int diff, bool isFinal, int milestoneId, int boardId, int depth, int roundNum)
+        {
+            var data = _GetTrackData<event_minecart_reward>();
+            data.event_id = acti_.Id;
+            data.event_from = acti_.From;
+            data.event_param = acti_.Param;
+            data.milestone_queue = index;
+            data.milestone_num = milestoneNum;
+            data.milestone_difficulty = diff;
+            data.is_final = isFinal;
+            data.milestone_id = milestoneId;
+            data.board_id = boardId;
+            data.board_row = depth;
+            data.round_num = roundNum;
+            _TrackData(data);
+        }
+    }
+
+    //完成图鉴时
+    [Serializable]
+    internal class event_minecart_gallery : MergeCommonData
+    {
+        public int event_id;
+        public int event_from; //活动来源（0：EventTime，1：EventTrigger）
+        public int event_param;
+        public int milestone_queue; //第几个目标棋子（从1开始，EventMineCart.handBook）
+        public int milestone_num;   //目标棋子总数（EventMineCart.handBook）
+        public int milestone_difficulty;   //该里程碑认定难度(EventMineCartDetail.diff)
+        public bool is_final;   //是否为最后一个目标棋子
+        public int board_id;    //来源棋盘（MergeBoard.id）
+        public int board_row;   //当前棋盘深度m（类似挖矿逻辑）
+        public int round_num; //本次活动第几轮（从1开始，递增）
+
+        public static void Track(ActivityLike acti_, int index, int milestoneNum, int diff, bool isFinal, int boardId, int depth, int roundNum)
+        {
+            var data = _GetTrackData<event_minecart_gallery>();
+            data.event_id = acti_.Id;
+            data.event_from = acti_.From;
+            data.event_param = acti_.Param;
+            data.milestone_queue = index;
+            data.milestone_num = milestoneNum;
+            data.milestone_difficulty = diff;
+            data.is_final = isFinal;
+            data.board_id = boardId;
+            data.board_row = depth;
+            data.round_num = roundNum;
+            _TrackData(data);
+        }
+    }
+    
+    //提交随机订单获得棋子时
+    [Serializable]
+    internal class event_minecart_getitem_order : MergeCommonData
+    {
+        public int event_id;
+        public int event_from; //活动来源（0：EventTime，1：EventTrigger）
+        public int event_param;
+        public int milestone_difficulty;   //活动难度(EventMineCartDetail.diff)
+        public int board_id;    //来源棋盘（MergeBoard.id）
+        public int board_row;   //当前棋盘深度m（类似挖矿逻辑）
+        public int round_num; //本次活动第几轮（从1开始，递增）
+        public int item_id; //生成的棋子id
+        public int item_level; //生成的棋子在合成链内的等级
+        public int item_num; //生成的棋子数量
+        public int pay_difficulty;  //订单的付出难度
+
+        public static void Track(ActivityLike acti_, int diff, int boardId, int depth, int roundNum, int itemId, int itemLevel, int itemNum, int payDifficulty)
+        {
+            var data = _GetTrackData<event_minecart_getitem_order>();
+            data.event_id = acti_.Id;
+            data.event_from = acti_.From;
+            data.event_param = acti_.Param;
+            data.milestone_difficulty = diff;
+            data.board_id = boardId;
+            data.board_row = depth;
+            data.round_num = roundNum;
+            data.item_id = itemId;
+            data.item_level = itemLevel;
+            data.item_num = itemNum;
+            data.pay_difficulty = payDifficulty;
+            _TrackData(data);
+        }
+    }
+    
+    //点击耗体生成器获得棋子时
+    [Serializable]
+    internal class event_minecart_getitem_tap : MergeCommonData
+    {
+        public int event_id;
+        public int event_from; //活动来源（0：EventTime，1：EventTrigger）
+        public int event_param;
+        public int milestone_difficulty;   //活动难度(EventMineCartDetail.diff)
+        public int board_id;    //来源棋盘（MergeBoard.id）
+        public int board_row;   //当前棋盘深度m（类似挖矿逻辑）
+        public int round_num; //本次活动第几轮（从1开始，递增）
+        public int item_id; //生成的棋子id
+        public int item_level; //生成的棋子在合成链内的等级
+        public int item_num; //生成的棋子数量
+
+        public static void Track(ActivityLike acti_, int diff, int boardId, int depth, int roundNum, int itemId, int itemLevel, int itemNum)
+        {
+            var data = _GetTrackData<event_minecart_getitem_tap>();
+            data.event_id = acti_.Id;
+            data.event_from = acti_.From;
+            data.event_param = acti_.Param;
+            data.milestone_difficulty = diff;
+            data.board_id = boardId;
+            data.board_row = depth;
+            data.round_num = roundNum;
+            data.item_id = itemId;
+            data.item_level = itemLevel;
+            data.item_num = itemNum;
+            _TrackData(data);
+        }
+    }
+    
+    //活动结束领取遗留奖励时
+    [Serializable]
+    internal class event_minecart_end_reward : MergeCommonData
+    {
+        public int event_id;
+        public int event_from; //活动来源（0：EventTime，1：EventTrigger）
+        public int event_param;
+        public string rewardinfo; //回收的棋子信息 id:数量
+
+        public static void Track(ActivityLike acti_, string itemsInfo)
+        {
+            var data = _GetTrackData<event_minecart_end_reward>();
+            data.event_id = acti_.Id;
+            data.event_from = acti_.From;
+            data.event_param = acti_.Param;
+            data.rewardinfo = itemsInfo;
+            _TrackData(data);
+        }
+    }
+    
+    //矿车 1+1 领取奖励时
+    [Serializable]
+    internal class oneplusone_minecart_reward : MergeCommonData
+    {
+        public int event_id;
+        public int event_from; //活动来源（0：EventTime，1：EventTrigger）
+        public int event_param;
+        public bool is_free;
+
+        public static void Track(ActivityLike acti_, bool isFree)
+        {
+            var data = _GetTrackData<oneplusone_minecart_reward>();
+            data.event_id = acti_.Id;
+            data.event_from = acti_.From;
+            data.event_param = acti_.Param;
+            data.is_free = isFree;
+            _TrackData(data);
+        }
+    }
+
+    #endregion
+
     #region 第三方绑定
 
     public static void AccountBinding(int state_, bool switch_, string pId_, AccountLoginType pType_,
@@ -2372,6 +2606,67 @@ public partial class DataTracker
             (data.event_id, data.event_from, data.event_param) = acti_.Info3;
             data.level_num = level_num;
             data.digging_board_id = digging_board_id;
+            _TrackData(data);
+        }
+    }
+    #endregion
+
+    #region 耗体自选活动
+    [Serializable]
+    internal class event_wishupon_rwd : MergeCommonData
+    {
+        public int event_id;
+        public int event_from;
+        public int event_param;
+        public int milestone_queue;
+        public int milestone_num;
+        public int milestone_difficulty;
+        public string item_info;
+        public int reward_from;
+
+        public static void Track(ActivityLike acti_, int milestone_queue, int milestone_num, int milestone_difficulty, string reward_str, int reward_from)
+        {
+            var data = _GetTrackData<event_wishupon_rwd>();
+            (data.event_id, data.event_from, data.event_param) = acti_.Info3;
+            data.milestone_queue = milestone_queue;
+            data.milestone_num = milestone_num;
+            data.milestone_difficulty = milestone_difficulty;
+            data.item_info = reward_str;
+            data.reward_from = reward_from;
+            _TrackData(data);
+        }
+    }
+
+    [Serializable]
+    internal class event_wishupon_complete : MergeCommonData
+    {
+        public int event_id;
+        public int event_from;
+        public int event_param;
+        public int milestone_difficulty;
+
+        public static void Track(ActivityLike acti_, int milestone_difficulty)
+        {
+            var data = _GetTrackData<event_wishupon_complete>();
+            (data.event_id, data.event_from, data.event_param) = acti_.Info3;
+            data.milestone_difficulty = milestone_difficulty;
+            _TrackData(data);
+        }
+    }
+
+    [Serializable]
+    internal class event_wishupon_popup : MergeCommonData
+    {
+        public int event_id;
+        public int event_from;
+        public int event_param;
+        public int from;
+
+        public static void Track(ActivityLike acti_, int from)
+        {
+            var data = _GetTrackData<event_wishupon_popup>();
+            (data.event_id, data.event_from, data.event_param) = acti_.Info3;
+            data.from = from;
             _TrackData(data);
         }
     }

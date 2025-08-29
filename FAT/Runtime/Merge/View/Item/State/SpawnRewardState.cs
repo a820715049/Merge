@@ -35,7 +35,8 @@ namespace FAT
             var ignoreOffset = view.spawnContext?.type == ItemSpawnContext.SpawnType.OrderLike ||
                 view.spawnContext?.type == ItemSpawnContext.SpawnType.OrderRate ||
                 view.spawnContext?.type == ItemSpawnContext.SpawnType.Fight ||
-                view.spawnContext?.type == ItemSpawnContext.SpawnType.WishBoard;
+                view.spawnContext?.type == ItemSpawnContext.SpawnType.WishBoard ||
+                view.spawnContext?.type == ItemSpawnContext.SpawnType.MineCart;
             var (a, b, c) = BoardUtility.CalcBezierControlPos(BoardUtility.GetRealCoordByBoardPos(fromPosInBoard), view.data.coord, ignoreOffset);
             p0 = BoardUtility.CalcItemLocalPosInMoveRoot(a);
             p1 = BoardUtility.CalcItemLocalPosInMoveRoot(b);

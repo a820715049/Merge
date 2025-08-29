@@ -74,7 +74,7 @@ public enum PoolItemType
     MINE_BOARD_MILESTONE_CELL,
 
     #endregion
-    
+
     #region 连续订单
     ORDER_STREAK_CELL,
     #endregion
@@ -195,6 +195,12 @@ public enum PoolItemType
 
     WISH_BOARD_MILESTONE_CELL,
     WISH_BOARD_GALLERY_ITEM,
+
+    #endregion
+
+    #region 矿车棋盘活动
+
+    MINE_CART_BOARD_GALLERY_ITEM,
 
     #endregion
 }

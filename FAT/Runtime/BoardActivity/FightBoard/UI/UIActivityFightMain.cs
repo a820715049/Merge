@@ -39,8 +39,6 @@ namespace FAT
         private TextMeshProUGUI _giftPackCd;
         private FightBoardActivity _activity;
         private Image _boardEntry;
-        private bool _isTapBonus;
-        private Sequence _commonResSeq;
         [SerializeField] private ScrollRect scroll;
         [SerializeField] private UICommonProgressBar progressBar;
         [SerializeField] private GameObject block;
@@ -221,6 +219,9 @@ namespace FAT
             RefreshCD(false);
             RefreshMilestone();
             RefreshMonster();
+                        
+            //打开棋盘界面时 直接打开UIStatus界面，同时修改UIStatus的位置
+            UIConfig.UIStatus.Open();
             MessageCenter.Get<MSG.UI_TOP_BAR_PUSH_STATE>().Dispatch(UIStatus.LayerState.AboveStatus);
             MessageCenter.Get<MSG.GAME_SHOP_ENTRY_STATE_CHANGE>().Dispatch(false);
             MessageCenter.Get<MSG.GAME_LEVEL_GO_STATE_CHANGE>().Dispatch(false);
@@ -617,7 +618,7 @@ namespace FAT
             UIManager.Instance.CloseWindow(UIConfig.UIPopFlyTips);
             UIManager.Instance.CloseWindow(UIConfig.UIPopFlyTips);
             UIManager.Instance.CloseWindow(UIConfig.UIEnergyBoostTips);
-            if (_commonResSeq != null) _commonResSeq.Kill();
+            _commonResSeq?.Kill();
             if (BoardViewWrapper.GetCurrentWorld() == null) return;
             _view.OnBoardLeave();
             BoardViewWrapper.PopWorld();
@@ -1005,8 +1006,18 @@ namespace FAT
             {
                 CheckTapBonus();
             }
+            
+            if (slice.FlyType == FlyType.Coin || slice.FlyType == FlyType.Gem || slice.FlyType == FlyType.Energy)
+            {
+                CheckCommonRes();
+            }
         }
 
+        private bool _isCheckCommonRes;
+        private bool _isTapBonus;
+        private Sequence _commonResSeq;
+        
+        // 显示主棋盘入口
         private void CheckTapBonus()
         {
             if (_isTapBonus) return;
@@ -1030,6 +1041,29 @@ namespace FAT
                 mergeItem.enabled = false;
                 mergeItem.gameObject.SetActive(false);
             });
+        }
+        
+        // 显示资源栏
+        private void CheckCommonRes()
+        {
+            if (_isCheckCommonRes) return;
+            _isCheckCommonRes = true;
+            _commonResSeq = DOTween.Sequence();
+            MessageCenter.Get<MSG.GAME_STATUS_UI_STATE_CHANGE>().Dispatch(true);
+            _commonResSeq.AppendInterval(1.5f);
+            _commonResSeq.AppendCallback(() =>
+            {
+                MessageCenter.Get<MSG.GAME_STATUS_UI_STATE_CHANGE>().Dispatch(false);
+                _isCheckCommonRes = false;
+                _commonResSeq = null;
+            });
+            _commonResSeq.OnKill(() =>
+            {
+                MessageCenter.Get<MSG.GAME_STATUS_UI_STATE_CHANGE>().Dispatch(false);
+                _isCheckCommonRes = false;
+                _commonResSeq = null;
+            });
+            _commonResSeq.Play();
         }
 
         public void OnNavBack()

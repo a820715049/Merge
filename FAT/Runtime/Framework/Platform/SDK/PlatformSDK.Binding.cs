@@ -27,7 +27,7 @@ namespace FAT.Platform {
                 //wait GetBindInfo
                 yield return token.Wait(15, sw);
                 if (!sdk.BindInit) {
-                    tip.ShowClientTips(I18N.Text("#BindInfoFail"));
+                    tip.ShowClientTips(I18N.Text("#SysComDesc1636"));
                     yield break;
                 }
                 var map = sdk.BindInfo;

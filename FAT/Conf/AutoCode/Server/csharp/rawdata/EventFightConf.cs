@@ -24,36 +24,36 @@ namespace fat.rawdata {
     static EventFightConfReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChxyYXdkYXRhL0V2ZW50RmlnaHRDb25mLnByb3RvEgdyYXdkYXRhIt4CCgpF",
+            "ChxyYXdkYXRhL0V2ZW50RmlnaHRDb25mLnByb3RvEgdyYXdkYXRhIvUCCgpF",
             "dmVudEZpZ2h0EgoKAmlkGAEgASgFEhYKDmF0dGFja0NyaXRpY2FsGAIgASgF",
             "EhQKDGF0dGFja0RhbWFnZRgDIAMoBRIQCghhdHRhY2tJZBgUIAEoBRIRCglh",
             "dHRhY2tOdW0YBCABKAUSEgoKYm9hcmRUaGVtZRgFIAEoBRITCgtjb2xvckhl",
-            "YWx0aBgGIAMoCRIMCgRjb3N0GAcgASgFEhAKCGVuZFRoZW1lGAggASgFEhMK",
-            "C2V4cGlyZVBvcHVwGAkgASgFEg8KB2dyYWRlSWQYCiABKAUSEgoKZ3JpZEhl",
-            "YWx0aBgLIAEoBRIRCgloZWxwVGhlbWUYEiABKAUSFAoMbG9hZGluZ1RoZW1l",
-            "GAwgASgFEgwKBG5hbWUYDiABKAkSEwoLcmV3YXJkVGhlbWUYEyABKAUSEgoK",
-            "c3RhcnRUaGVtZRgQIAEoBRIOCgZ3ZWFwb24YESABKAUiqgEKFEV2ZW50Rmln",
-            "aHRNYXBBQlZhbHVlEkcKDUV2ZW50RmlnaHRNYXAYASADKAsyMC5yYXdkYXRh",
-            "LkV2ZW50RmlnaHRNYXBBQlZhbHVlLkV2ZW50RmlnaHRNYXBFbnRyeRpJChJF",
-            "dmVudEZpZ2h0TWFwRW50cnkSCwoDa2V5GAEgASgFEiIKBXZhbHVlGAIgASgL",
-            "MhMucmF3ZGF0YS5FdmVudEZpZ2h0OgI4ASLpAwoORXZlbnRGaWdodENvbmYS",
-            "QQoNRXZlbnRGaWdodE1hcBgBIAMoCzIqLnJhd2RhdGEuRXZlbnRGaWdodENv",
-            "bmYuRXZlbnRGaWdodE1hcEVudHJ5EkUKD0V2ZW50RmlnaHRNYXBBQhgCIAMo",
-            "CzIsLnJhd2RhdGEuRXZlbnRGaWdodENvbmYuRXZlbnRGaWdodE1hcEFCRW50",
-            "cnkSTwoURXZlbnRGaWdodE1hcEFCUGF0Y2gYAyADKAsyMS5yYXdkYXRhLkV2",
-            "ZW50RmlnaHRDb25mLkV2ZW50RmlnaHRNYXBBQlBhdGNoRW50cnkaSQoSRXZl",
-            "bnRGaWdodE1hcEVudHJ5EgsKA2tleRgBIAEoBRIiCgV2YWx1ZRgCIAEoCzIT",
-            "LnJhd2RhdGEuRXZlbnRGaWdodDoCOAEaVQoURXZlbnRGaWdodE1hcEFCRW50",
-            "cnkSCwoDa2V5GAEgASgJEiwKBXZhbHVlGAIgASgLMh0ucmF3ZGF0YS5FdmVu",
-            "dEZpZ2h0TWFwQUJWYWx1ZToCOAEaWgoZRXZlbnRGaWdodE1hcEFCUGF0Y2hF",
-            "bnRyeRILCgNrZXkYASABKAkSLAoFdmFsdWUYAiABKAsyHS5yYXdkYXRhLkV2",
-            "ZW50RmlnaHRNYXBBQlZhbHVlOgI4AUI9Wi1naXRsYWIuZnVucGx1cy5pby9m",
-            "YXQvY29uZi9nZW4vZ29sYW5nL3Jhd2RhdGGqAgtmYXQucmF3ZGF0YWIGcHJv",
-            "dG8z"));
+            "YWx0aBgGIAMoCRIMCgRjb3N0GAcgASgFEhUKDWN5Y2xlVGlwVGhlbWUYFSAB",
+            "KAUSEAoIZW5kVGhlbWUYCCABKAUSEwoLZXhwaXJlUG9wdXAYCSABKAUSDwoH",
+            "Z3JhZGVJZBgKIAEoBRISCgpncmlkSGVhbHRoGAsgASgFEhEKCWhlbHBUaGVt",
+            "ZRgSIAEoBRIUCgxsb2FkaW5nVGhlbWUYDCABKAUSDAoEbmFtZRgOIAEoCRIT",
+            "CgtyZXdhcmRUaGVtZRgTIAEoBRISCgpzdGFydFRoZW1lGBAgASgFEg4KBndl",
+            "YXBvbhgRIAEoBSKqAQoURXZlbnRGaWdodE1hcEFCVmFsdWUSRwoNRXZlbnRG",
+            "aWdodE1hcBgBIAMoCzIwLnJhd2RhdGEuRXZlbnRGaWdodE1hcEFCVmFsdWUu",
+            "RXZlbnRGaWdodE1hcEVudHJ5GkkKEkV2ZW50RmlnaHRNYXBFbnRyeRILCgNr",
+            "ZXkYASABKAUSIgoFdmFsdWUYAiABKAsyEy5yYXdkYXRhLkV2ZW50RmlnaHQ6",
+            "AjgBIukDCg5FdmVudEZpZ2h0Q29uZhJBCg1FdmVudEZpZ2h0TWFwGAEgAygL",
+            "MioucmF3ZGF0YS5FdmVudEZpZ2h0Q29uZi5FdmVudEZpZ2h0TWFwRW50cnkS",
+            "RQoPRXZlbnRGaWdodE1hcEFCGAIgAygLMiwucmF3ZGF0YS5FdmVudEZpZ2h0",
+            "Q29uZi5FdmVudEZpZ2h0TWFwQUJFbnRyeRJPChRFdmVudEZpZ2h0TWFwQUJQ",
+            "YXRjaBgDIAMoCzIxLnJhd2RhdGEuRXZlbnRGaWdodENvbmYuRXZlbnRGaWdo",
+            "dE1hcEFCUGF0Y2hFbnRyeRpJChJFdmVudEZpZ2h0TWFwRW50cnkSCwoDa2V5",
+            "GAEgASgFEiIKBXZhbHVlGAIgASgLMhMucmF3ZGF0YS5FdmVudEZpZ2h0OgI4",
+            "ARpVChRFdmVudEZpZ2h0TWFwQUJFbnRyeRILCgNrZXkYASABKAkSLAoFdmFs",
+            "dWUYAiABKAsyHS5yYXdkYXRhLkV2ZW50RmlnaHRNYXBBQlZhbHVlOgI4ARpa",
+            "ChlFdmVudEZpZ2h0TWFwQUJQYXRjaEVudHJ5EgsKA2tleRgBIAEoCRIsCgV2",
+            "YWx1ZRgCIAEoCzIdLnJhd2RhdGEuRXZlbnRGaWdodE1hcEFCVmFsdWU6AjgB",
+            "Qj1aLWdpdGxhYi5mdW5wbHVzLmlvL2ZhdC9jb25mL2dlbi9nb2xhbmcvcmF3",
+            "ZGF0YaoCC2ZhdC5yYXdkYXRhYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EventFight), global::fat.rawdata.EventFight.Parser, new[]{ "Id", "AttackCritical", "AttackDamage", "AttackId", "AttackNum", "BoardTheme", "ColorHealth", "Cost", "EndTheme", "ExpirePopup", "GradeId", "GridHealth", "HelpTheme", "LoadingTheme", "Name", "RewardTheme", "StartTheme", "Weapon" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EventFight), global::fat.rawdata.EventFight.Parser, new[]{ "Id", "AttackCritical", "AttackDamage", "AttackId", "AttackNum", "BoardTheme", "ColorHealth", "Cost", "CycleTipTheme", "EndTheme", "ExpirePopup", "GradeId", "GridHealth", "HelpTheme", "LoadingTheme", "Name", "RewardTheme", "StartTheme", "Weapon" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EventFightMapABValue), global::fat.rawdata.EventFightMapABValue.Parser, new[]{ "EventFightMap" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EventFightConf), global::fat.rawdata.EventFightConf.Parser, new[]{ "EventFightMap", "EventFightMapAB", "EventFightMapABPatch" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, null, })
           }));
@@ -106,6 +106,7 @@ namespace fat.rawdata {
       boardTheme_ = other.boardTheme_;
       colorHealth_ = other.colorHealth_.Clone();
       cost_ = other.cost_;
+      cycleTipTheme_ = other.cycleTipTheme_;
       endTheme_ = other.endTheme_;
       expirePopup_ = other.expirePopup_;
       gradeId_ = other.gradeId_;
@@ -238,6 +239,21 @@ namespace fat.rawdata {
       get { return cost_; }
       set {
         cost_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "cycleTipTheme" field.</summary>
+    public const int CycleTipThemeFieldNumber = 21;
+    private int cycleTipTheme_;
+    /// <summary>
+    /// 里程碑达成
+    /// （EventTheme.id）
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CycleTipTheme {
+      get { return cycleTipTheme_; }
+      set {
+        cycleTipTheme_ = value;
       }
     }
 
@@ -413,6 +429,7 @@ namespace fat.rawdata {
       if (BoardTheme != other.BoardTheme) return false;
       if(!colorHealth_.Equals(other.colorHealth_)) return false;
       if (Cost != other.Cost) return false;
+      if (CycleTipTheme != other.CycleTipTheme) return false;
       if (EndTheme != other.EndTheme) return false;
       if (ExpirePopup != other.ExpirePopup) return false;
       if (GradeId != other.GradeId) return false;
@@ -437,6 +454,7 @@ namespace fat.rawdata {
       if (BoardTheme != 0) hash ^= BoardTheme.GetHashCode();
       hash ^= colorHealth_.GetHashCode();
       if (Cost != 0) hash ^= Cost.GetHashCode();
+      if (CycleTipTheme != 0) hash ^= CycleTipTheme.GetHashCode();
       if (EndTheme != 0) hash ^= EndTheme.GetHashCode();
       if (ExpirePopup != 0) hash ^= ExpirePopup.GetHashCode();
       if (GradeId != 0) hash ^= GradeId.GetHashCode();
@@ -529,6 +547,10 @@ namespace fat.rawdata {
         output.WriteRawTag(160, 1);
         output.WriteInt32(AttackId);
       }
+      if (CycleTipTheme != 0) {
+        output.WriteRawTag(168, 1);
+        output.WriteInt32(CycleTipTheme);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -604,6 +626,10 @@ namespace fat.rawdata {
         output.WriteRawTag(160, 1);
         output.WriteInt32(AttackId);
       }
+      if (CycleTipTheme != 0) {
+        output.WriteRawTag(168, 1);
+        output.WriteInt32(CycleTipTheme);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -632,6 +658,9 @@ namespace fat.rawdata {
       size += colorHealth_.CalculateSize(_repeated_colorHealth_codec);
       if (Cost != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Cost);
+      }
+      if (CycleTipTheme != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeInt32Size(CycleTipTheme);
       }
       if (EndTheme != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(EndTheme);
@@ -693,6 +722,9 @@ namespace fat.rawdata {
       colorHealth_.Add(other.colorHealth_);
       if (other.Cost != 0) {
         Cost = other.Cost;
+      }
+      if (other.CycleTipTheme != 0) {
+        CycleTipTheme = other.CycleTipTheme;
       }
       if (other.EndTheme != 0) {
         EndTheme = other.EndTheme;
@@ -811,6 +843,10 @@ namespace fat.rawdata {
             AttackId = input.ReadInt32();
             break;
           }
+          case 168: {
+            CycleTipTheme = input.ReadInt32();
+            break;
+          }
         }
       }
     #endif
@@ -896,6 +932,10 @@ namespace fat.rawdata {
           }
           case 160: {
             AttackId = input.ReadInt32();
+            break;
+          }
+          case 168: {
+            CycleTipTheme = input.ReadInt32();
             break;
           }
         }

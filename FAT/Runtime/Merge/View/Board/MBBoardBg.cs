@@ -52,7 +52,8 @@ namespace FAT
             MessageCenter.Get<MSG.GAME_WALLPAPER_SWITCH>().RemoveListener(SwitchWallpaper);
         }
 
-        private void SwitchWallpaper(int id_) {
+        private void SwitchWallpaper(int id_)
+        {
             _SetupBoardBgAndPattern(width, height);
         }
 
@@ -71,7 +72,7 @@ namespace FAT
                 bg.gameObject.SetActive(true);
                 bg.SetImage(cfg.ImgBG);
             }
-        
+
             // pattern
             if (string.IsNullOrEmpty(cfg.ImgTile))
             {

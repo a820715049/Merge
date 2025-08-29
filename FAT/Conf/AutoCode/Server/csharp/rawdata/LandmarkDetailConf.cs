@@ -24,32 +24,32 @@ namespace fat.rawdata {
     static LandmarkDetailConfReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CiByYXdkYXRhL0xhbmRtYXJrRGV0YWlsQ29uZi5wcm90bxIHcmF3ZGF0YSJa",
-            "Cg5MYW5kbWFya0RldGFpbBIKCgJpZBgBIAEoBRIUCgxnb2xkVG9rZW5OdW0Y",
-            "AiABKAUSEQoJcmV3YXJkQmlnGAMgAygJEhMKC3Jld2FyZFNtYWxsGAQgASgJ",
-            "IsIBChhMYW5kbWFya0RldGFpbE1hcEFCVmFsdWUSUwoRTGFuZG1hcmtEZXRh",
-            "aWxNYXAYASADKAsyOC5yYXdkYXRhLkxhbmRtYXJrRGV0YWlsTWFwQUJWYWx1",
-            "ZS5MYW5kbWFya0RldGFpbE1hcEVudHJ5GlEKFkxhbmRtYXJrRGV0YWlsTWFw",
-            "RW50cnkSCwoDa2V5GAEgASgFEiYKBXZhbHVlGAIgASgLMhcucmF3ZGF0YS5M",
-            "YW5kbWFya0RldGFpbDoCOAEiqQQKEkxhbmRtYXJrRGV0YWlsQ29uZhJNChFM",
-            "YW5kbWFya0RldGFpbE1hcBgBIAMoCzIyLnJhd2RhdGEuTGFuZG1hcmtEZXRh",
-            "aWxDb25mLkxhbmRtYXJrRGV0YWlsTWFwRW50cnkSUQoTTGFuZG1hcmtEZXRh",
-            "aWxNYXBBQhgCIAMoCzI0LnJhd2RhdGEuTGFuZG1hcmtEZXRhaWxDb25mLkxh",
-            "bmRtYXJrRGV0YWlsTWFwQUJFbnRyeRJbChhMYW5kbWFya0RldGFpbE1hcEFC",
-            "UGF0Y2gYAyADKAsyOS5yYXdkYXRhLkxhbmRtYXJrRGV0YWlsQ29uZi5MYW5k",
-            "bWFya0RldGFpbE1hcEFCUGF0Y2hFbnRyeRpRChZMYW5kbWFya0RldGFpbE1h",
-            "cEVudHJ5EgsKA2tleRgBIAEoBRImCgV2YWx1ZRgCIAEoCzIXLnJhd2RhdGEu",
-            "TGFuZG1hcmtEZXRhaWw6AjgBGl0KGExhbmRtYXJrRGV0YWlsTWFwQUJFbnRy",
-            "eRILCgNrZXkYASABKAkSMAoFdmFsdWUYAiABKAsyIS5yYXdkYXRhLkxhbmRt",
-            "YXJrRGV0YWlsTWFwQUJWYWx1ZToCOAEaYgodTGFuZG1hcmtEZXRhaWxNYXBB",
-            "QlBhdGNoRW50cnkSCwoDa2V5GAEgASgJEjAKBXZhbHVlGAIgASgLMiEucmF3",
-            "ZGF0YS5MYW5kbWFya0RldGFpbE1hcEFCVmFsdWU6AjgBQj1aLWdpdGxhYi5m",
-            "dW5wbHVzLmlvL2ZhdC9jb25mL2dlbi9nb2xhbmcvcmF3ZGF0YaoCC2ZhdC5y",
-            "YXdkYXRhYgZwcm90bzM="));
+            "CiByYXdkYXRhL0xhbmRtYXJrRGV0YWlsQ29uZi5wcm90bxIHcmF3ZGF0YSJo",
+            "Cg5MYW5kbWFya0RldGFpbBIKCgJpZBgBIAEoBRIMCgRkaWZmGAUgASgFEhQK",
+            "DGdvbGRUb2tlbk51bRgCIAEoBRIRCglyZXdhcmRCaWcYAyADKAkSEwoLcmV3",
+            "YXJkU21hbGwYBCABKAkiwgEKGExhbmRtYXJrRGV0YWlsTWFwQUJWYWx1ZRJT",
+            "ChFMYW5kbWFya0RldGFpbE1hcBgBIAMoCzI4LnJhd2RhdGEuTGFuZG1hcmtE",
+            "ZXRhaWxNYXBBQlZhbHVlLkxhbmRtYXJrRGV0YWlsTWFwRW50cnkaUQoWTGFu",
+            "ZG1hcmtEZXRhaWxNYXBFbnRyeRILCgNrZXkYASABKAUSJgoFdmFsdWUYAiAB",
+            "KAsyFy5yYXdkYXRhLkxhbmRtYXJrRGV0YWlsOgI4ASKpBAoSTGFuZG1hcmtE",
+            "ZXRhaWxDb25mEk0KEUxhbmRtYXJrRGV0YWlsTWFwGAEgAygLMjIucmF3ZGF0",
+            "YS5MYW5kbWFya0RldGFpbENvbmYuTGFuZG1hcmtEZXRhaWxNYXBFbnRyeRJR",
+            "ChNMYW5kbWFya0RldGFpbE1hcEFCGAIgAygLMjQucmF3ZGF0YS5MYW5kbWFy",
+            "a0RldGFpbENvbmYuTGFuZG1hcmtEZXRhaWxNYXBBQkVudHJ5ElsKGExhbmRt",
+            "YXJrRGV0YWlsTWFwQUJQYXRjaBgDIAMoCzI5LnJhd2RhdGEuTGFuZG1hcmtE",
+            "ZXRhaWxDb25mLkxhbmRtYXJrRGV0YWlsTWFwQUJQYXRjaEVudHJ5GlEKFkxh",
+            "bmRtYXJrRGV0YWlsTWFwRW50cnkSCwoDa2V5GAEgASgFEiYKBXZhbHVlGAIg",
+            "ASgLMhcucmF3ZGF0YS5MYW5kbWFya0RldGFpbDoCOAEaXQoYTGFuZG1hcmtE",
+            "ZXRhaWxNYXBBQkVudHJ5EgsKA2tleRgBIAEoCRIwCgV2YWx1ZRgCIAEoCzIh",
+            "LnJhd2RhdGEuTGFuZG1hcmtEZXRhaWxNYXBBQlZhbHVlOgI4ARpiCh1MYW5k",
+            "bWFya0RldGFpbE1hcEFCUGF0Y2hFbnRyeRILCgNrZXkYASABKAkSMAoFdmFs",
+            "dWUYAiABKAsyIS5yYXdkYXRhLkxhbmRtYXJrRGV0YWlsTWFwQUJWYWx1ZToC",
+            "OAFCPVotZ2l0bGFiLmZ1bnBsdXMuaW8vZmF0L2NvbmYvZ2VuL2dvbGFuZy9y",
+            "YXdkYXRhqgILZmF0LnJhd2RhdGFiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.LandmarkDetail), global::fat.rawdata.LandmarkDetail.Parser, new[]{ "Id", "GoldTokenNum", "RewardBig", "RewardSmall" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.LandmarkDetail), global::fat.rawdata.LandmarkDetail.Parser, new[]{ "Id", "Diff", "GoldTokenNum", "RewardBig", "RewardSmall" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.LandmarkDetailMapABValue), global::fat.rawdata.LandmarkDetailMapABValue.Parser, new[]{ "LandmarkDetailMap" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.LandmarkDetailConf), global::fat.rawdata.LandmarkDetailConf.Parser, new[]{ "LandmarkDetailMap", "LandmarkDetailMapAB", "LandmarkDetailMapABPatch" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, null, })
           }));
@@ -95,6 +95,7 @@ namespace fat.rawdata {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public LandmarkDetail(LandmarkDetail other) : this() {
       id_ = other.id_;
+      diff_ = other.diff_;
       goldTokenNum_ = other.goldTokenNum_;
       rewardBig_ = other.rewardBig_.Clone();
       rewardSmall_ = other.rewardSmall_;
@@ -118,6 +119,21 @@ namespace fat.rawdata {
       get { return id_; }
       set {
         id_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "diff" field.</summary>
+    public const int DiffFieldNumber = 5;
+    private int diff_;
+    /// <summary>
+    /// 难度
+    /// （仅用于TGA）
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Diff {
+      get { return diff_; }
+      set {
+        diff_ = value;
       }
     }
 
@@ -176,6 +192,7 @@ namespace fat.rawdata {
         return true;
       }
       if (Id != other.Id) return false;
+      if (Diff != other.Diff) return false;
       if (GoldTokenNum != other.GoldTokenNum) return false;
       if(!rewardBig_.Equals(other.rewardBig_)) return false;
       if (RewardSmall != other.RewardSmall) return false;
@@ -186,6 +203,7 @@ namespace fat.rawdata {
     public override int GetHashCode() {
       int hash = 1;
       if (Id != 0) hash ^= Id.GetHashCode();
+      if (Diff != 0) hash ^= Diff.GetHashCode();
       if (GoldTokenNum != 0) hash ^= GoldTokenNum.GetHashCode();
       hash ^= rewardBig_.GetHashCode();
       if (RewardSmall.Length != 0) hash ^= RewardSmall.GetHashCode();
@@ -218,6 +236,10 @@ namespace fat.rawdata {
         output.WriteRawTag(34);
         output.WriteString(RewardSmall);
       }
+      if (Diff != 0) {
+        output.WriteRawTag(40);
+        output.WriteInt32(Diff);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -240,6 +262,10 @@ namespace fat.rawdata {
         output.WriteRawTag(34);
         output.WriteString(RewardSmall);
       }
+      if (Diff != 0) {
+        output.WriteRawTag(40);
+        output.WriteInt32(Diff);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -251,6 +277,9 @@ namespace fat.rawdata {
       int size = 0;
       if (Id != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Id);
+      }
+      if (Diff != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Diff);
       }
       if (GoldTokenNum != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(GoldTokenNum);
@@ -272,6 +301,9 @@ namespace fat.rawdata {
       }
       if (other.Id != 0) {
         Id = other.Id;
+      }
+      if (other.Diff != 0) {
+        Diff = other.Diff;
       }
       if (other.GoldTokenNum != 0) {
         GoldTokenNum = other.GoldTokenNum;
@@ -310,6 +342,10 @@ namespace fat.rawdata {
             RewardSmall = input.ReadString();
             break;
           }
+          case 40: {
+            Diff = input.ReadInt32();
+            break;
+          }
         }
       }
     #endif
@@ -338,6 +374,10 @@ namespace fat.rawdata {
           }
           case 34: {
             RewardSmall = input.ReadString();
+            break;
+          }
+          case 40: {
+            Diff = input.ReadInt32();
             break;
           }
         }

@@ -29,9 +29,6 @@ namespace FAT
         private int tokenPhase;
         public int TokenPrev { get; private set; }
 
-        public PackDiscount() { }
-
-
         public PackDiscount(ActivityLite lite_)
         {
             Lite = lite_;

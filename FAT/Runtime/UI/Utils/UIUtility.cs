@@ -223,6 +223,16 @@ namespace FAT
                     break;
             }
         }
+        
+        public static void CommonResFeedBackShakeEffect(int objBasicId)
+        {
+            //根据配置决定是否在资源飞向资源栏时触发震动效果
+            var shakeConf = Game.Manager.configMan.GetShakeConfig(objBasicId);
+            var canShake = shakeConf?.IsShake ?? false;
+            //默认可以震动时 播中等震动效果
+            if (canShake)
+                VibrationManager.VibrateMedium();
+        }
 
         public static string FormatTMPString(int id)
         {

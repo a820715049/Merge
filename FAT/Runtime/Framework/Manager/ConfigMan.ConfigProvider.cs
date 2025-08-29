@@ -555,6 +555,12 @@ namespace FAT
         {
             return conf.Data.GetObjTool(toolId);
         }
+        
+        //传入objBasicId 获取对应的震动配置 配置中决定是否在资源飞向资源栏时触发震动效果
+        public Shake GetShakeConfig(int objBasicId)
+        {
+            return conf.Data.GetShake(objBasicId);
+        }
 
         #region 卡册相关
 
@@ -802,6 +808,50 @@ namespace FAT
         public EventMineBoardRow GetEventMineBoardRow(int id)
         {
             return conf.Data.GetEventMineBoardRow(id);
+        }
+
+        #endregion
+        
+        #region 矿车棋盘
+
+        public EventMineCart GetEventMineCartConfig(int id)
+        {
+            return conf.Data.GetEventMineCart(id);
+        }
+
+        public EventMineCartDetail GetEventMineCartDetailConfig(int id)
+        {
+            return conf.Data.GetEventMineCartDetail(id);
+        }
+        
+        public EventMineCartRowGrp GetEventMineCartRowGrpConfig(int id)
+        {
+            return conf.Data.GetEventMineCartRowGrp(id);
+        }
+        
+        public EventMineCartRound GetEventMineCartRoundConfig(int id)
+        {
+            return conf.Data.GetEventMineCartRound(id);
+        }
+        
+        public EventMineCartReward GetEventMineCartRewardConfig(int id)
+        {
+            return conf.Data.GetEventMineCartReward(id);
+        }
+        
+        public EventMineCartDrop GetEventMineCartDropConfig(int id)
+        {
+            return conf.Data.GetEventMineCartDrop(id);
+        }
+
+        public EventMineCartOrderItem GetEventMineCartOrderItemConfig(int id)
+        {
+            return conf.Data.GetEventMineCartOrderItem(id);
+        }
+        
+        public EventMineCartRow GetEventMineCartRowConfig(int id)
+        {
+            return conf.Data.GetEventMineCartRow(id);
         }
 
         #endregion

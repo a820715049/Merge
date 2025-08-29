@@ -84,49 +84,49 @@ namespace fat.gamekitdata {
             "ASgFEhIKClJhbmRvbVNlZWQYCCABKAUSFQoNUmFuZG9tTmV4dElkeBgJIAEo",
             "BRITCgtPdXRwdXRDb3VudBgKIAEoBRIVCg1Jc0ZpcnN0UmV2aXZlGAsgASgI",
             "EhYKDkJvb3N0SXRlbUNvdW50GAwgASgFIi0KCENvbUNoZXN0Eg4KBk9wZW5l",
-            "ZBgBIAEoCBIRCglVc2VkQ291bnQYAiABKAUiKAoJQ29tQnViYmxlEgwKBExp",
-            "ZmUYASABKAUSDQoFU3RhcnQYAiABKAMiXQoNQ29tQXV0b1NvdXJjZRIVCg1P",
-            "dXRwdXRDb3VudGVyGAEgASgFEg0KBVN0YXJ0GAIgASgDEhEKCUl0ZW1Db3Vu",
-            "dBgDIAEoBRITCgtUb3RhbE91dHB1dBgEIAEoBSIbCgZDb21Cb3gSEQoJVXNl",
-            "ZENvdW50GAEgASgFIjUKCENvbVNraWxsEhMKC0J1ZmZDb3VudGVyGAEgASgF",
-            "EhQKDFN0YWNrQ291bnRlchgCIAEoBSLxAQoPQ29tRWF0aW5nU291cmNlEhEK",
-            "CUNvdW50TGVmdBgBIAEoBRIWCg5FYXRpbmdUaW1lTGVmdBgCIAEoBRJCCgtJ",
-            "dGVtc1dpdGhpbhgDIAMoCzItLmdhbWVraXRkYXRhLkNvbUVhdGluZ1NvdXJj",
-            "ZS5JdGVtc1dpdGhpbkVudHJ5EhUKDVJhbmRvbU5leHRJZHgYBCABKAUSEgoK",
-            "UmFuZG9tU2VlZBgFIAEoBRIQCghFYXRHcm91cBgGIAEoBRoyChBJdGVtc1dp",
-            "dGhpbkVudHJ5EgsKA2tleRgBIAEoBRINCgV2YWx1ZRgCIAEoBToCOAEiOQoL",
-            "Q29tQWN0aXZpdHkSEgoKQWN0aXZpdHlJZBgBIAEoBRIWCg5BY3Rpdml0eUVu",
-            "ZXJneRgCIAEoBSI3Cg1Db21Ub29sU291cmNlEhEKCUl0ZW1Db3VudBgBIAEo",
-            "BRITCgtUb3RhbE91dHB1dBgCIAEoBSIiCg1Db21TcGVjaWFsQm94EhEKCUl0",
-            "ZW1Db3VudBgBIAEoBSKnAQoMQ29tTWl4U291cmNlEhUKDVJldml2ZUNvdW50",
-            "ZXIYASABKAUSFQoNT3V0cHV0Q291bnRlchgCIAEoBRIWCg5JdGVtSW5SZWNo",
-            "YXJnZRgDIAEoBRIRCglJdGVtQ291bnQYBCABKAUSEwoLT3V0cHV0Q291bnQY",
-            "BSABKAUSFQoNSXNGaXJzdFJldml2ZRgGIAEoCBISCgpNaXhlZEl0ZW1zGAcg",
-            "AygFIiUKDUNvbVRyaWdTb3VyY2USFAoMVHJpZ2dlckNvdW50GAEgASgFIiQK",
-            "D0NvbUFjdGl2ZVNvdXJjZRIRCglJdGVtQ291bnQYASABKAUigwYKCU1lcmdl",
-            "SXRlbRIKCgJJZBgBIAEoBRILCgNUaWQYAiABKAUSDQoFU3RhdGUYAyABKAUS",
-            "CQoBWBgEIAEoBRIJCgFZGAUgASgFEgsKA0NvbRgGIAEoDRInCghDb21EeWlu",
-            "ZxgHIAEoCzIVLmdhbWVraXRkYXRhLkNvbUR5aW5nEjMKDkNvbUNsaWNrU291",
-            "cmNlGAggASgLMhsuZ2FtZWtpdGRhdGEuQ29tQ2xpY2tTb3VyY2USJwoIQ29t",
-            "Q2hlc3QYCSABKAsyFS5nYW1la2l0ZGF0YS5Db21DaGVzdBIpCglDb21CdWJi",
-            "bGUYCiABKAsyFi5nYW1la2l0ZGF0YS5Db21CdWJibGUSMQoNQ29tQXV0b1Nv",
-            "dXJjZRgLIAEoCzIaLmdhbWVraXRkYXRhLkNvbUF1dG9Tb3VyY2USIwoGQ29t",
-            "Qm94GAwgASgLMhMuZ2FtZWtpdGRhdGEuQ29tQm94EjUKD0NvbUVhdGluZ1Nv",
-            "dXJjZRgNIAEoCzIcLmdhbWVraXRkYXRhLkNvbUVhdGluZ1NvdXJjZRInCghD",
-            "b21Ta2lsbBgOIAEoCzIVLmdhbWVraXRkYXRhLkNvbVNraWxsEi0KC0NvbUFj",
-            "dGl2aXR5GA8gASgLMhguZ2FtZWtpdGRhdGEuQ29tQWN0aXZpdHkSEQoJU3Rh",
-            "dGVDb25mGBAgASgFEjEKDUNvbVRvb2xTb3VyY2UYESABKAsyGi5nYW1la2l0",
-            "ZGF0YS5Db21Ub29sU291cmNlEjEKDUNvbVNwZWNpYWxCb3gYEiABKAsyGi5n",
-            "YW1la2l0ZGF0YS5Db21TcGVjaWFsQm94Ei8KDENvbU1peFNvdXJjZRgTIAEo",
-            "CzIZLmdhbWVraXRkYXRhLkNvbU1peFNvdXJjZRIxCg1Db21UcmlnU291cmNl",
-            "GBQgASgLMhouZ2FtZWtpdGRhdGEuQ29tVHJpZ1NvdXJjZRI1Cg9Db21BY3Rp",
-            "dmVTb3VyY2UYFSABKAsyHC5nYW1la2l0ZGF0YS5Db21BY3RpdmVTb3VyY2Ui",
-            "KAoLUmVjb3JkU3RhdGUSCgoCSWQYASABKAUSDQoFU3RhdGUYAiABKAUqaQoK",
-            "R29vZHNTdGF0ZRIWChJHb29kc1N0YXRlQ2FuQ2xhaW0QABIWChJHb29kc1N0",
-            "YXRlTm90U3RhcnQQARIUChBHb29kc1N0YXRlTWlzc2VkEAISFQoRR29vZHNT",
-            "dGF0ZUNsYWltZWQQA0JFWjFnaXRsYWIuZnVucGx1cy5pby9mYXQvY29uZi9n",
-            "ZW4vZ29sYW5nL2dhbWVraXRkYXRhqgIPZmF0LmdhbWVraXRkYXRhYgZwcm90",
-            "bzM="));
+            "ZBgBIAEoCBIRCglVc2VkQ291bnQYAiABKAUiNgoJQ29tQnViYmxlEgwKBExp",
+            "ZmUYASABKAUSDQoFU3RhcnQYAiABKAMSDAoEVHlwZRgDIAEoBSJdCg1Db21B",
+            "dXRvU291cmNlEhUKDU91dHB1dENvdW50ZXIYASABKAUSDQoFU3RhcnQYAiAB",
+            "KAMSEQoJSXRlbUNvdW50GAMgASgFEhMKC1RvdGFsT3V0cHV0GAQgASgFIhsK",
+            "BkNvbUJveBIRCglVc2VkQ291bnQYASABKAUiNQoIQ29tU2tpbGwSEwoLQnVm",
+            "ZkNvdW50ZXIYASABKAUSFAoMU3RhY2tDb3VudGVyGAIgASgFIvEBCg9Db21F",
+            "YXRpbmdTb3VyY2USEQoJQ291bnRMZWZ0GAEgASgFEhYKDkVhdGluZ1RpbWVM",
+            "ZWZ0GAIgASgFEkIKC0l0ZW1zV2l0aGluGAMgAygLMi0uZ2FtZWtpdGRhdGEu",
+            "Q29tRWF0aW5nU291cmNlLkl0ZW1zV2l0aGluRW50cnkSFQoNUmFuZG9tTmV4",
+            "dElkeBgEIAEoBRISCgpSYW5kb21TZWVkGAUgASgFEhAKCEVhdEdyb3VwGAYg",
+            "ASgFGjIKEEl0ZW1zV2l0aGluRW50cnkSCwoDa2V5GAEgASgFEg0KBXZhbHVl",
+            "GAIgASgFOgI4ASI5CgtDb21BY3Rpdml0eRISCgpBY3Rpdml0eUlkGAEgASgF",
+            "EhYKDkFjdGl2aXR5RW5lcmd5GAIgASgFIjcKDUNvbVRvb2xTb3VyY2USEQoJ",
+            "SXRlbUNvdW50GAEgASgFEhMKC1RvdGFsT3V0cHV0GAIgASgFIiIKDUNvbVNw",
+            "ZWNpYWxCb3gSEQoJSXRlbUNvdW50GAEgASgFIqcBCgxDb21NaXhTb3VyY2US",
+            "FQoNUmV2aXZlQ291bnRlchgBIAEoBRIVCg1PdXRwdXRDb3VudGVyGAIgASgF",
+            "EhYKDkl0ZW1JblJlY2hhcmdlGAMgASgFEhEKCUl0ZW1Db3VudBgEIAEoBRIT",
+            "CgtPdXRwdXRDb3VudBgFIAEoBRIVCg1Jc0ZpcnN0UmV2aXZlGAYgASgIEhIK",
+            "Ck1peGVkSXRlbXMYByADKAUiJQoNQ29tVHJpZ1NvdXJjZRIUCgxUcmlnZ2Vy",
+            "Q291bnQYASABKAUiJAoPQ29tQWN0aXZlU291cmNlEhEKCUl0ZW1Db3VudBgB",
+            "IAEoBSKDBgoJTWVyZ2VJdGVtEgoKAklkGAEgASgFEgsKA1RpZBgCIAEoBRIN",
+            "CgVTdGF0ZRgDIAEoBRIJCgFYGAQgASgFEgkKAVkYBSABKAUSCwoDQ29tGAYg",
+            "ASgNEicKCENvbUR5aW5nGAcgASgLMhUuZ2FtZWtpdGRhdGEuQ29tRHlpbmcS",
+            "MwoOQ29tQ2xpY2tTb3VyY2UYCCABKAsyGy5nYW1la2l0ZGF0YS5Db21DbGlj",
+            "a1NvdXJjZRInCghDb21DaGVzdBgJIAEoCzIVLmdhbWVraXRkYXRhLkNvbUNo",
+            "ZXN0EikKCUNvbUJ1YmJsZRgKIAEoCzIWLmdhbWVraXRkYXRhLkNvbUJ1YmJs",
+            "ZRIxCg1Db21BdXRvU291cmNlGAsgASgLMhouZ2FtZWtpdGRhdGEuQ29tQXV0",
+            "b1NvdXJjZRIjCgZDb21Cb3gYDCABKAsyEy5nYW1la2l0ZGF0YS5Db21Cb3gS",
+            "NQoPQ29tRWF0aW5nU291cmNlGA0gASgLMhwuZ2FtZWtpdGRhdGEuQ29tRWF0",
+            "aW5nU291cmNlEicKCENvbVNraWxsGA4gASgLMhUuZ2FtZWtpdGRhdGEuQ29t",
+            "U2tpbGwSLQoLQ29tQWN0aXZpdHkYDyABKAsyGC5nYW1la2l0ZGF0YS5Db21B",
+            "Y3Rpdml0eRIRCglTdGF0ZUNvbmYYECABKAUSMQoNQ29tVG9vbFNvdXJjZRgR",
+            "IAEoCzIaLmdhbWVraXRkYXRhLkNvbVRvb2xTb3VyY2USMQoNQ29tU3BlY2lh",
+            "bEJveBgSIAEoCzIaLmdhbWVraXRkYXRhLkNvbVNwZWNpYWxCb3gSLwoMQ29t",
+            "TWl4U291cmNlGBMgASgLMhkuZ2FtZWtpdGRhdGEuQ29tTWl4U291cmNlEjEK",
+            "DUNvbVRyaWdTb3VyY2UYFCABKAsyGi5nYW1la2l0ZGF0YS5Db21UcmlnU291",
+            "cmNlEjUKD0NvbUFjdGl2ZVNvdXJjZRgVIAEoCzIcLmdhbWVraXRkYXRhLkNv",
+            "bUFjdGl2ZVNvdXJjZSIoCgtSZWNvcmRTdGF0ZRIKCgJJZBgBIAEoBRINCgVT",
+            "dGF0ZRgCIAEoBSppCgpHb29kc1N0YXRlEhYKEkdvb2RzU3RhdGVDYW5DbGFp",
+            "bRAAEhYKEkdvb2RzU3RhdGVOb3RTdGFydBABEhQKEEdvb2RzU3RhdGVNaXNz",
+            "ZWQQAhIVChFHb29kc1N0YXRlQ2xhaW1lZBADQkVaMWdpdGxhYi5mdW5wbHVz",
+            "LmlvL2ZhdC9jb25mL2dlbi9nb2xhbmcvZ2FtZWtpdGRhdGGqAg9mYXQuZ2Ft",
+            "ZWtpdGRhdGFiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::fat.gamekitdata.GoodsState), }, null, new pbr::GeneratedClrTypeInfo[] {
@@ -143,7 +143,7 @@ namespace fat.gamekitdata {
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.gamekitdata.ComDying), global::fat.gamekitdata.ComDying.Parser, new[]{ "Life", "Start" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.gamekitdata.ComClickSource), global::fat.gamekitdata.ComClickSource.Parser, new[]{ "ReviveCounter", "ReviveStart", "OutputCounter", "OutputStart", "ItemInRecharge", "Item", "NoCDCounter", "RandomSeed", "RandomNextIdx", "OutputCount", "IsFirstRevive", "BoostItemCount" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.gamekitdata.ComChest), global::fat.gamekitdata.ComChest.Parser, new[]{ "Opened", "UsedCount" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::fat.gamekitdata.ComBubble), global::fat.gamekitdata.ComBubble.Parser, new[]{ "Life", "Start" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::fat.gamekitdata.ComBubble), global::fat.gamekitdata.ComBubble.Parser, new[]{ "Life", "Start", "Type" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.gamekitdata.ComAutoSource), global::fat.gamekitdata.ComAutoSource.Parser, new[]{ "OutputCounter", "Start", "ItemCount", "TotalOutput" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.gamekitdata.ComBox), global::fat.gamekitdata.ComBox.Parser, new[]{ "UsedCount" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.gamekitdata.ComSkill), global::fat.gamekitdata.ComSkill.Parser, new[]{ "BuffCounter", "StackCounter" }, null, null, null, null),
@@ -4388,6 +4388,7 @@ namespace fat.gamekitdata {
     public ComBubble(ComBubble other) : this() {
       life_ = other.life_;
       start_ = other.start_;
+      type_ = other.type_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -4424,6 +4425,20 @@ namespace fat.gamekitdata {
       }
     }
 
+    /// <summary>Field number for the "Type" field.</summary>
+    public const int TypeFieldNumber = 3;
+    private int type_;
+    /// <summary>
+    /// 类型 默认0为泡泡棋子 1为冰冻棋子
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Type {
+      get { return type_; }
+      set {
+        type_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as ComBubble);
@@ -4439,6 +4454,7 @@ namespace fat.gamekitdata {
       }
       if (Life != other.Life) return false;
       if (Start != other.Start) return false;
+      if (Type != other.Type) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -4447,6 +4463,7 @@ namespace fat.gamekitdata {
       int hash = 1;
       if (Life != 0) hash ^= Life.GetHashCode();
       if (Start != 0L) hash ^= Start.GetHashCode();
+      if (Type != 0) hash ^= Type.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -4471,6 +4488,10 @@ namespace fat.gamekitdata {
         output.WriteRawTag(16);
         output.WriteInt64(Start);
       }
+      if (Type != 0) {
+        output.WriteRawTag(24);
+        output.WriteInt32(Type);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -4488,6 +4509,10 @@ namespace fat.gamekitdata {
         output.WriteRawTag(16);
         output.WriteInt64(Start);
       }
+      if (Type != 0) {
+        output.WriteRawTag(24);
+        output.WriteInt32(Type);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -4502,6 +4527,9 @@ namespace fat.gamekitdata {
       }
       if (Start != 0L) {
         size += 1 + pb::CodedOutputStream.ComputeInt64Size(Start);
+      }
+      if (Type != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Type);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -4519,6 +4547,9 @@ namespace fat.gamekitdata {
       }
       if (other.Start != 0L) {
         Start = other.Start;
+      }
+      if (other.Type != 0) {
+        Type = other.Type;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -4542,6 +4573,10 @@ namespace fat.gamekitdata {
             Start = input.ReadInt64();
             break;
           }
+          case 24: {
+            Type = input.ReadInt32();
+            break;
+          }
         }
       }
     #endif
@@ -4562,6 +4597,10 @@ namespace fat.gamekitdata {
           }
           case 16: {
             Start = input.ReadInt64();
+            break;
+          }
+          case 24: {
+            Type = input.ReadInt32();
             break;
           }
         }

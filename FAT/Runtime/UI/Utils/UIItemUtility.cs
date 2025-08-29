@@ -23,19 +23,32 @@ namespace FAT
             }
         }
 
-        public static bool ItemTipsInfoValid(int id_, int exclude_ = 0) {
+        public static bool ItemTipsInfoValid(int id_, int exclude_ = 0)
+        {
             var objMan = Game.Manager.objectMan;
             var mask = ~exclude_ & (int)(ObjConfigType.CardPack
                         | ObjConfigType.RandomBox | ObjConfigType.CardJoker);
-            return objMan.IsOneOfType(id_, mask) || MergeItemTipsInfoValid(id_);
+            var inWhiteList = objMan.IsOneOfType(id_, mask);
+            // 随机宝箱新增开关：当不显示结果时，不弹Tips
+            // 这里是因为LandMark活动用随机宝箱配了个Token，不要展示Info按钮
+            if (inWhiteList && objMan.IsType(id_, ObjConfigType.RandomBox))
+            {
+                var chestConf = objMan.GetRandomBoxConfig(id_);
+                if (chestConf != null && !chestConf.IsShowResult)
+                {
+                    return false;
+                }
+            }
+            return inWhiteList || MergeItemTipsInfoValid(id_);
         }
 
-        public static bool MergeItemTipsInfoValid(int id_) {
+        public static bool MergeItemTipsInfoValid(int id_)
+        {
             if (!Game.Manager.objectMan.IsType(id_, ObjConfigType.MergeItem)) return false;
             var confC = Merge.Env.Instance.GetItemComConfig(id_);
             return confC.jumpCDConfig != null || confC.specialBoxConfig != null || confC.choiceBoxConfig != null;
         }
-        
+
         //显示物品气泡tips形式的信息 需要指定气泡显示的起始位置和偏移  气泡的箭头需要指向道具Icon中心
         //也可显示大面板形式的信息面板
         public static void ShowItemTipsInfo(int itemId, Vector3 startWorldPos = new Vector3(), float offset = 0)
@@ -63,7 +76,8 @@ namespace FAT
                 Game.Manager.randomBoxMan.TryOpenRandomBoxTips(itemId, startWorldPos, offset);
                 return;
             }
-            if (objectMan.IsType(itemId, ObjConfigType.CardPack)) {
+            if (objectMan.IsType(itemId, ObjConfigType.CardPack))
+            {
                 var isShinnyPack = Game.Manager.objectMan.GetCardPackConfig(itemId)?.IsShinnyGuar ?? false;
                 var uiRes = !isShinnyPack ? UIConfig.UICardPackPreview : UIConfig.UIShinnyGuarPreview;
                 UIManager.Instance.OpenWindow(uiRes, startWorldPos, offset, itemId);
@@ -72,13 +86,14 @@ namespace FAT
 
             if (objectMan.IsType(itemId, ObjConfigType.CardJoker))
             {
-                UIManager.Instance.OpenWindow(UIConfig.UIJokerCardTips,startWorldPos,offset,itemId);
+                UIManager.Instance.OpenWindow(UIConfig.UIJokerCardTips, startWorldPos, offset, itemId);
                 return;
             }
             DebugEx.Warning($"ShowItemTipsInfo no matching tip for {itemId}");
         }
 
-        public static void HideTips() {
+        public static void HideTips()
+        {
             var ui = UIManager.Instance;
             ui.CloseWindow(UIConfig.UITimeBoosterDetails);
             ui.CloseWindow(UIConfig.UIRandomBoxTips);
@@ -86,7 +101,8 @@ namespace FAT
             ui.CloseWindow(UIConfig.UIJokerCardTips);
         }
 
-        public static bool ItemTipsInfoAuto(int id_, int type_) {
+        public static bool ItemTipsInfoAuto(int id_, int type_)
+        {
             var g = Game.Manager.configMan.globalConfig;
             if (g.TapSourceTips.ContainsKey(id_)) return true;
             return type_ > 0 && Game.Manager.objectMan.IsType(id_, type_);
@@ -95,14 +111,15 @@ namespace FAT
         public static void ShowItemTipsInfoAuto(int itemId, Vector3 startWorldPos = default, float offset = 0)
         {
             var g = Game.Manager.configMan.globalConfig;
-            if (g.TapSourceTips.ContainsKey(itemId)) {
+            if (g.TapSourceTips.ContainsKey(itemId))
+            {
                 var conf = fat.conf.Data.GetObjBasic(itemId);
                 UIManager.Instance.OpenWindow(UIConfig.UIEnergyBoxTips, conf, startWorldPos, offset);
                 return;
             }
             ShowItemTipsInfo(itemId, startWorldPos, offset);
         }
-        
+
         #region count string style
 
         public enum CountStringStyle

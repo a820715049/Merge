@@ -101,6 +101,7 @@ namespace FAT
             FarmBoard,          //农场棋盘
             FightBoard,
             WishBoard,  //许愿棋盘
+            MineCartBoard,      //矿车棋盘
         }
         public EntryType type;
         public MergeWorld world;
@@ -358,6 +359,36 @@ namespace FAT
             {
                 return true;
             }
+            //默认走按列优先的方式处理棋盘初始的棋子配置
+            _InitBoardItemColumnFirst(board, boardConfig.Col, boardConfig.ColCount, boardConfig.RowCount);
+            return true;
+        }
+        
+        //活动类棋盘在初始化棋盘数据时 如果需要用到活动实例 可以调用此接口 （如可以上下滚动的棋盘）
+        public bool InitializeBoard(ActivityLike activityLike, MergeWorld world, int boardId, bool fillInitialItems = true)
+        {
+            if (!mAllBoardConfigs.TryGetValue(boardId, out var boardConfig))
+            {
+                DebugEx.FormatWarning("MergeBoardMan::InitializeBoard ----> fail because board {0} not exists!", boardId);
+                return false;
+            }
+            var board = world.activeBoard;
+            board.Reset(boardId, boardConfig.ColCount, boardConfig.RowCount);
+            using (ObjectPool<List<MergeGridArea>>.GlobalPool.AllocStub(out var areas))
+            {
+                FillMergeAreaForBoard(boardId, areas);
+                foreach (var a in areas)
+                {
+                    board.AddArea(a);
+                }
+            }
+            //初始化当前棋盘可能存在的云层区域 这里只初始化 实际坐标的刷新在各自业务逻辑处 根据需要自行判断是否执行
+            board.InitAllCloud();
+            //是否是第一次初始化棋盘棋子
+            if (!fillInitialItems)
+            {
+                return true;
+            }
             //根据feature来决定棋盘初始化方式
             var feature = boardConfig.Feature;
             if (feature == FeatureEntry.FeatureMine)
@@ -372,23 +403,43 @@ namespace FAT
             }
             else if (feature == FeatureEntry.FeatureFarmBoard)
             {
-                using (ObjectPool<List<string>>.GlobalPool.AllocStub(out var rowItems))
+                if (activityLike is IBoardActivityRowConf IRowConf && activityLike.Type == EventType.FarmBoard)
                 {
-                    var rowCount = boardConfig.RowCount;
-                    if (BoardActivityUtility.FillFarmBoardRowConfStr(boardConfig.DetailParam, rowItems, 0, rowCount))
+                    using (ObjectPool<List<string>>.GlobalPool.AllocStub(out var rowItems))
                     {
-                        _InitBoardItemRowFirstBottom(board, rowItems, rowCount, boardConfig.ColCount, rowCount);
+                        var rowCount = boardConfig.RowCount;
+                        if (BoardActivityUtility.FillBoardRowConfStr(IRowConf, boardConfig.DetailParam, rowItems, 0, rowCount))
+                        {
+                            _InitBoardItemRowFirstBottom(board, rowItems, rowCount, boardConfig.ColCount, rowCount);
+                        }
                     }
                 }
             }
             else if (feature == FeatureEntry.FeatureWishBoard)
             {
-                using (ObjectPool<List<string>>.GlobalPool.AllocStub(out var rowItems))
+                if (activityLike is IBoardActivityRowConf IRowConf && activityLike.Type == EventType.WishBoard)
                 {
-                    var rowCount = boardConfig.RowCount;
-                    if (BoardActivityUtility.FillWishBoardRowConfStr(boardConfig.DetailParam, rowItems, 0, rowCount))
+                    using (ObjectPool<List<string>>.GlobalPool.AllocStub(out var rowItems))
                     {
-                        _InitBoardItemRowFirstBottom(board, rowItems, rowCount, boardConfig.ColCount, rowCount);
+                        var rowCount = boardConfig.RowCount;
+                        if (BoardActivityUtility.FillBoardRowConfStr(IRowConf, boardConfig.DetailParam, rowItems, 0, rowCount))
+                        {
+                            _InitBoardItemRowFirstBottom(board, rowItems, rowCount, boardConfig.ColCount, rowCount);
+                        }
+                    }
+                }
+            }
+            else if (feature == FeatureEntry.FeatureMineCart)
+            {
+                if (activityLike is IBoardActivityRowConf IRowConf && activityLike.Type == EventType.MineCart)
+                {
+                    using (ObjectPool<List<string>>.GlobalPool.AllocStub(out var rowItems))
+                    {
+                        var rowCount = boardConfig.RowCount;
+                        if (BoardActivityUtility.FillBoardRowConfStr(IRowConf, boardConfig.DetailParam, rowItems, 0, rowCount))
+                        {
+                            _InitBoardItemRowFirst(board, rowItems, rowCount, boardConfig.ColCount);
+                        }
                     }
                 }
             }

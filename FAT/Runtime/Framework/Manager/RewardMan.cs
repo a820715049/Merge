@@ -359,6 +359,14 @@ namespace FAT
                                 (_clawOrder as ActivityClawOrder).AddToken(data.rewardId, data.rewardCount);
                             }
                             break;
+                        case FeatureEntry.FeatureLandmark:
+                            Game.Manager.activity.LookupAny(EventType.Landmark, out var actLandMark);
+                            if (actLandMark != null)
+                            {
+                                var activityLandMark = (LandMarkActivity)actLandMark;
+                                activityLandMark.AddToken(data.rewardId, data.rewardCount);
+                            }
+                            break;
                         default:
                             DebugEx.Warning($"RewardMan.BeginReward ----> unknown token {tokenConf.Feature}");
                             //Game.Instance.activityMan.CommitToken(data, tokenConf);

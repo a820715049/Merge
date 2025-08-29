@@ -77,7 +77,26 @@ public static class AdjustTracker
         DebugEx.FormatInfo("AdjustTracker::TrackLevelEvent ----> track level:{0}", level);
         PlatformSDK.Instance.TrackAdjust(token);
     }
-    
+
+    // 主线订单
+    public static void TrackCommonOrderEvent(int taskId)
+    {
+        var events = mConfig?.tasks;
+        if(events == null)
+        {
+            DebugEx.Info($"AdjustTracker::TrackCommonOrderEvent ----> no task event {taskId}");    
+            return;
+        }
+        var e = events.FindEx((ea) => ea.intValue == taskId);
+        if(e == null)
+        {
+            DebugEx.Info($"AdjustTracker::TrackCommonOrderEvent ----> no task event {taskId}");                
+            return;
+        }
+        DebugEx.Info($"AdjustTracker::TrackCommonOrderEvent ----> track task:{taskId}");
+        _SendTrack(e);
+    }
+
     public static void TrackIAPPackEvent(int packageId)
     {
         var events = mConfig?.purchase;

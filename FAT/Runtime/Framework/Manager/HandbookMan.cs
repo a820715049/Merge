@@ -460,13 +460,11 @@ namespace FAT
             Game.Manager.miniBoardMan.OnNewItemUnlock();
             Game.Manager.miniBoardMultiMan.OnNewItemUnlock();
             Game.Manager.mineBoardMan.OnNewItemUnlock();
-            if (Game.Manager.activity.LookupAny(EventType.FarmBoard, out var act1) && act1 is FarmBoardActivity farm)
+            var allActivity = Game.Manager.activity.map;
+            foreach (var (_, activity) in allActivity)
             {
-                farm.OnNewItemUnlock();
-            }
-            if (Game.Manager.activity.LookupAny(EventType.WishBoard, out var act2) && act2 is WishBoardActivity wish)
-            {
-                wish.OnNewItemUnlock();
+                if (activity is IBoardActivityHandbook boardActivity)
+                    boardActivity.OnNewItemUnlock();
             }
         }
 

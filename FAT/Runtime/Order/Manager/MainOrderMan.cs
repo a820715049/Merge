@@ -68,6 +68,8 @@ namespace FAT
             {
                 if ((OrderProviderType)order.ProviderType == OrderProviderType.Common)
                 {
+                    AdjustTracker.TrackCommonOrderEvent(order.Id);
+
                     Game.Manager.featureUnlockMan.OnMainOrderFinished();
                     GuideUtility.OnMainOrderFinished();
                 }

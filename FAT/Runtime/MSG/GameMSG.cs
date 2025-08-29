@@ -117,6 +117,7 @@ namespace FAT
         public class ACTIVITY_SUCCESS : MessageBase<ActivityLike> { }
         public class ACTIVITY_TS_SYNC : MessageBase<ActivityLike> { }
         public class ACTIVITY_RANKING_DATA : MessageBase<ActivityRanking, RankingType> { }
+
         #endregion activity
         #region IAP
         public class IAP_INIT : MessageBase { }
@@ -194,6 +195,7 @@ namespace FAT
         public class UI_ON_ORDER_ITEM_CONSUMED : MessageBase<int, Vector3> { }
         public class UI_REWARD_FEEDBACK : MessageBase<FlyType> { }
         public class UI_COST_FEEDBACK : MessageBase<FlyType> { }
+        public class UI_SINGLE_REWARD_CLOSE_FEEDBACK : MessageBase<int> { }
         public class UI_SHOW_LEVEL_UP_TIP : MessageBase { }
         public class UI_ZODIAC_LEVEL_LOCK_TIP : MessageBase<Transform> { }
         public class UI_ZODIAC_MERGE_ENTRY_GUIDE : MessageBase<bool> { }
@@ -243,6 +245,11 @@ namespace FAT
         public class GAME_CARD_ADD : MessageBase { }
 
         #endregion
+
+        #region wish upon
+        public class WISH_UPON_ENERGY_UPDATE : MessageBase<int, int> { }
+        #endregion
+
         #region score
         public class GAME_SCORE_GET_PROGRESS_BOARD : MessageBase<int, int> { }    //积分活动- 获得积分后 通知棋盘积分详情组件划入
         public class GAME_SCORE_GET_PROGRESS_SHOP : MessageBase<int, int> { }    //积分活动- 获得积分后 通知商店积分详情组件划入
@@ -317,6 +324,17 @@ namespace FAT
 
         #endregion
 
+        #region 活动类棋盘通用事件
+
+        //棋盘准备进行移动时，通知界面做准备。 移动几行本事件就发几次，每次会对应传递要收集飞到奖励箱的棋子
+        public class UI_ACTIVITY_BOARD_MOVE_COLLECT : MessageBase<List<Item>> { }
+        //棋盘开始上升 通知界面
+        public class UI_ACTIVITY_BOARD_MOVE_START : MessageBase { }
+        //棋盘发生卡死情况时，处理过程中需要通知界面打开block
+        public class UI_ACTIVITY_BOARD_EXTREME : MessageBase { }
+
+        #endregion
+
         #region MiniBoard
 
         public class UI_MINI_BOARD_UNLOCK_ITEM : MessageBase<Merge.Item> { } //迷你棋盘棋子在图鉴中第一次解锁时发消息(用于界面表现)
@@ -358,7 +376,19 @@ namespace FAT
         public class GAME_MINE_BOARD_TOKEN_CHANGE : MessageBase<int, int> { }
 
         #endregion
+        #region 矿车棋盘
 
+        public class UI_MINECART_BOARD_UNLOCK_ITEM : MessageBase<Item> { } //矿车盘最高级棋子在图鉴中第一次解锁时发消息(用于界面表现)
+        public class UI_MINECART_BOARD_MOVE_UP : MessageBase<List<Item>> { }   //矿车棋盘准备进行上升前 通知界面 按行传递要飞行的棋子
+        public class UI_MINECART_BOARD_MOVE_START : MessageBase { }   //矿车棋盘开始上升 通知界面
+
+        //矿车棋盘进度条表现事件
+        //param1:最终进度值
+        //param2:本次进度条变化达成的阶段id，需要再把此值回传给数据层，默认-1表示没有达成阶段奖励
+        //param3:进度条完成时的回合大奖，默认传default表示不是大奖，用完时记得回收
+        public class GAME_MINECART_BOARD_PROG_CHANGE : MessageBase<int, int, Ref<List<RewardCommitData>>> { }
+
+        #endregion
         #region 付费留存礼包
         public class PACK_RETENTION_EXPIRE : MessageBase { } //付费玩家活动过期后领取免费没领取的免费奖励
         #endregion
@@ -474,7 +504,7 @@ namespace FAT
         //BP里程碑进度条表现事件 param1:最终进度值 param2:进度条涨满时对应的进度最大值 -1表示直接使用数据层最新的进度最大值
         public class UI_BP_MILESTONE_CHANGE : MessageBase<int, int> { }
         public class UI_BP_MILESTONECELL_PLAY_UP : MessageBase { } // 里程碑格子播放升级动画
-        public class UI_BP_MILESTONECELL_PLAY_PROGRESS : MessageBase<float, int, int> { } // 里程碑格子播放进度动画
+        public class UI_BP_MILESTONECELL_PLAY_PROGRESS : MessageBase<int, float, int, int> { } // 里程碑格子播放进度动画
         public class UI_BP_OPEN_CYCLE_TIP : MessageBase { } // 打开循环奖励提示
         //BP购买成功
         public class GAME_BP_BUY_SUCCESS : MessageBase<BPActivity.BPPurchaseType, Ref<List<RewardCommitData>>, bool> { }
@@ -482,7 +512,7 @@ namespace FAT
         public class GAME_BP_TASK_STATE_CHANGE : MessageBase { }
         //BP任务刷新 用于主棋盘展示任务进度或状态发生变化时的Tips
         public class GAME_BP_TASK_UPDATED : MessageBase<List<BPActivity.BPTaskUpdateInfo>> { }
-        
+
         #endregion
 
         #region 兑换商店
@@ -513,6 +543,10 @@ namespace FAT
         public class APP_ENTER_FOREGROUND_EVENT : MessageBase { }
         public class COMMUNITY_LINK_REFRESH_RED_DOT : MessageBase { }
         public class MAIL_ITEM_REFRESH : MessageBase { }
+        #endregion
+
+        #region 每日任务路径主题
+        public class LANDMARK_TOKEN_CHANGE : MessageBase { } // LandMark 活动专用：token 数量变更
         #endregion
     }
 }

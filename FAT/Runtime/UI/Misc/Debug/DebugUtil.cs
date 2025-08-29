@@ -25,6 +25,7 @@ namespace FAT
                 {
                     return;
                 }
+
                 var activityTreasure = (ActivityOrderChallenge)activity;
                 activityTreasure.Challenge();
             }
@@ -41,7 +42,8 @@ namespace FAT
                 }
 
                 var activityDigging = (ActivityDigging)activity;
-                var field = typeof(ActivityDigging).GetField("currentLevelIndex", BindingFlags.NonPublic | BindingFlags.Instance);
+                var field = typeof(ActivityDigging).GetField("currentLevelIndex",
+                    BindingFlags.NonPublic | BindingFlags.Instance);
                 if (field != null)
                 {
                     field.SetValue(activityDigging, activityDigging.detailConfig.Includelevel.Count - 1);
@@ -53,17 +55,18 @@ namespace FAT
             }
             else if (Input.GetKeyDown(KeyCode.F5))
             {
-                var mergeBoardMan = Game.Manager.mergeBoardMan;
-                var detailParam = Game.Manager.mergeBoardMan
-                    .GetBoardConfig(mergeBoardMan.activeWorld.activeBoard.boardId)?.DetailParam ?? 0;
-                using (ObjectPool<List<string>>.GlobalPool.AllocStub(out var rowItems))
+                Game.Manager.activity.LookupAny(fat.rawdata.EventType.Fish, out var activity);
+                if (activity == null)
                 {
-                    // 获得从第8个索引开始 之后两行的棋子数据
-                    if (Game.Manager.mineBoardMan.FillBoardRowConfStr(detailParam, rowItems, 8, 2))
-                    {
-                        // 从第二行开始 向上生成两行棋子
-                        mergeBoardMan.CreateNewBoardItemFromRowToTop(mergeBoardMan.activeWorld.activeBoard, rowItems, 2);
-                    }
+                    return;
+                }
+
+                var activityFishing = (ActivityFishing)activity;
+                var field = typeof(ActivityFishing).GetMethod("GenerateFish",
+                    BindingFlags.NonPublic | BindingFlags.Instance);
+                if (field != null)
+                {
+                    field.Invoke(activityFishing, null);
                 }
             }
             else if (Input.GetKeyDown(KeyCode.F6))
@@ -82,17 +85,18 @@ namespace FAT
     {
         private static List<Item> _cacheItemList = new List<Item>();
         private static List<Tuple<Item, Item>> _canMergeItemList = new List<Tuple<Item, Item>>();
-        
+
         private enum MergeStep
         {
-            None,           //空状态
-            CollectItems,   //收集当前棋盘上所有符合条件的棋子并排序
+            None, //空状态
+            CollectItems, //收集当前棋盘上所有符合条件的棋子并排序
             FindMergePairs, //找出所有可以合成的棋子对
-            ExecuteMerge    //执行合成操作
+            ExecuteMerge //执行合成操作
         }
-        private static bool _isInAutoMerge = false;         // 是否处于自动合成状态，由外部控制
-        private static int _mergeStepDelayFrame = 3;        // 每步之间的延迟帧数，可配置
-        private static int _mergeStepFrameCounter = 0;      // 当前帧计数器
+
+        private static bool _isInAutoMerge = false; // 是否处于自动合成状态，由外部控制
+        private static int _mergeStepDelayFrame = 3; // 每步之间的延迟帧数，可配置
+        private static int _mergeStepFrameCounter = 0; // 当前帧计数器
         private static MergeStep _currentMergeStep = MergeStep.None; // 当前状态阶段
 
         //只执行一次 此操作会停止auto merge
@@ -109,7 +113,7 @@ namespace FAT
             Reset(!_isInAutoMerge);
             return _isInAutoMerge;
         }
-        
+
         public static void Update()
         {
             if (!_isInAutoMerge)
@@ -152,13 +156,13 @@ namespace FAT
             _cacheItemList.Clear();
             _canMergeItemList.Clear();
         }
-        
+
         private static void _AutoCollectItems()
         {
             var curBoard = Game.Manager.mergeBoardMan.activeWorld?.activeBoard;
             if (curBoard == null)
                 return;
-            
+
             _cacheItemList.Clear();
 
             curBoard.WalkAllItem((item) =>
@@ -221,9 +225,11 @@ namespace FAT
                             break;
                         }
                     }
+
                     if (foundPair)
                         break;
                 }
+
                 if (!foundPair)
                     break;
             }
@@ -233,7 +239,7 @@ namespace FAT
         {
             if (_canMergeItemList.Count <= 0)
                 return;
-            
+
             var curBoard = Game.Manager.mergeBoardMan.activeWorld?.activeBoard;
             if (curBoard == null)
                 return;

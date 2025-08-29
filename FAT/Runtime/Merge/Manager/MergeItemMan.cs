@@ -497,13 +497,14 @@ namespace FAT
             //若已经是活动类棋盘 则无需检查
             if (!isActivityBoardItem)
             {
-                if (Game.Manager.activity.LookupAny(EventType.FarmBoard, out var act1) && act1 is FarmBoardActivity farm)
+                var allActivity = Game.Manager.activity.map;
+                foreach (var (_, activity) in allActivity)
                 {
-                    isActivityBoardItem = farm.CheckIsFarmBoardItem(itemId);
-                }
-                if (Game.Manager.activity.LookupAny(EventType.WishBoard, out var act2) && act2 is WishBoardActivity wish)
-                {
-                    isActivityBoardItem = wish.CheckIsWishBoardItem(itemId);
+                    if (activity is IBoardActivityHandbook boardActivity)
+                    {
+                        isActivityBoardItem = boardActivity.CheckIsBoardItem(itemId);
+                        break;
+                    }
                 }
             }
             Game.Manager.handbookMan.UnlockHandbookItem(itemId, isActivityBoardItem);

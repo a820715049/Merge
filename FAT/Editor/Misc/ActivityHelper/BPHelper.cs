@@ -65,7 +65,7 @@ namespace FAT
 
             if (GUILayout.Button("open act"))
             {
-                Game.Manager.activity.DebugActivate("990006");
+                Game.Manager.activity.DebugActivate("990007");
             }
 
 

@@ -46,6 +46,7 @@ namespace FAT
         public static UIResource UIItemInfoTips = new UIResource("UIItemInfoTips.prefab", UILayer.SubStatus, "fat_global").SetMute().SupportNavBack().IsTips();
         public static UIResource UIItemInfoWideTips = new UIResource("UIItemInfoWideTips.prefab", UILayer.SubStatus, "fat_global").SetMute().SupportNavBack().IsTips();
         public static UIResource UIRandomBox = new UIResource("UIRandomBox.prefab", UILayer.SubStatus, "chest_randomchest_common");
+        public static UIResource UISingleReward = new UIResource("UISingleReward.prefab", UILayer.SubStatus, "chest_randomchest_common");
         public static UIResource UIRewardPanel = new UIResource("UIRewardPanel.prefab", UILayer.SubStatus, "fat_global");
         public static UIResource UIRandomBoxTips = new UIResource("UIRandomBoxTips.prefab", UILayer.SubStatus, "chest_randomchest_common").SetMute().SupportNavBack().IsTips();
         public static UIResource UIRandomBoxSpecialTips = new UIResource(string.Empty, UILayer.SubStatus, string.Empty).SetMute().SupportNavBack().IsTips();
@@ -109,6 +110,7 @@ namespace FAT
         public static UIResource UIErgListPackBuyTips = new UIResource("UIErgListPackBuyTips.prefab", SubStatus, "event_erglist_default");
         public static UIResource UIErgListPackEnd = new UIResource("UIErgListPackEnd.prefab", SubStatus, "event_erglist_default");
         public static UIResource UIGemSecondConfirm = new UIResource("UIGemSecondConfirm.prefab", SubStatus, "fat_global").SupportNavBack();
+        public static UIResource UIActivityWishUponMain = new UIResource("UIActivityWishUponMain.prefab", AboveStatus, "event_wishupon_default");
         #region 卡册系统相关界面
 
         //debug 模拟抽卡界面
@@ -319,6 +321,9 @@ namespace FAT
         public static UIResource UIPackDiscount = new UIResource("UIPackDiscount.prefab", AboveStatus, "event_packdiscount_default");
         public static UIResource UIPackDiscountHelp = new UIResource("UIPackDiscountHelp.prefab", AboveStatus, "event_packdiscount_default");
         #endregion
+        #region 路径活动（每日任务）
+        public static UIResource UILandMark = new UIResource("UILandMark.prefab", AboveStatus, "event_landmark_s001").SupportNavBack();
+        #endregion
 
         #region 好评订单活动
         public static UIResource UIOrderLike = new UIResource("UIOrderLike.prefab", AboveStatus, "event_orderlike_default");
@@ -521,6 +526,19 @@ namespace FAT
         public static UIResource UISpinPackPanel = new UIResource("UISpinPackPanel.prefab", AboveStatus, "event_spinpack_s001");
         public static UIResource UISpinPackTip = new UIResource("UISpinPackTips.prefab", SubStatus, "event_spinpack_default");
         public static UIResource UISpinRewardPanel = new UIResource("UISpinRewardPanel.prefab", SubStatus, "event_spinpack_default");
+        #endregion
+
+        #region 矿车棋盘
+        public static UIResource UIMineCartBoardStartNotice = new UIResource("UIMineCartBoardStartNotice.prefab", AboveStatus, "event_minecartboard_common").SupportNavBack();
+        public static UIResource UIMineCartBoardEndNotice = new UIResource("UIMineCartBoardEndNotice.prefab", AboveStatus, "event_minecartboard_common").SupportNavBack();
+        public static UIResource UIMineCartRewardTips = new UIResource("UIMineCartRewardTips.prefab", SubStatus, "event_minecartboard_common").IsTips().SupportNavBack();
+        public static UIResource UIMineCartBoardMilestoneReward = new UIResource("UIMineCartBoardMilestoneReward.prefab", SubStatus, "event_minecartboard_common").SupportNavBack();
+        public static UIResource UIMineCartHandbook = new UIResource("UIMineCartHandbook.prefab", AboveStatus, "event_minecartboard_common").SupportNavBack();
+        public static UIResource UIMineCartBoardReplacement = new UIResource("UIMineCartBoardReplacement.prefab", AboveStatus, "event_minecartboard_common").SupportNavBack();
+        public static UIResource UIMineCartBoardMain = new UIResource("UIMineCartBoardMain.prefab", BelowStatus, "event_minecartboard_s001");
+        public static UIResource UIMineCartLoading = new UIResource("UIMineCartLoading.prefab", Loading, "event_minecartboard_s001");
+        public static UIResource UIMineCartBoardHelp = new UIResource("UIMineCartBoardHelp.prefab", SubStatus, "event_minecartboard_common").SupportNavBack();
+        public static UIResource UIMineCartBoardBannerTip = new UIResource("UIMineCartBoardBannerTip.prefab", SubStatus, "event_minecartboard_common");
         #endregion
     }
 }

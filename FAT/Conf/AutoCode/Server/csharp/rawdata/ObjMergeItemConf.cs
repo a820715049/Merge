@@ -24,43 +24,44 @@ namespace fat.rawdata {
     static ObjMergeItemConfReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "Ch5yYXdkYXRhL09iak1lcmdlSXRlbUNvbmYucHJvdG8SB3Jhd2RhdGEijAUK",
+            "Ch5yYXdkYXRhL09iak1lcmdlSXRlbUNvbmYucHJvdG8SB3Jhd2RhdGEiogUK",
             "DE9iak1lcmdlSXRlbRIVCg1jb25maWdWZXJzaW9uGAEgASgFEgoKAmlkGAIg",
             "ASgFEg4KBl90YWdzXxgDIAMoCRISCgpiaW5nb1ByaWNlGAQgASgFEg8KB2Jv",
             "YXJkSWQYBSABKAUSEAoIYnViYmxlQWQYGSABKAgSFgoOYnViYmxlRGlzY291",
             "bnQYBiABKAUSEwoLYnViYmxlUHJpY2UYByABKAUSEgoKYnViYmxlUHJvYhgI",
             "IAEoBRIYChBidWJibGVQcm9iQWRqdXN0GAkgASgCEgwKBGRlc2MYCiABKAkS",
-            "EgoKZGlzcGxheVJlcxgLIAEoCRIUCgxpc0RlZ3JhZGFibGUYGyABKAgSEgoK",
-            "aXNIaWRlUHJvZBgWIAEoCBITCgtpc0ltcG9ydGFudBgMIAEoCBITCgtpc0pv",
-            "a2VyYWJsZRgaIAEoCBIRCglpc05vbmRyYWcYISABKAgSEQoJaXNQb3dlclVw",
-            "GA0gASgIEhEKCWlzUmVjeWNsZRggIAEoCBIVCg1pc1NlbGxGb3JDb2luGB0g",
-            "ASgIEg0KBWlzVG9wGA4gASgIEhMKC2lzVG9wRWZmZWN0GBggASgIEhIKCm1l",
-            "cmdlQm9udXMYDyADKAUSEQoJbWVyZ2VHcmlkGBAgAygFEhIKCm1lcmdlU2Nv",
-            "cmUYHCABKAUSDQoFcG9pbnQYESABKAUSEQoJcmVwbGFjZUlkGBcgASgFEg4K",
-            "BnJld2FyZBgSIAEoCRIRCglzZWxlY3RTbmQYEyABKAkSDwoHc2VsbE51bRge",
-            "IAEoBRIUCgxzZWxsUGxheWVyTHYYHyABKAUSEQoJc2VsbFByaWNlGBQgASgF",
-            "EhMKC3VubG9ja1ByaWNlGBUgASgFIrYBChZPYmpNZXJnZUl0ZW1NYXBBQlZh",
-            "bHVlEk0KD09iak1lcmdlSXRlbU1hcBgBIAMoCzI0LnJhd2RhdGEuT2JqTWVy",
-            "Z2VJdGVtTWFwQUJWYWx1ZS5PYmpNZXJnZUl0ZW1NYXBFbnRyeRpNChRPYmpN",
-            "ZXJnZUl0ZW1NYXBFbnRyeRILCgNrZXkYASABKAkSJAoFdmFsdWUYAiABKAsy",
-            "FS5yYXdkYXRhLk9iak1lcmdlSXRlbToCOAEiiQQKEE9iak1lcmdlSXRlbUNv",
-            "bmYSRwoPT2JqTWVyZ2VJdGVtTWFwGAEgAygLMi4ucmF3ZGF0YS5PYmpNZXJn",
-            "ZUl0ZW1Db25mLk9iak1lcmdlSXRlbU1hcEVudHJ5EksKEU9iak1lcmdlSXRl",
-            "bU1hcEFCGAIgAygLMjAucmF3ZGF0YS5PYmpNZXJnZUl0ZW1Db25mLk9iak1l",
-            "cmdlSXRlbU1hcEFCRW50cnkSVQoWT2JqTWVyZ2VJdGVtTWFwQUJQYXRjaBgD",
-            "IAMoCzI1LnJhd2RhdGEuT2JqTWVyZ2VJdGVtQ29uZi5PYmpNZXJnZUl0ZW1N",
-            "YXBBQlBhdGNoRW50cnkaTQoUT2JqTWVyZ2VJdGVtTWFwRW50cnkSCwoDa2V5",
+            "EgoKZGlzcGxheVJlcxgLIAEoCRIUCgxpc0RlZ3JhZGFibGUYGyABKAgSFAoM",
+            "aXNGcm96ZW5JdGVtGCIgASgIEhIKCmlzSGlkZVByb2QYFiABKAgSEwoLaXNJ",
+            "bXBvcnRhbnQYDCABKAgSEwoLaXNKb2tlcmFibGUYGiABKAgSEQoJaXNOb25k",
+            "cmFnGCEgASgIEhEKCWlzUG93ZXJVcBgNIAEoCBIRCglpc1JlY3ljbGUYICAB",
+            "KAgSFQoNaXNTZWxsRm9yQ29pbhgdIAEoCBINCgVpc1RvcBgOIAEoCBITCgtp",
+            "c1RvcEVmZmVjdBgYIAEoCBISCgptZXJnZUJvbnVzGA8gAygFEhEKCW1lcmdl",
+            "R3JpZBgQIAMoBRISCgptZXJnZVNjb3JlGBwgASgFEg0KBXBvaW50GBEgASgF",
+            "EhEKCXJlcGxhY2VJZBgXIAEoBRIOCgZyZXdhcmQYEiABKAkSEQoJc2VsZWN0",
+            "U25kGBMgASgJEg8KB3NlbGxOdW0YHiABKAUSFAoMc2VsbFBsYXllckx2GB8g",
+            "ASgFEhEKCXNlbGxQcmljZRgUIAEoBRITCgt1bmxvY2tQcmljZRgVIAEoBSK2",
+            "AQoWT2JqTWVyZ2VJdGVtTWFwQUJWYWx1ZRJNCg9PYmpNZXJnZUl0ZW1NYXAY",
+            "ASADKAsyNC5yYXdkYXRhLk9iak1lcmdlSXRlbU1hcEFCVmFsdWUuT2JqTWVy",
+            "Z2VJdGVtTWFwRW50cnkaTQoUT2JqTWVyZ2VJdGVtTWFwRW50cnkSCwoDa2V5",
             "GAEgASgJEiQKBXZhbHVlGAIgASgLMhUucmF3ZGF0YS5PYmpNZXJnZUl0ZW06",
-            "AjgBGlkKFk9iak1lcmdlSXRlbU1hcEFCRW50cnkSCwoDa2V5GAEgASgJEi4K",
-            "BXZhbHVlGAIgASgLMh8ucmF3ZGF0YS5PYmpNZXJnZUl0ZW1NYXBBQlZhbHVl",
-            "OgI4ARpeChtPYmpNZXJnZUl0ZW1NYXBBQlBhdGNoRW50cnkSCwoDa2V5GAEg",
-            "ASgJEi4KBXZhbHVlGAIgASgLMh8ucmF3ZGF0YS5PYmpNZXJnZUl0ZW1NYXBB",
-            "QlZhbHVlOgI4AUI9Wi1naXRsYWIuZnVucGx1cy5pby9mYXQvY29uZi9nZW4v",
-            "Z29sYW5nL3Jhd2RhdGGqAgtmYXQucmF3ZGF0YWIGcHJvdG8z"));
+            "AjgBIokEChBPYmpNZXJnZUl0ZW1Db25mEkcKD09iak1lcmdlSXRlbU1hcBgB",
+            "IAMoCzIuLnJhd2RhdGEuT2JqTWVyZ2VJdGVtQ29uZi5PYmpNZXJnZUl0ZW1N",
+            "YXBFbnRyeRJLChFPYmpNZXJnZUl0ZW1NYXBBQhgCIAMoCzIwLnJhd2RhdGEu",
+            "T2JqTWVyZ2VJdGVtQ29uZi5PYmpNZXJnZUl0ZW1NYXBBQkVudHJ5ElUKFk9i",
+            "ak1lcmdlSXRlbU1hcEFCUGF0Y2gYAyADKAsyNS5yYXdkYXRhLk9iak1lcmdl",
+            "SXRlbUNvbmYuT2JqTWVyZ2VJdGVtTWFwQUJQYXRjaEVudHJ5Gk0KFE9iak1l",
+            "cmdlSXRlbU1hcEVudHJ5EgsKA2tleRgBIAEoCRIkCgV2YWx1ZRgCIAEoCzIV",
+            "LnJhd2RhdGEuT2JqTWVyZ2VJdGVtOgI4ARpZChZPYmpNZXJnZUl0ZW1NYXBB",
+            "QkVudHJ5EgsKA2tleRgBIAEoCRIuCgV2YWx1ZRgCIAEoCzIfLnJhd2RhdGEu",
+            "T2JqTWVyZ2VJdGVtTWFwQUJWYWx1ZToCOAEaXgobT2JqTWVyZ2VJdGVtTWFw",
+            "QUJQYXRjaEVudHJ5EgsKA2tleRgBIAEoCRIuCgV2YWx1ZRgCIAEoCzIfLnJh",
+            "d2RhdGEuT2JqTWVyZ2VJdGVtTWFwQUJWYWx1ZToCOAFCPVotZ2l0bGFiLmZ1",
+            "bnBsdXMuaW8vZmF0L2NvbmYvZ2VuL2dvbGFuZy9yYXdkYXRhqgILZmF0LnJh",
+            "d2RhdGFiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.ObjMergeItem), global::fat.rawdata.ObjMergeItem.Parser, new[]{ "ConfigVersion", "Id", "Tags", "BingoPrice", "BoardId", "BubbleAd", "BubbleDiscount", "BubblePrice", "BubbleProb", "BubbleProbAdjust", "Desc", "DisplayRes", "IsDegradable", "IsHideProd", "IsImportant", "IsJokerable", "IsNondrag", "IsPowerUp", "IsRecycle", "IsSellForCoin", "IsTop", "IsTopEffect", "MergeBonus", "MergeGrid", "MergeScore", "Point", "ReplaceId", "Reward", "SelectSnd", "SellNum", "SellPlayerLv", "SellPrice", "UnlockPrice" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.ObjMergeItem), global::fat.rawdata.ObjMergeItem.Parser, new[]{ "ConfigVersion", "Id", "Tags", "BingoPrice", "BoardId", "BubbleAd", "BubbleDiscount", "BubblePrice", "BubbleProb", "BubbleProbAdjust", "Desc", "DisplayRes", "IsDegradable", "IsFrozenItem", "IsHideProd", "IsImportant", "IsJokerable", "IsNondrag", "IsPowerUp", "IsRecycle", "IsSellForCoin", "IsTop", "IsTopEffect", "MergeBonus", "MergeGrid", "MergeScore", "Point", "ReplaceId", "Reward", "SelectSnd", "SellNum", "SellPlayerLv", "SellPrice", "UnlockPrice" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.ObjMergeItemMapABValue), global::fat.rawdata.ObjMergeItemMapABValue.Parser, new[]{ "ObjMergeItemMap" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.ObjMergeItemConf), global::fat.rawdata.ObjMergeItemConf.Parser, new[]{ "ObjMergeItemMap", "ObjMergeItemMapAB", "ObjMergeItemMapABPatch" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, null, })
           }));
@@ -118,6 +119,7 @@ namespace fat.rawdata {
       desc_ = other.desc_;
       displayRes_ = other.displayRes_;
       isDegradable_ = other.isDegradable_;
+      isFrozenItem_ = other.isFrozenItem_;
       isHideProd_ = other.isHideProd_;
       isImportant_ = other.isImportant_;
       isJokerable_ = other.isJokerable_;
@@ -338,6 +340,21 @@ namespace fat.rawdata {
       get { return isDegradable_; }
       set {
         isDegradable_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "isFrozenItem" field.</summary>
+    public const int IsFrozenItemFieldNumber = 34;
+    private bool isFrozenItem_;
+    /// <summary>
+    /// 是否可以是冰冻棋子
+    /// （各种活动/生成器棋子：FALSE）
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool IsFrozenItem {
+      get { return isFrozenItem_; }
+      set {
+        isFrozenItem_ = value;
       }
     }
 
@@ -663,6 +680,7 @@ namespace fat.rawdata {
       if (Desc != other.Desc) return false;
       if (DisplayRes != other.DisplayRes) return false;
       if (IsDegradable != other.IsDegradable) return false;
+      if (IsFrozenItem != other.IsFrozenItem) return false;
       if (IsHideProd != other.IsHideProd) return false;
       if (IsImportant != other.IsImportant) return false;
       if (IsJokerable != other.IsJokerable) return false;
@@ -702,6 +720,7 @@ namespace fat.rawdata {
       if (Desc.Length != 0) hash ^= Desc.GetHashCode();
       if (DisplayRes.Length != 0) hash ^= DisplayRes.GetHashCode();
       if (IsDegradable != false) hash ^= IsDegradable.GetHashCode();
+      if (IsFrozenItem != false) hash ^= IsFrozenItem.GetHashCode();
       if (IsHideProd != false) hash ^= IsHideProd.GetHashCode();
       if (IsImportant != false) hash ^= IsImportant.GetHashCode();
       if (IsJokerable != false) hash ^= IsJokerable.GetHashCode();
@@ -861,6 +880,10 @@ namespace fat.rawdata {
         output.WriteRawTag(136, 2);
         output.WriteBool(IsNondrag);
       }
+      if (IsFrozenItem != false) {
+        output.WriteRawTag(144, 2);
+        output.WriteBool(IsFrozenItem);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -993,6 +1016,10 @@ namespace fat.rawdata {
         output.WriteRawTag(136, 2);
         output.WriteBool(IsNondrag);
       }
+      if (IsFrozenItem != false) {
+        output.WriteRawTag(144, 2);
+        output.WriteBool(IsFrozenItem);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -1037,6 +1064,9 @@ namespace fat.rawdata {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(DisplayRes);
       }
       if (IsDegradable != false) {
+        size += 2 + 1;
+      }
+      if (IsFrozenItem != false) {
         size += 2 + 1;
       }
       if (IsHideProd != false) {
@@ -1142,6 +1172,9 @@ namespace fat.rawdata {
       }
       if (other.IsDegradable != false) {
         IsDegradable = other.IsDegradable;
+      }
+      if (other.IsFrozenItem != false) {
+        IsFrozenItem = other.IsFrozenItem;
       }
       if (other.IsHideProd != false) {
         IsHideProd = other.IsHideProd;
@@ -1347,6 +1380,10 @@ namespace fat.rawdata {
             IsNondrag = input.ReadBool();
             break;
           }
+          case 272: {
+            IsFrozenItem = input.ReadBool();
+            break;
+          }
         }
       }
     #endif
@@ -1493,6 +1530,10 @@ namespace fat.rawdata {
           }
           case 264: {
             IsNondrag = input.ReadBool();
+            break;
+          }
+          case 272: {
+            IsFrozenItem = input.ReadBool();
             break;
           }
         }

@@ -19,22 +19,22 @@ namespace FAT
         {
             public int RandomBoxId;
             public int BoxIndex;    //唯一自增id 用于识别多个id相同的随机宝箱
-            public List<RewardCommitData> Reward; 
+            public List<RewardCommitData> Reward;
             public RandomBoxState State;
-            public ReasonString ProduceFrom; //记录宝箱产物的来源 
+            public ReasonString ProduceFrom; //记录宝箱产物的来源
         }
-        
+
         public enum RandomBoxState
         {
             Begin,  //开始领取
             Ready,  //准备领取
             Finish  //完成领取
         }
-        
+
         //当前缓存的随机宝箱队列
         private List<RandomBoxData> _cacheRandomBoxList = new List<RandomBoxData>();
         private static int _boxIndex = 0;
-        
+
         public void TryOpenRandomBoxTips(int itemId, Vector3 startWorldPos, float offset)
         {
             var boxConfig = Game.Manager.objectMan.GetRandomBoxConfig(itemId);
@@ -115,7 +115,7 @@ namespace FAT
                 _cacheRandomBoxList.Add(boxData);
             }
         }
-        
+
         /// <summary>
         /// 标记指定随机宝箱为可领取
         /// </summary>
@@ -145,29 +145,38 @@ namespace FAT
         public void TryClaimRandomBox()
         {
             //界面正在开着时 无视调用请求
-            if (UIManager.Instance.IsShow(UIConfig.UIRandomBox))
+            if (UIManager.Instance.IsShow(UIConfig.UIRandomBox) || UIManager.Instance.IsShow(UIConfig.UISingleReward))
                 return;
-            var canClaim = CheckCanClaimRandomBox();
+            var (canClaim, isSingleReward) = CheckCanClaimRandomBox();
             //当前没有可领取宝箱时 无视调用请求
             if (!canClaim)
             {
                 return;
             }
-            UIManager.Instance.OpenWindow(UIConfig.UIRandomBox);
+            if (isSingleReward)
+            {
+                UIManager.Instance.OpenWindow(UIConfig.UISingleReward);
+            }
+            else
+            {
+                UIManager.Instance.OpenWindow(UIConfig.UIRandomBox);
+            }
         }
-
-        public bool CheckCanClaimRandomBox()
+        public (bool, bool) CheckCanClaimRandomBox()
         {
             bool canClaim = false;
+            bool isSingleReward = false;
             foreach (var boxData in _cacheRandomBoxList)
             {
                 if (boxData.State == RandomBoxState.Ready)
                 {
+                    var boxConfig = Game.Manager.objectMan.GetRandomBoxConfig(boxData.RandomBoxId);
+                    isSingleReward = boxConfig == null ? false : !boxConfig.IsShowResult;
                     canClaim = true;
                     break;
                 }
             }
-            return canClaim;
+            return (canClaim, isSingleReward);
         }
 
         //获取当前最近的可以领取的奖励宝箱数据 UI界面OnPreOpen中调用
@@ -190,7 +199,7 @@ namespace FAT
                 return;
             foreach (var boxData in _cacheRandomBoxList)
             {
-                if (randomBoxData.RandomBoxId == boxData.RandomBoxId && 
+                if (randomBoxData.RandomBoxId == boxData.RandomBoxId &&
                     randomBoxData.BoxIndex == boxData.BoxIndex &&
                     boxData.State == RandomBoxState.Ready)
                 {
@@ -213,7 +222,7 @@ namespace FAT
                 }
             }
         }
-        
+
         private void _ClearReadyBoxData()
         {
             for (int i = _cacheRandomBoxList.Count - 1; i >= 0; i--)

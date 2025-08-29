@@ -155,6 +155,9 @@ namespace fat.conf.conf_loader
 			EventItemBingoDetailVisitor.Initialize();
 			EventItemBingoRoundVisitor.Initialize();
 			EventLandmarkVisitor.Initialize();
+			EventLimitMergeVisitor.Initialize();
+			EventLimitMergeGroupVisitor.Initialize();
+			EventLimitMergeOrderVisitor.Initialize();
 			EventLoginGiftVisitor.Initialize();
 			EventMarketIAPGiftVisitor.Initialize();
 			EventMineVisitor.Initialize();
@@ -178,6 +181,8 @@ namespace fat.conf.conf_loader
 			EventMiniBoardMultiDropVisitor.Initialize();
 			EventMiniBoardMultiGroupVisitor.Initialize();
 			EventMiniBoardMultiInfoVisitor.Initialize();
+			EventOnlineVisitor.Initialize();
+			EventOnlineDetailVisitor.Initialize();
 			EventOrderBonusVisitor.Initialize();
 			EventOrderBonusDetailVisitor.Initialize();
 			EventOrderBonusGroupVisitor.Initialize();
@@ -217,6 +222,7 @@ namespace fat.conf.conf_loader
 			EventScoreDuelVisitor.Initialize();
 			EventScoreDuelDetailVisitor.Initialize();
 			EventScoreDuelSTGVisitor.Initialize();
+			EventSevenDayTaskVisitor.Initialize();
 			EventStampVisitor.Initialize();
 			EventStampRoundVisitor.Initialize();
 			EventStepVisitor.Initialize();
@@ -304,6 +310,8 @@ namespace fat.conf.conf_loader
 			LangZhHantTwVisitor.Initialize();
 			LanguageVisitor.Initialize();
 			LevelGroupsVisitor.Initialize();
+			LevelPackVisitor.Initialize();
+			LevelPackDetailVisitor.Initialize();
 			LoginSignVisitor.Initialize();
 			LoginSignPoolVisitor.Initialize();
 			LoginSignTotalVisitor.Initialize();
@@ -396,6 +404,10 @@ namespace fat.conf.conf_loader
 			RoundScoreVisitor.Initialize();
 			RoundToolVisitor.Initialize();
 			SettingsCommunityVisitor.Initialize();
+			SevenDayTaskDetailVisitor.Initialize();
+			SevenDayTaskGroupVisitor.Initialize();
+			SevenDayTaskInfoVisitor.Initialize();
+			SevenDayTaskRwdVisitor.Initialize();
 			ShakeVisitor.Initialize();
 			ShinnyGuarPackVisitor.Initialize();
 			ShopCommunityVisitor.Initialize();
@@ -670,6 +682,9 @@ namespace fat.conf.conf_loader
 		public EventItemBingoDetailConf EventItemBingoDetailMap = new EventItemBingoDetailConf();
 		public EventItemBingoRoundConf EventItemBingoRoundMap = new EventItemBingoRoundConf();
 		public EventLandmarkConf EventLandmarkMap = new EventLandmarkConf();
+		public EventLimitMergeConf EventLimitMergeMap = new EventLimitMergeConf();
+		public EventLimitMergeGroupConf EventLimitMergeGroupMap = new EventLimitMergeGroupConf();
+		public EventLimitMergeOrderConf EventLimitMergeOrderMap = new EventLimitMergeOrderConf();
 		public EventLoginGiftConf EventLoginGiftMap = new EventLoginGiftConf();
 		public EventMarketIAPGiftConf EventMarketIAPGiftMap = new EventMarketIAPGiftConf();
 		public EventMineConf EventMineMap = new EventMineConf();
@@ -693,6 +708,8 @@ namespace fat.conf.conf_loader
 		public EventMiniBoardMultiDropConf EventMiniBoardMultiDropMap = new EventMiniBoardMultiDropConf();
 		public EventMiniBoardMultiGroupConf EventMiniBoardMultiGroupMap = new EventMiniBoardMultiGroupConf();
 		public EventMiniBoardMultiInfoConf EventMiniBoardMultiInfoMap = new EventMiniBoardMultiInfoConf();
+		public EventOnlineConf EventOnlineMap = new EventOnlineConf();
+		public EventOnlineDetailConf EventOnlineDetailMap = new EventOnlineDetailConf();
 		public EventOrderBonusConf EventOrderBonusMap = new EventOrderBonusConf();
 		public EventOrderBonusDetailConf EventOrderBonusDetailMap = new EventOrderBonusDetailConf();
 		public EventOrderBonusGroupConf EventOrderBonusGroupMap = new EventOrderBonusGroupConf();
@@ -732,6 +749,7 @@ namespace fat.conf.conf_loader
 		public EventScoreDuelConf EventScoreDuelMap = new EventScoreDuelConf();
 		public EventScoreDuelDetailConf EventScoreDuelDetailMap = new EventScoreDuelDetailConf();
 		public EventScoreDuelSTGConf EventScoreDuelSTGMap = new EventScoreDuelSTGConf();
+		public EventSevenDayTaskConf EventSevenDayTaskMap = new EventSevenDayTaskConf();
 		public EventStampConf EventStampMap = new EventStampConf();
 		public EventStampRoundConf EventStampRoundMap = new EventStampRoundConf();
 		public EventStepConf EventStepMap = new EventStepConf();
@@ -819,6 +837,8 @@ namespace fat.conf.conf_loader
 		public LangZhHantTwConf LangZhHantTwSlice = new LangZhHantTwConf();
 		public LanguageConf LanguageSlice = new LanguageConf();
 		public LevelGroupsConf LevelGroupsMap = new LevelGroupsConf();
+		public LevelPackConf LevelPackMap = new LevelPackConf();
+		public LevelPackDetailConf LevelPackDetailMap = new LevelPackDetailConf();
 		public LoginSignConf LoginSignSlice = new LoginSignConf();
 		public LoginSignPoolConf LoginSignPoolMap = new LoginSignPoolConf();
 		public LoginSignTotalConf LoginSignTotalMap = new LoginSignTotalConf();
@@ -911,6 +931,10 @@ namespace fat.conf.conf_loader
 		public RoundScoreConf RoundScoreSlice = new RoundScoreConf();
 		public RoundToolConf RoundToolSlice = new RoundToolConf();
 		public SettingsCommunityConf SettingsCommunityMap = new SettingsCommunityConf();
+		public SevenDayTaskDetailConf SevenDayTaskDetailMap = new SevenDayTaskDetailConf();
+		public SevenDayTaskGroupConf SevenDayTaskGroupMap = new SevenDayTaskGroupConf();
+		public SevenDayTaskInfoConf SevenDayTaskInfoMap = new SevenDayTaskInfoConf();
+		public SevenDayTaskRwdConf SevenDayTaskRwdMap = new SevenDayTaskRwdConf();
 		public ShakeConf ShakeMap = new ShakeConf();
 		public ShinnyGuarPackConf ShinnyGuarPackMap = new ShinnyGuarPackConf();
 		public ShopCommunityConf ShopCommunityMap = new ShopCommunityConf();
@@ -1047,6 +1071,9 @@ namespace fat.conf.conf_loader
 		public Dictionary<string, List<int>> EventItemBingoDetailSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> EventItemBingoRoundSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> EventLandmarkSortedKeys = new Dictionary<string, List<int>>();
+		public Dictionary<string, List<int>> EventLimitMergeSortedKeys = new Dictionary<string, List<int>>();
+		public Dictionary<string, List<int>> EventLimitMergeGroupSortedKeys = new Dictionary<string, List<int>>();
+		public Dictionary<string, List<int>> EventLimitMergeOrderSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> EventLoginGiftSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> EventMarketIAPGiftSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> EventMineSortedKeys = new Dictionary<string, List<int>>();
@@ -1070,6 +1097,8 @@ namespace fat.conf.conf_loader
 		public Dictionary<string, List<int>> EventMiniBoardMultiDropSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> EventMiniBoardMultiGroupSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> EventMiniBoardMultiInfoSortedKeys = new Dictionary<string, List<int>>();
+		public Dictionary<string, List<int>> EventOnlineSortedKeys = new Dictionary<string, List<int>>();
+		public Dictionary<string, List<int>> EventOnlineDetailSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> EventOrderBonusSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> EventOrderBonusDetailSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> EventOrderBonusGroupSortedKeys = new Dictionary<string, List<int>>();
@@ -1109,6 +1138,7 @@ namespace fat.conf.conf_loader
 		public Dictionary<string, List<int>> EventScoreDuelSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> EventScoreDuelDetailSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> EventScoreDuelSTGSortedKeys = new Dictionary<string, List<int>>();
+		public Dictionary<string, List<int>> EventSevenDayTaskSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> EventStampSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> EventStampRoundSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> EventStepSortedKeys = new Dictionary<string, List<int>>();
@@ -1180,6 +1210,8 @@ namespace fat.conf.conf_loader
 		public Dictionary<string, List<int>> LabelSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> LandmarkDetailSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> LevelGroupsSortedKeys = new Dictionary<string, List<int>>();
+		public Dictionary<string, List<int>> LevelPackSortedKeys = new Dictionary<string, List<int>>();
+		public Dictionary<string, List<int>> LevelPackDetailSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> LoginSignPoolSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> LoginSignTotalSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> MailSortedKeys = new Dictionary<string, List<int>>();
@@ -1257,6 +1289,10 @@ namespace fat.conf.conf_loader
 		public Dictionary<string, List<int>> ReshipmentSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> RetentionPackSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> SettingsCommunitySortedKeys = new Dictionary<string, List<int>>();
+		public Dictionary<string, List<int>> SevenDayTaskDetailSortedKeys = new Dictionary<string, List<int>>();
+		public Dictionary<string, List<int>> SevenDayTaskGroupSortedKeys = new Dictionary<string, List<int>>();
+		public Dictionary<string, List<int>> SevenDayTaskInfoSortedKeys = new Dictionary<string, List<int>>();
+		public Dictionary<string, List<int>> SevenDayTaskRwdSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> ShakeSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> ShinnyGuarPackSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> ShopCommunitySortedKeys = new Dictionary<string, List<int>>();

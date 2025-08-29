@@ -21,6 +21,7 @@ public enum AdjustEventType
 public class InstallTrackConfig
 {
     public InstallIntEvent[] levels;
+    // 主线订单
     public InstallIntEvent[] tasks;
     public InstallIntEvent[] purchase;
     public InstallTypeEvent[] other;
@@ -141,7 +142,6 @@ public class AppSettings : ScriptableObject
     public CenturyGame.AppUpdaterLib.Runtime.Configs.AppUpdaterConfig updaterConfig;
     public SDKEnvironment sdkEnv = SDKEnvironment.Sandbox;
     public SDKChannel sdkChannel = SDKChannel.Mainland;
-    [SerializeField]
-    public InstallTrackConfig adjustConfig = new InstallTrackConfig();
     public string admobRewardAdUnitId;
+    public TrackingConfig trackingConfig;
 }

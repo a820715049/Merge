@@ -48,15 +48,17 @@ namespace FAT
 
             DebugEx.FormatTrace("[GameProcedure] app setting:{0}", JsonUtility.ToJson(Game.Instance.appSettings));
             //初始化adjustConfig
-            AdjustTracker.SetConfig(Game.Instance.appSettings.adjustConfig);
+            AdjustTracker.SetConfig(Game.Instance.appSettings.trackingConfig?.config);
 
             DebugEx.Info($"[GameProcedure] sdk pre init");
             yield return sdkInit;
             DebugEx.Info($"[GameProcedure] sdk post init");
             DeviceNotificationHelper.CheckRespondedNotification();
             AdjustTracker.TrackEvent(AdjustEventType.LaunchApp);
-            yield return AsyncTaskUtility.ExtractAsyncTaskFromCoroutine<AsyncTaskBase>(out var taks, Hotfix.HotfixManager.Instance.ATInitPatch());
-            DebugEx.Info($"[GameProcedure] hotfix on init");
+
+            // 改为不在启动时加载热更
+            // yield return AsyncTaskUtility.ExtractAsyncTaskFromCoroutine<AsyncTaskBase>(out var taks, Hotfix.HotfixManager.Instance.ATInitPatch());
+            // DebugEx.Info($"[GameProcedure] hotfix on init");
 
             GameProcedure.AsyncEnterGame().Forget();
         }

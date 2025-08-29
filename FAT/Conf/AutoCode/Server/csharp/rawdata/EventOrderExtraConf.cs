@@ -25,36 +25,36 @@ namespace fat.rawdata {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "CiFyYXdkYXRhL0V2ZW50T3JkZXJFeHRyYUNvbmYucHJvdG8SB3Jhd2RhdGEi",
-            "mwIKD0V2ZW50T3JkZXJFeHRyYRIKCgJpZBgBIAEoBRIPCgdib2FyZElkGAYg",
-            "ASgFEhQKDGVudHJ5VGhlbWVJZBgJIAEoBRISCgpldmVudFRoZW1lGAMgASgF",
-            "EhAKCGxpZmV0aW1lGAQgASgFEhAKCGxvY2F0aW9uGAogASgIEg8KB29yZGVy",
-            "QmcYCyABKAkSEgoKb3JkZXJUaGVtZRgIIAEoCRJCCg1yZXdhcmRHcnBJbmZv",
-            "GAUgAygLMisucmF3ZGF0YS5FdmVudE9yZGVyRXh0cmEuUmV3YXJkR3JwSW5m",
-            "b0VudHJ5GjQKElJld2FyZEdycEluZm9FbnRyeRILCgNrZXkYASABKAUSDQoF",
-            "dmFsdWUYAiABKAU6AjgBIsgBChlFdmVudE9yZGVyRXh0cmFNYXBBQlZhbHVl",
-            "ElYKEkV2ZW50T3JkZXJFeHRyYU1hcBgBIAMoCzI6LnJhd2RhdGEuRXZlbnRP",
-            "cmRlckV4dHJhTWFwQUJWYWx1ZS5FdmVudE9yZGVyRXh0cmFNYXBFbnRyeRpT",
-            "ChdFdmVudE9yZGVyRXh0cmFNYXBFbnRyeRILCgNrZXkYASABKAUSJwoFdmFs",
-            "dWUYAiABKAsyGC5yYXdkYXRhLkV2ZW50T3JkZXJFeHRyYToCOAEiuQQKE0V2",
-            "ZW50T3JkZXJFeHRyYUNvbmYSUAoSRXZlbnRPcmRlckV4dHJhTWFwGAEgAygL",
-            "MjQucmF3ZGF0YS5FdmVudE9yZGVyRXh0cmFDb25mLkV2ZW50T3JkZXJFeHRy",
-            "YU1hcEVudHJ5ElQKFEV2ZW50T3JkZXJFeHRyYU1hcEFCGAIgAygLMjYucmF3",
-            "ZGF0YS5FdmVudE9yZGVyRXh0cmFDb25mLkV2ZW50T3JkZXJFeHRyYU1hcEFC",
-            "RW50cnkSXgoZRXZlbnRPcmRlckV4dHJhTWFwQUJQYXRjaBgDIAMoCzI7LnJh",
-            "d2RhdGEuRXZlbnRPcmRlckV4dHJhQ29uZi5FdmVudE9yZGVyRXh0cmFNYXBB",
-            "QlBhdGNoRW50cnkaUwoXRXZlbnRPcmRlckV4dHJhTWFwRW50cnkSCwoDa2V5",
-            "GAEgASgFEicKBXZhbHVlGAIgASgLMhgucmF3ZGF0YS5FdmVudE9yZGVyRXh0",
-            "cmE6AjgBGl8KGUV2ZW50T3JkZXJFeHRyYU1hcEFCRW50cnkSCwoDa2V5GAEg",
-            "ASgJEjEKBXZhbHVlGAIgASgLMiIucmF3ZGF0YS5FdmVudE9yZGVyRXh0cmFN",
-            "YXBBQlZhbHVlOgI4ARpkCh5FdmVudE9yZGVyRXh0cmFNYXBBQlBhdGNoRW50",
-            "cnkSCwoDa2V5GAEgASgJEjEKBXZhbHVlGAIgASgLMiIucmF3ZGF0YS5FdmVu",
-            "dE9yZGVyRXh0cmFNYXBBQlZhbHVlOgI4AUI9Wi1naXRsYWIuZnVucGx1cy5p",
-            "by9mYXQvY29uZi9nZW4vZ29sYW5nL3Jhd2RhdGGqAgtmYXQucmF3ZGF0YWIG",
-            "cHJvdG8z"));
+            "rQIKD0V2ZW50T3JkZXJFeHRyYRIKCgJpZBgBIAEoBRIPCgdib2FyZElkGAYg",
+            "ASgFEhAKCGRlYWRsaW5lGAwgASgFEhQKDGVudHJ5VGhlbWVJZBgJIAEoBRIS",
+            "CgpldmVudFRoZW1lGAMgASgFEhAKCGxpZmV0aW1lGAQgASgFEhAKCGxvY2F0",
+            "aW9uGAogASgIEg8KB29yZGVyQmcYCyABKAkSEgoKb3JkZXJUaGVtZRgIIAEo",
+            "CRJCCg1yZXdhcmRHcnBJbmZvGAUgAygLMisucmF3ZGF0YS5FdmVudE9yZGVy",
+            "RXh0cmEuUmV3YXJkR3JwSW5mb0VudHJ5GjQKElJld2FyZEdycEluZm9FbnRy",
+            "eRILCgNrZXkYASABKAUSDQoFdmFsdWUYAiABKAU6AjgBIsgBChlFdmVudE9y",
+            "ZGVyRXh0cmFNYXBBQlZhbHVlElYKEkV2ZW50T3JkZXJFeHRyYU1hcBgBIAMo",
+            "CzI6LnJhd2RhdGEuRXZlbnRPcmRlckV4dHJhTWFwQUJWYWx1ZS5FdmVudE9y",
+            "ZGVyRXh0cmFNYXBFbnRyeRpTChdFdmVudE9yZGVyRXh0cmFNYXBFbnRyeRIL",
+            "CgNrZXkYASABKAUSJwoFdmFsdWUYAiABKAsyGC5yYXdkYXRhLkV2ZW50T3Jk",
+            "ZXJFeHRyYToCOAEiuQQKE0V2ZW50T3JkZXJFeHRyYUNvbmYSUAoSRXZlbnRP",
+            "cmRlckV4dHJhTWFwGAEgAygLMjQucmF3ZGF0YS5FdmVudE9yZGVyRXh0cmFD",
+            "b25mLkV2ZW50T3JkZXJFeHRyYU1hcEVudHJ5ElQKFEV2ZW50T3JkZXJFeHRy",
+            "YU1hcEFCGAIgAygLMjYucmF3ZGF0YS5FdmVudE9yZGVyRXh0cmFDb25mLkV2",
+            "ZW50T3JkZXJFeHRyYU1hcEFCRW50cnkSXgoZRXZlbnRPcmRlckV4dHJhTWFw",
+            "QUJQYXRjaBgDIAMoCzI7LnJhd2RhdGEuRXZlbnRPcmRlckV4dHJhQ29uZi5F",
+            "dmVudE9yZGVyRXh0cmFNYXBBQlBhdGNoRW50cnkaUwoXRXZlbnRPcmRlckV4",
+            "dHJhTWFwRW50cnkSCwoDa2V5GAEgASgFEicKBXZhbHVlGAIgASgLMhgucmF3",
+            "ZGF0YS5FdmVudE9yZGVyRXh0cmE6AjgBGl8KGUV2ZW50T3JkZXJFeHRyYU1h",
+            "cEFCRW50cnkSCwoDa2V5GAEgASgJEjEKBXZhbHVlGAIgASgLMiIucmF3ZGF0",
+            "YS5FdmVudE9yZGVyRXh0cmFNYXBBQlZhbHVlOgI4ARpkCh5FdmVudE9yZGVy",
+            "RXh0cmFNYXBBQlBhdGNoRW50cnkSCwoDa2V5GAEgASgJEjEKBXZhbHVlGAIg",
+            "ASgLMiIucmF3ZGF0YS5FdmVudE9yZGVyRXh0cmFNYXBBQlZhbHVlOgI4AUI9",
+            "Wi1naXRsYWIuZnVucGx1cy5pby9mYXQvY29uZi9nZW4vZ29sYW5nL3Jhd2Rh",
+            "dGGqAgtmYXQucmF3ZGF0YWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EventOrderExtra), global::fat.rawdata.EventOrderExtra.Parser, new[]{ "Id", "BoardId", "EntryThemeId", "EventTheme", "Lifetime", "Location", "OrderBg", "OrderTheme", "RewardGrpInfo" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
+            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EventOrderExtra), global::fat.rawdata.EventOrderExtra.Parser, new[]{ "Id", "BoardId", "Deadline", "EntryThemeId", "EventTheme", "Lifetime", "Location", "OrderBg", "OrderTheme", "RewardGrpInfo" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EventOrderExtraMapABValue), global::fat.rawdata.EventOrderExtraMapABValue.Parser, new[]{ "EventOrderExtraMap" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EventOrderExtraConf), global::fat.rawdata.EventOrderExtraConf.Parser, new[]{ "EventOrderExtraMap", "EventOrderExtraMapAB", "EventOrderExtraMapABPatch" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, null, })
           }));
@@ -101,6 +101,7 @@ namespace fat.rawdata {
     public EventOrderExtra(EventOrderExtra other) : this() {
       id_ = other.id_;
       boardId_ = other.boardId_;
+      deadline_ = other.deadline_;
       entryThemeId_ = other.entryThemeId_;
       eventTheme_ = other.eventTheme_;
       lifetime_ = other.lifetime_;
@@ -144,6 +145,22 @@ namespace fat.rawdata {
       get { return boardId_; }
       set {
         boardId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "deadline" field.</summary>
+    public const int DeadlineFieldNumber = 12;
+    private int deadline_;
+    /// <summary>
+    /// 活动开始截止时间
+    /// 从活动结束时刻往前推
+    /// （秒）
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Deadline {
+      get { return deadline_; }
+      set {
+        deadline_ = value;
       }
     }
 
@@ -271,6 +288,7 @@ namespace fat.rawdata {
       }
       if (Id != other.Id) return false;
       if (BoardId != other.BoardId) return false;
+      if (Deadline != other.Deadline) return false;
       if (EntryThemeId != other.EntryThemeId) return false;
       if (EventTheme != other.EventTheme) return false;
       if (Lifetime != other.Lifetime) return false;
@@ -286,6 +304,7 @@ namespace fat.rawdata {
       int hash = 1;
       if (Id != 0) hash ^= Id.GetHashCode();
       if (BoardId != 0) hash ^= BoardId.GetHashCode();
+      if (Deadline != 0) hash ^= Deadline.GetHashCode();
       if (EntryThemeId != 0) hash ^= EntryThemeId.GetHashCode();
       if (EventTheme != 0) hash ^= EventTheme.GetHashCode();
       if (Lifetime != 0) hash ^= Lifetime.GetHashCode();
@@ -342,6 +361,10 @@ namespace fat.rawdata {
         output.WriteRawTag(90);
         output.WriteString(OrderBg);
       }
+      if (Deadline != 0) {
+        output.WriteRawTag(96);
+        output.WriteInt32(Deadline);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -384,6 +407,10 @@ namespace fat.rawdata {
         output.WriteRawTag(90);
         output.WriteString(OrderBg);
       }
+      if (Deadline != 0) {
+        output.WriteRawTag(96);
+        output.WriteInt32(Deadline);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -398,6 +425,9 @@ namespace fat.rawdata {
       }
       if (BoardId != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(BoardId);
+      }
+      if (Deadline != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Deadline);
       }
       if (EntryThemeId != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(EntryThemeId);
@@ -434,6 +464,9 @@ namespace fat.rawdata {
       }
       if (other.BoardId != 0) {
         BoardId = other.BoardId;
+      }
+      if (other.Deadline != 0) {
+        Deadline = other.Deadline;
       }
       if (other.EntryThemeId != 0) {
         EntryThemeId = other.EntryThemeId;
@@ -504,6 +537,10 @@ namespace fat.rawdata {
             OrderBg = input.ReadString();
             break;
           }
+          case 96: {
+            Deadline = input.ReadInt32();
+            break;
+          }
         }
       }
     #endif
@@ -552,6 +589,10 @@ namespace fat.rawdata {
           }
           case 90: {
             OrderBg = input.ReadString();
+            break;
+          }
+          case 96: {
+            Deadline = input.ReadInt32();
             break;
           }
         }

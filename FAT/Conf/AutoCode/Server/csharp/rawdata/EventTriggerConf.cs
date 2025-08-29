@@ -25,34 +25,34 @@ namespace fat.rawdata {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "Ch5yYXdkYXRhL0V2ZW50VHJpZ2dlckNvbmYucHJvdG8SB3Jhd2RhdGEaF3Jh",
-            "d2RhdGEvRXZlbnRUeXBlLnByb3RvIu4BCgxFdmVudFRyaWdnZXISCgoCaWQY",
+            "d2RhdGEvRXZlbnRUeXBlLnByb3RvIocCCgxFdmVudFRyaWdnZXISCgoCaWQY",
             "ASABKAUSEgoKZXZlbnRQYXJhbRgCIAEoBRIlCglldmVudFR5cGUYAyABKA4y",
             "Ei5yYXdkYXRhLkV2ZW50VHlwZRIRCglpc0FiYW5kb24YBCABKAgSEAoIaXNB",
             "Y3RpdmUYBSABKAgSDQoFaXNVdGMYBiABKAgSEAoIbGlmZXRpbWUYByABKAUS",
-            "EAoIcHJpb3JpdHkYCCABKAUSFQoNcmV2aXZlUmVxdWlyZRgLIAEoCRIQCghz",
-            "dGFydFV0YxgJIAEoBRIWCg50cmlnZ2VyUmVxdWlyZRgKIAEoCSK2AQoWRXZl",
-            "bnRUcmlnZ2VyTWFwQUJWYWx1ZRJNCg9FdmVudFRyaWdnZXJNYXAYASADKAsy",
-            "NC5yYXdkYXRhLkV2ZW50VHJpZ2dlck1hcEFCVmFsdWUuRXZlbnRUcmlnZ2Vy",
-            "TWFwRW50cnkaTQoURXZlbnRUcmlnZ2VyTWFwRW50cnkSCwoDa2V5GAEgASgF",
-            "EiQKBXZhbHVlGAIgASgLMhUucmF3ZGF0YS5FdmVudFRyaWdnZXI6AjgBIokE",
-            "ChBFdmVudFRyaWdnZXJDb25mEkcKD0V2ZW50VHJpZ2dlck1hcBgBIAMoCzIu",
-            "LnJhd2RhdGEuRXZlbnRUcmlnZ2VyQ29uZi5FdmVudFRyaWdnZXJNYXBFbnRy",
-            "eRJLChFFdmVudFRyaWdnZXJNYXBBQhgCIAMoCzIwLnJhd2RhdGEuRXZlbnRU",
-            "cmlnZ2VyQ29uZi5FdmVudFRyaWdnZXJNYXBBQkVudHJ5ElUKFkV2ZW50VHJp",
-            "Z2dlck1hcEFCUGF0Y2gYAyADKAsyNS5yYXdkYXRhLkV2ZW50VHJpZ2dlckNv",
-            "bmYuRXZlbnRUcmlnZ2VyTWFwQUJQYXRjaEVudHJ5Gk0KFEV2ZW50VHJpZ2dl",
-            "ck1hcEVudHJ5EgsKA2tleRgBIAEoBRIkCgV2YWx1ZRgCIAEoCzIVLnJhd2Rh",
-            "dGEuRXZlbnRUcmlnZ2VyOgI4ARpZChZFdmVudFRyaWdnZXJNYXBBQkVudHJ5",
-            "EgsKA2tleRgBIAEoCRIuCgV2YWx1ZRgCIAEoCzIfLnJhd2RhdGEuRXZlbnRU",
-            "cmlnZ2VyTWFwQUJWYWx1ZToCOAEaXgobRXZlbnRUcmlnZ2VyTWFwQUJQYXRj",
-            "aEVudHJ5EgsKA2tleRgBIAEoCRIuCgV2YWx1ZRgCIAEoCzIfLnJhd2RhdGEu",
-            "RXZlbnRUcmlnZ2VyTWFwQUJWYWx1ZToCOAFCPVotZ2l0bGFiLmZ1bnBsdXMu",
-            "aW8vZmF0L2NvbmYvZ2VuL2dvbGFuZy9yYXdkYXRhqgILZmF0LnJhd2RhdGFi",
-            "BnByb3RvMw=="));
+            "EAoIcHJpb3JpdHkYCCABKAUSFQoNcmV2aXZlUmVxdWlyZRgLIAEoCRIXCg9z",
+            "aHV0ZG93blRyaWdnZXIYDCADKAUSEAoIc3RhcnRVdGMYCSABKAUSFgoOdHJp",
+            "Z2dlclJlcXVpcmUYCiABKAkitgEKFkV2ZW50VHJpZ2dlck1hcEFCVmFsdWUS",
+            "TQoPRXZlbnRUcmlnZ2VyTWFwGAEgAygLMjQucmF3ZGF0YS5FdmVudFRyaWdn",
+            "ZXJNYXBBQlZhbHVlLkV2ZW50VHJpZ2dlck1hcEVudHJ5Gk0KFEV2ZW50VHJp",
+            "Z2dlck1hcEVudHJ5EgsKA2tleRgBIAEoBRIkCgV2YWx1ZRgCIAEoCzIVLnJh",
+            "d2RhdGEuRXZlbnRUcmlnZ2VyOgI4ASKJBAoQRXZlbnRUcmlnZ2VyQ29uZhJH",
+            "Cg9FdmVudFRyaWdnZXJNYXAYASADKAsyLi5yYXdkYXRhLkV2ZW50VHJpZ2dl",
+            "ckNvbmYuRXZlbnRUcmlnZ2VyTWFwRW50cnkSSwoRRXZlbnRUcmlnZ2VyTWFw",
+            "QUIYAiADKAsyMC5yYXdkYXRhLkV2ZW50VHJpZ2dlckNvbmYuRXZlbnRUcmln",
+            "Z2VyTWFwQUJFbnRyeRJVChZFdmVudFRyaWdnZXJNYXBBQlBhdGNoGAMgAygL",
+            "MjUucmF3ZGF0YS5FdmVudFRyaWdnZXJDb25mLkV2ZW50VHJpZ2dlck1hcEFC",
+            "UGF0Y2hFbnRyeRpNChRFdmVudFRyaWdnZXJNYXBFbnRyeRILCgNrZXkYASAB",
+            "KAUSJAoFdmFsdWUYAiABKAsyFS5yYXdkYXRhLkV2ZW50VHJpZ2dlcjoCOAEa",
+            "WQoWRXZlbnRUcmlnZ2VyTWFwQUJFbnRyeRILCgNrZXkYASABKAkSLgoFdmFs",
+            "dWUYAiABKAsyHy5yYXdkYXRhLkV2ZW50VHJpZ2dlck1hcEFCVmFsdWU6AjgB",
+            "Gl4KG0V2ZW50VHJpZ2dlck1hcEFCUGF0Y2hFbnRyeRILCgNrZXkYASABKAkS",
+            "LgoFdmFsdWUYAiABKAsyHy5yYXdkYXRhLkV2ZW50VHJpZ2dlck1hcEFCVmFs",
+            "dWU6AjgBQj1aLWdpdGxhYi5mdW5wbHVzLmlvL2ZhdC9jb25mL2dlbi9nb2xh",
+            "bmcvcmF3ZGF0YaoCC2ZhdC5yYXdkYXRhYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::fat.rawdata.EventTypeReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EventTrigger), global::fat.rawdata.EventTrigger.Parser, new[]{ "Id", "EventParam", "EventType", "IsAbandon", "IsActive", "IsUtc", "Lifetime", "Priority", "ReviveRequire", "StartUtc", "TriggerRequire" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EventTrigger), global::fat.rawdata.EventTrigger.Parser, new[]{ "Id", "EventParam", "EventType", "IsAbandon", "IsActive", "IsUtc", "Lifetime", "Priority", "ReviveRequire", "ShutdownTrigger", "StartUtc", "TriggerRequire" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EventTriggerMapABValue), global::fat.rawdata.EventTriggerMapABValue.Parser, new[]{ "EventTriggerMap" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EventTriggerConf), global::fat.rawdata.EventTriggerConf.Parser, new[]{ "EventTriggerMap", "EventTriggerMapAB", "EventTriggerMapABPatch" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, null, })
           }));
@@ -106,6 +106,7 @@ namespace fat.rawdata {
       lifetime_ = other.lifetime_;
       priority_ = other.priority_;
       reviveRequire_ = other.reviveRequire_;
+      shutdownTrigger_ = other.shutdownTrigger_.Clone();
       startUtc_ = other.startUtc_;
       triggerRequire_ = other.triggerRequire_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
@@ -252,6 +253,21 @@ namespace fat.rawdata {
       }
     }
 
+    /// <summary>Field number for the "shutdownTrigger" field.</summary>
+    public const int ShutdownTriggerFieldNumber = 12;
+    private static readonly pb::FieldCodec<int> _repeated_shutdownTrigger_codec
+        = pb::FieldCodec.ForInt32(98);
+    private readonly pbc::RepeatedField<int> shutdownTrigger_ = new pbc::RepeatedField<int>();
+    /// <summary>
+    /// 当此 trigger 要触发时
+    /// 需要关掉哪个 trigger
+    /// （EventTrigger.id）
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<int> ShutdownTrigger {
+      get { return shutdownTrigger_; }
+    }
+
     /// <summary>Field number for the "startUtc" field.</summary>
     public const int StartUtcFieldNumber = 9;
     private int startUtc_;
@@ -306,6 +322,7 @@ namespace fat.rawdata {
       if (Lifetime != other.Lifetime) return false;
       if (Priority != other.Priority) return false;
       if (ReviveRequire != other.ReviveRequire) return false;
+      if(!shutdownTrigger_.Equals(other.shutdownTrigger_)) return false;
       if (StartUtc != other.StartUtc) return false;
       if (TriggerRequire != other.TriggerRequire) return false;
       return Equals(_unknownFields, other._unknownFields);
@@ -323,6 +340,7 @@ namespace fat.rawdata {
       if (Lifetime != 0) hash ^= Lifetime.GetHashCode();
       if (Priority != 0) hash ^= Priority.GetHashCode();
       if (ReviveRequire.Length != 0) hash ^= ReviveRequire.GetHashCode();
+      hash ^= shutdownTrigger_.GetHashCode();
       if (StartUtc != 0) hash ^= StartUtc.GetHashCode();
       if (TriggerRequire.Length != 0) hash ^= TriggerRequire.GetHashCode();
       if (_unknownFields != null) {
@@ -385,6 +403,7 @@ namespace fat.rawdata {
         output.WriteRawTag(90);
         output.WriteString(ReviveRequire);
       }
+      shutdownTrigger_.WriteTo(output, _repeated_shutdownTrigger_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -438,6 +457,7 @@ namespace fat.rawdata {
         output.WriteRawTag(90);
         output.WriteString(ReviveRequire);
       }
+      shutdownTrigger_.WriteTo(ref output, _repeated_shutdownTrigger_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -474,6 +494,7 @@ namespace fat.rawdata {
       if (ReviveRequire.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(ReviveRequire);
       }
+      size += shutdownTrigger_.CalculateSize(_repeated_shutdownTrigger_codec);
       if (StartUtc != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(StartUtc);
       }
@@ -518,6 +539,7 @@ namespace fat.rawdata {
       if (other.ReviveRequire.Length != 0) {
         ReviveRequire = other.ReviveRequire;
       }
+      shutdownTrigger_.Add(other.shutdownTrigger_);
       if (other.StartUtc != 0) {
         StartUtc = other.StartUtc;
       }
@@ -582,6 +604,11 @@ namespace fat.rawdata {
             ReviveRequire = input.ReadString();
             break;
           }
+          case 98:
+          case 96: {
+            shutdownTrigger_.AddEntriesFrom(input, _repeated_shutdownTrigger_codec);
+            break;
+          }
         }
       }
     #endif
@@ -638,6 +665,11 @@ namespace fat.rawdata {
           }
           case 90: {
             ReviveRequire = input.ReadString();
+            break;
+          }
+          case 98:
+          case 96: {
+            shutdownTrigger_.AddEntriesFrom(ref input, _repeated_shutdownTrigger_codec);
             break;
           }
         }

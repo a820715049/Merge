@@ -76,10 +76,10 @@ namespace FAT.Platform {
         //客服系统
         public void ShowCustomService(bool preferConversation = false) {
             UpdateGameUserInfo();
-
-            if (Game.Manager.configMan.IsAllConfigReady)
+            var cfgMan = Game.Manager.configMan;
+            if (cfgMan.IsAllConfigReady && cfgMan.globalConfig != null)
             {
-                if (Game.Manager.configMan.globalConfig.IsFaq)
+                if (cfgMan.globalConfig.IsFaq)
                     Adapter.ShowFAQ();
                 else
                     Adapter.ShowConversation();

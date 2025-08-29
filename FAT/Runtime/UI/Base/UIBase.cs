@@ -260,7 +260,7 @@ namespace FAT
         /// <summary>
         /// 开启事件阻挡
         /// </summary>
-        protected void LockEvent()
+        public void LockEvent()
         {
             if (_lockEventObject == null)
             {
@@ -288,7 +288,7 @@ namespace FAT
         /// <summary>
         /// 关闭事件阻挡，在UI关闭的时候会自动调用这个方法
         /// </summary>
-        protected void UnlockEvent()
+        public void UnlockEvent()
         {
             if (_lockEventObject != null)
             {

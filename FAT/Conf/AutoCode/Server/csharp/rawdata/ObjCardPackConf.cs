@@ -65,7 +65,7 @@ namespace fat.rawdata {
   /// <summary>
   /// annotation@annotation_type(type="rawdata")
   /// annotation@rawdata(row="ObjCardPack",table="ObjCardPackMap",table_wrapper="ObjCardPackConf",map="true",map_key_type="int32",data="ObjCardPackConf")
-  /// annotation@ab(table_ab="ObjCardPackMapAB",table_ab_patch="ObjCardPackMapABPatch",table_ab_value="ObjCardPackMapABValue",ab_patch="true")
+  /// annotation@ab(table_ab="ObjCardPackMapAB",table_ab_patch="ObjCardPackMapABPatch",table_ab_value="ObjCardPackMapABValue",ab_patch="false")
   /// annotation@filter(just_server="false",just_client="false")
   /// annotation@ObjCardPack(id="id")
   /// </summary>

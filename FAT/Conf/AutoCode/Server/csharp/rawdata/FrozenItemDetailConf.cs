@@ -25,35 +25,35 @@ namespace fat.rawdata {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "CiJyYXdkYXRhL0Zyb3plbkl0ZW1EZXRhaWxDb25mLnByb3RvEgdyYXdkYXRh",
-            "IusBChBGcm96ZW5JdGVtRGV0YWlsEgoKAmlkGAEgASgFEhAKCGJhc2VQcm9i",
-            "GAIgASgFEhIKCmRlYWRXZWlnaHQYAyADKAkSEwoLZW5lcmd5UmFuZ2UYBCAD",
-            "KAkSFwoPZXJnQ29uc3VtZVRpbWVzGAUgASgFEhQKDGl0ZW1EZWFkVGltZRgO",
-            "IAMoBRIVCg1pdGVtRGlmZlJhbmdlGAkgAygJEg4KBmx2RGlmZhgKIAEoBRIU",
-            "CgxyYXRlVXBFbmVyZ3kYCyABKAUSEgoKcmF0ZVVwUHJvYhgMIAEoBRIQCghz",
-            "dGVwUHJvYhgNIAEoBSLOAQoaRnJvemVuSXRlbURldGFpbE1hcEFCVmFsdWUS",
-            "WQoTRnJvemVuSXRlbURldGFpbE1hcBgBIAMoCzI8LnJhd2RhdGEuRnJvemVu",
-            "SXRlbURldGFpbE1hcEFCVmFsdWUuRnJvemVuSXRlbURldGFpbE1hcEVudHJ5",
-            "GlUKGEZyb3plbkl0ZW1EZXRhaWxNYXBFbnRyeRILCgNrZXkYASABKAUSKAoF",
-            "dmFsdWUYAiABKAsyGS5yYXdkYXRhLkZyb3plbkl0ZW1EZXRhaWw6AjgBIskE",
-            "ChRGcm96ZW5JdGVtRGV0YWlsQ29uZhJTChNGcm96ZW5JdGVtRGV0YWlsTWFw",
-            "GAEgAygLMjYucmF3ZGF0YS5Gcm96ZW5JdGVtRGV0YWlsQ29uZi5Gcm96ZW5J",
-            "dGVtRGV0YWlsTWFwRW50cnkSVwoVRnJvemVuSXRlbURldGFpbE1hcEFCGAIg",
-            "AygLMjgucmF3ZGF0YS5Gcm96ZW5JdGVtRGV0YWlsQ29uZi5Gcm96ZW5JdGVt",
-            "RGV0YWlsTWFwQUJFbnRyeRJhChpGcm96ZW5JdGVtRGV0YWlsTWFwQUJQYXRj",
-            "aBgDIAMoCzI9LnJhd2RhdGEuRnJvemVuSXRlbURldGFpbENvbmYuRnJvemVu",
-            "SXRlbURldGFpbE1hcEFCUGF0Y2hFbnRyeRpVChhGcm96ZW5JdGVtRGV0YWls",
-            "TWFwRW50cnkSCwoDa2V5GAEgASgFEigKBXZhbHVlGAIgASgLMhkucmF3ZGF0",
-            "YS5Gcm96ZW5JdGVtRGV0YWlsOgI4ARphChpGcm96ZW5JdGVtRGV0YWlsTWFw",
-            "QUJFbnRyeRILCgNrZXkYASABKAkSMgoFdmFsdWUYAiABKAsyIy5yYXdkYXRh",
-            "LkZyb3plbkl0ZW1EZXRhaWxNYXBBQlZhbHVlOgI4ARpmCh9Gcm96ZW5JdGVt",
-            "RGV0YWlsTWFwQUJQYXRjaEVudHJ5EgsKA2tleRgBIAEoCRIyCgV2YWx1ZRgC",
-            "IAEoCzIjLnJhd2RhdGEuRnJvemVuSXRlbURldGFpbE1hcEFCVmFsdWU6AjgB",
-            "Qj1aLWdpdGxhYi5mdW5wbHVzLmlvL2ZhdC9jb25mL2dlbi9nb2xhbmcvcmF3",
-            "ZGF0YaoCC2ZhdC5yYXdkYXRhYgZwcm90bzM="));
+            "IuUBChBGcm96ZW5JdGVtRGV0YWlsEgoKAmlkGAEgASgFEhAKCGJhc2VQcm9i",
+            "GAIgASgFEgwKBGRpZmYYDyABKAUSEwoLZW5lcmd5UmFuZ2UYBCADKAkSFwoP",
+            "ZXJnQ29uc3VtZVRpbWVzGAUgASgFEhQKDGl0ZW1EZWFkVGltZRgOIAMoBRIV",
+            "Cg1pdGVtRGlmZlJhbmdlGAkgAygJEg4KBmx2RGlmZhgKIAEoBRIUCgxyYXRl",
+            "VXBFbmVyZ3kYCyABKAUSEgoKcmF0ZVVwUHJvYhgMIAEoBRIQCghzdGVwUHJv",
+            "YhgNIAEoBSLOAQoaRnJvemVuSXRlbURldGFpbE1hcEFCVmFsdWUSWQoTRnJv",
+            "emVuSXRlbURldGFpbE1hcBgBIAMoCzI8LnJhd2RhdGEuRnJvemVuSXRlbURl",
+            "dGFpbE1hcEFCVmFsdWUuRnJvemVuSXRlbURldGFpbE1hcEVudHJ5GlUKGEZy",
+            "b3plbkl0ZW1EZXRhaWxNYXBFbnRyeRILCgNrZXkYASABKAUSKAoFdmFsdWUY",
+            "AiABKAsyGS5yYXdkYXRhLkZyb3plbkl0ZW1EZXRhaWw6AjgBIskEChRGcm96",
+            "ZW5JdGVtRGV0YWlsQ29uZhJTChNGcm96ZW5JdGVtRGV0YWlsTWFwGAEgAygL",
+            "MjYucmF3ZGF0YS5Gcm96ZW5JdGVtRGV0YWlsQ29uZi5Gcm96ZW5JdGVtRGV0",
+            "YWlsTWFwRW50cnkSVwoVRnJvemVuSXRlbURldGFpbE1hcEFCGAIgAygLMjgu",
+            "cmF3ZGF0YS5Gcm96ZW5JdGVtRGV0YWlsQ29uZi5Gcm96ZW5JdGVtRGV0YWls",
+            "TWFwQUJFbnRyeRJhChpGcm96ZW5JdGVtRGV0YWlsTWFwQUJQYXRjaBgDIAMo",
+            "CzI9LnJhd2RhdGEuRnJvemVuSXRlbURldGFpbENvbmYuRnJvemVuSXRlbURl",
+            "dGFpbE1hcEFCUGF0Y2hFbnRyeRpVChhGcm96ZW5JdGVtRGV0YWlsTWFwRW50",
+            "cnkSCwoDa2V5GAEgASgFEigKBXZhbHVlGAIgASgLMhkucmF3ZGF0YS5Gcm96",
+            "ZW5JdGVtRGV0YWlsOgI4ARphChpGcm96ZW5JdGVtRGV0YWlsTWFwQUJFbnRy",
+            "eRILCgNrZXkYASABKAkSMgoFdmFsdWUYAiABKAsyIy5yYXdkYXRhLkZyb3pl",
+            "bkl0ZW1EZXRhaWxNYXBBQlZhbHVlOgI4ARpmCh9Gcm96ZW5JdGVtRGV0YWls",
+            "TWFwQUJQYXRjaEVudHJ5EgsKA2tleRgBIAEoCRIyCgV2YWx1ZRgCIAEoCzIj",
+            "LnJhd2RhdGEuRnJvemVuSXRlbURldGFpbE1hcEFCVmFsdWU6AjgBQj1aLWdp",
+            "dGxhYi5mdW5wbHVzLmlvL2ZhdC9jb25mL2dlbi9nb2xhbmcvcmF3ZGF0YaoC",
+            "C2ZhdC5yYXdkYXRhYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.FrozenItemDetail), global::fat.rawdata.FrozenItemDetail.Parser, new[]{ "Id", "BaseProb", "DeadWeight", "EnergyRange", "ErgConsumeTimes", "ItemDeadTime", "ItemDiffRange", "LvDiff", "RateUpEnergy", "RateUpProb", "StepProb" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.FrozenItemDetail), global::fat.rawdata.FrozenItemDetail.Parser, new[]{ "Id", "BaseProb", "Diff", "EnergyRange", "ErgConsumeTimes", "ItemDeadTime", "ItemDiffRange", "LvDiff", "RateUpEnergy", "RateUpProb", "StepProb" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.FrozenItemDetailMapABValue), global::fat.rawdata.FrozenItemDetailMapABValue.Parser, new[]{ "FrozenItemDetailMap" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.FrozenItemDetailConf), global::fat.rawdata.FrozenItemDetailConf.Parser, new[]{ "FrozenItemDetailMap", "FrozenItemDetailMapAB", "FrozenItemDetailMapABPatch" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, null, })
           }));
@@ -100,7 +100,7 @@ namespace fat.rawdata {
     public FrozenItemDetail(FrozenItemDetail other) : this() {
       id_ = other.id_;
       baseProb_ = other.baseProb_;
-      deadWeight_ = other.deadWeight_.Clone();
+      diff_ = other.diff_;
       energyRange_ = other.energyRange_.Clone();
       ergConsumeTimes_ = other.ergConsumeTimes_;
       itemDeadTime_ = other.itemDeadTime_.Clone();
@@ -147,17 +147,19 @@ namespace fat.rawdata {
       }
     }
 
-    /// <summary>Field number for the "deadWeight" field.</summary>
-    public const int DeadWeightFieldNumber = 3;
-    private static readonly pb::FieldCodec<string> _repeated_deadWeight_codec
-        = pb::FieldCodec.ForString(26);
-    private readonly pbc::RepeatedField<string> deadWeight_ = new pbc::RepeatedField<string>();
+    /// <summary>Field number for the "diff" field.</summary>
+    public const int DiffFieldNumber = 15;
+    private int diff_;
     /// <summary>
-    /// 冰冻棋子过期后产生的棋子
+    /// 难度
+    /// （仅用作TGA）
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<string> DeadWeight {
-      get { return deadWeight_; }
+    public int Diff {
+      get { return diff_; }
+      set {
+        diff_ = value;
+      }
     }
 
     /// <summary>Field number for the "energyRange" field.</summary>
@@ -288,7 +290,7 @@ namespace fat.rawdata {
       }
       if (Id != other.Id) return false;
       if (BaseProb != other.BaseProb) return false;
-      if(!deadWeight_.Equals(other.deadWeight_)) return false;
+      if (Diff != other.Diff) return false;
       if(!energyRange_.Equals(other.energyRange_)) return false;
       if (ErgConsumeTimes != other.ErgConsumeTimes) return false;
       if(!itemDeadTime_.Equals(other.itemDeadTime_)) return false;
@@ -305,7 +307,7 @@ namespace fat.rawdata {
       int hash = 1;
       if (Id != 0) hash ^= Id.GetHashCode();
       if (BaseProb != 0) hash ^= BaseProb.GetHashCode();
-      hash ^= deadWeight_.GetHashCode();
+      if (Diff != 0) hash ^= Diff.GetHashCode();
       hash ^= energyRange_.GetHashCode();
       if (ErgConsumeTimes != 0) hash ^= ErgConsumeTimes.GetHashCode();
       hash ^= itemDeadTime_.GetHashCode();
@@ -338,7 +340,6 @@ namespace fat.rawdata {
         output.WriteRawTag(16);
         output.WriteInt32(BaseProb);
       }
-      deadWeight_.WriteTo(output, _repeated_deadWeight_codec);
       energyRange_.WriteTo(output, _repeated_energyRange_codec);
       if (ErgConsumeTimes != 0) {
         output.WriteRawTag(40);
@@ -362,6 +363,10 @@ namespace fat.rawdata {
         output.WriteInt32(StepProb);
       }
       itemDeadTime_.WriteTo(output, _repeated_itemDeadTime_codec);
+      if (Diff != 0) {
+        output.WriteRawTag(120);
+        output.WriteInt32(Diff);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -379,7 +384,6 @@ namespace fat.rawdata {
         output.WriteRawTag(16);
         output.WriteInt32(BaseProb);
       }
-      deadWeight_.WriteTo(ref output, _repeated_deadWeight_codec);
       energyRange_.WriteTo(ref output, _repeated_energyRange_codec);
       if (ErgConsumeTimes != 0) {
         output.WriteRawTag(40);
@@ -403,6 +407,10 @@ namespace fat.rawdata {
         output.WriteInt32(StepProb);
       }
       itemDeadTime_.WriteTo(ref output, _repeated_itemDeadTime_codec);
+      if (Diff != 0) {
+        output.WriteRawTag(120);
+        output.WriteInt32(Diff);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -418,7 +426,9 @@ namespace fat.rawdata {
       if (BaseProb != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(BaseProb);
       }
-      size += deadWeight_.CalculateSize(_repeated_deadWeight_codec);
+      if (Diff != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Diff);
+      }
       size += energyRange_.CalculateSize(_repeated_energyRange_codec);
       if (ErgConsumeTimes != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(ErgConsumeTimes);
@@ -454,7 +464,9 @@ namespace fat.rawdata {
       if (other.BaseProb != 0) {
         BaseProb = other.BaseProb;
       }
-      deadWeight_.Add(other.deadWeight_);
+      if (other.Diff != 0) {
+        Diff = other.Diff;
+      }
       energyRange_.Add(other.energyRange_);
       if (other.ErgConsumeTimes != 0) {
         ErgConsumeTimes = other.ErgConsumeTimes;
@@ -495,10 +507,6 @@ namespace fat.rawdata {
             BaseProb = input.ReadInt32();
             break;
           }
-          case 26: {
-            deadWeight_.AddEntriesFrom(input, _repeated_deadWeight_codec);
-            break;
-          }
           case 34: {
             energyRange_.AddEntriesFrom(input, _repeated_energyRange_codec);
             break;
@@ -532,6 +540,10 @@ namespace fat.rawdata {
             itemDeadTime_.AddEntriesFrom(input, _repeated_itemDeadTime_codec);
             break;
           }
+          case 120: {
+            Diff = input.ReadInt32();
+            break;
+          }
         }
       }
     #endif
@@ -552,10 +564,6 @@ namespace fat.rawdata {
           }
           case 16: {
             BaseProb = input.ReadInt32();
-            break;
-          }
-          case 26: {
-            deadWeight_.AddEntriesFrom(ref input, _repeated_deadWeight_codec);
             break;
           }
           case 34: {
@@ -589,6 +597,10 @@ namespace fat.rawdata {
           case 114:
           case 112: {
             itemDeadTime_.AddEntriesFrom(ref input, _repeated_itemDeadTime_codec);
+            break;
+          }
+          case 120: {
+            Diff = input.ReadInt32();
             break;
           }
         }

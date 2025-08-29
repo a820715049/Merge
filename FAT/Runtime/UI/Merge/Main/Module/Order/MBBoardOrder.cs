@@ -564,6 +564,13 @@ namespace FAT
                     scoreGroupBR.txtScore.text = $"{score}";
                     _SetScoreBRState(true);
                 }
+                else if (act is MineCartActivity mineCart && mineCart.Valid)
+                {
+                    act.Visual.RefreshStyle(scoreGroupBR.txtScore, "mineCartOrderScore");
+                    scoreGroupBR.icon.SetImage(Game.Manager.objectMan.GetBasicConfig(data.ScoreRewardBR).Icon);
+                    scoreGroupBR.txtScore.text = $"{score}";
+                    _SetScoreBRState(true);
+                }
                 else
                 {
                     _SetScoreBRState(false);
@@ -805,15 +812,26 @@ namespace FAT
                 if (mData.ScoreRewardBR > 0)
                 {
                     var act = Game.Manager.activity.Lookup(mData.GetValue(OrderParamType.ScoreEventIdBR));
-                    if (act != null && act is WishBoardActivity curActivity)
+                    if (act is WishBoardActivity wish && wish.Valid)
                     {
                         var reward = Game.Manager.rewardMan.BeginReward(mData.GetValue(OrderParamType.ScoreRewardBR), mData.GetValue(OrderParamType.ScoreBR), ReasonString.wish_order);
                         Game.Manager.rewardMan.CommitReward(reward);
                         UIFlyUtility.FlyCustom(reward.rewardId, reward.rewardCount, scoreGroupBR.icon.transform.position, UIFlyFactory.ResolveFlyTarget(FlyType.WishBoardToken),
                             FlyStyle.Reward, FlyType.WishBoardToken);
-                        DataTracker.event_wish_getitem_order.Track(curActivity, curActivity.GetCurProgressPhase() + 1, curActivity.GetCurGroupConfig().BarRewardId.Count,
-                            curActivity.GetCurGroupConfig().Diff, Game.Manager.mergeBoardMan.activeWorld.activeBoard.boardId, 1, curActivity.CurDepthIndex, reward.rewardId,
+                        DataTracker.event_wish_getitem_order.Track(wish, wish.GetCurProgressPhase() + 1, wish.GetCurGroupConfig().BarRewardId.Count,
+                            wish.GetCurGroupConfig().Diff, Game.Manager.mergeBoardMan.activeWorld.activeBoard.boardId, 1, wish.CurDepthIndex, reward.rewardId,
                             ItemUtility.GetItemLevel(reward.rewardId), reward.rewardCount, mData.GetValue(OrderParamType.PayDifficulty));
+                    }
+                    else if (act is MineCartActivity mineCart && mineCart.Valid)
+                    {
+                        var reward = Game.Manager.rewardMan.BeginReward(mData.ScoreRewardBR, mData.ScoreBR, ReasonString.mine_cart_order);
+                        //直接commit
+                        Game.Manager.rewardMan.CommitReward(reward);
+                        //FlyCustom 为纯表现 不会执行commit逻辑
+                        UIFlyUtility.FlyCustom(reward.rewardId, reward.rewardCount, scoreGroupBR.icon.transform.position, UIFlyFactory.ResolveFlyTarget(FlyType.MineCartGetItem),
+                            FlyStyle.Reward, FlyType.MineCartGetItem);
+                        //打点
+                        mineCart.TrackOrderGetItem(reward.rewardId, reward.rewardCount, mData.GetValue(OrderParamType.PayDifficulty));
                     }
                 }
                 else
@@ -854,6 +872,10 @@ namespace FAT
             if (act is WishBoardActivity wish)
             {
                 return wish.Valid;
+            }
+            if (act is MineCartActivity mineCart)
+            {
+                return mineCart.Valid;
             }
             // 其他情况分数都有效
             return true;

@@ -21,7 +21,7 @@ public static class AppBuilderEditorUtility
     }
     
     public static void SyncConf(bool data = true, bool source = true, bool lua = false) {
-        const string ConfRepoPath = "../fatr_conf";
+        const string ConfRepoPath = "../conf";
         var list = new List<(string, string, string[], string[])>();
         if (data) list.Add((ConfRepoPath + "/gen/rawdata/client", Path.Combine(Application.streamingAssetsPath, Constant.kConfPath),
             new string[] { "*.bytes" }, null));

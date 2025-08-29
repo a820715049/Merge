@@ -64,13 +64,11 @@ namespace FAT
                 Game.Manager.miniBoardMan.OnNewItemShow(mView.data);
                 Game.Manager.miniBoardMultiMan.OnNewItemShow(mView.data);
                 Game.Manager.mineBoardMan.OnNewItemShow(mView.data);
-                if (Game.Manager.activity.LookupAny(EventType.FarmBoard, out var act1) && act1 is FarmBoardActivity farm)
+                var allActivity = Game.Manager.activity.map;
+                foreach (var (_, activity) in allActivity)
                 {
-                    farm.OnNewItemShow(mView.data);
-                }
-                if (Game.Manager.activity.LookupAny(EventType.WishBoard, out var act2) && act2 is WishBoardActivity wish)
-                {
-                    wish.OnNewItemShow(mView.data);
+                    if (activity is IBoardActivityHandbook boardActivity)
+                        boardActivity.OnNewItemShow(mView.data);
                 }
             }
         }

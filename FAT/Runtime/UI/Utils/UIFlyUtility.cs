@@ -60,7 +60,7 @@ namespace FAT
                 var item = _CreateItemFly(reward.rewardId, reward.rewardCount, from + offset, to,
                     FlyStyle.Reward, type, size);
                 item.Reward = reward;
-                if (type == FlyType.MiniBoard || type == FlyType.MiniBoardMulti || type == FlyType.WishBoardToken)
+                if (type == FlyType.MiniBoard || type == FlyType.MiniBoardMulti || type == FlyType.WishBoardToken || type == FlyType.MineCartGetItem)
                 {
                     var icon = _CreateItemFly(reward.rewardId, reward.rewardCount, from, from + new Vector3(0, 120, 0),
                         FlyStyle.Score, type, 136f);

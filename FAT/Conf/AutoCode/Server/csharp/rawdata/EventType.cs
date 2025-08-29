@@ -24,7 +24,7 @@ namespace fat.rawdata {
     static EventTypeReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChdyYXdkYXRhL0V2ZW50VHlwZS5wcm90bxIHcmF3ZGF0YSrkDgoJRXZlbnRU",
+            "ChdyYXdkYXRhL0V2ZW50VHlwZS5wcm90bxIHcmF3ZGF0YSrFDwoJRXZlbnRU",
             "eXBlEhQKEEV2ZW50VHlwZURlZmF1bHQQABITCg9FdmVudFR5cGVFbmVyZ3kQ",
             "ARIVChFFdmVudFR5cGVEYWlseVBvcBACEhQKEEV2ZW50VHlwZU5ld1VzZXIQ",
             "AxIXChNFdmVudFR5cGVPbmVQbHVzT25lEAQSGAoURXZlbnRUeXBlRW5kbGVz",
@@ -66,9 +66,11 @@ namespace fat.rawdata {
             "ZW50VHlwZUNhcnRPbmVQbHVzT25lEEYSHgoaRXZlbnRUeXBlTXVsdGlwbGll",
             "clJhbmtpbmcQRxIVChFFdmVudFR5cGVXaXNoVXBvbhBIEhkKFUV2ZW50VHlw",
             "ZVRyYWluTWlzc2lvbhBJEhMKD0V2ZW50VHlwZVB1enpsZRBLEhUKEUV2ZW50",
-            "VHlwZUxhbmRtYXJrEEwSFwoTRXZlbnRUeXBlRnJvemVuSXRlbRBNQj1aLWdp",
-            "dGxhYi5mdW5wbHVzLmlvL2ZhdC9jb25mL2dlbi9nb2xhbmcvcmF3ZGF0YaoC",
-            "C2ZhdC5yYXdkYXRhYgZwcm90bzM="));
+            "VHlwZUxhbmRtYXJrEEwSFwoTRXZlbnRUeXBlRnJvemVuSXRlbRBNEhcKE0V2",
+            "ZW50VHlwZUxpbWl0TWVyZ2UQThITCg9FdmVudFR5cGVPbmxpbmUQTxIWChJF",
+            "dmVudFR5cGVMZXZlbFBhY2sQUBIZChVFdmVudFR5cGVTZXZlbkRheVRhc2sQ",
+            "UUI9Wi1naXRsYWIuZnVucGx1cy5pby9mYXQvY29uZi9nZW4vZ29sYW5nL3Jh",
+            "d2RhdGGqAgtmYXQucmF3ZGF0YWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::fat.rawdata.EventType), }, null, null));
@@ -383,6 +385,22 @@ namespace fat.rawdata {
     /// 冰冻棋子
     /// </summary>
     [pbr::OriginalName("EventTypeFrozenItem")] FrozenItem = 77,
+    /// <summary>
+    /// 限时合成订单
+    /// </summary>
+    [pbr::OriginalName("EventTypeLimitMerge")] LimitMerge = 78,
+    /// <summary>
+    /// 在线奖励
+    /// </summary>
+    [pbr::OriginalName("EventTypeOnline")] Online = 79,
+    /// <summary>
+    /// 等级礼包
+    /// </summary>
+    [pbr::OriginalName("EventTypeLevelPack")] LevelPack = 80,
+    /// <summary>
+    /// 七天任务
+    /// </summary>
+    [pbr::OriginalName("EventTypeSevenDayTask")] SevenDayTask = 81,
   }
 
   #endregion

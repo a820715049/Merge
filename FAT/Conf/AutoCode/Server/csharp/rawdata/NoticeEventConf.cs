@@ -61,7 +61,7 @@ namespace fat.rawdata {
   /// <summary>
   /// annotation@annotation_type(type="rawdata")
   /// annotation@rawdata(row="NoticeEvent",table="NoticeEventMap",table_wrapper="NoticeEventConf",map="true",map_key_type="int32",data="NoticeEventConf")
-  /// annotation@ab(table_ab="NoticeEventMapAB",table_ab_patch="NoticeEventMapABPatch",table_ab_value="NoticeEventMapABValue",ab_patch="true")
+  /// annotation@ab(table_ab="NoticeEventMapAB",table_ab_patch="NoticeEventMapABPatch",table_ab_value="NoticeEventMapABValue",ab_patch="false")
   /// annotation@filter(just_server="false",just_client="false")
   /// annotation@NoticeEvent(id="id")
   /// </summary>

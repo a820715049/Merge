@@ -52,7 +52,10 @@ namespace FAT
             else
                 MessageCenter.Get<MSG.UI_REWARD_FEEDBACK>().Dispatch(item.FlyType);
 
+            //播音效
             UIUtility.CommonResFeedBackSoundEffect(item.FlyType);
+            //播震动
+            UIUtility.CommonResFeedBackShakeEffect(item.ID);
         }
 
         public void TryFeedbackFlyable(FlyableItemSlice flyableItemSlice)

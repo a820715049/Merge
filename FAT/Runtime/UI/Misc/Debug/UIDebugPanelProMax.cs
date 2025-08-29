@@ -177,14 +177,14 @@ namespace FAT
             //打印没有正确被commit的奖励
             _RegisterButton("reward info", () => Game.Manager.rewardMan.ReportCommit());
 
-            _StartGroupB("棋盘/订单/meta场景操作");
+            _StartGroupB("棋盘/订单/meta场景操作/guide");
             _RegisterButton("orderpass", () => OrderUtility.SetDebug(!OrderUtility.isDebug));
             _RegisterButton("orderitem", _OnBtnAddOrderItem);
             _RegisterButton("clear board", _OnBtnClearBoard);
             _RegisterButton("quick merge", _OnBtnQuickMerge);
             _RegisterButton("auto quick merge", _OnBtnAutoQuickMerge);
-            //锁住选中的item
-            _RegisterButton("Freeze Item", _OnBtnFreezeItem);
+            _RegisterButton("Freeze Item", _OnBtnFreezeItem);               // 锁住选中的item
+            _RegisterButtonWithInput("guide flip", _OnBtnGuideFlip);        // 切换guide状态
             _RegisterButtonWithInput("board step(s)", _OnUpdateBoard);
             _RegisterButtonWithInput("claim all bonus", (idStrs) =>
             {
@@ -975,6 +975,22 @@ namespace FAT
         private void _OnBtnSetIAPCent(string param)
         {
             Game.Manager.iap.DebugSetIAPCent(ulong.Parse(param));
+        }
+
+        private void _OnBtnGuideFlip(string param)
+        {
+            if (int.TryParse(param, out var gid))
+            {
+                var mgr = Game.Manager.guideMan;
+                if (mgr.IsGuideFinished(gid))
+                {
+                    mgr.UnfinishGuideAndRefresh(gid);
+                }
+                else
+                {
+                    mgr.FinishGuideAndMoveNext(gid);
+                }
+            }
         }
 
         private void _OnUpdateBoard(string seconds)

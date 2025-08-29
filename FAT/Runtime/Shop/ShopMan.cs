@@ -269,35 +269,35 @@ namespace FAT
         {
             _rewardFromPos = flyFromPos;
             _rewardSize = size;
-            using (ObjectPool<List<RewardCommitData>>.GlobalPool.AllocStub(out var rewards))
+            if (data?.CurSellGoodsConfig == null)
+                return;
+            var price = data.CurSellGoodsConfig.Price.ConvertToRewardConfig();
+            var reward = data.CurSellGoodsConfig.Reward.ConvertToRewardConfig();
+            if (price == null || reward == null)
+                return;
+            CoinType type = Game.Manager.coinMan.GetCoinTypeById(price.Id);
+            if (Game.Manager.coinMan.CanUseCoin(type, price.Count))
             {
-                if (data?.CurSellGoodsConfig == null)
-                    return;
-                var price = data.CurSellGoodsConfig.Price.ConvertToRewardConfig();
-                var reward = data.CurSellGoodsConfig.Reward.ConvertToRewardConfig();
-                if (price == null || reward == null)
-                    return;
-                CoinType type = Game.Manager.coinMan.GetCoinTypeById(price.Id);
-                if (Game.Manager.coinMan.CanUseCoin(type, price.Count))
-                {
-                    Game.Manager.coinMan.UseCoin(type, price.Count, ReasonString.market_energy)
-                    .OnSuccess(() =>
+                Game.Manager.coinMan.UseCoin(type, price.Count, ReasonString.market_energy)
+                .OnSuccess(() =>
+                 {
+                     using (ObjectPool<List<RewardCommitData>>.GlobalPool.AllocStub(out var rewards))
                      {
                          //构造基础奖励
                          rewards.Add(Game.Manager.rewardMan.BeginReward(reward.Id, reward.Count, ReasonString.market_energy));
                          market_buy.Track(2, data.BelongBoardId, data.GirdId, data.CurSellGoodsConfig.Id, reward.Id);
                          // 发货
                          UIFlyUtility.FlyRewardList(rewards, _rewardFromPos, null, _rewardSize);
-                         //在数据刷新前尝试Adjust打点
-                         _AdjustTrackerShopEnergy(data.CurSellGoodsConfig.Id);
-                         //数据刷新
-                         data.OnBuyGoodsSuccess();
-                         //Dispatch
-                         MessageCenter.Get<MSG.GAME_SHOP_ITEM_INFO_CHANGE>().Dispatch();
-                         whenSuccess?.Invoke();
-                     })
-                     .Execute();
-                }
+                     }
+                     //在数据刷新前尝试Adjust打点
+                     _AdjustTrackerShopEnergy(data.CurSellGoodsConfig.Id);
+                     //数据刷新
+                     data.OnBuyGoodsSuccess();
+                     //Dispatch
+                     MessageCenter.Get<MSG.GAME_SHOP_ITEM_INFO_CHANGE>().Dispatch();
+                     whenSuccess?.Invoke();
+                 })
+                 .Execute();
             }
         }
         private void _AdjustTrackerShopEnergy(int goodsId)
@@ -323,13 +323,10 @@ namespace FAT
                 return;
             _rewardFromPos = flyFromPos;
             _rewardSize = size;
-            using (ObjectPool<List<RewardCommitData>>.GlobalPool.AllocStub(out var rewards))
-            {
-                ProcessShopRandomChess(data, rewards);
-            }
+            ProcessShopRandomChess(data);
         }
 
-        private void ProcessShopRandomChess(ShopChessRandomData data, List<RewardCommitData> rewards)
+        private void ProcessShopRandomChess(ShopChessRandomData data)
         {
             if (data?.CurSellGoodsConfig == null)
                 return;
@@ -343,11 +340,14 @@ namespace FAT
                 Game.Manager.coinMan.UseCoin(type, price.Count, ReasonString.market_item)
                 .OnSuccess(() =>
                 {
-                    //构造基础奖励
-                    rewards.Add(Game.Manager.rewardMan.BeginReward(reward.Id, reward.Count, ReasonString.market_item));
-                    market_buy.Track(3, data.BelongBoardId, data.GirdId, data.CurSellGoodsConfig.Id, reward.Id);
-                    // 发货
-                    UIFlyUtility.FlyRewardList(rewards, _rewardFromPos, null, _rewardSize);
+                    using (ObjectPool<List<RewardCommitData>>.GlobalPool.AllocStub(out var rewards))
+                    {
+                        //构造基础奖励
+                        rewards.Add(Game.Manager.rewardMan.BeginReward(reward.Id, reward.Count, ReasonString.market_item));
+                        market_buy.Track(3, data.BelongBoardId, data.GirdId, data.CurSellGoodsConfig.Id, reward.Id);
+                        // 发货
+                        UIFlyUtility.FlyRewardList(rewards, _rewardFromPos, null, _rewardSize);
+                    }
                     //数据刷新
                     data.OnBuyGoodsSuccess();
                     //Dispatch
@@ -385,24 +385,24 @@ namespace FAT
                 return;
             _rewardFromPos = flyFromPos;
             _rewardSize = size;
-            using (ObjectPool<List<RewardCommitData>>.GlobalPool.AllocStub(out var rewards))
-            {
-                ProcessShopOrderChess(data, rewards);
-            }
+            ProcessShopOrderChess(data);
         }
 
-        private void ProcessShopOrderChess(ShopChessOrderData data, List<RewardCommitData> rewards)
+        private void ProcessShopOrderChess(ShopChessOrderData data)
         {
             if (Game.Manager.coinMan.CanUseCoin(CoinType.Gem, data.CurSellGoodsPrice))
             {
                 Game.Manager.coinMan.UseCoin(CoinType.Gem, data.CurSellGoodsPrice, ReasonString.market_boost)
                 .OnSuccess(() =>
                 {
-                    //构造基础奖励
-                    rewards.Add(Game.Manager.rewardMan.BeginReward(data.CurSellGoodsId, 1, ReasonString.market_boost));
-                    market_buy.Track(4, data.BelongBoardId, data.GirdId, 0, data.CurSellGoodsId);
-                    // 发货
-                    UIFlyUtility.FlyRewardList(rewards, _rewardFromPos, null, _rewardSize);
+                    using (ObjectPool<List<RewardCommitData>>.GlobalPool.AllocStub(out var rewards))
+                    {
+                        //构造基础奖励
+                        rewards.Add(Game.Manager.rewardMan.BeginReward(data.CurSellGoodsId, 1, ReasonString.market_boost));
+                        market_buy.Track(4, data.BelongBoardId, data.GirdId, 0, data.CurSellGoodsId);
+                        // 发货
+                        UIFlyUtility.FlyRewardList(rewards, _rewardFromPos, null, _rewardSize);
+                    }
                     //数据刷新
                     data.OnBuyGoodsSuccess();
                     //Dispatch

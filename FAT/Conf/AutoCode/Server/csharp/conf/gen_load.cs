@@ -250,6 +250,12 @@ using rawEventItemBingoRound = fat.rawdata.EventItemBingoRound;
 using EventItemBingoRoundVisitor = fat.conf.EventItemBingoRoundVisitor;
 using rawEventLandmark = fat.rawdata.EventLandmark;
 using EventLandmarkVisitor = fat.conf.EventLandmarkVisitor;
+using rawEventLimitMerge = fat.rawdata.EventLimitMerge;
+using EventLimitMergeVisitor = fat.conf.EventLimitMergeVisitor;
+using rawEventLimitMergeGroup = fat.rawdata.EventLimitMergeGroup;
+using EventLimitMergeGroupVisitor = fat.conf.EventLimitMergeGroupVisitor;
+using rawEventLimitMergeOrder = fat.rawdata.EventLimitMergeOrder;
+using EventLimitMergeOrderVisitor = fat.conf.EventLimitMergeOrderVisitor;
 using rawEventLoginGift = fat.rawdata.EventLoginGift;
 using EventLoginGiftVisitor = fat.conf.EventLoginGiftVisitor;
 using rawEventMarketIAPGift = fat.rawdata.EventMarketIAPGift;
@@ -296,6 +302,10 @@ using rawEventMiniBoardMultiGroup = fat.rawdata.EventMiniBoardMultiGroup;
 using EventMiniBoardMultiGroupVisitor = fat.conf.EventMiniBoardMultiGroupVisitor;
 using rawEventMiniBoardMultiInfo = fat.rawdata.EventMiniBoardMultiInfo;
 using EventMiniBoardMultiInfoVisitor = fat.conf.EventMiniBoardMultiInfoVisitor;
+using rawEventOnline = fat.rawdata.EventOnline;
+using EventOnlineVisitor = fat.conf.EventOnlineVisitor;
+using rawEventOnlineDetail = fat.rawdata.EventOnlineDetail;
+using EventOnlineDetailVisitor = fat.conf.EventOnlineDetailVisitor;
 using rawEventOrderBonus = fat.rawdata.EventOrderBonus;
 using EventOrderBonusVisitor = fat.conf.EventOrderBonusVisitor;
 using rawEventOrderBonusDetail = fat.rawdata.EventOrderBonusDetail;
@@ -374,6 +384,8 @@ using rawEventScoreDuelDetail = fat.rawdata.EventScoreDuelDetail;
 using EventScoreDuelDetailVisitor = fat.conf.EventScoreDuelDetailVisitor;
 using rawEventScoreDuelSTG = fat.rawdata.EventScoreDuelSTG;
 using EventScoreDuelSTGVisitor = fat.conf.EventScoreDuelSTGVisitor;
+using rawEventSevenDayTask = fat.rawdata.EventSevenDayTask;
+using EventSevenDayTaskVisitor = fat.conf.EventSevenDayTaskVisitor;
 using rawEventStamp = fat.rawdata.EventStamp;
 using EventStampVisitor = fat.conf.EventStampVisitor;
 using rawEventStampRound = fat.rawdata.EventStampRound;
@@ -548,6 +560,10 @@ using rawLanguage = fat.rawdata.Language;
 using LanguageVisitor = fat.conf.LanguageVisitor;
 using rawLevelGroups = fat.rawdata.LevelGroups;
 using LevelGroupsVisitor = fat.conf.LevelGroupsVisitor;
+using rawLevelPack = fat.rawdata.LevelPack;
+using LevelPackVisitor = fat.conf.LevelPackVisitor;
+using rawLevelPackDetail = fat.rawdata.LevelPackDetail;
+using LevelPackDetailVisitor = fat.conf.LevelPackDetailVisitor;
 using rawLoginSign = fat.rawdata.LoginSign;
 using LoginSignVisitor = fat.conf.LoginSignVisitor;
 using rawLoginSignPool = fat.rawdata.LoginSignPool;
@@ -732,6 +748,14 @@ using rawRoundTool = fat.rawdata.RoundTool;
 using RoundToolVisitor = fat.conf.RoundToolVisitor;
 using rawSettingsCommunity = fat.rawdata.SettingsCommunity;
 using SettingsCommunityVisitor = fat.conf.SettingsCommunityVisitor;
+using rawSevenDayTaskDetail = fat.rawdata.SevenDayTaskDetail;
+using SevenDayTaskDetailVisitor = fat.conf.SevenDayTaskDetailVisitor;
+using rawSevenDayTaskGroup = fat.rawdata.SevenDayTaskGroup;
+using SevenDayTaskGroupVisitor = fat.conf.SevenDayTaskGroupVisitor;
+using rawSevenDayTaskInfo = fat.rawdata.SevenDayTaskInfo;
+using SevenDayTaskInfoVisitor = fat.conf.SevenDayTaskInfoVisitor;
+using rawSevenDayTaskRwd = fat.rawdata.SevenDayTaskRwd;
+using SevenDayTaskRwdVisitor = fat.conf.SevenDayTaskRwdVisitor;
 using rawShake = fat.rawdata.Shake;
 using ShakeVisitor = fat.conf.ShakeVisitor;
 using rawShinnyGuarPack = fat.rawdata.ShinnyGuarPack;
@@ -916,6 +940,9 @@ public static partial class Data {
 		    cur.EventItemBingoDetailMap = new fat.rawdata.EventItemBingoDetailConf();
 		    cur.EventItemBingoRoundMap = new fat.rawdata.EventItemBingoRoundConf();
 		    cur.EventLandmarkMap = new fat.rawdata.EventLandmarkConf();
+		    cur.EventLimitMergeMap = new fat.rawdata.EventLimitMergeConf();
+		    cur.EventLimitMergeGroupMap = new fat.rawdata.EventLimitMergeGroupConf();
+		    cur.EventLimitMergeOrderMap = new fat.rawdata.EventLimitMergeOrderConf();
 		    cur.EventLoginGiftMap = new fat.rawdata.EventLoginGiftConf();
 		    cur.EventMarketIAPGiftMap = new fat.rawdata.EventMarketIAPGiftConf();
 		    cur.EventMineMap = new fat.rawdata.EventMineConf();
@@ -939,6 +966,8 @@ public static partial class Data {
 		    cur.EventMiniBoardMultiDropMap = new fat.rawdata.EventMiniBoardMultiDropConf();
 		    cur.EventMiniBoardMultiGroupMap = new fat.rawdata.EventMiniBoardMultiGroupConf();
 		    cur.EventMiniBoardMultiInfoMap = new fat.rawdata.EventMiniBoardMultiInfoConf();
+		    cur.EventOnlineMap = new fat.rawdata.EventOnlineConf();
+		    cur.EventOnlineDetailMap = new fat.rawdata.EventOnlineDetailConf();
 		    cur.EventOrderBonusMap = new fat.rawdata.EventOrderBonusConf();
 		    cur.EventOrderBonusDetailMap = new fat.rawdata.EventOrderBonusDetailConf();
 		    cur.EventOrderBonusGroupMap = new fat.rawdata.EventOrderBonusGroupConf();
@@ -978,6 +1007,7 @@ public static partial class Data {
 		    cur.EventScoreDuelMap = new fat.rawdata.EventScoreDuelConf();
 		    cur.EventScoreDuelDetailMap = new fat.rawdata.EventScoreDuelDetailConf();
 		    cur.EventScoreDuelSTGMap = new fat.rawdata.EventScoreDuelSTGConf();
+		    cur.EventSevenDayTaskMap = new fat.rawdata.EventSevenDayTaskConf();
 		    cur.EventStampMap = new fat.rawdata.EventStampConf();
 		    cur.EventStampRoundMap = new fat.rawdata.EventStampRoundConf();
 		    cur.EventStepMap = new fat.rawdata.EventStepConf();
@@ -1065,6 +1095,8 @@ public static partial class Data {
 		    cur.LangZhHantTwSlice = new fat.rawdata.LangZhHantTwConf();
 		    cur.LanguageSlice = new fat.rawdata.LanguageConf();
 		    cur.LevelGroupsMap = new fat.rawdata.LevelGroupsConf();
+		    cur.LevelPackMap = new fat.rawdata.LevelPackConf();
+		    cur.LevelPackDetailMap = new fat.rawdata.LevelPackDetailConf();
 		    cur.LoginSignSlice = new fat.rawdata.LoginSignConf();
 		    cur.LoginSignPoolMap = new fat.rawdata.LoginSignPoolConf();
 		    cur.LoginSignTotalMap = new fat.rawdata.LoginSignTotalConf();
@@ -1157,6 +1189,10 @@ public static partial class Data {
 		    cur.RoundScoreSlice = new fat.rawdata.RoundScoreConf();
 		    cur.RoundToolSlice = new fat.rawdata.RoundToolConf();
 		    cur.SettingsCommunityMap = new fat.rawdata.SettingsCommunityConf();
+		    cur.SevenDayTaskDetailMap = new fat.rawdata.SevenDayTaskDetailConf();
+		    cur.SevenDayTaskGroupMap = new fat.rawdata.SevenDayTaskGroupConf();
+		    cur.SevenDayTaskInfoMap = new fat.rawdata.SevenDayTaskInfoConf();
+		    cur.SevenDayTaskRwdMap = new fat.rawdata.SevenDayTaskRwdConf();
 		    cur.ShakeMap = new fat.rawdata.ShakeConf();
 		    cur.ShinnyGuarPackMap = new fat.rawdata.ShinnyGuarPackConf();
 		    cur.ShopCommunityMap = new fat.rawdata.ShopCommunityConf();
@@ -2511,6 +2547,39 @@ public static partial class Data {
 		public static List<rawEventLandmark> GetEventLandmarkByFilter(Func<rawEventLandmark, bool> filterFunc,string tag="") => EventLandmarkVisitor.GetByFilter(filterFunc,tag);
 		public static rawEventLandmark? GetOneEventLandmarkByFilter(Func<rawEventLandmark, bool> filterFunc,string tag="") => EventLandmarkVisitor.GetOneByFilter(filterFunc,tag);
 	#endregion EventLandmark
+	#region EventLimitMerge
+		public static int GetCountEventLimitMergeMap(string tag="") => EventLimitMergeVisitor.GetCount(tag);
+		public static string GetFileNameEventLimitMergeMap() => EventLimitMergeVisitor.GetFileName();
+		public static List<int> SortedKeysEventLimitMergeMap(string tag="") => EventLimitMergeVisitor.SortedKeys(tag);
+		public static PBC::MapField<int, rawEventLimitMerge> GetEventLimitMergeMap(string tag="") => EventLimitMergeVisitor.All(tag);
+		public static void RangeEventLimitMergeMap(Action<int, rawEventLimitMerge> filter,string tag="") => EventLimitMergeVisitor.Range(filter,tag);
+		public static List<int> KeysEventLimitMergeMap(string tag="") => EventLimitMergeVisitor.Keys(tag);
+		public static rawEventLimitMerge? GetEventLimitMerge(int key,string tag="") => EventLimitMergeVisitor.Get(key,tag);
+		public static List<rawEventLimitMerge> GetEventLimitMergeByFilter(Func<rawEventLimitMerge, bool> filterFunc,string tag="") => EventLimitMergeVisitor.GetByFilter(filterFunc,tag);
+		public static rawEventLimitMerge? GetOneEventLimitMergeByFilter(Func<rawEventLimitMerge, bool> filterFunc,string tag="") => EventLimitMergeVisitor.GetOneByFilter(filterFunc,tag);
+	#endregion EventLimitMerge
+	#region EventLimitMergeGroup
+		public static int GetCountEventLimitMergeGroupMap(string tag="") => EventLimitMergeGroupVisitor.GetCount(tag);
+		public static string GetFileNameEventLimitMergeGroupMap() => EventLimitMergeGroupVisitor.GetFileName();
+		public static List<int> SortedKeysEventLimitMergeGroupMap(string tag="") => EventLimitMergeGroupVisitor.SortedKeys(tag);
+		public static PBC::MapField<int, rawEventLimitMergeGroup> GetEventLimitMergeGroupMap(string tag="") => EventLimitMergeGroupVisitor.All(tag);
+		public static void RangeEventLimitMergeGroupMap(Action<int, rawEventLimitMergeGroup> filter,string tag="") => EventLimitMergeGroupVisitor.Range(filter,tag);
+		public static List<int> KeysEventLimitMergeGroupMap(string tag="") => EventLimitMergeGroupVisitor.Keys(tag);
+		public static rawEventLimitMergeGroup? GetEventLimitMergeGroup(int key,string tag="") => EventLimitMergeGroupVisitor.Get(key,tag);
+		public static List<rawEventLimitMergeGroup> GetEventLimitMergeGroupByFilter(Func<rawEventLimitMergeGroup, bool> filterFunc,string tag="") => EventLimitMergeGroupVisitor.GetByFilter(filterFunc,tag);
+		public static rawEventLimitMergeGroup? GetOneEventLimitMergeGroupByFilter(Func<rawEventLimitMergeGroup, bool> filterFunc,string tag="") => EventLimitMergeGroupVisitor.GetOneByFilter(filterFunc,tag);
+	#endregion EventLimitMergeGroup
+	#region EventLimitMergeOrder
+		public static int GetCountEventLimitMergeOrderMap(string tag="") => EventLimitMergeOrderVisitor.GetCount(tag);
+		public static string GetFileNameEventLimitMergeOrderMap() => EventLimitMergeOrderVisitor.GetFileName();
+		public static List<int> SortedKeysEventLimitMergeOrderMap(string tag="") => EventLimitMergeOrderVisitor.SortedKeys(tag);
+		public static PBC::MapField<int, rawEventLimitMergeOrder> GetEventLimitMergeOrderMap(string tag="") => EventLimitMergeOrderVisitor.All(tag);
+		public static void RangeEventLimitMergeOrderMap(Action<int, rawEventLimitMergeOrder> filter,string tag="") => EventLimitMergeOrderVisitor.Range(filter,tag);
+		public static List<int> KeysEventLimitMergeOrderMap(string tag="") => EventLimitMergeOrderVisitor.Keys(tag);
+		public static rawEventLimitMergeOrder? GetEventLimitMergeOrder(int key,string tag="") => EventLimitMergeOrderVisitor.Get(key,tag);
+		public static List<rawEventLimitMergeOrder> GetEventLimitMergeOrderByFilter(Func<rawEventLimitMergeOrder, bool> filterFunc,string tag="") => EventLimitMergeOrderVisitor.GetByFilter(filterFunc,tag);
+		public static rawEventLimitMergeOrder? GetOneEventLimitMergeOrderByFilter(Func<rawEventLimitMergeOrder, bool> filterFunc,string tag="") => EventLimitMergeOrderVisitor.GetOneByFilter(filterFunc,tag);
+	#endregion EventLimitMergeOrder
 	#region EventLoginGift
 		public static int GetCountEventLoginGiftMap(string tag="") => EventLoginGiftVisitor.GetCount(tag);
 		public static string GetFileNameEventLoginGiftMap() => EventLoginGiftVisitor.GetFileName();
@@ -2764,6 +2833,28 @@ public static partial class Data {
 		public static List<rawEventMiniBoardMultiInfo> GetEventMiniBoardMultiInfoByFilter(Func<rawEventMiniBoardMultiInfo, bool> filterFunc,string tag="") => EventMiniBoardMultiInfoVisitor.GetByFilter(filterFunc,tag);
 		public static rawEventMiniBoardMultiInfo? GetOneEventMiniBoardMultiInfoByFilter(Func<rawEventMiniBoardMultiInfo, bool> filterFunc,string tag="") => EventMiniBoardMultiInfoVisitor.GetOneByFilter(filterFunc,tag);
 	#endregion EventMiniBoardMultiInfo
+	#region EventOnline
+		public static int GetCountEventOnlineMap(string tag="") => EventOnlineVisitor.GetCount(tag);
+		public static string GetFileNameEventOnlineMap() => EventOnlineVisitor.GetFileName();
+		public static List<int> SortedKeysEventOnlineMap(string tag="") => EventOnlineVisitor.SortedKeys(tag);
+		public static PBC::MapField<int, rawEventOnline> GetEventOnlineMap(string tag="") => EventOnlineVisitor.All(tag);
+		public static void RangeEventOnlineMap(Action<int, rawEventOnline> filter,string tag="") => EventOnlineVisitor.Range(filter,tag);
+		public static List<int> KeysEventOnlineMap(string tag="") => EventOnlineVisitor.Keys(tag);
+		public static rawEventOnline? GetEventOnline(int key,string tag="") => EventOnlineVisitor.Get(key,tag);
+		public static List<rawEventOnline> GetEventOnlineByFilter(Func<rawEventOnline, bool> filterFunc,string tag="") => EventOnlineVisitor.GetByFilter(filterFunc,tag);
+		public static rawEventOnline? GetOneEventOnlineByFilter(Func<rawEventOnline, bool> filterFunc,string tag="") => EventOnlineVisitor.GetOneByFilter(filterFunc,tag);
+	#endregion EventOnline
+	#region EventOnlineDetail
+		public static int GetCountEventOnlineDetailMap(string tag="") => EventOnlineDetailVisitor.GetCount(tag);
+		public static string GetFileNameEventOnlineDetailMap() => EventOnlineDetailVisitor.GetFileName();
+		public static List<int> SortedKeysEventOnlineDetailMap(string tag="") => EventOnlineDetailVisitor.SortedKeys(tag);
+		public static PBC::MapField<int, rawEventOnlineDetail> GetEventOnlineDetailMap(string tag="") => EventOnlineDetailVisitor.All(tag);
+		public static void RangeEventOnlineDetailMap(Action<int, rawEventOnlineDetail> filter,string tag="") => EventOnlineDetailVisitor.Range(filter,tag);
+		public static List<int> KeysEventOnlineDetailMap(string tag="") => EventOnlineDetailVisitor.Keys(tag);
+		public static rawEventOnlineDetail? GetEventOnlineDetail(int key,string tag="") => EventOnlineDetailVisitor.Get(key,tag);
+		public static List<rawEventOnlineDetail> GetEventOnlineDetailByFilter(Func<rawEventOnlineDetail, bool> filterFunc,string tag="") => EventOnlineDetailVisitor.GetByFilter(filterFunc,tag);
+		public static rawEventOnlineDetail? GetOneEventOnlineDetailByFilter(Func<rawEventOnlineDetail, bool> filterFunc,string tag="") => EventOnlineDetailVisitor.GetOneByFilter(filterFunc,tag);
+	#endregion EventOnlineDetail
 	#region EventOrderBonus
 		public static int GetCountEventOrderBonusMap(string tag="") => EventOrderBonusVisitor.GetCount(tag);
 		public static string GetFileNameEventOrderBonusMap() => EventOrderBonusVisitor.GetFileName();
@@ -3193,6 +3284,17 @@ public static partial class Data {
 		public static List<rawEventScoreDuelSTG> GetEventScoreDuelSTGByFilter(Func<rawEventScoreDuelSTG, bool> filterFunc,string tag="") => EventScoreDuelSTGVisitor.GetByFilter(filterFunc,tag);
 		public static rawEventScoreDuelSTG? GetOneEventScoreDuelSTGByFilter(Func<rawEventScoreDuelSTG, bool> filterFunc,string tag="") => EventScoreDuelSTGVisitor.GetOneByFilter(filterFunc,tag);
 	#endregion EventScoreDuelSTG
+	#region EventSevenDayTask
+		public static int GetCountEventSevenDayTaskMap(string tag="") => EventSevenDayTaskVisitor.GetCount(tag);
+		public static string GetFileNameEventSevenDayTaskMap() => EventSevenDayTaskVisitor.GetFileName();
+		public static List<int> SortedKeysEventSevenDayTaskMap(string tag="") => EventSevenDayTaskVisitor.SortedKeys(tag);
+		public static PBC::MapField<int, rawEventSevenDayTask> GetEventSevenDayTaskMap(string tag="") => EventSevenDayTaskVisitor.All(tag);
+		public static void RangeEventSevenDayTaskMap(Action<int, rawEventSevenDayTask> filter,string tag="") => EventSevenDayTaskVisitor.Range(filter,tag);
+		public static List<int> KeysEventSevenDayTaskMap(string tag="") => EventSevenDayTaskVisitor.Keys(tag);
+		public static rawEventSevenDayTask? GetEventSevenDayTask(int key,string tag="") => EventSevenDayTaskVisitor.Get(key,tag);
+		public static List<rawEventSevenDayTask> GetEventSevenDayTaskByFilter(Func<rawEventSevenDayTask, bool> filterFunc,string tag="") => EventSevenDayTaskVisitor.GetByFilter(filterFunc,tag);
+		public static rawEventSevenDayTask? GetOneEventSevenDayTaskByFilter(Func<rawEventSevenDayTask, bool> filterFunc,string tag="") => EventSevenDayTaskVisitor.GetOneByFilter(filterFunc,tag);
+	#endregion EventSevenDayTask
 	#region EventStamp
 		public static int GetCountEventStampMap(string tag="") => EventStampVisitor.GetCount(tag);
 		public static string GetFileNameEventStampMap() => EventStampVisitor.GetFileName();
@@ -4118,6 +4220,28 @@ public static partial class Data {
 		public static List<rawLevelGroups> GetLevelGroupsByFilter(Func<rawLevelGroups, bool> filterFunc,string tag="") => LevelGroupsVisitor.GetByFilter(filterFunc,tag);
 		public static rawLevelGroups? GetOneLevelGroupsByFilter(Func<rawLevelGroups, bool> filterFunc,string tag="") => LevelGroupsVisitor.GetOneByFilter(filterFunc,tag);
 	#endregion LevelGroups
+	#region LevelPack
+		public static int GetCountLevelPackMap(string tag="") => LevelPackVisitor.GetCount(tag);
+		public static string GetFileNameLevelPackMap() => LevelPackVisitor.GetFileName();
+		public static List<int> SortedKeysLevelPackMap(string tag="") => LevelPackVisitor.SortedKeys(tag);
+		public static PBC::MapField<int, rawLevelPack> GetLevelPackMap(string tag="") => LevelPackVisitor.All(tag);
+		public static void RangeLevelPackMap(Action<int, rawLevelPack> filter,string tag="") => LevelPackVisitor.Range(filter,tag);
+		public static List<int> KeysLevelPackMap(string tag="") => LevelPackVisitor.Keys(tag);
+		public static rawLevelPack? GetLevelPack(int key,string tag="") => LevelPackVisitor.Get(key,tag);
+		public static List<rawLevelPack> GetLevelPackByFilter(Func<rawLevelPack, bool> filterFunc,string tag="") => LevelPackVisitor.GetByFilter(filterFunc,tag);
+		public static rawLevelPack? GetOneLevelPackByFilter(Func<rawLevelPack, bool> filterFunc,string tag="") => LevelPackVisitor.GetOneByFilter(filterFunc,tag);
+	#endregion LevelPack
+	#region LevelPackDetail
+		public static int GetCountLevelPackDetailMap(string tag="") => LevelPackDetailVisitor.GetCount(tag);
+		public static string GetFileNameLevelPackDetailMap() => LevelPackDetailVisitor.GetFileName();
+		public static List<int> SortedKeysLevelPackDetailMap(string tag="") => LevelPackDetailVisitor.SortedKeys(tag);
+		public static PBC::MapField<int, rawLevelPackDetail> GetLevelPackDetailMap(string tag="") => LevelPackDetailVisitor.All(tag);
+		public static void RangeLevelPackDetailMap(Action<int, rawLevelPackDetail> filter,string tag="") => LevelPackDetailVisitor.Range(filter,tag);
+		public static List<int> KeysLevelPackDetailMap(string tag="") => LevelPackDetailVisitor.Keys(tag);
+		public static rawLevelPackDetail? GetLevelPackDetail(int key,string tag="") => LevelPackDetailVisitor.Get(key,tag);
+		public static List<rawLevelPackDetail> GetLevelPackDetailByFilter(Func<rawLevelPackDetail, bool> filterFunc,string tag="") => LevelPackDetailVisitor.GetByFilter(filterFunc,tag);
+		public static rawLevelPackDetail? GetOneLevelPackDetailByFilter(Func<rawLevelPackDetail, bool> filterFunc,string tag="") => LevelPackDetailVisitor.GetOneByFilter(filterFunc,tag);
+	#endregion LevelPackDetail
 	#region LoginSign
 		public static int GetCountLoginSignSlice(string tag="") => LoginSignVisitor.GetCount(tag);
 		public static string GetFileNameLoginSignSlice() => LoginSignVisitor.GetFileName();
@@ -5102,6 +5226,50 @@ public static partial class Data {
 		public static List<rawSettingsCommunity> GetSettingsCommunityByFilter(Func<rawSettingsCommunity, bool> filterFunc,string tag="") => SettingsCommunityVisitor.GetByFilter(filterFunc,tag);
 		public static rawSettingsCommunity? GetOneSettingsCommunityByFilter(Func<rawSettingsCommunity, bool> filterFunc,string tag="") => SettingsCommunityVisitor.GetOneByFilter(filterFunc,tag);
 	#endregion SettingsCommunity
+	#region SevenDayTaskDetail
+		public static int GetCountSevenDayTaskDetailMap(string tag="") => SevenDayTaskDetailVisitor.GetCount(tag);
+		public static string GetFileNameSevenDayTaskDetailMap() => SevenDayTaskDetailVisitor.GetFileName();
+		public static List<int> SortedKeysSevenDayTaskDetailMap(string tag="") => SevenDayTaskDetailVisitor.SortedKeys(tag);
+		public static PBC::MapField<int, rawSevenDayTaskDetail> GetSevenDayTaskDetailMap(string tag="") => SevenDayTaskDetailVisitor.All(tag);
+		public static void RangeSevenDayTaskDetailMap(Action<int, rawSevenDayTaskDetail> filter,string tag="") => SevenDayTaskDetailVisitor.Range(filter,tag);
+		public static List<int> KeysSevenDayTaskDetailMap(string tag="") => SevenDayTaskDetailVisitor.Keys(tag);
+		public static rawSevenDayTaskDetail? GetSevenDayTaskDetail(int key,string tag="") => SevenDayTaskDetailVisitor.Get(key,tag);
+		public static List<rawSevenDayTaskDetail> GetSevenDayTaskDetailByFilter(Func<rawSevenDayTaskDetail, bool> filterFunc,string tag="") => SevenDayTaskDetailVisitor.GetByFilter(filterFunc,tag);
+		public static rawSevenDayTaskDetail? GetOneSevenDayTaskDetailByFilter(Func<rawSevenDayTaskDetail, bool> filterFunc,string tag="") => SevenDayTaskDetailVisitor.GetOneByFilter(filterFunc,tag);
+	#endregion SevenDayTaskDetail
+	#region SevenDayTaskGroup
+		public static int GetCountSevenDayTaskGroupMap(string tag="") => SevenDayTaskGroupVisitor.GetCount(tag);
+		public static string GetFileNameSevenDayTaskGroupMap() => SevenDayTaskGroupVisitor.GetFileName();
+		public static List<int> SortedKeysSevenDayTaskGroupMap(string tag="") => SevenDayTaskGroupVisitor.SortedKeys(tag);
+		public static PBC::MapField<int, rawSevenDayTaskGroup> GetSevenDayTaskGroupMap(string tag="") => SevenDayTaskGroupVisitor.All(tag);
+		public static void RangeSevenDayTaskGroupMap(Action<int, rawSevenDayTaskGroup> filter,string tag="") => SevenDayTaskGroupVisitor.Range(filter,tag);
+		public static List<int> KeysSevenDayTaskGroupMap(string tag="") => SevenDayTaskGroupVisitor.Keys(tag);
+		public static rawSevenDayTaskGroup? GetSevenDayTaskGroup(int key,string tag="") => SevenDayTaskGroupVisitor.Get(key,tag);
+		public static List<rawSevenDayTaskGroup> GetSevenDayTaskGroupByFilter(Func<rawSevenDayTaskGroup, bool> filterFunc,string tag="") => SevenDayTaskGroupVisitor.GetByFilter(filterFunc,tag);
+		public static rawSevenDayTaskGroup? GetOneSevenDayTaskGroupByFilter(Func<rawSevenDayTaskGroup, bool> filterFunc,string tag="") => SevenDayTaskGroupVisitor.GetOneByFilter(filterFunc,tag);
+	#endregion SevenDayTaskGroup
+	#region SevenDayTaskInfo
+		public static int GetCountSevenDayTaskInfoMap(string tag="") => SevenDayTaskInfoVisitor.GetCount(tag);
+		public static string GetFileNameSevenDayTaskInfoMap() => SevenDayTaskInfoVisitor.GetFileName();
+		public static List<int> SortedKeysSevenDayTaskInfoMap(string tag="") => SevenDayTaskInfoVisitor.SortedKeys(tag);
+		public static PBC::MapField<int, rawSevenDayTaskInfo> GetSevenDayTaskInfoMap(string tag="") => SevenDayTaskInfoVisitor.All(tag);
+		public static void RangeSevenDayTaskInfoMap(Action<int, rawSevenDayTaskInfo> filter,string tag="") => SevenDayTaskInfoVisitor.Range(filter,tag);
+		public static List<int> KeysSevenDayTaskInfoMap(string tag="") => SevenDayTaskInfoVisitor.Keys(tag);
+		public static rawSevenDayTaskInfo? GetSevenDayTaskInfo(int key,string tag="") => SevenDayTaskInfoVisitor.Get(key,tag);
+		public static List<rawSevenDayTaskInfo> GetSevenDayTaskInfoByFilter(Func<rawSevenDayTaskInfo, bool> filterFunc,string tag="") => SevenDayTaskInfoVisitor.GetByFilter(filterFunc,tag);
+		public static rawSevenDayTaskInfo? GetOneSevenDayTaskInfoByFilter(Func<rawSevenDayTaskInfo, bool> filterFunc,string tag="") => SevenDayTaskInfoVisitor.GetOneByFilter(filterFunc,tag);
+	#endregion SevenDayTaskInfo
+	#region SevenDayTaskRwd
+		public static int GetCountSevenDayTaskRwdMap(string tag="") => SevenDayTaskRwdVisitor.GetCount(tag);
+		public static string GetFileNameSevenDayTaskRwdMap() => SevenDayTaskRwdVisitor.GetFileName();
+		public static List<int> SortedKeysSevenDayTaskRwdMap(string tag="") => SevenDayTaskRwdVisitor.SortedKeys(tag);
+		public static PBC::MapField<int, rawSevenDayTaskRwd> GetSevenDayTaskRwdMap(string tag="") => SevenDayTaskRwdVisitor.All(tag);
+		public static void RangeSevenDayTaskRwdMap(Action<int, rawSevenDayTaskRwd> filter,string tag="") => SevenDayTaskRwdVisitor.Range(filter,tag);
+		public static List<int> KeysSevenDayTaskRwdMap(string tag="") => SevenDayTaskRwdVisitor.Keys(tag);
+		public static rawSevenDayTaskRwd? GetSevenDayTaskRwd(int key,string tag="") => SevenDayTaskRwdVisitor.Get(key,tag);
+		public static List<rawSevenDayTaskRwd> GetSevenDayTaskRwdByFilter(Func<rawSevenDayTaskRwd, bool> filterFunc,string tag="") => SevenDayTaskRwdVisitor.GetByFilter(filterFunc,tag);
+		public static rawSevenDayTaskRwd? GetOneSevenDayTaskRwdByFilter(Func<rawSevenDayTaskRwd, bool> filterFunc,string tag="") => SevenDayTaskRwdVisitor.GetOneByFilter(filterFunc,tag);
+	#endregion SevenDayTaskRwd
 	#region Shake
 		public static int GetCountShakeMap(string tag="") => ShakeVisitor.GetCount(tag);
 		public static string GetFileNameShakeMap() => ShakeVisitor.GetFileName();

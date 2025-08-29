@@ -24,7 +24,7 @@ namespace fat.rawdata {
     static GlobalConfReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChhyYXdkYXRhL0dsb2JhbENvbmYucHJvdG8SB3Jhd2RhdGEioEIKBkdsb2Jh",
+            "ChhyYXdkYXRhL0dsb2JhbENvbmYucHJvdG8SB3Jhd2RhdGEiv0IKBkdsb2Jh",
             "bBIaChJBY3Rpdml0eUNvbnN1bWVOdW0YASABKAUSFgoOQWN0aXZpdHlNYXhO",
             "dW0YAiABKAUSHQoVQW5udWFsU3VtbWFyeURlYWRsaW5lGAMgASgDEhoKEkJw",
             "R3JvdXBSYW5raW5nSGlkZRgEIAEoCBIbChNCcFJhbmtpbmdGcmllbmRIaWRl",
@@ -111,124 +111,124 @@ namespace fat.rawdata {
             "cmd5Tm90aWZpY2F0aW9uRW50cnkSGQoRZnJlZVJlY2hhcmdlVGltZXMYayAB",
             "KAUSFAoMZnJlZVJvbGVQYXJ0GGwgAygFEhgKEGZyZWVTcGVlZFVwVGltZXMY",
             "bSABKAUSEwoLZnJpZW5kTGltaXQYbiABKAUSHwoXZnJpZW5kT3BpbmlvbkZy",
-            "aWVuZHNoaXAYbyABKAUSGAoPZ2FsbGVyeUZpbmdlckx2GMMBIAEoBRIbChNn",
-            "aWZ0QXV0b1JvbGxpbmdUaW1lGHAgASgFEhsKEmdpZnRCb3hTdG9wU2hha2lu",
-            "ZxjFASABKAUSFAoLZ2l2ZUNhcmROdW0Y8QEgASgFEhsKEmdpdmVDYXJkUmVm",
-            "cmVzaFV0YxjyASABKAUSEgoKZ3VpZGVNdXNpYxhxIAEoCRIVCg1oYWlyQmFz",
-            "ZUNvbG9yGHIgASgJEhQKDGluaXRJZGxlQ29pbhhzIAEoCRIYChBpbnZlbnRv",
-            "cnlJbml0Q2FwGHQgASgFEiIKGmludmVudG9yeVByb2R1Y2VyRXh0cmFHcmlk",
-            "GHUgASgFEhoKEmludml0ZUdlbVJld2FyZE51bRh2IAEoBRIbChNpbnZpdGVk",
-            "R2VtUmV3YXJkTnVtGHcgASgFEhYKDWlzQW5kRmFjZWJvb2sY9QEgASgIEhQK",
-            "C2lzQW5kR29vZ2xlGPYBIAEoCBIOCgVpc0ZhcRjvASABKAgSFQoNaXNJbkFw",
-            "cFJldmlldxh4IAEoCBITCgppc0lvc0FwcGxlGPcBIAEoCBIWCg1pc0lvc0Zh",
-            "Y2Vib29rGPgBIAEoCBIUCgtpc0lvc0dvb2dsZRj5ASABKAgSFwoOaXNOZXdP",
-            "cmRlclZpZXcYggIgASgIEiAKF2lzT3JkZXJBcGlPbmx5V2hpdGVsaXN0GOIB",
-            "IAEoCBIcChRpc2xhbmRDaGFuZ2VJdGVtR29sZBh5IAMoCRI8Cg5pdGVtU2Nh",
-            "bGVUZXN0QhjWASADKAsyIy5yYXdkYXRhLkdsb2JhbC5JdGVtU2NhbGVUZXN0",
-            "QkVudHJ5EhIKCmx1Y2t5Qm94Q0QYeiADKAUSFQoNbHVja3lCb3hMaW1pdBh7",
-            "IAEoBRITCgtsdWNreUJveE51bRh8IAEoBRIaChJsdWNreVdoZWVsQWRzQ291",
-            "bnQYfSABKAUSGwoTbHVja3lXaGVlbEZyZWVDb3VudBh+IAEoBRIZChFsdWNr",
-            "eVdoZWVsR2VtQ29zdBh/IAEoBRIbChJsdWNreVdoZWVsR2VtQ291bnQYgAEg",
-            "ASgFEhkKEGx2UG9wdXBDYXJkQWxidW0Y2QEgASgFEhsKEmx2UG9wdXBDbG9z",
-            "ZURpYWxvZxjfASABKAUSEgoJbHZQb3B1cERFGNoBIAEoBRIaChFsdlBvcHVw",
-            "TmV3U2Vzc2lvbhjbASABKAUSHAoTbHZQb3B1cE5ld1Nlc3Npb25JZBjcASAB",
-            "KAUSFgoNbWFpbFN5c3RlbU1heBiBASABKAUSGQoQbWFwQnVpbGRTdGFydEFp",
-            "bRjKASABKAUSGAoPbWFwQnVpbGRTdG9wQWltGMgBIAEoBRIWCg1tYXJrZXRS",
-            "ZWZyZXNoGIIBIAEoBRIZChBtYXJrZXRSZWZyZXNoTnVtGIMBIAEoBRIXCg5t",
-            "YXJrZXRVdGNDbG9jaxiEASABKAUSJwoebWF4RmFtZUxldmVsVG9WaWV3QWN0",
-            "aXZpdHlGZWVkGIUBIAEoBRIdChRtYXhQdWxsRnJpZW5kSW5mb051bRjzASAB",
-            "KAUSFQoMbWF4VG9vbENvdW50GMkBIAEoBRITCgptZXJnZUJvbnVzGIYBIAEo",
-            "BRIYCg9tZXJnZUJvbnVzTGV2ZWwYhwEgASgFEhsKEm1lcmdlRW5lcmd5QXV0",
-            "b01heBiIASABKAUSGwoSbWVyZ2VFbmVyZ3lBdXRvU2VjGIkBIAEoBRIZChBt",
-            "ZXJnZUVuZXJneVByaWNlGIoBIAMoBRIfChZtZXJnZVJlbWluZFRyaWdnZXJU",
-            "aW1lGOEBIAEoBRIeChVtZXJnZVR1dG9yaWFsSW50ZXJ2YWwYxgEgASgFEhoK",
-            "EW1lcmdlVHV0b3JpYWxTdG9wGMcBIAEoBRIXCg5tb3V0aEJhc2VDb2xvchiL",
-            "ASABKAkSHgoVbXlzdGVyeVN0b3JlQ3VzdG9tTnVtGIwBIAEoBRIfChZteXN0",
-            "ZXJ5U3RvcmVDdXN0b21SYXRlGI0BIAEoBRIhChhteXN0ZXJ5U3RvcmVSZWZy",
-            "ZXNoUHJpY2UYjgEgASgFEiAKF215c3RlcnlTdG9yZVJlZnJlc2hUaW1lGI8B",
-            "IAMoBRIQCgduYW1lTWF4GJABIAEoBRIQCgduYW1lTWluGJEBIAEoBRIjChpu",
-            "ZXdVc2VyR3JhbmRQcml6ZUludml0ZU51bRiSASABKAUSTgoXbmV3VXNlckdy",
-            "YW5kUHJpemVSZXdhcmQYkwEgAygLMiwucmF3ZGF0YS5HbG9iYWwuTmV3VXNl",
-            "ckdyYW5kUHJpemVSZXdhcmRFbnRyeRIfChZuZXdVc2VySW52aXRlZU1heExl",
-            "dmVsGJQBIAEoBRJOChduZXdVc2VyUmV3YXJkRm9ySW52aXRlZRiVASADKAsy",
-            "LC5yYXdkYXRhLkdsb2JhbC5OZXdVc2VyUmV3YXJkRm9ySW52aXRlZUVudHJ5",
-            "Ek4KF25ld1VzZXJSZXdhcmRGb3JJbnZpdG9yGJYBIAMoCzIsLnJhd2RhdGEu",
-            "R2xvYmFsLk5ld1VzZXJSZXdhcmRGb3JJbnZpdG9yRW50cnkSGwoSbmV3VXNl",
-            "clJld2FyZExldmVsGJcBIAEoBRIaChFub3RpY2VDb21iYWNrVGltZRjQASAB",
-            "KAUSHQoUbm90aWNlRXZlbnRWYWxpZFRpbWUYiAIgASgFEh4KFW5vdGlmaVBv",
-            "cHVwRXZlbnRUaGVtZRjdASABKAUSHgoVbm90aWZpUG9wdXBTaHV0ZG93bkx2",
-            "GN4BIAEoBRIgChdub3RpZmljYXRpb25FbmVyZ3lCb251cxiYASADKAUSHgoV",
-            "b2xkVXNlckxldHRlckR1cmF0aW9uGJkBIAEoBRIdChRvcmRlckFwaUxpdmVv",
-            "cHNHcmFkZRj8ASABKAUSGAoPb3JkZXJBcGlQYXN0TnVtGPsBIAEoBRIVCgxv",
-            "cmRlckN0cmxOdW0Y6gEgASgFEhkKEG9yZGVyQ3RybFRvb0hpZ2gY6wEgASgF",
-            "Eh8KFm9yZGVyQ3RybFRvb0hpZ2hUYXJnZXQY7QEgASgFEhgKD29yZGVyQ3Ry",
-            "bFRvb0xvdxjsASABKAUSHgoVb3JkZXJDdHJsVG9vTG93VGFyZ2V0GO4BIAEo",
-            "BRIbChJvcmRlckVudGVyQXBpRGVsYXkY4wEgASgFEhgKD29yZGVyRW50ZXJE",
-            "ZWxheRjEASABKAUSGAoPb3JkZXJMaW1pdENvdW50GJoBIAEoBRIXCg5wYWNr",
-            "QXBpVGltZW91dBj9ASABKAUSDwoGcGV0TlBDGJsBIAEoBRITCgpwb3B1cExp",
-            "bWl0GM0BIAEoBRIVCgxwb3B1cFJlZnJlc2gYzgEgASgFEh4KFXBvc3RDYXJk",
-            "SVBhcmFtSXNsYW5kMRicASADKAISFgoNcG9zdENhcmRQYXJhbRidASADKAIS",
-            "IQoYcG9zdGNhcmRHaWZ0T3RoZXJzUmV3YXJkGJ4BIAMoCRIXCg5wb3N0Y2Fy",
-            "ZE1pbk51bRifASABKAUSHwoWcHVsbEZyaWVuZEluZm9XYWl0VGltZRj0ASAB",
-            "KAUSEwoKcHVzaFNob3BDRBigASADKAUSFgoNcHVzaFNob3BDREljZRihASAD",
-            "KAUSGQoQcHVzaFNob3BEdXJhdGlvbhiiASABKAUSPAoOcHVzaFNob3BNYXhO",
-            "dW0YowEgAygLMiMucmF3ZGF0YS5HbG9iYWwuUHVzaFNob3BNYXhOdW1FbnRy",
-            "eRIZChBwdXNoU2hvcFBvcFRpbWVzGKQBIAMoBRIdChRyYW5rQm90T3JkZXJM",
-            "aW1pdE51bRilASABKAUSFwoOcmFua0NvaW5zUGFyYW0YpgEgAygFEhoKEXJh",
-            "bmtDb2luc1BhcmFtTmV3GKcBIAMoAhIWCg1yYW5rTWVtYmVyTnVtGKgBIAEo",
-            "BRIVCgxyYW5rT3JkZXJOdW0YqQEgASgFEhkKEHJhbmtpbmdXaGl0ZWxpc3QY",
-            "hQIgAygJEhkKEHJhdGVCdWlsZGluZ0Jhc2UYzwEgAygFEhcKDnJhdGVSZWRp",
-            "cmVjdEx2GMwBIAEoBRIVCgxyYXRlVGFza09wZW4YqgEgAygFEhoKEXJlcXVp",
-            "cmVUeXBlQURJbml0GOQBIAEoBRIaChFyZXF1aXJlVHlwZUxUSW5pdBjlASAB",
-            "KAUSHAoTcmVxdWlyZVR5cGVVdGNDbG9jaxjmASABKAUSFAoLcmVzdGFydFRp",
-            "bWUY/gEgASgFEh0KFHNlcnZlclRpbWVDaGVja1JhbmdlGIMCIAEoBRIbChJz",
-            "ZXR0aW5nRkJGb2xsb3dHZW0YqwEgASgFEiAKF3NldHRpbmdIZWxwc2hpZnRX",
-            "ZWJzaXRlGKwBIAEoCRIWCg1za2luQmFzZUNvbG9yGK0BIAEoCRITCgpzcGRH",
-            "ZW1UaXBzGI8CIAEoBRIUCgtzcGRVcERpdmlkZRi+ASADKAUSEwoKc3BkVXBQ",
-            "YXJhbRi/ASADKAUSIQoYc3BlY2lhbFN0dWRlbnRDZEludGVydmFsGK4BIAEo",
-            "BRIhChhzdHVkZW50QW5jaG9yUG9pbnRBbW91bnQYrwEgAygFEhoKEXN0dWRl",
-            "bnRHcm91cFRvdGFsGLABIAMoBRIcChNzdHVkZW50U2hvd0ludGVydmFsGLEB",
-            "IAMoBRIZChBzdW5SYW5rTWVtYmVyTnVtGLIBIAEoBRIbChJzdW5SYW5rU3Rv",
-            "cE5ld1RpbWUYswEgASgFEhQKC3N1blJhbmtUaW1lGLQBIAEoBRIVCgxzdXJ2",
-            "ZXlBZHNQb3MYtQEgAygFEjoKDXRhcFNvdXJjZVRpcHMY5wEgAygLMiIucmF3",
-            "ZGF0YS5HbG9iYWwuVGFwU291cmNlVGlwc0VudHJ5EhwKE3Rhc2tEYWlseUZp",
-            "bmFsQ2hlc3QYtgEgASgJEhoKEXRhc2tEYWlseUhhcmRSYXRlGLcBIAEoBRIa",
-            "ChF0YXNrRGFpbHlUb3RhbE51bRi4ASABKAUSFQoMdGFza1Bsb3RUaW1lGLkB",
-            "IAMoBRIcChN1cGRhdGVSZW1pbmRQb3B1cElkGIsCIAEoBRIZChB1c2VyUmVj",
-            "b3JkTWF4RGF5GNQBIAEoBRIdChR1c2VyUmVjb3JkUmVmcmVzaFV0YxjVASAB",
-            "KAUSGgoRdXNlclJlY29yZFdlZWtkYXkY2AEgASgFEhAKB3ZlcnNpb24YugEg",
-            "ASgFEhkKEHdhbGxQYXBlckRpc3BsYXkYuwEgASgJGjwKGkFiSW5mb0F0dHJp",
-            "YnV0ZURpdmlkZUVudHJ5EgsKA2tleRgBIAEoBRINCgV2YWx1ZRgCIAEoCToC",
-            "OAEaMgoQQnViYmxlQm9udXNFbnRyeRILCgNrZXkYASABKAUSDQoFdmFsdWUY",
-            "AiABKAU6AjgBGjQKEkRhaWx5VGFza051bXNFbnRyeRILCgNrZXkYASABKAUS",
-            "DQoFdmFsdWUYAiABKAU6AjgBGjYKFEZyZWVCdWJibGVDb3VudEVudHJ5EgsK",
-            "A2tleRgBIAEoBRINCgV2YWx1ZRgCIAEoBToCOAEaOgoYRnJlZUVuZXJneUNs",
-            "YWltVGltZUVudHJ5EgsKA2tleRgBIAEoBRINCgV2YWx1ZRgCIAEoBToCOAEa",
-            "PQobRnJlZUVuZXJneU5vdGlmaWNhdGlvbkVudHJ5EgsKA2tleRgBIAEoBRIN",
-            "CgV2YWx1ZRgCIAEoBToCOAEaNQoTSXRlbVNjYWxlVGVzdEJFbnRyeRILCgNr",
-            "ZXkYASABKAUSDQoFdmFsdWUYAiABKAU6AjgBGj4KHE5ld1VzZXJHcmFuZFBy",
-            "aXplUmV3YXJkRW50cnkSCwoDa2V5GAEgASgFEg0KBXZhbHVlGAIgASgFOgI4",
-            "ARo+ChxOZXdVc2VyUmV3YXJkRm9ySW52aXRlZUVudHJ5EgsKA2tleRgBIAEo",
-            "BRINCgV2YWx1ZRgCIAEoBToCOAEaPgocTmV3VXNlclJld2FyZEZvckludml0",
-            "b3JFbnRyeRILCgNrZXkYASABKAUSDQoFdmFsdWUYAiABKAU6AjgBGjUKE1B1",
-            "c2hTaG9wTWF4TnVtRW50cnkSCwoDa2V5GAEgASgFEg0KBXZhbHVlGAIgASgF",
-            "OgI4ARo0ChJUYXBTb3VyY2VUaXBzRW50cnkSCwoDa2V5GAEgASgFEg0KBXZh",
-            "bHVlGAIgASgFOgI4ASI6ChJHbG9iYWxTbGljZUFCVmFsdWUSJAoLR2xvYmFs",
-            "U2xpY2UYASADKAsyDy5yYXdkYXRhLkdsb2JhbCLlAgoKR2xvYmFsQ29uZhIk",
-            "CgtHbG9iYWxTbGljZRgBIAMoCzIPLnJhd2RhdGEuR2xvYmFsEj0KDUdsb2Jh",
-            "bFNsaWNlQUIYAiADKAsyJi5yYXdkYXRhLkdsb2JhbENvbmYuR2xvYmFsU2xp",
-            "Y2VBQkVudHJ5EkcKEkdsb2JhbFNsaWNlQUJQYXRjaBgDIAMoCzIrLnJhd2Rh",
-            "dGEuR2xvYmFsQ29uZi5HbG9iYWxTbGljZUFCUGF0Y2hFbnRyeRpRChJHbG9i",
-            "YWxTbGljZUFCRW50cnkSCwoDa2V5GAEgASgJEioKBXZhbHVlGAIgASgLMhsu",
-            "cmF3ZGF0YS5HbG9iYWxTbGljZUFCVmFsdWU6AjgBGlYKF0dsb2JhbFNsaWNl",
-            "QUJQYXRjaEVudHJ5EgsKA2tleRgBIAEoCRIqCgV2YWx1ZRgCIAEoCzIbLnJh",
-            "d2RhdGEuR2xvYmFsU2xpY2VBQlZhbHVlOgI4AUI9Wi1naXRsYWIuZnVucGx1",
-            "cy5pby9mYXQvY29uZi9nZW4vZ29sYW5nL3Jhd2RhdGGqAgtmYXQucmF3ZGF0",
-            "YWIGcHJvdG8z"));
+            "aWVuZHNoaXAYbyABKAUSHQoUZnJvemVuSXRlbURlYWRXZWlnaHQYkAIgAygJ",
+            "EhgKD2dhbGxlcnlGaW5nZXJMdhjDASABKAUSGwoTZ2lmdEF1dG9Sb2xsaW5n",
+            "VGltZRhwIAEoBRIbChJnaWZ0Qm94U3RvcFNoYWtpbmcYxQEgASgFEhQKC2dp",
+            "dmVDYXJkTnVtGPEBIAEoBRIbChJnaXZlQ2FyZFJlZnJlc2hVdGMY8gEgASgF",
+            "EhIKCmd1aWRlTXVzaWMYcSABKAkSFQoNaGFpckJhc2VDb2xvchhyIAEoCRIU",
+            "Cgxpbml0SWRsZUNvaW4YcyABKAkSGAoQaW52ZW50b3J5SW5pdENhcBh0IAEo",
+            "BRIiChppbnZlbnRvcnlQcm9kdWNlckV4dHJhR3JpZBh1IAEoBRIaChJpbnZp",
+            "dGVHZW1SZXdhcmROdW0YdiABKAUSGwoTaW52aXRlZEdlbVJld2FyZE51bRh3",
+            "IAEoBRIWCg1pc0FuZEZhY2Vib29rGPUBIAEoCBIUCgtpc0FuZEdvb2dsZRj2",
+            "ASABKAgSDgoFaXNGYXEY7wEgASgIEhUKDWlzSW5BcHBSZXZpZXcYeCABKAgS",
+            "EwoKaXNJb3NBcHBsZRj3ASABKAgSFgoNaXNJb3NGYWNlYm9vaxj4ASABKAgS",
+            "FAoLaXNJb3NHb29nbGUY+QEgASgIEhcKDmlzTmV3T3JkZXJWaWV3GIICIAEo",
+            "CBIgChdpc09yZGVyQXBpT25seVdoaXRlbGlzdBjiASABKAgSHAoUaXNsYW5k",
+            "Q2hhbmdlSXRlbUdvbGQYeSADKAkSPAoOaXRlbVNjYWxlVGVzdEIY1gEgAygL",
+            "MiMucmF3ZGF0YS5HbG9iYWwuSXRlbVNjYWxlVGVzdEJFbnRyeRISCgpsdWNr",
+            "eUJveENEGHogAygFEhUKDWx1Y2t5Qm94TGltaXQYeyABKAUSEwoLbHVja3lC",
+            "b3hOdW0YfCABKAUSGgoSbHVja3lXaGVlbEFkc0NvdW50GH0gASgFEhsKE2x1",
+            "Y2t5V2hlZWxGcmVlQ291bnQYfiABKAUSGQoRbHVja3lXaGVlbEdlbUNvc3QY",
+            "fyABKAUSGwoSbHVja3lXaGVlbEdlbUNvdW50GIABIAEoBRIZChBsdlBvcHVw",
+            "Q2FyZEFsYnVtGNkBIAEoBRIbChJsdlBvcHVwQ2xvc2VEaWFsb2cY3wEgASgF",
+            "EhIKCWx2UG9wdXBERRjaASABKAUSGgoRbHZQb3B1cE5ld1Nlc3Npb24Y2wEg",
+            "ASgFEhwKE2x2UG9wdXBOZXdTZXNzaW9uSWQY3AEgASgFEhYKDW1haWxTeXN0",
+            "ZW1NYXgYgQEgASgFEhkKEG1hcEJ1aWxkU3RhcnRBaW0YygEgASgFEhgKD21h",
+            "cEJ1aWxkU3RvcEFpbRjIASABKAUSFgoNbWFya2V0UmVmcmVzaBiCASABKAUS",
+            "GQoQbWFya2V0UmVmcmVzaE51bRiDASABKAUSFwoObWFya2V0VXRjQ2xvY2sY",
+            "hAEgASgFEicKHm1heEZhbWVMZXZlbFRvVmlld0FjdGl2aXR5RmVlZBiFASAB",
+            "KAUSHQoUbWF4UHVsbEZyaWVuZEluZm9OdW0Y8wEgASgFEhUKDG1heFRvb2xD",
+            "b3VudBjJASABKAUSEwoKbWVyZ2VCb251cxiGASABKAUSGAoPbWVyZ2VCb251",
+            "c0xldmVsGIcBIAEoBRIbChJtZXJnZUVuZXJneUF1dG9NYXgYiAEgASgFEhsK",
+            "Em1lcmdlRW5lcmd5QXV0b1NlYxiJASABKAUSGQoQbWVyZ2VFbmVyZ3lQcmlj",
+            "ZRiKASADKAUSHwoWbWVyZ2VSZW1pbmRUcmlnZ2VyVGltZRjhASABKAUSHgoV",
+            "bWVyZ2VUdXRvcmlhbEludGVydmFsGMYBIAEoBRIaChFtZXJnZVR1dG9yaWFs",
+            "U3RvcBjHASABKAUSFwoObW91dGhCYXNlQ29sb3IYiwEgASgJEh4KFW15c3Rl",
+            "cnlTdG9yZUN1c3RvbU51bRiMASABKAUSHwoWbXlzdGVyeVN0b3JlQ3VzdG9t",
+            "UmF0ZRiNASABKAUSIQoYbXlzdGVyeVN0b3JlUmVmcmVzaFByaWNlGI4BIAEo",
+            "BRIgChdteXN0ZXJ5U3RvcmVSZWZyZXNoVGltZRiPASADKAUSEAoHbmFtZU1h",
+            "eBiQASABKAUSEAoHbmFtZU1pbhiRASABKAUSIwoabmV3VXNlckdyYW5kUHJp",
+            "emVJbnZpdGVOdW0YkgEgASgFEk4KF25ld1VzZXJHcmFuZFByaXplUmV3YXJk",
+            "GJMBIAMoCzIsLnJhd2RhdGEuR2xvYmFsLk5ld1VzZXJHcmFuZFByaXplUmV3",
+            "YXJkRW50cnkSHwoWbmV3VXNlckludml0ZWVNYXhMZXZlbBiUASABKAUSTgoX",
+            "bmV3VXNlclJld2FyZEZvckludml0ZWUYlQEgAygLMiwucmF3ZGF0YS5HbG9i",
+            "YWwuTmV3VXNlclJld2FyZEZvckludml0ZWVFbnRyeRJOChduZXdVc2VyUmV3",
+            "YXJkRm9ySW52aXRvchiWASADKAsyLC5yYXdkYXRhLkdsb2JhbC5OZXdVc2Vy",
+            "UmV3YXJkRm9ySW52aXRvckVudHJ5EhsKEm5ld1VzZXJSZXdhcmRMZXZlbBiX",
+            "ASABKAUSGgoRbm90aWNlQ29tYmFja1RpbWUY0AEgASgFEh0KFG5vdGljZUV2",
+            "ZW50VmFsaWRUaW1lGIgCIAEoBRIeChVub3RpZmlQb3B1cEV2ZW50VGhlbWUY",
+            "3QEgASgFEh4KFW5vdGlmaVBvcHVwU2h1dGRvd25MdhjeASABKAUSIAoXbm90",
+            "aWZpY2F0aW9uRW5lcmd5Qm9udXMYmAEgAygFEh4KFW9sZFVzZXJMZXR0ZXJE",
+            "dXJhdGlvbhiZASABKAUSHQoUb3JkZXJBcGlMaXZlb3BzR3JhZGUY/AEgASgF",
+            "EhgKD29yZGVyQXBpUGFzdE51bRj7ASABKAUSFQoMb3JkZXJDdHJsTnVtGOoB",
+            "IAEoBRIZChBvcmRlckN0cmxUb29IaWdoGOsBIAEoBRIfChZvcmRlckN0cmxU",
+            "b29IaWdoVGFyZ2V0GO0BIAEoBRIYCg9vcmRlckN0cmxUb29Mb3cY7AEgASgF",
+            "Eh4KFW9yZGVyQ3RybFRvb0xvd1RhcmdldBjuASABKAUSGwoSb3JkZXJFbnRl",
+            "ckFwaURlbGF5GOMBIAEoBRIYCg9vcmRlckVudGVyRGVsYXkYxAEgASgFEhgK",
+            "D29yZGVyTGltaXRDb3VudBiaASABKAUSFwoOcGFja0FwaVRpbWVvdXQY/QEg",
+            "ASgFEg8KBnBldE5QQxibASABKAUSEwoKcG9wdXBMaW1pdBjNASABKAUSFQoM",
+            "cG9wdXBSZWZyZXNoGM4BIAEoBRIeChVwb3N0Q2FyZElQYXJhbUlzbGFuZDEY",
+            "nAEgAygCEhYKDXBvc3RDYXJkUGFyYW0YnQEgAygCEiEKGHBvc3RjYXJkR2lm",
+            "dE90aGVyc1Jld2FyZBieASADKAkSFwoOcG9zdGNhcmRNaW5OdW0YnwEgASgF",
+            "Eh8KFnB1bGxGcmllbmRJbmZvV2FpdFRpbWUY9AEgASgFEhMKCnB1c2hTaG9w",
+            "Q0QYoAEgAygFEhYKDXB1c2hTaG9wQ0RJY2UYoQEgAygFEhkKEHB1c2hTaG9w",
+            "RHVyYXRpb24YogEgASgFEjwKDnB1c2hTaG9wTWF4TnVtGKMBIAMoCzIjLnJh",
+            "d2RhdGEuR2xvYmFsLlB1c2hTaG9wTWF4TnVtRW50cnkSGQoQcHVzaFNob3BQ",
+            "b3BUaW1lcxikASADKAUSHQoUcmFua0JvdE9yZGVyTGltaXROdW0YpQEgASgF",
+            "EhcKDnJhbmtDb2luc1BhcmFtGKYBIAMoBRIaChFyYW5rQ29pbnNQYXJhbU5l",
+            "dxinASADKAISFgoNcmFua01lbWJlck51bRioASABKAUSFQoMcmFua09yZGVy",
+            "TnVtGKkBIAEoBRIZChByYW5raW5nV2hpdGVsaXN0GIUCIAMoCRIZChByYXRl",
+            "QnVpbGRpbmdCYXNlGM8BIAMoBRIXCg5yYXRlUmVkaXJlY3RMdhjMASABKAUS",
+            "FQoMcmF0ZVRhc2tPcGVuGKoBIAMoBRIaChFyZXF1aXJlVHlwZUFESW5pdBjk",
+            "ASABKAUSGgoRcmVxdWlyZVR5cGVMVEluaXQY5QEgASgFEhwKE3JlcXVpcmVU",
+            "eXBlVXRjQ2xvY2sY5gEgASgFEhQKC3Jlc3RhcnRUaW1lGP4BIAEoBRIdChRz",
+            "ZXJ2ZXJUaW1lQ2hlY2tSYW5nZRiDAiABKAUSGwoSc2V0dGluZ0ZCRm9sbG93",
+            "R2VtGKsBIAEoBRIgChdzZXR0aW5nSGVscHNoaWZ0V2Vic2l0ZRisASABKAkS",
+            "FgoNc2tpbkJhc2VDb2xvchitASABKAkSEwoKc3BkR2VtVGlwcxiPAiABKAUS",
+            "FAoLc3BkVXBEaXZpZGUYvgEgAygFEhMKCnNwZFVwUGFyYW0YvwEgAygFEiEK",
+            "GHNwZWNpYWxTdHVkZW50Q2RJbnRlcnZhbBiuASABKAUSIQoYc3R1ZGVudEFu",
+            "Y2hvclBvaW50QW1vdW50GK8BIAMoBRIaChFzdHVkZW50R3JvdXBUb3RhbBiw",
+            "ASADKAUSHAoTc3R1ZGVudFNob3dJbnRlcnZhbBixASADKAUSGQoQc3VuUmFu",
+            "a01lbWJlck51bRiyASABKAUSGwoSc3VuUmFua1N0b3BOZXdUaW1lGLMBIAEo",
+            "BRIUCgtzdW5SYW5rVGltZRi0ASABKAUSFQoMc3VydmV5QWRzUG9zGLUBIAMo",
+            "BRI6Cg10YXBTb3VyY2VUaXBzGOcBIAMoCzIiLnJhd2RhdGEuR2xvYmFsLlRh",
+            "cFNvdXJjZVRpcHNFbnRyeRIcChN0YXNrRGFpbHlGaW5hbENoZXN0GLYBIAEo",
+            "CRIaChF0YXNrRGFpbHlIYXJkUmF0ZRi3ASABKAUSGgoRdGFza0RhaWx5VG90",
+            "YWxOdW0YuAEgASgFEhUKDHRhc2tQbG90VGltZRi5ASADKAUSHAoTdXBkYXRl",
+            "UmVtaW5kUG9wdXBJZBiLAiABKAUSGQoQdXNlclJlY29yZE1heERheRjUASAB",
+            "KAUSHQoUdXNlclJlY29yZFJlZnJlc2hVdGMY1QEgASgFEhoKEXVzZXJSZWNv",
+            "cmRXZWVrZGF5GNgBIAEoBRIQCgd2ZXJzaW9uGLoBIAEoBRIZChB3YWxsUGFw",
+            "ZXJEaXNwbGF5GLsBIAEoCRo8ChpBYkluZm9BdHRyaWJ1dGVEaXZpZGVFbnRy",
+            "eRILCgNrZXkYASABKAUSDQoFdmFsdWUYAiABKAk6AjgBGjIKEEJ1YmJsZUJv",
+            "bnVzRW50cnkSCwoDa2V5GAEgASgFEg0KBXZhbHVlGAIgASgFOgI4ARo0ChJE",
+            "YWlseVRhc2tOdW1zRW50cnkSCwoDa2V5GAEgASgFEg0KBXZhbHVlGAIgASgF",
+            "OgI4ARo2ChRGcmVlQnViYmxlQ291bnRFbnRyeRILCgNrZXkYASABKAUSDQoF",
+            "dmFsdWUYAiABKAU6AjgBGjoKGEZyZWVFbmVyZ3lDbGFpbVRpbWVFbnRyeRIL",
+            "CgNrZXkYASABKAUSDQoFdmFsdWUYAiABKAU6AjgBGj0KG0ZyZWVFbmVyZ3lO",
+            "b3RpZmljYXRpb25FbnRyeRILCgNrZXkYASABKAUSDQoFdmFsdWUYAiABKAU6",
+            "AjgBGjUKE0l0ZW1TY2FsZVRlc3RCRW50cnkSCwoDa2V5GAEgASgFEg0KBXZh",
+            "bHVlGAIgASgFOgI4ARo+ChxOZXdVc2VyR3JhbmRQcml6ZVJld2FyZEVudHJ5",
+            "EgsKA2tleRgBIAEoBRINCgV2YWx1ZRgCIAEoBToCOAEaPgocTmV3VXNlclJl",
+            "d2FyZEZvckludml0ZWVFbnRyeRILCgNrZXkYASABKAUSDQoFdmFsdWUYAiAB",
+            "KAU6AjgBGj4KHE5ld1VzZXJSZXdhcmRGb3JJbnZpdG9yRW50cnkSCwoDa2V5",
+            "GAEgASgFEg0KBXZhbHVlGAIgASgFOgI4ARo1ChNQdXNoU2hvcE1heE51bUVu",
+            "dHJ5EgsKA2tleRgBIAEoBRINCgV2YWx1ZRgCIAEoBToCOAEaNAoSVGFwU291",
+            "cmNlVGlwc0VudHJ5EgsKA2tleRgBIAEoBRINCgV2YWx1ZRgCIAEoBToCOAEi",
+            "OgoSR2xvYmFsU2xpY2VBQlZhbHVlEiQKC0dsb2JhbFNsaWNlGAEgAygLMg8u",
+            "cmF3ZGF0YS5HbG9iYWwi5QIKCkdsb2JhbENvbmYSJAoLR2xvYmFsU2xpY2UY",
+            "ASADKAsyDy5yYXdkYXRhLkdsb2JhbBI9Cg1HbG9iYWxTbGljZUFCGAIgAygL",
+            "MiYucmF3ZGF0YS5HbG9iYWxDb25mLkdsb2JhbFNsaWNlQUJFbnRyeRJHChJH",
+            "bG9iYWxTbGljZUFCUGF0Y2gYAyADKAsyKy5yYXdkYXRhLkdsb2JhbENvbmYu",
+            "R2xvYmFsU2xpY2VBQlBhdGNoRW50cnkaUQoSR2xvYmFsU2xpY2VBQkVudHJ5",
+            "EgsKA2tleRgBIAEoCRIqCgV2YWx1ZRgCIAEoCzIbLnJhd2RhdGEuR2xvYmFs",
+            "U2xpY2VBQlZhbHVlOgI4ARpWChdHbG9iYWxTbGljZUFCUGF0Y2hFbnRyeRIL",
+            "CgNrZXkYASABKAkSKgoFdmFsdWUYAiABKAsyGy5yYXdkYXRhLkdsb2JhbFNs",
+            "aWNlQUJWYWx1ZToCOAFCPVotZ2l0bGFiLmZ1bnBsdXMuaW8vZmF0L2NvbmYv",
+            "Z2VuL2dvbGFuZy9yYXdkYXRhqgILZmF0LnJhd2RhdGFiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.Global), global::fat.rawdata.Global.Parser, new[]{ "ActivityConsumeNum", "ActivityMaxNum", "AnnualSummaryDeadline", "BpGroupRankingHide", "BpRankingFriendHide", "BpRankingHide", "BpRankingWorldHide", "Bpiconovertip1", "Bpiconovertip2", "CardShopRedRefreshUtc", "ClientHttpContinue", "ClientHttpTimeout", "DropProbability", "EventRoleShowAmount", "EventRoleShowLimitation", "FBCommunityWebsite", "GroupRankingHide", "GuildAnnouncementLimit", "GuildApplyCd", "GuildApplyExpireDay", "GuildApplyLimit", "GuildCreatePrice", "GuildJoinCd", "GuildKickoutLimitation", "GuildLeaderInactionDuration", "GuildListNum", "GuildMemberNum", "GuildModifyNamePrice", "GuildNameInvalidChar", "GuildNameLenMax", "GuildNameLenMin", "GuildRefreshInterval", "HobbitsName", "HobbitsName2", "LightLoadingInterval", "LoadingImage", "MiniGameShareImgUrl", "NoNetQuitTime", "NoticeFetchIntervalSec", "NoticeShowIntervalMinMaxSec", "NoticeTimeoutSec", "NotificationApplicationLevel", "NotificationPopLimit", "PacketDelateDays", "PioneerIdx", "PrivacyPolicy", "RankingAnnounceDuration", "RankingAreaHide", "RankingAreaHideInfo", "RankingAreaShowLimitation", "RankingHide", "RankingLevelAreaHideInfo", "RankingLevelAreaShowLimitaion", "RankingLevelHideInfo", "RankingLevelShowLimitaion", "RankingLevelWorldHideInfo", "RankingLevelWorldShowLimitaion", "RankingWorldHide", "RankingWorldHideInfo", "RankingWorldNormalAvatar", "RankingWorldShowLimitaion", "RankingWorldTopAvatar", "RetentionPackRefreshUtc", "ShopRefreshTime", "SignCoinPrize", "SignEnergyLimitPrize", "TermsOfService", "TrackSpeedup", "UnlockEventRoleShow", "UserAvatarCount", "UserTzOffset", "WechatIOSDisablePayVersion", "YDSeq", "AbInfoAttributeDivide", "ActivityCoolDown", "AdIdAndroid", "AdIdAndroidAdmobAsia", "AdIdIos", "AdIdIosAdmobAsia", "AncCdTime", "AncNightStopTime", "AncSessionLimit", "AutoFingerTriggerTime", "BindSocialGem", "BoardClearGem", "BoardColors", "BoostLevel", "BoostLevel4X", "BoostRate", "BoostRate4X", "BotColor", "BotFirstRankLevel", "BoxPossibleOffset", "BpTaskRefresh", "BubbleAdId", "BubbleBonus", "BubbleBonusProb", "BubbleDeadItem", "BubbleDeadWeight", "BubbleExpired", "BubbleGuideItemId", "BubbleLevelDiffParam", "BubbleMaxNum", "BuddyApplyLimitNum", "BuddyApplyLimitTime", "BuddyEnergyDailyLimit", "BuddyEnergyEachSent", "BuddyVisitExtraReward", "BuddyVisitLimit", "BuddyVisitReward", "CardTradeGroupLink", "DailyOrderReward", "DailyTaskNums", "DeRefreshUtc", "DecoShopRefreshGem", "DecoShopRefreshInterval", "DefaultHome", "DefaultRolePart", "DemRefreshWeekday", "DetectiveUnlockLevel", "DiffApiTimeout", "ExitNewUser", "EyeBaseColor", "FishBoardRepeatNum", "FloorDecoDisplay", "FreeBubbleCount", "FreeEnergyClaimCost", "FreeEnergyClaimNum", "FreeEnergyClaimTime", "FreeEnergyNotification", "FreeRechargeTimes", "FreeRolePart", "FreeSpeedUpTimes", "FriendLimit", "FriendOpinionFriendship", "GalleryFingerLv", "GiftAutoRollingTime", "GiftBoxStopShaking", "GiveCardNum", "GiveCardRefreshUtc", "GuideMusic", "HairBaseColor", "InitIdleCoin", "InventoryInitCap", "InventoryProducerExtraGrid", "InviteGemRewardNum", "InvitedGemRewardNum", "IsAndFacebook", "IsAndGoogle", "IsFaq", "IsInAppReview", "IsIosApple", "IsIosFacebook", "IsIosGoogle", "IsNewOrderView", "IsOrderApiOnlyWhitelist", "IslandChangeItemGold", "ItemScaleTestB", "LuckyBoxCD", "LuckyBoxLimit", "LuckyBoxNum", "LuckyWheelAdsCount", "LuckyWheelFreeCount", "LuckyWheelGemCost", "LuckyWheelGemCount", "LvPopupCardAlbum", "LvPopupCloseDialog", "LvPopupDE", "LvPopupNewSession", "LvPopupNewSessionId", "MailSystemMax", "MapBuildStartAim", "MapBuildStopAim", "MarketRefresh", "MarketRefreshNum", "MarketUtcClock", "MaxFameLevelToViewActivityFeed", "MaxPullFriendInfoNum", "MaxToolCount", "MergeBonus", "MergeBonusLevel", "MergeEnergyAutoMax", "MergeEnergyAutoSec", "MergeEnergyPrice", "MergeRemindTriggerTime", "MergeTutorialInterval", "MergeTutorialStop", "MouthBaseColor", "MysteryStoreCustomNum", "MysteryStoreCustomRate", "MysteryStoreRefreshPrice", "MysteryStoreRefreshTime", "NameMax", "NameMin", "NewUserGrandPrizeInviteNum", "NewUserGrandPrizeReward", "NewUserInviteeMaxLevel", "NewUserRewardForInvitee", "NewUserRewardForInvitor", "NewUserRewardLevel", "NoticeCombackTime", "NoticeEventValidTime", "NotifiPopupEventTheme", "NotifiPopupShutdownLv", "NotificationEnergyBonus", "OldUserLetterDuration", "OrderApiLiveopsGrade", "OrderApiPastNum", "OrderCtrlNum", "OrderCtrlTooHigh", "OrderCtrlTooHighTarget", "OrderCtrlTooLow", "OrderCtrlTooLowTarget", "OrderEnterApiDelay", "OrderEnterDelay", "OrderLimitCount", "PackApiTimeout", "PetNPC", "PopupLimit", "PopupRefresh", "PostCardIParamIsland1", "PostCardParam", "PostcardGiftOthersReward", "PostcardMinNum", "PullFriendInfoWaitTime", "PushShopCD", "PushShopCDIce", "PushShopDuration", "PushShopMaxNum", "PushShopPopTimes", "RankBotOrderLimitNum", "RankCoinsParam", "RankCoinsParamNew", "RankMemberNum", "RankOrderNum", "RankingWhitelist", "RateBuildingBase", "RateRedirectLv", "RateTaskOpen", "RequireTypeADInit", "RequireTypeLTInit", "RequireTypeUtcClock", "RestartTime", "ServerTimeCheckRange", "SettingFBFollowGem", "SettingHelpshiftWebsite", "SkinBaseColor", "SpdGemTips", "SpdUpDivide", "SpdUpParam", "SpecialStudentCdInterval", "StudentAnchorPointAmount", "StudentGroupTotal", "StudentShowInterval", "SunRankMemberNum", "SunRankStopNewTime", "SunRankTime", "SurveyAdsPos", "TapSourceTips", "TaskDailyFinalChest", "TaskDailyHardRate", "TaskDailyTotalNum", "TaskPlotTime", "UpdateRemindPopupId", "UserRecordMaxDay", "UserRecordRefreshUtc", "UserRecordWeekday", "Version", "WallPaperDisplay" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, null, null, null, null, null, null, null, null, null, null, }),
+            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.Global), global::fat.rawdata.Global.Parser, new[]{ "ActivityConsumeNum", "ActivityMaxNum", "AnnualSummaryDeadline", "BpGroupRankingHide", "BpRankingFriendHide", "BpRankingHide", "BpRankingWorldHide", "Bpiconovertip1", "Bpiconovertip2", "CardShopRedRefreshUtc", "ClientHttpContinue", "ClientHttpTimeout", "DropProbability", "EventRoleShowAmount", "EventRoleShowLimitation", "FBCommunityWebsite", "GroupRankingHide", "GuildAnnouncementLimit", "GuildApplyCd", "GuildApplyExpireDay", "GuildApplyLimit", "GuildCreatePrice", "GuildJoinCd", "GuildKickoutLimitation", "GuildLeaderInactionDuration", "GuildListNum", "GuildMemberNum", "GuildModifyNamePrice", "GuildNameInvalidChar", "GuildNameLenMax", "GuildNameLenMin", "GuildRefreshInterval", "HobbitsName", "HobbitsName2", "LightLoadingInterval", "LoadingImage", "MiniGameShareImgUrl", "NoNetQuitTime", "NoticeFetchIntervalSec", "NoticeShowIntervalMinMaxSec", "NoticeTimeoutSec", "NotificationApplicationLevel", "NotificationPopLimit", "PacketDelateDays", "PioneerIdx", "PrivacyPolicy", "RankingAnnounceDuration", "RankingAreaHide", "RankingAreaHideInfo", "RankingAreaShowLimitation", "RankingHide", "RankingLevelAreaHideInfo", "RankingLevelAreaShowLimitaion", "RankingLevelHideInfo", "RankingLevelShowLimitaion", "RankingLevelWorldHideInfo", "RankingLevelWorldShowLimitaion", "RankingWorldHide", "RankingWorldHideInfo", "RankingWorldNormalAvatar", "RankingWorldShowLimitaion", "RankingWorldTopAvatar", "RetentionPackRefreshUtc", "ShopRefreshTime", "SignCoinPrize", "SignEnergyLimitPrize", "TermsOfService", "TrackSpeedup", "UnlockEventRoleShow", "UserAvatarCount", "UserTzOffset", "WechatIOSDisablePayVersion", "YDSeq", "AbInfoAttributeDivide", "ActivityCoolDown", "AdIdAndroid", "AdIdAndroidAdmobAsia", "AdIdIos", "AdIdIosAdmobAsia", "AncCdTime", "AncNightStopTime", "AncSessionLimit", "AutoFingerTriggerTime", "BindSocialGem", "BoardClearGem", "BoardColors", "BoostLevel", "BoostLevel4X", "BoostRate", "BoostRate4X", "BotColor", "BotFirstRankLevel", "BoxPossibleOffset", "BpTaskRefresh", "BubbleAdId", "BubbleBonus", "BubbleBonusProb", "BubbleDeadItem", "BubbleDeadWeight", "BubbleExpired", "BubbleGuideItemId", "BubbleLevelDiffParam", "BubbleMaxNum", "BuddyApplyLimitNum", "BuddyApplyLimitTime", "BuddyEnergyDailyLimit", "BuddyEnergyEachSent", "BuddyVisitExtraReward", "BuddyVisitLimit", "BuddyVisitReward", "CardTradeGroupLink", "DailyOrderReward", "DailyTaskNums", "DeRefreshUtc", "DecoShopRefreshGem", "DecoShopRefreshInterval", "DefaultHome", "DefaultRolePart", "DemRefreshWeekday", "DetectiveUnlockLevel", "DiffApiTimeout", "ExitNewUser", "EyeBaseColor", "FishBoardRepeatNum", "FloorDecoDisplay", "FreeBubbleCount", "FreeEnergyClaimCost", "FreeEnergyClaimNum", "FreeEnergyClaimTime", "FreeEnergyNotification", "FreeRechargeTimes", "FreeRolePart", "FreeSpeedUpTimes", "FriendLimit", "FriendOpinionFriendship", "FrozenItemDeadWeight", "GalleryFingerLv", "GiftAutoRollingTime", "GiftBoxStopShaking", "GiveCardNum", "GiveCardRefreshUtc", "GuideMusic", "HairBaseColor", "InitIdleCoin", "InventoryInitCap", "InventoryProducerExtraGrid", "InviteGemRewardNum", "InvitedGemRewardNum", "IsAndFacebook", "IsAndGoogle", "IsFaq", "IsInAppReview", "IsIosApple", "IsIosFacebook", "IsIosGoogle", "IsNewOrderView", "IsOrderApiOnlyWhitelist", "IslandChangeItemGold", "ItemScaleTestB", "LuckyBoxCD", "LuckyBoxLimit", "LuckyBoxNum", "LuckyWheelAdsCount", "LuckyWheelFreeCount", "LuckyWheelGemCost", "LuckyWheelGemCount", "LvPopupCardAlbum", "LvPopupCloseDialog", "LvPopupDE", "LvPopupNewSession", "LvPopupNewSessionId", "MailSystemMax", "MapBuildStartAim", "MapBuildStopAim", "MarketRefresh", "MarketRefreshNum", "MarketUtcClock", "MaxFameLevelToViewActivityFeed", "MaxPullFriendInfoNum", "MaxToolCount", "MergeBonus", "MergeBonusLevel", "MergeEnergyAutoMax", "MergeEnergyAutoSec", "MergeEnergyPrice", "MergeRemindTriggerTime", "MergeTutorialInterval", "MergeTutorialStop", "MouthBaseColor", "MysteryStoreCustomNum", "MysteryStoreCustomRate", "MysteryStoreRefreshPrice", "MysteryStoreRefreshTime", "NameMax", "NameMin", "NewUserGrandPrizeInviteNum", "NewUserGrandPrizeReward", "NewUserInviteeMaxLevel", "NewUserRewardForInvitee", "NewUserRewardForInvitor", "NewUserRewardLevel", "NoticeCombackTime", "NoticeEventValidTime", "NotifiPopupEventTheme", "NotifiPopupShutdownLv", "NotificationEnergyBonus", "OldUserLetterDuration", "OrderApiLiveopsGrade", "OrderApiPastNum", "OrderCtrlNum", "OrderCtrlTooHigh", "OrderCtrlTooHighTarget", "OrderCtrlTooLow", "OrderCtrlTooLowTarget", "OrderEnterApiDelay", "OrderEnterDelay", "OrderLimitCount", "PackApiTimeout", "PetNPC", "PopupLimit", "PopupRefresh", "PostCardIParamIsland1", "PostCardParam", "PostcardGiftOthersReward", "PostcardMinNum", "PullFriendInfoWaitTime", "PushShopCD", "PushShopCDIce", "PushShopDuration", "PushShopMaxNum", "PushShopPopTimes", "RankBotOrderLimitNum", "RankCoinsParam", "RankCoinsParamNew", "RankMemberNum", "RankOrderNum", "RankingWhitelist", "RateBuildingBase", "RateRedirectLv", "RateTaskOpen", "RequireTypeADInit", "RequireTypeLTInit", "RequireTypeUtcClock", "RestartTime", "ServerTimeCheckRange", "SettingFBFollowGem", "SettingHelpshiftWebsite", "SkinBaseColor", "SpdGemTips", "SpdUpDivide", "SpdUpParam", "SpecialStudentCdInterval", "StudentAnchorPointAmount", "StudentGroupTotal", "StudentShowInterval", "SunRankMemberNum", "SunRankStopNewTime", "SunRankTime", "SurveyAdsPos", "TapSourceTips", "TaskDailyFinalChest", "TaskDailyHardRate", "TaskDailyTotalNum", "TaskPlotTime", "UpdateRemindPopupId", "UserRecordMaxDay", "UserRecordRefreshUtc", "UserRecordWeekday", "Version", "WallPaperDisplay" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, null, null, null, null, null, null, null, null, null, null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.GlobalSliceABValue), global::fat.rawdata.GlobalSliceABValue.Parser, new[]{ "GlobalSlice" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.GlobalConf), global::fat.rawdata.GlobalConf.Parser, new[]{ "GlobalSlice", "GlobalSliceAB", "GlobalSliceABPatch" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, })
           }));
@@ -240,7 +240,7 @@ namespace fat.rawdata {
   /// <summary>
   /// annotation@annotation_type(type="rawdata")
   /// annotation@rawdata(row="Global",table="GlobalSlice",table_wrapper="GlobalConf",map="false",map_key_type="",data="GlobalConf")
-  /// annotation@ab(table_ab="GlobalSliceAB",table_ab_patch="GlobalSliceABPatch",table_ab_value="GlobalSliceABValue",ab_patch="false")
+  /// annotation@ab(table_ab="GlobalSliceAB",table_ab_patch="GlobalSliceABPatch",table_ab_value="GlobalSliceABValue",ab_patch="true")
   /// annotation@filter(just_server="false",just_client="false")
   /// </summary>
   public sealed partial class Global : pb::IMessage<Global>
@@ -407,6 +407,7 @@ namespace fat.rawdata {
       freeSpeedUpTimes_ = other.freeSpeedUpTimes_;
       friendLimit_ = other.friendLimit_;
       friendOpinionFriendship_ = other.friendOpinionFriendship_;
+      frozenItemDeadWeight_ = other.frozenItemDeadWeight_.Clone();
       galleryFingerLv_ = other.galleryFingerLv_;
       giftAutoRollingTime_ = other.giftAutoRollingTime_;
       giftBoxStopShaking_ = other.giftBoxStopShaking_;
@@ -2411,6 +2412,19 @@ namespace fat.rawdata {
       }
     }
 
+    /// <summary>Field number for the "frozenItemDeadWeight" field.</summary>
+    public const int FrozenItemDeadWeightFieldNumber = 272;
+    private static readonly pb::FieldCodec<string> _repeated_frozenItemDeadWeight_codec
+        = pb::FieldCodec.ForString(2178);
+    private readonly pbc::RepeatedField<string> frozenItemDeadWeight_ = new pbc::RepeatedField<string>();
+    /// <summary>
+    /// 冰冻棋子过期后变成的棋子ID按权重随机结果
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<string> FrozenItemDeadWeight {
+      get { return frozenItemDeadWeight_; }
+    }
+
     /// <summary>Field number for the "galleryFingerLv" field.</summary>
     public const int GalleryFingerLvFieldNumber = 195;
     private int galleryFingerLv_;
@@ -4406,6 +4420,7 @@ namespace fat.rawdata {
       if (FreeSpeedUpTimes != other.FreeSpeedUpTimes) return false;
       if (FriendLimit != other.FriendLimit) return false;
       if (FriendOpinionFriendship != other.FriendOpinionFriendship) return false;
+      if(!frozenItemDeadWeight_.Equals(other.frozenItemDeadWeight_)) return false;
       if (GalleryFingerLv != other.GalleryFingerLv) return false;
       if (GiftAutoRollingTime != other.GiftAutoRollingTime) return false;
       if (GiftBoxStopShaking != other.GiftBoxStopShaking) return false;
@@ -4681,6 +4696,7 @@ namespace fat.rawdata {
       if (FreeSpeedUpTimes != 0) hash ^= FreeSpeedUpTimes.GetHashCode();
       if (FriendLimit != 0) hash ^= FriendLimit.GetHashCode();
       if (FriendOpinionFriendship != 0) hash ^= FriendOpinionFriendship.GetHashCode();
+      hash ^= frozenItemDeadWeight_.GetHashCode();
       if (GalleryFingerLv != 0) hash ^= GalleryFingerLv.GetHashCode();
       if (GiftAutoRollingTime != 0) hash ^= GiftAutoRollingTime.GetHashCode();
       if (GiftBoxStopShaking != 0) hash ^= GiftBoxStopShaking.GetHashCode();
@@ -5736,6 +5752,7 @@ namespace fat.rawdata {
         output.WriteRawTag(248, 16);
         output.WriteInt32(SpdGemTips);
       }
+      frozenItemDeadWeight_.WriteTo(output, _repeated_frozenItemDeadWeight_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -6650,6 +6667,7 @@ namespace fat.rawdata {
         output.WriteRawTag(248, 16);
         output.WriteInt32(SpdGemTips);
       }
+      frozenItemDeadWeight_.WriteTo(ref output, _repeated_frozenItemDeadWeight_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -7008,6 +7026,7 @@ namespace fat.rawdata {
       if (FriendOpinionFriendship != 0) {
         size += 2 + pb::CodedOutputStream.ComputeInt32Size(FriendOpinionFriendship);
       }
+      size += frozenItemDeadWeight_.CalculateSize(_repeated_frozenItemDeadWeight_codec);
       if (GalleryFingerLv != 0) {
         size += 2 + pb::CodedOutputStream.ComputeInt32Size(GalleryFingerLv);
       }
@@ -7712,6 +7731,7 @@ namespace fat.rawdata {
       if (other.FriendOpinionFriendship != 0) {
         FriendOpinionFriendship = other.FriendOpinionFriendship;
       }
+      frozenItemDeadWeight_.Add(other.frozenItemDeadWeight_);
       if (other.GalleryFingerLv != 0) {
         GalleryFingerLv = other.GalleryFingerLv;
       }
@@ -9179,6 +9199,10 @@ namespace fat.rawdata {
             SpdGemTips = input.ReadInt32();
             break;
           }
+          case 2178: {
+            frozenItemDeadWeight_.AddEntriesFrom(input, _repeated_frozenItemDeadWeight_codec);
+            break;
+          }
         }
       }
     #endif
@@ -10300,6 +10324,10 @@ namespace fat.rawdata {
           }
           case 2168: {
             SpdGemTips = input.ReadInt32();
+            break;
+          }
+          case 2178: {
+            frozenItemDeadWeight_.AddEntriesFrom(ref input, _repeated_frozenItemDeadWeight_codec);
             break;
           }
         }

@@ -144,7 +144,10 @@ namespace FAT
             if (data.rewardType == ObjConfigType.MergeItem || data.rewardType == ObjConfigType.CardPack)
             {
                 //若奖励来源为迷你棋盘相关 则无视
-                if (data.reason == ReasonString.miniboard_getitem || Game.Manager.miniBoardMultiMan.CheckIsMiniBoardItem(data.rewardId))
+                if (data.reason == ReasonString.miniboard_getitem
+                || Game.Manager.miniBoardMultiMan.CheckIsMiniBoardItem(data.rewardId)
+                || data.reason == ReasonString.mine_cart_order
+                || data.reason == ReasonString.mine_cart_tap)
                     return;
                 ignoreRefresh = true;
             }
@@ -154,8 +157,11 @@ namespace FAT
         {
             if ((data.rewardType == ObjConfigType.MergeItem || data.rewardType == ObjConfigType.CardPack) && ignoreRefresh)
             {
-                //若奖励来源为迷你棋盘相关 则无视
-                if (data.reason == ReasonString.miniboard_getitem || Game.Manager.miniBoardMultiMan.CheckIsMiniBoardItem(data.rewardId))
+                //若奖励来源为迷你棋盘相关或者矿车棋盘相关 则无视
+                if (data.reason == ReasonString.miniboard_getitem
+                || Game.Manager.miniBoardMultiMan.CheckIsMiniBoardItem(data.rewardId)
+                || data.reason == ReasonString.mine_cart_order
+                || data.reason == ReasonString.mine_cart_tap)
                     return;
                 ignoreRefresh = false;
                 transform.DOScale(1f, 0.1f).From(0.7f);

@@ -305,7 +305,7 @@ namespace fat.rawdata {
     private readonly pbc::RepeatedField<int> multiplierDur_ = new pbc::RepeatedField<int>();
     /// <summary>
     /// 积分倍率持续时间
-    /// （备注：额外多配置3s，覆盖因动画播放冻结的时间）
+    /// （备注：额外多配置2s，覆盖因动画播放冻结的时间）
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<int> MultiplierDur {

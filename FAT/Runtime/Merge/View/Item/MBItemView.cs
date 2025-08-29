@@ -364,7 +364,8 @@ namespace FAT.Merge
                              context.type == ItemSpawnContext.SpawnType.OrderRate ||
                              context.type == ItemSpawnContext.SpawnType.Farm ||
                              context.type == ItemSpawnContext.SpawnType.Fight ||
-                             context.type == ItemSpawnContext.SpawnType.WishBoard)
+                             context.type == ItemSpawnContext.SpawnType.WishBoard ||
+                             context.type == ItemSpawnContext.SpawnType.MineCart)
                     {
                         _ChangeState(ItemLifecycle.SpawnReward);
                     }

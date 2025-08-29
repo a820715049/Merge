@@ -13,7 +13,7 @@ namespace FAT
     /// </summary>
     public static class ConfTool
     {
-        private static readonly string confRepoName = "fatr_conf";
+        private static readonly string confRepoName = "conf";
 
         // 框架自动更新配置
         // public static void SyncConf()

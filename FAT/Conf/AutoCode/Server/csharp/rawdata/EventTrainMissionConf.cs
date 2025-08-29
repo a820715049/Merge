@@ -254,6 +254,7 @@ namespace fat.rawdata {
     private bool isOnBonus_;
     /// <summary>
     /// 开启mergeBonus
+    /// (空=FALSE)
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public bool IsOnBonus {
@@ -268,6 +269,7 @@ namespace fat.rawdata {
     private bool isOnBubble_;
     /// <summary>
     /// 开启合成气泡
+    /// (空=FALSE)
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public bool IsOnBubble {

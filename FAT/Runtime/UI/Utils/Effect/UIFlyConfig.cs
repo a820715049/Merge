@@ -133,5 +133,9 @@ namespace FAT
         BPExp, //BP经验
         CastleToken,
         ClawOrderToken,     // 抓宝活动代币
+        MineCartGetItem,    //矿车棋盘从订单或耗体行为产出活动棋子 并飞到活动入口
+        MineCartUseItem,    //矿车棋盘使用活动棋子，棋子飞往上方矿车处
+        MineCartGetItemReward, //矿车棋盘使用活动棋子后，棋子飞行的起点
+        MineCartRewardBubble, //矿车棋盘发奖气泡
     }
 }

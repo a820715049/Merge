@@ -24,7 +24,7 @@ namespace fat.rawdata {
     static FeatureEntryReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChpyYXdkYXRhL0ZlYXR1cmVFbnRyeS5wcm90bxIHcmF3ZGF0YSquEQoMRmVh",
+            "ChpyYXdkYXRhL0ZlYXR1cmVFbnRyeS5wcm90bxIHcmF3ZGF0YSqHEgoMRmVh",
             "dHVyZUVudHJ5Eg8KC0ZlYXR1cmVOb25lEAASEwoPRmVhdHVyZUl0ZW1TYWxl",
             "EAESEgoORmVhdHVyZUJhZ0l0ZW0QAhIWChJGZWF0dXJlQmFnUHJvZHVjZXIQ",
             "AxISCg5GZWF0dXJlQmFnVG9vbBAEEhEKDUZlYXR1cmVCdWJibGUQBRIVChFG",
@@ -74,8 +74,10 @@ namespace fat.rawdata {
             "bHVzT25lEFsSHAoYRmVhdHVyZU11bHRpcGxpZXJSYW5raW5nEFwSEwoPRmVh",
             "dHVyZVdpc2hVcG9uEF0SFwoTRmVhdHVyZVRyYWluTWlzc2lvbhBeEhEKDUZl",
             "YXR1cmVQdXp6bGUQXxITCg9GZWF0dXJlTGFuZG1hcmsQYBIVChFGZWF0dXJl",
-            "RnJvemVuSXRlbRBhQj1aLWdpdGxhYi5mdW5wbHVzLmlvL2ZhdC9jb25mL2dl",
-            "bi9nb2xhbmcvcmF3ZGF0YaoCC2ZhdC5yYXdkYXRhYgZwcm90bzM="));
+            "RnJvemVuSXRlbRBhEhUKEUZlYXR1cmVMaW1pdE1lcmdlEGISEQoNRmVhdHVy",
+            "ZU9ubGluZRBjEhQKEEZlYXR1cmVMZXZlbFBhY2sQZBIXChNGZWF0dXJlU2V2",
+            "ZW5EYXlUYXNrEGVCPVotZ2l0bGFiLmZ1bnBsdXMuaW8vZmF0L2NvbmYvZ2Vu",
+            "L2dvbGFuZy9yYXdkYXRhqgILZmF0LnJhd2RhdGFiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::fat.rawdata.FeatureEntry), }, null, null));
@@ -477,6 +479,22 @@ namespace fat.rawdata {
     /// 冰冻棋子
     /// </summary>
     [pbr::OriginalName("FeatureFrozenItem")] FeatureFrozenItem = 97,
+    /// <summary>
+    /// 限时合成订单
+    /// </summary>
+    [pbr::OriginalName("FeatureLimitMerge")] FeatureLimitMerge = 98,
+    /// <summary>
+    /// 在线奖励
+    /// </summary>
+    [pbr::OriginalName("FeatureOnline")] FeatureOnline = 99,
+    /// <summary>
+    /// 等级礼包
+    /// </summary>
+    [pbr::OriginalName("FeatureLevelPack")] FeatureLevelPack = 100,
+    /// <summary>
+    /// 七天任务
+    /// </summary>
+    [pbr::OriginalName("FeatureSevenDayTask")] FeatureSevenDayTask = 101,
   }
 
   #endregion

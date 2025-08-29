@@ -319,7 +319,7 @@ namespace FAT
             World.BindTracer(WorldTracer);
             //挖矿棋盘不需要背包 也没有订单 和底部信息栏
             // World.BindOrderHelper(Game.Manager.mainOrderMan.curOrderHelper);
-            Game.Manager.mergeBoardMan.InitializeBoard(World, boardId, isFirstOpen);
+            Game.Manager.mergeBoardMan.InitializeBoard(_curActivity, World, boardId, isFirstOpen);
         }
 
         //供外部获取指定范围内的棋盘行配置 startRow从0开始

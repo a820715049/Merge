@@ -67,7 +67,7 @@ namespace fat.rawdata {
   /// <summary>
   /// annotation@annotation_type(type="rawdata")
   /// annotation@rawdata(row="CardLimit",table="CardLimitMap",table_wrapper="CardLimitConf",map="true",map_key_type="int32",data="CardLimitConf")
-  /// annotation@ab(table_ab="CardLimitMapAB",table_ab_patch="CardLimitMapABPatch",table_ab_value="CardLimitMapABValue",ab_patch="true")
+  /// annotation@ab(table_ab="CardLimitMapAB",table_ab_patch="CardLimitMapABPatch",table_ab_value="CardLimitMapABValue",ab_patch="false")
   /// annotation@filter(just_server="false",just_client="false")
   /// annotation@CardLimit(id="id")
   /// </summary>

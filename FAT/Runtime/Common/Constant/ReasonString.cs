@@ -83,6 +83,8 @@ namespace FAT
         public static readonly ReasonString mine_order_gettoken = new(nameof(mine_order_gettoken)); //从主订单产代币到挖矿活动
         public static readonly ReasonString mine_milestone_reward = new(nameof(mine_milestone_reward)); //挖矿活动中获得里程碑奖励时
         public static readonly ReasonString mine_end_token_energy = new(nameof(mine_end_token_energy)); //挖矿活动结束代币转化体力
+        public static readonly ReasonString wish_upon_reward = new(nameof(wish_upon_reward)); //耗体自选活动获得奖励
+        
 
         #region 农场棋盘
 
@@ -91,6 +93,17 @@ namespace FAT
         public static readonly ReasonString farm_merge = new(nameof(farm_merge)); //从主棋盘通过耗体行为产代币到农场棋盘活动
         public static readonly ReasonString farm_use_token = new(nameof(farm_use_token)); //农场棋盘消耗代币
         public static readonly ReasonString farm_end_token_energy = new(nameof(farm_end_token_energy)); //农场棋盘活动结束代币转化体力
+
+        #endregion
+        
+        #region  矿车棋盘
+        
+        public static readonly ReasonString mine_cart_start = new(nameof(mine_cart_start)); //矿车棋盘获得初始棋子
+        public static readonly ReasonString mine_cart_tap = new(nameof(mine_cart_tap));  //从主棋盘通过点击耗体行为产棋子到矿车棋盘活动
+        public static readonly ReasonString mine_cart_order = new(nameof(mine_cart_order));  //从订单产活动棋子到矿车棋盘活动
+        public static readonly ReasonString mine_cart_use_item = new(nameof(mine_cart_use_item));  //使用活动棋子获得奖励，因棋盘满飞到奖励箱时
+        public static readonly ReasonString mine_cart_milestone_reward = new(nameof(mine_cart_milestone_reward));  //矿车棋盘里程碑阶段奖励，因棋盘满飞到奖励箱时
+        public static readonly ReasonString mine_cart_round_reward = new(nameof(mine_cart_round_reward));  //矿车棋盘回合大奖
 
         #endregion
 
@@ -219,6 +232,10 @@ namespace FAT
 
         #region bingoTask
         public static readonly ReasonString bingo_task_milestone = new(nameof(bingo_task_milestone));
+        #endregion
+
+        #region 每日任务路径主题
+        public static readonly ReasonString landmark_reward = new(nameof(landmark_reward));
         #endregion
     }
 }

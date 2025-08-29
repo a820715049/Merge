@@ -57,7 +57,7 @@ namespace fat.rawdata {
   /// <summary>
   /// annotation@annotation_type(type="rawdata")
   /// annotation@rawdata(row="ObjCard",table="ObjCardMap",table_wrapper="ObjCardConf",map="true",map_key_type="int32",data="ObjCardConf")
-  /// annotation@ab(table_ab="ObjCardMapAB",table_ab_patch="ObjCardMapABPatch",table_ab_value="ObjCardMapABValue",ab_patch="true")
+  /// annotation@ab(table_ab="ObjCardMapAB",table_ab_patch="ObjCardMapABPatch",table_ab_value="ObjCardMapABValue",ab_patch="false")
   /// annotation@filter(just_server="false",just_client="false")
   /// annotation@ObjCard(id="id")
   /// </summary>

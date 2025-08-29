@@ -118,4 +118,32 @@ namespace EL
 
         public void Clear() => mMessageHandler = null;
     }
+    
+    public class MessageBase<T1,T2,T3,T4> : IGameMessage
+    {
+        protected Action<T1,T2,T3,T4> mMessageHandler = null;
+
+        public void AddListener(Action<T1,T2,T3,T4> func)
+        {
+            mMessageHandler += func;
+        }
+
+        public void AddListenerUnique(Action<T1, T2, T3, T4> func) {
+            mMessageHandler -= func;
+            mMessageHandler += func;
+        }
+
+        public void RemoveListener(Action<T1,T2,T3,T4> func)
+        {
+            if (func == null) return;
+            mMessageHandler -= func;
+        }
+
+        public void Dispatch(T1 val1, T2 val2, T3 val3, T4 val4)
+        {
+            mMessageHandler?.Invoke(val1, val2, val3, val4);
+        }
+
+        public void Clear() => mMessageHandler = null;
+    }
 }

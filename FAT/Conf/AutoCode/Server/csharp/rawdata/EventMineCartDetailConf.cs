@@ -25,35 +25,35 @@ namespace fat.rawdata {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "CiVyYXdkYXRhL0V2ZW50TWluZUNhcnREZXRhaWxDb25mLnByb3RvEgdyYXdk",
-            "YXRhIpoBChNFdmVudE1pbmVDYXJ0RGV0YWlsEgoKAmlkGAEgASgFEg8KB2Jv",
+            "YXRhIrIBChNFdmVudE1pbmVDYXJ0RGV0YWlsEgoKAmlkGAEgASgFEg8KB2Jv",
             "YXJkSWQYAiABKAUSEgoKY3ljbGVSb3VuZBgEIAEoBRIMCgRkaWZmGAYgASgF",
-            "Eg4KBmRyb3BJZBgHIAMoBRIQCghmcmVlSXRlbRgIIAMoCRIRCglvcmRlckl0",
-            "ZW0YCSADKAUSDwoHcm91bmRJZBgKIAMoBSLgAQodRXZlbnRNaW5lQ2FydERl",
-            "dGFpbE1hcEFCVmFsdWUSYgoWRXZlbnRNaW5lQ2FydERldGFpbE1hcBgBIAMo",
-            "CzJCLnJhd2RhdGEuRXZlbnRNaW5lQ2FydERldGFpbE1hcEFCVmFsdWUuRXZl",
-            "bnRNaW5lQ2FydERldGFpbE1hcEVudHJ5GlsKG0V2ZW50TWluZUNhcnREZXRh",
-            "aWxNYXBFbnRyeRILCgNrZXkYASABKAUSKwoFdmFsdWUYAiABKAsyHC5yYXdk",
-            "YXRhLkV2ZW50TWluZUNhcnREZXRhaWw6AjgBIvkEChdFdmVudE1pbmVDYXJ0",
-            "RGV0YWlsQ29uZhJcChZFdmVudE1pbmVDYXJ0RGV0YWlsTWFwGAEgAygLMjwu",
-            "cmF3ZGF0YS5FdmVudE1pbmVDYXJ0RGV0YWlsQ29uZi5FdmVudE1pbmVDYXJ0",
-            "RGV0YWlsTWFwRW50cnkSYAoYRXZlbnRNaW5lQ2FydERldGFpbE1hcEFCGAIg",
-            "AygLMj4ucmF3ZGF0YS5FdmVudE1pbmVDYXJ0RGV0YWlsQ29uZi5FdmVudE1p",
-            "bmVDYXJ0RGV0YWlsTWFwQUJFbnRyeRJqCh1FdmVudE1pbmVDYXJ0RGV0YWls",
-            "TWFwQUJQYXRjaBgDIAMoCzJDLnJhd2RhdGEuRXZlbnRNaW5lQ2FydERldGFp",
-            "bENvbmYuRXZlbnRNaW5lQ2FydERldGFpbE1hcEFCUGF0Y2hFbnRyeRpbChtF",
-            "dmVudE1pbmVDYXJ0RGV0YWlsTWFwRW50cnkSCwoDa2V5GAEgASgFEisKBXZh",
-            "bHVlGAIgASgLMhwucmF3ZGF0YS5FdmVudE1pbmVDYXJ0RGV0YWlsOgI4ARpn",
-            "Ch1FdmVudE1pbmVDYXJ0RGV0YWlsTWFwQUJFbnRyeRILCgNrZXkYASABKAkS",
-            "NQoFdmFsdWUYAiABKAsyJi5yYXdkYXRhLkV2ZW50TWluZUNhcnREZXRhaWxN",
-            "YXBBQlZhbHVlOgI4ARpsCiJFdmVudE1pbmVDYXJ0RGV0YWlsTWFwQUJQYXRj",
-            "aEVudHJ5EgsKA2tleRgBIAEoCRI1CgV2YWx1ZRgCIAEoCzImLnJhd2RhdGEu",
-            "RXZlbnRNaW5lQ2FydERldGFpbE1hcEFCVmFsdWU6AjgBQj1aLWdpdGxhYi5m",
-            "dW5wbHVzLmlvL2ZhdC9jb25mL2dlbi9nb2xhbmcvcmF3ZGF0YaoCC2ZhdC5y",
-            "YXdkYXRhYgZwcm90bzM="));
+            "EhYKDmRpc3RhbmNlRmFjdG9yGAwgASgFEg4KBmRyb3BJZBgHIAMoBRIQCghm",
+            "cmVlSXRlbRgIIAMoCRIRCglvcmRlckl0ZW0YCSADKAUSDwoHcm91bmRJZBgK",
+            "IAMoBSLgAQodRXZlbnRNaW5lQ2FydERldGFpbE1hcEFCVmFsdWUSYgoWRXZl",
+            "bnRNaW5lQ2FydERldGFpbE1hcBgBIAMoCzJCLnJhd2RhdGEuRXZlbnRNaW5l",
+            "Q2FydERldGFpbE1hcEFCVmFsdWUuRXZlbnRNaW5lQ2FydERldGFpbE1hcEVu",
+            "dHJ5GlsKG0V2ZW50TWluZUNhcnREZXRhaWxNYXBFbnRyeRILCgNrZXkYASAB",
+            "KAUSKwoFdmFsdWUYAiABKAsyHC5yYXdkYXRhLkV2ZW50TWluZUNhcnREZXRh",
+            "aWw6AjgBIvkEChdFdmVudE1pbmVDYXJ0RGV0YWlsQ29uZhJcChZFdmVudE1p",
+            "bmVDYXJ0RGV0YWlsTWFwGAEgAygLMjwucmF3ZGF0YS5FdmVudE1pbmVDYXJ0",
+            "RGV0YWlsQ29uZi5FdmVudE1pbmVDYXJ0RGV0YWlsTWFwRW50cnkSYAoYRXZl",
+            "bnRNaW5lQ2FydERldGFpbE1hcEFCGAIgAygLMj4ucmF3ZGF0YS5FdmVudE1p",
+            "bmVDYXJ0RGV0YWlsQ29uZi5FdmVudE1pbmVDYXJ0RGV0YWlsTWFwQUJFbnRy",
+            "eRJqCh1FdmVudE1pbmVDYXJ0RGV0YWlsTWFwQUJQYXRjaBgDIAMoCzJDLnJh",
+            "d2RhdGEuRXZlbnRNaW5lQ2FydERldGFpbENvbmYuRXZlbnRNaW5lQ2FydERl",
+            "dGFpbE1hcEFCUGF0Y2hFbnRyeRpbChtFdmVudE1pbmVDYXJ0RGV0YWlsTWFw",
+            "RW50cnkSCwoDa2V5GAEgASgFEisKBXZhbHVlGAIgASgLMhwucmF3ZGF0YS5F",
+            "dmVudE1pbmVDYXJ0RGV0YWlsOgI4ARpnCh1FdmVudE1pbmVDYXJ0RGV0YWls",
+            "TWFwQUJFbnRyeRILCgNrZXkYASABKAkSNQoFdmFsdWUYAiABKAsyJi5yYXdk",
+            "YXRhLkV2ZW50TWluZUNhcnREZXRhaWxNYXBBQlZhbHVlOgI4ARpsCiJFdmVu",
+            "dE1pbmVDYXJ0RGV0YWlsTWFwQUJQYXRjaEVudHJ5EgsKA2tleRgBIAEoCRI1",
+            "CgV2YWx1ZRgCIAEoCzImLnJhd2RhdGEuRXZlbnRNaW5lQ2FydERldGFpbE1h",
+            "cEFCVmFsdWU6AjgBQj1aLWdpdGxhYi5mdW5wbHVzLmlvL2ZhdC9jb25mL2dl",
+            "bi9nb2xhbmcvcmF3ZGF0YaoCC2ZhdC5yYXdkYXRhYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EventMineCartDetail), global::fat.rawdata.EventMineCartDetail.Parser, new[]{ "Id", "BoardId", "CycleRound", "Diff", "DropId", "FreeItem", "OrderItem", "RoundId" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EventMineCartDetail), global::fat.rawdata.EventMineCartDetail.Parser, new[]{ "Id", "BoardId", "CycleRound", "Diff", "DistanceFactor", "DropId", "FreeItem", "OrderItem", "RoundId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EventMineCartDetailMapABValue), global::fat.rawdata.EventMineCartDetailMapABValue.Parser, new[]{ "EventMineCartDetailMap" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EventMineCartDetailConf), global::fat.rawdata.EventMineCartDetailConf.Parser, new[]{ "EventMineCartDetailMap", "EventMineCartDetailMapAB", "EventMineCartDetailMapABPatch" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, null, })
           }));
@@ -102,6 +102,7 @@ namespace fat.rawdata {
       boardId_ = other.boardId_;
       cycleRound_ = other.cycleRound_;
       diff_ = other.diff_;
+      distanceFactor_ = other.distanceFactor_;
       dropId_ = other.dropId_.Clone();
       freeItem_ = other.freeItem_.Clone();
       orderItem_ = other.orderItem_.Clone();
@@ -169,6 +170,20 @@ namespace fat.rawdata {
       get { return diff_; }
       set {
         diff_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "distanceFactor" field.</summary>
+    public const int DistanceFactorFieldNumber = 12;
+    private int distanceFactor_;
+    /// <summary>
+    /// 距离系数
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int DistanceFactor {
+      get { return distanceFactor_; }
+      set {
+        distanceFactor_ = value;
       }
     }
 
@@ -245,6 +260,7 @@ namespace fat.rawdata {
       if (BoardId != other.BoardId) return false;
       if (CycleRound != other.CycleRound) return false;
       if (Diff != other.Diff) return false;
+      if (DistanceFactor != other.DistanceFactor) return false;
       if(!dropId_.Equals(other.dropId_)) return false;
       if(!freeItem_.Equals(other.freeItem_)) return false;
       if(!orderItem_.Equals(other.orderItem_)) return false;
@@ -259,6 +275,7 @@ namespace fat.rawdata {
       if (BoardId != 0) hash ^= BoardId.GetHashCode();
       if (CycleRound != 0) hash ^= CycleRound.GetHashCode();
       if (Diff != 0) hash ^= Diff.GetHashCode();
+      if (DistanceFactor != 0) hash ^= DistanceFactor.GetHashCode();
       hash ^= dropId_.GetHashCode();
       hash ^= freeItem_.GetHashCode();
       hash ^= orderItem_.GetHashCode();
@@ -299,6 +316,10 @@ namespace fat.rawdata {
       freeItem_.WriteTo(output, _repeated_freeItem_codec);
       orderItem_.WriteTo(output, _repeated_orderItem_codec);
       roundId_.WriteTo(output, _repeated_roundId_codec);
+      if (DistanceFactor != 0) {
+        output.WriteRawTag(96);
+        output.WriteInt32(DistanceFactor);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -328,6 +349,10 @@ namespace fat.rawdata {
       freeItem_.WriteTo(ref output, _repeated_freeItem_codec);
       orderItem_.WriteTo(ref output, _repeated_orderItem_codec);
       roundId_.WriteTo(ref output, _repeated_roundId_codec);
+      if (DistanceFactor != 0) {
+        output.WriteRawTag(96);
+        output.WriteInt32(DistanceFactor);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -348,6 +373,9 @@ namespace fat.rawdata {
       }
       if (Diff != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Diff);
+      }
+      if (DistanceFactor != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(DistanceFactor);
       }
       size += dropId_.CalculateSize(_repeated_dropId_codec);
       size += freeItem_.CalculateSize(_repeated_freeItem_codec);
@@ -375,6 +403,9 @@ namespace fat.rawdata {
       }
       if (other.Diff != 0) {
         Diff = other.Diff;
+      }
+      if (other.DistanceFactor != 0) {
+        DistanceFactor = other.DistanceFactor;
       }
       dropId_.Add(other.dropId_);
       freeItem_.Add(other.freeItem_);
@@ -429,6 +460,10 @@ namespace fat.rawdata {
             roundId_.AddEntriesFrom(input, _repeated_roundId_codec);
             break;
           }
+          case 96: {
+            DistanceFactor = input.ReadInt32();
+            break;
+          }
         }
       }
     #endif
@@ -476,6 +511,10 @@ namespace fat.rawdata {
           case 82:
           case 80: {
             roundId_.AddEntriesFrom(ref input, _repeated_roundId_codec);
+            break;
+          }
+          case 96: {
+            DistanceFactor = input.ReadInt32();
             break;
           }
         }

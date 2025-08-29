@@ -96,6 +96,7 @@ namespace FAT.Merge
             Farm,       // 农场
             Fight,
             WishBoard,
+            MineCart,   //矿车棋盘
         }
         public Item spawner;
         public Item from1;           //如果是变过来的，它的来源之1

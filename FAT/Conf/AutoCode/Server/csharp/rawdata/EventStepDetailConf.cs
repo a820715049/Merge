@@ -62,7 +62,7 @@ namespace fat.rawdata {
   /// <summary>
   /// annotation@annotation_type(type="rawdata")
   /// annotation@rawdata(row="EventStepDetail",table="EventStepDetailMap",table_wrapper="EventStepDetailConf",map="true",map_key_type="int32",data="EventStepDetailConf")
-  /// annotation@ab(table_ab="EventStepDetailMapAB",table_ab_patch="EventStepDetailMapABPatch",table_ab_value="EventStepDetailMapABValue",ab_patch="true")
+  /// annotation@ab(table_ab="EventStepDetailMapAB",table_ab_patch="EventStepDetailMapABPatch",table_ab_value="EventStepDetailMapABValue",ab_patch="false")
   /// annotation@filter(just_server="false",just_client="false")
   /// annotation@EventStepDetail(id="id")
   /// </summary>
