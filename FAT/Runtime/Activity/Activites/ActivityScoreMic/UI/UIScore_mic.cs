@@ -450,69 +450,56 @@ namespace FAT.UI
 
         /// <summary>
         /// 播放Cell动画流程
-        /// 动画流程：
-        /// 1. 隐藏第一个位置的Cell（已领奖的Cell），并将其移动到数组最后
-        /// 2. 等待最后一个Cell消失，确保视觉连续性
-        /// 3. 所有Cell同步位移：前6个Cell向前移动一位，最后一个Cell从最后位置移动到第一个位置
-        /// 4. 等待所有Cell移动完成
         /// </summary>
         private IEnumerator PlayCellAnimation()
         {
-        //     // 第一步：隐藏第一个位置的Cell，并将其移动到数组最后
-        //     // 第一个Cell是刚刚领奖的Cell，需要隐藏并移动到数组末尾
-        //     if (cellList.Count > 0)
-        //     {
-        //         var firstCell = cellList[0];
-        //         // 将第一个Cell移动到数组最后
-        //         // 这样在后续的移动中，它会从最后位置移动到第一个位置
-        //         cellList.RemoveAt(0);
-        //         cellList.Add(firstCell);
-        //         firstCell.transform.localPosition = m_movePos[^1]; // 设置到最后一个位置
-        //         firstCell.transform.localScale = m_moveScale[^1];  // 设置对应的缩放
-        //         firstCell.transform.SetAsFirstSibling();
-        //         //这里要刷新被挪到最后的那个cell的显示状态
-        //         var lastCellComponent = firstCell.GetComponent<UIScoreMilestoneItem_track>();
-        //         if (lastCellComponent != null)
-        //         {
-        //             // 使用维护的动画状态参数
-        //             // 被移动到最后的Cell应该显示当前里程碑后面的第7个奖励
-        //             int targetMilestoneIndex = _currentAnimationMilestoneIndex + 7;
-        //
-        //             // 确保索引在有效范围内
-        //             if (targetMilestoneIndex < activity.ListM.Count)
-        //             {
-        //                 var node = activity.ListM[targetMilestoneIndex];
-        //                 lastCellComponent.UpdateContent(node, targetMilestoneIndex == activity.ListM.Count - 1);
-        //                 lastCellComponent.gameObject.SetActive(true);
-        //             }
-        //             else
-        //             {
-        //                 // 如果后面已经没有奖励了（超界），就隐藏这个Cell
-        //                 firstCell.SetActive(false);
-        //             }
-        //         }
-        //     }
-        //
-        //     // 第三步：所有Cell同步位移（包括最后一个Cell从最后位置移动到第一个位置）
-        //     // 使用DoTween直接执行动画，无需协程管理
-        //     for (int i = 0; i < cellList.Count; i++)
-        //     {
-        //         var cellObj = cellList[i];
-        //         if (cellObj != null)
-        //         {
-        //             // 移动到对应的位置和缩放
-        //             // i=0对应第一个位置，i=1对应第二个位置，以此类推
-        //             var targetPos = m_movePos[i];
-        //             var targetScale = m_moveScale[i];
-        //
-        //             // 使用DoTween直接执行动画
-        //             MoveCellToPosition(cellObj, targetPos, targetScale, cellMoveDuration);
-        //         }
-        //     }
-        //
-        // 等待所有Cell移动完成
-        // DoTween动画会自动完成，这里等待动画时长
-            yield return new WaitForSeconds(0);
+            if (cellList.Count < 2)
+            {
+                yield break;
+            }
+
+            // 在播放动画前刷新数据，使UI与最新领奖状态保持一致
+            activity.FillMilestoneData();
+
+            nodes.Clear();
+            var currentMilestoneIndex = activity.GetMilestoneIndex();
+            for (int i = activity.ListM.Count - 2; i >= 0; i--)
+            {
+                if (activity.ListM[i].showNum - 1 < currentMilestoneIndex)
+                    continue;
+                nodes.Add(activity.ListM[i]);
+            }
+
+            if (nodes.Count < cellList.Count)
+            {
+                var needNum = cellList.Count - nodes.Count;
+                for (int i = 0; i < needNum; i++)
+                {
+                    nodes.Add(activity.ListM[currentMilestoneIndex - 1 - i]);
+                }
+            }
+
+            for (int i = 0; i < cellList.Count && i < nodes.Count; i++)
+            {
+                var uiItem = cellList[i].GetComponent<UIMicItem>();
+                if (uiItem != null)
+                {
+                    uiItem.UpdateContent(nodes[i]);
+                }
+            }
+
+            var prevItem = cellList[0].GetComponent<UIMicItem>();
+            var nextItem = cellList[1].GetComponent<UIMicItem>();
+
+            if (prevItem != null)
+            {
+                yield return prevItem.ProcessToNext();
+            }
+
+            if (nextItem != null)
+            {
+                yield return nextItem.ProcessToThis();
+            }
         }
 
         public void OnNavBack()
