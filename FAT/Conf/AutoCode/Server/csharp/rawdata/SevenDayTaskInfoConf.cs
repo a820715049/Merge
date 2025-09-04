@@ -25,35 +25,35 @@ namespace fat.rawdata {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "CiJyYXdkYXRhL1NldmVuRGF5VGFza0luZm9Db25mLnByb3RvEgdyYXdkYXRh",
-            "It0BChBTZXZlbkRheVRhc2tJbmZvEgoKAmlkGAEgASgFEgwKBGRlc2MYAiAB",
-            "KAkSEAoIaWNvbkRlc2MYAyABKAkSEAoIaWNvblNob3cYBCADKAkSGAoQaWNv",
-            "blNob3dBY3Rpdml0eRgFIAEoBRIWCg5pY29uU2hvd0NvbW1vbhgGIAEoCRIU",
-            "CgxyZXF1aXJlUGFyYW0YByABKAkSDAoEc29ydBgIIAEoBRISCgp0YXNrUmV3",
-            "YXJkGAkgAygJEhAKCHRhc2tUeXBlGAogASgFEg8KB3Rva2VuSWQYCyABKAUi",
-            "zgEKGlNldmVuRGF5VGFza0luZm9NYXBBQlZhbHVlElkKE1NldmVuRGF5VGFz",
-            "a0luZm9NYXAYASADKAsyPC5yYXdkYXRhLlNldmVuRGF5VGFza0luZm9NYXBB",
-            "QlZhbHVlLlNldmVuRGF5VGFza0luZm9NYXBFbnRyeRpVChhTZXZlbkRheVRh",
-            "c2tJbmZvTWFwRW50cnkSCwoDa2V5GAEgASgFEigKBXZhbHVlGAIgASgLMhku",
-            "cmF3ZGF0YS5TZXZlbkRheVRhc2tJbmZvOgI4ASLJBAoUU2V2ZW5EYXlUYXNr",
-            "SW5mb0NvbmYSUwoTU2V2ZW5EYXlUYXNrSW5mb01hcBgBIAMoCzI2LnJhd2Rh",
-            "dGEuU2V2ZW5EYXlUYXNrSW5mb0NvbmYuU2V2ZW5EYXlUYXNrSW5mb01hcEVu",
-            "dHJ5ElcKFVNldmVuRGF5VGFza0luZm9NYXBBQhgCIAMoCzI4LnJhd2RhdGEu",
-            "U2V2ZW5EYXlUYXNrSW5mb0NvbmYuU2V2ZW5EYXlUYXNrSW5mb01hcEFCRW50",
-            "cnkSYQoaU2V2ZW5EYXlUYXNrSW5mb01hcEFCUGF0Y2gYAyADKAsyPS5yYXdk",
-            "YXRhLlNldmVuRGF5VGFza0luZm9Db25mLlNldmVuRGF5VGFza0luZm9NYXBB",
-            "QlBhdGNoRW50cnkaVQoYU2V2ZW5EYXlUYXNrSW5mb01hcEVudHJ5EgsKA2tl",
-            "eRgBIAEoBRIoCgV2YWx1ZRgCIAEoCzIZLnJhd2RhdGEuU2V2ZW5EYXlUYXNr",
-            "SW5mbzoCOAEaYQoaU2V2ZW5EYXlUYXNrSW5mb01hcEFCRW50cnkSCwoDa2V5",
-            "GAEgASgJEjIKBXZhbHVlGAIgASgLMiMucmF3ZGF0YS5TZXZlbkRheVRhc2tJ",
-            "bmZvTWFwQUJWYWx1ZToCOAEaZgofU2V2ZW5EYXlUYXNrSW5mb01hcEFCUGF0",
-            "Y2hFbnRyeRILCgNrZXkYASABKAkSMgoFdmFsdWUYAiABKAsyIy5yYXdkYXRh",
-            "LlNldmVuRGF5VGFza0luZm9NYXBBQlZhbHVlOgI4AUI9Wi1naXRsYWIuZnVu",
-            "cGx1cy5pby9mYXQvY29uZi9nZW4vZ29sYW5nL3Jhd2RhdGGqAgtmYXQucmF3",
-            "ZGF0YWIGcHJvdG8z"));
+            "GhZyYXdkYXRhL1Rhc2tUeXBlLnByb3RvIsQBChBTZXZlbkRheVRhc2tJbmZv",
+            "EgoKAmlkGAEgASgFEhUKDWFjdGl2aXR5VGl0bGUYDCABKAkSDAoEZGVzYxgC",
+            "IAEoCRIQCghpY29uRGVzYxgDIAEoCRIQCghpY29uU2hvdxgEIAEoCRIUCgxy",
+            "ZXF1aXJlUGFyYW0YByABKAkSDAoEc29ydBgIIAEoBRISCgp0YXNrUmV3YXJk",
+            "GAkgAygJEiMKCHRhc2tUeXBlGAogASgOMhEucmF3ZGF0YS5UYXNrVHlwZSLO",
+            "AQoaU2V2ZW5EYXlUYXNrSW5mb01hcEFCVmFsdWUSWQoTU2V2ZW5EYXlUYXNr",
+            "SW5mb01hcBgBIAMoCzI8LnJhd2RhdGEuU2V2ZW5EYXlUYXNrSW5mb01hcEFC",
+            "VmFsdWUuU2V2ZW5EYXlUYXNrSW5mb01hcEVudHJ5GlUKGFNldmVuRGF5VGFz",
+            "a0luZm9NYXBFbnRyeRILCgNrZXkYASABKAUSKAoFdmFsdWUYAiABKAsyGS5y",
+            "YXdkYXRhLlNldmVuRGF5VGFza0luZm86AjgBIskEChRTZXZlbkRheVRhc2tJ",
+            "bmZvQ29uZhJTChNTZXZlbkRheVRhc2tJbmZvTWFwGAEgAygLMjYucmF3ZGF0",
+            "YS5TZXZlbkRheVRhc2tJbmZvQ29uZi5TZXZlbkRheVRhc2tJbmZvTWFwRW50",
+            "cnkSVwoVU2V2ZW5EYXlUYXNrSW5mb01hcEFCGAIgAygLMjgucmF3ZGF0YS5T",
+            "ZXZlbkRheVRhc2tJbmZvQ29uZi5TZXZlbkRheVRhc2tJbmZvTWFwQUJFbnRy",
+            "eRJhChpTZXZlbkRheVRhc2tJbmZvTWFwQUJQYXRjaBgDIAMoCzI9LnJhd2Rh",
+            "dGEuU2V2ZW5EYXlUYXNrSW5mb0NvbmYuU2V2ZW5EYXlUYXNrSW5mb01hcEFC",
+            "UGF0Y2hFbnRyeRpVChhTZXZlbkRheVRhc2tJbmZvTWFwRW50cnkSCwoDa2V5",
+            "GAEgASgFEigKBXZhbHVlGAIgASgLMhkucmF3ZGF0YS5TZXZlbkRheVRhc2tJ",
+            "bmZvOgI4ARphChpTZXZlbkRheVRhc2tJbmZvTWFwQUJFbnRyeRILCgNrZXkY",
+            "ASABKAkSMgoFdmFsdWUYAiABKAsyIy5yYXdkYXRhLlNldmVuRGF5VGFza0lu",
+            "Zm9NYXBBQlZhbHVlOgI4ARpmCh9TZXZlbkRheVRhc2tJbmZvTWFwQUJQYXRj",
+            "aEVudHJ5EgsKA2tleRgBIAEoCRIyCgV2YWx1ZRgCIAEoCzIjLnJhd2RhdGEu",
+            "U2V2ZW5EYXlUYXNrSW5mb01hcEFCVmFsdWU6AjgBQj1aLWdpdGxhYi5mdW5w",
+            "bHVzLmlvL2ZhdC9jb25mL2dlbi9nb2xhbmcvcmF3ZGF0YaoCC2ZhdC5yYXdk",
+            "YXRhYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { },
+          new pbr::FileDescriptor[] { global::fat.rawdata.TaskTypeReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.SevenDayTaskInfo), global::fat.rawdata.SevenDayTaskInfo.Parser, new[]{ "Id", "Desc", "IconDesc", "IconShow", "IconShowActivity", "IconShowCommon", "RequireParam", "Sort", "TaskReward", "TaskType", "TokenId" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.SevenDayTaskInfo), global::fat.rawdata.SevenDayTaskInfo.Parser, new[]{ "Id", "ActivityTitle", "Desc", "IconDesc", "IconShow", "RequireParam", "Sort", "TaskReward", "TaskType" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.SevenDayTaskInfoMapABValue), global::fat.rawdata.SevenDayTaskInfoMapABValue.Parser, new[]{ "SevenDayTaskInfoMap" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.SevenDayTaskInfoConf), global::fat.rawdata.SevenDayTaskInfoConf.Parser, new[]{ "SevenDayTaskInfoMap", "SevenDayTaskInfoMapAB", "SevenDayTaskInfoMapABPatch" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, null, })
           }));
@@ -99,16 +99,14 @@ namespace fat.rawdata {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public SevenDayTaskInfo(SevenDayTaskInfo other) : this() {
       id_ = other.id_;
+      activityTitle_ = other.activityTitle_;
       desc_ = other.desc_;
       iconDesc_ = other.iconDesc_;
-      iconShow_ = other.iconShow_.Clone();
-      iconShowActivity_ = other.iconShowActivity_;
-      iconShowCommon_ = other.iconShowCommon_;
+      iconShow_ = other.iconShow_;
       requireParam_ = other.requireParam_;
       sort_ = other.sort_;
       taskReward_ = other.taskReward_.Clone();
       taskType_ = other.taskType_;
-      tokenId_ = other.tokenId_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -129,6 +127,20 @@ namespace fat.rawdata {
       get { return id_; }
       set {
         id_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "activityTitle" field.</summary>
+    public const int ActivityTitleFieldNumber = 12;
+    private string activityTitle_ = "";
+    /// <summary>
+    /// icon描述文案中的活动标题文案
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string ActivityTitle {
+      get { return activityTitle_; }
+      set {
+        activityTitle_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
@@ -162,44 +174,15 @@ namespace fat.rawdata {
 
     /// <summary>Field number for the "iconShow" field.</summary>
     public const int IconShowFieldNumber = 4;
-    private static readonly pb::FieldCodec<string> _repeated_iconShow_codec
-        = pb::FieldCodec.ForString(34);
-    private readonly pbc::RepeatedField<string> iconShow_ = new pbc::RepeatedField<string>();
+    private string iconShow_ = "";
     /// <summary>
-    /// 本任务关联的活动和任务icon
-    /// {活动模版id1:token.Asset1,活动模版id2:token.Asset2,.......}
+    /// 活动关联的icon图
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<string> IconShow {
+    public string IconShow {
       get { return iconShow_; }
-    }
-
-    /// <summary>Field number for the "iconShowActivity" field.</summary>
-    public const int IconShowActivityFieldNumber = 5;
-    private int iconShowActivity_;
-    /// <summary>
-    /// 本任务关联的活动id
-    /// （eventType.id）
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int IconShowActivity {
-      get { return iconShowActivity_; }
       set {
-        iconShowActivity_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "iconShowCommon" field.</summary>
-    public const int IconShowCommonFieldNumber = 6;
-    private string iconShowCommon_ = "";
-    /// <summary>
-    /// 不与活动关联的icon图
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string IconShowCommon {
-      get { return iconShowCommon_; }
-      set {
-        iconShowCommon_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        iconShow_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
@@ -251,31 +234,16 @@ namespace fat.rawdata {
 
     /// <summary>Field number for the "taskType" field.</summary>
     public const int TaskTypeFieldNumber = 10;
-    private int taskType_;
+    private global::fat.rawdata.TaskType taskType_ = global::fat.rawdata.TaskType.Coin;
     /// <summary>
     /// 任务类型
-    /// （TaskType@enum.value）
+    /// （TaskType@enum.key）
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int TaskType {
+    public global::fat.rawdata.TaskType TaskType {
       get { return taskType_; }
       set {
         taskType_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "tokenId" field.</summary>
-    public const int TokenIdFieldNumber = 11;
-    private int tokenId_;
-    /// <summary>
-    /// 关联具体活动
-    /// 根据tokenId关联到对应活动
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int TokenId {
-      get { return tokenId_; }
-      set {
-        tokenId_ = value;
       }
     }
 
@@ -293,16 +261,14 @@ namespace fat.rawdata {
         return true;
       }
       if (Id != other.Id) return false;
+      if (ActivityTitle != other.ActivityTitle) return false;
       if (Desc != other.Desc) return false;
       if (IconDesc != other.IconDesc) return false;
-      if(!iconShow_.Equals(other.iconShow_)) return false;
-      if (IconShowActivity != other.IconShowActivity) return false;
-      if (IconShowCommon != other.IconShowCommon) return false;
+      if (IconShow != other.IconShow) return false;
       if (RequireParam != other.RequireParam) return false;
       if (Sort != other.Sort) return false;
       if(!taskReward_.Equals(other.taskReward_)) return false;
       if (TaskType != other.TaskType) return false;
-      if (TokenId != other.TokenId) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -310,16 +276,14 @@ namespace fat.rawdata {
     public override int GetHashCode() {
       int hash = 1;
       if (Id != 0) hash ^= Id.GetHashCode();
+      if (ActivityTitle.Length != 0) hash ^= ActivityTitle.GetHashCode();
       if (Desc.Length != 0) hash ^= Desc.GetHashCode();
       if (IconDesc.Length != 0) hash ^= IconDesc.GetHashCode();
-      hash ^= iconShow_.GetHashCode();
-      if (IconShowActivity != 0) hash ^= IconShowActivity.GetHashCode();
-      if (IconShowCommon.Length != 0) hash ^= IconShowCommon.GetHashCode();
+      if (IconShow.Length != 0) hash ^= IconShow.GetHashCode();
       if (RequireParam.Length != 0) hash ^= RequireParam.GetHashCode();
       if (Sort != 0) hash ^= Sort.GetHashCode();
       hash ^= taskReward_.GetHashCode();
-      if (TaskType != 0) hash ^= TaskType.GetHashCode();
-      if (TokenId != 0) hash ^= TokenId.GetHashCode();
+      if (TaskType != global::fat.rawdata.TaskType.Coin) hash ^= TaskType.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -348,14 +312,9 @@ namespace fat.rawdata {
         output.WriteRawTag(26);
         output.WriteString(IconDesc);
       }
-      iconShow_.WriteTo(output, _repeated_iconShow_codec);
-      if (IconShowActivity != 0) {
-        output.WriteRawTag(40);
-        output.WriteInt32(IconShowActivity);
-      }
-      if (IconShowCommon.Length != 0) {
-        output.WriteRawTag(50);
-        output.WriteString(IconShowCommon);
+      if (IconShow.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteString(IconShow);
       }
       if (RequireParam.Length != 0) {
         output.WriteRawTag(58);
@@ -366,13 +325,13 @@ namespace fat.rawdata {
         output.WriteInt32(Sort);
       }
       taskReward_.WriteTo(output, _repeated_taskReward_codec);
-      if (TaskType != 0) {
+      if (TaskType != global::fat.rawdata.TaskType.Coin) {
         output.WriteRawTag(80);
-        output.WriteInt32(TaskType);
+        output.WriteEnum((int) TaskType);
       }
-      if (TokenId != 0) {
-        output.WriteRawTag(88);
-        output.WriteInt32(TokenId);
+      if (ActivityTitle.Length != 0) {
+        output.WriteRawTag(98);
+        output.WriteString(ActivityTitle);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -395,14 +354,9 @@ namespace fat.rawdata {
         output.WriteRawTag(26);
         output.WriteString(IconDesc);
       }
-      iconShow_.WriteTo(ref output, _repeated_iconShow_codec);
-      if (IconShowActivity != 0) {
-        output.WriteRawTag(40);
-        output.WriteInt32(IconShowActivity);
-      }
-      if (IconShowCommon.Length != 0) {
-        output.WriteRawTag(50);
-        output.WriteString(IconShowCommon);
+      if (IconShow.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteString(IconShow);
       }
       if (RequireParam.Length != 0) {
         output.WriteRawTag(58);
@@ -413,13 +367,13 @@ namespace fat.rawdata {
         output.WriteInt32(Sort);
       }
       taskReward_.WriteTo(ref output, _repeated_taskReward_codec);
-      if (TaskType != 0) {
+      if (TaskType != global::fat.rawdata.TaskType.Coin) {
         output.WriteRawTag(80);
-        output.WriteInt32(TaskType);
+        output.WriteEnum((int) TaskType);
       }
-      if (TokenId != 0) {
-        output.WriteRawTag(88);
-        output.WriteInt32(TokenId);
+      if (ActivityTitle.Length != 0) {
+        output.WriteRawTag(98);
+        output.WriteString(ActivityTitle);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -433,18 +387,17 @@ namespace fat.rawdata {
       if (Id != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Id);
       }
+      if (ActivityTitle.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(ActivityTitle);
+      }
       if (Desc.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Desc);
       }
       if (IconDesc.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(IconDesc);
       }
-      size += iconShow_.CalculateSize(_repeated_iconShow_codec);
-      if (IconShowActivity != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(IconShowActivity);
-      }
-      if (IconShowCommon.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(IconShowCommon);
+      if (IconShow.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(IconShow);
       }
       if (RequireParam.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(RequireParam);
@@ -453,11 +406,8 @@ namespace fat.rawdata {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Sort);
       }
       size += taskReward_.CalculateSize(_repeated_taskReward_codec);
-      if (TaskType != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(TaskType);
-      }
-      if (TokenId != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(TokenId);
+      if (TaskType != global::fat.rawdata.TaskType.Coin) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) TaskType);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -473,18 +423,17 @@ namespace fat.rawdata {
       if (other.Id != 0) {
         Id = other.Id;
       }
+      if (other.ActivityTitle.Length != 0) {
+        ActivityTitle = other.ActivityTitle;
+      }
       if (other.Desc.Length != 0) {
         Desc = other.Desc;
       }
       if (other.IconDesc.Length != 0) {
         IconDesc = other.IconDesc;
       }
-      iconShow_.Add(other.iconShow_);
-      if (other.IconShowActivity != 0) {
-        IconShowActivity = other.IconShowActivity;
-      }
-      if (other.IconShowCommon.Length != 0) {
-        IconShowCommon = other.IconShowCommon;
+      if (other.IconShow.Length != 0) {
+        IconShow = other.IconShow;
       }
       if (other.RequireParam.Length != 0) {
         RequireParam = other.RequireParam;
@@ -493,11 +442,8 @@ namespace fat.rawdata {
         Sort = other.Sort;
       }
       taskReward_.Add(other.taskReward_);
-      if (other.TaskType != 0) {
+      if (other.TaskType != global::fat.rawdata.TaskType.Coin) {
         TaskType = other.TaskType;
-      }
-      if (other.TokenId != 0) {
-        TokenId = other.TokenId;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -526,15 +472,7 @@ namespace fat.rawdata {
             break;
           }
           case 34: {
-            iconShow_.AddEntriesFrom(input, _repeated_iconShow_codec);
-            break;
-          }
-          case 40: {
-            IconShowActivity = input.ReadInt32();
-            break;
-          }
-          case 50: {
-            IconShowCommon = input.ReadString();
+            IconShow = input.ReadString();
             break;
           }
           case 58: {
@@ -550,11 +488,11 @@ namespace fat.rawdata {
             break;
           }
           case 80: {
-            TaskType = input.ReadInt32();
+            TaskType = (global::fat.rawdata.TaskType) input.ReadEnum();
             break;
           }
-          case 88: {
-            TokenId = input.ReadInt32();
+          case 98: {
+            ActivityTitle = input.ReadString();
             break;
           }
         }
@@ -584,15 +522,7 @@ namespace fat.rawdata {
             break;
           }
           case 34: {
-            iconShow_.AddEntriesFrom(ref input, _repeated_iconShow_codec);
-            break;
-          }
-          case 40: {
-            IconShowActivity = input.ReadInt32();
-            break;
-          }
-          case 50: {
-            IconShowCommon = input.ReadString();
+            IconShow = input.ReadString();
             break;
           }
           case 58: {
@@ -608,11 +538,11 @@ namespace fat.rawdata {
             break;
           }
           case 80: {
-            TaskType = input.ReadInt32();
+            TaskType = (global::fat.rawdata.TaskType) input.ReadEnum();
             break;
           }
-          case 88: {
-            TokenId = input.ReadInt32();
+          case 98: {
+            ActivityTitle = input.ReadString();
             break;
           }
         }

@@ -20,20 +20,19 @@ namespace FAT
         [SerializeField] private GameObject normalEffect;
         [SerializeField] private GameObject scoreEffect;
         [SerializeField] private GameObject boardFlyRoot;
-
         private List<Transform> listFlyItem = new();
-        
+
         public void Setup()
         {
             GameObjectPoolManager.Instance.PreparePool(PoolItemType.BOARD_FLY_ITEM, boardFlyItem);
         }
-        
+
         public void InitOnPreOpen()
         {
             MessageCenter.Get<MSG.SCORE_FLY_REWARD_CENTER>().AddListener(ShowFlyCenterReward);
             _FirstTimeShow();
         }
-        
+
         public void CleanupOnPostClose()
         {
             MessageCenter.Get<MSG.SCORE_FLY_REWARD_CENTER>().RemoveListener(ShowFlyCenterReward);
@@ -52,7 +51,18 @@ namespace FAT
             var trans = GameObjectPoolManager.Instance.CreateObject(PoolItemType.BOARD_FLY_ITEM, boardFlyRoot.transform).transform as RectTransform;
             if (trans != null)
             {
-                BoardUtility.AddAutoReleaseComponent(trans.gameObject, 2f, PoolItemType.BOARD_FLY_ITEM);
+                float releaseTime = 2f;
+                if (obj.act is ActivityMultiplierRanking)
+                {
+                    var boardFlyItem = trans.GetComponent<BoardFlyItem>();
+                    if (boardFlyItem != null && (obj.act as ActivityMultiplierRanking).GetCurMultiplierNum() > 1)
+                    {
+                        //策划约定1倍率不进行展示动画
+                        releaseTime = boardFlyItem.GetRankAnimLength();
+                    }
+                    MessageCenter.Get<MSG.BOARD_ORDER_SCROLL_RESET>().Dispatch();
+                }
+                BoardUtility.AddAutoReleaseComponent(trans.gameObject, releaseTime, PoolItemType.BOARD_FLY_ITEM);
                 trans.gameObject.SetActive(true);
                 trans.transform.position = obj.from;
                 trans.transform.GetChild(0).GetComponent<UIImageRes>().SetImage(Game.Manager.rewardMan.GetRewardIcon(obj.re.rewardId, obj.re.rewardCount));
@@ -69,7 +79,16 @@ namespace FAT
         private IEnumerator _OnFlyCenterComplete(Transform trans, RewardCommitData re, Vector3 from, ActivityLike act)
         {
             Game.Manager.audioMan.TriggerSound("WhiteBallBig");
-            var wait = new WaitForSeconds(1f);
+            float waitTime = 1f;
+            if (act is ActivityMultiplierRanking)
+            {
+                if ((act as ActivityMultiplierRanking).GetCurMultiplierNum() > 1)
+                {
+                    //倍率排行榜因为要播放动画，所以等待时间会延长
+                    waitTime = 1.5f;
+                }
+            }
+            var wait = new WaitForSeconds(waitTime);
             num.gameObject.SetActive(true);
             //根据不同活动 表现不同 例如积分活动需要区分特效和字体描边
             if (act is ActivityScore scoreAct && act.Valid && re.rewardId == scoreAct.ConfD.RequireCoinId)
@@ -82,7 +101,16 @@ namespace FAT
                 normalEffect.gameObject.SetActive(true);
             }
             num.text = re.rewardCount.ToString();
-
+            BoardFlyItem boardFlyItem = null;
+            if (act is ActivityMultiplierRanking)
+            {
+                //倍率排行榜需要播放额外的动画表现
+                boardFlyItem = trans.GetComponent<BoardFlyItem>();
+                if (boardFlyItem != null)
+                {
+                    boardFlyItem.SetRankAnimView(act, re, num);
+                }
+            }
             yield return wait;
             float waitProgress = 0;
             if (act is ActivityScore scoreActivity && Game.Manager.mapSceneMan.scene.Active)
@@ -94,6 +122,10 @@ namespace FAT
             normalEffect.gameObject.SetActive(false);
             scoreEffect.gameObject.SetActive(false);
             num.gameObject.SetActive(false);
+            if (boardFlyItem != null)
+            {
+                boardFlyItem.Reset();
+            }
             //飞奖励：生成奖励icon 飞；而随机宝箱不飞奖励 直接commit后 尝试打开
             if (UIFlyFactory.CheckNeedFlyIcon(re.rewardId))
             {

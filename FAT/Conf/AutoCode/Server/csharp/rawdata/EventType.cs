@@ -24,7 +24,7 @@ namespace fat.rawdata {
     static EventTypeReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChdyYXdkYXRhL0V2ZW50VHlwZS5wcm90bxIHcmF3ZGF0YSrFDwoJRXZlbnRU",
+            "ChdyYXdkYXRhL0V2ZW50VHlwZS5wcm90bxIHcmF3ZGF0YSqNEAoJRXZlbnRU",
             "eXBlEhQKEEV2ZW50VHlwZURlZmF1bHQQABITCg9FdmVudFR5cGVFbmVyZ3kQ",
             "ARIVChFFdmVudFR5cGVEYWlseVBvcBACEhQKEEV2ZW50VHlwZU5ld1VzZXIQ",
             "AxIXChNFdmVudFR5cGVPbmVQbHVzT25lEAQSGAoURXZlbnRUeXBlRW5kbGVz",
@@ -65,12 +65,14 @@ namespace fat.rawdata {
             "dFR5cGVDbGF3T3JkZXIQRBIVChFFdmVudFR5cGVNaW5lQ2FydBBFEhsKF0V2",
             "ZW50VHlwZUNhcnRPbmVQbHVzT25lEEYSHgoaRXZlbnRUeXBlTXVsdGlwbGll",
             "clJhbmtpbmcQRxIVChFFdmVudFR5cGVXaXNoVXBvbhBIEhkKFUV2ZW50VHlw",
-            "ZVRyYWluTWlzc2lvbhBJEhMKD0V2ZW50VHlwZVB1enpsZRBLEhUKEUV2ZW50",
+            "ZVRyYWluTWlzc2lvbhBJEhMKD0V2ZW50VHlwZVB1enpsZRBKEhUKEUV2ZW50",
             "VHlwZUxhbmRtYXJrEEwSFwoTRXZlbnRUeXBlRnJvemVuSXRlbRBNEhcKE0V2",
             "ZW50VHlwZUxpbWl0TWVyZ2UQThITCg9FdmVudFR5cGVPbmxpbmUQTxIWChJF",
             "dmVudFR5cGVMZXZlbFBhY2sQUBIZChVFdmVudFR5cGVTZXZlbkRheVRhc2sQ",
-            "UUI9Wi1naXRsYWIuZnVucGx1cy5pby9mYXQvY29uZi9nZW4vZ29sYW5nL3Jh",
-            "d2RhdGGqAgtmYXQucmF3ZGF0YWIGcHJvdG8z"));
+            "URIZChVFdmVudFR5cGVNaWNNaWxlc3RvbmUQUhIUChBFdmVudFR5cGVTZWFS",
+            "YWNlEFMSFQoRRXZlbnRUeXBlVmluZUxlYXAQVEI9Wi1naXRsYWIuZnVucGx1",
+            "cy5pby9mYXQvY29uZi9nZW4vZ29sYW5nL3Jhd2RhdGGqAgtmYXQucmF3ZGF0",
+            "YWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::fat.rawdata.EventType), }, null, null));
@@ -376,7 +378,7 @@ namespace fat.rawdata {
     /// <summary>
     /// 拼图活动
     /// </summary>
-    [pbr::OriginalName("EventTypePuzzle")] Puzzle = 75,
+    [pbr::OriginalName("EventTypePuzzle")] Puzzle = 74,
     /// <summary>
     /// 每日路径里程碑
     /// </summary>
@@ -401,6 +403,18 @@ namespace fat.rawdata {
     /// 七天任务
     /// </summary>
     [pbr::OriginalName("EventTypeSevenDayTask")] SevenDayTask = 81,
+    /// <summary>
+    /// 合成音符
+    /// </summary>
+    [pbr::OriginalName("EventTypeMicMilestone")] MicMilestone = 82,
+    /// <summary>
+    /// 海上赢家
+    /// </summary>
+    [pbr::OriginalName("EventTypeSeaRace")] SeaRace = 83,
+    /// <summary>
+    /// 飞跃藤蔓
+    /// </summary>
+    [pbr::OriginalName("EventTypeVineLeap")] VineLeap = 84,
   }
 
   #endregion

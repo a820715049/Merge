@@ -540,5 +540,16 @@ namespace FAT
         public static UIResource UIMineCartBoardHelp = new UIResource("UIMineCartBoardHelp.prefab", SubStatus, "event_minecartboard_common").SupportNavBack();
         public static UIResource UIMineCartBoardBannerTip = new UIResource("UIMineCartBoardBannerTip.prefab", SubStatus, "event_minecartboard_common");
         #endregion
+        
+        #region 倍率排行榜
+        public static UIResource UIMultiplyRankingMain = new UIResource("UIMultiplyRankingMain.prefab", AboveStatus, "event_multiplyranking_default").SupportNavBack();
+        public static UIResource UIMultiplyRankingStart = new UIResource("UIMultiplyRankingStart.prefab", AboveStatus, "event_multiplyranking_default");
+        public static UIResource UIMultiplyRankingEnd = new UIResource("UIMultiplyRankingEnd.prefab", AboveStatus, "event_multiplyranking_default");
+        public static UIResource UIMultiplyRankingHelp = new UIResource("UIMultiplyRankingHelp.prefab", AboveStatus, "event_multiplyranking_default").SupportNavBack();
+        public static UIResource UIMultiplyRankingEndReward = new UIResource("UIMultiplyRankingEndReward.prefab", AboveStatus, "event_multiplyranking_default");
+        public static UIResource UIMultiplyRankingMilestone = new UIResource("UIMultiplyRankingMilestone.prefab", SubStatus, "event_multiplyranking_default").SupportNavBack();
+        public static UIResource UIRankingEntryTips = new UIResource("UIRankingEntryTips.prefab", SubStatus, "event_multiplyranking_default").SupportNavBack().IsTips();
+        public static UIResource UIRankingTurntableTips = new UIResource("UIRankingTurntableTips.prefab", SubStatus, "event_multiplyranking_default").SupportNavBack().IsTips();
+        #endregion
     }
 }

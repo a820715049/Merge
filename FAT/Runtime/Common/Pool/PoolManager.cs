@@ -85,6 +85,11 @@ public enum PoolItemType
 
     #endregion
 
+    #region 积分活动 音乐会
+
+    SCORE_MIC_CELL,
+
+    #endregion
 
     #region 周任务活动
 
@@ -201,7 +206,11 @@ public enum PoolItemType
     #region 矿车棋盘活动
 
     MINE_CART_BOARD_GALLERY_ITEM,
+    #endregion
 
+    #region 倍率排行榜
+    Ranking_REWARD_ITEM,
+    
     #endregion
 }
 

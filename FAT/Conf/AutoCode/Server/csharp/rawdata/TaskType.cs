@@ -130,7 +130,7 @@ namespace fat.rawdata {
     /// </summary>
     [pbr::OriginalName("TaskUFO")] TaskUfo = 20,
     /// <summary>
-    /// 消耗道具（农场）
+    /// 消耗道具(农场)
     /// </summary>
     [pbr::OriginalName("TaskFarmTokenCost")] TaskFarmTokenCost = 21,
   }

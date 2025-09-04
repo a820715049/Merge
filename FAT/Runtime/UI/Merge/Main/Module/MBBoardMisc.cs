@@ -309,7 +309,7 @@ namespace FAT
             _RefreshLayout();
             
             // 红点位置适配
-            entry.GetComponentInChildren<MBDotPosFit>()?.FitPos(entry);
+            entry.GetComponentInChildren<MBDotPosFit>(true)?.FitPos(entry);
         }
     }
 }

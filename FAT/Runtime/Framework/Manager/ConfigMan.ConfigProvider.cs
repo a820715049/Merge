@@ -687,6 +687,25 @@ namespace FAT
 
         #endregion
 
+        #region 积分活动变种(麦克风版)
+
+        public MicMilestone GetMicMilestoneConfig(int id)
+        {
+            return conf.Data.GetMicMilestone(id);
+        }
+        
+        public MicMilestoneDetail GetMicMilestoneDetailConfig(int id)
+        {
+            return conf.Data.GetMicMilestoneDetail(id);
+        }
+        
+        public MicMilestoneGroup GetMicMilestoneGroupConfig(int id)
+        {
+            return conf.Data.GetMicMilestoneGroup(id);
+        }
+
+        #endregion
+
         #region 用户分层相关
 
         public UserGradeGroup GetUserGradeGroupConfig(int id)

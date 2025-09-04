@@ -24,34 +24,35 @@ namespace fat.rawdata {
     static EventPuzzleConfReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "Ch1yYXdkYXRhL0V2ZW50UHV6emxlQ29uZi5wcm90bxIHcmF3ZGF0YSKHAgoL",
+            "Ch1yYXdkYXRhL0V2ZW50UHV6emxlQ29uZi5wcm90bxIHcmF3ZGF0YSKYAgoL",
             "RXZlbnRQdXp6bGUSCgoCaWQYASABKAUSDwoHYm9hcmRJZBgCIAEoBRIUCgxl",
             "dmVudFRoZW1lSWQYAyABKAUSOgoLZXhwaXJlUG9wdXAYBCADKAsyJS5yYXdk",
             "YXRhLkV2ZW50UHV6emxlLkV4cGlyZVBvcHVwRW50cnkSFAoMZnJlZVRva2Vu",
-            "TnVtGAUgASgFEhUKDW5vcm1hbFJvdW5kSWQYBiADKAUSFwoPcmVjb250aW51",
-            "ZVRoZW1lGAcgASgFEg8KB3Rva2VuSWQYCCABKAUaMgoQRXhwaXJlUG9wdXBF",
-            "bnRyeRILCgNrZXkYASABKAUSDQoFdmFsdWUYAiABKAk6AjgBIrABChVFdmVu",
-            "dFB1enpsZU1hcEFCVmFsdWUSSgoORXZlbnRQdXp6bGVNYXAYASADKAsyMi5y",
-            "YXdkYXRhLkV2ZW50UHV6emxlTWFwQUJWYWx1ZS5FdmVudFB1enpsZU1hcEVu",
-            "dHJ5GksKE0V2ZW50UHV6emxlTWFwRW50cnkSCwoDa2V5GAEgASgFEiMKBXZh",
-            "bHVlGAIgASgLMhQucmF3ZGF0YS5FdmVudFB1enpsZToCOAEi+QMKD0V2ZW50",
-            "UHV6emxlQ29uZhJECg5FdmVudFB1enpsZU1hcBgBIAMoCzIsLnJhd2RhdGEu",
-            "RXZlbnRQdXp6bGVDb25mLkV2ZW50UHV6emxlTWFwRW50cnkSSAoQRXZlbnRQ",
-            "dXp6bGVNYXBBQhgCIAMoCzIuLnJhd2RhdGEuRXZlbnRQdXp6bGVDb25mLkV2",
-            "ZW50UHV6emxlTWFwQUJFbnRyeRJSChVFdmVudFB1enpsZU1hcEFCUGF0Y2gY",
-            "AyADKAsyMy5yYXdkYXRhLkV2ZW50UHV6emxlQ29uZi5FdmVudFB1enpsZU1h",
-            "cEFCUGF0Y2hFbnRyeRpLChNFdmVudFB1enpsZU1hcEVudHJ5EgsKA2tleRgB",
-            "IAEoBRIjCgV2YWx1ZRgCIAEoCzIULnJhd2RhdGEuRXZlbnRQdXp6bGU6AjgB",
-            "GlcKFUV2ZW50UHV6emxlTWFwQUJFbnRyeRILCgNrZXkYASABKAkSLQoFdmFs",
-            "dWUYAiABKAsyHi5yYXdkYXRhLkV2ZW50UHV6emxlTWFwQUJWYWx1ZToCOAEa",
-            "XAoaRXZlbnRQdXp6bGVNYXBBQlBhdGNoRW50cnkSCwoDa2V5GAEgASgJEi0K",
-            "BXZhbHVlGAIgASgLMh4ucmF3ZGF0YS5FdmVudFB1enpsZU1hcEFCVmFsdWU6",
-            "AjgBQj1aLWdpdGxhYi5mdW5wbHVzLmlvL2ZhdC9jb25mL2dlbi9nb2xhbmcv",
-            "cmF3ZGF0YaoCC2ZhdC5yYXdkYXRhYgZwcm90bzM="));
+            "TnVtGAUgASgFEg8KB2lzQ3ljbGUYCSABKAgSFQoNbm9ybWFsUm91bmRJZBgG",
+            "IAMoBRIXCg9yZWNvbnRpbnVlVGhlbWUYByABKAUSDwoHdG9rZW5JZBgIIAEo",
+            "BRoyChBFeHBpcmVQb3B1cEVudHJ5EgsKA2tleRgBIAEoBRINCgV2YWx1ZRgC",
+            "IAEoCToCOAEisAEKFUV2ZW50UHV6emxlTWFwQUJWYWx1ZRJKCg5FdmVudFB1",
+            "enpsZU1hcBgBIAMoCzIyLnJhd2RhdGEuRXZlbnRQdXp6bGVNYXBBQlZhbHVl",
+            "LkV2ZW50UHV6emxlTWFwRW50cnkaSwoTRXZlbnRQdXp6bGVNYXBFbnRyeRIL",
+            "CgNrZXkYASABKAUSIwoFdmFsdWUYAiABKAsyFC5yYXdkYXRhLkV2ZW50UHV6",
+            "emxlOgI4ASL5AwoPRXZlbnRQdXp6bGVDb25mEkQKDkV2ZW50UHV6emxlTWFw",
+            "GAEgAygLMiwucmF3ZGF0YS5FdmVudFB1enpsZUNvbmYuRXZlbnRQdXp6bGVN",
+            "YXBFbnRyeRJIChBFdmVudFB1enpsZU1hcEFCGAIgAygLMi4ucmF3ZGF0YS5F",
+            "dmVudFB1enpsZUNvbmYuRXZlbnRQdXp6bGVNYXBBQkVudHJ5ElIKFUV2ZW50",
+            "UHV6emxlTWFwQUJQYXRjaBgDIAMoCzIzLnJhd2RhdGEuRXZlbnRQdXp6bGVD",
+            "b25mLkV2ZW50UHV6emxlTWFwQUJQYXRjaEVudHJ5GksKE0V2ZW50UHV6emxl",
+            "TWFwRW50cnkSCwoDa2V5GAEgASgFEiMKBXZhbHVlGAIgASgLMhQucmF3ZGF0",
+            "YS5FdmVudFB1enpsZToCOAEaVwoVRXZlbnRQdXp6bGVNYXBBQkVudHJ5EgsK",
+            "A2tleRgBIAEoCRItCgV2YWx1ZRgCIAEoCzIeLnJhd2RhdGEuRXZlbnRQdXp6",
+            "bGVNYXBBQlZhbHVlOgI4ARpcChpFdmVudFB1enpsZU1hcEFCUGF0Y2hFbnRy",
+            "eRILCgNrZXkYASABKAkSLQoFdmFsdWUYAiABKAsyHi5yYXdkYXRhLkV2ZW50",
+            "UHV6emxlTWFwQUJWYWx1ZToCOAFCPVotZ2l0bGFiLmZ1bnBsdXMuaW8vZmF0",
+            "L2NvbmYvZ2VuL2dvbGFuZy9yYXdkYXRhqgILZmF0LnJhd2RhdGFiBnByb3Rv",
+            "Mw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EventPuzzle), global::fat.rawdata.EventPuzzle.Parser, new[]{ "Id", "BoardId", "EventThemeId", "ExpirePopup", "FreeTokenNum", "NormalRoundId", "RecontinueTheme", "TokenId" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
+            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EventPuzzle), global::fat.rawdata.EventPuzzle.Parser, new[]{ "Id", "BoardId", "EventThemeId", "ExpirePopup", "FreeTokenNum", "IsCycle", "NormalRoundId", "RecontinueTheme", "TokenId" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EventPuzzleMapABValue), global::fat.rawdata.EventPuzzleMapABValue.Parser, new[]{ "EventPuzzleMap" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EventPuzzleConf), global::fat.rawdata.EventPuzzleConf.Parser, new[]{ "EventPuzzleMap", "EventPuzzleMapAB", "EventPuzzleMapABPatch" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, null, })
           }));
@@ -101,6 +102,7 @@ namespace fat.rawdata {
       eventThemeId_ = other.eventThemeId_;
       expirePopup_ = other.expirePopup_.Clone();
       freeTokenNum_ = other.freeTokenNum_;
+      isCycle_ = other.isCycle_;
       normalRoundId_ = other.normalRoundId_.Clone();
       recontinueTheme_ = other.recontinueTheme_;
       tokenId_ = other.tokenId_;
@@ -186,6 +188,21 @@ namespace fat.rawdata {
       }
     }
 
+    /// <summary>Field number for the "isCycle" field.</summary>
+    public const int IsCycleFieldNumber = 9;
+    private bool isCycle_;
+    /// <summary>
+    /// 是否循环回合
+    /// （根据normalRoundId进行循环）
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool IsCycle {
+      get { return isCycle_; }
+      set {
+        isCycle_ = value;
+      }
+    }
+
     /// <summary>Field number for the "normalRoundId" field.</summary>
     public const int NormalRoundIdFieldNumber = 6;
     private static readonly pb::FieldCodec<int> _repeated_normalRoundId_codec
@@ -248,6 +265,7 @@ namespace fat.rawdata {
       if (EventThemeId != other.EventThemeId) return false;
       if (!ExpirePopup.Equals(other.ExpirePopup)) return false;
       if (FreeTokenNum != other.FreeTokenNum) return false;
+      if (IsCycle != other.IsCycle) return false;
       if(!normalRoundId_.Equals(other.normalRoundId_)) return false;
       if (RecontinueTheme != other.RecontinueTheme) return false;
       if (TokenId != other.TokenId) return false;
@@ -262,6 +280,7 @@ namespace fat.rawdata {
       if (EventThemeId != 0) hash ^= EventThemeId.GetHashCode();
       hash ^= ExpirePopup.GetHashCode();
       if (FreeTokenNum != 0) hash ^= FreeTokenNum.GetHashCode();
+      if (IsCycle != false) hash ^= IsCycle.GetHashCode();
       hash ^= normalRoundId_.GetHashCode();
       if (RecontinueTheme != 0) hash ^= RecontinueTheme.GetHashCode();
       if (TokenId != 0) hash ^= TokenId.GetHashCode();
@@ -307,6 +326,10 @@ namespace fat.rawdata {
         output.WriteRawTag(64);
         output.WriteInt32(TokenId);
       }
+      if (IsCycle != false) {
+        output.WriteRawTag(72);
+        output.WriteBool(IsCycle);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -342,6 +365,10 @@ namespace fat.rawdata {
         output.WriteRawTag(64);
         output.WriteInt32(TokenId);
       }
+      if (IsCycle != false) {
+        output.WriteRawTag(72);
+        output.WriteBool(IsCycle);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -363,6 +390,9 @@ namespace fat.rawdata {
       size += expirePopup_.CalculateSize(_map_expirePopup_codec);
       if (FreeTokenNum != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(FreeTokenNum);
+      }
+      if (IsCycle != false) {
+        size += 1 + 1;
       }
       size += normalRoundId_.CalculateSize(_repeated_normalRoundId_codec);
       if (RecontinueTheme != 0) {
@@ -394,6 +424,9 @@ namespace fat.rawdata {
       expirePopup_.Add(other.expirePopup_);
       if (other.FreeTokenNum != 0) {
         FreeTokenNum = other.FreeTokenNum;
+      }
+      if (other.IsCycle != false) {
+        IsCycle = other.IsCycle;
       }
       normalRoundId_.Add(other.normalRoundId_);
       if (other.RecontinueTheme != 0) {
@@ -449,6 +482,10 @@ namespace fat.rawdata {
             TokenId = input.ReadInt32();
             break;
           }
+          case 72: {
+            IsCycle = input.ReadBool();
+            break;
+          }
         }
       }
     #endif
@@ -494,6 +531,10 @@ namespace fat.rawdata {
           }
           case 64: {
             TokenId = input.ReadInt32();
+            break;
+          }
+          case 72: {
+            IsCycle = input.ReadBool();
             break;
           }
         }

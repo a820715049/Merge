@@ -196,6 +196,8 @@ namespace FAT
                 return false;
             if (Game.Manager.activity.LookupAny(EventType.ScoreDuel) != null)
                 return false;
+            if (Game.Manager.activity.LookupAny(EventType.MultiplierRanking) != null)
+                return false;
             var changed = true;
             slot_score.ClearData(order);
             return changed;

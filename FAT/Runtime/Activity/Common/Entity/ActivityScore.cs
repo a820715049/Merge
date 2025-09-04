@@ -36,7 +36,9 @@ namespace FAT
         public EventScoreDetail ConfDetail;
         public override bool Valid => ConfD != null;
         public PopupActivity Popup { get; internal set; }
-        public UIResAlt Res { get; } = new(UIConfig.UIScoreHelp);
+        // public UIResAlt Res { get; } = new(UIConfig.UIScoreHelp);
+        static UIResource resource = new UIResource("UIScore_mic.prefab", UILayer.AboveStatus, "event_score_mic").SupportNavBack().AllowHideUI();
+        public UIResAlt Res { get; } = new(resource);
         public bool IsUnlock => Game.Manager.featureUnlockMan.IsFeatureEntryUnlocked(FeatureEntry.FeatureScore);
         public int CurShowScore;
         public int CurMileStoneScore;
@@ -123,6 +125,7 @@ namespace FAT
             //初始化弹脸
             if (ConfD != null && Visual.Setup(ConfD.EventThemeId, Res))
             {
+                Res.ActiveR = Res.RefR;
                 Popup = new(this, Visual, Res, false);
                 //如果后续需要和Popup不同的领奖弹窗,可以在这里改
                 PopupReward = new(this, Visual, Res);

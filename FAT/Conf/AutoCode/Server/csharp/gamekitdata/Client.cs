@@ -34,45 +34,48 @@ namespace fat.gamekitdata {
             "GhdnYW1la2l0ZGF0YS9tZXJnZS5wcm90bxocZ2FtZWtpdGRhdGEvbWluaV9i",
             "b2FyZC5wcm90bxoaZ2FtZWtpdGRhdGEvbWluaWdhbWUucHJvdG8aF2dhbWVr",
             "aXRkYXRhL29yZGVyLnByb3RvGhxnYW1la2l0ZGF0YS9yZW1vdGVfYXBpLnBy",
-            "b3RvGhZnYW1la2l0ZGF0YS9zaG9wLnByb3RvIoUBCgtTY3JlZW5Qb3B1cBI0",
-            "CgZSZWNvcmQYASADKAsyJC5nYW1la2l0ZGF0YS5TY3JlZW5Qb3B1cC5SZWNv",
-            "cmRFbnRyeRIRCglSZWZyZXNoVFMYAiABKAMaLQoLUmVjb3JkRW50cnkSCwoD",
-            "a2V5GAEgASgFEg0KBXZhbHVlGAIgASgFOgI4ASJtCgpVc2VyUmVjb3JkEjEK",
-            "BUxldmVsGAEgAygLMiIuZ2FtZWtpdGRhdGEuVXNlclJlY29yZC5MZXZlbEVu",
-            "dHJ5GiwKCkxldmVsRW50cnkSCwoDa2V5GAEgASgFEg0KBXZhbHVlGAIgASgD",
-            "OgI4ASJQCgxIYW5kYm9va0RhdGESDgoGVW5yZWFkGAEgASgIEhcKD01lcmdl",
-            "SXRlbVVubG9jaxgCIAMoBBIXCg9NZXJnZUl0ZW1SZXdhcmQYAyADKAQiQwoH",
-            "QWRzRGF0YRINCgVBZHNJZBgBIAEoBRISCgpXYXRjaENvdW50GAIgASgFEhUK",
-            "DU5leHRSZXNldFRpbWUYAyABKAMiHgoIVHV0b3JpYWwSEgoKRmluaXNoTWFz",
-            "axgEIAMoBCJ6ChJDbGllbnRTdG9yYWdlU3RhdGUSNwoERGF0YRgBIAMoCzIp",
-            "LmdhbWVraXRkYXRhLkNsaWVudFN0b3JhZ2VTdGF0ZS5EYXRhRW50cnkaKwoJ",
-            "RGF0YUVudHJ5EgsKA2tleRgBIAEoCRINCgV2YWx1ZRgCIAEoCToCOAEidAoR",
-            "UGxheWVyR2VuZXJhbERhdGESJwoIVHV0b3JpYWwYASABKAsyFS5nYW1la2l0",
-            "ZGF0YS5UdXRvcmlhbBI2Cg1DbGllbnRTdG9yYWdlGAIgASgLMh8uZ2FtZWtp",
-            "dGRhdGEuQ2xpZW50U3RvcmFnZVN0YXRlIqAICg5QbGF5ZXJHYW1lRGF0YRIh",
-            "CgVNZXJnZRgBIAEoCzISLmdhbWVraXRkYXRhLk1lcmdlEi0KC01lcmdlR2xv",
-            "YmFsGAIgASgLMhguZ2FtZWtpdGRhdGEuTWVyZ2VHbG9iYWwSKwoKRW5lcmd5",
-            "SW5mbxgDIAEoCzIXLmdhbWVraXRkYXRhLkVuZXJneUluZm8SLwoMSGFuZGJv",
-            "b2tEYXRhGAQgASgLMhkuZ2FtZWtpdGRhdGEuSGFuZGJvb2tEYXRhEioKCU1h",
-            "aW5PcmRlchgFIAEoCzIXLmdhbWVraXRkYXRhLk9yZGVyR3JvdXASJwoITWFw",
-            "U2NlbmUYBiABKAsyFS5nYW1la2l0ZGF0YS5NYXBTY2VuZRInCghTaG9wSW5m",
-            "bxgHIAEoCzIVLmdhbWVraXRkYXRhLlNob3BJbmZvEisKCkRhaWx5RXZlbnQY",
-            "CCABKAsyFy5nYW1la2l0ZGF0YS5EYWlseUV2ZW50EikKC0Fkc0RhdGFMaXN0",
-            "GAogAygLMhQuZ2FtZWtpdGRhdGEuQWRzRGF0YRInCghBY3Rpdml0eRgLIAEo",
-            "CzIVLmdhbWVraXRkYXRhLkFjdGl2aXR5Ei0KC1NjcmVlblBvcHVwGAwgASgL",
-            "MhguZ2FtZWtpdGRhdGEuU2NyZWVuUG9wdXASLwoMQ2FyZEFjdGl2aXR5GA0g",
-            "ASgLMhkuZ2FtZWtpdGRhdGEuQ2FyZEFjdGl2aXR5EjcKEERlY29yYXRlQWN0",
-            "aXZpdHkYDiABKAsyHS5nYW1la2l0ZGF0YS5EZWNvcmF0ZUFjdGl2aXR5Ei4K",
-            "B1RyaWdnZXIYDyABKAsyHS5nYW1la2l0ZGF0YS5Db25kaXRpb25UcmlnZ2Vy",
-            "EicKBlJlY29yZBgQIAEoCzIXLmdhbWVraXRkYXRhLlVzZXJSZWNvcmQSOQoR",
-            "TWluaUJvYXJkQWN0aXZpdHkYESABKAsyHi5nYW1la2l0ZGF0YS5NaW5pQm9h",
-            "cmRBY3Rpdml0eRIvCgxNaW5pR2FtZURhdGEYEiABKAsyGS5nYW1la2l0ZGF0",
-            "YS5NaW5pR2FtZURhdGESMQoNUmVtb3RlQXBpRGF0YRgTIAEoCzIaLmdhbWVr",
-            "aXRkYXRhLlJlbW90ZUFwaURhdGESMQoNQm9hcmRBY3Rpdml0eRgUIAEoCzIa",
-            "LmdhbWVraXRkYXRhLkJvYXJkQWN0aXZpdHkSKwoKU2lnbkluRGF0YRgVIAEo",
-            "CzIXLmdhbWVraXRkYXRhLlNpZ25JbkRhdGESMwoOVXNlclRhZ0FwaURhdGEY",
-            "FiABKAsyGy5nYW1la2l0ZGF0YS5Vc2VyVGFnQXBpRGF0YRI5ChFDb21tdW5p",
-            "dHlMaW5rRGF0YRgXIAEoCzIeLmdhbWVraXRkYXRhLkNvbW11bml0eUxpbmtE",
+            "b3RvGhZnYW1la2l0ZGF0YS9zaG9wLnByb3RvGh1nYW1la2l0ZGF0YS90YXNr",
+            "X3N5c3RlbS5wcm90byKFAQoLU2NyZWVuUG9wdXASNAoGUmVjb3JkGAEgAygL",
+            "MiQuZ2FtZWtpdGRhdGEuU2NyZWVuUG9wdXAuUmVjb3JkRW50cnkSEQoJUmVm",
+            "cmVzaFRTGAIgASgDGi0KC1JlY29yZEVudHJ5EgsKA2tleRgBIAEoBRINCgV2",
+            "YWx1ZRgCIAEoBToCOAEibQoKVXNlclJlY29yZBIxCgVMZXZlbBgBIAMoCzIi",
+            "LmdhbWVraXRkYXRhLlVzZXJSZWNvcmQuTGV2ZWxFbnRyeRosCgpMZXZlbEVu",
+            "dHJ5EgsKA2tleRgBIAEoBRINCgV2YWx1ZRgCIAEoAzoCOAEiUAoMSGFuZGJv",
+            "b2tEYXRhEg4KBlVucmVhZBgBIAEoCBIXCg9NZXJnZUl0ZW1VbmxvY2sYAiAD",
+            "KAQSFwoPTWVyZ2VJdGVtUmV3YXJkGAMgAygEIkMKB0Fkc0RhdGESDQoFQWRz",
+            "SWQYASABKAUSEgoKV2F0Y2hDb3VudBgCIAEoBRIVCg1OZXh0UmVzZXRUaW1l",
+            "GAMgASgDIh4KCFR1dG9yaWFsEhIKCkZpbmlzaE1hc2sYBCADKAQiegoSQ2xp",
+            "ZW50U3RvcmFnZVN0YXRlEjcKBERhdGEYASADKAsyKS5nYW1la2l0ZGF0YS5D",
+            "bGllbnRTdG9yYWdlU3RhdGUuRGF0YUVudHJ5GisKCURhdGFFbnRyeRILCgNr",
+            "ZXkYASABKAkSDQoFdmFsdWUYAiABKAk6AjgBInQKEVBsYXllckdlbmVyYWxE",
+            "YXRhEicKCFR1dG9yaWFsGAEgASgLMhUuZ2FtZWtpdGRhdGEuVHV0b3JpYWwS",
+            "NgoNQ2xpZW50U3RvcmFnZRgCIAEoCzIfLmdhbWVraXRkYXRhLkNsaWVudFN0",
+            "b3JhZ2VTdGF0ZSKICQoOUGxheWVyR2FtZURhdGESIQoFTWVyZ2UYASABKAsy",
+            "Ei5nYW1la2l0ZGF0YS5NZXJnZRItCgtNZXJnZUdsb2JhbBgCIAEoCzIYLmdh",
+            "bWVraXRkYXRhLk1lcmdlR2xvYmFsEisKCkVuZXJneUluZm8YAyABKAsyFy5n",
+            "YW1la2l0ZGF0YS5FbmVyZ3lJbmZvEi8KDEhhbmRib29rRGF0YRgEIAEoCzIZ",
+            "LmdhbWVraXRkYXRhLkhhbmRib29rRGF0YRIqCglNYWluT3JkZXIYBSABKAsy",
+            "Fy5nYW1la2l0ZGF0YS5PcmRlckdyb3VwEicKCE1hcFNjZW5lGAYgASgLMhUu",
+            "Z2FtZWtpdGRhdGEuTWFwU2NlbmUSJwoIU2hvcEluZm8YByABKAsyFS5nYW1l",
+            "a2l0ZGF0YS5TaG9wSW5mbxIrCgpEYWlseUV2ZW50GAggASgLMhcuZ2FtZWtp",
+            "dGRhdGEuRGFpbHlFdmVudBIpCgtBZHNEYXRhTGlzdBgKIAMoCzIULmdhbWVr",
+            "aXRkYXRhLkFkc0RhdGESJwoIQWN0aXZpdHkYCyABKAsyFS5nYW1la2l0ZGF0",
+            "YS5BY3Rpdml0eRItCgtTY3JlZW5Qb3B1cBgMIAEoCzIYLmdhbWVraXRkYXRh",
+            "LlNjcmVlblBvcHVwEi8KDENhcmRBY3Rpdml0eRgNIAEoCzIZLmdhbWVraXRk",
+            "YXRhLkNhcmRBY3Rpdml0eRI3ChBEZWNvcmF0ZUFjdGl2aXR5GA4gASgLMh0u",
+            "Z2FtZWtpdGRhdGEuRGVjb3JhdGVBY3Rpdml0eRIuCgdUcmlnZ2VyGA8gASgL",
+            "Mh0uZ2FtZWtpdGRhdGEuQ29uZGl0aW9uVHJpZ2dlchInCgZSZWNvcmQYECAB",
+            "KAsyFy5nYW1la2l0ZGF0YS5Vc2VyUmVjb3JkEjkKEU1pbmlCb2FyZEFjdGl2",
+            "aXR5GBEgASgLMh4uZ2FtZWtpdGRhdGEuTWluaUJvYXJkQWN0aXZpdHkSLwoM",
+            "TWluaUdhbWVEYXRhGBIgASgLMhkuZ2FtZWtpdGRhdGEuTWluaUdhbWVEYXRh",
+            "EjEKDVJlbW90ZUFwaURhdGEYEyABKAsyGi5nYW1la2l0ZGF0YS5SZW1vdGVB",
+            "cGlEYXRhEjEKDUJvYXJkQWN0aXZpdHkYFCABKAsyGi5nYW1la2l0ZGF0YS5C",
+            "b2FyZEFjdGl2aXR5EisKClNpZ25JbkRhdGEYFSABKAsyFy5nYW1la2l0ZGF0",
+            "YS5TaWduSW5EYXRhEjMKDlVzZXJUYWdBcGlEYXRhGBYgASgLMhsuZ2FtZWtp",
+            "dGRhdGEuVXNlclRhZ0FwaURhdGESOQoRQ29tbXVuaXR5TGlua0RhdGEYFyAB",
+            "KAsyHi5nYW1la2l0ZGF0YS5Db21tdW5pdHlMaW5rRGF0YRInCghUYXNrRGF0",
+            "YRgYIAEoCzIVLmdhbWVraXRkYXRhLlRhc2tEYXRhEj0KFVNwZWNpYWxSZXdh",
+            "cmREYXRhTGlzdBgZIAMoCzIeLmdhbWVraXRkYXRhLlNwZWNpYWxSZXdhcmRE",
             "YXRhIt4BCgpDbGllbnREYXRhEg8KB1ZlcnNpb24YASABKAUSEgoKTGFzdFVw",
             "ZGF0ZRgCIAEoAxIYChBMYXN0U3luY0J5Q2xpZW50GAMgASgDEjkKEVBsYXll",
             "ckdlbmVyYWxEYXRhGAQgASgLMh4uZ2FtZWtpdGRhdGEuUGxheWVyR2VuZXJh",
@@ -86,10 +89,12 @@ namespace fat.gamekitdata {
             "c3RvbmVOdW0YBSABKAUigQEKEUNvbW11bml0eUxpbmtEYXRhEjwKB2xpbmtE",
             "aWMYASADKAsyKy5nYW1la2l0ZGF0YS5Db21tdW5pdHlMaW5rRGF0YS5MaW5r",
             "RGljRW50cnkaLgoMTGlua0RpY0VudHJ5EgsKA2tleRgBIAEoBRINCgV2YWx1",
-            "ZRgCIAEoBToCOAFCRVoxZ2l0bGFiLmZ1bnBsdXMuaW8vZmF0L2NvbmYvZ2Vu",
-            "L2dvbGFuZy9nYW1la2l0ZGF0YaoCD2ZhdC5nYW1la2l0ZGF0YWIGcHJvdG8z"));
+            "ZRgCIAEoBToCOAEiPgoRU3BlY2lhbFJld2FyZERhdGESCgoCSWQYASABKAUS",
+            "DQoFQ291bnQYAiABKAUSDgoGUmVhc29uGAMgASgJQkVaMWdpdGxhYi5mdW5w",
+            "bHVzLmlvL2ZhdC9jb25mL2dlbi9nb2xhbmcvZ2FtZWtpdGRhdGGqAg9mYXQu",
+            "Z2FtZWtpdGRhdGFiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::fat.gamekitdata.ActivityReflection.Descriptor, global::fat.gamekitdata.BaseReflection.Descriptor, global::fat.gamekitdata.BoardActivityReflection.Descriptor, global::fat.gamekitdata.CardActivityReflection.Descriptor, global::fat.gamekitdata.ConditionTriggerReflection.Descriptor, global::fat.gamekitdata.DailyEventReflection.Descriptor, global::fat.gamekitdata.DecorateActivityReflection.Descriptor, global::fat.gamekitdata.IapReflection.Descriptor, global::fat.gamekitdata.MapSceneReflection.Descriptor, global::fat.gamekitdata.MergeReflection.Descriptor, global::fat.gamekitdata.MiniBoardReflection.Descriptor, global::fat.gamekitdata.MinigameReflection.Descriptor, global::fat.gamekitdata.OrderReflection.Descriptor, global::fat.gamekitdata.RemoteApiReflection.Descriptor, global::fat.gamekitdata.ShopReflection.Descriptor, },
+          new pbr::FileDescriptor[] { global::fat.gamekitdata.ActivityReflection.Descriptor, global::fat.gamekitdata.BaseReflection.Descriptor, global::fat.gamekitdata.BoardActivityReflection.Descriptor, global::fat.gamekitdata.CardActivityReflection.Descriptor, global::fat.gamekitdata.ConditionTriggerReflection.Descriptor, global::fat.gamekitdata.DailyEventReflection.Descriptor, global::fat.gamekitdata.DecorateActivityReflection.Descriptor, global::fat.gamekitdata.IapReflection.Descriptor, global::fat.gamekitdata.MapSceneReflection.Descriptor, global::fat.gamekitdata.MergeReflection.Descriptor, global::fat.gamekitdata.MiniBoardReflection.Descriptor, global::fat.gamekitdata.MinigameReflection.Descriptor, global::fat.gamekitdata.OrderReflection.Descriptor, global::fat.gamekitdata.RemoteApiReflection.Descriptor, global::fat.gamekitdata.ShopReflection.Descriptor, global::fat.gamekitdata.TaskSystemReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.gamekitdata.ScreenPopup), global::fat.gamekitdata.ScreenPopup.Parser, new[]{ "Record", "RefreshTS" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.gamekitdata.UserRecord), global::fat.gamekitdata.UserRecord.Parser, new[]{ "Level" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
@@ -98,11 +103,12 @@ namespace fat.gamekitdata {
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.gamekitdata.Tutorial), global::fat.gamekitdata.Tutorial.Parser, new[]{ "FinishMask" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.gamekitdata.ClientStorageState), global::fat.gamekitdata.ClientStorageState.Parser, new[]{ "Data" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.gamekitdata.PlayerGeneralData), global::fat.gamekitdata.PlayerGeneralData.Parser, new[]{ "Tutorial", "ClientStorage" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::fat.gamekitdata.PlayerGameData), global::fat.gamekitdata.PlayerGameData.Parser, new[]{ "Merge", "MergeGlobal", "EnergyInfo", "HandbookData", "MainOrder", "MapScene", "ShopInfo", "DailyEvent", "AdsDataList", "Activity", "ScreenPopup", "CardActivity", "DecorateActivity", "Trigger", "Record", "MiniBoardActivity", "MiniGameData", "RemoteApiData", "BoardActivity", "SignInData", "UserTagApiData", "CommunityLinkData" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::fat.gamekitdata.PlayerGameData), global::fat.gamekitdata.PlayerGameData.Parser, new[]{ "Merge", "MergeGlobal", "EnergyInfo", "HandbookData", "MainOrder", "MapScene", "ShopInfo", "DailyEvent", "AdsDataList", "Activity", "ScreenPopup", "CardActivity", "DecorateActivity", "Trigger", "Record", "MiniBoardActivity", "MiniGameData", "RemoteApiData", "BoardActivity", "SignInData", "UserTagApiData", "CommunityLinkData", "TaskData", "SpecialRewardDataList" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.gamekitdata.ClientData), global::fat.gamekitdata.ClientData.Parser, new[]{ "Version", "LastUpdate", "LastSyncByClient", "PlayerGeneralData", "PlayerGameData", "IAP" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.gamekitdata.LocalSaveData), global::fat.gamekitdata.LocalSaveData.Parser, new[]{ "PlayerBaseData", "ClientData" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.gamekitdata.SignInData), global::fat.gamekitdata.SignInData.Parser, new[]{ "TotalSignIn", "ConsecutiveSignIn", "LastSignIn", "Rewards", "MilestoneNum" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::fat.gamekitdata.CommunityLinkData), global::fat.gamekitdata.CommunityLinkData.Parser, new[]{ "LinkDic" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, })
+            new pbr::GeneratedClrTypeInfo(typeof(global::fat.gamekitdata.CommunityLinkData), global::fat.gamekitdata.CommunityLinkData.Parser, new[]{ "LinkDic" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
+            new pbr::GeneratedClrTypeInfo(typeof(global::fat.gamekitdata.SpecialRewardData), global::fat.gamekitdata.SpecialRewardData.Parser, new[]{ "Id", "Count", "Reason" }, null, null, null, null)
           }));
     }
     #endregion
@@ -1547,6 +1553,8 @@ namespace fat.gamekitdata {
       signInData_ = other.signInData_ != null ? other.signInData_.Clone() : null;
       userTagApiData_ = other.userTagApiData_ != null ? other.userTagApiData_.Clone() : null;
       communityLinkData_ = other.communityLinkData_ != null ? other.communityLinkData_.Clone() : null;
+      taskData_ = other.taskData_ != null ? other.taskData_.Clone() : null;
+      specialRewardDataList_ = other.specialRewardDataList_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -1820,6 +1828,33 @@ namespace fat.gamekitdata {
       }
     }
 
+    /// <summary>Field number for the "TaskData" field.</summary>
+    public const int TaskDataFieldNumber = 24;
+    private global::fat.gamekitdata.TaskData taskData_;
+    /// <summary>
+    ///任务系统
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::fat.gamekitdata.TaskData TaskData {
+      get { return taskData_; }
+      set {
+        taskData_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "SpecialRewardDataList" field.</summary>
+    public const int SpecialRewardDataListFieldNumber = 25;
+    private static readonly pb::FieldCodec<global::fat.gamekitdata.SpecialRewardData> _repeated_specialRewardDataList_codec
+        = pb::FieldCodec.ForMessage(202, global::fat.gamekitdata.SpecialRewardData.Parser);
+    private readonly pbc::RepeatedField<global::fat.gamekitdata.SpecialRewardData> specialRewardDataList_ = new pbc::RepeatedField<global::fat.gamekitdata.SpecialRewardData>();
+    /// <summary>
+    ///特殊奖励数据List
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::fat.gamekitdata.SpecialRewardData> SpecialRewardDataList {
+      get { return specialRewardDataList_; }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as PlayerGameData);
@@ -1855,6 +1890,8 @@ namespace fat.gamekitdata {
       if (!object.Equals(SignInData, other.SignInData)) return false;
       if (!object.Equals(UserTagApiData, other.UserTagApiData)) return false;
       if (!object.Equals(CommunityLinkData, other.CommunityLinkData)) return false;
+      if (!object.Equals(TaskData, other.TaskData)) return false;
+      if(!specialRewardDataList_.Equals(other.specialRewardDataList_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -1883,6 +1920,8 @@ namespace fat.gamekitdata {
       if (signInData_ != null) hash ^= SignInData.GetHashCode();
       if (userTagApiData_ != null) hash ^= UserTagApiData.GetHashCode();
       if (communityLinkData_ != null) hash ^= CommunityLinkData.GetHashCode();
+      if (taskData_ != null) hash ^= TaskData.GetHashCode();
+      hash ^= specialRewardDataList_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1984,6 +2023,11 @@ namespace fat.gamekitdata {
         output.WriteRawTag(186, 1);
         output.WriteMessage(CommunityLinkData);
       }
+      if (taskData_ != null) {
+        output.WriteRawTag(194, 1);
+        output.WriteMessage(TaskData);
+      }
+      specialRewardDataList_.WriteTo(output, _repeated_specialRewardDataList_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -2078,6 +2122,11 @@ namespace fat.gamekitdata {
         output.WriteRawTag(186, 1);
         output.WriteMessage(CommunityLinkData);
       }
+      if (taskData_ != null) {
+        output.WriteRawTag(194, 1);
+        output.WriteMessage(TaskData);
+      }
+      specialRewardDataList_.WriteTo(ref output, _repeated_specialRewardDataList_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -2151,6 +2200,10 @@ namespace fat.gamekitdata {
       if (communityLinkData_ != null) {
         size += 2 + pb::CodedOutputStream.ComputeMessageSize(CommunityLinkData);
       }
+      if (taskData_ != null) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(TaskData);
+      }
+      size += specialRewardDataList_.CalculateSize(_repeated_specialRewardDataList_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -2289,6 +2342,13 @@ namespace fat.gamekitdata {
         }
         CommunityLinkData.MergeFrom(other.CommunityLinkData);
       }
+      if (other.taskData_ != null) {
+        if (taskData_ == null) {
+          TaskData = new global::fat.gamekitdata.TaskData();
+        }
+        TaskData.MergeFrom(other.TaskData);
+      }
+      specialRewardDataList_.Add(other.specialRewardDataList_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -2454,6 +2514,17 @@ namespace fat.gamekitdata {
             input.ReadMessage(CommunityLinkData);
             break;
           }
+          case 194: {
+            if (taskData_ == null) {
+              TaskData = new global::fat.gamekitdata.TaskData();
+            }
+            input.ReadMessage(TaskData);
+            break;
+          }
+          case 202: {
+            specialRewardDataList_.AddEntriesFrom(input, _repeated_specialRewardDataList_codec);
+            break;
+          }
         }
       }
     #endif
@@ -2617,6 +2688,17 @@ namespace fat.gamekitdata {
               CommunityLinkData = new global::fat.gamekitdata.CommunityLinkData();
             }
             input.ReadMessage(CommunityLinkData);
+            break;
+          }
+          case 194: {
+            if (taskData_ == null) {
+              TaskData = new global::fat.gamekitdata.TaskData();
+            }
+            input.ReadMessage(TaskData);
+            break;
+          }
+          case 202: {
+            specialRewardDataList_.AddEntriesFrom(ref input, _repeated_specialRewardDataList_codec);
             break;
           }
         }
@@ -3699,6 +3781,262 @@ namespace fat.gamekitdata {
             break;
           case 10: {
             linkDic_.AddEntriesFrom(ref input, _map_linkDic_codec);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  /// <summary>
+  ///特殊奖励数据类 获得后会先存在虚拟奖励箱中，逻辑上驱动打开，只有在真正打开时才会发对应奖励
+  /// </summary>
+  public sealed partial class SpecialRewardData : pb::IMessage<SpecialRewardData>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<SpecialRewardData> _parser = new pb::MessageParser<SpecialRewardData>(() => new SpecialRewardData());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<SpecialRewardData> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::fat.gamekitdata.ClientReflection.Descriptor.MessageTypes[12]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SpecialRewardData() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SpecialRewardData(SpecialRewardData other) : this() {
+      id_ = other.id_;
+      count_ = other.count_;
+      reason_ = other.reason_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SpecialRewardData Clone() {
+      return new SpecialRewardData(this);
+    }
+
+    /// <summary>Field number for the "Id" field.</summary>
+    public const int IdFieldNumber = 1;
+    private int id_;
+    /// <summary>
+    ///奖励id
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Id {
+      get { return id_; }
+      set {
+        id_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "Count" field.</summary>
+    public const int CountFieldNumber = 2;
+    private int count_;
+    /// <summary>
+    ///待开启数量
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Count {
+      get { return count_; }
+      set {
+        count_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "Reason" field.</summary>
+    public const int ReasonFieldNumber = 3;
+    private string reason_ = "";
+    /// <summary>
+    ///发奖原因
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Reason {
+      get { return reason_; }
+      set {
+        reason_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as SpecialRewardData);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(SpecialRewardData other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Id != other.Id) return false;
+      if (Count != other.Count) return false;
+      if (Reason != other.Reason) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Id != 0) hash ^= Id.GetHashCode();
+      if (Count != 0) hash ^= Count.GetHashCode();
+      if (Reason.Length != 0) hash ^= Reason.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (Id != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(Id);
+      }
+      if (Count != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(Count);
+      }
+      if (Reason.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(Reason);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Id != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(Id);
+      }
+      if (Count != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(Count);
+      }
+      if (Reason.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(Reason);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Id != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Id);
+      }
+      if (Count != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Count);
+      }
+      if (Reason.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Reason);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(SpecialRewardData other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Id != 0) {
+        Id = other.Id;
+      }
+      if (other.Count != 0) {
+        Count = other.Count;
+      }
+      if (other.Reason.Length != 0) {
+        Reason = other.Reason;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            Id = input.ReadInt32();
+            break;
+          }
+          case 16: {
+            Count = input.ReadInt32();
+            break;
+          }
+          case 26: {
+            Reason = input.ReadString();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            Id = input.ReadInt32();
+            break;
+          }
+          case 16: {
+            Count = input.ReadInt32();
+            break;
+          }
+          case 26: {
+            Reason = input.ReadString();
             break;
           }
         }

@@ -4316,7 +4316,95 @@ public partial class DataTracker
 
 
     #endregion
+    #region 倍率排行榜
 
+    internal class event_multiranking_start : MergeCommonData
+    {
+        public int event_id;
+        public int event_from;
+        public int event_param;
+        public int milestone_difficulty;
+        public int robot_group;
+
+        public static void Track(ActivityLike activity, int diff, int group)
+        {
+            var data = _GetTrackData<event_multiranking_start>();
+            (data.event_id, data.event_from, data.event_param) = activity.Info3;
+            data.milestone_difficulty = diff;
+            data.robot_group = group;
+            _TrackData(data);
+        }
+    }
+
+    internal class event_multiranking_multiplier : MergeCommonData
+    {
+        public int event_id;
+        public int event_from;
+        public int event_param;
+        public int milestone_difficulty;
+        public int multiplier_num;
+        public int multiplier_before;
+        public bool is_reset;
+        public static void Track(ActivityLike activityLike, int diff, int current, int previous, bool reset)
+        {
+            var data = _GetTrackData<event_multiranking_multiplier>();
+            (data.event_id, data.event_from, data.event_param) = activityLike.Info3;
+            data.milestone_difficulty = diff;
+            data.multiplier_num = current;
+            data.multiplier_before = previous;
+            data.is_reset = reset;
+            _TrackData(data);
+        }
+    }
+
+    internal class event_multiranking_milestone : MergeCommonData
+    {
+        public int event_id;
+        public int event_from;
+        public int event_param;
+        public int milestone_difficulty;
+        public int milestone_queue;
+        public int milestone_num;
+        public int round_num;
+        public bool is_final;
+
+        public static void Track(ActivityLike activityLike, int diff, int queue, int num, bool final)
+        {
+            var data = _GetTrackData<event_multiranking_milestone>();
+            (data.event_id, data.event_from, data.event_param) = activityLike.Info3;
+            data.milestone_difficulty = diff;
+            data.milestone_queue = queue;
+            data.milestone_num = num;
+            data.round_num = 1;
+            data.is_final = final;
+            _TrackData(data);
+        }
+    }
+
+    internal class event_multiranking_complete : MergeCommonData
+    {
+        public int event_id;
+        public int event_from;
+        public int event_param;
+        public int milestone_difficulty;
+        public int rank;
+        public int score_num;
+        public int energy_cost;
+        public string bot_score;
+        public static void Track(ActivityLike activityLike, int diff, int rank, int score, int cost, string botscore)
+        {
+            var data = _GetTrackData<event_multiranking_complete>();
+            (data.event_id, data.event_from, data.event_param) = activityLike.Info3;
+            data.milestone_difficulty = diff;
+            data.rank = rank;
+            data.score_num = score;
+            data.energy_cost = cost;
+            data.bot_score = botscore;
+            _TrackData(data);
+        }
+
+    }
+    #endregion
     #region 许愿棋盘
     /// <summary>
     /// 许愿棋盘完成里程碑时

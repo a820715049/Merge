@@ -47,6 +47,8 @@ namespace FAT
         public AnimationCurve curveRewardElasticEnd;
         public AnimationCurve curveHorizontal;
         public AnimationCurve curveVertical;
+        public AnimationCurve curveRankingUp;
+        public AnimationCurve curveRankingDown;
 
 
         public static List<int> ClipNumList = new() { 1, 2, 4, 8, 10, 12 };
@@ -55,6 +57,7 @@ namespace FAT
         public static List<int> CoinRank = new() { 1, 3, 8, 20, 50, 120 };
         public static List<int> GemRank = new() { 1, 3, 8, 20 };
         public static List<int> DefaultRank = new() { 1, 3, 8, 20, 50, 120 };
+        public static List<int> SingleRank = new() { 1 };
     }
 
     public enum FlyStyle
@@ -137,5 +140,6 @@ namespace FAT
         MineCartUseItem,    //矿车棋盘使用活动棋子，棋子飞往上方矿车处
         MineCartGetItemReward, //矿车棋盘使用活动棋子后，棋子飞行的起点
         MineCartRewardBubble, //矿车棋盘发奖气泡
+        MultiRankingToken,
     }
 }

@@ -263,6 +263,7 @@ namespace FAT
                 PackSpin packSpin => new EntrySpin(e_, packSpin),
                 FightBoardActivity fightBoard => new FightBoardEntry(e_, fightBoard),
                 ActivityBingoTask bingoTask => new BingoTaskEntry(e_, bingoTask),
+                ActivityMultiplierRanking multiplierRanking => new MultiplierRankingEntry(e_, multiplierRanking),
                 _ => null
             };
         }

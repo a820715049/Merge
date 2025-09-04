@@ -48,6 +48,8 @@ namespace FAT
                 EventType.Community => (feature.IsFeatureEntryUnlocked(FeatureCommunity), rf),
                 EventType.BingoTask => (feature.IsFeatureEntryUnlocked(FeatureBingoTask), rf),
                 EventType.Landmark => (feature.IsFeatureEntryUnlocked(FeatureLandmark), rf),
+                EventType.MultiplierRanking => (feature.IsFeatureEntryUnlocked(FeatureMultiplierRanking), rf),
+                EventType.MicMilestone => (feature.IsFeatureEntryUnlocked(FeatureMicMilestone), rf),
                 _ => (true, null),
             };
         }
@@ -88,6 +90,8 @@ namespace FAT
                 EventType.Community => new CommunityMailActivity(lite_),
                 EventType.BingoTask => new ActivityBingoTask(lite_),
                 EventType.Landmark => new LandMarkActivity(lite_),
+                EventType.MultiplierRanking => new ActivityMultiplierRanking(lite_),
+                EventType.MicMilestone => new ActivityScoreMic(lite_),
                 _ => null,
             };
     }

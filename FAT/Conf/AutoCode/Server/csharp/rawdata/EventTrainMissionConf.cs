@@ -25,38 +25,39 @@ namespace fat.rawdata {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "CiNyYXdkYXRhL0V2ZW50VHJhaW5NaXNzaW9uQ29uZi5wcm90bxIHcmF3ZGF0",
-            "YSLhAgoRRXZlbnRUcmFpbk1pc3Npb24SCgoCaWQYASABKAUSDQoFYm9hcmQY",
+            "YSL4AgoRRXZlbnRUcmFpbk1pc3Npb24SCgoCaWQYASABKAUSDQoFYm9hcmQY",
             "EyABKAUSDwoHYm9hcmRJZBgDIAEoBRITCgtjaG9vc2VUaGVtZRgFIAEoBRIS",
             "CgplbmRSZWN5Y2xlGAYgAygJEhAKCGVuZFRoZW1lGAcgASgFEg8KB2dyYWRl",
             "SWQYCCABKAUSEQoJaGVscFRoZW1lGAkgASgFEhEKCWlzT25Cb251cxgKIAEo",
             "CBISCgppc09uQnViYmxlGAsgASgIEhEKCWl0ZW1UaGVtZRgMIAEoBRIUCgxs",
             "b2FkaW5nVGhlbWUYFCABKAUSEQoJbWFpblRoZW1lGA0gASgFEgwKBG5hbWUY",
             "DiABKAkSFQoNbmV3Um91bmRUaGVtZRgPIAEoBRIUCgxwcmV2aWV3VGhlbWUY",
-            "ECABKAUSEgoKc3RhcnRUaGVtZRgRIAEoBRIPCgdzdG9yYWdlGBIgASgFItQB",
-            "ChtFdmVudFRyYWluTWlzc2lvbk1hcEFCVmFsdWUSXAoURXZlbnRUcmFpbk1p",
-            "c3Npb25NYXAYASADKAsyPi5yYXdkYXRhLkV2ZW50VHJhaW5NaXNzaW9uTWFw",
-            "QUJWYWx1ZS5FdmVudFRyYWluTWlzc2lvbk1hcEVudHJ5GlcKGUV2ZW50VHJh",
-            "aW5NaXNzaW9uTWFwRW50cnkSCwoDa2V5GAEgASgFEikKBXZhbHVlGAIgASgL",
-            "MhoucmF3ZGF0YS5FdmVudFRyYWluTWlzc2lvbjoCOAEi2QQKFUV2ZW50VHJh",
-            "aW5NaXNzaW9uQ29uZhJWChRFdmVudFRyYWluTWlzc2lvbk1hcBgBIAMoCzI4",
-            "LnJhd2RhdGEuRXZlbnRUcmFpbk1pc3Npb25Db25mLkV2ZW50VHJhaW5NaXNz",
-            "aW9uTWFwRW50cnkSWgoWRXZlbnRUcmFpbk1pc3Npb25NYXBBQhgCIAMoCzI6",
-            "LnJhd2RhdGEuRXZlbnRUcmFpbk1pc3Npb25Db25mLkV2ZW50VHJhaW5NaXNz",
-            "aW9uTWFwQUJFbnRyeRJkChtFdmVudFRyYWluTWlzc2lvbk1hcEFCUGF0Y2gY",
-            "AyADKAsyPy5yYXdkYXRhLkV2ZW50VHJhaW5NaXNzaW9uQ29uZi5FdmVudFRy",
-            "YWluTWlzc2lvbk1hcEFCUGF0Y2hFbnRyeRpXChlFdmVudFRyYWluTWlzc2lv",
-            "bk1hcEVudHJ5EgsKA2tleRgBIAEoBRIpCgV2YWx1ZRgCIAEoCzIaLnJhd2Rh",
-            "dGEuRXZlbnRUcmFpbk1pc3Npb246AjgBGmMKG0V2ZW50VHJhaW5NaXNzaW9u",
-            "TWFwQUJFbnRyeRILCgNrZXkYASABKAkSMwoFdmFsdWUYAiABKAsyJC5yYXdk",
-            "YXRhLkV2ZW50VHJhaW5NaXNzaW9uTWFwQUJWYWx1ZToCOAEaaAogRXZlbnRU",
-            "cmFpbk1pc3Npb25NYXBBQlBhdGNoRW50cnkSCwoDa2V5GAEgASgJEjMKBXZh",
-            "bHVlGAIgASgLMiQucmF3ZGF0YS5FdmVudFRyYWluTWlzc2lvbk1hcEFCVmFs",
-            "dWU6AjgBQj1aLWdpdGxhYi5mdW5wbHVzLmlvL2ZhdC9jb25mL2dlbi9nb2xh",
-            "bmcvcmF3ZGF0YaoCC2ZhdC5yYXdkYXRhYgZwcm90bzM="));
+            "ECABKAUSFQoNc2VuZE1haW5Cb2FyZBgVIAMoBRISCgpzdGFydFRoZW1lGBEg",
+            "ASgFEg8KB3N0b3JhZ2UYEiABKAUi1AEKG0V2ZW50VHJhaW5NaXNzaW9uTWFw",
+            "QUJWYWx1ZRJcChRFdmVudFRyYWluTWlzc2lvbk1hcBgBIAMoCzI+LnJhd2Rh",
+            "dGEuRXZlbnRUcmFpbk1pc3Npb25NYXBBQlZhbHVlLkV2ZW50VHJhaW5NaXNz",
+            "aW9uTWFwRW50cnkaVwoZRXZlbnRUcmFpbk1pc3Npb25NYXBFbnRyeRILCgNr",
+            "ZXkYASABKAUSKQoFdmFsdWUYAiABKAsyGi5yYXdkYXRhLkV2ZW50VHJhaW5N",
+            "aXNzaW9uOgI4ASLZBAoVRXZlbnRUcmFpbk1pc3Npb25Db25mElYKFEV2ZW50",
+            "VHJhaW5NaXNzaW9uTWFwGAEgAygLMjgucmF3ZGF0YS5FdmVudFRyYWluTWlz",
+            "c2lvbkNvbmYuRXZlbnRUcmFpbk1pc3Npb25NYXBFbnRyeRJaChZFdmVudFRy",
+            "YWluTWlzc2lvbk1hcEFCGAIgAygLMjoucmF3ZGF0YS5FdmVudFRyYWluTWlz",
+            "c2lvbkNvbmYuRXZlbnRUcmFpbk1pc3Npb25NYXBBQkVudHJ5EmQKG0V2ZW50",
+            "VHJhaW5NaXNzaW9uTWFwQUJQYXRjaBgDIAMoCzI/LnJhd2RhdGEuRXZlbnRU",
+            "cmFpbk1pc3Npb25Db25mLkV2ZW50VHJhaW5NaXNzaW9uTWFwQUJQYXRjaEVu",
+            "dHJ5GlcKGUV2ZW50VHJhaW5NaXNzaW9uTWFwRW50cnkSCwoDa2V5GAEgASgF",
+            "EikKBXZhbHVlGAIgASgLMhoucmF3ZGF0YS5FdmVudFRyYWluTWlzc2lvbjoC",
+            "OAEaYwobRXZlbnRUcmFpbk1pc3Npb25NYXBBQkVudHJ5EgsKA2tleRgBIAEo",
+            "CRIzCgV2YWx1ZRgCIAEoCzIkLnJhd2RhdGEuRXZlbnRUcmFpbk1pc3Npb25N",
+            "YXBBQlZhbHVlOgI4ARpoCiBFdmVudFRyYWluTWlzc2lvbk1hcEFCUGF0Y2hF",
+            "bnRyeRILCgNrZXkYASABKAkSMwoFdmFsdWUYAiABKAsyJC5yYXdkYXRhLkV2",
+            "ZW50VHJhaW5NaXNzaW9uTWFwQUJWYWx1ZToCOAFCPVotZ2l0bGFiLmZ1bnBs",
+            "dXMuaW8vZmF0L2NvbmYvZ2VuL2dvbGFuZy9yYXdkYXRhqgILZmF0LnJhd2Rh",
+            "dGFiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EventTrainMission), global::fat.rawdata.EventTrainMission.Parser, new[]{ "Id", "Board", "BoardId", "ChooseTheme", "EndRecycle", "EndTheme", "GradeId", "HelpTheme", "IsOnBonus", "IsOnBubble", "ItemTheme", "LoadingTheme", "MainTheme", "Name", "NewRoundTheme", "PreviewTheme", "StartTheme", "Storage" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EventTrainMission), global::fat.rawdata.EventTrainMission.Parser, new[]{ "Id", "Board", "BoardId", "ChooseTheme", "EndRecycle", "EndTheme", "GradeId", "HelpTheme", "IsOnBonus", "IsOnBubble", "ItemTheme", "LoadingTheme", "MainTheme", "Name", "NewRoundTheme", "PreviewTheme", "SendMainBoard", "StartTheme", "Storage" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EventTrainMissionMapABValue), global::fat.rawdata.EventTrainMissionMapABValue.Parser, new[]{ "EventTrainMissionMap" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EventTrainMissionConf), global::fat.rawdata.EventTrainMissionConf.Parser, new[]{ "EventTrainMissionMap", "EventTrainMissionMapAB", "EventTrainMissionMapABPatch" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, null, })
           }));
@@ -117,6 +118,7 @@ namespace fat.rawdata {
       name_ = other.name_;
       newRoundTheme_ = other.newRoundTheme_;
       previewTheme_ = other.previewTheme_;
+      sendMainBoard_ = other.sendMainBoard_.Clone();
       startTheme_ = other.startTheme_;
       storage_ = other.storage_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
@@ -372,6 +374,20 @@ namespace fat.rawdata {
       }
     }
 
+    /// <summary>Field number for the "sendMainBoard" field.</summary>
+    public const int SendMainBoardFieldNumber = 21;
+    private static readonly pb::FieldCodec<int> _repeated_sendMainBoard_codec
+        = pb::FieldCodec.ForInt32(170);
+    private readonly pbc::RepeatedField<int> sendMainBoard_ = new pbc::RepeatedField<int>();
+    /// <summary>
+    /// 产出后发放到主棋盘的棋子
+    /// （神灯）
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<int> SendMainBoard {
+      get { return sendMainBoard_; }
+    }
+
     /// <summary>Field number for the "startTheme" field.</summary>
     public const int StartThemeFieldNumber = 17;
     private int startTheme_;
@@ -431,6 +447,7 @@ namespace fat.rawdata {
       if (Name != other.Name) return false;
       if (NewRoundTheme != other.NewRoundTheme) return false;
       if (PreviewTheme != other.PreviewTheme) return false;
+      if(!sendMainBoard_.Equals(other.sendMainBoard_)) return false;
       if (StartTheme != other.StartTheme) return false;
       if (Storage != other.Storage) return false;
       return Equals(_unknownFields, other._unknownFields);
@@ -455,6 +472,7 @@ namespace fat.rawdata {
       if (Name.Length != 0) hash ^= Name.GetHashCode();
       if (NewRoundTheme != 0) hash ^= NewRoundTheme.GetHashCode();
       if (PreviewTheme != 0) hash ^= PreviewTheme.GetHashCode();
+      hash ^= sendMainBoard_.GetHashCode();
       if (StartTheme != 0) hash ^= StartTheme.GetHashCode();
       if (Storage != 0) hash ^= Storage.GetHashCode();
       if (_unknownFields != null) {
@@ -542,6 +560,7 @@ namespace fat.rawdata {
         output.WriteRawTag(160, 1);
         output.WriteInt32(LoadingTheme);
       }
+      sendMainBoard_.WriteTo(output, _repeated_sendMainBoard_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -620,6 +639,7 @@ namespace fat.rawdata {
         output.WriteRawTag(160, 1);
         output.WriteInt32(LoadingTheme);
       }
+      sendMainBoard_.WriteTo(ref output, _repeated_sendMainBoard_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -675,6 +695,7 @@ namespace fat.rawdata {
       if (PreviewTheme != 0) {
         size += 2 + pb::CodedOutputStream.ComputeInt32Size(PreviewTheme);
       }
+      size += sendMainBoard_.CalculateSize(_repeated_sendMainBoard_codec);
       if (StartTheme != 0) {
         size += 2 + pb::CodedOutputStream.ComputeInt32Size(StartTheme);
       }
@@ -738,6 +759,7 @@ namespace fat.rawdata {
       if (other.PreviewTheme != 0) {
         PreviewTheme = other.PreviewTheme;
       }
+      sendMainBoard_.Add(other.sendMainBoard_);
       if (other.StartTheme != 0) {
         StartTheme = other.StartTheme;
       }
@@ -830,6 +852,11 @@ namespace fat.rawdata {
             LoadingTheme = input.ReadInt32();
             break;
           }
+          case 170:
+          case 168: {
+            sendMainBoard_.AddEntriesFrom(input, _repeated_sendMainBoard_codec);
+            break;
+          }
         }
       }
     #endif
@@ -914,6 +941,11 @@ namespace fat.rawdata {
           }
           case 160: {
             LoadingTheme = input.ReadInt32();
+            break;
+          }
+          case 170:
+          case 168: {
+            sendMainBoard_.AddEntriesFrom(ref input, _repeated_sendMainBoard_codec);
             break;
           }
         }

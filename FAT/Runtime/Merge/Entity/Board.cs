@@ -1976,18 +1976,14 @@ namespace FAT.Merge
                 else if ((world.activeBoard?.boardId ?? 0) == Constant.MainBoardId)
                 {
                     //检查是否有不属于主棋盘的棋子被发到了主棋盘奖励箱里 如果有的话 在点击时直接消耗掉
-                    //本逻辑目前只针对迷你棋盘主链条棋子
                     var objConf = Env.Instance.GetItemMergeConfig(nextItem);
                     if (objConf != null && objConf.BoardId > Constant.MainBoardId)  //objConf.BoardId大于1说明本棋子不想发到主棋盘
                     {
-                        if (Game.Manager.miniBoardMultiMan.CheckIsBelongMiniBoard(nextItem))
-                        {
-                            // 直接消耗 无需占用格子
-                            rewardItem = world.ConsumeRewardByIdx(idx);
-                            mParent.TriggerItemEvent(rewardItem, ItemEventType.ItemEventRewardDisappear);
-                            DebugEx.FormatInfo("Merge::Board::_TryConsumeRewardItemImmediately ----> consume miniboard item {0}:{1}", idx, rewardItem);
-                            return true;
-                        }
+                        // 直接消耗 无需占用格子
+                        rewardItem = world.ConsumeRewardByIdx(idx);
+                        mParent.TriggerItemEvent(rewardItem, ItemEventType.ItemEventRewardDisappear);
+                        DebugEx.FormatInfo("Merge::Board::_TryConsumeRewardItemImmediately ----> consume activity board item {0}:{1}", idx, rewardItem);
+                        return true;
                     }
                 }
             }

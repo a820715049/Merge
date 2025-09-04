@@ -41,6 +41,7 @@ namespace FAT
             DecorateStart = 22,
             WeeklyRaffle = 23, //签到抽奖
             Boost4XGuide = 24, //是否满足4倍加速引导弹出条件
+            MultiRanking = 25,
             MineCartBoard = 26, //矿车棋盘
         }
 
@@ -324,6 +325,9 @@ namespace FAT
                 case UIState.MineCartBoard:
                     var mineCart = Game.Manager.activity.LookupAny(EventType.MineCart) as MineCartActivity;
                     return UIManager.Instance.IsOpen(mineCart?.VisualBoard.res.ActiveR ?? UIConfig.UIMineCartBoardMain);
+                case UIState.MultiRanking:
+                    var multi = Game.Manager.activity.LookupAny(EventType.MultiplierRanking) as ActivityMultiplierRanking;
+                    return UIManager.Instance.IsOpen(multi?.VisualUIRankingMain.res.ActiveR ?? UIConfig.UIMultiplyRankingMain);
             }
 
             return false;

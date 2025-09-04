@@ -25,33 +25,32 @@ namespace fat.rawdata {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "CiNyYXdkYXRhL1NldmVuRGF5VGFza0dyb3VwQ29uZi5wcm90bxIHcmF3ZGF0",
-            "YSJjChFTZXZlbkRheVRhc2tHcm91cBIKCgJpZBgBIAEoBRIPCgdkYXlUZXh0",
-            "GAIgASgJEgwKBHNvcnQYAyABKAUSEAoIdGFza0luZm8YBCADKAUSEQoJdW5s",
-            "b2NrRGF5GAUgASgFItQBChtTZXZlbkRheVRhc2tHcm91cE1hcEFCVmFsdWUS",
-            "XAoUU2V2ZW5EYXlUYXNrR3JvdXBNYXAYASADKAsyPi5yYXdkYXRhLlNldmVu",
-            "RGF5VGFza0dyb3VwTWFwQUJWYWx1ZS5TZXZlbkRheVRhc2tHcm91cE1hcEVu",
-            "dHJ5GlcKGVNldmVuRGF5VGFza0dyb3VwTWFwRW50cnkSCwoDa2V5GAEgASgF",
-            "EikKBXZhbHVlGAIgASgLMhoucmF3ZGF0YS5TZXZlbkRheVRhc2tHcm91cDoC",
-            "OAEi2QQKFVNldmVuRGF5VGFza0dyb3VwQ29uZhJWChRTZXZlbkRheVRhc2tH",
-            "cm91cE1hcBgBIAMoCzI4LnJhd2RhdGEuU2V2ZW5EYXlUYXNrR3JvdXBDb25m",
-            "LlNldmVuRGF5VGFza0dyb3VwTWFwRW50cnkSWgoWU2V2ZW5EYXlUYXNrR3Jv",
-            "dXBNYXBBQhgCIAMoCzI6LnJhd2RhdGEuU2V2ZW5EYXlUYXNrR3JvdXBDb25m",
-            "LlNldmVuRGF5VGFza0dyb3VwTWFwQUJFbnRyeRJkChtTZXZlbkRheVRhc2tH",
-            "cm91cE1hcEFCUGF0Y2gYAyADKAsyPy5yYXdkYXRhLlNldmVuRGF5VGFza0dy",
-            "b3VwQ29uZi5TZXZlbkRheVRhc2tHcm91cE1hcEFCUGF0Y2hFbnRyeRpXChlT",
-            "ZXZlbkRheVRhc2tHcm91cE1hcEVudHJ5EgsKA2tleRgBIAEoBRIpCgV2YWx1",
-            "ZRgCIAEoCzIaLnJhd2RhdGEuU2V2ZW5EYXlUYXNrR3JvdXA6AjgBGmMKG1Nl",
-            "dmVuRGF5VGFza0dyb3VwTWFwQUJFbnRyeRILCgNrZXkYASABKAkSMwoFdmFs",
-            "dWUYAiABKAsyJC5yYXdkYXRhLlNldmVuRGF5VGFza0dyb3VwTWFwQUJWYWx1",
-            "ZToCOAEaaAogU2V2ZW5EYXlUYXNrR3JvdXBNYXBBQlBhdGNoRW50cnkSCwoD",
-            "a2V5GAEgASgJEjMKBXZhbHVlGAIgASgLMiQucmF3ZGF0YS5TZXZlbkRheVRh",
-            "c2tHcm91cE1hcEFCVmFsdWU6AjgBQj1aLWdpdGxhYi5mdW5wbHVzLmlvL2Zh",
-            "dC9jb25mL2dlbi9nb2xhbmcvcmF3ZGF0YaoCC2ZhdC5yYXdkYXRhYgZwcm90",
-            "bzM="));
+            "YSJSChFTZXZlbkRheVRhc2tHcm91cBIKCgJpZBgBIAEoBRIMCgRzb3J0GAMg",
+            "ASgFEhAKCHRhc2tJbmZvGAQgAygFEhEKCXVubG9ja0RheRgFIAEoBSLUAQob",
+            "U2V2ZW5EYXlUYXNrR3JvdXBNYXBBQlZhbHVlElwKFFNldmVuRGF5VGFza0dy",
+            "b3VwTWFwGAEgAygLMj4ucmF3ZGF0YS5TZXZlbkRheVRhc2tHcm91cE1hcEFC",
+            "VmFsdWUuU2V2ZW5EYXlUYXNrR3JvdXBNYXBFbnRyeRpXChlTZXZlbkRheVRh",
+            "c2tHcm91cE1hcEVudHJ5EgsKA2tleRgBIAEoBRIpCgV2YWx1ZRgCIAEoCzIa",
+            "LnJhd2RhdGEuU2V2ZW5EYXlUYXNrR3JvdXA6AjgBItkEChVTZXZlbkRheVRh",
+            "c2tHcm91cENvbmYSVgoUU2V2ZW5EYXlUYXNrR3JvdXBNYXAYASADKAsyOC5y",
+            "YXdkYXRhLlNldmVuRGF5VGFza0dyb3VwQ29uZi5TZXZlbkRheVRhc2tHcm91",
+            "cE1hcEVudHJ5EloKFlNldmVuRGF5VGFza0dyb3VwTWFwQUIYAiADKAsyOi5y",
+            "YXdkYXRhLlNldmVuRGF5VGFza0dyb3VwQ29uZi5TZXZlbkRheVRhc2tHcm91",
+            "cE1hcEFCRW50cnkSZAobU2V2ZW5EYXlUYXNrR3JvdXBNYXBBQlBhdGNoGAMg",
+            "AygLMj8ucmF3ZGF0YS5TZXZlbkRheVRhc2tHcm91cENvbmYuU2V2ZW5EYXlU",
+            "YXNrR3JvdXBNYXBBQlBhdGNoRW50cnkaVwoZU2V2ZW5EYXlUYXNrR3JvdXBN",
+            "YXBFbnRyeRILCgNrZXkYASABKAUSKQoFdmFsdWUYAiABKAsyGi5yYXdkYXRh",
+            "LlNldmVuRGF5VGFza0dyb3VwOgI4ARpjChtTZXZlbkRheVRhc2tHcm91cE1h",
+            "cEFCRW50cnkSCwoDa2V5GAEgASgJEjMKBXZhbHVlGAIgASgLMiQucmF3ZGF0",
+            "YS5TZXZlbkRheVRhc2tHcm91cE1hcEFCVmFsdWU6AjgBGmgKIFNldmVuRGF5",
+            "VGFza0dyb3VwTWFwQUJQYXRjaEVudHJ5EgsKA2tleRgBIAEoCRIzCgV2YWx1",
+            "ZRgCIAEoCzIkLnJhd2RhdGEuU2V2ZW5EYXlUYXNrR3JvdXBNYXBBQlZhbHVl",
+            "OgI4AUI9Wi1naXRsYWIuZnVucGx1cy5pby9mYXQvY29uZi9nZW4vZ29sYW5n",
+            "L3Jhd2RhdGGqAgtmYXQucmF3ZGF0YWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.SevenDayTaskGroup), global::fat.rawdata.SevenDayTaskGroup.Parser, new[]{ "Id", "DayText", "Sort", "TaskInfo", "UnlockDay" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.SevenDayTaskGroup), global::fat.rawdata.SevenDayTaskGroup.Parser, new[]{ "Id", "Sort", "TaskInfo", "UnlockDay" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.SevenDayTaskGroupMapABValue), global::fat.rawdata.SevenDayTaskGroupMapABValue.Parser, new[]{ "SevenDayTaskGroupMap" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.SevenDayTaskGroupConf), global::fat.rawdata.SevenDayTaskGroupConf.Parser, new[]{ "SevenDayTaskGroupMap", "SevenDayTaskGroupMapAB", "SevenDayTaskGroupMapABPatch" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, null, })
           }));
@@ -97,7 +96,6 @@ namespace fat.rawdata {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public SevenDayTaskGroup(SevenDayTaskGroup other) : this() {
       id_ = other.id_;
-      dayText_ = other.dayText_;
       sort_ = other.sort_;
       taskInfo_ = other.taskInfo_.Clone();
       unlockDay_ = other.unlockDay_;
@@ -121,20 +119,6 @@ namespace fat.rawdata {
       get { return id_; }
       set {
         id_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "dayText" field.</summary>
-    public const int DayTextFieldNumber = 2;
-    private string dayText_ = "";
-    /// <summary>
-    /// 界面下方页签上的天数数字
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string DayText {
-      get { return dayText_; }
-      set {
-        dayText_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
@@ -194,7 +178,6 @@ namespace fat.rawdata {
         return true;
       }
       if (Id != other.Id) return false;
-      if (DayText != other.DayText) return false;
       if (Sort != other.Sort) return false;
       if(!taskInfo_.Equals(other.taskInfo_)) return false;
       if (UnlockDay != other.UnlockDay) return false;
@@ -205,7 +188,6 @@ namespace fat.rawdata {
     public override int GetHashCode() {
       int hash = 1;
       if (Id != 0) hash ^= Id.GetHashCode();
-      if (DayText.Length != 0) hash ^= DayText.GetHashCode();
       if (Sort != 0) hash ^= Sort.GetHashCode();
       hash ^= taskInfo_.GetHashCode();
       if (UnlockDay != 0) hash ^= UnlockDay.GetHashCode();
@@ -229,10 +211,6 @@ namespace fat.rawdata {
         output.WriteRawTag(8);
         output.WriteInt32(Id);
       }
-      if (DayText.Length != 0) {
-        output.WriteRawTag(18);
-        output.WriteString(DayText);
-      }
       if (Sort != 0) {
         output.WriteRawTag(24);
         output.WriteInt32(Sort);
@@ -255,10 +233,6 @@ namespace fat.rawdata {
         output.WriteRawTag(8);
         output.WriteInt32(Id);
       }
-      if (DayText.Length != 0) {
-        output.WriteRawTag(18);
-        output.WriteString(DayText);
-      }
       if (Sort != 0) {
         output.WriteRawTag(24);
         output.WriteInt32(Sort);
@@ -280,9 +254,6 @@ namespace fat.rawdata {
       if (Id != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Id);
       }
-      if (DayText.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(DayText);
-      }
       if (Sort != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Sort);
       }
@@ -303,9 +274,6 @@ namespace fat.rawdata {
       }
       if (other.Id != 0) {
         Id = other.Id;
-      }
-      if (other.DayText.Length != 0) {
-        DayText = other.DayText;
       }
       if (other.Sort != 0) {
         Sort = other.Sort;
@@ -330,10 +298,6 @@ namespace fat.rawdata {
             break;
           case 8: {
             Id = input.ReadInt32();
-            break;
-          }
-          case 18: {
-            DayText = input.ReadString();
             break;
           }
           case 24: {
@@ -365,10 +329,6 @@ namespace fat.rawdata {
             break;
           case 8: {
             Id = input.ReadInt32();
-            break;
-          }
-          case 18: {
-            DayText = input.ReadString();
             break;
           }
           case 24: {

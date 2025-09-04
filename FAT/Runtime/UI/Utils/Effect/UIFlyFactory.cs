@@ -74,6 +74,8 @@ namespace FAT
                     ft = FlyType.FarmToken;
                 else if (tokenConf.Feature == FeatureEntry.FeatureCastleMilestone)
                     ft = FlyType.CastleToken;
+                else if (tokenConf.Feature == FeatureEntry.FeatureMultiplierRanking)
+                    ft = FlyType.MultiRankingToken;
                 else if (tokenConf.Feature == FeatureEntry.FeatureGuess)
                 {
                     var acti = (ActivityGuess)Game.Manager.activity.LookupAny(fat.rawdata.EventType.Guess);
@@ -211,6 +213,7 @@ namespace FAT
                 FlyType.Energy => UIFlyConfig.EnergyRank,
                 FlyType.Coin => UIFlyConfig.CoinRank,
                 FlyType.Gem => UIFlyConfig.GemRank,
+                FlyType.MultiRankingToken => UIFlyConfig.SingleRank,
                 _ => UIFlyConfig.DefaultRank
             };
             return rankList;

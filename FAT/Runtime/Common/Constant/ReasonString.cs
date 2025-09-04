@@ -237,5 +237,9 @@ namespace FAT
         #region 每日任务路径主题
         public static readonly ReasonString landmark_reward = new(nameof(landmark_reward));
         #endregion
+        
+        #region 倍率排行榜
+        public static readonly ReasonString multi_ranking_token = new(nameof(multi_ranking_token));
+        #endregion
     }
 }

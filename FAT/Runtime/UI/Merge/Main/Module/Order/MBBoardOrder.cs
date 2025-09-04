@@ -523,6 +523,13 @@ namespace FAT
                     scoreGroup.txtScore.text = $"{score}";
                     _SetScoreState(true);
                 }
+                else if (act is ActivityMultiplierRanking ranking)
+                {
+                    var coinID = ranking.conf.Token;
+                    scoreGroup.icon.SetImage(Game.Manager.objectMan.GetBasicConfig(coinID).Image);
+                    scoreGroup.txtScore.text = $"{score}";
+                    _SetScoreState(true);
+                }
                 else
                 {
                     _SetScoreState(false);

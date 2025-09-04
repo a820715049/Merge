@@ -24,7 +24,7 @@ namespace fat.rawdata {
     static FeatureEntryReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChpyYXdkYXRhL0ZlYXR1cmVFbnRyeS5wcm90bxIHcmF3ZGF0YSqHEgoMRmVh",
+            "ChpyYXdkYXRhL0ZlYXR1cmVFbnRyeS5wcm90bxIHcmF3ZGF0YSqUEwoMRmVh",
             "dHVyZUVudHJ5Eg8KC0ZlYXR1cmVOb25lEAASEwoPRmVhdHVyZUl0ZW1TYWxl",
             "EAESEgoORmVhdHVyZUJhZ0l0ZW0QAhIWChJGZWF0dXJlQmFnUHJvZHVjZXIQ",
             "AxISCg5GZWF0dXJlQmFnVG9vbBAEEhEKDUZlYXR1cmVCdWJibGUQBRIVChFG",
@@ -76,8 +76,11 @@ namespace fat.rawdata {
             "YXR1cmVQdXp6bGUQXxITCg9GZWF0dXJlTGFuZG1hcmsQYBIVChFGZWF0dXJl",
             "RnJvemVuSXRlbRBhEhUKEUZlYXR1cmVMaW1pdE1lcmdlEGISEQoNRmVhdHVy",
             "ZU9ubGluZRBjEhQKEEZlYXR1cmVMZXZlbFBhY2sQZBIXChNGZWF0dXJlU2V2",
-            "ZW5EYXlUYXNrEGVCPVotZ2l0bGFiLmZ1bnBsdXMuaW8vZmF0L2NvbmYvZ2Vu",
-            "L2dvbGFuZy9yYXdkYXRhqgILZmF0LnJhd2RhdGFiBnByb3RvMw=="));
+            "ZW5EYXlUYXNrEGUSFAoQRmVhdHVyZUdlbVZlcmlmeRBmEhoKFkZlYXR1cmVT",
+            "a2lwUmFuZG9tQ2hlc3QQZxIXChNGZWF0dXJlU2tpcENhcmRQYWNrEGgSFwoT",
+            "RmVhdHVyZU1pY01pbGVzdG9uZRBpEhIKDkZlYXR1cmVTZWFSYWNlEGoSEwoP",
+            "RmVhdHVyZVZpbmVMZWFwEGtCPVotZ2l0bGFiLmZ1bnBsdXMuaW8vZmF0L2Nv",
+            "bmYvZ2VuL2dvbGFuZy9yYXdkYXRhqgILZmF0LnJhd2RhdGFiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::fat.rawdata.FeatureEntry), }, null, null));
@@ -495,6 +498,30 @@ namespace fat.rawdata {
     /// 七天任务
     /// </summary>
     [pbr::OriginalName("FeatureSevenDayTask")] FeatureSevenDayTask = 101,
+    /// <summary>
+    /// 大额钻石消耗确认弹窗
+    /// </summary>
+    [pbr::OriginalName("FeatureGemVerify")] FeatureGemVerify = 102,
+    /// <summary>
+    /// 点击跳过开启随机宝箱动画
+    /// </summary>
+    [pbr::OriginalName("FeatureSkipRandomChest")] FeatureSkipRandomChest = 103,
+    /// <summary>
+    /// 点击跳过开启卡包动画
+    /// </summary>
+    [pbr::OriginalName("FeatureSkipCardPack")] FeatureSkipCardPack = 104,
+    /// <summary>
+    /// 合成音符
+    /// </summary>
+    [pbr::OriginalName("FeatureMicMilestone")] FeatureMicMilestone = 105,
+    /// <summary>
+    /// 海上赢家
+    /// </summary>
+    [pbr::OriginalName("FeatureSeaRace")] FeatureSeaRace = 106,
+    /// <summary>
+    /// 飞跃藤蔓
+    /// </summary>
+    [pbr::OriginalName("FeatureVineLeap")] FeatureVineLeap = 107,
   }
 
   #endregion

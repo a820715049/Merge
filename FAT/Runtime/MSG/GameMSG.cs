@@ -548,5 +548,12 @@ namespace FAT
         #region 每日任务路径主题
         public class LANDMARK_TOKEN_CHANGE : MessageBase { } // LandMark 活动专用：token 数量变更
         #endregion
+        
+        #region 倍率排行
+        public class MULTIPLIER_RANKING_SLOTS_CHANGE : MessageBase<int> { }    // 倍率排行转盘槽位发生变化
+        public class MULTIPLY_RANKING_ENTRY_REFRESH_RED_DOT : MessageBase { }    // 倍率排行入口刷新红点
+        public class MULTIPLY_RANKING_BLOCK_ENTRY_UPDATE : MessageBase { }
+        public class MULTIPLY_RANKING_RANKING_CHANGE : MessageBase { }
+        #endregion
     }
 }

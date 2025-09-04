@@ -63,7 +63,7 @@ namespace fat.rawdata {
   /// <summary>
   /// annotation@annotation_type(type="rawdata")
   /// annotation@rawdata(row="EventItemBingo",table="EventItemBingoMap",table_wrapper="EventItemBingoConf",map="true",map_key_type="int32",data="EventItemBingoConf")
-  /// annotation@ab(table_ab="EventItemBingoMapAB",table_ab_patch="EventItemBingoMapABPatch",table_ab_value="EventItemBingoMapABValue",ab_patch="true")
+  /// annotation@ab(table_ab="EventItemBingoMapAB",table_ab_patch="EventItemBingoMapABPatch",table_ab_value="EventItemBingoMapABValue",ab_patch="false")
   /// annotation@filter(just_server="false",just_client="false")
   /// annotation@EventItemBingo(id="id")
   /// </summary>

@@ -78,6 +78,8 @@ using rawComMergeTapSource = fat.rawdata.ComMergeTapSource;
 using ComMergeTapSourceVisitor = fat.conf.ComMergeTapSourceVisitor;
 using rawComMergeTimeSkip = fat.rawdata.ComMergeTimeSkip;
 using ComMergeTimeSkipVisitor = fat.conf.ComMergeTimeSkipVisitor;
+using rawComMergeTokenMultiplier = fat.rawdata.ComMergeTokenMultiplier;
+using ComMergeTokenMultiplierVisitor = fat.conf.ComMergeTokenMultiplierVisitor;
 using rawComMergeToolSource = fat.rawdata.ComMergeToolSource;
 using ComMergeToolSourceVisitor = fat.conf.ComMergeToolSourceVisitor;
 using rawComTapBonus = fat.rawdata.ComTapBonus;
@@ -384,6 +386,18 @@ using rawEventScoreDuelDetail = fat.rawdata.EventScoreDuelDetail;
 using EventScoreDuelDetailVisitor = fat.conf.EventScoreDuelDetailVisitor;
 using rawEventScoreDuelSTG = fat.rawdata.EventScoreDuelSTG;
 using EventScoreDuelSTGVisitor = fat.conf.EventScoreDuelSTGVisitor;
+using rawEventSeaMilestoneReward = fat.rawdata.EventSeaMilestoneReward;
+using EventSeaMilestoneRewardVisitor = fat.conf.EventSeaMilestoneRewardVisitor;
+using rawEventSeaRace = fat.rawdata.EventSeaRace;
+using EventSeaRaceVisitor = fat.conf.EventSeaRaceVisitor;
+using rawEventSeaRaceDetail = fat.rawdata.EventSeaRaceDetail;
+using EventSeaRaceDetailVisitor = fat.conf.EventSeaRaceDetailVisitor;
+using rawEventSeaRaceReward = fat.rawdata.EventSeaRaceReward;
+using EventSeaRaceRewardVisitor = fat.conf.EventSeaRaceRewardVisitor;
+using rawEventSeaRaceRobot = fat.rawdata.EventSeaRaceRobot;
+using EventSeaRaceRobotVisitor = fat.conf.EventSeaRaceRobotVisitor;
+using rawEventSeaRaceRound = fat.rawdata.EventSeaRaceRound;
+using EventSeaRaceRoundVisitor = fat.conf.EventSeaRaceRoundVisitor;
 using rawEventSevenDayTask = fat.rawdata.EventSevenDayTask;
 using EventSevenDayTaskVisitor = fat.conf.EventSevenDayTaskVisitor;
 using rawEventStamp = fat.rawdata.EventStamp;
@@ -426,6 +440,18 @@ using rawEventTrigger = fat.rawdata.EventTrigger;
 using EventTriggerVisitor = fat.conf.EventTriggerVisitor;
 using rawEventTypeInfo = fat.rawdata.EventTypeInfo;
 using EventTypeInfoVisitor = fat.conf.EventTypeInfoVisitor;
+using rawEventVineLeap = fat.rawdata.EventVineLeap;
+using EventVineLeapVisitor = fat.conf.EventVineLeapVisitor;
+using rawEventVineLeapDiff = fat.rawdata.EventVineLeapDiff;
+using EventVineLeapDiffVisitor = fat.conf.EventVineLeapDiffVisitor;
+using rawEventVineLeapGroup = fat.rawdata.EventVineLeapGroup;
+using EventVineLeapGroupVisitor = fat.conf.EventVineLeapGroupVisitor;
+using rawEventVineLeapLevel = fat.rawdata.EventVineLeapLevel;
+using EventVineLeapLevelVisitor = fat.conf.EventVineLeapLevelVisitor;
+using rawEventVineLeapOut = fat.rawdata.EventVineLeapOut;
+using EventVineLeapOutVisitor = fat.conf.EventVineLeapOutVisitor;
+using rawEventVineLeapReward = fat.rawdata.EventVineLeapReward;
+using EventVineLeapRewardVisitor = fat.conf.EventVineLeapRewardVisitor;
 using rawEventWeeklyRaffle = fat.rawdata.EventWeeklyRaffle;
 using EventWeeklyRaffleVisitor = fat.conf.EventWeeklyRaffleVisitor;
 using rawEventWeeklyRaffleDetail = fat.rawdata.EventWeeklyRaffleDetail;
@@ -622,6 +648,12 @@ using rawMergeRuledOutput = fat.rawdata.MergeRuledOutput;
 using MergeRuledOutputVisitor = fat.conf.MergeRuledOutputVisitor;
 using rawMergeTapCost = fat.rawdata.MergeTapCost;
 using MergeTapCostVisitor = fat.conf.MergeTapCostVisitor;
+using rawMicMilestone = fat.rawdata.MicMilestone;
+using MicMilestoneVisitor = fat.conf.MicMilestoneVisitor;
+using rawMicMilestoneDetail = fat.rawdata.MicMilestoneDetail;
+using MicMilestoneDetailVisitor = fat.conf.MicMilestoneDetailVisitor;
+using rawMicMilestoneGroup = fat.rawdata.MicMilestoneGroup;
+using MicMilestoneGroupVisitor = fat.conf.MicMilestoneGroupVisitor;
 using rawMiniGameBeadsBase = fat.rawdata.MiniGameBeadsBase;
 using MiniGameBeadsBaseVisitor = fat.conf.MiniGameBeadsBaseVisitor;
 using rawMiniGameBeadsCell = fat.rawdata.MiniGameBeadsCell;
@@ -854,6 +886,7 @@ public static partial class Data {
 		    cur.ComMergeSpecialBoxMap = new fat.rawdata.ComMergeSpecialBoxConf();
 		    cur.ComMergeTapSourceMap = new fat.rawdata.ComMergeTapSourceConf();
 		    cur.ComMergeTimeSkipMap = new fat.rawdata.ComMergeTimeSkipConf();
+		    cur.ComMergeTokenMultiplierMap = new fat.rawdata.ComMergeTokenMultiplierConf();
 		    cur.ComMergeToolSourceMap = new fat.rawdata.ComMergeToolSourceConf();
 		    cur.ComTapBonusMap = new fat.rawdata.ComTapBonusConf();
 		    cur.ComTimeMachineMap = new fat.rawdata.ComTimeMachineConf();
@@ -1007,6 +1040,12 @@ public static partial class Data {
 		    cur.EventScoreDuelMap = new fat.rawdata.EventScoreDuelConf();
 		    cur.EventScoreDuelDetailMap = new fat.rawdata.EventScoreDuelDetailConf();
 		    cur.EventScoreDuelSTGMap = new fat.rawdata.EventScoreDuelSTGConf();
+		    cur.EventSeaMilestoneRewardMap = new fat.rawdata.EventSeaMilestoneRewardConf();
+		    cur.EventSeaRaceMap = new fat.rawdata.EventSeaRaceConf();
+		    cur.EventSeaRaceDetailMap = new fat.rawdata.EventSeaRaceDetailConf();
+		    cur.EventSeaRaceRewardMap = new fat.rawdata.EventSeaRaceRewardConf();
+		    cur.EventSeaRaceRobotMap = new fat.rawdata.EventSeaRaceRobotConf();
+		    cur.EventSeaRaceRoundMap = new fat.rawdata.EventSeaRaceRoundConf();
 		    cur.EventSevenDayTaskMap = new fat.rawdata.EventSevenDayTaskConf();
 		    cur.EventStampMap = new fat.rawdata.EventStampConf();
 		    cur.EventStampRoundMap = new fat.rawdata.EventStampRoundConf();
@@ -1028,6 +1067,12 @@ public static partial class Data {
 		    cur.EventTreasureRewardMap = new fat.rawdata.EventTreasureRewardConf();
 		    cur.EventTriggerMap = new fat.rawdata.EventTriggerConf();
 		    cur.EventTypeInfoSlice = new fat.rawdata.EventTypeInfoConf();
+		    cur.EventVineLeapMap = new fat.rawdata.EventVineLeapConf();
+		    cur.EventVineLeapDiffMap = new fat.rawdata.EventVineLeapDiffConf();
+		    cur.EventVineLeapGroupMap = new fat.rawdata.EventVineLeapGroupConf();
+		    cur.EventVineLeapLevelMap = new fat.rawdata.EventVineLeapLevelConf();
+		    cur.EventVineLeapOutMap = new fat.rawdata.EventVineLeapOutConf();
+		    cur.EventVineLeapRewardMap = new fat.rawdata.EventVineLeapRewardConf();
 		    cur.EventWeeklyRaffleMap = new fat.rawdata.EventWeeklyRaffleConf();
 		    cur.EventWeeklyRaffleDetailMap = new fat.rawdata.EventWeeklyRaffleDetailConf();
 		    cur.EventWeeklyRaffleGrpMap = new fat.rawdata.EventWeeklyRaffleGrpConf();
@@ -1126,6 +1171,9 @@ public static partial class Data {
 		    cur.MergeRuleMap = new fat.rawdata.MergeRuleConf();
 		    cur.MergeRuledOutputMap = new fat.rawdata.MergeRuledOutputConf();
 		    cur.MergeTapCostMap = new fat.rawdata.MergeTapCostConf();
+		    cur.MicMilestoneMap = new fat.rawdata.MicMilestoneConf();
+		    cur.MicMilestoneDetailMap = new fat.rawdata.MicMilestoneDetailConf();
+		    cur.MicMilestoneGroupMap = new fat.rawdata.MicMilestoneGroupConf();
 		    cur.MiniGameBeadsBaseMap = new fat.rawdata.MiniGameBeadsBaseConf();
 		    cur.MiniGameBeadsCellMap = new fat.rawdata.MiniGameBeadsCellConf();
 		    cur.MiniGameBeadsLevelMap = new fat.rawdata.MiniGameBeadsLevelConf();
@@ -1605,6 +1653,17 @@ public static partial class Data {
 		public static List<rawComMergeTimeSkip> GetComMergeTimeSkipByFilter(Func<rawComMergeTimeSkip, bool> filterFunc,string tag="") => ComMergeTimeSkipVisitor.GetByFilter(filterFunc,tag);
 		public static rawComMergeTimeSkip? GetOneComMergeTimeSkipByFilter(Func<rawComMergeTimeSkip, bool> filterFunc,string tag="") => ComMergeTimeSkipVisitor.GetOneByFilter(filterFunc,tag);
 	#endregion ComMergeTimeSkip
+	#region ComMergeTokenMultiplier
+		public static int GetCountComMergeTokenMultiplierMap(string tag="") => ComMergeTokenMultiplierVisitor.GetCount(tag);
+		public static string GetFileNameComMergeTokenMultiplierMap() => ComMergeTokenMultiplierVisitor.GetFileName();
+		public static List<int> SortedKeysComMergeTokenMultiplierMap(string tag="") => ComMergeTokenMultiplierVisitor.SortedKeys(tag);
+		public static PBC::MapField<int, rawComMergeTokenMultiplier> GetComMergeTokenMultiplierMap(string tag="") => ComMergeTokenMultiplierVisitor.All(tag);
+		public static void RangeComMergeTokenMultiplierMap(Action<int, rawComMergeTokenMultiplier> filter,string tag="") => ComMergeTokenMultiplierVisitor.Range(filter,tag);
+		public static List<int> KeysComMergeTokenMultiplierMap(string tag="") => ComMergeTokenMultiplierVisitor.Keys(tag);
+		public static rawComMergeTokenMultiplier? GetComMergeTokenMultiplier(int key,string tag="") => ComMergeTokenMultiplierVisitor.Get(key,tag);
+		public static List<rawComMergeTokenMultiplier> GetComMergeTokenMultiplierByFilter(Func<rawComMergeTokenMultiplier, bool> filterFunc,string tag="") => ComMergeTokenMultiplierVisitor.GetByFilter(filterFunc,tag);
+		public static rawComMergeTokenMultiplier? GetOneComMergeTokenMultiplierByFilter(Func<rawComMergeTokenMultiplier, bool> filterFunc,string tag="") => ComMergeTokenMultiplierVisitor.GetOneByFilter(filterFunc,tag);
+	#endregion ComMergeTokenMultiplier
 	#region ComMergeToolSource
 		public static int GetCountComMergeToolSourceMap(string tag="") => ComMergeToolSourceVisitor.GetCount(tag);
 		public static string GetFileNameComMergeToolSourceMap() => ComMergeToolSourceVisitor.GetFileName();
@@ -3284,6 +3343,72 @@ public static partial class Data {
 		public static List<rawEventScoreDuelSTG> GetEventScoreDuelSTGByFilter(Func<rawEventScoreDuelSTG, bool> filterFunc,string tag="") => EventScoreDuelSTGVisitor.GetByFilter(filterFunc,tag);
 		public static rawEventScoreDuelSTG? GetOneEventScoreDuelSTGByFilter(Func<rawEventScoreDuelSTG, bool> filterFunc,string tag="") => EventScoreDuelSTGVisitor.GetOneByFilter(filterFunc,tag);
 	#endregion EventScoreDuelSTG
+	#region EventSeaMilestoneReward
+		public static int GetCountEventSeaMilestoneRewardMap(string tag="") => EventSeaMilestoneRewardVisitor.GetCount(tag);
+		public static string GetFileNameEventSeaMilestoneRewardMap() => EventSeaMilestoneRewardVisitor.GetFileName();
+		public static List<int> SortedKeysEventSeaMilestoneRewardMap(string tag="") => EventSeaMilestoneRewardVisitor.SortedKeys(tag);
+		public static PBC::MapField<int, rawEventSeaMilestoneReward> GetEventSeaMilestoneRewardMap(string tag="") => EventSeaMilestoneRewardVisitor.All(tag);
+		public static void RangeEventSeaMilestoneRewardMap(Action<int, rawEventSeaMilestoneReward> filter,string tag="") => EventSeaMilestoneRewardVisitor.Range(filter,tag);
+		public static List<int> KeysEventSeaMilestoneRewardMap(string tag="") => EventSeaMilestoneRewardVisitor.Keys(tag);
+		public static rawEventSeaMilestoneReward? GetEventSeaMilestoneReward(int key,string tag="") => EventSeaMilestoneRewardVisitor.Get(key,tag);
+		public static List<rawEventSeaMilestoneReward> GetEventSeaMilestoneRewardByFilter(Func<rawEventSeaMilestoneReward, bool> filterFunc,string tag="") => EventSeaMilestoneRewardVisitor.GetByFilter(filterFunc,tag);
+		public static rawEventSeaMilestoneReward? GetOneEventSeaMilestoneRewardByFilter(Func<rawEventSeaMilestoneReward, bool> filterFunc,string tag="") => EventSeaMilestoneRewardVisitor.GetOneByFilter(filterFunc,tag);
+	#endregion EventSeaMilestoneReward
+	#region EventSeaRace
+		public static int GetCountEventSeaRaceMap(string tag="") => EventSeaRaceVisitor.GetCount(tag);
+		public static string GetFileNameEventSeaRaceMap() => EventSeaRaceVisitor.GetFileName();
+		public static List<int> SortedKeysEventSeaRaceMap(string tag="") => EventSeaRaceVisitor.SortedKeys(tag);
+		public static PBC::MapField<int, rawEventSeaRace> GetEventSeaRaceMap(string tag="") => EventSeaRaceVisitor.All(tag);
+		public static void RangeEventSeaRaceMap(Action<int, rawEventSeaRace> filter,string tag="") => EventSeaRaceVisitor.Range(filter,tag);
+		public static List<int> KeysEventSeaRaceMap(string tag="") => EventSeaRaceVisitor.Keys(tag);
+		public static rawEventSeaRace? GetEventSeaRace(int key,string tag="") => EventSeaRaceVisitor.Get(key,tag);
+		public static List<rawEventSeaRace> GetEventSeaRaceByFilter(Func<rawEventSeaRace, bool> filterFunc,string tag="") => EventSeaRaceVisitor.GetByFilter(filterFunc,tag);
+		public static rawEventSeaRace? GetOneEventSeaRaceByFilter(Func<rawEventSeaRace, bool> filterFunc,string tag="") => EventSeaRaceVisitor.GetOneByFilter(filterFunc,tag);
+	#endregion EventSeaRace
+	#region EventSeaRaceDetail
+		public static int GetCountEventSeaRaceDetailMap(string tag="") => EventSeaRaceDetailVisitor.GetCount(tag);
+		public static string GetFileNameEventSeaRaceDetailMap() => EventSeaRaceDetailVisitor.GetFileName();
+		public static List<int> SortedKeysEventSeaRaceDetailMap(string tag="") => EventSeaRaceDetailVisitor.SortedKeys(tag);
+		public static PBC::MapField<int, rawEventSeaRaceDetail> GetEventSeaRaceDetailMap(string tag="") => EventSeaRaceDetailVisitor.All(tag);
+		public static void RangeEventSeaRaceDetailMap(Action<int, rawEventSeaRaceDetail> filter,string tag="") => EventSeaRaceDetailVisitor.Range(filter,tag);
+		public static List<int> KeysEventSeaRaceDetailMap(string tag="") => EventSeaRaceDetailVisitor.Keys(tag);
+		public static rawEventSeaRaceDetail? GetEventSeaRaceDetail(int key,string tag="") => EventSeaRaceDetailVisitor.Get(key,tag);
+		public static List<rawEventSeaRaceDetail> GetEventSeaRaceDetailByFilter(Func<rawEventSeaRaceDetail, bool> filterFunc,string tag="") => EventSeaRaceDetailVisitor.GetByFilter(filterFunc,tag);
+		public static rawEventSeaRaceDetail? GetOneEventSeaRaceDetailByFilter(Func<rawEventSeaRaceDetail, bool> filterFunc,string tag="") => EventSeaRaceDetailVisitor.GetOneByFilter(filterFunc,tag);
+	#endregion EventSeaRaceDetail
+	#region EventSeaRaceReward
+		public static int GetCountEventSeaRaceRewardMap(string tag="") => EventSeaRaceRewardVisitor.GetCount(tag);
+		public static string GetFileNameEventSeaRaceRewardMap() => EventSeaRaceRewardVisitor.GetFileName();
+		public static List<int> SortedKeysEventSeaRaceRewardMap(string tag="") => EventSeaRaceRewardVisitor.SortedKeys(tag);
+		public static PBC::MapField<int, rawEventSeaRaceReward> GetEventSeaRaceRewardMap(string tag="") => EventSeaRaceRewardVisitor.All(tag);
+		public static void RangeEventSeaRaceRewardMap(Action<int, rawEventSeaRaceReward> filter,string tag="") => EventSeaRaceRewardVisitor.Range(filter,tag);
+		public static List<int> KeysEventSeaRaceRewardMap(string tag="") => EventSeaRaceRewardVisitor.Keys(tag);
+		public static rawEventSeaRaceReward? GetEventSeaRaceReward(int key,string tag="") => EventSeaRaceRewardVisitor.Get(key,tag);
+		public static List<rawEventSeaRaceReward> GetEventSeaRaceRewardByFilter(Func<rawEventSeaRaceReward, bool> filterFunc,string tag="") => EventSeaRaceRewardVisitor.GetByFilter(filterFunc,tag);
+		public static rawEventSeaRaceReward? GetOneEventSeaRaceRewardByFilter(Func<rawEventSeaRaceReward, bool> filterFunc,string tag="") => EventSeaRaceRewardVisitor.GetOneByFilter(filterFunc,tag);
+	#endregion EventSeaRaceReward
+	#region EventSeaRaceRobot
+		public static int GetCountEventSeaRaceRobotMap(string tag="") => EventSeaRaceRobotVisitor.GetCount(tag);
+		public static string GetFileNameEventSeaRaceRobotMap() => EventSeaRaceRobotVisitor.GetFileName();
+		public static List<int> SortedKeysEventSeaRaceRobotMap(string tag="") => EventSeaRaceRobotVisitor.SortedKeys(tag);
+		public static PBC::MapField<int, rawEventSeaRaceRobot> GetEventSeaRaceRobotMap(string tag="") => EventSeaRaceRobotVisitor.All(tag);
+		public static void RangeEventSeaRaceRobotMap(Action<int, rawEventSeaRaceRobot> filter,string tag="") => EventSeaRaceRobotVisitor.Range(filter,tag);
+		public static List<int> KeysEventSeaRaceRobotMap(string tag="") => EventSeaRaceRobotVisitor.Keys(tag);
+		public static rawEventSeaRaceRobot? GetEventSeaRaceRobot(int key,string tag="") => EventSeaRaceRobotVisitor.Get(key,tag);
+		public static List<rawEventSeaRaceRobot> GetEventSeaRaceRobotByFilter(Func<rawEventSeaRaceRobot, bool> filterFunc,string tag="") => EventSeaRaceRobotVisitor.GetByFilter(filterFunc,tag);
+		public static rawEventSeaRaceRobot? GetOneEventSeaRaceRobotByFilter(Func<rawEventSeaRaceRobot, bool> filterFunc,string tag="") => EventSeaRaceRobotVisitor.GetOneByFilter(filterFunc,tag);
+	#endregion EventSeaRaceRobot
+	#region EventSeaRaceRound
+		public static int GetCountEventSeaRaceRoundMap(string tag="") => EventSeaRaceRoundVisitor.GetCount(tag);
+		public static string GetFileNameEventSeaRaceRoundMap() => EventSeaRaceRoundVisitor.GetFileName();
+		public static List<int> SortedKeysEventSeaRaceRoundMap(string tag="") => EventSeaRaceRoundVisitor.SortedKeys(tag);
+		public static PBC::MapField<int, rawEventSeaRaceRound> GetEventSeaRaceRoundMap(string tag="") => EventSeaRaceRoundVisitor.All(tag);
+		public static void RangeEventSeaRaceRoundMap(Action<int, rawEventSeaRaceRound> filter,string tag="") => EventSeaRaceRoundVisitor.Range(filter,tag);
+		public static List<int> KeysEventSeaRaceRoundMap(string tag="") => EventSeaRaceRoundVisitor.Keys(tag);
+		public static rawEventSeaRaceRound? GetEventSeaRaceRound(int key,string tag="") => EventSeaRaceRoundVisitor.Get(key,tag);
+		public static List<rawEventSeaRaceRound> GetEventSeaRaceRoundByFilter(Func<rawEventSeaRaceRound, bool> filterFunc,string tag="") => EventSeaRaceRoundVisitor.GetByFilter(filterFunc,tag);
+		public static rawEventSeaRaceRound? GetOneEventSeaRaceRoundByFilter(Func<rawEventSeaRaceRound, bool> filterFunc,string tag="") => EventSeaRaceRoundVisitor.GetOneByFilter(filterFunc,tag);
+	#endregion EventSeaRaceRound
 	#region EventSevenDayTask
 		public static int GetCountEventSevenDayTaskMap(string tag="") => EventSevenDayTaskVisitor.GetCount(tag);
 		public static string GetFileNameEventSevenDayTaskMap() => EventSevenDayTaskVisitor.GetFileName();
@@ -3513,6 +3638,72 @@ public static partial class Data {
 		public static List<rawEventTypeInfo> GetEventTypeInfoByFilter(Func<rawEventTypeInfo, bool> filterFunc,string tag="") => EventTypeInfoVisitor.GetByFilter(filterFunc,tag);
 		public static rawEventTypeInfo? GetOneEventTypeInfoByFilter(Func<rawEventTypeInfo, bool> filterFunc,string tag="") => EventTypeInfoVisitor.GetOneByFilter(filterFunc,tag);
 	#endregion EventTypeInfo
+	#region EventVineLeap
+		public static int GetCountEventVineLeapMap(string tag="") => EventVineLeapVisitor.GetCount(tag);
+		public static string GetFileNameEventVineLeapMap() => EventVineLeapVisitor.GetFileName();
+		public static List<int> SortedKeysEventVineLeapMap(string tag="") => EventVineLeapVisitor.SortedKeys(tag);
+		public static PBC::MapField<int, rawEventVineLeap> GetEventVineLeapMap(string tag="") => EventVineLeapVisitor.All(tag);
+		public static void RangeEventVineLeapMap(Action<int, rawEventVineLeap> filter,string tag="") => EventVineLeapVisitor.Range(filter,tag);
+		public static List<int> KeysEventVineLeapMap(string tag="") => EventVineLeapVisitor.Keys(tag);
+		public static rawEventVineLeap? GetEventVineLeap(int key,string tag="") => EventVineLeapVisitor.Get(key,tag);
+		public static List<rawEventVineLeap> GetEventVineLeapByFilter(Func<rawEventVineLeap, bool> filterFunc,string tag="") => EventVineLeapVisitor.GetByFilter(filterFunc,tag);
+		public static rawEventVineLeap? GetOneEventVineLeapByFilter(Func<rawEventVineLeap, bool> filterFunc,string tag="") => EventVineLeapVisitor.GetOneByFilter(filterFunc,tag);
+	#endregion EventVineLeap
+	#region EventVineLeapDiff
+		public static int GetCountEventVineLeapDiffMap(string tag="") => EventVineLeapDiffVisitor.GetCount(tag);
+		public static string GetFileNameEventVineLeapDiffMap() => EventVineLeapDiffVisitor.GetFileName();
+		public static List<int> SortedKeysEventVineLeapDiffMap(string tag="") => EventVineLeapDiffVisitor.SortedKeys(tag);
+		public static PBC::MapField<int, rawEventVineLeapDiff> GetEventVineLeapDiffMap(string tag="") => EventVineLeapDiffVisitor.All(tag);
+		public static void RangeEventVineLeapDiffMap(Action<int, rawEventVineLeapDiff> filter,string tag="") => EventVineLeapDiffVisitor.Range(filter,tag);
+		public static List<int> KeysEventVineLeapDiffMap(string tag="") => EventVineLeapDiffVisitor.Keys(tag);
+		public static rawEventVineLeapDiff? GetEventVineLeapDiff(int key,string tag="") => EventVineLeapDiffVisitor.Get(key,tag);
+		public static List<rawEventVineLeapDiff> GetEventVineLeapDiffByFilter(Func<rawEventVineLeapDiff, bool> filterFunc,string tag="") => EventVineLeapDiffVisitor.GetByFilter(filterFunc,tag);
+		public static rawEventVineLeapDiff? GetOneEventVineLeapDiffByFilter(Func<rawEventVineLeapDiff, bool> filterFunc,string tag="") => EventVineLeapDiffVisitor.GetOneByFilter(filterFunc,tag);
+	#endregion EventVineLeapDiff
+	#region EventVineLeapGroup
+		public static int GetCountEventVineLeapGroupMap(string tag="") => EventVineLeapGroupVisitor.GetCount(tag);
+		public static string GetFileNameEventVineLeapGroupMap() => EventVineLeapGroupVisitor.GetFileName();
+		public static List<int> SortedKeysEventVineLeapGroupMap(string tag="") => EventVineLeapGroupVisitor.SortedKeys(tag);
+		public static PBC::MapField<int, rawEventVineLeapGroup> GetEventVineLeapGroupMap(string tag="") => EventVineLeapGroupVisitor.All(tag);
+		public static void RangeEventVineLeapGroupMap(Action<int, rawEventVineLeapGroup> filter,string tag="") => EventVineLeapGroupVisitor.Range(filter,tag);
+		public static List<int> KeysEventVineLeapGroupMap(string tag="") => EventVineLeapGroupVisitor.Keys(tag);
+		public static rawEventVineLeapGroup? GetEventVineLeapGroup(int key,string tag="") => EventVineLeapGroupVisitor.Get(key,tag);
+		public static List<rawEventVineLeapGroup> GetEventVineLeapGroupByFilter(Func<rawEventVineLeapGroup, bool> filterFunc,string tag="") => EventVineLeapGroupVisitor.GetByFilter(filterFunc,tag);
+		public static rawEventVineLeapGroup? GetOneEventVineLeapGroupByFilter(Func<rawEventVineLeapGroup, bool> filterFunc,string tag="") => EventVineLeapGroupVisitor.GetOneByFilter(filterFunc,tag);
+	#endregion EventVineLeapGroup
+	#region EventVineLeapLevel
+		public static int GetCountEventVineLeapLevelMap(string tag="") => EventVineLeapLevelVisitor.GetCount(tag);
+		public static string GetFileNameEventVineLeapLevelMap() => EventVineLeapLevelVisitor.GetFileName();
+		public static List<int> SortedKeysEventVineLeapLevelMap(string tag="") => EventVineLeapLevelVisitor.SortedKeys(tag);
+		public static PBC::MapField<int, rawEventVineLeapLevel> GetEventVineLeapLevelMap(string tag="") => EventVineLeapLevelVisitor.All(tag);
+		public static void RangeEventVineLeapLevelMap(Action<int, rawEventVineLeapLevel> filter,string tag="") => EventVineLeapLevelVisitor.Range(filter,tag);
+		public static List<int> KeysEventVineLeapLevelMap(string tag="") => EventVineLeapLevelVisitor.Keys(tag);
+		public static rawEventVineLeapLevel? GetEventVineLeapLevel(int key,string tag="") => EventVineLeapLevelVisitor.Get(key,tag);
+		public static List<rawEventVineLeapLevel> GetEventVineLeapLevelByFilter(Func<rawEventVineLeapLevel, bool> filterFunc,string tag="") => EventVineLeapLevelVisitor.GetByFilter(filterFunc,tag);
+		public static rawEventVineLeapLevel? GetOneEventVineLeapLevelByFilter(Func<rawEventVineLeapLevel, bool> filterFunc,string tag="") => EventVineLeapLevelVisitor.GetOneByFilter(filterFunc,tag);
+	#endregion EventVineLeapLevel
+	#region EventVineLeapOut
+		public static int GetCountEventVineLeapOutMap(string tag="") => EventVineLeapOutVisitor.GetCount(tag);
+		public static string GetFileNameEventVineLeapOutMap() => EventVineLeapOutVisitor.GetFileName();
+		public static List<int> SortedKeysEventVineLeapOutMap(string tag="") => EventVineLeapOutVisitor.SortedKeys(tag);
+		public static PBC::MapField<int, rawEventVineLeapOut> GetEventVineLeapOutMap(string tag="") => EventVineLeapOutVisitor.All(tag);
+		public static void RangeEventVineLeapOutMap(Action<int, rawEventVineLeapOut> filter,string tag="") => EventVineLeapOutVisitor.Range(filter,tag);
+		public static List<int> KeysEventVineLeapOutMap(string tag="") => EventVineLeapOutVisitor.Keys(tag);
+		public static rawEventVineLeapOut? GetEventVineLeapOut(int key,string tag="") => EventVineLeapOutVisitor.Get(key,tag);
+		public static List<rawEventVineLeapOut> GetEventVineLeapOutByFilter(Func<rawEventVineLeapOut, bool> filterFunc,string tag="") => EventVineLeapOutVisitor.GetByFilter(filterFunc,tag);
+		public static rawEventVineLeapOut? GetOneEventVineLeapOutByFilter(Func<rawEventVineLeapOut, bool> filterFunc,string tag="") => EventVineLeapOutVisitor.GetOneByFilter(filterFunc,tag);
+	#endregion EventVineLeapOut
+	#region EventVineLeapReward
+		public static int GetCountEventVineLeapRewardMap(string tag="") => EventVineLeapRewardVisitor.GetCount(tag);
+		public static string GetFileNameEventVineLeapRewardMap() => EventVineLeapRewardVisitor.GetFileName();
+		public static List<int> SortedKeysEventVineLeapRewardMap(string tag="") => EventVineLeapRewardVisitor.SortedKeys(tag);
+		public static PBC::MapField<int, rawEventVineLeapReward> GetEventVineLeapRewardMap(string tag="") => EventVineLeapRewardVisitor.All(tag);
+		public static void RangeEventVineLeapRewardMap(Action<int, rawEventVineLeapReward> filter,string tag="") => EventVineLeapRewardVisitor.Range(filter,tag);
+		public static List<int> KeysEventVineLeapRewardMap(string tag="") => EventVineLeapRewardVisitor.Keys(tag);
+		public static rawEventVineLeapReward? GetEventVineLeapReward(int key,string tag="") => EventVineLeapRewardVisitor.Get(key,tag);
+		public static List<rawEventVineLeapReward> GetEventVineLeapRewardByFilter(Func<rawEventVineLeapReward, bool> filterFunc,string tag="") => EventVineLeapRewardVisitor.GetByFilter(filterFunc,tag);
+		public static rawEventVineLeapReward? GetOneEventVineLeapRewardByFilter(Func<rawEventVineLeapReward, bool> filterFunc,string tag="") => EventVineLeapRewardVisitor.GetOneByFilter(filterFunc,tag);
+	#endregion EventVineLeapReward
 	#region EventWeeklyRaffle
 		public static int GetCountEventWeeklyRaffleMap(string tag="") => EventWeeklyRaffleVisitor.GetCount(tag);
 		public static string GetFileNameEventWeeklyRaffleMap() => EventWeeklyRaffleVisitor.GetFileName();
@@ -4548,6 +4739,39 @@ public static partial class Data {
 		public static List<rawMergeTapCost> GetMergeTapCostByFilter(Func<rawMergeTapCost, bool> filterFunc,string tag="") => MergeTapCostVisitor.GetByFilter(filterFunc,tag);
 		public static rawMergeTapCost? GetOneMergeTapCostByFilter(Func<rawMergeTapCost, bool> filterFunc,string tag="") => MergeTapCostVisitor.GetOneByFilter(filterFunc,tag);
 	#endregion MergeTapCost
+	#region MicMilestone
+		public static int GetCountMicMilestoneMap(string tag="") => MicMilestoneVisitor.GetCount(tag);
+		public static string GetFileNameMicMilestoneMap() => MicMilestoneVisitor.GetFileName();
+		public static List<int> SortedKeysMicMilestoneMap(string tag="") => MicMilestoneVisitor.SortedKeys(tag);
+		public static PBC::MapField<int, rawMicMilestone> GetMicMilestoneMap(string tag="") => MicMilestoneVisitor.All(tag);
+		public static void RangeMicMilestoneMap(Action<int, rawMicMilestone> filter,string tag="") => MicMilestoneVisitor.Range(filter,tag);
+		public static List<int> KeysMicMilestoneMap(string tag="") => MicMilestoneVisitor.Keys(tag);
+		public static rawMicMilestone? GetMicMilestone(int key,string tag="") => MicMilestoneVisitor.Get(key,tag);
+		public static List<rawMicMilestone> GetMicMilestoneByFilter(Func<rawMicMilestone, bool> filterFunc,string tag="") => MicMilestoneVisitor.GetByFilter(filterFunc,tag);
+		public static rawMicMilestone? GetOneMicMilestoneByFilter(Func<rawMicMilestone, bool> filterFunc,string tag="") => MicMilestoneVisitor.GetOneByFilter(filterFunc,tag);
+	#endregion MicMilestone
+	#region MicMilestoneDetail
+		public static int GetCountMicMilestoneDetailMap(string tag="") => MicMilestoneDetailVisitor.GetCount(tag);
+		public static string GetFileNameMicMilestoneDetailMap() => MicMilestoneDetailVisitor.GetFileName();
+		public static List<int> SortedKeysMicMilestoneDetailMap(string tag="") => MicMilestoneDetailVisitor.SortedKeys(tag);
+		public static PBC::MapField<int, rawMicMilestoneDetail> GetMicMilestoneDetailMap(string tag="") => MicMilestoneDetailVisitor.All(tag);
+		public static void RangeMicMilestoneDetailMap(Action<int, rawMicMilestoneDetail> filter,string tag="") => MicMilestoneDetailVisitor.Range(filter,tag);
+		public static List<int> KeysMicMilestoneDetailMap(string tag="") => MicMilestoneDetailVisitor.Keys(tag);
+		public static rawMicMilestoneDetail? GetMicMilestoneDetail(int key,string tag="") => MicMilestoneDetailVisitor.Get(key,tag);
+		public static List<rawMicMilestoneDetail> GetMicMilestoneDetailByFilter(Func<rawMicMilestoneDetail, bool> filterFunc,string tag="") => MicMilestoneDetailVisitor.GetByFilter(filterFunc,tag);
+		public static rawMicMilestoneDetail? GetOneMicMilestoneDetailByFilter(Func<rawMicMilestoneDetail, bool> filterFunc,string tag="") => MicMilestoneDetailVisitor.GetOneByFilter(filterFunc,tag);
+	#endregion MicMilestoneDetail
+	#region MicMilestoneGroup
+		public static int GetCountMicMilestoneGroupMap(string tag="") => MicMilestoneGroupVisitor.GetCount(tag);
+		public static string GetFileNameMicMilestoneGroupMap() => MicMilestoneGroupVisitor.GetFileName();
+		public static List<int> SortedKeysMicMilestoneGroupMap(string tag="") => MicMilestoneGroupVisitor.SortedKeys(tag);
+		public static PBC::MapField<int, rawMicMilestoneGroup> GetMicMilestoneGroupMap(string tag="") => MicMilestoneGroupVisitor.All(tag);
+		public static void RangeMicMilestoneGroupMap(Action<int, rawMicMilestoneGroup> filter,string tag="") => MicMilestoneGroupVisitor.Range(filter,tag);
+		public static List<int> KeysMicMilestoneGroupMap(string tag="") => MicMilestoneGroupVisitor.Keys(tag);
+		public static rawMicMilestoneGroup? GetMicMilestoneGroup(int key,string tag="") => MicMilestoneGroupVisitor.Get(key,tag);
+		public static List<rawMicMilestoneGroup> GetMicMilestoneGroupByFilter(Func<rawMicMilestoneGroup, bool> filterFunc,string tag="") => MicMilestoneGroupVisitor.GetByFilter(filterFunc,tag);
+		public static rawMicMilestoneGroup? GetOneMicMilestoneGroupByFilter(Func<rawMicMilestoneGroup, bool> filterFunc,string tag="") => MicMilestoneGroupVisitor.GetOneByFilter(filterFunc,tag);
+	#endregion MicMilestoneGroup
 	#region MiniGameBeadsBase
 		public static int GetCountMiniGameBeadsBaseMap(string tag="") => MiniGameBeadsBaseVisitor.GetCount(tag);
 		public static string GetFileNameMiniGameBeadsBaseMap() => MiniGameBeadsBaseVisitor.GetFileName();

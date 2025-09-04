@@ -80,6 +80,7 @@ namespace FAT
                 case "open_ui_digging_help": imp = new GuideActImpOpenUIDiggingHelp(); break;
                 case "open_ui_pachinko_help": imp = new GuideActImpOpenUIPachinkoHelp(); break;
                 case "open_ui_guess_help": imp = new GuideActImpOpenGuessHelp(); break;
+                case "open_ui_multi_help": imp = new GuideActImpUIMultihelp(); break;
                 case "open_ui_wish_help": imp = new GuideActImpOpenWishHelp(); break;
                 case "plot": imp = new GuideActImpPlot(); break;
                 case "save": imp = new GuideActImpSave(); break;

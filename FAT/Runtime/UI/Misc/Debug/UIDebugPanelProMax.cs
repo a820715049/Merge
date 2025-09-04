@@ -336,6 +336,7 @@ namespace FAT
             _StartGroupA("Bingo Item");
             _RegisterButton("一键发棋子", ItemBingoUtility.DebugBingoItem);
 
+
             _StartGroupA("签到");
             _RegisterButton("Show", () => UIManager.Instance.OpenWindow(UIConfig.UISignInpanel));
             _RegisterButton("Reset", () => Game.Manager.loginSignMan.DebugReset());
@@ -347,6 +348,21 @@ namespace FAT
 
             _StartGroupA("ClawOrder");
             _RegisterButton("clear", ActivityClawOrder.DebugReset);
+            _StartGroupA("倍率排行榜");
+            _RegisterButtonWithInput("Add Score", (string str) =>
+            {
+                if (Game.Manager.activity.LookupAny(EventType.MultiplierRanking, out var multi))
+                {
+                    (multi as ActivityMultiplierRanking).AddScoreDebug(str.ConvertToInt());
+                }
+            });
+            _RegisterButtonWithInput("Set Energy", (string str) =>
+            {
+                if (Game.Manager.activity.LookupAny(EventType.MultiplierRanking, out var multi))
+                {
+                    (multi as ActivityMultiplierRanking).SetEnergy(str.ConvertToInt());
+                }
+            });
         }
 
         private void _UnfrozenAndUnlockAllItems()
@@ -475,6 +491,11 @@ namespace FAT
                 return DataTracker.TrackEnable ? "track ON" : "track OFF";
             });
             _RegisterButton("clear LinkData", () => Game.Manager.communityLinkMan.DebugClearCommunityLinkData());
+            _RegisterButtonWithInput("RankNum", (str) =>
+            {
+                int.TryParse(str, out var rankNum);
+                MessageCenter.Get<MSG.MULTIPLIER_RANKING_SLOTS_CHANGE>().Dispatch(rankNum);
+            });
         }
 
         //构建日志页签里的相关功能
