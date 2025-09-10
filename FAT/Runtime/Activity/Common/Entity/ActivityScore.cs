@@ -600,12 +600,7 @@ namespace FAT
 
         public string BoardEntryAsset()
         {
-            Visual.Theme.AssetInfo.TryGetValue("boardEntry", out var key);
-            if (string.IsNullOrEmpty(key))
-            {
-                return "event_score_cook#UIScoreEntry.prefab";
-            }
-            return key;
+            return "event_score_mic#UIScoreEntry_mic.prefab";
         }
 
         public bool HasComplete()

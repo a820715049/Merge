@@ -181,6 +181,9 @@ namespace FAT
         public static UIResource UIScoreMilestone = new UIResource("UIScoreMilestone_cook.prefab", AboveStatus, "event_score_cook").SupportNavBack().AllowHideUI();
         public static UIResource UIScoreFinish_Track = new UIResource("UIScoreFinish_track.prefab", AboveStatus, "event_score_track").SupportNavBack();
         public static UIResource UIScoreFinish_Piece = new UIResource("UIScoreFinish_piece.prefab", AboveStatus, "event_score_piece").SupportNavBack();
+        public static UIResource UIScoreFinish_Mic = new UIResource("UIScoreFinish_mic.prefab", AboveStatus, "event_score_mic").SupportNavBack();
+        public static UIResource UIScoreConvert_Mic = new UIResource("UIScoreConvert_Mic.prefab", AboveStatus, "event_score_mic").AllowHideUI();
+        public static UIResource UIScore_Mic = new UIResource("UIScore_mic.prefab", UILayer.AboveStatus, "event_score_mic").SupportNavBack().AllowHideUI();
         #endregion
 
         #region 订单额外奖励活动

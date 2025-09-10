@@ -7,13 +7,17 @@ using TMPro;
 using System.Collections;
 using DG.Tweening;
 
-namespace FAT.UI
+namespace FAT
 {
     public class UIScore_mic : UIBase, INavBack
     {
         public const int itemHeight = 172;
         public const int spacing = 8;
         public const int topAndBottome = 40;
+        public const float ToNextTime = 0.99f * 0.5f;
+        public const float ToThisTime = 0.8f * 0.5f;
+        
+        public const int MinNum = 6;
         
         #region UI组件
 
@@ -24,7 +28,7 @@ namespace FAT.UI
         [SerializeField] private Button block;             // 遮罩按钮
         [SerializeField] private TextProOnACircle title;   // 标题文本
         [SerializeField] private TMP_Text cd;              // 倒计时文本
-        [SerializeField] private TMP_Text tip;             // 提示文本
+        [SerializeField] private TMP_Text tip;             // 提示文本#SysComDesc1711
         [SerializeField] private UIImageRes bg;            // 背景图片
         [SerializeField] private UIImageRes cdBg;          // 倒计时背景
         [SerializeField] private UIImageRes titleBg;       // 标题背景
@@ -71,8 +75,9 @@ namespace FAT.UI
             helpBtn.onClick.AddListener(OnClickHelp);
             playBtn.onClick.AddListener(OnClickPlay);
             block.onClick.AddListener(OnClickBlock);
-
-            GameObjectPoolManager.Instance.PreparePool(PoolItemType.SCORE_MILESTONE_CELL, cell);
+            
+            // MBI18NText.SetPlainText(tip.gameObject, "#SysComDesc1711", activity.Conf.Token);
+            GameObjectPoolManager.Instance.PreparePool(PoolItemType.SCORE_MIC_CELL, cell);
         }
 
         protected override void OnParse(params object[] items)
@@ -163,13 +168,13 @@ namespace FAT.UI
             }
             if (activity.HasComplete())
             {
-                UIManager.Instance.OpenWindow(UIConfig.UIScoreFinish_Track);
+                UIManager.Instance.OpenWindow(UIConfig.UIScoreFinish_Mic);
             }
 
             // // 清理创建的Cell
             foreach (var cellObj in cellList)
             {
-                GameObjectPoolManager.Instance.ReleaseObject(PoolItemType.SCORE_MILESTONE_CELL, cellObj);
+                GameObjectPoolManager.Instance.ReleaseObject(PoolItemType.SCORE_MIC_CELL, cellObj);
             }
             cellList.Clear();
         }
@@ -248,31 +253,37 @@ namespace FAT.UI
             nodes.Clear();
             for (int i = activity.ListM.Count - 2; i >= 0; i--)
             {
-                if (activity.ListM[i].showNum - 1 < currentMilestoneIndex)
+                if (activity.ListM[i].showNum - 1 < currentMilestoneIndex - 1)
                     continue;
                 nodes.Add(activity.ListM[i]);
             }
             listPrime.Clear();
             foreach (var rewardStep in activity.ConfDetail.RewardStepNum)
             {
-                if (rewardStep > activity.GetMilestoneIndex() + 4 || (rewardStep > activity.GetMilestoneIndex() && nodes.Count < 4))
+                if (rewardStep > activity.GetMilestoneIndex() + MinNum || (rewardStep > activity.GetMilestoneIndex() && nodes.Count < MinNum))
                 {
                     listPrime.Add(rewardStep);
                 }
             }
-            if (nodes.Count < 4)
+            if (nodes.Count < MinNum)
             {
-                var needNum = 4 - nodes.Count;
+                var needNum = MinNum - nodes.Count;
                 for (int i = 0; i < needNum; i++)
                 {
                     nodes.Add(activity.ListM[activity.GetMilestoneIndex() - 1 - i]);
                 }
             }
-            scroll.content.sizeDelta = new Vector2(scroll.content.sizeDelta.x, (itemHeight + spacing) * nodes.Count + topAndBottome);
+
+            float height = (itemHeight + spacing) * nodes.Count + topAndBottome;
+            if (activity.ListM[0].showNum - 1 != currentMilestoneIndex)
+            {
+                height -= (itemHeight + spacing) * 2 + spacing;
+            }
+            scroll.content.sizeDelta = new Vector2(scroll.content.sizeDelta.x, height);
             scroll.normalizedPosition = new Vector2(scroll.normalizedPosition.x, 0f);
             for (int i = 0; i < nodes.Count; i++)
             {
-                var cellSand = GameObjectPoolManager.Instance.CreateObject(PoolItemType.SCORE_MILESTONE_CELL, cellRoot.transform);
+                var cellSand = GameObjectPoolManager.Instance.CreateObject(PoolItemType.SCORE_MIC_CELL, cellRoot.transform);
                 cellSand.GetComponent<UIMicItem>().UpdateContent(nodes[i]);
                 cellList.Add(cellSand);
             }
@@ -317,6 +328,13 @@ namespace FAT.UI
                 = activity.CalculateScoreDisplayData(startScore);
             var (endMilestoneIndex, endShowScore, endMilestoneScore)
                 = activity.CalculateScoreDisplayData(endScore);
+            
+            int offset = activity.ListM[0].showNum - 1 != startMilestoneIndex ? 1 : 0;
+            for (int milestoneIndex = startMilestoneIndex; milestoneIndex <= endMilestoneIndex; milestoneIndex++)
+            {
+                var uiItem = cellList[^(1 + offset + milestoneIndex - startMilestoneIndex)].GetComponent<UIMicItem>();
+                uiItem.UpdateContentByValue(milestoneIndex == startMilestoneIndex, milestoneIndex < startMilestoneIndex, milestoneIndex > startMilestoneIndex);
+            }
 
             // 第二步：进度条逐个充满每个里程碑
             for (int milestoneIndex = startMilestoneIndex; milestoneIndex <= endMilestoneIndex; milestoneIndex++)
@@ -362,27 +380,26 @@ namespace FAT.UI
                     }
                     progressItemAnim.Play("ProgressGroup_punch");
                     yield return new WaitForSeconds(0.367f);
+                
+                    // 播放领奖动画
+                    // rewardIcon.gameObject.SetActive(false);
+                    yield return StartCoroutine(PlayRewardAnimation(milestoneIndex));
 
                     // 动画完成后刷新图标
+                    // rewardIcon.gameObject.SetActive(true);
                     RefreshRewardIcon(milestoneIndex + 1);
                     rewardProgress.Refresh(0, currentMilestoneScore);
+                    if (activity.HasComplete()) yield break;
                 }
             }
 
             // 第三步：轨道动画 - 逐个播放里程碑动画和领奖动画
             // 从起始里程碑开始，逐个播放每个里程碑的动画
+            int num = endMilestoneIndex - startMilestoneIndex;
+            scroll.content.DOSizeDelta(new Vector2(scroll.content.sizeDelta.x, scroll.content.sizeDelta.y - num * (itemHeight + spacing) * 2), (ToNextTime + ToThisTime) * num).SetEase(Ease.Linear).SetLink(gameObject);
             for (int milestoneIndex = startMilestoneIndex; milestoneIndex <= endMilestoneIndex; milestoneIndex++)
             {
-                // 更新当前正在播放动画的里程碑索引
-                _currentAnimationMilestoneIndex = milestoneIndex;
-
-                // 检查是否需要播放领奖动画
-                // 只有完整跨越的里程碑才会触发领奖动画
-                if (milestoneIndex < endMilestoneIndex || activity.HasComplete())
-                {
-                    // 播放领奖动画
-                    yield return StartCoroutine(PlayRewardAnimation(milestoneIndex));
-                }
+                yield return StartCoroutine(PlayCellAnimation(milestoneIndex - startMilestoneIndex + offset, milestoneIndex == startMilestoneIndex, milestoneIndex == endMilestoneIndex));
             }
 
             // 动画结束，清理协程引用
@@ -399,51 +416,35 @@ namespace FAT.UI
         /// 3. 等待奖励动画完成
         /// 4. 播放奖励飞行动画（从奖励图标位置飞到目标位置）
         /// 5. 播放Cell动画流程（重新排列Cell位置）
-        /// 6. 如果领取的奖励是大奖，在奖励隐藏后刷新到下一个大奖
         /// </summary>
         /// <param name="milestoneIndex">里程碑索引</param>
         private IEnumerator PlayRewardAnimation(int milestoneIndex)
         {
             var milestoneList = activity.ListM;
-            if (milestoneIndex >= 0 && milestoneIndex < milestoneList.Count)
+            var node = milestoneList[milestoneIndex];
+            var reward = node.reward;
+            var isPrimeReward = node.isPrime;
+            var rewardData = activity.TryGetCommitReward(reward);
+            if (rewardData != null)
             {
-                var node = milestoneList[milestoneIndex];
-                var reward = node.reward;
-                var isPrimeReward = node.isPrime;
-                var rewardData = activity.TryGetCommitReward(reward);
-                if (rewardData != null)
+                UIFlyUtility.FlyReward(rewardData, rewardIcon.transform.position);
+                //特殊处理宝箱的流程
+                if (rewardData.rewardType == ObjConfigType.RandomBox)
                 {
-                    if (cellList.Count > 0 && cellList[0] != null)
+                    yield return new WaitForSeconds(1f);
+                    // 等待宝箱UI关闭（表示领取完成）
+                    yield return new WaitUntil(() => !UIManager.Instance.IsShow(UIConfig.UIRandomBox) && !UIManager.Instance.IsShow(UIConfig.UISingleReward));
+                }
+                else
+                {
+                    yield return new WaitForSeconds(1.5f);
+                }
+                if (milestoneIndex == milestoneList.Count - 1)
+                {
+                    if (activity.HasComplete())
                     {
-                        UIScoreMilestoneItem_track item = cellList[0].GetComponent<UIScoreMilestoneItem_track>();
-                        if (item != null)
-                        {
-                            item.PlayHide();
-                            yield return new WaitForSeconds(0.5f);
-        
-                            UIFlyUtility.FlyReward(rewardData, item.commonItem.transform.position);
-                            //特殊处理宝箱的流程
-                            if (rewardData.rewardType == ObjConfigType.RandomBox)
-                            {
-                                yield return new WaitForSeconds(1f);
-                                // 等待宝箱UI关闭（表示领取完成）
-                                yield return new WaitUntil(() => !UIManager.Instance.IsShow(UIConfig.UIRandomBox) && !UIManager.Instance.IsShow(UIConfig.UISingleReward));
-                            }
-                            else
-                            {
-                                yield return new WaitForSeconds(1.5f);
-                            }
-                            if (milestoneIndex == milestoneList.Count - 1)
-                            {
-                                if (activity.HasComplete())
-                                {
-                                    Close();
-                                    yield break;
-                                }
-                            }
-                        }
+                        Close();
                     }
-                    yield return StartCoroutine(PlayCellAnimation());
                 }
             }
         }
@@ -451,54 +452,17 @@ namespace FAT.UI
         /// <summary>
         /// 播放Cell动画流程
         /// </summary>
-        private IEnumerator PlayCellAnimation()
+        private IEnumerator PlayCellAnimation(int index, bool isStart, bool isEnd)
         {
-            if (cellList.Count < 2)
+            var uiItem = cellList[^(1 + index)].GetComponent<UIMicItem>();
+            if (!isStart)
             {
-                yield break;
+                yield return uiItem.ProcessToThis();
             }
 
-            // 在播放动画前刷新数据，使UI与最新领奖状态保持一致
-            activity.FillMilestoneData();
-
-            nodes.Clear();
-            var currentMilestoneIndex = activity.GetMilestoneIndex();
-            for (int i = activity.ListM.Count - 2; i >= 0; i--)
+            if (!isEnd)
             {
-                if (activity.ListM[i].showNum - 1 < currentMilestoneIndex)
-                    continue;
-                nodes.Add(activity.ListM[i]);
-            }
-
-            if (nodes.Count < cellList.Count)
-            {
-                var needNum = cellList.Count - nodes.Count;
-                for (int i = 0; i < needNum; i++)
-                {
-                    nodes.Add(activity.ListM[currentMilestoneIndex - 1 - i]);
-                }
-            }
-
-            for (int i = 0; i < cellList.Count && i < nodes.Count; i++)
-            {
-                var uiItem = cellList[i].GetComponent<UIMicItem>();
-                if (uiItem != null)
-                {
-                    uiItem.UpdateContent(nodes[i]);
-                }
-            }
-
-            var prevItem = cellList[0].GetComponent<UIMicItem>();
-            var nextItem = cellList[1].GetComponent<UIMicItem>();
-
-            if (prevItem != null)
-            {
-                yield return prevItem.ProcessToNext();
-            }
-
-            if (nextItem != null)
-            {
-                yield return nextItem.ProcessToThis();
+                yield return uiItem.ProcessToNext();
             }
         }
 

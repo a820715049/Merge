@@ -3,11 +3,10 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace FAT.UI
+namespace FAT
 {
     public class UIMicItem : MonoBehaviour
     {
-        [SerializeField] private float animScale = 1;
         [SerializeField] private Transform goal;
         [SerializeField] private Transform prime;
         [SerializeField] private Transform done;
@@ -25,45 +24,58 @@ namespace FAT.UI
         [SerializeField] private Transform complete;
         [SerializeField] private Transform sweep;
 
+        private ActivityScore.Node _node;
+        
         public void UpdateContent(ActivityScore.Node node)
         {
-            item.Refresh(node.reward, node.isCur ? 17 : 50);
-            num.text.text = node.showNum.ToString();
-            num.Select(node.isCur ? 1 : 0);
-            goal.gameObject.SetActive(node.isGoal);
-            goalLock.gameObject.SetActive(node.isGoal);
-            prime.gameObject.SetActive(node.isPrime);
-            done.gameObject.SetActive(node.isDone || node.isCur);
-            bg1.gameObject.SetActive(!node.isCur && !node.isPrime && (node.isDone || node.isGoal));
-            bg2.gameObject.SetActive(node.isCur && !node.isPrime);
-            bg3.gameObject.SetActive(!node.isCur && node.isPrime);
-            bg4.gameObject.SetActive(node.isCur && node.isPrime);
-            sweep.gameObject.SetActive((node.isCur && node.isPrime) || (!node.isCur && node.isPrime));
+            _node = node;
+            UpdateContentByValue(node.isCur, node.isDone, node.isGoal);
+        }
+        
+        public void UpdateContentByValue(bool isCur, bool isDone, bool isGoal)
+        {
+            item.Refresh(_node.reward, isCur ? 17 : 50);
+            num.text.text = _node.showNum.ToString();
+            num.Select(isCur ? 1 : 0);
+            goal.gameObject.SetActive(isGoal);
+            goalLock.gameObject.SetActive(isGoal);
+            prime.gameObject.SetActive(_node.isPrime);
+            done.gameObject.SetActive(isDone || isCur);
+            bg1.gameObject.SetActive(!isCur && !_node.isPrime && (isGoal || isDone));
+            bg2.gameObject.SetActive(isCur && !_node.isPrime);
+            bg3.gameObject.SetActive(!isCur && _node.isPrime);
+            bg4.gameObject.SetActive(isCur && _node.isPrime);
+            sweep.gameObject.SetActive((isCur && _node.isPrime) || (!isCur && _node.isPrime));
             up.gameObject.SetActive(true);
-            upV.gameObject.SetActive(node.isDone && !node.isCur && !node.isGoal);
-            down.gameObject.SetActive(node.showNum > 1);
-            downV.gameObject.SetActive(node.isCur || node.isDone);
-            complete.gameObject.SetActive(node.isComplete && !node.isCur && !node.isGoal);
-            item.gameObject.SetActive(!(node.isComplete && !node.isCur && !node.isGoal));
+            down.gameObject.SetActive(_node.showNum > 1);
+            complete.gameObject.SetActive(_node.isComplete && !isCur && !isGoal);
+            item.gameObject.SetActive(!(_node.isComplete && !isCur && !isGoal));
+            
+            RectTransform upRect = upV.GetComponent<RectTransform>();
+            upRect.sizeDelta = new Vector2(isDone && !isCur && !isGoal ? 0 : -99, 0);
+            RectTransform downRect = downV.GetComponent<RectTransform>();
+            downRect.sizeDelta = new Vector2(isCur || isDone ? 0 : -80.5f, 0);
         }
     
         public IEnumerator ProcessToNext()
         {
             RectTransform rect = upV.GetComponent<RectTransform>();
             rect.sizeDelta = new Vector2(-99, 0);
-            var t = rect.DOSizeDelta(Vector2.zero, 0.99f * animScale).SetLink(gameObject).SetEase(Ease.Linear);
+            rect.DOKill();
+            var t = rect.DOSizeDelta(Vector2.zero, UIScore_mic.ToNextTime).SetLink(gameObject).SetEase(Ease.Linear);
             yield return t.WaitForCompletion();
+            UpdateContentByValue(false, true, false);
         }
     
         public IEnumerator ProcessToThis()
         {
             RectTransform rect = downV.GetComponent<RectTransform>();
-            rect.anchoredPosition = new Vector2(80, 0);
-            rect.sizeDelta = new Vector2(-80, 0);
-            
-            rect.DOAnchorPos(Vector2.zero, 0.8f * animScale).SetLink(gameObject).SetEase(Ease.Linear);
-            var t = rect.DOSizeDelta(Vector2.zero, 0.8f * animScale).SetLink(gameObject).SetEase(Ease.Linear);
+            rect.sizeDelta = new Vector2(-80.5f, 0);
+            rect.DOKill();
+            var t = rect.DOSizeDelta(Vector2.zero, UIScore_mic.ToThisTime).SetLink(gameObject).SetEase(Ease.Linear);
             yield return t.WaitForCompletion();
+
+            UpdateContentByValue(true, false, false);
         }
     }
 }
