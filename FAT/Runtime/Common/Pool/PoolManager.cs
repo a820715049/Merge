@@ -63,6 +63,10 @@ public enum PoolItemType
     CASTLE_MILESTONE_CELL,
     #endregion
 
+    #region 拼图活动 里程碑样式
+    PUZZLE_MILESTONE_CELL,
+    #endregion
+
     #region 积分活动 里程碑样式
 
     SCORE_MILESTONE_CELL,
@@ -151,6 +155,7 @@ public enum PoolItemType
     MERGE_ITEM_EFFECT_MAGIC_HOUR_HIT,
     MERGE_ITEM_EFFECT_TRIG_AUTO_SOURCE,
     MERGE_ITEM_EFFECT_LIGHTBULB,
+    MERGE_ITEM_EFFECT_FROZEN_ITEM,
 
     Auto_Guide_Finger,
     PACK_MARKET_SLIDE_CELL,

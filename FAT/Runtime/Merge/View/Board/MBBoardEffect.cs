@@ -134,6 +134,17 @@ namespace FAT
         {
             _ShowEffect(coord, ItemEffectType.OnMerge, 3f);
         }
+        
+        //播放冰冻棋子参与合成时的特效
+        public void ShowFrozenMergeEffect(Vector2Int coord)
+        {
+            _ShowEffect(coord, ItemEffectType.FrozenItem, 2f);
+        }
+        
+        public void ShowFrozenMergeEffect(Vector3 worldPos)
+        {
+            _ShowEffect(worldPos, ItemEffectType.FrozenItem, 2f);
+        }
 
         public void ShowCollectFeedback(Vector2Int coord)
         {
@@ -188,6 +199,12 @@ namespace FAT
         private void _ShowEffect(Vector2Int coord, ItemEffectType et, float lifeTime)
         {
             holder.AddInstantEffect(coord, BoardUtility.EffTypeToPoolType(et).ToString(), lifeTime);
+        }
+        
+        //在指定世界坐标位置创建特效
+        private void _ShowEffect(Vector3 worldPos, ItemEffectType et, float lifeTime)
+        {
+            holder.AddInstantEffect(worldPos, BoardUtility.EffTypeToPoolType(et).ToString(), lifeTime);
         }
 
         #region time skip

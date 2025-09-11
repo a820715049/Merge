@@ -26,10 +26,21 @@ namespace FAT
             BoardUtility.ReleaseAutoPoolItemFromChildren(effectRoot);
         }
 
+        //在指定坐标创建特效
         public GameObject AddInstantEffect(Vector2Int coord, string poolKey, float lifeTime)
         {
             var go = GameObjectPoolManager.Instance.CreateObject(poolKey, effectRoot);
             BoardUtility.PlaceItemToBoardCoord(go, coord);
+            BoardUtility.AddAutoReleaseComponent(go, lifeTime, poolKey);
+            go.SetActive(true);
+            return go;
+        }
+        
+        //在指定世界坐标位置创建特效
+        public GameObject AddInstantEffect(Vector3 worldPos, string poolKey, float lifeTime)
+        {
+            var go = GameObjectPoolManager.Instance.CreateObject(poolKey, effectRoot);
+            go.transform.position = worldPos;
             BoardUtility.AddAutoReleaseComponent(go, lifeTime, poolKey);
             go.SetActive(true);
             return go;

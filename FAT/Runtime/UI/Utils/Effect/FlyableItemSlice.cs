@@ -95,7 +95,7 @@ namespace FAT
                         };
                         Size = FlyType switch
                         {
-                            FlyType.EventScore or FlyType.OrderLikeToken => 70f,
+                            FlyType.EventScore or FlyType.OrderLikeToken or FlyType.PuzzleToken => 70f,
                             FlyType.FightBoardMonster or FlyType.FightBoardTreasure => 85f,
                             FlyType.Inventory => 136f,
                             _ => Size,

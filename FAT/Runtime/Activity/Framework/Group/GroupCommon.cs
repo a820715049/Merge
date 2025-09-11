@@ -36,6 +36,7 @@ namespace FAT
                 EventType.OrderStreak => (feature.IsFeatureEntryUnlocked(FeatureOrderStreak), rf),
                 EventType.ItemBingo => (feature.IsFeatureEntryUnlocked(FeatureItemBingo), rf),
                 EventType.OrderLike => (feature.IsFeatureEntryUnlocked(FeatureOrderLike), rf),
+                EventType.Puzzle => (feature.IsFeatureEntryUnlocked(FeaturePuzzle), rf),
                 EventType.ScoreDuel => (feature.IsFeatureEntryUnlocked(FeatureScoreDuel), rf),
                 EventType.WishUpon => (feature.IsFeatureEntryUnlocked(FeatureWishUpon), rf),
                 EventType.WeeklyTask => (feature.IsFeatureEntryUnlocked(FeatureWeeklyTask), rf),
@@ -49,6 +50,7 @@ namespace FAT
                 EventType.BingoTask => (feature.IsFeatureEntryUnlocked(FeatureBingoTask), rf),
                 EventType.Landmark => (feature.IsFeatureEntryUnlocked(FeatureLandmark), rf),
                 EventType.MultiplierRanking => (feature.IsFeatureEntryUnlocked(FeatureMultiplierRanking), rf),
+                EventType.FrozenItem => (feature.IsFeatureEntryUnlocked(FeatureFrozenItem), rf),
                 EventType.MicMilestone => (feature.IsFeatureEntryUnlocked(FeatureMicMilestone), rf),
                 _ => (true, null),
             };
@@ -77,6 +79,7 @@ namespace FAT
                 EventType.OrderStreak => new ActivityOrderStreak(lite_),
                 EventType.ItemBingo => new ActivityBingo(lite_),
                 EventType.OrderLike => new ActivityOrderLike(lite_),
+                EventType.Puzzle => new ActivityPuzzle(lite_),
                 EventType.ScoreDuel => new ActivityDuel(lite_),
                 EventType.WishUpon => new ActivityWishUpon(lite_),
                 EventType.WeeklyTask => new ActivityWeeklyTask(lite_),
@@ -91,6 +94,7 @@ namespace FAT
                 EventType.BingoTask => new ActivityBingoTask(lite_),
                 EventType.Landmark => new LandMarkActivity(lite_),
                 EventType.MultiplierRanking => new ActivityMultiplierRanking(lite_),
+                EventType.FrozenItem => new ActivityFrozenItem(lite_),
                 EventType.MicMilestone => new ActivityScoreMic(lite_),
                 _ => null,
             };

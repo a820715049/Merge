@@ -299,7 +299,7 @@ namespace FAT
             //迷你游戏
             _RegisterButtonWithInput("MiniGame", _OnBtnSetMIniGame);
 
-            _StartGroupB("棋盘活动");
+            _StartGroupB("棋盘活动/冰冻棋子");
             _RegisterButton("ResetMiniBoard", () =>
             {
                 Game.Manager.miniBoardMan.DebugResetMiniBoard();
@@ -320,6 +320,33 @@ namespace FAT
                 Game.Manager.activityTrigger.DebugReset();
                 Game.Manager.activity.DebugReset();
                 Game.Manager.screenPopup.DebugReset();
+            });
+            //设置体力消耗次数
+            _RegisterButtonWithInput("ErgTapCount", (numStr) =>
+            {
+                if (int.TryParse(numStr, out var num) && (Game.Manager.activity.LookupAny(EventType.FrozenItem) is ActivityFrozenItem frozen))
+                {
+                    frozen.DebugSetTapCount(num);
+                    Game.Manager.commonTipsMan.ShowMessageTips($"Set ErgConsumeTimes success for {num}", isSingle: true);
+                }
+            });
+            //设置体力消耗总数
+            _RegisterButtonWithInput("ErgTotalNum", (numStr) =>
+            {
+                if (int.TryParse(numStr, out var num) && (Game.Manager.activity.LookupAny(EventType.FrozenItem) is ActivityFrozenItem frozen))
+                {
+                    frozen.DebugSetEnergyConsumed(num);
+                    Game.Manager.commonTipsMan.ShowMessageTips($"Set ErgConsumeNum success for {num}", isSingle: true);
+                }
+            });
+            //设置是否必出冰冻棋子
+            _RegisterButton("MustSpawnFrozenItem",() =>
+            {
+                if ((Game.Manager.activity.LookupAny(EventType.FrozenItem) is ActivityFrozenItem frozen))
+                {
+                    frozen.DebugMustSpawnFrozenItem();
+                    Game.Manager.commonTipsMan.ShowMessageTips($"Set MustSpawnFrozenItem success for {frozen.MustSpawnFrozenItem}", isSingle: true);
+                }
             });
 
             _StartGroupA("猜颜色");

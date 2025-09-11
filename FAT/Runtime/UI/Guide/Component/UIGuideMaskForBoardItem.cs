@@ -107,8 +107,8 @@ namespace FAT
                     {
                         if (targetItemIdTable.Contains(item.tid))
                         {
-                            // 蜘蛛网内物品和常规物品都可以计入
-                            if (!item.isLocked && item.isFrozen || item.isActive && !ItemUtility.IsInBubble(item))
+                            // 蜘蛛网内物品和常规物品都可以计入  不计入泡泡棋子 但计入冰冻棋子
+                            if (!item.isLocked && item.isFrozen || item.isActive && !ItemUtility.IsBubbleItem(item))
                             {
                                 coordCacheList.Add(item.coord);
                             }

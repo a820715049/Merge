@@ -11,7 +11,7 @@ namespace FAT.Merge
 {
     public class BubbleMergeBonusHandler : IMergeBonusHandler
     {
-        int IMergeBonusHandler.priority => 101;
+        int IMergeBonusHandler.priority => 102; //泡泡在冰冻棋子后面生成
         void IMergeBonusHandler.Process(Merge.MergeBonusContext context)
         {
             var world = context.world;
@@ -61,7 +61,7 @@ namespace FAT.Merge
             int bubbleCount = 0;
             foreach (var grid in mGrids)
             {
-                if (grid.item != null && ItemUtility.IsInBubble(grid.item))
+                if (grid.item != null && ItemUtility.IsBubbleItem(grid.item))
                 {
                     ++bubbleCount;
                     if (srcItem.tid == grid.item.tid)

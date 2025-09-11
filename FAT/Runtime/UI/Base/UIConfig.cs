@@ -111,6 +111,7 @@ namespace FAT
         public static UIResource UIErgListPackEnd = new UIResource("UIErgListPackEnd.prefab", SubStatus, "event_erglist_default");
         public static UIResource UIGemSecondConfirm = new UIResource("UIGemSecondConfirm.prefab", SubStatus, "fat_global").SupportNavBack();
         public static UIResource UIActivityWishUponMain = new UIResource("UIActivityWishUponMain.prefab", AboveStatus, "event_wishupon_default");
+        public static UIResource UIFrozenItemHelp = new UIResource("UIFrozenItemHelp.prefab", AboveStatus, "event_frozen_item");
         #region 卡册系统相关界面
 
         //debug 模拟抽卡界面
@@ -181,7 +182,6 @@ namespace FAT
         public static UIResource UIScoreMilestone = new UIResource("UIScoreMilestone_cook.prefab", AboveStatus, "event_score_cook").SupportNavBack().AllowHideUI();
         public static UIResource UIScoreFinish_Track = new UIResource("UIScoreFinish_track.prefab", AboveStatus, "event_score_track").SupportNavBack();
         public static UIResource UIScoreFinish_Piece = new UIResource("UIScoreFinish_piece.prefab", AboveStatus, "event_score_piece").SupportNavBack();
-        public static UIResource UIScoreFinish_Mic = new UIResource("UIScoreFinish_mic.prefab", AboveStatus, "event_score_mic").SupportNavBack();
         public static UIResource UIScoreConvert_Mic = new UIResource("UIScoreConvert_Mic.prefab", AboveStatus, "event_score_mic").AllowHideUI();
         public static UIResource UIScore_Mic = new UIResource("UIScore_mic.prefab", UILayer.AboveStatus, "event_score_mic").SupportNavBack().AllowHideUI();
         #endregion
@@ -326,6 +326,11 @@ namespace FAT
         #endregion
         #region 路径活动（每日任务）
         public static UIResource UILandMark = new UIResource("UILandMark.prefab", AboveStatus, "event_landmark_s001").SupportNavBack();
+        #endregion
+
+        #region 拼图活动
+        public static UIResource UIActivityPuzzleMain = new UIResource("UIActivityPuzzleMain.prefab", AboveStatus, "event_puzzle_default");
+        public static UIResource UIActivityPuzzleConvert = new UIResource("UIActivityPuzzleConvert.prefab", AboveStatus, "event_puzzle_default");
         #endregion
 
         #region 好评订单活动

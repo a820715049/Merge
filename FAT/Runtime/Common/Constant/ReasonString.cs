@@ -152,6 +152,12 @@ namespace FAT
         public static readonly ReasonString order_streak = new(nameof(order_streak));
         #endregion
 
+        #region 拼图活动
+        public static readonly ReasonString puzzle_end = new(nameof(puzzle_end));
+        public static readonly ReasonString puzzle_token = new(nameof(puzzle_token));
+        public static readonly ReasonString puzzle_milestone = new(nameof(puzzle_milestone));
+        #endregion
+
         #endregion
 
         #region Bingo
@@ -205,6 +211,12 @@ namespace FAT
         public static readonly ReasonString SignIn = new(nameof(SignIn));
         //三日签到
         public static readonly ReasonString three_sign = new(nameof(three_sign));
+
+        #region 积分活动变种(麦克风版)
+
+        public static readonly ReasonString score_mic = new(nameof(score_mic));
+
+        #endregion
 
         #region 兑换商店
         public static readonly ReasonString redeem_Coin_change = new(nameof(redeem_Coin_change));  //兑换币变化

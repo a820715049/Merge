@@ -22,6 +22,8 @@ namespace FAT.Merge
                     return Game.Manager.featureUnlockMan.IsFeatureEntryUnlocked(FeatureEntry.FeatureBubble);
                 case MergeFeatureType.EnergyBoost:
                     return EnergyBoostUtility.AnyEnergyBoostFeatureReady();
+                case MergeFeatureType.FrozenItem:
+                    return Game.Manager.featureUnlockMan.IsFeatureEntryUnlocked(FeatureEntry.FeatureFrozenItem);
             }
             return true;
         }

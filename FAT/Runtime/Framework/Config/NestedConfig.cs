@@ -182,4 +182,11 @@ namespace Config
         public int Col; //列 x
         public int Row; //行 y
     }
+    
+    [Serializable]
+    public class IntRangeConfig
+    {
+        public int Min; //最小值
+        public int Max; //最大值
+    }
 }

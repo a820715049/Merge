@@ -182,10 +182,10 @@ namespace FAT
                 DebugEx.Info("ActivityMultiplierRanking is null");
                 return;
             }
-            int index = slotNum - 1;
             //拖尾特效
             string fxAnim = null;
             var fxAnimList = act.conf.MultiplierSfx;
+            int index = slotNum - 1 >= fxAnimList.Count ? fxAnimList.Count - 1 : slotNum - 1;
             if (fxAnimList.Count > 0 && index < fxAnimList.Count)
             {
                 fxAnim = fxAnimList[index];

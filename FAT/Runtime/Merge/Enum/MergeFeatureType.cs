@@ -8,5 +8,6 @@ namespace FAT.Merge
     {
         Bubble,
         EnergyBoost,    //能量加倍
+        FrozenItem,     //冰冻棋子
     }
 }

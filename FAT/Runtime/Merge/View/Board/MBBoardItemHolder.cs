@@ -507,8 +507,19 @@ namespace FAT
 
             GuideUtility.OnItemMerge(src, dst, result);
 
-            // merge effect
-            BoardViewManager.Instance.boardView.boardEffect.ShowMergeEffect(result.coord);
+            var boardEffect = BoardViewManager.Instance.boardView.boardEffect;
+            // 正常合成时播放的特效
+            boardEffect.ShowMergeEffect(result.coord);
+            // 假如当前有冰冻棋子参与合成 则播放冰块破碎特效 顺带打点
+            var srcIsFrozenItem = ItemUtility.IsFrozenItem(src);
+            var dstIsFrozenItem = ItemUtility.IsFrozenItem(dst);
+            if (srcIsFrozenItem || dstIsFrozenItem)
+            {
+                boardEffect.ShowFrozenMergeEffect(result.coord);
+                //打点
+                var frozenItem = srcIsFrozenItem ? src : dst;
+                DataTracker.event_frozen_item_merge.Track(frozenItem.id, frozenItem.tid, ItemUtility.GetItemLevel(frozenItem.tid));
+            }
 
             if (mItemViewDict.TryGetValue(src.id, out MBItemView srcView) && mItemViewDict.TryGetValue(dst.id, out MBItemView dstView))
             {
@@ -612,7 +623,16 @@ namespace FAT
 
             if (item.HasComponent(ItemComponentType.Bubble))
             {
-                Game.Manager.audioMan.TriggerSound("BubbleBorn");
+                var bubbleComp = item.GetItemComponent<ItemBubbleComponent>();
+                if (bubbleComp.IsBubbleItem())
+                {
+                    Game.Manager.audioMan.TriggerSound("BubbleBorn");
+                }
+                else if (bubbleComp.IsFrozenItem())
+                {
+                    //播冰冻棋子出生音效
+                    Game.Manager.audioMan.TriggerSound("FrozenItemBorn");
+                }
             }
             else if (context.spawner != null)
             {

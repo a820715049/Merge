@@ -47,7 +47,7 @@ namespace FAT.Merge
             ItemUtility.TrySpeedUpEmptyItem(mItem, () =>
             {
                 // 气泡加速后可能产生积分
-                if (_item.HasComponent(ItemComponentType.Bubble))
+                if (ItemUtility.IsBubbleItem(_item))
                 {
                     var score = _item.config.BubblePrice;
                     if (score > 0)

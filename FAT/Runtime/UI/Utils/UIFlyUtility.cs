@@ -217,7 +217,7 @@ namespace FAT
                                 item.FlyType != FlyType.MiniBoard && item.FlyType != FlyType.MiniBoardMulti &&
                                 item.FlyType != FlyType.GuessMilestone && item.FlyType != FlyType.OrderLikeToken &&
                                 item.FlyType != FlyType.MineToken && item.FlyType != FlyType.MineScore &&
-                                item.FlyType != FlyType.FarmToken &&
+                                item.FlyType != FlyType.FarmToken && item.FlyType != FlyType.PuzzleToken &&
                                 item.FlyType != FlyType.BPExp &&
                                 item.FlyType != FlyType.DuelToken && item.FlyType != FlyType.DuelMilestone && item.FlyType != FlyType.FightBoardMonster
                                 && item.FlyType != FlyType.FightBoardTreasure

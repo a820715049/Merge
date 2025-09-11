@@ -47,6 +47,7 @@ namespace FAT
         public Sprite frozenCoverSprite;
         public Sprite chestOpenTimerSprite;
         public Sprite bubbleCoverSprite;
+        public Sprite bubbleFrozenCoverSprite;
         public Sprite bottomSprite;
         public Sprite cloudSprite;
         public SpawnPopParam spawnPopParam;
@@ -65,6 +66,7 @@ namespace FAT
             // BoardUtility.SetBoxSprite(boxSprite);
             BoardUtility.SetFrozenCoverSprite(frozenCoverSprite);
             BoardUtility.SetBubbleCoverSprite(bubbleCoverSprite);
+            BoardUtility.SetBubbleFrozenCoverSprite(bubbleFrozenCoverSprite);
             BoardUtility.SetBottomSprite(bottomSprite);
             BoardUtility.SetSpawnPopParam(spawnPopParam);
 

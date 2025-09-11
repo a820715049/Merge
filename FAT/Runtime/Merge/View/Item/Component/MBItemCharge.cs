@@ -42,6 +42,7 @@ namespace FAT
         private ItemSkillComponent skillComp;
         private ItemJumpCDComponent jumpCDComp;
         private ItemBonusCompoent bonusComp;
+        private ItemBubbleComponent bubbleFrozenComp;   //冰冻棋子
 
         private bool mIsCostEnergy;
 
@@ -73,6 +74,10 @@ namespace FAT
             skillComp = mView.data.GetItemComponent<ItemSkillComponent>();
             jumpCDComp = mView.data.GetItemComponent<ItemJumpCDComponent>();
             bonusComp = mView.data.GetItemComponent<ItemBonusCompoent>();
+            if (mView.data.TryGetItemComponent(out ItemBubbleComponent comp) && comp.IsFrozenItem())
+                bubbleFrozenComp = comp;
+            else
+                bubbleFrozenComp = null;
 
             progressBar.SetActive(false);
             progressBarMini.SetActive(false);
@@ -144,6 +149,10 @@ namespace FAT
             else if (jumpCDComp != null)
             {
                 _RefreshJumpCD();
+            }
+            else if (bubbleFrozenComp != null)
+            {
+                _RefreshFrozenItemTime();
             }
         }
 
@@ -653,6 +662,16 @@ namespace FAT
                     item.gameObject.SetActive(false);
                 }
             }
+        }
+        
+        private void _RefreshFrozenItemTime()
+        {
+            var com = bubbleFrozenComp;
+            // 倒计时展示
+            UIUtility.CountDownFormat(countdownLock.txtTime, com.LifeRemainTime / 1000);
+            countdownLock.goLock.SetActive(false);
+            countdownLock.goRoot.SetActive(true);
+            fixedTimeLock.goRoot.SetActive(false);
         }
     }
 }

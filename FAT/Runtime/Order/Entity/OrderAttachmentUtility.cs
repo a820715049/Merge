@@ -246,6 +246,9 @@ namespace FAT
             // 好评订单
             if (Game.Manager.activity.LookupAny(EventType.OrderLike, eventParam, out _))
                 return false;
+            // 拼图活动
+            if (Game.Manager.activity.LookupAny(EventType.Puzzle, eventParam, out _))
+                return false;
             slot_extra_tl.ClearData(order);
             return true;
         }

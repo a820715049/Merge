@@ -28,6 +28,7 @@ namespace FAT.Merge
         ItemEventRewardDisappear,   //奖励箱中的物品在点击后直接移出奖励箱并消失(不发往棋盘)
         ItemEventTrigAutoSource,
         ItemEventMoveToRewardBox,   //棋盘棋子移动到奖励箱
+        ItemBubbleFrozenBreak,      //冰冻棋子过期时破碎
     }
     public class MergeWorldParam
     {
@@ -1082,9 +1083,14 @@ namespace FAT.Merge
                 // 需要替换棋子
                 item = new Item(itemData.Id, this);
                 item.DeserializeStateOnly(itemData);
-                if (itemData.ComBubble != null)
+                var bubbleData = itemData.ComBubble;
+                if (bubbleData != null)
                 {
-                    item.InitWithBubbleItem(info.ReplaceInto);
+                    var type = bubbleData.Type;
+                    //替换棋子时 如果Type值<=0 则默认为Bubble类型
+                    var bubbleType = type > 0 ? (ItemBubbleType)type : ItemBubbleType.Bubble;
+                    //继承原有棋子的存档 避免其已存在的时间清0
+                    item.InitWithBubbleItem(info.ReplaceInto, bubbleType, bubbleData.Start, bubbleData.Life);
                 }
                 else
                 {

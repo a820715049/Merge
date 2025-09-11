@@ -308,6 +308,76 @@ public partial class DataTracker
         }
     }
 
+    #region 冰冻棋子
+
+    //通过合成行为，生成冰冻棋子时
+    [Serializable]
+    internal class event_frozen_item_get : MergeCommonData
+    {
+        public int event_id;   //活动ID（EventTime.id）
+        public int event_from; //活动来源（0：EventTime，1：EventTrigger）
+        public int event_param; //活动参数（EventTime.eventParam）
+        public int milestone_difficulty;   //本轮活动难度
+        public int pay_difficulty;   //棋子付出难度
+        public int item_unique_id;   //冰冻棋子的唯一id
+        public int item_id;    //获得的冰冻棋子id
+        public int item_level;   //获得的冰冻棋子等级
+
+        public static void Track(ActivityLike acti_, int diff, int payDiff, int itemUniqueId, int itemId, int itemLevel)
+        {
+            var data = _GetTrackData<event_frozen_item_get>();
+            data.event_id = acti_.Id;
+            data.event_from = acti_.From;
+            data.event_param = acti_.Param;
+            data.milestone_difficulty = diff;
+            data.pay_difficulty = payDiff;
+            data.item_unique_id = itemUniqueId;
+            data.item_id = itemId;
+            data.item_level = itemLevel;
+            _TrackData(data);
+        }
+    }
+    
+    //把冰冻棋子和其他棋子合成时
+    [Serializable]
+    internal class event_frozen_item_merge : MergeCommonData
+    {
+        public int item_unique_id;   //冰冻棋子的唯一id
+        public int item_id;    //被合成的冰冻棋子id
+        public int item_level;   //被合成的冰冻棋子等级
+
+        public static void Track(int itemUniqueId, int itemId, int itemLevel)
+        {
+            var data = _GetTrackData<event_frozen_item_merge>();
+            data.item_unique_id = itemUniqueId;
+            data.item_id = itemId;
+            data.item_level = itemLevel;
+            _TrackData(data);
+        }
+    }
+    
+    //冰冻棋子过期时
+    [Serializable]
+    internal class event_frozen_item_expire : MergeCommonData
+    {
+        public int item_unique_id;   //冰冻棋子的唯一id
+        public int item_id;    //过期的冰冻棋子id
+        public int item_level;   //过期的冰冻棋子等级
+        public string reward_map;   //过期物品转化（奖励ID:数量）
+
+        public static void Track(int itemUniqueId, int itemId, int itemLevel, string rewardInfo)
+        {
+            var data = _GetTrackData<event_frozen_item_expire>();
+            data.item_unique_id = itemUniqueId;
+            data.item_id = itemId;
+            data.item_level = itemLevel;
+            data.reward_map = rewardInfo;
+            _TrackData(data);
+        }
+    }
+
+    #endregion
+
     #region guide
 
     [Serializable]
@@ -3812,6 +3882,34 @@ public partial class DataTracker
             data.event_diff = diff;
             data.type_id = typeId;
             data.level_queue = levelQueue;
+            _TrackData(data);
+        }
+    }
+
+    #endregion
+    
+    #region 拼图
+
+    internal class event_puzzle_rwd : MergeCommonData
+    {
+        public int event_id;
+        public int event_from;
+        public int event_param;
+        public int milestone_queue;
+        public int milestone_num;
+        public int milestone_difficulty;
+        public int round_num;
+        public bool is_final;
+
+        public static void Track(ActivityLike act, int queue, int num, int diff, int round, bool isFinal)
+        {
+            var data = _GetTrackData<event_puzzle_rwd>();
+            (data.event_id, data.event_from, data.event_param) = act.Info3;
+            data.milestone_queue = queue;
+            data.milestone_num = num;
+            data.milestone_difficulty = diff;
+            data.round_num = round;
+            data.is_final = isFinal;
             _TrackData(data);
         }
     }

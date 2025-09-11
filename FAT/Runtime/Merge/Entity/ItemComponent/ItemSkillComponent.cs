@@ -186,7 +186,7 @@ namespace FAT.Merge
             {
                 return false;
             }
-            if (ItemUtility.IsInBubble(target))
+            if (ItemUtility.HasBubbleComponent(target))
             {
                 return false;
             }

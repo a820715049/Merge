@@ -68,6 +68,8 @@ namespace FAT
                     ft = FlyType.OrderLikeToken;
                 else if (tokenConf.Feature == FeatureEntry.FeatureClawOrder)
                     ft = FlyType.ClawOrderToken;
+                else if (tokenConf.Feature == FeatureEntry.FeaturePuzzle)
+                    ft = FlyType.PuzzleToken;
                 else if (tokenConf.Feature == FeatureEntry.FeatureWeeklyTask)
                     ft = FlyType.WeeklyTaskEntry;
                 else if (tokenConf.Feature == FeatureEntry.FeatureFarmBoard)

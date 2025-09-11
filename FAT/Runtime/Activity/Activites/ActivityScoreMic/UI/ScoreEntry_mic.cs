@@ -25,7 +25,6 @@ namespace FAT
         public TMP_Text cd;
         public UIImageRes cdBg;
         public MBRewardProgress progress;
-        public Button btnInfo;
         public Animator animator;
         public Animator progressAnimator;
         public Animator scoreIconAnimator;
@@ -36,7 +35,7 @@ namespace FAT
         private int showAddNum;
         private Action<int, int> WhenUpdate;
         private Action WhenCD;
-        private ActivityScore activityScore;
+        private ActivityScoreMic activityScore;
         private int tipOffset = 4;
         private int targetV;
         private float currentV;
@@ -58,7 +57,7 @@ namespace FAT
             progressBg = root.FindEx<UIImageRes>("progress/back");
             progressValueImage = root.FindEx<UIImageRes>("progress/mask/fore");
             progress = root.FindEx<MBRewardProgress>("progress");
-            btnInfo = root.FindEx<Button>("btnInfo");
+            // btnInfo = root.FindEx<Button>("btnInfo");
             progressAnimator = root.FindEx<Animator>("progress/mask");
             scoreIconAnimator = root.FindEx<Animator>("icon/ScoreIconRoot/scoreIcon");
             addNumAnimator = root.FindEx<Animator>("icon");
@@ -70,7 +69,7 @@ namespace FAT
         {
             var button = group.GetComponent<Button>().WithClickScale().FixPivot();
             button.onClick.AddListener(EntryClick);
-            btnInfo.onClick.AddListener(EntryClick);
+            // btnInfo.onClick.AddListener(EntryClick);
         }
 
         public void OnEnable()
@@ -101,20 +100,6 @@ namespace FAT
                 routine = null;
             }
             listC.Clear();
-            //当玩家离开棋盘时 尝试commit奖励 确保数据和显示正确
-            if (activityScore != null)
-            {
-                if (activityScore.ShouldPopup())
-                {
-                    activityScore.TryPopRewardUI();
-                }
-                else
-                {
-                    activityScore.TryCommitReward();
-                }
-                activityScore.PrevFinalMileStoneRewardId = 0;
-                activityScore.PrevFinalMileStoneRewardCount = 0;
-            }
         }
 
         private IEnumerator OnAdapterComplete()
@@ -152,10 +137,10 @@ namespace FAT
                 Visible(false);
                 return;
             }
-            if (activity is not ActivityScore)
+            if (activity is not ActivityScoreMic)
                 return;
-            activityScore = (ActivityScore)activity;
-            var valid = activityScore is { Valid: true, IsUnlock: true } && activityScore.HasCycleMilestone();
+            activityScore = (ActivityScoreMic)activity;
+            var valid = activityScore is { Valid: true } && activityScore.IsComplete();
             Visible(valid);
             if (!valid) return;
             if (!UIManager.Instance.IsShow(UIConfig.UIScoreProgress))
@@ -165,7 +150,7 @@ namespace FAT
             //刷新倒计时
             RefreshCD();
             //刷新进度条
-            progress.Refresh(activityScore.CurShowScore, activityScore.CurMileStoneScore);
+            progress.Refresh(activityScore.CurMilestoneNum, activityScore.GetCurMilestoneNumMax(activityScore.CurMilestoneLevel));
             addNum.gameObject.SetActive(false);
             addNumShow.gameObject.SetActive(false);
             showAddNum = 0;
@@ -232,7 +217,7 @@ namespace FAT
                 }
                 else
                     node = list[v_];
-
+            
                 var prev = next > -1 && v_ < list.Count
                     ? (next > 0 ? list[v_ - 1].value : 0)
                     : activityScore.GetCyclePrevScore(currentV);
@@ -252,9 +237,7 @@ namespace FAT
                 currentV += speed * Time.deltaTime;
                 if (currentV >= node.value)
                 {
-                    var r = node.reward;
-                    var commitData = activityScore.TryGetCommitReward(r);
-                    OnMileStoneChanged(commitData);
+                    OnMileStoneChanged();
                     Progress(node.value, prev);
                     // var milestoneScore = node.value - prev;
                     // progress.text.text = $"{milestoneScore}/{milestoneScore}";
@@ -331,7 +314,7 @@ namespace FAT
                 Visible(false);
         }
 
-        private void OnMileStoneChanged(RewardCommitData r)
+        private void OnMileStoneChanged()
         {
             animator.SetTrigger("Punch");
         }
@@ -389,7 +372,7 @@ namespace FAT
         private void OnDebugAddScore()
         {
             Game.Manager.activity.LookupAny(EventType.Score, out var activity);
-            activityScore = (ActivityScore)activity;
+            activityScore = (ActivityScoreMic)activity;
             RefreshEntry(activityScore);
         }
         /// <summary>

@@ -102,4 +102,10 @@ public static class StringConverterExt
     {
         return _roundsItemConverter.Get(text);
     }
+    
+    private static IntRangeConverter mIntRangeConverter = new ();
+    public static IntRangeConfig ConvertToIntRange(this string text)
+    {
+        return mIntRangeConverter.Get(text);
+    }
 }

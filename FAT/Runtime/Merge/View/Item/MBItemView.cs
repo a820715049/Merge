@@ -575,5 +575,15 @@ namespace FAT.Merge
         {
             return contentCtrl.Holder.ResHolder;
         }
+
+        public void TweenSetAlpha(float a)
+        {
+            contentCtrl.TweenSetAlpha(a);
+        }
+
+        public float GetCurIconAlpha()
+        {
+            return contentCtrl.CurAlpha;
+        }
     }
 }

@@ -63,7 +63,7 @@ namespace FAT.Merge
             _RegisterItemComponent<ItemAutoSourceComponent>(ItemComponentType.AutoSouce, ItemAutoSourceComponent.SerializeDelta, ItemAutoSourceComponent.Validate);
             _RegisterItemComponent<ItemBonusCompoent>(ItemComponentType.Bonus, null, ItemBonusCompoent.Validate);
             _RegisterItemComponent<ItemTapBonusComponent>(ItemComponentType.TapBonus, null, ItemTapBonusComponent.Validate);
-            _RegisterItemComponent<ItemBubbleComponent>(ItemComponentType.Bubble, ItemBubbleComponent.SerializeDelta, null);
+            _RegisterItemComponent<ItemBubbleComponent>(ItemComponentType.Bubble, null, null);
             _RegisterItemComponent<ItemChestComponent>(ItemComponentType.Chest, ItemChestComponent.SerializeDelta, ItemChestComponent.Validate);
             _RegisterItemComponent<ItemClickSourceComponent>(ItemComponentType.ClickSouce, ItemClickSourceComponent.SerializeDelta, ItemClickSourceComponent.Validate);
             _RegisterItemComponent<ItemEatSourceComponent>(ItemComponentType.EatSource, ItemEatSourceComponent.SerializeDelta, ItemEatSourceComponent.Validate);

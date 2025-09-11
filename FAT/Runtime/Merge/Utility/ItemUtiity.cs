@@ -142,9 +142,22 @@ namespace FAT.Merge
             {
                 return MergeState.Unknown;
             }
-            if (src.HasComponent(ItemComponentType.Bubble) || dst.HasComponent(ItemComponentType.Bubble))
+            //细化针对ItemBubbleComponent组件的合成判断
+            if (HasBubbleComponent(src) || HasBubbleComponent(dst))
             {
-                return MergeState.HasBubble;
+                src.TryGetItemComponent(out ItemBubbleComponent srcBubble);
+                dst.TryGetItemComponent(out ItemBubbleComponent dstBubble);
+                var srcIsBubble = srcBubble?.IsBubbleItem() ?? false;
+                var dstIsBubble = dstBubble?.IsBubbleItem() ?? false;
+                var srcIsFrozen = srcBubble?.IsFrozenItem() ?? false;
+                var dstIsFrozen = dstBubble?.IsFrozenItem() ?? false;
+                // 1) 任意一方是“泡泡”类型 -> 阻止合成
+                if (srcIsBubble || dstIsBubble)
+                    return MergeState.HasBubble;
+                // 2) 双方都是“冰冻”类型 -> 阻止合成
+                if (srcIsFrozen && dstIsFrozen)
+                    return MergeState.HasBubble;
+                //有组件但为单侧冰冻 & 另一侧是普通可合成对象 允许继续往下走
             }
             if (dst.parent.GetGridTid(dst.coord.x, dst.coord.y) > 0)
             {
@@ -410,23 +423,6 @@ namespace FAT.Merge
             }
         }
 
-        // public static int GetSellPrice(int tid)
-        // {
-        //     return Env.Instance.GetItemMergeConfig(tid).SellPrice;
-        // }
-
-        // public static int GetSellPrice(Item src)
-        // {
-        //     if(src != null && src.isActive && src.parent != null && !src.HasComponent(ItemComponentType.Bubble))
-        //     {
-        //         return GetSellPrice(src.tid);
-        //     }
-        //     else
-        //     {
-        //         return 0;
-        //     }
-        // }
-
         public static bool IsItemMaxLevel(int tid)
         {
             var cat = Env.Instance.GetCategoryByItem(tid);
@@ -524,9 +520,19 @@ namespace FAT.Merge
             return Game.Manager.objectMan.IsType(tid, ObjConfigType.MergeItem);
         }
 
-        public static bool IsInBubble(Item item)
+        public static bool HasBubbleComponent(Item item)
         {
             return item.HasComponent(ItemComponentType.Bubble);
+        }
+
+        public static bool IsBubbleItem(Item item)
+        {
+            return item.TryGetItemComponent(out ItemBubbleComponent bubble) && bubble.IsBubbleItem();
+        }
+        
+        public static bool IsFrozenItem(Item item)
+        {
+            return item.TryGetItemComponent(out ItemBubbleComponent bubble) && bubble.IsFrozenItem();
         }
 
         public static bool IsChest(Item item)
@@ -565,9 +571,10 @@ namespace FAT.Merge
             }
         }
 
-        public static int GetBubbleDeadItemId(Item item)
+        public static int GetBubbleDeadItemId(ItemBubbleType type)
         {
-            var pool = Env.Instance.GetGlobalConfig().BubbleDeadWeight;
+            var globalConf = Env.Instance.GetGlobalConfig();
+            var pool = type == ItemBubbleType.Bubble ? globalConf.BubbleDeadWeight : globalConf.FrozenItemDeadWeight;
             int totalWeight = 0;
             using (ObjectPool<List<(int id, int weight)>>.GlobalPool.AllocStub(out var list))
             {
@@ -670,25 +677,6 @@ namespace FAT.Merge
         public static string GetItemRuntimeShortName(Item item)
         {
             return GetItemShortName(item.tid);
-            // var ret = GetItemShortName(item.tid);
-            // if(item.HasComponent(ItemComponentType.Bubble))
-            // {
-            //     ret = string.Format("{0} {1}", ret, I18N.Text("#MergeInBubble"));
-            // }
-            // if(item.isFrozen) {
-            //     ret = $"{ret} {I18N.Text("#MergeNameLockTag")}";
-            // }
-            // return ret;
-        }
-
-        public static string GetItemRuntimeLongName(Item item)
-        {
-            var ret = GetItemLongName(item.tid);
-            if (item.HasComponent(ItemComponentType.Bubble))
-            {
-                ret = string.Format("{0} {1}", ret, I18N.Text("#MergeInBubble"));
-            }
-            return ret;
         }
 
         public static string GetItemLevelStr(int tid)
@@ -697,94 +685,6 @@ namespace FAT.Merge
             if (level <= 0)
                 level = 1;
             return I18N.FormatText("#CommonLevelNum", level);
-        }
-
-        public static string GetItemDesc(Item item)
-        {
-            if (item.isFrozen)
-            {
-                return I18N.Text("#MergeDesc15");
-            }
-            var bubble = item.GetItemComponent<ItemBubbleComponent>(true);
-            if (bubble != null)
-            {
-                return I18N.Text("#MergeTip15");
-            }
-
-            string ret = "";
-            var clickSource = item.GetItemComponent<ItemClickSourceComponent>(true);
-            var chestSource = item.GetItemComponent<ItemChestComponent>(true);
-            var eatSource = item.GetItemComponent<ItemEatSourceComponent>(true);
-            var skillComp = item.GetItemComponent<ItemSkillComponent>(true);
-            if (eatSource != null)
-            {
-                var state = eatSource.state;
-                switch (state)
-                {
-                    case ItemEatSourceComponent.Status.Empty:
-                        ret = I18N.JoinSentence(ret, I18N.Text("#MergeDesc23"));
-                        break;
-                    case ItemEatSourceComponent.Status.Eating:
-                        ret = I18N.JoinSentence(ret, I18N.Text("#MergeDesc24"));
-                        break;
-                    case ItemEatSourceComponent.Status.Output:
-                        ret = I18N.JoinSentence(ret, I18N.Text("#MergeDesc25"));
-                        break;
-                }
-            }
-            if (clickSource != null)
-            {
-                if (clickSource.itemCount > 0)
-                {
-                    ret = I18N.JoinSentence(ret, I18N.Text("#MergeDesc6"));
-                }
-                else
-                {
-                    ret = I18N.JoinSentence(ret, I18N.Text("#MergeDesc16"));
-                }
-            }
-            if (chestSource != null)
-            {
-                if (chestSource.isNeedWait)
-                {
-                    if (chestSource.isWaiting)
-                    {
-                        ret = I18N.JoinSentence(ret, I18N.Text("#MergeDesc8"));
-                    }
-                    else if (chestSource.canUse)
-                    {
-                        ret = I18N.JoinSentence(ret, I18N.Text("#MergeDesc10"));
-                    }
-                    else
-                    {
-                        var currentChest = item.world.currentWaitChest;
-                        if (currentChest > 0)
-                        {
-                            ret = I18N.JoinSentence(ret, I18N.Text("#MergeDesc9"));
-                        }
-                        else
-                        {
-                            ret = I18N.JoinSentence(ret, I18N.Text("#MergeDesc7"));
-                        }
-                    }
-                }
-            }
-            if (skillComp != null)
-            {
-                if (skillComp.type == SkillType.Tesla)
-                {
-                    if (skillComp.teslaActive)
-                    {
-                        // 已经激活
-                        foreach (var desc in skillComp.descList)
-                        {
-                            ret = $"{ret}{I18N.Text(desc)}";
-                        }
-                        return ret;
-                    }
-                }
-            }
-            return I18N.JoinSentence(ret, _GetItemBasicDesc(item.tid));
         }
 
         private static string _StringJoin(string a, string b)
@@ -816,9 +716,16 @@ namespace FAT.Merge
                 return ret;
             }
 
-            if (IsInBubble(item))
+            if (item.TryGetItemComponent(out ItemBubbleComponent bubble))
             {
-                ret = _StringJoin(ret, I18N.Text("#SysComDesc81"));
+                if (bubble.IsBubbleItem())
+                {
+                    ret = _StringJoin(ret, I18N.Text("#SysComDesc81"));
+                }
+                else if (bubble.IsFrozenItem())
+                {
+                    ret = _StringJoin(ret, I18N.Text("#SysComDesc1559"));
+                }
             }
             else if (item.HasComponent(ItemComponentType.OrderBox))
             {
@@ -1299,7 +1206,7 @@ namespace FAT.Merge
         {
             if (com is ItemBubbleComponent _bubble)
             {
-                return _bubble.breakCost;
+                return _bubble.BreakCost;
             }
             else
             {
@@ -1355,7 +1262,8 @@ namespace FAT.Merge
             var globalData = Env.Instance.GetGlobalData();
             var globalConfig = Env.Instance.GetGlobalConfig();
 
-            if (item.TryGetItemComponent(out ItemBubbleComponent bubble))
+            //IsBubbleItem为true时才能加速
+            if (item.TryGetItemComponent(out ItemBubbleComponent bubble) && bubble.IsBubbleItem())
             {
                 var boardId = Game.Manager.mergeBoardMan.activeWorld?.activeBoard?.boardId ?? 0;
                 if (globalConfig.FreeBubbleCount.TryGetValue(boardId, out var count) && globalData.FreeBubbleUsed < count)
@@ -1525,7 +1433,7 @@ namespace FAT.Merge
                     {
                         case ItemComponentType.Bubble:
                             {
-                                if (com is ItemBubbleComponent)
+                                if (com is ItemBubbleComponent bubble && bubble.IsBubbleItem())
                                 {
                                     item.parent?.UnleashBubbleItem(item);
                                     // track

@@ -1610,21 +1610,23 @@ namespace FAT.Merge
             }
         }
 
-        public Item KillBubbleItem(Item item)
+        public Item KillBubbleItem(Item item, ItemBubbleType type, out int transItemId)
         {
+            transItemId = 0;
             var com = item.GetItemComponent<ItemBubbleComponent>();
             if (com != null)
             {
-                DebugEx.FormatInfo("Merge::Board.KillBubbleItem ----> bubble item killed {0}", item.tid);
+                DebugEx.FormatInfo("Merge::Board.KillBubbleItem ----> bubble item killed {0}, type = {1}", item.tid, type);
                 //kill bubble
                 var pos = item.coord;
-                var targetId = ItemUtility.GetBubbleDeadItemId(item);
-                item.world.TriggerItemEvent(item, ItemEventType.ItemBubbleBreak);
+                var targetId = ItemUtility.GetBubbleDeadItemId(type);
+                transItemId = targetId;
+                var eventType = type == ItemBubbleType.Bubble ? ItemEventType.ItemBubbleBreak : ItemEventType.ItemBubbleFrozenBreak;
+                item.world.TriggerItemEvent(item, eventType);
                 _DisposeItem(item);
                 _DisposeBonusProcess(item, item, ItemDeadType.BubbleTimeout);
                 var newItem = _SpawnItem(targetId, _CalculateIdxByCoord(pos.x, pos.y), pos.x, pos.y, false, false);
                 _SpawnBonusProcess(newItem, false, 0, ItemSpawnReason.BubbleTimeout);
-                //UseBonusItem(newItem);
                 return newItem;
             }
             else
@@ -2729,7 +2731,7 @@ namespace FAT.Merge
             var world = mParent;
             var item = new Item(world.ConsumeNextItemId(), mParent);
             item.SetParent(this, mGrids[idx]);
-            item.InitWithBubbleItem(id);
+            item.InitWithBubbleItem(id, ItemBubbleType.Bubble);
             _SpawnBonusProcess(item, true, 0, ItemSpawnReason.BubbleBorn);
             _SetItemPos(item, -1, idx, col, row, false);
             if (triggerEvent)
@@ -2739,6 +2741,39 @@ namespace FAT.Merge
             onItemEnter?.Invoke(item);
             world.TriggerItemEvent(item, ItemEventType.ItemEventEnterBoard);
             DebugEx.FormatInfo("Merge::Board._SpawnBubbleItem ----> item {0}({1},{2}) is spawned", item.id, item.coord.x, item.coord.y);
+            return item;
+        }
+        
+        public Item TrySpawnFrozenItem(Item srcItem, int targetId, long lifeTime)
+        {
+            var emptyIdx = _FindEmptyIdx(new FindEmptyIndexParam() { centerCol = srcItem.coord.x, centerRow = srcItem.coord.y });       //泡泡不能放在特殊grid上，就视为普通item
+            if (emptyIdx >= 0 && _CalculateCoordByIdx(emptyIdx, out var c, out var r))
+            {
+                var bubbleItem = _SpawnFrozenItem(lifeTime, targetId, emptyIdx, c, r, false);
+                _OnItemSpawn(ItemSpawnContext.CreateWithSource(srcItem, ItemSpawnContext.SpawnType.None), bubbleItem);
+                return bubbleItem;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        private Item _SpawnFrozenItem(long lifeTime, int id, int idx, int col, int row, bool triggerEvent = true)
+        {
+            var world = mParent;
+            var item = new Item(world.ConsumeNextItemId(), mParent);
+            item.SetParent(this, mGrids[idx]);
+            item.InitWithBubbleItem(id, ItemBubbleType.Frozen, lifeTime);
+            _SpawnBonusProcess(item, true, 0, ItemSpawnReason.BubbleBorn);
+            _SetItemPos(item, -1, idx, col, row, false);
+            if (triggerEvent)
+            {
+                _OnItemSpawn(ItemSpawnContext.Create(), item);
+            }
+            onItemEnter?.Invoke(item);
+            world.TriggerItemEvent(item, ItemEventType.ItemEventEnterBoard);
+            DebugEx.FormatInfo("Merge::Board._SpawnFrozenItem ----> item {0}({1},{2}) is spawned", item.tid, item.coord.x, item.coord.y);
             return item;
         }
 

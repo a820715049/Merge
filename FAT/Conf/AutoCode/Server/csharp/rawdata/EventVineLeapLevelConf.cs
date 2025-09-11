@@ -28,7 +28,7 @@ namespace fat.rawdata {
             "dGEi4wEKEkV2ZW50VmluZUxlYXBMZXZlbBIKCgJpZBgBIAEoBRI9CglhZHZB",
             "dmF0YXIYAiADKAsyKi5yYXdkYXRhLkV2ZW50VmluZUxlYXBMZXZlbC5BZHZB",
             "dmF0YXJFbnRyeRIOCgZhdmF0YXIYAyABKAUSDQoFb3V0SWQYBCABKAUSEAoI",
-            "cmV3YXJkSWQYBSADKAUSDQoFc2NvcmUYBiADKAUSEAoIdG9jYWxOdW0YByAB",
+            "cmV3YXJkSWQYBSABKAUSDQoFc2NvcmUYBiABKAUSEAoIdG90YWxOdW0YCCAB",
             "KAUaMAoOQWR2QXZhdGFyRW50cnkSCwoDa2V5GAEgASgFEg0KBXZhbHVlGAIg",
             "ASgJOgI4ASLaAQocRXZlbnRWaW5lTGVhcExldmVsTWFwQUJWYWx1ZRJfChVF",
             "dmVudFZpbmVMZWFwTGV2ZWxNYXAYASADKAsyQC5yYXdkYXRhLkV2ZW50Vmlu",
@@ -54,7 +54,7 @@ namespace fat.rawdata {
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EventVineLeapLevel), global::fat.rawdata.EventVineLeapLevel.Parser, new[]{ "Id", "AdvAvatar", "Avatar", "OutId", "RewardId", "Score", "TocalNum" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
+            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EventVineLeapLevel), global::fat.rawdata.EventVineLeapLevel.Parser, new[]{ "Id", "AdvAvatar", "Avatar", "OutId", "RewardId", "Score", "TotalNum" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EventVineLeapLevelMapABValue), global::fat.rawdata.EventVineLeapLevelMapABValue.Parser, new[]{ "EventVineLeapLevelMap" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EventVineLeapLevelConf), global::fat.rawdata.EventVineLeapLevelConf.Parser, new[]{ "EventVineLeapLevelMap", "EventVineLeapLevelMapAB", "EventVineLeapLevelMapABPatch" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, null, })
           }));
@@ -103,9 +103,9 @@ namespace fat.rawdata {
       advAvatar_ = other.advAvatar_.Clone();
       avatar_ = other.avatar_;
       outId_ = other.outId_;
-      rewardId_ = other.rewardId_.Clone();
-      score_ = other.score_.Clone();
-      tocalNum_ = other.tocalNum_;
+      rewardId_ = other.rewardId_;
+      score_ = other.score_;
+      totalNum_ = other.totalNum_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -172,41 +172,43 @@ namespace fat.rawdata {
 
     /// <summary>Field number for the "rewardId" field.</summary>
     public const int RewardIdFieldNumber = 5;
-    private static readonly pb::FieldCodec<int> _repeated_rewardId_codec
-        = pb::FieldCodec.ForInt32(42);
-    private readonly pbc::RepeatedField<int> rewardId_ = new pbc::RepeatedField<int>();
+    private int rewardId_;
     /// <summary>
     /// 奖励id
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<int> RewardId {
+    public int RewardId {
       get { return rewardId_; }
+      set {
+        rewardId_ = value;
+      }
     }
 
     /// <summary>Field number for the "score" field.</summary>
     public const int ScoreFieldNumber = 6;
-    private static readonly pb::FieldCodec<int> _repeated_score_codec
-        = pb::FieldCodec.ForInt32(50);
-    private readonly pbc::RepeatedField<int> score_ = new pbc::RepeatedField<int>();
+    private int score_;
     /// <summary>
     /// 积分数
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<int> Score {
+    public int Score {
       get { return score_; }
+      set {
+        score_ = value;
+      }
     }
 
-    /// <summary>Field number for the "tocalNum" field.</summary>
-    public const int TocalNumFieldNumber = 7;
-    private int tocalNum_;
+    /// <summary>Field number for the "totalNum" field.</summary>
+    public const int TotalNumFieldNumber = 8;
+    private int totalNum_;
     /// <summary>
     /// 总人数
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int TocalNum {
-      get { return tocalNum_; }
+    public int TotalNum {
+      get { return totalNum_; }
       set {
-        tocalNum_ = value;
+        totalNum_ = value;
       }
     }
 
@@ -227,9 +229,9 @@ namespace fat.rawdata {
       if (!AdvAvatar.Equals(other.AdvAvatar)) return false;
       if (Avatar != other.Avatar) return false;
       if (OutId != other.OutId) return false;
-      if(!rewardId_.Equals(other.rewardId_)) return false;
-      if(!score_.Equals(other.score_)) return false;
-      if (TocalNum != other.TocalNum) return false;
+      if (RewardId != other.RewardId) return false;
+      if (Score != other.Score) return false;
+      if (TotalNum != other.TotalNum) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -240,9 +242,9 @@ namespace fat.rawdata {
       hash ^= AdvAvatar.GetHashCode();
       if (Avatar != 0) hash ^= Avatar.GetHashCode();
       if (OutId != 0) hash ^= OutId.GetHashCode();
-      hash ^= rewardId_.GetHashCode();
-      hash ^= score_.GetHashCode();
-      if (TocalNum != 0) hash ^= TocalNum.GetHashCode();
+      if (RewardId != 0) hash ^= RewardId.GetHashCode();
+      if (Score != 0) hash ^= Score.GetHashCode();
+      if (TotalNum != 0) hash ^= TotalNum.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -272,11 +274,17 @@ namespace fat.rawdata {
         output.WriteRawTag(32);
         output.WriteInt32(OutId);
       }
-      rewardId_.WriteTo(output, _repeated_rewardId_codec);
-      score_.WriteTo(output, _repeated_score_codec);
-      if (TocalNum != 0) {
-        output.WriteRawTag(56);
-        output.WriteInt32(TocalNum);
+      if (RewardId != 0) {
+        output.WriteRawTag(40);
+        output.WriteInt32(RewardId);
+      }
+      if (Score != 0) {
+        output.WriteRawTag(48);
+        output.WriteInt32(Score);
+      }
+      if (TotalNum != 0) {
+        output.WriteRawTag(64);
+        output.WriteInt32(TotalNum);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -300,11 +308,17 @@ namespace fat.rawdata {
         output.WriteRawTag(32);
         output.WriteInt32(OutId);
       }
-      rewardId_.WriteTo(ref output, _repeated_rewardId_codec);
-      score_.WriteTo(ref output, _repeated_score_codec);
-      if (TocalNum != 0) {
-        output.WriteRawTag(56);
-        output.WriteInt32(TocalNum);
+      if (RewardId != 0) {
+        output.WriteRawTag(40);
+        output.WriteInt32(RewardId);
+      }
+      if (Score != 0) {
+        output.WriteRawTag(48);
+        output.WriteInt32(Score);
+      }
+      if (TotalNum != 0) {
+        output.WriteRawTag(64);
+        output.WriteInt32(TotalNum);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -325,10 +339,14 @@ namespace fat.rawdata {
       if (OutId != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(OutId);
       }
-      size += rewardId_.CalculateSize(_repeated_rewardId_codec);
-      size += score_.CalculateSize(_repeated_score_codec);
-      if (TocalNum != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(TocalNum);
+      if (RewardId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(RewardId);
+      }
+      if (Score != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Score);
+      }
+      if (TotalNum != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(TotalNum);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -351,10 +369,14 @@ namespace fat.rawdata {
       if (other.OutId != 0) {
         OutId = other.OutId;
       }
-      rewardId_.Add(other.rewardId_);
-      score_.Add(other.score_);
-      if (other.TocalNum != 0) {
-        TocalNum = other.TocalNum;
+      if (other.RewardId != 0) {
+        RewardId = other.RewardId;
+      }
+      if (other.Score != 0) {
+        Score = other.Score;
+      }
+      if (other.TotalNum != 0) {
+        TotalNum = other.TotalNum;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -386,18 +408,16 @@ namespace fat.rawdata {
             OutId = input.ReadInt32();
             break;
           }
-          case 42:
           case 40: {
-            rewardId_.AddEntriesFrom(input, _repeated_rewardId_codec);
+            RewardId = input.ReadInt32();
             break;
           }
-          case 50:
           case 48: {
-            score_.AddEntriesFrom(input, _repeated_score_codec);
+            Score = input.ReadInt32();
             break;
           }
-          case 56: {
-            TocalNum = input.ReadInt32();
+          case 64: {
+            TotalNum = input.ReadInt32();
             break;
           }
         }
@@ -430,18 +450,16 @@ namespace fat.rawdata {
             OutId = input.ReadInt32();
             break;
           }
-          case 42:
           case 40: {
-            rewardId_.AddEntriesFrom(ref input, _repeated_rewardId_codec);
+            RewardId = input.ReadInt32();
             break;
           }
-          case 50:
           case 48: {
-            score_.AddEntriesFrom(ref input, _repeated_score_codec);
+            Score = input.ReadInt32();
             break;
           }
-          case 56: {
-            TocalNum = input.ReadInt32();
+          case 64: {
+            TotalNum = input.ReadInt32();
             break;
           }
         }

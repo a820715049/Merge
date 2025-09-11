@@ -24,31 +24,32 @@ namespace fat.rawdata {
     static EnergyBoostConfReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "Ch1yYXdkYXRhL0VuZXJneUJvb3N0Q29uZi5wcm90bxIHcmF3ZGF0YSKOAQoL",
+            "Ch1yYXdkYXRhL0VuZXJneUJvb3N0Q29uZi5wcm90bxIHcmF3ZGF0YSK1AQoL",
             "RW5lcmd5Qm9vc3QSCgoCaWQYASABKAUSEAoIYWN0aXZlTHYYAiABKAUSEgoK",
             "Ym9vc3RMZXZlbBgDIAEoBRIRCglib29zdFJhdGUYBCABKAUSDQoFZ3VpZGUY",
-            "BSABKAUSEQoJaXNQYXNzaXZlGAYgASgIEhgKEHJlcXVpcmVFbmVyZ3lOdW0Y",
-            "ByABKAUisAEKFUVuZXJneUJvb3N0TWFwQUJWYWx1ZRJKCg5FbmVyZ3lCb29z",
-            "dE1hcBgBIAMoCzIyLnJhd2RhdGEuRW5lcmd5Qm9vc3RNYXBBQlZhbHVlLkVu",
-            "ZXJneUJvb3N0TWFwRW50cnkaSwoTRW5lcmd5Qm9vc3RNYXBFbnRyeRILCgNr",
-            "ZXkYASABKAUSIwoFdmFsdWUYAiABKAsyFC5yYXdkYXRhLkVuZXJneUJvb3N0",
-            "OgI4ASL5AwoPRW5lcmd5Qm9vc3RDb25mEkQKDkVuZXJneUJvb3N0TWFwGAEg",
-            "AygLMiwucmF3ZGF0YS5FbmVyZ3lCb29zdENvbmYuRW5lcmd5Qm9vc3RNYXBF",
-            "bnRyeRJIChBFbmVyZ3lCb29zdE1hcEFCGAIgAygLMi4ucmF3ZGF0YS5FbmVy",
-            "Z3lCb29zdENvbmYuRW5lcmd5Qm9vc3RNYXBBQkVudHJ5ElIKFUVuZXJneUJv",
-            "b3N0TWFwQUJQYXRjaBgDIAMoCzIzLnJhd2RhdGEuRW5lcmd5Qm9vc3RDb25m",
-            "LkVuZXJneUJvb3N0TWFwQUJQYXRjaEVudHJ5GksKE0VuZXJneUJvb3N0TWFw",
-            "RW50cnkSCwoDa2V5GAEgASgFEiMKBXZhbHVlGAIgASgLMhQucmF3ZGF0YS5F",
-            "bmVyZ3lCb29zdDoCOAEaVwoVRW5lcmd5Qm9vc3RNYXBBQkVudHJ5EgsKA2tl",
-            "eRgBIAEoCRItCgV2YWx1ZRgCIAEoCzIeLnJhd2RhdGEuRW5lcmd5Qm9vc3RN",
-            "YXBBQlZhbHVlOgI4ARpcChpFbmVyZ3lCb29zdE1hcEFCUGF0Y2hFbnRyeRIL",
-            "CgNrZXkYASABKAkSLQoFdmFsdWUYAiABKAsyHi5yYXdkYXRhLkVuZXJneUJv",
-            "b3N0TWFwQUJWYWx1ZToCOAFCPVotZ2l0bGFiLmZ1bnBsdXMuaW8vZmF0L2Nv",
-            "bmYvZ2VuL2dvbGFuZy9yYXdkYXRhqgILZmF0LnJhd2RhdGFiBnByb3RvMw=="));
+            "BSABKAUSEQoJaXNQYXNzaXZlGAYgASgIEhIKCmlzVG9hc3RNYXgYCCABKAgS",
+            "GAoQcmVxdWlyZUVuZXJneU51bRgHIAEoBRIRCglyZXdhcmROdW0YCSABKAUi",
+            "sAEKFUVuZXJneUJvb3N0TWFwQUJWYWx1ZRJKCg5FbmVyZ3lCb29zdE1hcBgB",
+            "IAMoCzIyLnJhd2RhdGEuRW5lcmd5Qm9vc3RNYXBBQlZhbHVlLkVuZXJneUJv",
+            "b3N0TWFwRW50cnkaSwoTRW5lcmd5Qm9vc3RNYXBFbnRyeRILCgNrZXkYASAB",
+            "KAUSIwoFdmFsdWUYAiABKAsyFC5yYXdkYXRhLkVuZXJneUJvb3N0OgI4ASL5",
+            "AwoPRW5lcmd5Qm9vc3RDb25mEkQKDkVuZXJneUJvb3N0TWFwGAEgAygLMiwu",
+            "cmF3ZGF0YS5FbmVyZ3lCb29zdENvbmYuRW5lcmd5Qm9vc3RNYXBFbnRyeRJI",
+            "ChBFbmVyZ3lCb29zdE1hcEFCGAIgAygLMi4ucmF3ZGF0YS5FbmVyZ3lCb29z",
+            "dENvbmYuRW5lcmd5Qm9vc3RNYXBBQkVudHJ5ElIKFUVuZXJneUJvb3N0TWFw",
+            "QUJQYXRjaBgDIAMoCzIzLnJhd2RhdGEuRW5lcmd5Qm9vc3RDb25mLkVuZXJn",
+            "eUJvb3N0TWFwQUJQYXRjaEVudHJ5GksKE0VuZXJneUJvb3N0TWFwRW50cnkS",
+            "CwoDa2V5GAEgASgFEiMKBXZhbHVlGAIgASgLMhQucmF3ZGF0YS5FbmVyZ3lC",
+            "b29zdDoCOAEaVwoVRW5lcmd5Qm9vc3RNYXBBQkVudHJ5EgsKA2tleRgBIAEo",
+            "CRItCgV2YWx1ZRgCIAEoCzIeLnJhd2RhdGEuRW5lcmd5Qm9vc3RNYXBBQlZh",
+            "bHVlOgI4ARpcChpFbmVyZ3lCb29zdE1hcEFCUGF0Y2hFbnRyeRILCgNrZXkY",
+            "ASABKAkSLQoFdmFsdWUYAiABKAsyHi5yYXdkYXRhLkVuZXJneUJvb3N0TWFw",
+            "QUJWYWx1ZToCOAFCPVotZ2l0bGFiLmZ1bnBsdXMuaW8vZmF0L2NvbmYvZ2Vu",
+            "L2dvbGFuZy9yYXdkYXRhqgILZmF0LnJhd2RhdGFiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EnergyBoost), global::fat.rawdata.EnergyBoost.Parser, new[]{ "Id", "ActiveLv", "BoostLevel", "BoostRate", "Guide", "IsPassive", "RequireEnergyNum" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EnergyBoost), global::fat.rawdata.EnergyBoost.Parser, new[]{ "Id", "ActiveLv", "BoostLevel", "BoostRate", "Guide", "IsPassive", "IsToastMax", "RequireEnergyNum", "RewardNum" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EnergyBoostMapABValue), global::fat.rawdata.EnergyBoostMapABValue.Parser, new[]{ "EnergyBoostMap" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EnergyBoostConf), global::fat.rawdata.EnergyBoostConf.Parser, new[]{ "EnergyBoostMap", "EnergyBoostMapAB", "EnergyBoostMapABPatch" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, null, })
           }));
@@ -99,7 +100,9 @@ namespace fat.rawdata {
       boostRate_ = other.boostRate_;
       guide_ = other.guide_;
       isPassive_ = other.isPassive_;
+      isToastMax_ = other.isToastMax_;
       requireEnergyNum_ = other.requireEnergyNum_;
+      rewardNum_ = other.rewardNum_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -200,6 +203,20 @@ namespace fat.rawdata {
       }
     }
 
+    /// <summary>Field number for the "isToastMax" field.</summary>
+    public const int IsToastMaxFieldNumber = 8;
+    private bool isToastMax_;
+    /// <summary>
+    /// 是否可以使用Max
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool IsToastMax {
+      get { return isToastMax_; }
+      set {
+        isToastMax_ = value;
+      }
+    }
+
     /// <summary>Field number for the "requireEnergyNum" field.</summary>
     public const int RequireEnergyNumFieldNumber = 7;
     private int requireEnergyNum_;
@@ -212,6 +229,20 @@ namespace fat.rawdata {
       get { return requireEnergyNum_; }
       set {
         requireEnergyNum_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "rewardNum" field.</summary>
+    public const int RewardNumFieldNumber = 9;
+    private int rewardNum_;
+    /// <summary>
+    /// 活动棋子掉落的数量
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int RewardNum {
+      get { return rewardNum_; }
+      set {
+        rewardNum_ = value;
       }
     }
 
@@ -234,7 +265,9 @@ namespace fat.rawdata {
       if (BoostRate != other.BoostRate) return false;
       if (Guide != other.Guide) return false;
       if (IsPassive != other.IsPassive) return false;
+      if (IsToastMax != other.IsToastMax) return false;
       if (RequireEnergyNum != other.RequireEnergyNum) return false;
+      if (RewardNum != other.RewardNum) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -247,7 +280,9 @@ namespace fat.rawdata {
       if (BoostRate != 0) hash ^= BoostRate.GetHashCode();
       if (Guide != 0) hash ^= Guide.GetHashCode();
       if (IsPassive != false) hash ^= IsPassive.GetHashCode();
+      if (IsToastMax != false) hash ^= IsToastMax.GetHashCode();
       if (RequireEnergyNum != 0) hash ^= RequireEnergyNum.GetHashCode();
+      if (RewardNum != 0) hash ^= RewardNum.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -292,6 +327,14 @@ namespace fat.rawdata {
         output.WriteRawTag(56);
         output.WriteInt32(RequireEnergyNum);
       }
+      if (IsToastMax != false) {
+        output.WriteRawTag(64);
+        output.WriteBool(IsToastMax);
+      }
+      if (RewardNum != 0) {
+        output.WriteRawTag(72);
+        output.WriteInt32(RewardNum);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -329,6 +372,14 @@ namespace fat.rawdata {
         output.WriteRawTag(56);
         output.WriteInt32(RequireEnergyNum);
       }
+      if (IsToastMax != false) {
+        output.WriteRawTag(64);
+        output.WriteBool(IsToastMax);
+      }
+      if (RewardNum != 0) {
+        output.WriteRawTag(72);
+        output.WriteInt32(RewardNum);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -356,8 +407,14 @@ namespace fat.rawdata {
       if (IsPassive != false) {
         size += 1 + 1;
       }
+      if (IsToastMax != false) {
+        size += 1 + 1;
+      }
       if (RequireEnergyNum != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(RequireEnergyNum);
+      }
+      if (RewardNum != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(RewardNum);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -388,8 +445,14 @@ namespace fat.rawdata {
       if (other.IsPassive != false) {
         IsPassive = other.IsPassive;
       }
+      if (other.IsToastMax != false) {
+        IsToastMax = other.IsToastMax;
+      }
       if (other.RequireEnergyNum != 0) {
         RequireEnergyNum = other.RequireEnergyNum;
+      }
+      if (other.RewardNum != 0) {
+        RewardNum = other.RewardNum;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -433,6 +496,14 @@ namespace fat.rawdata {
             RequireEnergyNum = input.ReadInt32();
             break;
           }
+          case 64: {
+            IsToastMax = input.ReadBool();
+            break;
+          }
+          case 72: {
+            RewardNum = input.ReadInt32();
+            break;
+          }
         }
       }
     #endif
@@ -473,6 +544,14 @@ namespace fat.rawdata {
           }
           case 56: {
             RequireEnergyNum = input.ReadInt32();
+            break;
+          }
+          case 64: {
+            IsToastMax = input.ReadBool();
+            break;
+          }
+          case 72: {
+            RewardNum = input.ReadInt32();
             break;
           }
         }

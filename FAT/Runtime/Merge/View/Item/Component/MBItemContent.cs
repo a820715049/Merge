@@ -143,7 +143,9 @@ namespace FAT
                 coverImg.enabled = true;
                 // bubble
                 _SetMainContent(cfg.Icon, mgCfg?.DisplayRes);
-                coverImg.sprite = BoardUtility.bubbleCoverSprite;
+                var bubble = item.GetItemComponent<ItemBubbleComponent>();
+                //根据不同类型决定不同的覆盖图片
+                coverImg.sprite = bubble.IsBubbleItem() ? BoardUtility.bubbleCoverSprite : BoardUtility.bubbleFrozenCoverSprite;
                 coverImg.gameObject.SetActive(true);
                 textUnlockLevel.gameObject.SetActive(false);
                 bottom.gameObject.SetActive(false);
@@ -215,8 +217,20 @@ namespace FAT
             _SetAlpha(1f);
         }
 
+        //供外部从当前alpha值开始做tween动画 避免表现上透明度突变
+        public float CurAlpha { get; private set; } = 1f;
+
+        //用于外部控制做tween显隐动画
+        public void TweenSetAlpha(float a)
+        {
+            if (mView == null || itemId <= 0)
+                return;
+            _SetAlpha(a);
+        }
+
         private void _SetAlpha(float a)
         {
+            CurAlpha = a;
             if (resType == ResType.Prefab)
             {
                 holder.SetAlpha(a);

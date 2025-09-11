@@ -24,9 +24,9 @@ namespace FAT
         [SerializeField] private Transform complete;
         [SerializeField] private Transform sweep;
 
-        private ActivityScore.Node _node;
+        private UIScore_mic.Node _node;
         
-        public void UpdateContent(ActivityScore.Node node)
+        public void UpdateContent(UIScore_mic.Node node)
         {
             _node = node;
             UpdateContentByValue(node.isCur, node.isDone, node.isGoal);

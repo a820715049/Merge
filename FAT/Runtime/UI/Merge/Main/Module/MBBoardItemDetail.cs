@@ -289,7 +289,7 @@ namespace FAT
                 return mask;
             }
             // 气泡
-            if (item.HasComponent(ItemComponentType.Bubble))
+            if (ItemUtility.IsBubbleItem(item))
             {
                 if (_IsFreeBubble(item))
                     mask |= _GetUsageFlag(UsageType.SpeedUpFree);
@@ -304,7 +304,7 @@ namespace FAT
             if (item.isActive &&
                 _AllowSell() &&
                 Env.Instance.GetMergeLevel() >= cfg.SellPlayerLv &&
-                !ItemUtility.IsInBubble(item))
+                !ItemUtility.HasBubbleComponent(item))
             {
                 if (cfg.SellNum > 0)
                     mask |= _GetUsageFlag(UsageType.Sell);
@@ -487,7 +487,14 @@ namespace FAT
         {
             if (mItem != null)
             {
-                UIItemUtility.ShowItemTipsInfo(mItem.tid);
+                if (mItem.TryGetItemComponent(out ItemBubbleComponent bubble) && bubble.IsFrozenItem())
+                {
+                    Game.Manager.itemInfoMan.TryOpenItemInfo(mItem.tid, ItemInfoMan.ItemInfoType.FrozenItem, bubble.LifeRemainTime);
+                }
+                else
+                {
+                    UIItemUtility.ShowItemTipsInfo(mItem.tid);
+                }
             }
         }
 

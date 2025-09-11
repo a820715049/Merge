@@ -275,6 +275,20 @@ namespace FAT
             return conf.Data.GetMergeBoardMap();
         }
 
+        #region 冰冻棋子相关
+
+        public FrozenItem GetFrozenItemConfig(int id)
+        {
+            return conf.Data.GetFrozenItem(id);
+        }
+        
+        public FrozenItemDetail GetFrozenItemDetailConfig(int id)
+        {
+            return conf.Data.GetFrozenItemDetail(id);
+        }
+
+        #endregion
+
         public IDictionary<int, AdSetting> GetAdSettingMap()
         {
             return conf.Data.GetAdSettingMap();

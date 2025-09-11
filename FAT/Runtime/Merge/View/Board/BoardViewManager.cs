@@ -28,7 +28,8 @@ namespace FAT
         private Item mItemTryToDrag;
         private MatchChecker mChecker = new MatchChecker();
         private MergeHelper mMergeHelper = new MergeHelper();
-        private Dictionary<int, int> mActiveBubbleCache = new Dictionary<int, int>();
+        private Dictionary<int, int> mActiveBubbleCache = new Dictionary<int, int>();   //当前活跃的泡泡棋子
+        private Dictionary<int, int> mActiveBubbleFrozenCache = new Dictionary<int, int>(); //当前活跃的冰冻棋子
         private Dictionary<int, int> mActiveItemCache = new Dictionary<int, int>();
         private Dictionary<int, int> mInSandItemCache = new Dictionary<int, int>(); // 沙尘中的物品数量记录
         private Dictionary<int, int> mActiveBonusCache = new();
@@ -174,6 +175,7 @@ namespace FAT
             mActiveItemCache.Clear();
             mInSandItemCache.Clear();
             mActiveBubbleCache.Clear();
+            mActiveBubbleFrozenCache.Clear();
             mAllCompList.Clear();
             mActiveBonusCache.Clear();
             mActiveChestCache.Clear();
@@ -594,6 +596,11 @@ namespace FAT
                 }
             }
 
+            _OnDragFinish();
+        }
+
+        private void _OnDragFinish()
+        {
             mItemInDrag = null;
             _RemoveFilter();
             _HideMergeHighlight();
@@ -1074,6 +1081,7 @@ namespace FAT
         private void _CacheBoardItem()
         {
             mActiveBubbleCache.Clear();
+            mActiveBubbleFrozenCache.Clear();
             mActiveItemCache.Clear();
             mInSandItemCache.Clear();
             mCDItemNum = 0;
@@ -1086,15 +1094,16 @@ namespace FAT
                     item = board.GetItemByCoord(i, j);
                     if (item != null)
                     {
-                        if (ItemUtility.IsInBubble(item))
+                        if (item.TryGetItemComponent(out ItemBubbleComponent bubble))
                         {
-                            if (mActiveBubbleCache.ContainsKey(item.tid))
+                            var cache = bubble.IsBubbleItem() ? mActiveBubbleCache : mActiveBubbleFrozenCache;
+                            if (cache.ContainsKey(item.tid))
                             {
-                                mActiveBubbleCache[item.tid] = mActiveBubbleCache[item.tid] + 1;
+                                cache[item.tid] += 1;
                             }
                             else
                             {
-                                mActiveBubbleCache.Add(item.tid, 1);
+                                cache.Add(item.tid, 1);
                             }
                         }
                         else if (!item.isLocked && item.isFrozen)
@@ -1182,33 +1191,72 @@ namespace FAT
             return null;
         }
 
-        public bool HasBubbleItem(int tid, int num)
+        public bool HasBubbleItem(ItemBubbleType type, int tid, int num)
         {
-            var dict = mActiveBubbleCache;
-            if (num <= 0)
+            var dict = type == ItemBubbleType.Bubble ? mActiveBubbleCache : mActiveBubbleFrozenCache;
+            //tid>0时：表示某个具体id的且含有type类型组件的棋子，在棋盘上的数量是否满足num
+            if (tid > 0)
             {
-                // 精确要求0个
-                if (dict.ContainsKey(tid))
+                if (num <= 0)
                 {
-                    return dict[tid] <= 0;
+                    // 精确要求0个
+                    if (dict.TryGetValue(tid, out var value))
+                    {
+                        return value <= 0;
+                    }
+                    else
+                    {
+                        return true;
+                    }
                 }
                 else
                 {
-                    return true;
+                    // 要求数量足够num个
+                    if (dict.TryGetValue(tid, out var value))
+                    {
+                        return num <= value;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
             }
+            //tid<=0时：表示任意含有type类型组件的棋子，在棋盘上的数量是否满足num
             else
             {
-                // 要求数量足够num个
-                if (dict.ContainsKey(tid))
+                var totalCount = 0;
+                foreach (var itemCount in dict.Values)
                 {
-                    return num <= dict[tid];
+                    totalCount += itemCount;
                 }
+
+                if (num <= 0)
+                    return totalCount <= 0;
                 else
-                {
-                    return false;
-                }
+                    return num <= totalCount;
             }
+        }
+
+        //获取当前棋盘上冰冻棋子的数量
+        public int GetBubbleFrozenItemCount()
+        {
+            var count = 0;
+            foreach (var num in mActiveBubbleFrozenCache.Values)
+            {
+                count += num;
+            }
+            return count;
+        }
+
+        public int GetFirstFrozenItemId()
+        {
+            foreach (var info in mActiveBubbleFrozenCache)
+            {
+                if (info.Value > 0)
+                    return info.Key;
+            }
+            return 0;
         }
 
         public bool HasInSandItem(int tid, int num)
@@ -1487,9 +1535,10 @@ namespace FAT
                 }
             }
 
+            //若棋子在拖拽过程中死亡了，则走一遍_OnDragFinish，用于清理拖拽过程中可能产生的各种效果
             if (mItemInDrag != null && mItemInDrag == item)
             {
-                mItemInDrag = null;
+                _OnDragFinish();
             }
         }
 
@@ -1501,9 +1550,10 @@ namespace FAT
                 case ItemEventType.ItemBubbleBreak:
                     Game.Manager.audioMan.TriggerSound("BubbleBreak");
                     break;
-                // case ItemEventType.ItemBubbleUnleash:
-                //     Game.Manager.audioMan.TriggerSound("BubbleOpen");
-                //     break;
+                case ItemEventType.ItemBubbleFrozenBreak:
+                    //播放冰冻棋子破碎特效
+                    Game.Manager.audioMan.TriggerSound("FrozenItemBreak");
+                    break;
                 case ItemEventType.ItemEventSpeedUp:
                     Game.Manager.audioMan.TriggerSound("SpeedUp");
                     break;

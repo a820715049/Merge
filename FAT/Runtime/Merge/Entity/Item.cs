@@ -320,18 +320,25 @@ namespace FAT.Merge
             }
         }
 
-        public void InitWithBubbleItem(int id)
+        public void InitWithBubbleItem(int itemConfId, ItemBubbleType type, long lifeTime = 0, int lifeCounter = 0)
         {
-            if(mTId == id)
+            if(mTId == itemConfId)
             {
                 return;
             }
             mIsIniting = true;
-            mTId = id;
-            mConfig = Env.Instance.GetItemMergeConfig(id);
+            mTId = itemConfId;
+            mConfig = Env.Instance.GetItemMergeConfig(itemConfId);
             _ClearAllComponent();
 
-            _AddItemComponent<ItemBubbleComponent>();
+            var bubbleComp = _AddItemComponent<ItemBubbleComponent>();
+            bubbleComp?.InitItemBubbleType(type, lifeTime, lifeCounter);
+            //冰冻棋子额外具有merge组件
+            if (type == ItemBubbleType.Frozen)
+            {
+                var comConfig = Env.Instance.GetItemComConfig(itemConfId);
+                ItemComponentTable.ValidateAndAddComponent(this, comConfig, ItemComponentType.Merge);
+            }
             mIsIniting = false;
             OnStart();
         }

@@ -25,7 +25,7 @@ namespace fat.rawdata {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "CiNyYXdkYXRhL0NvbU1lcmdlVGFwU291cmNlQ29uZi5wcm90bxIHcmF3ZGF0",
-            "YSKpBwoRQ29tTWVyZ2VUYXBTb3VyY2USFQoNY29uZmlnVmVyc2lvbhgBIAEo",
+            "YSLFBgoRQ29tTWVyZ2VUYXBTb3VyY2USFQoNY29uZmlnVmVyc2lvbhgBIAEo",
             "BRIKCgJpZBgCIAEoBRIOCgZfdGFnc18YAyADKAkSDgoGY29zdElkGBcgAygF",
             "EhAKCGRlYWRJdGVtGAQgASgFEjgKB2RpZUludG8YGSADKAsyJy5yYXdkYXRh",
             "LkNvbU1lcmdlVGFwU291cmNlLkRpZUludG9FbnRyeRISCgplbmVyZ3lDb3N0",
@@ -34,42 +34,40 @@ namespace fat.rawdata {
             "EwoLaXNGaWxsQ2xlYXIYFSABKAgSEgoKaXNKdW1wYWJsZRgaIAEoCBIWCg5p",
             "c1NraXBEaWVBbmltZRgUIAEoCBISCgpsaW1pdENvdW50GAggASgFEjoKCG1h",
             "eFRvYXN0GBsgAygLMigucmF3ZGF0YS5Db21NZXJnZVRhcFNvdXJjZS5NYXhU",
-            "b2FzdEVudHJ5EkMKDW1heFRvYXN0X3Rlc3QYHiADKAsyLC5yYXdkYXRhLkNv",
-            "bU1lcmdlVGFwU291cmNlLk1heFRvYXN0VGVzdEVudHJ5EhMKC291dHB1dENv",
-            "dW50GAkgASgFEhIKCm91dHB1dFRpbWUYCiABKAUSFAoMb3V0cHV0c0ZpeGVk",
-            "GAwgAygFEhgKEG91dHB1dHNGaXhlZFRpbWUYDSADKAUSQgoMb3V0cHV0c1Rv",
-            "YXN0GBYgAygLMiwucmF3ZGF0YS5Db21NZXJnZVRhcFNvdXJjZS5PdXRwdXRz",
-            "VG9hc3RFbnRyeRITCgtyZXZpdmVDb3VudBgPIAEoBRISCgpyZXZpdmVUaW1l",
-            "GBAgASgFEhAKCHNwYXduU2Z4GBEgASgJEhEKCXNwZWVkQ29zdBgSIAEoBRIS",
-            "CgpzdGFnZUNvdW50GBMgASgFGi4KDERpZUludG9FbnRyeRILCgNrZXkYASAB",
-            "KAUSDQoFdmFsdWUYAiABKAU6AjgBGi8KDU1heFRvYXN0RW50cnkSCwoDa2V5",
-            "GAEgASgFEg0KBXZhbHVlGAIgASgFOgI4ARozChFNYXhUb2FzdFRlc3RFbnRy",
-            "eRILCgNrZXkYASABKAUSDQoFdmFsdWUYAiABKAU6AjgBGjMKEU91dHB1dHNU",
-            "b2FzdEVudHJ5EgsKA2tleRgBIAEoBRINCgV2YWx1ZRgCIAEoBToCOAEi1AEK",
-            "G0NvbU1lcmdlVGFwU291cmNlTWFwQUJWYWx1ZRJcChRDb21NZXJnZVRhcFNv",
-            "dXJjZU1hcBgBIAMoCzI+LnJhd2RhdGEuQ29tTWVyZ2VUYXBTb3VyY2VNYXBB",
-            "QlZhbHVlLkNvbU1lcmdlVGFwU291cmNlTWFwRW50cnkaVwoZQ29tTWVyZ2VU",
-            "YXBTb3VyY2VNYXBFbnRyeRILCgNrZXkYASABKAkSKQoFdmFsdWUYAiABKAsy",
-            "Gi5yYXdkYXRhLkNvbU1lcmdlVGFwU291cmNlOgI4ASLZBAoVQ29tTWVyZ2VU",
-            "YXBTb3VyY2VDb25mElYKFENvbU1lcmdlVGFwU291cmNlTWFwGAEgAygLMjgu",
-            "cmF3ZGF0YS5Db21NZXJnZVRhcFNvdXJjZUNvbmYuQ29tTWVyZ2VUYXBTb3Vy",
-            "Y2VNYXBFbnRyeRJaChZDb21NZXJnZVRhcFNvdXJjZU1hcEFCGAIgAygLMjou",
-            "cmF3ZGF0YS5Db21NZXJnZVRhcFNvdXJjZUNvbmYuQ29tTWVyZ2VUYXBTb3Vy",
-            "Y2VNYXBBQkVudHJ5EmQKG0NvbU1lcmdlVGFwU291cmNlTWFwQUJQYXRjaBgD",
-            "IAMoCzI/LnJhd2RhdGEuQ29tTWVyZ2VUYXBTb3VyY2VDb25mLkNvbU1lcmdl",
-            "VGFwU291cmNlTWFwQUJQYXRjaEVudHJ5GlcKGUNvbU1lcmdlVGFwU291cmNl",
-            "TWFwRW50cnkSCwoDa2V5GAEgASgJEikKBXZhbHVlGAIgASgLMhoucmF3ZGF0",
-            "YS5Db21NZXJnZVRhcFNvdXJjZToCOAEaYwobQ29tTWVyZ2VUYXBTb3VyY2VN",
-            "YXBBQkVudHJ5EgsKA2tleRgBIAEoCRIzCgV2YWx1ZRgCIAEoCzIkLnJhd2Rh",
-            "dGEuQ29tTWVyZ2VUYXBTb3VyY2VNYXBBQlZhbHVlOgI4ARpoCiBDb21NZXJn",
-            "ZVRhcFNvdXJjZU1hcEFCUGF0Y2hFbnRyeRILCgNrZXkYASABKAkSMwoFdmFs",
-            "dWUYAiABKAsyJC5yYXdkYXRhLkNvbU1lcmdlVGFwU291cmNlTWFwQUJWYWx1",
-            "ZToCOAFCPVotZ2l0bGFiLmZ1bnBsdXMuaW8vZmF0L2NvbmYvZ2VuL2dvbGFu",
-            "Zy9yYXdkYXRhqgILZmF0LnJhd2RhdGFiBnByb3RvMw=="));
+            "b2FzdEVudHJ5EhQKDG1heFRvYXN0X25ldxgfIAMoBRITCgtvdXRwdXRDb3Vu",
+            "dBgJIAEoBRISCgpvdXRwdXRUaW1lGAogASgFEhQKDG91dHB1dHNGaXhlZBgM",
+            "IAMoBRIYChBvdXRwdXRzRml4ZWRUaW1lGA0gAygFEkIKDG91dHB1dHNUb2Fz",
+            "dBgWIAMoCzIsLnJhd2RhdGEuQ29tTWVyZ2VUYXBTb3VyY2UuT3V0cHV0c1Rv",
+            "YXN0RW50cnkSEwoLcmV2aXZlQ291bnQYDyABKAUSEgoKcmV2aXZlVGltZRgQ",
+            "IAEoBRIQCghzcGF3blNmeBgRIAEoCRIRCglzcGVlZENvc3QYEiABKAUSEgoK",
+            "c3RhZ2VDb3VudBgTIAEoBRouCgxEaWVJbnRvRW50cnkSCwoDa2V5GAEgASgF",
+            "Eg0KBXZhbHVlGAIgASgFOgI4ARovCg1NYXhUb2FzdEVudHJ5EgsKA2tleRgB",
+            "IAEoBRINCgV2YWx1ZRgCIAEoBToCOAEaMwoRT3V0cHV0c1RvYXN0RW50cnkS",
+            "CwoDa2V5GAEgASgFEg0KBXZhbHVlGAIgASgFOgI4ASLUAQobQ29tTWVyZ2VU",
+            "YXBTb3VyY2VNYXBBQlZhbHVlElwKFENvbU1lcmdlVGFwU291cmNlTWFwGAEg",
+            "AygLMj4ucmF3ZGF0YS5Db21NZXJnZVRhcFNvdXJjZU1hcEFCVmFsdWUuQ29t",
+            "TWVyZ2VUYXBTb3VyY2VNYXBFbnRyeRpXChlDb21NZXJnZVRhcFNvdXJjZU1h",
+            "cEVudHJ5EgsKA2tleRgBIAEoCRIpCgV2YWx1ZRgCIAEoCzIaLnJhd2RhdGEu",
+            "Q29tTWVyZ2VUYXBTb3VyY2U6AjgBItkEChVDb21NZXJnZVRhcFNvdXJjZUNv",
+            "bmYSVgoUQ29tTWVyZ2VUYXBTb3VyY2VNYXAYASADKAsyOC5yYXdkYXRhLkNv",
+            "bU1lcmdlVGFwU291cmNlQ29uZi5Db21NZXJnZVRhcFNvdXJjZU1hcEVudHJ5",
+            "EloKFkNvbU1lcmdlVGFwU291cmNlTWFwQUIYAiADKAsyOi5yYXdkYXRhLkNv",
+            "bU1lcmdlVGFwU291cmNlQ29uZi5Db21NZXJnZVRhcFNvdXJjZU1hcEFCRW50",
+            "cnkSZAobQ29tTWVyZ2VUYXBTb3VyY2VNYXBBQlBhdGNoGAMgAygLMj8ucmF3",
+            "ZGF0YS5Db21NZXJnZVRhcFNvdXJjZUNvbmYuQ29tTWVyZ2VUYXBTb3VyY2VN",
+            "YXBBQlBhdGNoRW50cnkaVwoZQ29tTWVyZ2VUYXBTb3VyY2VNYXBFbnRyeRIL",
+            "CgNrZXkYASABKAkSKQoFdmFsdWUYAiABKAsyGi5yYXdkYXRhLkNvbU1lcmdl",
+            "VGFwU291cmNlOgI4ARpjChtDb21NZXJnZVRhcFNvdXJjZU1hcEFCRW50cnkS",
+            "CwoDa2V5GAEgASgJEjMKBXZhbHVlGAIgASgLMiQucmF3ZGF0YS5Db21NZXJn",
+            "ZVRhcFNvdXJjZU1hcEFCVmFsdWU6AjgBGmgKIENvbU1lcmdlVGFwU291cmNl",
+            "TWFwQUJQYXRjaEVudHJ5EgsKA2tleRgBIAEoCRIzCgV2YWx1ZRgCIAEoCzIk",
+            "LnJhd2RhdGEuQ29tTWVyZ2VUYXBTb3VyY2VNYXBBQlZhbHVlOgI4AUI9Wi1n",
+            "aXRsYWIuZnVucGx1cy5pby9mYXQvY29uZi9nZW4vZ29sYW5nL3Jhd2RhdGGq",
+            "AgtmYXQucmF3ZGF0YWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.ComMergeTapSource), global::fat.rawdata.ComMergeTapSource.Parser, new[]{ "ConfigVersion", "Id", "Tags", "CostId", "DeadItem", "DieInto", "EnergyCost", "FirstOutputTime", "Frozen", "IsBoostItem", "IsBoostable", "IsFillClear", "IsJumpable", "IsSkipDieAnime", "LimitCount", "MaxToast", "MaxToastTest", "OutputCount", "OutputTime", "OutputsFixed", "OutputsFixedTime", "OutputsToast", "ReviveCount", "ReviveTime", "SpawnSfx", "SpeedCost", "StageCount" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, null, null, }),
+            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.ComMergeTapSource), global::fat.rawdata.ComMergeTapSource.Parser, new[]{ "ConfigVersion", "Id", "Tags", "CostId", "DeadItem", "DieInto", "EnergyCost", "FirstOutputTime", "Frozen", "IsBoostItem", "IsBoostable", "IsFillClear", "IsJumpable", "IsSkipDieAnime", "LimitCount", "MaxToast", "MaxToastNew", "OutputCount", "OutputTime", "OutputsFixed", "OutputsFixedTime", "OutputsToast", "ReviveCount", "ReviveTime", "SpawnSfx", "SpeedCost", "StageCount" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.ComMergeTapSourceMapABValue), global::fat.rawdata.ComMergeTapSourceMapABValue.Parser, new[]{ "ComMergeTapSourceMap" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.ComMergeTapSourceConf), global::fat.rawdata.ComMergeTapSourceConf.Parser, new[]{ "ComMergeTapSourceMap", "ComMergeTapSourceMapAB", "ComMergeTapSourceMapABPatch" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, null, })
           }));
@@ -130,7 +128,7 @@ namespace fat.rawdata {
       isSkipDieAnime_ = other.isSkipDieAnime_;
       limitCount_ = other.limitCount_;
       maxToast_ = other.maxToast_.Clone();
-      maxToastTest_ = other.maxToastTest_.Clone();
+      maxToastNew_ = other.maxToastNew_.Clone();
       outputCount_ = other.outputCount_;
       outputTime_ = other.outputTime_;
       outputsFixed_ = other.outputsFixed_.Clone();
@@ -389,17 +387,17 @@ namespace fat.rawdata {
       get { return maxToast_; }
     }
 
-    /// <summary>Field number for the "maxToast_test" field.</summary>
-    public const int MaxToastTestFieldNumber = 30;
-    private static readonly pbc::MapField<int, int>.Codec _map_maxToastTest_codec
-        = new pbc::MapField<int, int>.Codec(pb::FieldCodec.ForInt32(8, 0), pb::FieldCodec.ForInt32(16, 0), 242);
-    private readonly pbc::MapField<int, int> maxToastTest_ = new pbc::MapField<int, int>();
+    /// <summary>Field number for the "maxToast_new" field.</summary>
+    public const int MaxToastNewFieldNumber = 31;
+    private static readonly pb::FieldCodec<int> _repeated_maxToastNew_codec
+        = pb::FieldCodec.ForInt32(250);
+    private readonly pbc::RepeatedField<int> maxToastNew_ = new pbc::RepeatedField<int>();
     /// <summary>
     /// 1倍状态下掉落Max的棋子
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::MapField<int, int> MaxToastTest {
-      get { return maxToastTest_; }
+    public pbc::RepeatedField<int> MaxToastNew {
+      get { return maxToastNew_; }
     }
 
     /// <summary>Field number for the "outputCount" field.</summary>
@@ -580,7 +578,7 @@ namespace fat.rawdata {
       if (IsSkipDieAnime != other.IsSkipDieAnime) return false;
       if (LimitCount != other.LimitCount) return false;
       if (!MaxToast.Equals(other.MaxToast)) return false;
-      if (!MaxToastTest.Equals(other.MaxToastTest)) return false;
+      if(!maxToastNew_.Equals(other.maxToastNew_)) return false;
       if (OutputCount != other.OutputCount) return false;
       if (OutputTime != other.OutputTime) return false;
       if(!outputsFixed_.Equals(other.outputsFixed_)) return false;
@@ -613,7 +611,7 @@ namespace fat.rawdata {
       if (IsSkipDieAnime != false) hash ^= IsSkipDieAnime.GetHashCode();
       if (LimitCount != 0) hash ^= LimitCount.GetHashCode();
       hash ^= MaxToast.GetHashCode();
-      hash ^= MaxToastTest.GetHashCode();
+      hash ^= maxToastNew_.GetHashCode();
       if (OutputCount != 0) hash ^= OutputCount.GetHashCode();
       if (OutputTime != 0) hash ^= OutputTime.GetHashCode();
       hash ^= outputsFixed_.GetHashCode();
@@ -723,7 +721,7 @@ namespace fat.rawdata {
         output.WriteRawTag(224, 1);
         output.WriteBool(IsBoostItem);
       }
-      maxToastTest_.WriteTo(output, _map_maxToastTest_codec);
+      maxToastNew_.WriteTo(output, _repeated_maxToastNew_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -816,7 +814,7 @@ namespace fat.rawdata {
         output.WriteRawTag(224, 1);
         output.WriteBool(IsBoostItem);
       }
-      maxToastTest_.WriteTo(ref output, _map_maxToastTest_codec);
+      maxToastNew_.WriteTo(ref output, _repeated_maxToastNew_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -866,7 +864,7 @@ namespace fat.rawdata {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(LimitCount);
       }
       size += maxToast_.CalculateSize(_map_maxToast_codec);
-      size += maxToastTest_.CalculateSize(_map_maxToastTest_codec);
+      size += maxToastNew_.CalculateSize(_repeated_maxToastNew_codec);
       if (OutputCount != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(OutputCount);
       }
@@ -942,7 +940,7 @@ namespace fat.rawdata {
         LimitCount = other.LimitCount;
       }
       maxToast_.Add(other.maxToast_);
-      maxToastTest_.Add(other.maxToastTest_);
+      maxToastNew_.Add(other.maxToastNew_);
       if (other.OutputCount != 0) {
         OutputCount = other.OutputCount;
       }
@@ -1088,8 +1086,9 @@ namespace fat.rawdata {
             IsBoostItem = input.ReadBool();
             break;
           }
-          case 242: {
-            maxToastTest_.AddEntriesFrom(input, _map_maxToastTest_codec);
+          case 250:
+          case 248: {
+            maxToastNew_.AddEntriesFrom(input, _repeated_maxToastNew_codec);
             break;
           }
         }
@@ -1213,8 +1212,9 @@ namespace fat.rawdata {
             IsBoostItem = input.ReadBool();
             break;
           }
-          case 242: {
-            maxToastTest_.AddEntriesFrom(ref input, _map_maxToastTest_codec);
+          case 250:
+          case 248: {
+            maxToastNew_.AddEntriesFrom(ref input, _repeated_maxToastNew_codec);
             break;
           }
         }

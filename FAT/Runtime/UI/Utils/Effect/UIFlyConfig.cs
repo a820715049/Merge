@@ -141,5 +141,6 @@ namespace FAT
         MineCartGetItemReward, //矿车棋盘使用活动棋子后，棋子飞行的起点
         MineCartRewardBubble, //矿车棋盘发奖气泡
         MultiRankingToken,
+        PuzzleToken,
     }
 }

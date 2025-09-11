@@ -16,6 +16,7 @@ namespace FAT
             {
                 case "add_reward": imp = new GuideActImpAddReward(); break;
                 case "add_energy4x_reward": imp = new GuideActImpAddEnergyBoostUnlock4xReward(); break;
+                case "add_puzzlepiece_reward": imp = new GuideActImpAddPuzzlePieceReward(); break;
                 case "block": imp = new GuideActImpBlockCtrl(); break;
                 case "bingo_hand_pro": imp = new GuideActImpBingoHandPro(); break;
                 case "board_dialog": imp = new GuideActImpBoardDialog(); break;
@@ -82,6 +83,7 @@ namespace FAT
                 case "open_ui_guess_help": imp = new GuideActImpOpenGuessHelp(); break;
                 case "open_ui_multi_help": imp = new GuideActImpUIMultihelp(); break;
                 case "open_ui_wish_help": imp = new GuideActImpOpenWishHelp(); break;
+                case "open_ui_frozen_help": imp = new GuideActImpOpenFrozenHelp(); break;
                 case "plot": imp = new GuideActImpPlot(); break;
                 case "save": imp = new GuideActImpSave(); break;
                 case "source_ctrl": imp = new GuideActImpSourceCtrl(); break;

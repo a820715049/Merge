@@ -264,6 +264,7 @@ namespace FAT
                 FightBoardActivity fightBoard => new FightBoardEntry(e_, fightBoard),
                 ActivityBingoTask bingoTask => new BingoTaskEntry(e_, bingoTask),
                 ActivityMultiplierRanking multiplierRanking => new MultiplierRankingEntry(e_, multiplierRanking),
+                ActivityPuzzle puzzle => new PuzzleEntry(e_, puzzle),
                 _ => null
             };
         }

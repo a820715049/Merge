@@ -59,6 +59,8 @@ namespace FAT
         TrigAutoSource,
         [Tooltip("状态 灯泡特殊道具")]
         Lightbulb,
+        [Tooltip("瞬时 冰冻棋子合成及消失时要播的特效")]
+        FrozenItem,
 
         //以下部分实际没用到
         TeslaSource,

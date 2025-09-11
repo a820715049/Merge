@@ -15,10 +15,12 @@ namespace FAT
 {
     public class UIItemInfo : UIBase
     {
+        [SerializeField] private RectTransform root;
         //顶部信息
         [SerializeField] private TMP_Text itemName;
         [SerializeField] private TMP_Text itemLevel;
         [SerializeField] private UIImageRes itemIcon;
+        [SerializeField] private GameObject itemFrozenGo;
         [SerializeField] private GameObject levelMaxIcon;
         [SerializeField] private GameObject boostEnergyIcon;
         [SerializeField] private Image lineImage;
@@ -51,13 +53,15 @@ namespace FAT
         [SerializeField] private LayoutElement bInfoTopSpace;
         [SerializeField] private LayoutElement bInfoBottomSpace;
         //阶梯活动相关
-        [SerializeField] private GameObject stepActBg;
-        [SerializeField] private GameObject stepActTime;
-        [SerializeField] private TMP_Text stepActTimeText;
         [SerializeField] private GameObject stepActInfoGo;
         [SerializeField] private TMP_Text stepActInfoText;
         [SerializeField] private GameObject stepActTextGo;
         [SerializeField] private TMP_Text stepActText;
+        //特殊样式 - 阶梯活动 / 冰冻棋子
+        [SerializeField] private GameObject stepActBg;
+        [SerializeField] private GameObject stepActTime;
+        [SerializeField] private TMP_Text stepActTimeText;
+        [SerializeField] private TMP_Text bottomText;
         //面板scroll高度样式
         private UIItemInfoGroupScroll _threeGroupScroll;    //3行 scroll
         private UIImageState _threeSlider1;
@@ -74,6 +78,7 @@ namespace FAT
 
         private List<List<int>> _chainGroupList = new List<List<int>>();
         private long _curStepActEndTime = -1;   //界面中缓存目前阶梯活动的结束时间
+        private long _frozenItemLifeTime = -1;   //界面中缓存目前冰冻棋子的消失时间 单位毫秒
 
         protected override void OnCreate()
         {
@@ -135,6 +140,7 @@ namespace FAT
         protected override void OnPreClose()
         {
             _curStepActEndTime = -1;
+            _frozenItemLifeTime = -1;
             UIManager.Instance.CloseWindow(UIConfig.UIItemInfoTips);
             MessageCenter.Get<MSG.GAME_ITEM_INFO_END>().Dispatch();
         }
@@ -153,6 +159,7 @@ namespace FAT
                 return;
             itemName.text = I18N.Text(cfg.Name);
             itemIcon.SetImage(cfg.Icon.ConvertToAssetConfig());
+            itemFrozenGo.SetActive(itemInfoData.Type == ItemInfoMan.ItemInfoType.FrozenItem);
             itemLevel.text = I18N.FormatText("#SysComDesc18", itemInfoData.ItemLevel);
             levelMaxIcon.SetActive(itemInfoData.IsLevelMax);
             bool canShowBoost = itemInfoData.CanShowBoost;
@@ -196,8 +203,12 @@ namespace FAT
             _RefreshMiddlePanel(panelSize);
             //刷新底部信息
             _RefreshBottomPanel(panelSize);
+            //刷新特殊样式通用UI
+            _RefreshSpecialCommonUI();
             //刷新阶梯活动相关信息 需要在底部信息刷新完后再调用
             _RefreshStepActPanel();
+            //刷新冰冻棋子相关信息 和阶梯活动互斥
+            _RefreshFrozenItemPanel();
         }
 
         private void _RefreshMiddlePanel(int panelSize)
@@ -372,6 +383,15 @@ namespace FAT
                 middleBottomPanel.SetActive(false);
             }
         }
+
+        private void _RefreshSpecialCommonUI()
+        {
+            stepActBg.SetActive(false);
+            stepActTime.SetActive(false);
+            stepActTimeText.text = "";
+            bottomText.gameObject.SetActive(false);
+            bottomText.text = "";
+        }
         
         //刷新阶梯活动相关信息 需要在底部信息刷新完后再调用
         private void _RefreshStepActPanel()
@@ -392,11 +412,9 @@ namespace FAT
                 }
             }
             //检测目前是否有正在开启的阶梯活动
-            bool isActOpen = false;
             if (act != null)
             {
                 //活动相关
-                isActOpen = true;
                 _curStepActEndTime = act.endTS;
                 _RefreshStepActTime();
                 var isShowProduce = middleBottomPanel.activeSelf && mProduceGo.activeSelf;
@@ -445,6 +463,8 @@ namespace FAT
                 var isShowActText = !string.IsNullOrEmpty(conf.TipTwoKey);
                 stepActTextGo.SetActive(isShowActText);
                 stepActText.text = I18N.Text(conf.TipTwoKey);
+                stepActBg.SetActive(true);
+                stepActTime.SetActive(true);
             }
             else
             {
@@ -454,8 +474,6 @@ namespace FAT
                 stepActInfoGo.SetActive(false);
                 stepActTextGo.SetActive(false);
             }
-            stepActBg.SetActive(isActOpen);
-            stepActTime.SetActive(isActOpen);
         }
 
         private void _RefreshStepActTime()
@@ -466,6 +484,41 @@ namespace FAT
                 UIUtility.CountDownFormat(stepActTimeText, countdown);
                 if (countdown <= 0)
                     Close();
+            }
+        }
+
+        //刷新冰冻棋子相关信息 和阶梯活动互斥
+        private void _RefreshFrozenItemPanel()
+        {
+            var itemInfoData = Game.Manager.itemInfoMan.CurShowItemData;
+            if (itemInfoData.Type != ItemInfoMan.ItemInfoType.FrozenItem)
+            {
+                _frozenItemLifeTime = -1;
+                return;
+            }
+            var rectTrans = bottomText.transform as RectTransform;
+            if (rectTrans != null)
+            {
+                LayoutRebuilder.ForceRebuildLayoutImmediate(root);
+                var posX = rectTrans.anchoredPosition.x;
+                rectTrans.anchoredPosition = new Vector2(posX, -root.rect.height);
+            }
+            bottomText.gameObject.SetActive(true);
+            bottomText.text = I18N.Text("#SysComDesc1558");
+            _frozenItemLifeTime = itemInfoData.RemainTime;
+            stepActBg.SetActive(true);
+            stepActTime.SetActive(true);
+            _RefreshFrozenItemTime();
+        }
+        
+        private void _RefreshFrozenItemTime()
+        {
+            if (_frozenItemLifeTime != -1)
+            {
+                UIUtility.CountDownFormat(stepActTimeText, _frozenItemLifeTime / 1000);
+                if (_frozenItemLifeTime <= 0)
+                    Close();
+                _frozenItemLifeTime -= 1000;
             }
         }
 
@@ -497,6 +550,7 @@ namespace FAT
         private void _OnSecondUpdate()
         {
             _RefreshStepActTime();
+            _RefreshFrozenItemTime();
         }
     }
 }

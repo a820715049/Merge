@@ -43,6 +43,7 @@ namespace FAT
             Boost4XGuide = 24, //是否满足4倍加速引导弹出条件
             MultiRanking = 25,
             MineCartBoard = 26, //矿车棋盘
+            Puzzle = 27, //拼图活动
         }
 
         private UIManager uiMan => UIManager.Instance;
@@ -80,7 +81,9 @@ namespace FAT
                 case GuideMergeRequireType.BoardSandItem:
                     return _IsRequireBoardSandItem(value, require.Extra);
                 case GuideMergeRequireType.BoardBubbleItem:
-                    return _IsRequireBubbleItem(value, require.Extra);
+                    return _IsRequireBubbleItem(Merge.ItemBubbleType.Bubble, value, require.Extra);
+                case GuideMergeRequireType.FrozenItemOnBoard:
+                    return _IsRequireBubbleItem(Merge.ItemBubbleType.Frozen, value, require.Extra);
                 case GuideMergeRequireType.BoardOrderIng:
                     return _IsRequireOnGoingOrderNum(value);
                 case GuideMergeRequireType.OrderCommittable:
@@ -328,16 +331,19 @@ namespace FAT
                 case UIState.MultiRanking:
                     var multi = Game.Manager.activity.LookupAny(EventType.MultiplierRanking) as ActivityMultiplierRanking;
                     return UIManager.Instance.IsOpen(multi?.VisualUIRankingMain.res.ActiveR ?? UIConfig.UIMultiplyRankingMain);
+                case UIState.Puzzle:
+                    var puzzle = Game.Manager.activity.LookupAny(EventType.Puzzle) as ActivityPuzzle;
+                    return UIManager.Instance.IsOpen(puzzle?.VisualMain.res.ActiveR ?? UIConfig.UIActivityPuzzleMain);
             }
 
             return false;
         }
 
-        private bool _IsRequireBubbleItem(int id, int num)
+        private bool _IsRequireBubbleItem(Merge.ItemBubbleType type, int id, int num)
         {
             if (!BoardViewManager.Instance.IsReady)
                 return false;
-            return BoardViewManager.Instance.HasBubbleItem(id, num);
+            return BoardViewManager.Instance.HasBubbleItem(type, id, num);
         }
 
         private bool _IsRequireBoardItem(int id, int num)
@@ -418,7 +424,7 @@ namespace FAT
             var curItem = BoardViewManager.Instance.GetCurrentBoardInfoItem();
             if (curItem == null)
                 return false;
-            if (!curItem.HasComponent(Merge.ItemComponentType.Bubble))
+            if (!Merge.ItemUtility.IsBubbleItem(curItem))
                 return false;
             if (tid > 0 && curItem.tid != tid)
                 return false;

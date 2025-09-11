@@ -24,7 +24,7 @@ namespace fat.rawdata {
     static GlobalConfReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChhyYXdkYXRhL0dsb2JhbENvbmYucHJvdG8SB3Jhd2RhdGEiv0IKBkdsb2Jh",
+            "ChhyYXdkYXRhL0dsb2JhbENvbmYucHJvdG8SB3Jhd2RhdGEi7EIKBkdsb2Jh",
             "bBIaChJBY3Rpdml0eUNvbnN1bWVOdW0YASABKAUSFgoOQWN0aXZpdHlNYXhO",
             "dW0YAiABKAUSHQoVQW5udWFsU3VtbWFyeURlYWRsaW5lGAMgASgDEhoKEkJw",
             "R3JvdXBSYW5raW5nSGlkZRgEIAEoCBIbChNCcFJhbmtpbmdGcmllbmRIaWRl",
@@ -137,25 +137,26 @@ namespace fat.rawdata {
             "cEJ1aWxkU3RvcEFpbRjIASABKAUSFgoNbWFya2V0UmVmcmVzaBiCASABKAUS",
             "GQoQbWFya2V0UmVmcmVzaE51bRiDASABKAUSFwoObWFya2V0VXRjQ2xvY2sY",
             "hAEgASgFEicKHm1heEZhbWVMZXZlbFRvVmlld0FjdGl2aXR5RmVlZBiFASAB",
-            "KAUSHQoUbWF4UHVsbEZyaWVuZEluZm9OdW0Y8wEgASgFEhUKDG1heFRvb2xD",
-            "b3VudBjJASABKAUSEwoKbWVyZ2VCb251cxiGASABKAUSGAoPbWVyZ2VCb251",
-            "c0xldmVsGIcBIAEoBRIbChJtZXJnZUVuZXJneUF1dG9NYXgYiAEgASgFEhsK",
-            "Em1lcmdlRW5lcmd5QXV0b1NlYxiJASABKAUSGQoQbWVyZ2VFbmVyZ3lQcmlj",
-            "ZRiKASADKAUSHwoWbWVyZ2VSZW1pbmRUcmlnZ2VyVGltZRjhASABKAUSHgoV",
-            "bWVyZ2VUdXRvcmlhbEludGVydmFsGMYBIAEoBRIaChFtZXJnZVR1dG9yaWFs",
-            "U3RvcBjHASABKAUSFwoObW91dGhCYXNlQ29sb3IYiwEgASgJEh4KFW15c3Rl",
-            "cnlTdG9yZUN1c3RvbU51bRiMASABKAUSHwoWbXlzdGVyeVN0b3JlQ3VzdG9t",
-            "UmF0ZRiNASABKAUSIQoYbXlzdGVyeVN0b3JlUmVmcmVzaFByaWNlGI4BIAEo",
-            "BRIgChdteXN0ZXJ5U3RvcmVSZWZyZXNoVGltZRiPASADKAUSEAoHbmFtZU1h",
-            "eBiQASABKAUSEAoHbmFtZU1pbhiRASABKAUSIwoabmV3VXNlckdyYW5kUHJp",
-            "emVJbnZpdGVOdW0YkgEgASgFEk4KF25ld1VzZXJHcmFuZFByaXplUmV3YXJk",
-            "GJMBIAMoCzIsLnJhd2RhdGEuR2xvYmFsLk5ld1VzZXJHcmFuZFByaXplUmV3",
-            "YXJkRW50cnkSHwoWbmV3VXNlckludml0ZWVNYXhMZXZlbBiUASABKAUSTgoX",
-            "bmV3VXNlclJld2FyZEZvckludml0ZWUYlQEgAygLMiwucmF3ZGF0YS5HbG9i",
-            "YWwuTmV3VXNlclJld2FyZEZvckludml0ZWVFbnRyeRJOChduZXdVc2VyUmV3",
-            "YXJkRm9ySW52aXRvchiWASADKAsyLC5yYXdkYXRhLkdsb2JhbC5OZXdVc2Vy",
-            "UmV3YXJkRm9ySW52aXRvckVudHJ5EhsKEm5ld1VzZXJSZXdhcmRMZXZlbBiX",
-            "ASABKAUSGgoRbm90aWNlQ29tYmFja1RpbWUY0AEgASgFEh0KFG5vdGljZUV2",
+            "KAUSHQoUbWF4UHVsbEZyaWVuZEluZm9OdW0Y8wEgASgFEhMKCm1heFRvYXN0",
+            "SWQYkQIgASgFEhUKDG1heFRvb2xDb3VudBjJASABKAUSEwoKbWVyZ2VCb251",
+            "cxiGASABKAUSGAoPbWVyZ2VCb251c0xldmVsGIcBIAEoBRIbChJtZXJnZUVu",
+            "ZXJneUF1dG9NYXgYiAEgASgFEhsKEm1lcmdlRW5lcmd5QXV0b1NlYxiJASAB",
+            "KAUSGQoQbWVyZ2VFbmVyZ3lQcmljZRiKASADKAUSHwoWbWVyZ2VSZW1pbmRU",
+            "cmlnZ2VyVGltZRjhASABKAUSHgoVbWVyZ2VUdXRvcmlhbEludGVydmFsGMYB",
+            "IAEoBRIaChFtZXJnZVR1dG9yaWFsU3RvcBjHASABKAUSFwoObW91dGhCYXNl",
+            "Q29sb3IYiwEgASgJEh4KFW15c3RlcnlTdG9yZUN1c3RvbU51bRiMASABKAUS",
+            "HwoWbXlzdGVyeVN0b3JlQ3VzdG9tUmF0ZRiNASABKAUSIQoYbXlzdGVyeVN0",
+            "b3JlUmVmcmVzaFByaWNlGI4BIAEoBRIgChdteXN0ZXJ5U3RvcmVSZWZyZXNo",
+            "VGltZRiPASADKAUSEAoHbmFtZU1heBiQASABKAUSEAoHbmFtZU1pbhiRASAB",
+            "KAUSIwoabmV3VXNlckdyYW5kUHJpemVJbnZpdGVOdW0YkgEgASgFEk4KF25l",
+            "d1VzZXJHcmFuZFByaXplUmV3YXJkGJMBIAMoCzIsLnJhd2RhdGEuR2xvYmFs",
+            "Lk5ld1VzZXJHcmFuZFByaXplUmV3YXJkRW50cnkSHwoWbmV3VXNlckludml0",
+            "ZWVNYXhMZXZlbBiUASABKAUSTgoXbmV3VXNlclJld2FyZEZvckludml0ZWUY",
+            "lQEgAygLMiwucmF3ZGF0YS5HbG9iYWwuTmV3VXNlclJld2FyZEZvckludml0",
+            "ZWVFbnRyeRJOChduZXdVc2VyUmV3YXJkRm9ySW52aXRvchiWASADKAsyLC5y",
+            "YXdkYXRhLkdsb2JhbC5OZXdVc2VyUmV3YXJkRm9ySW52aXRvckVudHJ5EhsK",
+            "Em5ld1VzZXJSZXdhcmRMZXZlbBiXASABKAUSFgoNbm9ybWFsVG9hc3RJZBiS",
+            "AiABKAUSGgoRbm90aWNlQ29tYmFja1RpbWUY0AEgASgFEh0KFG5vdGljZUV2",
             "ZW50VmFsaWRUaW1lGIgCIAEoBRIeChVub3RpZmlQb3B1cEV2ZW50VGhlbWUY",
             "3QEgASgFEh4KFW5vdGlmaVBvcHVwU2h1dGRvd25MdhjeASABKAUSIAoXbm90",
             "aWZpY2F0aW9uRW5lcmd5Qm9udXMYmAEgAygFEh4KFW9sZFVzZXJMZXR0ZXJE",
@@ -228,7 +229,7 @@ namespace fat.rawdata {
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.Global), global::fat.rawdata.Global.Parser, new[]{ "ActivityConsumeNum", "ActivityMaxNum", "AnnualSummaryDeadline", "BpGroupRankingHide", "BpRankingFriendHide", "BpRankingHide", "BpRankingWorldHide", "Bpiconovertip1", "Bpiconovertip2", "CardShopRedRefreshUtc", "ClientHttpContinue", "ClientHttpTimeout", "DropProbability", "EventRoleShowAmount", "EventRoleShowLimitation", "FBCommunityWebsite", "GroupRankingHide", "GuildAnnouncementLimit", "GuildApplyCd", "GuildApplyExpireDay", "GuildApplyLimit", "GuildCreatePrice", "GuildJoinCd", "GuildKickoutLimitation", "GuildLeaderInactionDuration", "GuildListNum", "GuildMemberNum", "GuildModifyNamePrice", "GuildNameInvalidChar", "GuildNameLenMax", "GuildNameLenMin", "GuildRefreshInterval", "HobbitsName", "HobbitsName2", "LightLoadingInterval", "LoadingImage", "MiniGameShareImgUrl", "NoNetQuitTime", "NoticeFetchIntervalSec", "NoticeShowIntervalMinMaxSec", "NoticeTimeoutSec", "NotificationApplicationLevel", "NotificationPopLimit", "PacketDelateDays", "PioneerIdx", "PrivacyPolicy", "RankingAnnounceDuration", "RankingAreaHide", "RankingAreaHideInfo", "RankingAreaShowLimitation", "RankingHide", "RankingLevelAreaHideInfo", "RankingLevelAreaShowLimitaion", "RankingLevelHideInfo", "RankingLevelShowLimitaion", "RankingLevelWorldHideInfo", "RankingLevelWorldShowLimitaion", "RankingWorldHide", "RankingWorldHideInfo", "RankingWorldNormalAvatar", "RankingWorldShowLimitaion", "RankingWorldTopAvatar", "RetentionPackRefreshUtc", "ShopRefreshTime", "SignCoinPrize", "SignEnergyLimitPrize", "TermsOfService", "TrackSpeedup", "UnlockEventRoleShow", "UserAvatarCount", "UserTzOffset", "WechatIOSDisablePayVersion", "YDSeq", "AbInfoAttributeDivide", "ActivityCoolDown", "AdIdAndroid", "AdIdAndroidAdmobAsia", "AdIdIos", "AdIdIosAdmobAsia", "AncCdTime", "AncNightStopTime", "AncSessionLimit", "AutoFingerTriggerTime", "BindSocialGem", "BoardClearGem", "BoardColors", "BoostLevel", "BoostLevel4X", "BoostRate", "BoostRate4X", "BotColor", "BotFirstRankLevel", "BoxPossibleOffset", "BpTaskRefresh", "BubbleAdId", "BubbleBonus", "BubbleBonusProb", "BubbleDeadItem", "BubbleDeadWeight", "BubbleExpired", "BubbleGuideItemId", "BubbleLevelDiffParam", "BubbleMaxNum", "BuddyApplyLimitNum", "BuddyApplyLimitTime", "BuddyEnergyDailyLimit", "BuddyEnergyEachSent", "BuddyVisitExtraReward", "BuddyVisitLimit", "BuddyVisitReward", "CardTradeGroupLink", "DailyOrderReward", "DailyTaskNums", "DeRefreshUtc", "DecoShopRefreshGem", "DecoShopRefreshInterval", "DefaultHome", "DefaultRolePart", "DemRefreshWeekday", "DetectiveUnlockLevel", "DiffApiTimeout", "ExitNewUser", "EyeBaseColor", "FishBoardRepeatNum", "FloorDecoDisplay", "FreeBubbleCount", "FreeEnergyClaimCost", "FreeEnergyClaimNum", "FreeEnergyClaimTime", "FreeEnergyNotification", "FreeRechargeTimes", "FreeRolePart", "FreeSpeedUpTimes", "FriendLimit", "FriendOpinionFriendship", "FrozenItemDeadWeight", "GalleryFingerLv", "GiftAutoRollingTime", "GiftBoxStopShaking", "GiveCardNum", "GiveCardRefreshUtc", "GuideMusic", "HairBaseColor", "InitIdleCoin", "InventoryInitCap", "InventoryProducerExtraGrid", "InviteGemRewardNum", "InvitedGemRewardNum", "IsAndFacebook", "IsAndGoogle", "IsFaq", "IsInAppReview", "IsIosApple", "IsIosFacebook", "IsIosGoogle", "IsNewOrderView", "IsOrderApiOnlyWhitelist", "IslandChangeItemGold", "ItemScaleTestB", "LuckyBoxCD", "LuckyBoxLimit", "LuckyBoxNum", "LuckyWheelAdsCount", "LuckyWheelFreeCount", "LuckyWheelGemCost", "LuckyWheelGemCount", "LvPopupCardAlbum", "LvPopupCloseDialog", "LvPopupDE", "LvPopupNewSession", "LvPopupNewSessionId", "MailSystemMax", "MapBuildStartAim", "MapBuildStopAim", "MarketRefresh", "MarketRefreshNum", "MarketUtcClock", "MaxFameLevelToViewActivityFeed", "MaxPullFriendInfoNum", "MaxToolCount", "MergeBonus", "MergeBonusLevel", "MergeEnergyAutoMax", "MergeEnergyAutoSec", "MergeEnergyPrice", "MergeRemindTriggerTime", "MergeTutorialInterval", "MergeTutorialStop", "MouthBaseColor", "MysteryStoreCustomNum", "MysteryStoreCustomRate", "MysteryStoreRefreshPrice", "MysteryStoreRefreshTime", "NameMax", "NameMin", "NewUserGrandPrizeInviteNum", "NewUserGrandPrizeReward", "NewUserInviteeMaxLevel", "NewUserRewardForInvitee", "NewUserRewardForInvitor", "NewUserRewardLevel", "NoticeCombackTime", "NoticeEventValidTime", "NotifiPopupEventTheme", "NotifiPopupShutdownLv", "NotificationEnergyBonus", "OldUserLetterDuration", "OrderApiLiveopsGrade", "OrderApiPastNum", "OrderCtrlNum", "OrderCtrlTooHigh", "OrderCtrlTooHighTarget", "OrderCtrlTooLow", "OrderCtrlTooLowTarget", "OrderEnterApiDelay", "OrderEnterDelay", "OrderLimitCount", "PackApiTimeout", "PetNPC", "PopupLimit", "PopupRefresh", "PostCardIParamIsland1", "PostCardParam", "PostcardGiftOthersReward", "PostcardMinNum", "PullFriendInfoWaitTime", "PushShopCD", "PushShopCDIce", "PushShopDuration", "PushShopMaxNum", "PushShopPopTimes", "RankBotOrderLimitNum", "RankCoinsParam", "RankCoinsParamNew", "RankMemberNum", "RankOrderNum", "RankingWhitelist", "RateBuildingBase", "RateRedirectLv", "RateTaskOpen", "RequireTypeADInit", "RequireTypeLTInit", "RequireTypeUtcClock", "RestartTime", "ServerTimeCheckRange", "SettingFBFollowGem", "SettingHelpshiftWebsite", "SkinBaseColor", "SpdGemTips", "SpdUpDivide", "SpdUpParam", "SpecialStudentCdInterval", "StudentAnchorPointAmount", "StudentGroupTotal", "StudentShowInterval", "SunRankMemberNum", "SunRankStopNewTime", "SunRankTime", "SurveyAdsPos", "TapSourceTips", "TaskDailyFinalChest", "TaskDailyHardRate", "TaskDailyTotalNum", "TaskPlotTime", "UpdateRemindPopupId", "UserRecordMaxDay", "UserRecordRefreshUtc", "UserRecordWeekday", "Version", "WallPaperDisplay" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, null, null, null, null, null, null, null, null, null, null, }),
+            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.Global), global::fat.rawdata.Global.Parser, new[]{ "ActivityConsumeNum", "ActivityMaxNum", "AnnualSummaryDeadline", "BpGroupRankingHide", "BpRankingFriendHide", "BpRankingHide", "BpRankingWorldHide", "Bpiconovertip1", "Bpiconovertip2", "CardShopRedRefreshUtc", "ClientHttpContinue", "ClientHttpTimeout", "DropProbability", "EventRoleShowAmount", "EventRoleShowLimitation", "FBCommunityWebsite", "GroupRankingHide", "GuildAnnouncementLimit", "GuildApplyCd", "GuildApplyExpireDay", "GuildApplyLimit", "GuildCreatePrice", "GuildJoinCd", "GuildKickoutLimitation", "GuildLeaderInactionDuration", "GuildListNum", "GuildMemberNum", "GuildModifyNamePrice", "GuildNameInvalidChar", "GuildNameLenMax", "GuildNameLenMin", "GuildRefreshInterval", "HobbitsName", "HobbitsName2", "LightLoadingInterval", "LoadingImage", "MiniGameShareImgUrl", "NoNetQuitTime", "NoticeFetchIntervalSec", "NoticeShowIntervalMinMaxSec", "NoticeTimeoutSec", "NotificationApplicationLevel", "NotificationPopLimit", "PacketDelateDays", "PioneerIdx", "PrivacyPolicy", "RankingAnnounceDuration", "RankingAreaHide", "RankingAreaHideInfo", "RankingAreaShowLimitation", "RankingHide", "RankingLevelAreaHideInfo", "RankingLevelAreaShowLimitaion", "RankingLevelHideInfo", "RankingLevelShowLimitaion", "RankingLevelWorldHideInfo", "RankingLevelWorldShowLimitaion", "RankingWorldHide", "RankingWorldHideInfo", "RankingWorldNormalAvatar", "RankingWorldShowLimitaion", "RankingWorldTopAvatar", "RetentionPackRefreshUtc", "ShopRefreshTime", "SignCoinPrize", "SignEnergyLimitPrize", "TermsOfService", "TrackSpeedup", "UnlockEventRoleShow", "UserAvatarCount", "UserTzOffset", "WechatIOSDisablePayVersion", "YDSeq", "AbInfoAttributeDivide", "ActivityCoolDown", "AdIdAndroid", "AdIdAndroidAdmobAsia", "AdIdIos", "AdIdIosAdmobAsia", "AncCdTime", "AncNightStopTime", "AncSessionLimit", "AutoFingerTriggerTime", "BindSocialGem", "BoardClearGem", "BoardColors", "BoostLevel", "BoostLevel4X", "BoostRate", "BoostRate4X", "BotColor", "BotFirstRankLevel", "BoxPossibleOffset", "BpTaskRefresh", "BubbleAdId", "BubbleBonus", "BubbleBonusProb", "BubbleDeadItem", "BubbleDeadWeight", "BubbleExpired", "BubbleGuideItemId", "BubbleLevelDiffParam", "BubbleMaxNum", "BuddyApplyLimitNum", "BuddyApplyLimitTime", "BuddyEnergyDailyLimit", "BuddyEnergyEachSent", "BuddyVisitExtraReward", "BuddyVisitLimit", "BuddyVisitReward", "CardTradeGroupLink", "DailyOrderReward", "DailyTaskNums", "DeRefreshUtc", "DecoShopRefreshGem", "DecoShopRefreshInterval", "DefaultHome", "DefaultRolePart", "DemRefreshWeekday", "DetectiveUnlockLevel", "DiffApiTimeout", "ExitNewUser", "EyeBaseColor", "FishBoardRepeatNum", "FloorDecoDisplay", "FreeBubbleCount", "FreeEnergyClaimCost", "FreeEnergyClaimNum", "FreeEnergyClaimTime", "FreeEnergyNotification", "FreeRechargeTimes", "FreeRolePart", "FreeSpeedUpTimes", "FriendLimit", "FriendOpinionFriendship", "FrozenItemDeadWeight", "GalleryFingerLv", "GiftAutoRollingTime", "GiftBoxStopShaking", "GiveCardNum", "GiveCardRefreshUtc", "GuideMusic", "HairBaseColor", "InitIdleCoin", "InventoryInitCap", "InventoryProducerExtraGrid", "InviteGemRewardNum", "InvitedGemRewardNum", "IsAndFacebook", "IsAndGoogle", "IsFaq", "IsInAppReview", "IsIosApple", "IsIosFacebook", "IsIosGoogle", "IsNewOrderView", "IsOrderApiOnlyWhitelist", "IslandChangeItemGold", "ItemScaleTestB", "LuckyBoxCD", "LuckyBoxLimit", "LuckyBoxNum", "LuckyWheelAdsCount", "LuckyWheelFreeCount", "LuckyWheelGemCost", "LuckyWheelGemCount", "LvPopupCardAlbum", "LvPopupCloseDialog", "LvPopupDE", "LvPopupNewSession", "LvPopupNewSessionId", "MailSystemMax", "MapBuildStartAim", "MapBuildStopAim", "MarketRefresh", "MarketRefreshNum", "MarketUtcClock", "MaxFameLevelToViewActivityFeed", "MaxPullFriendInfoNum", "MaxToastId", "MaxToolCount", "MergeBonus", "MergeBonusLevel", "MergeEnergyAutoMax", "MergeEnergyAutoSec", "MergeEnergyPrice", "MergeRemindTriggerTime", "MergeTutorialInterval", "MergeTutorialStop", "MouthBaseColor", "MysteryStoreCustomNum", "MysteryStoreCustomRate", "MysteryStoreRefreshPrice", "MysteryStoreRefreshTime", "NameMax", "NameMin", "NewUserGrandPrizeInviteNum", "NewUserGrandPrizeReward", "NewUserInviteeMaxLevel", "NewUserRewardForInvitee", "NewUserRewardForInvitor", "NewUserRewardLevel", "NormalToastId", "NoticeCombackTime", "NoticeEventValidTime", "NotifiPopupEventTheme", "NotifiPopupShutdownLv", "NotificationEnergyBonus", "OldUserLetterDuration", "OrderApiLiveopsGrade", "OrderApiPastNum", "OrderCtrlNum", "OrderCtrlTooHigh", "OrderCtrlTooHighTarget", "OrderCtrlTooLow", "OrderCtrlTooLowTarget", "OrderEnterApiDelay", "OrderEnterDelay", "OrderLimitCount", "PackApiTimeout", "PetNPC", "PopupLimit", "PopupRefresh", "PostCardIParamIsland1", "PostCardParam", "PostcardGiftOthersReward", "PostcardMinNum", "PullFriendInfoWaitTime", "PushShopCD", "PushShopCDIce", "PushShopDuration", "PushShopMaxNum", "PushShopPopTimes", "RankBotOrderLimitNum", "RankCoinsParam", "RankCoinsParamNew", "RankMemberNum", "RankOrderNum", "RankingWhitelist", "RateBuildingBase", "RateRedirectLv", "RateTaskOpen", "RequireTypeADInit", "RequireTypeLTInit", "RequireTypeUtcClock", "RestartTime", "ServerTimeCheckRange", "SettingFBFollowGem", "SettingHelpshiftWebsite", "SkinBaseColor", "SpdGemTips", "SpdUpDivide", "SpdUpParam", "SpecialStudentCdInterval", "StudentAnchorPointAmount", "StudentGroupTotal", "StudentShowInterval", "SunRankMemberNum", "SunRankStopNewTime", "SunRankTime", "SurveyAdsPos", "TapSourceTips", "TaskDailyFinalChest", "TaskDailyHardRate", "TaskDailyTotalNum", "TaskPlotTime", "UpdateRemindPopupId", "UserRecordMaxDay", "UserRecordRefreshUtc", "UserRecordWeekday", "Version", "WallPaperDisplay" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, null, null, null, null, null, null, null, null, null, null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.GlobalSliceABValue), global::fat.rawdata.GlobalSliceABValue.Parser, new[]{ "GlobalSlice" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.GlobalConf), global::fat.rawdata.GlobalConf.Parser, new[]{ "GlobalSlice", "GlobalSliceAB", "GlobalSliceABPatch" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, })
           }));
@@ -451,6 +452,7 @@ namespace fat.rawdata {
       marketUtcClock_ = other.marketUtcClock_;
       maxFameLevelToViewActivityFeed_ = other.maxFameLevelToViewActivityFeed_;
       maxPullFriendInfoNum_ = other.maxPullFriendInfoNum_;
+      maxToastId_ = other.maxToastId_;
       maxToolCount_ = other.maxToolCount_;
       mergeBonus_ = other.mergeBonus_;
       mergeBonusLevel_ = other.mergeBonusLevel_;
@@ -473,6 +475,7 @@ namespace fat.rawdata {
       newUserRewardForInvitee_ = other.newUserRewardForInvitee_.Clone();
       newUserRewardForInvitor_ = other.newUserRewardForInvitor_.Clone();
       newUserRewardLevel_ = other.newUserRewardLevel_;
+      normalToastId_ = other.normalToastId_;
       noticeCombackTime_ = other.noticeCombackTime_;
       noticeEventValidTime_ = other.noticeEventValidTime_;
       notifiPopupEventTheme_ = other.notifiPopupEventTheme_;
@@ -3024,6 +3027,20 @@ namespace fat.rawdata {
       }
     }
 
+    /// <summary>Field number for the "maxToastId" field.</summary>
+    public const int MaxToastIdFieldNumber = 273;
+    private int maxToastId_;
+    /// <summary>
+    /// 链条中，最大等级的链条id需要使用maxToastId
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int MaxToastId {
+      get { return maxToastId_; }
+      set {
+        maxToastId_ = value;
+      }
+    }
+
     /// <summary>Field number for the "maxToolCount" field.</summary>
     public const int MaxToolCountFieldNumber = 201;
     private int maxToolCount_;
@@ -3324,6 +3341,20 @@ namespace fat.rawdata {
       get { return newUserRewardLevel_; }
       set {
         newUserRewardLevel_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "normalToastId" field.</summary>
+    public const int NormalToastIdFieldNumber = 274;
+    private int normalToastId_;
+    /// <summary>
+    /// 链条中，最大等级的链条id需要使用normalToastId
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int NormalToastId {
+      get { return normalToastId_; }
+      set {
+        normalToastId_ = value;
       }
     }
 
@@ -4464,6 +4495,7 @@ namespace fat.rawdata {
       if (MarketUtcClock != other.MarketUtcClock) return false;
       if (MaxFameLevelToViewActivityFeed != other.MaxFameLevelToViewActivityFeed) return false;
       if (MaxPullFriendInfoNum != other.MaxPullFriendInfoNum) return false;
+      if (MaxToastId != other.MaxToastId) return false;
       if (MaxToolCount != other.MaxToolCount) return false;
       if (MergeBonus != other.MergeBonus) return false;
       if (MergeBonusLevel != other.MergeBonusLevel) return false;
@@ -4486,6 +4518,7 @@ namespace fat.rawdata {
       if (!NewUserRewardForInvitee.Equals(other.NewUserRewardForInvitee)) return false;
       if (!NewUserRewardForInvitor.Equals(other.NewUserRewardForInvitor)) return false;
       if (NewUserRewardLevel != other.NewUserRewardLevel) return false;
+      if (NormalToastId != other.NormalToastId) return false;
       if (NoticeCombackTime != other.NoticeCombackTime) return false;
       if (NoticeEventValidTime != other.NoticeEventValidTime) return false;
       if (NotifiPopupEventTheme != other.NotifiPopupEventTheme) return false;
@@ -4740,6 +4773,7 @@ namespace fat.rawdata {
       if (MarketUtcClock != 0) hash ^= MarketUtcClock.GetHashCode();
       if (MaxFameLevelToViewActivityFeed != 0) hash ^= MaxFameLevelToViewActivityFeed.GetHashCode();
       if (MaxPullFriendInfoNum != 0) hash ^= MaxPullFriendInfoNum.GetHashCode();
+      if (MaxToastId != 0) hash ^= MaxToastId.GetHashCode();
       if (MaxToolCount != 0) hash ^= MaxToolCount.GetHashCode();
       if (MergeBonus != 0) hash ^= MergeBonus.GetHashCode();
       if (MergeBonusLevel != 0) hash ^= MergeBonusLevel.GetHashCode();
@@ -4762,6 +4796,7 @@ namespace fat.rawdata {
       hash ^= NewUserRewardForInvitee.GetHashCode();
       hash ^= NewUserRewardForInvitor.GetHashCode();
       if (NewUserRewardLevel != 0) hash ^= NewUserRewardLevel.GetHashCode();
+      if (NormalToastId != 0) hash ^= NormalToastId.GetHashCode();
       if (NoticeCombackTime != 0) hash ^= NoticeCombackTime.GetHashCode();
       if (NoticeEventValidTime != 0) hash ^= NoticeEventValidTime.GetHashCode();
       if (NotifiPopupEventTheme != 0) hash ^= NotifiPopupEventTheme.GetHashCode();
@@ -5753,6 +5788,14 @@ namespace fat.rawdata {
         output.WriteInt32(SpdGemTips);
       }
       frozenItemDeadWeight_.WriteTo(output, _repeated_frozenItemDeadWeight_codec);
+      if (MaxToastId != 0) {
+        output.WriteRawTag(136, 17);
+        output.WriteInt32(MaxToastId);
+      }
+      if (NormalToastId != 0) {
+        output.WriteRawTag(144, 17);
+        output.WriteInt32(NormalToastId);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -6668,6 +6711,14 @@ namespace fat.rawdata {
         output.WriteInt32(SpdGemTips);
       }
       frozenItemDeadWeight_.WriteTo(ref output, _repeated_frozenItemDeadWeight_codec);
+      if (MaxToastId != 0) {
+        output.WriteRawTag(136, 17);
+        output.WriteInt32(MaxToastId);
+      }
+      if (NormalToastId != 0) {
+        output.WriteRawTag(144, 17);
+        output.WriteInt32(NormalToastId);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -7150,6 +7201,9 @@ namespace fat.rawdata {
       if (MaxPullFriendInfoNum != 0) {
         size += 2 + pb::CodedOutputStream.ComputeInt32Size(MaxPullFriendInfoNum);
       }
+      if (MaxToastId != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeInt32Size(MaxToastId);
+      }
       if (MaxToolCount != 0) {
         size += 2 + pb::CodedOutputStream.ComputeInt32Size(MaxToolCount);
       }
@@ -7205,6 +7259,9 @@ namespace fat.rawdata {
       size += newUserRewardForInvitor_.CalculateSize(_map_newUserRewardForInvitor_codec);
       if (NewUserRewardLevel != 0) {
         size += 2 + pb::CodedOutputStream.ComputeInt32Size(NewUserRewardLevel);
+      }
+      if (NormalToastId != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeInt32Size(NormalToastId);
       }
       if (NoticeCombackTime != 0) {
         size += 2 + pb::CodedOutputStream.ComputeInt32Size(NoticeCombackTime);
@@ -7855,6 +7912,9 @@ namespace fat.rawdata {
       if (other.MaxPullFriendInfoNum != 0) {
         MaxPullFriendInfoNum = other.MaxPullFriendInfoNum;
       }
+      if (other.MaxToastId != 0) {
+        MaxToastId = other.MaxToastId;
+      }
       if (other.MaxToolCount != 0) {
         MaxToolCount = other.MaxToolCount;
       }
@@ -7910,6 +7970,9 @@ namespace fat.rawdata {
       newUserRewardForInvitor_.Add(other.newUserRewardForInvitor_);
       if (other.NewUserRewardLevel != 0) {
         NewUserRewardLevel = other.NewUserRewardLevel;
+      }
+      if (other.NormalToastId != 0) {
+        NormalToastId = other.NormalToastId;
       }
       if (other.NoticeCombackTime != 0) {
         NoticeCombackTime = other.NoticeCombackTime;
@@ -9203,6 +9266,14 @@ namespace fat.rawdata {
             frozenItemDeadWeight_.AddEntriesFrom(input, _repeated_frozenItemDeadWeight_codec);
             break;
           }
+          case 2184: {
+            MaxToastId = input.ReadInt32();
+            break;
+          }
+          case 2192: {
+            NormalToastId = input.ReadInt32();
+            break;
+          }
         }
       }
     #endif
@@ -10328,6 +10399,14 @@ namespace fat.rawdata {
           }
           case 2178: {
             frozenItemDeadWeight_.AddEntriesFrom(ref input, _repeated_frozenItemDeadWeight_codec);
+            break;
+          }
+          case 2184: {
+            MaxToastId = input.ReadInt32();
+            break;
+          }
+          case 2192: {
+            NormalToastId = input.ReadInt32();
             break;
           }
         }

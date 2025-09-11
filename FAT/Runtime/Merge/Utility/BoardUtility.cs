@@ -25,6 +25,7 @@ namespace FAT
         public static readonly Color iconColFrozen = new Color32(0xC8, 0xC8, 0xC8, 255);
         #region sprite
         public static Sprite bubbleCoverSprite { get; private set; }
+        public static Sprite bubbleFrozenCoverSprite { get; private set; }
         public static Sprite frozenCoverSprite { get; private set; }
         public static Sprite BottomSprite { get; private set; }
         // private static Sprite[] boxSprite;
@@ -296,6 +297,8 @@ namespace FAT
                     return PoolItemType.MERGE_ITEM_EFFECT_TRIG_AUTO_SOURCE;
                 case ItemEffectType.Lightbulb:
                     return PoolItemType.MERGE_ITEM_EFFECT_LIGHTBULB;
+                case ItemEffectType.FrozenItem:
+                    return PoolItemType.MERGE_ITEM_EFFECT_FROZEN_ITEM;
             }
             return PoolItemType.NONE;
         }
@@ -354,6 +357,11 @@ namespace FAT
         public static void SetBubbleCoverSprite(Sprite sp)
         {
             bubbleCoverSprite = sp;
+        }
+        
+        public static void SetBubbleFrozenCoverSprite(Sprite sp)
+        {
+            bubbleFrozenCoverSprite = sp;
         }
 
         public static void SetBottomSprite(Sprite sp)

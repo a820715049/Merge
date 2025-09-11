@@ -140,6 +140,7 @@ namespace FAT
             await UniTask.WaitForSeconds(0.13f);
             compProgress.Refresh();
             compSpawner.Refresh();
+            compReward.Refresh();
             animGroup.spawner.SetTrigger("Show");
         }
 

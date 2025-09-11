@@ -21,6 +21,7 @@ namespace FAT
         public class ItemInfoData
         {
             public int ItemId;      //id
+            public ItemInfoType Type;    //物品信息类型
             public int ChainId;     //所属合成链id
             public int ItemLevel;   //在合成链中的等级 从1开始
             public bool IsLevelMax;  //是否是链中的满级物品
@@ -32,10 +33,12 @@ namespace FAT
             public bool CanJumpShop;    //是否可以跳转到商店
             public int EmptyIndex;     //不显示棋子的cellIndex
             public bool CanShowBoost;  //此棋子是否要显示能量加倍相关UI
+            public long RemainTime;    //剩余时间
 
             public void Clear()
             {
                 ItemId = 0;
+                Type = ItemInfoType.Normal;
                 ChainId = 0;
                 ItemLevel = 0;
                 IsLevelMax = false;
@@ -48,6 +51,8 @@ namespace FAT
                 EmptyIndex = -1;
                 TipsDataList?.Clear();
                 TipsDataList = null;
+                CanShowBoost = false;
+                RemainTime = 0;
             }
             //存储当前物品的合成链数据 用于界面显示
             public List<ItemChainTipsData> TipsDataList;
@@ -61,12 +66,20 @@ namespace FAT
             }
         }
 
+        //棋子信息界面展示类型 用于区别普通棋子和特殊棋子
+        public enum ItemInfoType
+        {
+            Normal = 0,        //普通棋子(包含泡泡棋子)
+            FrozenItem = 1,    //冰冻棋子
+        }
+        
         //当前正在展示的物品数据
         public ItemInfoData CurShowItemData = new ItemInfoData();
 
-        public void TryOpenItemInfo(int itemId)
+        //外部调用展示棋子信息界面
+        public void TryOpenItemInfo(int itemId, ItemInfoType type = ItemInfoType.Normal, params object[] paramList)
         {
-            if (_RefreshCurShowItemData(itemId))
+            if (_RefreshCurShowItemData(itemId, type, paramList))
             {
                 UIManager.Instance.OpenWindow(UIConfig.UIItemInfo);
             }
@@ -401,7 +414,7 @@ namespace FAT
             }
         }
 
-        private bool _RefreshCurShowItemData(int itemId)
+        private bool _RefreshCurShowItemData(int itemId, ItemInfoType type, params object[] paramList)
         {
             if (itemId <= 0)
                 return false;
@@ -419,6 +432,9 @@ namespace FAT
             //开始构造当前要展示的界面数据
             CurShowItemData.Clear();
             CurShowItemData.ItemId = itemId;
+            CurShowItemData.Type = type;
+            if (type == ItemInfoType.FrozenItem)
+                CurShowItemData.RemainTime = (long)paramList[0];
             CurShowItemData.IsHideProduce = itemConfig.IsHideProd;
             var mergeItemMan = Game.Manager.mergeItemMan;
             //获取到棋子所属链条和在链条中的等级

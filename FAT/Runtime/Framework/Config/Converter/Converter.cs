@@ -175,7 +175,17 @@ namespace Config
                 return true;
             }
         }
-
+        
+        public class IntRangeConverter : ConverterBase<IntRangeConfig>
+        {
+            protected override bool DoConvert(string text, ref IntRangeConfig ret)
+            {
+                string[] splited = text.Split(':');
+                ret.Min = splited.GetElementEx(0, ArrayExt.OverflowBehaviour.Default).ConvertToInt();
+                ret.Max = splited.GetElementEx(1, ArrayExt.OverflowBehaviour.Default).ConvertToInt();
+                return true;
+            }
+        }
 
         public class RoundsArrayConfigConverter : ConverterBase<RoundsArrayConfig>
         {

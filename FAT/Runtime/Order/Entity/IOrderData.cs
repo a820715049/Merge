@@ -343,7 +343,18 @@ namespace FAT
 
         bool TryGetOrderLikeRes(out string res)
         {
-            res = ActivityOrderLike.GetExtraRewardMiniThemeRes(GetValue(OrderParamType.ExtraSlot_TL_EventId), GetValue(OrderParamType.ExtraSlot_TL_EventParam));
+            if (Game.Manager.activity.LookupAny(fat.rawdata.EventType.OrderLike, out var _orderlike))
+            {
+                res = ActivityOrderLike.GetExtraRewardMiniThemeRes(GetValue(OrderParamType.ExtraSlot_TL_EventId), GetValue(OrderParamType.ExtraSlot_TL_EventParam));
+            }
+            else if (Game.Manager.activity.LookupAny(fat.rawdata.EventType.Puzzle, out var _puzzle))
+            {
+                res = ActivityPuzzle.GetExtraRewardMiniThemeRes(GetValue(OrderParamType.ExtraSlot_TL_EventId), GetValue(OrderParamType.ExtraSlot_TL_EventParam));
+            }
+            else
+            {
+                res = null;
+            }
             return !string.IsNullOrEmpty(res);
         }
 

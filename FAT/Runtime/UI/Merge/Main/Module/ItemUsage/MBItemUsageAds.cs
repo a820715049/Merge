@@ -14,7 +14,7 @@ namespace FAT.Merge
                 return;
             base.OnBtnClick();
 
-            if (mItem.TryGetItemComponent(out ItemBubbleComponent bubble))
+            if (mItem.TryGetItemComponent(out ItemBubbleComponent bubble) && bubble.IsBubbleItem())
             {
                 bubble.OnWatchBubbleAd_Prepare();
                 var adid = Game.Manager.configMan.globalConfig.BubbleAdId;

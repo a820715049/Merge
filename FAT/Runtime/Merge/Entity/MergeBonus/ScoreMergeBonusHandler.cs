@@ -9,7 +9,7 @@ namespace FAT.Merge
 {
     public class ScoreMergeBonusHandler : IMergeBonusHandler
     {
-        int IMergeBonusHandler.priority => 102;
+        int IMergeBonusHandler.priority => 103;     //积分活动的bonus监听 默认最后处理
         void IMergeBonusHandler.Process(Merge.MergeBonusContext context)
         {
             var score = context.result.config.MergeScore;

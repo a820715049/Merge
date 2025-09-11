@@ -344,6 +344,13 @@ namespace FAT
                                 (_orderlike as ActivityOrderLike).AddToken(data.rewardId, data.rewardCount, orderId);
                             }
                             break;
+                        case FeatureEntry.FeaturePuzzle:
+                            if (Game.Manager.activity.LookupAny(EventType.Puzzle, out var _puzzle))
+                            {
+                                data.WaitCommit = true;
+                                (_puzzle as ActivityPuzzle).AddToken(data.rewardId, data.rewardCount);
+                            }
+                            break;
                         case FeatureEntry.FeatureBp:
                             Game.Manager.activity.LookupAny(EventType.Bp, out var actBp);
                             if (actBp != null)
@@ -365,6 +372,14 @@ namespace FAT
                             {
                                 var activityLandMark = (LandMarkActivity)actLandMark;
                                 activityLandMark.AddToken(data.rewardId, data.rewardCount);
+                            }
+                            break;
+                        case FeatureEntry.FeatureMicMilestone:
+                            Game.Manager.activity.LookupAny(EventType.MicMilestone, out var actScoreMic);
+                            if (actScoreMic != null)
+                            {
+                                var activityMic = (ActivityScoreMic)actScoreMic;
+                                activityMic.TryAddToken(data.rewardId, data.rewardCount, data.reason);
                             }
                             break;
                         default:

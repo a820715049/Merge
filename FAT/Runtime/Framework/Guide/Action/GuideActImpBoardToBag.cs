@@ -43,7 +43,7 @@ namespace FAT
                 for (int j = 0; j < height && keepSearching; j++)
                 {
                     var item = board.GetItemByCoord(i, j);
-                    if (item != null && item.isActive && !ItemUtility.IsInBubble(item))
+                    if (item != null && item.isActive && !ItemUtility.HasBubbleComponent(item))
                     {
                         fallback ??= item;
                         if (item.HasComponent(ItemComponentType.Bonus) ||
