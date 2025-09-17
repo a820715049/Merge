@@ -142,7 +142,7 @@ namespace FAT
             }
         }
 
-        public void InitOnPreOpen()
+        public virtual void InitOnPreOpen()
         {
             text_format_for_boost = null;
             text_format_for_normal = null;
@@ -373,17 +373,17 @@ namespace FAT
             Game.Manager.mergeBoardMan.SetCurrentInteractingItem(item);
         }
 
+        protected virtual string BuildTextFormat(bool boost)
+        {
+            var config1 = FontMaterialRes.Instance.GetFontMatResConf(nameColorId(boost));
+            var config2 = FontMaterialRes.Instance.GetFontMatResConf(descColorId(boost));
+            var col1 = ColorUtility.ToHtmlStringRGB(config1.color);
+            var col2 = ColorUtility.ToHtmlStringRGB(config2.color);
+            return $"<color=#{col1}>{{0}}: </color><color=#{col2}>{{1}}</color>";
+        }
+
         private void _SetNameAndDesc(string _name, string _desc)
         {
-            string BuildTextFormat(bool boost)
-            {
-                var config1 = FontMaterialRes.Instance.GetFontMatResConf(nameColorId(boost));
-                var config2 = FontMaterialRes.Instance.GetFontMatResConf(descColorId(boost));
-                var col1 = ColorUtility.ToHtmlStringRGB(config1.color);
-                var col2 = ColorUtility.ToHtmlStringRGB(config2.color);
-                return $"<color=#{col1}>{{0}}: </color><color=#{col2}>{{1}}</color>";
-            }
-
             if (string.IsNullOrEmpty(_name))
             {
                 txtDesc.text = string.Empty;

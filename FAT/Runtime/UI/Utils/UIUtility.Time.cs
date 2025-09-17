@@ -68,6 +68,7 @@ namespace FAT
         {
             Unified, // 默认通用格式
             OmitZero, // 忽略0
+            Colon, // 冒号
         }
 
         public static string CountDownFormat(long totalSec, CdStyle style = CdStyle.Unified)
@@ -77,6 +78,7 @@ namespace FAT
             {
                 CdStyle.Unified => CountdownUnified(totalSec),
                 CdStyle.OmitZero => CountdownOmitZero(totalSec),
+                CdStyle.Colon => CountdownColon(totalSec),
                 _ => CountdownUnified(totalSec)
             };
 
@@ -94,6 +96,7 @@ namespace FAT
             {
                 CdStyle.Unified => CountdownUnified(totalSec),
                 CdStyle.OmitZero => CountdownOmitZero(totalSec),
+                CdStyle.Colon => CountdownColon(totalSec),
                 _ => CountdownUnified(totalSec)
             };
 
@@ -192,6 +195,41 @@ namespace FAT
             {
                 sb.AppendSec(sec);
             }
+
+            return sb;
+        }
+
+        /// <summary>
+        /// 倒计时冒号格式 (HH:MM:SS)
+        /// </summary>
+        private static Utf16ValueStringBuilder CountdownColon(long totalSec)
+        {
+            var sb = ZString.CreateStringBuilder();
+            if (totalSec < 0)
+            {
+                totalSec = 0;
+            }
+
+            var hour = totalSec / 3600;
+            var min = totalSec % 3600 / 60;
+            var sec = totalSec % 60;
+
+            // 限制小时数不超过999
+            if (hour > 999)
+            {
+                hour = 999;
+            }
+
+            // 格式化为 HH:MM:SS
+            if (hour > 0)
+            {
+                sb.Append(hour.ToString("D2"));
+                sb.Append(":");
+            }
+
+            sb.Append(min.ToString("D2"));
+            sb.Append(":");
+            sb.Append(sec.ToString("D2"));
 
             return sb;
         }

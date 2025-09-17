@@ -26,7 +26,7 @@ namespace fat.rawdata {
           string.Concat(
             "CiFyYXdkYXRhL1NldmVuRGF5VGFza1J3ZENvbmYucHJvdG8SB3Jhd2RhdGEi",
             "SwoPU2V2ZW5EYXlUYXNrUndkEgoKAmlkGAEgASgFEg4KBnBvaW50cxgCIAEo",
-            "BRIOCgZyZXdhcmQYAyABKAkSDAoEc29ydBgEIAEoBSLIAQoZU2V2ZW5EYXlU",
+            "BRIOCgZyZXdhcmQYAyADKAkSDAoEc29ydBgEIAEoBSLIAQoZU2V2ZW5EYXlU",
             "YXNrUndkTWFwQUJWYWx1ZRJWChJTZXZlbkRheVRhc2tSd2RNYXAYASADKAsy",
             "Oi5yYXdkYXRhLlNldmVuRGF5VGFza1J3ZE1hcEFCVmFsdWUuU2V2ZW5EYXlU",
             "YXNrUndkTWFwRW50cnkaUwoXU2V2ZW5EYXlUYXNrUndkTWFwRW50cnkSCwoD",
@@ -96,7 +96,7 @@ namespace fat.rawdata {
     public SevenDayTaskRwd(SevenDayTaskRwd other) : this() {
       id_ = other.id_;
       points_ = other.points_;
-      reward_ = other.reward_;
+      reward_ = other.reward_.Clone();
       sort_ = other.sort_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -137,17 +137,16 @@ namespace fat.rawdata {
 
     /// <summary>Field number for the "reward" field.</summary>
     public const int RewardFieldNumber = 3;
-    private string reward_ = "";
+    private static readonly pb::FieldCodec<string> _repeated_reward_codec
+        = pb::FieldCodec.ForString(26);
+    private readonly pbc::RepeatedField<string> reward_ = new pbc::RepeatedField<string>();
     /// <summary>
     /// 里程碑奖励
     /// {奖励id:数量}
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Reward {
+    public pbc::RepeatedField<string> Reward {
       get { return reward_; }
-      set {
-        reward_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
     }
 
     /// <summary>Field number for the "sort" field.</summary>
@@ -179,7 +178,7 @@ namespace fat.rawdata {
       }
       if (Id != other.Id) return false;
       if (Points != other.Points) return false;
-      if (Reward != other.Reward) return false;
+      if(!reward_.Equals(other.reward_)) return false;
       if (Sort != other.Sort) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -189,7 +188,7 @@ namespace fat.rawdata {
       int hash = 1;
       if (Id != 0) hash ^= Id.GetHashCode();
       if (Points != 0) hash ^= Points.GetHashCode();
-      if (Reward.Length != 0) hash ^= Reward.GetHashCode();
+      hash ^= reward_.GetHashCode();
       if (Sort != 0) hash ^= Sort.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -215,10 +214,7 @@ namespace fat.rawdata {
         output.WriteRawTag(16);
         output.WriteInt32(Points);
       }
-      if (Reward.Length != 0) {
-        output.WriteRawTag(26);
-        output.WriteString(Reward);
-      }
+      reward_.WriteTo(output, _repeated_reward_codec);
       if (Sort != 0) {
         output.WriteRawTag(32);
         output.WriteInt32(Sort);
@@ -240,10 +236,7 @@ namespace fat.rawdata {
         output.WriteRawTag(16);
         output.WriteInt32(Points);
       }
-      if (Reward.Length != 0) {
-        output.WriteRawTag(26);
-        output.WriteString(Reward);
-      }
+      reward_.WriteTo(ref output, _repeated_reward_codec);
       if (Sort != 0) {
         output.WriteRawTag(32);
         output.WriteInt32(Sort);
@@ -263,9 +256,7 @@ namespace fat.rawdata {
       if (Points != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Points);
       }
-      if (Reward.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Reward);
-      }
+      size += reward_.CalculateSize(_repeated_reward_codec);
       if (Sort != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Sort);
       }
@@ -286,9 +277,7 @@ namespace fat.rawdata {
       if (other.Points != 0) {
         Points = other.Points;
       }
-      if (other.Reward.Length != 0) {
-        Reward = other.Reward;
-      }
+      reward_.Add(other.reward_);
       if (other.Sort != 0) {
         Sort = other.Sort;
       }
@@ -315,7 +304,7 @@ namespace fat.rawdata {
             break;
           }
           case 26: {
-            Reward = input.ReadString();
+            reward_.AddEntriesFrom(input, _repeated_reward_codec);
             break;
           }
           case 32: {
@@ -345,7 +334,7 @@ namespace fat.rawdata {
             break;
           }
           case 26: {
-            Reward = input.ReadString();
+            reward_.AddEntriesFrom(ref input, _repeated_reward_codec);
             break;
           }
           case 32: {

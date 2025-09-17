@@ -31,6 +31,10 @@ namespace FAT
         public int TokenNum => _tokenNum;
         public int Round => _currentRound;
         public int MilestoneIndex => _lastClaimedMilestoneIndex;
+        /// <summary>
+        /// 判断当前回合是否是循环回来的（第2次及以上出现的回合）
+        /// </summary>
+        public bool IsCycleRound => conf.IsCycle && _currentRound >= conf.NormalRoundId.Count;
         public List<RewardCommitData> RewardCommitList = new();
 
         private int _tokenNum;
@@ -257,7 +261,7 @@ namespace FAT
                         var r = Game.Manager.rewardMan.BeginReward(rewardData.Id, rewardData.Count, ReasonString.puzzle_milestone);
                         RewardCommitList.Add(r);
                     }
-                    DataTracker.event_puzzle_rwd.Track(this, i + 1, confD.RewardCount.Count, confD.Id, _currentRound + 1, i == rewardCountList.Count - 1);
+                    DataTracker.event_puzzle_rwd.Track(this, i + 1, confD.RewardCount.Count, confD.Id, _currentRound + 1, i == rewardCountList.Count - 1, IsCycleRound);
                     // 更新已发放的里程碑下标
                     _lastClaimedMilestoneIndex = i;
                 }

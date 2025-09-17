@@ -95,9 +95,12 @@ namespace FAT
             StartPopup = new PopupDuelStart(this, VisualStart.visual, VisualStart.res);
         }
 
-        public void SetupTheme() {
-            VisualMain.Setup(Conf.EventTheme, this, active_ : false);
+        public void SetupTheme()
+        {
+            VisualMain.Setup(Conf.EventTheme, this, active_: false);
+            VisualMain.popup.option = new IScreenPopup.Option { ignoreDelay = true };
             VisualStart.Setup(Conf.StartTheme, this);
+            VisualStart.popup.option = new IScreenPopup.Option { ignoreDelay = true };
             VisualResult.Setup(Conf.ResultTheme);
         }
 
@@ -155,8 +158,9 @@ namespace FAT
             popup_.TryQueue(StartPopup, state_, true);
         }
 
-        public void TryPopupStart(ScreenPopup popup_, PopupType state_) {
-            if (startPopup) 
+        public void TryPopupStart(ScreenPopup popup_, PopupType state_)
+        {
+            if (startPopup)
             {
                 return;
             }
@@ -207,7 +211,8 @@ namespace FAT
                 var prefab = "event_duel_default#UIFlyMergeScore.prefab";
                 scoreEntity.Setup(score, this, Conf.TokenId, ConfD.ExtraScore, ReasonString.duel, prefab, boardId);
             }
-            if (visualRound != curRoundIndex) {
+            if (visualRound != curRoundIndex)
+            {
                 SyncScore();
             }
             lastTs = Game.Instance.GetTimestampSeconds();
@@ -239,7 +244,8 @@ namespace FAT
             any.Add(ToRecord(19, startPopup));
         }
 
-        public static void DebugAddScore() {
+        public static void DebugAddScore()
+        {
             var acti = (ActivityDuel)Game.Manager.activity.LookupAny(fat.rawdata.EventType.ScoreDuel);
             var v = 10;
             var prev = acti.score;
@@ -249,7 +255,8 @@ namespace FAT
             acti.CheckScore();
         }
 
-        public static void DebugAddRobotScore() {
+        public static void DebugAddRobotScore()
+        {
             var acti = (ActivityDuel)Game.Manager.activity.LookupAny(fat.rawdata.EventType.ScoreDuel);
             acti.nextScoreTs = 0;
             acti.UpdateRobotScore();
@@ -303,8 +310,10 @@ namespace FAT
             }
         }
 
-        public void SyncScore() {
-            if (!RoundActive) {
+        public void SyncScore()
+        {
+            if (!RoundActive)
+            {
                 score = 0;
                 robotScore = 0;
                 robotIcon = 0;
@@ -485,7 +494,7 @@ namespace FAT
                 DebugEx.Warning($"nextScoreTs: {nextScoreTs}");
             }
         }
-        
+
         private void TryHandleOfflineScore(long lastSaveTime)
         {
             if (lastSaveTime > 0)
@@ -579,12 +588,14 @@ namespace FAT
             nextScoreTs = 0;
             offsetStrategyUsedTimes = 0;
             var delay = win_ ? 2.5f : 0f;
-            DOVirtual.DelayedCall(delay, () => {
+            DOVirtual.DelayedCall(delay, () =>
+            {
                 if (!UIManager.Instance.IsShow(VisualMain.res.ActiveR))
                 {
                     Game.Manager.screenPopup.TryQueue(VisualMain.popup, PopupType.Login);
                 }
-                if (IsComplete()) {
+                if (IsComplete())
+                {
                     Game.Manager.activity.EndImmediate(this, false);
                 }
             });
@@ -648,22 +659,26 @@ namespace FAT
     }
 }
 
-namespace FAT {
+namespace FAT
+{
     using static UILayer;
-    
-    public partial class UIConfig {
+
+    public partial class UIConfig
+    {
         public static UIResource UIDuelHelp = new("UIDuelHelp.prefab", AboveStatus, "event_duel_default");
         public static UIResource UIActivityDuelStart = new("UIActivityDuelStart.prefab", AboveStatus, "event_duel_default");
         public static UIResource UIActivityDuelMain = new("UIActivityDuelMain.prefab", AboveStatus, "event_duel_default");
         public static UIResource UIActivityDuelResult = new("UIActivityDuelResult.prefab", SubStatus, "event_duel_default");
     }
 
-    public partial class ReasonString {
+    public partial class ReasonString
+    {
         public static readonly ReasonString duel = new(nameof(duel));
     }
 }
 
-namespace FAT.MSG {
-    public class ACTIVITY_DUEL_SCORE : MessageBase<int, int> {}
-    public class ACTIVITY_DUEL_ROBOT_SCORE : MessageBase<int, int> {}
+namespace FAT.MSG
+{
+    public class ACTIVITY_DUEL_SCORE : MessageBase<int, int> { }
+    public class ACTIVITY_DUEL_ROBOT_SCORE : MessageBase<int, int> { }
 }

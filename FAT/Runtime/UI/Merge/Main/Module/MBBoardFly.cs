@@ -60,7 +60,7 @@ namespace FAT
                         //策划约定1倍率不进行展示动画
                         releaseTime = boardFlyItem.GetRankAnimLength();
                     }
-                    MessageCenter.Get<MSG.BOARD_ORDER_SCROLL_RESET>().Dispatch();
+                    MessageCenter.Get<MSG.BOARD_FLY_START>().Dispatch();
                 }
                 BoardUtility.AddAutoReleaseComponent(trans.gameObject, releaseTime, PoolItemType.BOARD_FLY_ITEM);
                 trans.gameObject.SetActive(true);

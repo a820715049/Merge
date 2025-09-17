@@ -143,7 +143,7 @@ namespace fat.rawdata {
     private readonly pbc::RepeatedField<int> taskInfo_ = new pbc::RepeatedField<int>();
     /// <summary>
     /// 包含任务id
-    /// （EventWeeklyTaskInfo.id）
+    /// （SevenDayTaskInfo.id）
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<int> TaskInfo {

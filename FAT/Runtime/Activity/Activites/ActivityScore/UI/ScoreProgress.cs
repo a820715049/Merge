@@ -300,6 +300,14 @@ namespace FAT
                     {
                         activityScore.TryPopRewardUI();
                     }
+                    else
+                    {
+                        var commitData = activityScore.TryGetCommitReward(node.reward);
+                        if (commitData != null)
+                        {
+                            UIFlyUtility.FlyReward(commitData, reward.icon.transform.position);
+                        }
+                    }
 
                     yield return new WaitForSeconds(1.5f);
                     if (next >= 0)
@@ -356,7 +364,8 @@ namespace FAT
             if (activityScore == null)
             {
                 activityScore = Game.Manager.activity.LookupAny(EventType.Score) as ActivityScore;
-                if (!activityScore.HasCycleMilestone())
+                // 达到最后一档奖励时仍应允许进度条动画播放
+                if (activityScore == null)
                 {
                     Visible(false);
                     MessageCenter.Get<MSG.ACTIVITY_ENTRY_LAYOUT_REFRESH>().Dispatch();

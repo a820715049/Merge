@@ -4,9 +4,12 @@
  * @Date: 2024-3-6 20:56:49
  */
 
+using UnityEngine;
+
 namespace FAT
 {
     public class UIScoreProgress : UIBase
     {
+        public Transform flyFromPos;
     }
 }

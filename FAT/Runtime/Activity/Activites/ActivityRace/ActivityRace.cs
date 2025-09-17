@@ -200,6 +200,9 @@ namespace FAT
                 RoundOverPopup.Setup(this, RoundOverVisual, RaceResAlt);
             if (RacePanelVisual.Setup(ConfD.RaceTheme, RaceResAlt))
                 RacePanelPopup.Setup(this, RacePanelVisual, RaceResAlt);
+            StartPopup.option = new IScreenPopup.Option() { ignoreDelay = true };
+            RoundOverPopup.option = new IScreenPopup.Option() { ignoreDelay = true };
+            RacePanelPopup.option = new IScreenPopup.Option() { ignoreDelay = true };
         }
 
         public override void TryPopup(ScreenPopup popup_, PopupType state_)

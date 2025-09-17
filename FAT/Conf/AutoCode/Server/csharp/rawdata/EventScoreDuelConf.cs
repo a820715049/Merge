@@ -24,33 +24,34 @@ namespace fat.rawdata {
     static EventScoreDuelConfReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CiByYXdkYXRhL0V2ZW50U2NvcmVEdWVsQ29uZi5wcm90bxIHcmF3ZGF0YSKl",
+            "CiByYXdkYXRhL0V2ZW50U2NvcmVEdWVsQ29uZi5wcm90bxIHcmF3ZGF0YSK4",
             "AQoORXZlbnRTY29yZUR1ZWwSCgoCaWQYASABKAUSDwoHYm9hcmRJZBgCIAEo",
-            "BRIQCghkZXRhaWxJZBgDIAEoBRISCgpldmVudFRoZW1lGAQgASgFEhYKDm1p",
-            "bGVzdG9uZVRva2VuGAggASgFEhMKC3Jlc3VsdFRoZW1lGAYgASgFEhIKCnN0",
-            "YXJ0VGhlbWUYByABKAUSDwoHdG9rZW5JZBgFIAEoBSLCAQoYRXZlbnRTY29y",
-            "ZUR1ZWxNYXBBQlZhbHVlElMKEUV2ZW50U2NvcmVEdWVsTWFwGAEgAygLMjgu",
-            "cmF3ZGF0YS5FdmVudFNjb3JlRHVlbE1hcEFCVmFsdWUuRXZlbnRTY29yZUR1",
-            "ZWxNYXBFbnRyeRpRChZFdmVudFNjb3JlRHVlbE1hcEVudHJ5EgsKA2tleRgB",
-            "IAEoBRImCgV2YWx1ZRgCIAEoCzIXLnJhd2RhdGEuRXZlbnRTY29yZUR1ZWw6",
-            "AjgBIqkEChJFdmVudFNjb3JlRHVlbENvbmYSTQoRRXZlbnRTY29yZUR1ZWxN",
-            "YXAYASADKAsyMi5yYXdkYXRhLkV2ZW50U2NvcmVEdWVsQ29uZi5FdmVudFNj",
-            "b3JlRHVlbE1hcEVudHJ5ElEKE0V2ZW50U2NvcmVEdWVsTWFwQUIYAiADKAsy",
-            "NC5yYXdkYXRhLkV2ZW50U2NvcmVEdWVsQ29uZi5FdmVudFNjb3JlRHVlbE1h",
-            "cEFCRW50cnkSWwoYRXZlbnRTY29yZUR1ZWxNYXBBQlBhdGNoGAMgAygLMjku",
-            "cmF3ZGF0YS5FdmVudFNjb3JlRHVlbENvbmYuRXZlbnRTY29yZUR1ZWxNYXBB",
-            "QlBhdGNoRW50cnkaUQoWRXZlbnRTY29yZUR1ZWxNYXBFbnRyeRILCgNrZXkY",
-            "ASABKAUSJgoFdmFsdWUYAiABKAsyFy5yYXdkYXRhLkV2ZW50U2NvcmVEdWVs",
-            "OgI4ARpdChhFdmVudFNjb3JlRHVlbE1hcEFCRW50cnkSCwoDa2V5GAEgASgJ",
-            "EjAKBXZhbHVlGAIgASgLMiEucmF3ZGF0YS5FdmVudFNjb3JlRHVlbE1hcEFC",
-            "VmFsdWU6AjgBGmIKHUV2ZW50U2NvcmVEdWVsTWFwQUJQYXRjaEVudHJ5EgsK",
-            "A2tleRgBIAEoCRIwCgV2YWx1ZRgCIAEoCzIhLnJhd2RhdGEuRXZlbnRTY29y",
-            "ZUR1ZWxNYXBBQlZhbHVlOgI4AUI9Wi1naXRsYWIuZnVucGx1cy5pby9mYXQv",
-            "Y29uZi9nZW4vZ29sYW5nL3Jhd2RhdGGqAgtmYXQucmF3ZGF0YWIGcHJvdG8z"));
+            "BRIQCghkZXRhaWxJZBgDIAEoBRISCgpldmVudFRoZW1lGAQgASgFEhEKCWhl",
+            "bHBUaGVtZRgJIAEoBRIWCg5taWxlc3RvbmVUb2tlbhgIIAEoBRITCgtyZXN1",
+            "bHRUaGVtZRgGIAEoBRISCgpzdGFydFRoZW1lGAcgASgFEg8KB3Rva2VuSWQY",
+            "BSABKAUiwgEKGEV2ZW50U2NvcmVEdWVsTWFwQUJWYWx1ZRJTChFFdmVudFNj",
+            "b3JlRHVlbE1hcBgBIAMoCzI4LnJhd2RhdGEuRXZlbnRTY29yZUR1ZWxNYXBB",
+            "QlZhbHVlLkV2ZW50U2NvcmVEdWVsTWFwRW50cnkaUQoWRXZlbnRTY29yZUR1",
+            "ZWxNYXBFbnRyeRILCgNrZXkYASABKAUSJgoFdmFsdWUYAiABKAsyFy5yYXdk",
+            "YXRhLkV2ZW50U2NvcmVEdWVsOgI4ASKpBAoSRXZlbnRTY29yZUR1ZWxDb25m",
+            "Ek0KEUV2ZW50U2NvcmVEdWVsTWFwGAEgAygLMjIucmF3ZGF0YS5FdmVudFNj",
+            "b3JlRHVlbENvbmYuRXZlbnRTY29yZUR1ZWxNYXBFbnRyeRJRChNFdmVudFNj",
+            "b3JlRHVlbE1hcEFCGAIgAygLMjQucmF3ZGF0YS5FdmVudFNjb3JlRHVlbENv",
+            "bmYuRXZlbnRTY29yZUR1ZWxNYXBBQkVudHJ5ElsKGEV2ZW50U2NvcmVEdWVs",
+            "TWFwQUJQYXRjaBgDIAMoCzI5LnJhd2RhdGEuRXZlbnRTY29yZUR1ZWxDb25m",
+            "LkV2ZW50U2NvcmVEdWVsTWFwQUJQYXRjaEVudHJ5GlEKFkV2ZW50U2NvcmVE",
+            "dWVsTWFwRW50cnkSCwoDa2V5GAEgASgFEiYKBXZhbHVlGAIgASgLMhcucmF3",
+            "ZGF0YS5FdmVudFNjb3JlRHVlbDoCOAEaXQoYRXZlbnRTY29yZUR1ZWxNYXBB",
+            "QkVudHJ5EgsKA2tleRgBIAEoCRIwCgV2YWx1ZRgCIAEoCzIhLnJhd2RhdGEu",
+            "RXZlbnRTY29yZUR1ZWxNYXBBQlZhbHVlOgI4ARpiCh1FdmVudFNjb3JlRHVl",
+            "bE1hcEFCUGF0Y2hFbnRyeRILCgNrZXkYASABKAkSMAoFdmFsdWUYAiABKAsy",
+            "IS5yYXdkYXRhLkV2ZW50U2NvcmVEdWVsTWFwQUJWYWx1ZToCOAFCPVotZ2l0",
+            "bGFiLmZ1bnBsdXMuaW8vZmF0L2NvbmYvZ2VuL2dvbGFuZy9yYXdkYXRhqgIL",
+            "ZmF0LnJhd2RhdGFiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EventScoreDuel), global::fat.rawdata.EventScoreDuel.Parser, new[]{ "Id", "BoardId", "DetailId", "EventTheme", "MilestoneToken", "ResultTheme", "StartTheme", "TokenId" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EventScoreDuel), global::fat.rawdata.EventScoreDuel.Parser, new[]{ "Id", "BoardId", "DetailId", "EventTheme", "HelpTheme", "MilestoneToken", "ResultTheme", "StartTheme", "TokenId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EventScoreDuelMapABValue), global::fat.rawdata.EventScoreDuelMapABValue.Parser, new[]{ "EventScoreDuelMap" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EventScoreDuelConf), global::fat.rawdata.EventScoreDuelConf.Parser, new[]{ "EventScoreDuelMap", "EventScoreDuelMapAB", "EventScoreDuelMapABPatch" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, null, })
           }));
@@ -99,6 +100,7 @@ namespace fat.rawdata {
       boardId_ = other.boardId_;
       detailId_ = other.detailId_;
       eventTheme_ = other.eventTheme_;
+      helpTheme_ = other.helpTheme_;
       milestoneToken_ = other.milestoneToken_;
       resultTheme_ = other.resultTheme_;
       startTheme_ = other.startTheme_;
@@ -170,6 +172,21 @@ namespace fat.rawdata {
       get { return eventTheme_; }
       set {
         eventTheme_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "helpTheme" field.</summary>
+    public const int HelpThemeFieldNumber = 9;
+    private int helpTheme_;
+    /// <summary>
+    /// 帮助界面
+    /// （EventTheme.id）
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int HelpTheme {
+      get { return helpTheme_; }
+      set {
+        helpTheme_ = value;
       }
     }
 
@@ -250,6 +267,7 @@ namespace fat.rawdata {
       if (BoardId != other.BoardId) return false;
       if (DetailId != other.DetailId) return false;
       if (EventTheme != other.EventTheme) return false;
+      if (HelpTheme != other.HelpTheme) return false;
       if (MilestoneToken != other.MilestoneToken) return false;
       if (ResultTheme != other.ResultTheme) return false;
       if (StartTheme != other.StartTheme) return false;
@@ -264,6 +282,7 @@ namespace fat.rawdata {
       if (BoardId != 0) hash ^= BoardId.GetHashCode();
       if (DetailId != 0) hash ^= DetailId.GetHashCode();
       if (EventTheme != 0) hash ^= EventTheme.GetHashCode();
+      if (HelpTheme != 0) hash ^= HelpTheme.GetHashCode();
       if (MilestoneToken != 0) hash ^= MilestoneToken.GetHashCode();
       if (ResultTheme != 0) hash ^= ResultTheme.GetHashCode();
       if (StartTheme != 0) hash ^= StartTheme.GetHashCode();
@@ -316,6 +335,10 @@ namespace fat.rawdata {
         output.WriteRawTag(64);
         output.WriteInt32(MilestoneToken);
       }
+      if (HelpTheme != 0) {
+        output.WriteRawTag(72);
+        output.WriteInt32(HelpTheme);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -357,6 +380,10 @@ namespace fat.rawdata {
         output.WriteRawTag(64);
         output.WriteInt32(MilestoneToken);
       }
+      if (HelpTheme != 0) {
+        output.WriteRawTag(72);
+        output.WriteInt32(HelpTheme);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -377,6 +404,9 @@ namespace fat.rawdata {
       }
       if (EventTheme != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(EventTheme);
+      }
+      if (HelpTheme != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(HelpTheme);
       }
       if (MilestoneToken != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(MilestoneToken);
@@ -412,6 +442,9 @@ namespace fat.rawdata {
       }
       if (other.EventTheme != 0) {
         EventTheme = other.EventTheme;
+      }
+      if (other.HelpTheme != 0) {
+        HelpTheme = other.HelpTheme;
       }
       if (other.MilestoneToken != 0) {
         MilestoneToken = other.MilestoneToken;
@@ -471,6 +504,10 @@ namespace fat.rawdata {
             MilestoneToken = input.ReadInt32();
             break;
           }
+          case 72: {
+            HelpTheme = input.ReadInt32();
+            break;
+          }
         }
       }
     #endif
@@ -515,6 +552,10 @@ namespace fat.rawdata {
           }
           case 64: {
             MilestoneToken = input.ReadInt32();
+            break;
+          }
+          case 72: {
+            HelpTheme = input.ReadInt32();
             break;
           }
         }

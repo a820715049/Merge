@@ -320,6 +320,7 @@ namespace FAT
             // 提供 PopupRes 给队列系统，否则会报 "no ui to popup"
             PopupRes = _res.ActiveR;
             // 强制弹窗通常不受次数限制清理影响
+            option = new();
             option.ignoreLimit = true;
         }
         public override bool CheckValid(out string _)

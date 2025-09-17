@@ -42,6 +42,7 @@ namespace FAT
         }
 
         public void RefreshTheme() {
+            
             if (visual == null || visualGroup == null) return;
             visual.Refresh(visualGroup);
         }

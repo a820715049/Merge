@@ -10,6 +10,7 @@ namespace FAT.Merge
     {
         None,
         Bingo,
+        TrainMission,
     }
 
     public interface IMergeItemIndicatorHandler

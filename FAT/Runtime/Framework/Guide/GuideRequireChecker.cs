@@ -9,6 +9,7 @@ using fat.rawdata;
 using EL;
 using EventType = fat.rawdata.EventType;
 using System;
+using fat.conf;
 
 namespace FAT
 {
@@ -44,6 +45,7 @@ namespace FAT
             MultiRanking = 25,
             MineCartBoard = 26, //矿车棋盘
             Puzzle = 27, //拼图活动
+            TrainMission = 29, //火车任务
         }
 
         private UIManager uiMan => UIManager.Instance;
@@ -177,6 +179,8 @@ namespace FAT
                     return _CheckLevelCanBoost(value);
                 case GuideMergeRequireType.MineCartRoundComplete:
                     return _CheckMineCartBoardRoundFinish();
+                case GuideMergeRequireType.TrainSpawnerNum:
+                    return _CheckTrainMissionSpawnerNum(value);
             }
 
             return false;
@@ -313,6 +317,9 @@ namespace FAT
                     return UIManager.Instance.IsOpen(wish?.VisualUIBoardMain.res.ActiveR ?? UIConfig.UIWishBoardMain);
                 case UIState.DecorateStart:
                     return Game.Manager.decorateMan.CheckGuideStart();
+                case UIState.TrainMission:
+                    var train = (TrainMissionActivity)Game.Manager.activity.LookupAny(EventType.TrainMission);
+                    return UIManager.Instance.IsOpen(train?.VisualMain.res.ActiveR ?? UIConfig.UITrainMissionMain);
                 case UIState.WeeklyRaffle:
                     var raffle = Game.Manager.activity.LookupAny(EventType.WeeklyRaffle) as ActivityWeeklyRaffle;
                     return UIManager.Instance.IsOpen(raffle?.MainPopUp.res.ActiveR ?? UIConfig.UIActivityWeeklyRaffleMain);
@@ -324,6 +331,14 @@ namespace FAT
                     {
                         isSuccess = true;
                     }
+
+                    var trainMission = (TrainMissionActivity)Game.Manager.activity.LookupAny(EventType.TrainMission);
+                    if (trainMission != null &&
+                        uiMan.IsOpen(trainMission.VisualMain.res.ActiveR ?? UIConfig.UITrainMissionMain))
+                    {
+                        isSuccess = true;
+                    }
+
                     return isSuccess;
                 case UIState.MineCartBoard:
                     var mineCart = Game.Manager.activity.LookupAny(EventType.MineCart) as MineCartActivity;
@@ -708,11 +723,61 @@ namespace FAT
             }
             return false;
         }
+        
         private bool _CheckMineCartBoardRoundFinish()
         {
             if (!Game.Manager.activity.LookupAny(EventType.MineCart, out var acti) || acti is not MineCartActivity a)
                 return false;
             return a.CanPlayFinishRoundGuide;
+        }
+
+        private bool _CheckTrainMissionSpawnerNum(int num)
+        {
+            // 活动开启
+            if (Game.Manager.activity.LookupAny(EventType.TrainMission) is not TrainMissionActivity _activity)
+            {
+                return false;
+            }
+
+            // 打开主界面
+            var mainConfig = _activity.VisualMain.res.ActiveR ?? UIConfig.UITrainMissionMain;
+            var ui = UIManager.Instance.TryGetUI(mainConfig);
+            if (ui == null || ui is not UITrainMissionMain main)
+            {
+                return false;
+            }
+
+            if ( UIManager.Instance.IsOpen(_activity.VisualHelp.res.ActiveR))
+            {
+                return false;
+            }
+
+            var challengeIDList = TrainGroupDetailVisitor.Get(_activity.groupDetailID)?.IncludeChallenge;
+            if (challengeIDList == null)
+            {
+                return false;
+            }
+
+            // 刷新生成器
+            foreach (var challengeID in challengeIDList)
+            {
+                var challenge = TrainChallengeVisitor.Get(challengeID);
+                if (challenge == null)
+                {
+                    continue;
+                }
+
+                foreach (var linkId in challenge.ConnectSpawner)
+                {
+                    var spawnerId = BoardActivityUtility.GetHighestLevelItemIdInCategory(linkId, 1);
+                    if (TrainMissionUtility.HasActiveItemInMainBoard(spawnerId))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
         }
     }
 }

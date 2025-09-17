@@ -51,8 +51,9 @@ namespace FAT.Merge
             target4 = target4_;
             range = (range_[0], range_[1]);
             ResetCounter();
-            if (skip_ != null) {
-                foreach(var v in skip_)
+            if (skip_ != null)
+            {
+                foreach (var v in skip_)
                 {
                     skip.Add(v);
                 }
@@ -70,14 +71,15 @@ namespace FAT.Merge
 
         }
 
-        public void ResetCounter() {
+        public void ResetCounter()
+        {
             counter = Random.Range(range.lower, range.upper);
         }
 
         public int Simulate(SpawnBonusContext context, bool dryrun)
         {
             var from = context.from;
-            if(from is null || context.energyCost <= 0 || skip.Contains(from.tid))
+            if (from is null || context.energyCost <= 0 || skip.Contains(from.tid))
             {
                 return 0;
             }
@@ -100,21 +102,25 @@ namespace FAT.Merge
                 output = w.Keys.RandomChooseByWeight(e => w[e]);
                 DebugEx.Info($"{nameof(OutputSpawnBonusHandler)} {id} output weighted: {output} {state}");
             }
-            if (dryrun || output <= 0) {
+            if (dryrun || output <= 0)
+            {
                 goto end;
             }
             var result = context.result;
-            if(null == context.world.activeBoard.SpawnItemMustWithReason(output, ItemSpawnContext.CreateWithSource(from, ItemSpawnContext.SpawnType.None), from.coord.x, from.coord.y, false, false))
+            if (Game.Manager.mergeBoardMan.activeWorld.isEquivalentToMain ||
+                null == context.world.activeBoard.SpawnItemMustWithReason(output, ItemSpawnContext.CreateWithSource(from, ItemSpawnContext.SpawnType.None), from.coord.x, from.coord.y, false, false))
             {
                 var d = Game.Manager.rewardMan.BeginReward(output, 1, ReasonString.step);
                 var pos = BoardUtility.GetWorldPosByCoord(from.coord);
                 UIFlyUtility.FlyReward(d, pos);
             }
-            end:
-            if (output == target || output == target2 || output == target4) {
+        end:
+            if (output == target || output == target2 || output == target4)
+            {
                 ResetCounter();
             }
-            else {
+            else
+            {
                 --counter;
             }
             DebugEx.Info($"{nameof(OutputSpawnBonusHandler)} {id} output counter: {counter}");

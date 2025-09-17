@@ -299,6 +299,13 @@ namespace FAT
                     return PoolItemType.MERGE_ITEM_EFFECT_LIGHTBULB;
                 case ItemEffectType.FrozenItem:
                     return PoolItemType.MERGE_ITEM_EFFECT_FROZEN_ITEM;
+                
+                case ItemEffectType.TokenMultiTrigger:
+                    return PoolItemType.MERGE_ITEM_EFFECT_TOKEN_MULTI_TRIGGER;
+                case ItemEffectType.TokenMultiSelfTrigger:
+                    return PoolItemType.MERGE_ITEM_EFFECT_TOKEN_MULTI_SELF_TRIGGER;
+                case ItemEffectType.TokenMultiBg:
+                    return PoolItemType.MERGE_ITEM_EFFECT_TOKEN_MULTI_BG;
             }
             return PoolItemType.NONE;
         }

@@ -24,7 +24,7 @@ namespace fat.rawdata {
     static FeatureEntryReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChpyYXdkYXRhL0ZlYXR1cmVFbnRyeS5wcm90bxIHcmF3ZGF0YSqUEwoMRmVh",
+            "ChpyYXdkYXRhL0ZlYXR1cmVFbnRyeS5wcm90bxIHcmF3ZGF0YSq1EwoMRmVh",
             "dHVyZUVudHJ5Eg8KC0ZlYXR1cmVOb25lEAASEwoPRmVhdHVyZUl0ZW1TYWxl",
             "EAESEgoORmVhdHVyZUJhZ0l0ZW0QAhIWChJGZWF0dXJlQmFnUHJvZHVjZXIQ",
             "AxISCg5GZWF0dXJlQmFnVG9vbBAEEhEKDUZlYXR1cmVCdWJibGUQBRIVChFG",
@@ -79,8 +79,9 @@ namespace fat.rawdata {
             "ZW5EYXlUYXNrEGUSFAoQRmVhdHVyZUdlbVZlcmlmeRBmEhoKFkZlYXR1cmVT",
             "a2lwUmFuZG9tQ2hlc3QQZxIXChNGZWF0dXJlU2tpcENhcmRQYWNrEGgSFwoT",
             "RmVhdHVyZU1pY01pbGVzdG9uZRBpEhIKDkZlYXR1cmVTZWFSYWNlEGoSEwoP",
-            "RmVhdHVyZVZpbmVMZWFwEGtCPVotZ2l0bGFiLmZ1bnBsdXMuaW8vZmF0L2Nv",
-            "bmYvZ2VuL2dvbGFuZy9yYXdkYXRhqgILZmF0LnJhd2RhdGFiBnByb3RvMw=="));
+            "RmVhdHVyZVZpbmVMZWFwEGsSHwobRmVhdHVyZUNvbW11bml0eVNldHRpbmdz",
+            "UmVkEGxCPVotZ2l0bGFiLmZ1bnBsdXMuaW8vZmF0L2NvbmYvZ2VuL2dvbGFu",
+            "Zy9yYXdkYXRhqgILZmF0LnJhd2RhdGFiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::fat.rawdata.FeatureEntry), }, null, null));
@@ -522,6 +523,10 @@ namespace fat.rawdata {
     /// 飞跃藤蔓
     /// </summary>
     [pbr::OriginalName("FeatureVineLeap")] FeatureVineLeap = 107,
+    /// <summary>
+    /// 社群引流设置页入口红点
+    /// </summary>
+    [pbr::OriginalName("FeatureCommunitySettingsRed")] FeatureCommunitySettingsRed = 108,
   }
 
   #endregion

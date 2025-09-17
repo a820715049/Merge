@@ -62,8 +62,8 @@ namespace FAT
         private void BuildBoard()
         {
             var cache = BoardViewWrapper.GetBoardOrderRequireItemStateCache();
-            if (cache == null)
-                return;
+            // if (cache == null)
+            //     return;
             for (var row = 0; row < height; ++row)
             {
                 for (var col = 0; col < width; ++col)
@@ -89,10 +89,12 @@ namespace FAT
                 valid = !v.IsDragging();
                 hasFlag = v.hasFlag;
             }
+            var state = 0;
+            
             if (valid &&
                 item.isActive &&
                 !item.HasComponent(Merge.ItemComponentType.Bubble) &&
-                (orderStateDict.TryGetValue(item.tid, out var state) || hasFlag))
+                (hasFlag || (orderStateDict?.TryGetValue(item.tid, out  state) ?? false)))
             {
                 // 需要显示格子
                 var start_x = cell_size * col;

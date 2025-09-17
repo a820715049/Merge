@@ -24,34 +24,35 @@ namespace fat.rawdata {
     static EventVineLeapConfReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "Ch9yYXdkYXRhL0V2ZW50VmluZUxlYXBDb25mLnByb3RvEgdyYXdkYXRhIs8B",
+            "Ch9yYXdkYXRhL0V2ZW50VmluZUxlYXBDb25mLnByb3RvEgdyYXdkYXRhIvUB",
             "Cg1FdmVudFZpbmVMZWFwEgoKAmlkGAEgASgFEgwKBGNvc3QYAiABKAUSHQoV",
             "ZGlmZmljdWx0eVNlbGVjdFRoZW1lGAMgASgFEhAKCGVuZFRoZW1lGAQgASgF",
-            "EhIKCmV2ZW50VGhlbWUYBSABKAUSDwoHZ3JhZGVJZBgGIAEoBRIUCgxsb2Fk",
-            "aW5nVGhlbWUYByABKAUSEwoLcmVmcmVzaFRpbWUYCCABKAUSEgoKc3RhcnRU",
-            "aGVtZRgJIAEoBRIPCgd0b2tlbklkGAogASgFIrwBChdFdmVudFZpbmVMZWFw",
-            "TWFwQUJWYWx1ZRJQChBFdmVudFZpbmVMZWFwTWFwGAEgAygLMjYucmF3ZGF0",
-            "YS5FdmVudFZpbmVMZWFwTWFwQUJWYWx1ZS5FdmVudFZpbmVMZWFwTWFwRW50",
-            "cnkaTwoVRXZlbnRWaW5lTGVhcE1hcEVudHJ5EgsKA2tleRgBIAEoBRIlCgV2",
-            "YWx1ZRgCIAEoCzIWLnJhd2RhdGEuRXZlbnRWaW5lTGVhcDoCOAEimQQKEUV2",
-            "ZW50VmluZUxlYXBDb25mEkoKEEV2ZW50VmluZUxlYXBNYXAYASADKAsyMC5y",
-            "YXdkYXRhLkV2ZW50VmluZUxlYXBDb25mLkV2ZW50VmluZUxlYXBNYXBFbnRy",
-            "eRJOChJFdmVudFZpbmVMZWFwTWFwQUIYAiADKAsyMi5yYXdkYXRhLkV2ZW50",
-            "VmluZUxlYXBDb25mLkV2ZW50VmluZUxlYXBNYXBBQkVudHJ5ElgKF0V2ZW50",
-            "VmluZUxlYXBNYXBBQlBhdGNoGAMgAygLMjcucmF3ZGF0YS5FdmVudFZpbmVM",
-            "ZWFwQ29uZi5FdmVudFZpbmVMZWFwTWFwQUJQYXRjaEVudHJ5Gk8KFUV2ZW50",
-            "VmluZUxlYXBNYXBFbnRyeRILCgNrZXkYASABKAUSJQoFdmFsdWUYAiABKAsy",
-            "Fi5yYXdkYXRhLkV2ZW50VmluZUxlYXA6AjgBGlsKF0V2ZW50VmluZUxlYXBN",
-            "YXBBQkVudHJ5EgsKA2tleRgBIAEoCRIvCgV2YWx1ZRgCIAEoCzIgLnJhd2Rh",
-            "dGEuRXZlbnRWaW5lTGVhcE1hcEFCVmFsdWU6AjgBGmAKHEV2ZW50VmluZUxl",
-            "YXBNYXBBQlBhdGNoRW50cnkSCwoDa2V5GAEgASgJEi8KBXZhbHVlGAIgASgL",
-            "MiAucmF3ZGF0YS5FdmVudFZpbmVMZWFwTWFwQUJWYWx1ZToCOAFCPVotZ2l0",
-            "bGFiLmZ1bnBsdXMuaW8vZmF0L2NvbmYvZ2VuL2dvbGFuZy9yYXdkYXRhqgIL",
-            "ZmF0LnJhd2RhdGFiBnByb3RvMw=="));
+            "EhIKCmV2ZW50VGhlbWUYBSABKAUSEQoJZmFpbFRoZW1lGAsgASgFEg8KB2dy",
+            "YWRlSWQYBiABKAUSFAoMbG9hZGluZ1RoZW1lGAcgASgFEhEKCXBhc3NUaGVt",
+            "ZRgMIAEoBRITCgtyZWZyZXNoVGltZRgIIAEoBRISCgpzdGFydFRoZW1lGAkg",
+            "ASgFEg8KB3Rva2VuSWQYCiABKAUivAEKF0V2ZW50VmluZUxlYXBNYXBBQlZh",
+            "bHVlElAKEEV2ZW50VmluZUxlYXBNYXAYASADKAsyNi5yYXdkYXRhLkV2ZW50",
+            "VmluZUxlYXBNYXBBQlZhbHVlLkV2ZW50VmluZUxlYXBNYXBFbnRyeRpPChVF",
+            "dmVudFZpbmVMZWFwTWFwRW50cnkSCwoDa2V5GAEgASgFEiUKBXZhbHVlGAIg",
+            "ASgLMhYucmF3ZGF0YS5FdmVudFZpbmVMZWFwOgI4ASKZBAoRRXZlbnRWaW5l",
+            "TGVhcENvbmYSSgoQRXZlbnRWaW5lTGVhcE1hcBgBIAMoCzIwLnJhd2RhdGEu",
+            "RXZlbnRWaW5lTGVhcENvbmYuRXZlbnRWaW5lTGVhcE1hcEVudHJ5Ek4KEkV2",
+            "ZW50VmluZUxlYXBNYXBBQhgCIAMoCzIyLnJhd2RhdGEuRXZlbnRWaW5lTGVh",
+            "cENvbmYuRXZlbnRWaW5lTGVhcE1hcEFCRW50cnkSWAoXRXZlbnRWaW5lTGVh",
+            "cE1hcEFCUGF0Y2gYAyADKAsyNy5yYXdkYXRhLkV2ZW50VmluZUxlYXBDb25m",
+            "LkV2ZW50VmluZUxlYXBNYXBBQlBhdGNoRW50cnkaTwoVRXZlbnRWaW5lTGVh",
+            "cE1hcEVudHJ5EgsKA2tleRgBIAEoBRIlCgV2YWx1ZRgCIAEoCzIWLnJhd2Rh",
+            "dGEuRXZlbnRWaW5lTGVhcDoCOAEaWwoXRXZlbnRWaW5lTGVhcE1hcEFCRW50",
+            "cnkSCwoDa2V5GAEgASgJEi8KBXZhbHVlGAIgASgLMiAucmF3ZGF0YS5FdmVu",
+            "dFZpbmVMZWFwTWFwQUJWYWx1ZToCOAEaYAocRXZlbnRWaW5lTGVhcE1hcEFC",
+            "UGF0Y2hFbnRyeRILCgNrZXkYASABKAkSLwoFdmFsdWUYAiABKAsyIC5yYXdk",
+            "YXRhLkV2ZW50VmluZUxlYXBNYXBBQlZhbHVlOgI4AUI9Wi1naXRsYWIuZnVu",
+            "cGx1cy5pby9mYXQvY29uZi9nZW4vZ29sYW5nL3Jhd2RhdGGqAgtmYXQucmF3",
+            "ZGF0YWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EventVineLeap), global::fat.rawdata.EventVineLeap.Parser, new[]{ "Id", "Cost", "DifficultySelectTheme", "EndTheme", "EventTheme", "GradeId", "LoadingTheme", "RefreshTime", "StartTheme", "TokenId" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EventVineLeap), global::fat.rawdata.EventVineLeap.Parser, new[]{ "Id", "Cost", "DifficultySelectTheme", "EndTheme", "EventTheme", "FailTheme", "GradeId", "LoadingTheme", "PassTheme", "RefreshTime", "StartTheme", "TokenId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EventVineLeapMapABValue), global::fat.rawdata.EventVineLeapMapABValue.Parser, new[]{ "EventVineLeapMap" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EventVineLeapConf), global::fat.rawdata.EventVineLeapConf.Parser, new[]{ "EventVineLeapMap", "EventVineLeapMapAB", "EventVineLeapMapABPatch" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, null, })
           }));
@@ -101,8 +102,10 @@ namespace fat.rawdata {
       difficultySelectTheme_ = other.difficultySelectTheme_;
       endTheme_ = other.endTheme_;
       eventTheme_ = other.eventTheme_;
+      failTheme_ = other.failTheme_;
       gradeId_ = other.gradeId_;
       loadingTheme_ = other.loadingTheme_;
+      passTheme_ = other.passTheme_;
       refreshTime_ = other.refreshTime_;
       startTheme_ = other.startTheme_;
       tokenId_ = other.tokenId_;
@@ -186,6 +189,20 @@ namespace fat.rawdata {
       }
     }
 
+    /// <summary>Field number for the "failTheme" field.</summary>
+    public const int FailThemeFieldNumber = 11;
+    private int failTheme_;
+    /// <summary>
+    /// 失败
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int FailTheme {
+      get { return failTheme_; }
+      set {
+        failTheme_ = value;
+      }
+    }
+
     /// <summary>Field number for the "gradeId" field.</summary>
     public const int GradeIdFieldNumber = 6;
     private int gradeId_;
@@ -211,6 +228,20 @@ namespace fat.rawdata {
       get { return loadingTheme_; }
       set {
         loadingTheme_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "passTheme" field.</summary>
+    public const int PassThemeFieldNumber = 12;
+    private int passTheme_;
+    /// <summary>
+    /// 过关
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int PassTheme {
+      get { return passTheme_; }
+      set {
+        passTheme_ = value;
       }
     }
 
@@ -274,8 +305,10 @@ namespace fat.rawdata {
       if (DifficultySelectTheme != other.DifficultySelectTheme) return false;
       if (EndTheme != other.EndTheme) return false;
       if (EventTheme != other.EventTheme) return false;
+      if (FailTheme != other.FailTheme) return false;
       if (GradeId != other.GradeId) return false;
       if (LoadingTheme != other.LoadingTheme) return false;
+      if (PassTheme != other.PassTheme) return false;
       if (RefreshTime != other.RefreshTime) return false;
       if (StartTheme != other.StartTheme) return false;
       if (TokenId != other.TokenId) return false;
@@ -290,8 +323,10 @@ namespace fat.rawdata {
       if (DifficultySelectTheme != 0) hash ^= DifficultySelectTheme.GetHashCode();
       if (EndTheme != 0) hash ^= EndTheme.GetHashCode();
       if (EventTheme != 0) hash ^= EventTheme.GetHashCode();
+      if (FailTheme != 0) hash ^= FailTheme.GetHashCode();
       if (GradeId != 0) hash ^= GradeId.GetHashCode();
       if (LoadingTheme != 0) hash ^= LoadingTheme.GetHashCode();
+      if (PassTheme != 0) hash ^= PassTheme.GetHashCode();
       if (RefreshTime != 0) hash ^= RefreshTime.GetHashCode();
       if (StartTheme != 0) hash ^= StartTheme.GetHashCode();
       if (TokenId != 0) hash ^= TokenId.GetHashCode();
@@ -351,6 +386,14 @@ namespace fat.rawdata {
         output.WriteRawTag(80);
         output.WriteInt32(TokenId);
       }
+      if (FailTheme != 0) {
+        output.WriteRawTag(88);
+        output.WriteInt32(FailTheme);
+      }
+      if (PassTheme != 0) {
+        output.WriteRawTag(96);
+        output.WriteInt32(PassTheme);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -400,6 +443,14 @@ namespace fat.rawdata {
         output.WriteRawTag(80);
         output.WriteInt32(TokenId);
       }
+      if (FailTheme != 0) {
+        output.WriteRawTag(88);
+        output.WriteInt32(FailTheme);
+      }
+      if (PassTheme != 0) {
+        output.WriteRawTag(96);
+        output.WriteInt32(PassTheme);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -424,11 +475,17 @@ namespace fat.rawdata {
       if (EventTheme != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(EventTheme);
       }
+      if (FailTheme != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(FailTheme);
+      }
       if (GradeId != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(GradeId);
       }
       if (LoadingTheme != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(LoadingTheme);
+      }
+      if (PassTheme != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(PassTheme);
       }
       if (RefreshTime != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(RefreshTime);
@@ -465,11 +522,17 @@ namespace fat.rawdata {
       if (other.EventTheme != 0) {
         EventTheme = other.EventTheme;
       }
+      if (other.FailTheme != 0) {
+        FailTheme = other.FailTheme;
+      }
       if (other.GradeId != 0) {
         GradeId = other.GradeId;
       }
       if (other.LoadingTheme != 0) {
         LoadingTheme = other.LoadingTheme;
+      }
+      if (other.PassTheme != 0) {
+        PassTheme = other.PassTheme;
       }
       if (other.RefreshTime != 0) {
         RefreshTime = other.RefreshTime;
@@ -534,6 +597,14 @@ namespace fat.rawdata {
             TokenId = input.ReadInt32();
             break;
           }
+          case 88: {
+            FailTheme = input.ReadInt32();
+            break;
+          }
+          case 96: {
+            PassTheme = input.ReadInt32();
+            break;
+          }
         }
       }
     #endif
@@ -586,6 +657,14 @@ namespace fat.rawdata {
           }
           case 80: {
             TokenId = input.ReadInt32();
+            break;
+          }
+          case 88: {
+            FailTheme = input.ReadInt32();
+            break;
+          }
+          case 96: {
+            PassTheme = input.ReadInt32();
             break;
           }
         }

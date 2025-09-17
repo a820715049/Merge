@@ -188,14 +188,14 @@ namespace FAT
         public override IEnumerable<(string, AssetTag)> ResEnumerate()
         {
             if (!Valid) yield break;
-            foreach(var v in VisualEnd.ResEnumerate()) yield return v;
-            foreach(var v in VisualGift.ResEnumerate()) yield return v;
-            foreach(var v in VisualHelp.ResEnumerate()) yield return v;
-            foreach(var v in VisualStart.ResEnumerate()) yield return v;
-            foreach(var v in VisualHelpTab.ResEnumerate()) yield return v;
-            foreach(var v in VisualLevelReward.ResEnumerate()) yield return v;
-            foreach(var v in VisualProgressReward.ResEnumerate()) yield return v;
-            foreach(var v in VisualLoading.ResEnumerate()) yield return v;
+            foreach (var v in VisualEnd.ResEnumerate()) yield return v;
+            foreach (var v in VisualGift.ResEnumerate()) yield return v;
+            foreach (var v in VisualHelp.ResEnumerate()) yield return v;
+            foreach (var v in VisualStart.ResEnumerate()) yield return v;
+            foreach (var v in VisualHelpTab.ResEnumerate()) yield return v;
+            foreach (var v in VisualLevelReward.ResEnumerate()) yield return v;
+            foreach (var v in VisualProgressReward.ResEnumerate()) yield return v;
+            foreach (var v in VisualLoading.ResEnumerate()) yield return v;
         }
 
         public override void TryPopup(ScreenPopup popup_, PopupType state_)
@@ -340,8 +340,8 @@ namespace FAT
             if (Active)
             {
                 DataTracker.token_change.Track(ConfD.RequireCoinId, ConfD.KeyNum, keyNum, ReasonString.treasure_reward);
-                
-                UIManager.Instance.RegisterIdleAction("ui_idle_treasure_begin", 101, () => 
+
+                UIManager.Instance.RegisterIdleAction("ui_idle_treasure_begin", 101, () =>
                 {
                     if (Active)
                     {
@@ -396,7 +396,7 @@ namespace FAT
             {
                 //说明在棋盘内
                 var curBoardId = activeWorld.activeBoard.boardId;
-                if (curBoardId != boardId)
+                if (curBoardId != boardId && !activeWorld.isEquivalentToMain)
                 {
                     DebugEx.FormatError(
                         "[ActivityTreasure.AddScore]: ActiveBoardId != TreasureConfigId But TryAddScore, activeBoardId = {0}, eventTreasureConfigBoardId = {1}",
@@ -442,7 +442,7 @@ namespace FAT
             }
         }
 
-        private void CheckBonusToken() 
+        private void CheckBonusToken()
         {
             var max = grpMappingConfig.BonusPoints[bonusTokenPhase];
             if (bonusToken < max) return;
@@ -866,7 +866,7 @@ namespace FAT
             var listT = PoolMappingAccess.Take(out List<RewardCommitData> list);
             using var _ = PoolMappingAccess.Borrow(out Dictionary<int, int> map);
             map[ConfD.RequireCoinId] = keyNum;
-            ActivityExpire.ConvertToReward(ConfD.ExpirePopup, list, ReasonString.treasure, token_:map);
+            ActivityExpire.ConvertToReward(ConfD.ExpirePopup, list, ReasonString.treasure, token_: map);
             keyNum = 0;
             var ui = UIManager.Instance;
             if (ui.IsOpen(Res.ActiveR))

@@ -357,6 +357,12 @@ namespace FAT
             _RegisterButton("duel score", ActivityDuel.DebugAddScore);
             _RegisterButton("duel robot", ActivityDuel.DebugAddRobotScore);
 
+            _StartGroupA("火车");
+            _RegisterButton("order item", _DebugTrainMissionOrderItem);
+            _RegisterButton("order need", _DebugTrainMissionOrderNeed);
+            _RegisterButton("finish train", _DebugTrainMissionFinishTrain);
+            _RegisterButton("recycle", _DebugTrainMissionRecycle);
+
             _StartGroupA("打怪");
             _RegisterDisplayButton("一刀999:" + FightDebug, _ChangeFightDebugState);
 
@@ -1009,6 +1015,14 @@ namespace FAT
                 UIFlyUtility.FlyRewardList(rewards, Vector3.zero);
             }
         }
+        
+        private void _AddItemToBoard(int rewardID)
+        {
+            var board = Game.Manager.mergeBoardMan.activeWorld;
+            if (board != null)
+                board.activeBoard.SpawnItemMustWithReason(rewardID,
+                    ItemSpawnContext.CreateWithType(ItemSpawnContext.SpawnType.Cheat), 0, 0, false, false);
+        }
 
         private void _OnBtnSetMIniGame(string str, string strIndex)
         {
@@ -1312,6 +1326,91 @@ namespace FAT
                     Game.Manager.commonTipsMan.ShowMessageTipsCustom(content, "", "OK", UIUtility.DebugResetCacheStr);
                     GameI18NHelper.GetOrCreate().SwitchTargetLanguage(language);
                 });
+            }
+        }
+
+        private void _DebugTrainMissionOrderItem()
+        {
+            if (Game.Manager.activity.LookupAny(EventType.TrainMission, out var act) &&
+                act is TrainMissionActivity _activity)
+            {
+                var top = _activity.topOrder;
+                foreach (var info in top.ItemInfos)
+                {
+                    _AddItemToBoard(info.itemID);
+                }
+
+                var bottom = _activity.bottomOrder;
+                foreach (var info in bottom.ItemInfos)
+                {
+                    _AddItemToBoard(info.itemID);
+                }
+            }
+        }
+
+        private void _DebugTrainMissionOrderNeed()
+        {
+            if (Game.Manager.activity.LookupAny(EventType.TrainMission, out var act) &&
+                act is TrainMissionActivity _activity)
+            {
+                var top = _activity.topOrder;
+                for (var i = 0; i < top.ItemInfos.Count; i++)
+                {
+                    var info = top.ItemInfos[i];
+                    if (_activity.CheckMissionState(top, i) == 1)
+                    {
+                        _AddItemToBoard(info.itemID);
+                    }
+                }
+
+                var bottom = _activity.bottomOrder;
+                for (var i = 0; i < bottom.ItemInfos.Count; i++)
+                {
+                    var info = bottom.ItemInfos[i];
+                    if (_activity.CheckMissionState(bottom, i) == 1)
+                    {
+                        _AddItemToBoard(info.itemID);
+                    }
+                }
+            }
+        }
+
+        private void _DebugTrainMissionFinishTrain()
+        {
+            var ui = UIManager.Instance.TryGetUI(UIConfig.UITrainMissionMain);
+            if (ui == null)
+            {
+                return;
+            }
+
+            var main = (UITrainMissionMain)ui;
+            foreach (var pair in main.TrainModule.TopTrain.ItemMap)
+            {
+                var index = pair.Key;
+                var item = pair.Value;
+                if (item is MBTrainMissionTrainItemCarriage carriage)
+                {
+                    carriage.OnClickGO();
+                }
+            }
+
+            foreach (var pair in main.TrainModule.BottomTrain.ItemMap)
+            {
+                var index = pair.Key;
+                var item = pair.Value;
+                if (item is MBTrainMissionTrainItemCarriage carriage)
+                {
+                    carriage.OnClickGO();
+                }
+            }
+        }
+
+        private void _DebugTrainMissionRecycle()
+        {
+            if (Game.Manager.activity.LookupAny(EventType.TrainMission, out var act) &&
+                act is TrainMissionActivity _activity)
+            {
+                _activity.FinishRoundDebug();
             }
         }
 

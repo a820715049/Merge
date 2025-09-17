@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using fat.rawdata;
 using static fat.conf.Data;
 
-namespace FAT {
-    public abstract class IScreenPopup {
-        public struct Option {
+namespace FAT
+{
+    public abstract class IScreenPopup
+    {
+        public struct Option
+        {
             public bool ignoreLimit;
             public bool delay;
+            public bool ignoreDelay;//在和主棋盘等价的活动棋盘上时是否可以无视delay限制
         }
         public int PopupId { get; internal set; }
         public int PopupCount { get; internal set; }
@@ -23,21 +27,24 @@ namespace FAT {
         public Option option;
         public object Custom { get; set; }
 
-        public virtual bool CheckValid(out string rs_) {
+        public virtual bool CheckValid(out string rs_)
+        {
             if (PopupConf == null) { rs_ = "no conf"; return false; }
-            if (PopupRes  == null) { rs_ = "no res"; return false; }
+            if (PopupRes == null) { rs_ = "no res"; return false; }
             rs_ = null;
             return true;
         }
 
-        public virtual bool StateValid(PopupType state_) {
+        public virtual bool StateValid(PopupType state_)
+        {
             var s = (int)state_;
             return s < 0 || (PopupConf != null && PopupConf.PopupType.Contains(s));
         }
 
         public virtual bool Ready() => true;
 
-        public virtual bool OpenPopup() {
+        public virtual bool OpenPopup()
+        {
             ++PopupCount;
             UIManager.Instance.OpenWindow(PopupRes);
             return true;

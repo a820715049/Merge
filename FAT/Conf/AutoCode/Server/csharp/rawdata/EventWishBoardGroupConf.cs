@@ -66,7 +66,7 @@ namespace fat.rawdata {
   /// <summary>
   /// annotation@annotation_type(type="rawdata")
   /// annotation@rawdata(row="EventWishBoardGroup",table="EventWishBoardGroupMap",table_wrapper="EventWishBoardGroupConf",map="true",map_key_type="int32",data="EventWishBoardGroupConf")
-  /// annotation@ab(table_ab="EventWishBoardGroupMapAB",table_ab_patch="EventWishBoardGroupMapABPatch",table_ab_value="EventWishBoardGroupMapABValue",ab_patch="false")
+  /// annotation@ab(table_ab="EventWishBoardGroupMapAB",table_ab_patch="EventWishBoardGroupMapABPatch",table_ab_value="EventWishBoardGroupMapABValue",ab_patch="true")
   /// annotation@filter(just_server="false",just_client="false")
   /// annotation@EventWishBoardGroup(id="id")
   /// </summary>

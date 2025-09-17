@@ -319,7 +319,6 @@ namespace FAT
             if (!loader.isSuccess)
                 DebugEx.Error($"MBBoardMisc::CoLoadEntryPrefab ----> loading res error {loader.error}");
 
-            if (loader.asset == null) yield break;
             var assetName = loader.asset.name;
             var key = _GetBoardEntryKey(assetName, activity);
             GameObjectPoolManager.Instance.PreparePool(key, loader.asset as GameObject);

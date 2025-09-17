@@ -27,6 +27,7 @@ namespace FAT
             Lite = lite_;
             confD = GetEnergyPack(lite_.Param);
             RefreshTheme(popupCheck_: true);
+            Popup.option = new IScreenPopup.Option { ignoreDelay = true };
         }
 
         public override bool SetupPending()

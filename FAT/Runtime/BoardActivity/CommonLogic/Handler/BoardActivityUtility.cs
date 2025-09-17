@@ -182,5 +182,109 @@ namespace FAT
 #endif
             return true;
         }
+
+        #region 农场棋盘接口
+
+        //供外部获取指定范围内的棋盘行配置 startRow从0开始
+        public static bool FillFarmBoardRowConfStr(int detailId, IList<string> container, int startRow, int needRowCount)
+        {
+            var configMan = Game.Manager.configMan;
+            var detailConf = configMan.GetEventFarmBoardDetailConfig(detailId);
+            if (detailConf == null || container == null)
+                return false;
+            var totalCount = detailConf.BoardRowId.Count;
+            if (startRow < 0 || totalCount <= 0 || needRowCount <= 0)
+                return false;
+            container.Clear();
+            //需要的行配置范围不超过总行数时 直接按index取配置；大于总行数时 不做处理
+            if (startRow + needRowCount <= totalCount)
+            {
+                for (int i = startRow; i < startRow + needRowCount; i++)
+                {
+                    var rowConf = configMan.GetEventFarmRowConfig(detailConf.BoardRowId[i]);
+                    if (rowConf != null)
+                        container.Add(rowConf.UpMiniRow);
+                }
+                DebugEx.FormatInfo("FillBoardRowConfStr 1, startIndex = {0}, needCount = {1}", startRow + 1, needRowCount);
+            }
+
+#if UNITY_EDITOR
+            foreach (var info in container)
+            {
+                DebugEx.FormatInfo("FillBoardRowConfStr 3, info = {0}", info);
+            }
+#endif
+            return true;
+        }
+
+        #endregion
+
+        #region 棋盘查找逻辑
+
+        /// <summary>
+        /// 根据categoryId获取当前拥有的最高等级item
+        /// </summary>
+        /// <param name="categoryIds">categoryId列表</param>
+        /// <param name="results">结果列表</param>
+        /// <param name="defaultType">默认值类型  0:没有查到则填充0 1:没有查到则填充链条最高级</param>
+        public static void FillHighestLeveItemByCategory(IList<int> categoryIds, List<int> results, int defaultType = 0)
+        {
+            results.Clear();
+            foreach (var cid in categoryIds)
+            {
+                results.Add(GetHighestLevelItemIdInCategory(cid, defaultType));
+            }
+        }
+
+        /// <summary>
+        /// 根据categoryId获取当前拥有的最高等级item
+        /// </summary>
+        /// <param name="categoryId"></param>
+        /// <param name="defaultType">默认值类型  0:没有查到则填充0 1:没有查到则填充链条最高级</param>
+        /// <returns>生成器ID</returns>
+        public static int GetHighestLevelItemIdInCategory(int categoryId, int defaultType = 0)
+        {
+            var cat = Game.Manager.mergeItemMan.GetCategoryConfig(categoryId);
+            if (cat == null || cat.Progress.Count <= 0) return 0;
+            var itemId = defaultType switch
+            {
+                0 => 0,
+                1 => cat.Progress[^1],
+                _ => 0
+            };
+            for (var i = cat.Progress.Count - 1; i >= 0; i--)
+            {
+                var tid = cat.Progress[i];
+                if (HasActiveItemInMainBoardAndInventory(tid) || HasItemInMainBoardRewardTrack(tid))
+                {
+                    itemId = tid;
+                    break;
+                }
+            }
+            return itemId;
+        }
+
+        /// <summary>
+        /// 判断主棋盘存在item
+        /// </summary>
+        public static bool HasActiveItemInMainBoard(int itemId) => Game.Manager.mainMergeMan.worldTracer.GetCurrentActiveBoardItemCount().ContainsKey(itemId);
+
+
+        /// <summary>
+        /// 判断主棋盘和背包存在item
+        /// </summary>
+        public static bool HasActiveItemInMainBoardAndInventory(int itemId) => Game.Manager.mainMergeMan.worldTracer.GetCurrentActiveBoardAndInventoryItemCount().ContainsKey(itemId);
+
+
+        /// <summary>
+        /// 判断主棋盘礼物队列存在item
+        /// </summary>
+        public static bool HasItemInMainBoardRewardTrack(int itemId)
+        {
+            var index = Game.Manager.mainMergeMan.world.FindRewardIndex(itemId);
+            return index >= 0;
+        }
+
+        #endregion
     }
 }

@@ -155,7 +155,7 @@ namespace fat.rawdata {
         = pb::FieldCodec.ForInt32(34);
     private readonly pbc::RepeatedField<int> online_ = new pbc::RepeatedField<int>();
     /// <summary>
-    /// 在线刷新时间间隔ms
+    /// 在线刷新时间间隔（s/100)
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<int> Online {

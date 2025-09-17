@@ -112,6 +112,10 @@ namespace FAT
                 {
                     ft = FlyType.BPExp;
                 }
+                else if (tokenConf.Feature == FeatureEntry.FeatureMicMilestone)
+                {
+                    ft = FlyType.ScoreMicToken;
+                }
             }
             else if (mgr.IsType(rewardId, ObjConfigType.Coin))
             {
@@ -244,7 +248,9 @@ namespace FAT
         public static Vector3 ResolveFlyTarget(FlyType ft)
         {
             var idx = FlyPosResolverList.FindLastIndex(x => x.ft == ft);
-            return idx >= 0 ? FlyPosResolverList[idx].handler() : Vector3.zero;
+            var result = idx >= 0 ? FlyPosResolverList[idx].handler() : Vector3.zero;
+            if (result == Vector3.zero) { idx = FlyPosResolverList.FindLastIndex(x => x.ft == FlyType.Default); }
+            return idx >= 0 ? FlyPosResolverList[idx].handler() : result;
         }
 
         public static void RegisterFlyTarget(FlyType flyType, Func<Vector3> func)

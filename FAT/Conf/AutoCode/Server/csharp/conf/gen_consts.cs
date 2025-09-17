@@ -9,6 +9,7 @@ using System;
 
 namespace fat.conf {
 
+	// PMT翻译系统使用的语言代码
 	public enum Lang
 	{
 		en = 0, // 英语
@@ -31,7 +32,26 @@ namespace fat.conf {
 		tr, // 土耳其语
 		idn, // 印尼语
 		viet, // 越南语
+		ms, // 马来语
+		nb, // 挪威语
+		sv, // 瑞典语
 	}
+
+	public static partial class PmtTranslation {
+        public static Lang ConvertPlatformLangToPmtLang(string platformLang) {
+            switch (platformLang) {
+                case "zh-Hans": case "zh_CN": return Lang.zh_hans_cn;
+                case "zh-Hant": case "zh_TW": return Lang.zh_hant_tw;
+                case "id": case "in": return Lang.idn;
+                case "vi": return Lang.viet;
+                default:
+	                if (Enum.TryParse(platformLang, true, out Lang lang)) {
+		                return lang;
+	                }
+	                return Lang.en;
+            }
+        }
+    }
 
 	public static partial class Constants {
 	}

@@ -101,6 +101,7 @@ namespace FAT
             MessageCenter.Get<MSG.UI_NEWLY_FINISHED_ORDER_SHOW>().AddListener(_OnMessageNewlyFinishedOrderShow);
             MessageCenter.Get<MSG.UI_ORDER_REQUEST_SCROLL>().AddListener(_OnMessageOrderRequestScroll);
             MessageCenter.Get<MSG.BOARD_ORDER_SCROLL_RESET>().AddListener(_OnMessageOrderScrollResetWithAnim);
+            MessageCenter.Get<MSG.BOARD_ORDER_SCROLL_SETTARGET>().AddListener(ScrollToTarget);
             spawn_delay_interval = Game.Manager.configMan.globalConfig.OrderEnterDelay / 1000f;
             spawn_delay_api = Game.Manager.configMan.globalConfig.OrderEnterApiDelay / 1000f;
 
@@ -127,6 +128,7 @@ namespace FAT
             MessageCenter.Get<MSG.UI_NEWLY_FINISHED_ORDER_SHOW>().RemoveListener(_OnMessageNewlyFinishedOrderShow);
             MessageCenter.Get<MSG.UI_ORDER_REQUEST_SCROLL>().RemoveListener(_OnMessageOrderRequestScroll);
             MessageCenter.Get<MSG.BOARD_ORDER_SCROLL_RESET>().RemoveListener(_OnMessageOrderScrollResetWithAnim);
+            MessageCenter.Get<MSG.BOARD_ORDER_SCROLL_SETTARGET>().RemoveListener(ScrollToTarget);
             _Cleanup();
         }
 
@@ -556,6 +558,8 @@ namespace FAT
                 _ScrollToPos(pos, duration);
             }
         }
+
+        public void ScrollToTarget(Transform target) => _ScrollToTarget(target);
 
         private void _ScrollToPos(float pos, float duration)
         {

@@ -84,6 +84,8 @@ namespace FAT.Merge
             _RegisterItemComponent<ItemMixSourceComponent>(ItemComponentType.MixSource, null, ItemMixSourceComponent.Validate);
             _RegisterItemComponent<ItemTrigAutoSourceComponent>(ItemComponentType.TrigAutoSource, null, ItemTrigAutoSourceComponent.Validate);
             _RegisterItemComponent<ItemActiveSourceComponent>(ItemComponentType.ActiveSource, null, ItemActiveSourceComponent.Validate);
+            _RegisterItemComponent<ItemActivityTokenComponent>(ItemComponentType.ActivityToken, null, null);
+            _RegisterItemComponent<ItemTokenMultiComponent>(ItemComponentType.TokenMulti, null, ItemTokenMultiComponent.Validate);
         }
 
         public static ItemComponentType GetEnumByType(System.Type type)

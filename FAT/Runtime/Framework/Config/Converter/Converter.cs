@@ -18,11 +18,11 @@ namespace Config
             private Dictionary<string, T> mCache = new Dictionary<string, T>();
             public T Get(string text)
             {
-                if(text == null)
+                if (text == null)
                 {
                     return default(T);
                 }
-                if(!mCache.TryGetValue(text, out var ret))
+                if (!mCache.TryGetValue(text, out var ret))
                 {
                     ret = new T();
                     var needCache = DoConvert(text, ref ret);
@@ -116,7 +116,7 @@ namespace Config
                 return true;
             }
         }
-        
+
         public class RandomBoxShowRewardConverter : ConverterBase<RandomBoxShowReward>
         {
             protected override bool DoConvert(string text, ref RandomBoxShowReward ret)
@@ -164,7 +164,55 @@ namespace Config
                 return true;
             }
         }
-        
+
+        public class CommonInt4Converter : ConverterBase<(int, int, int, int)>
+        {
+            // ref: https://stackoverflow.com/a/62780940
+            protected override bool DoConvert(string text, ref (int, int, int, int) ret)
+            {
+                var span = text.AsSpan();
+
+                var idx = span.IndexOf(':');
+                int.TryParse(span[..idx], out ret.Item1);
+                span = span[(idx + 1)..];
+
+                idx = span.IndexOf(':');
+                if (idx >= 0)
+                {
+                    int.TryParse(span[..idx], out ret.Item2);
+                    span = span[(idx + 1)..];
+                    var idx_ = span.IndexOf(':');
+                    if (idx_ >= 0)
+                    {
+                        int.TryParse(span[..idx_], out ret.Item3);
+                        span = span[(idx_ + 1)..];
+                        int.TryParse(span, out ret.Item4);
+                    }
+                    else
+                    {
+                        int.TryParse(span, out ret.Item3);
+                        ret.Item4 = 0;
+                    }
+                }
+                else
+                {
+                    int.TryParse(span, out ret.Item2);
+                    ret.Item3 = 0;
+                    ret.Item4 = 0;
+                }
+                //检查第一项是否是赛季物品 是的话 就根据配置做转化
+                var id = ret.Item1;
+                var objectMan = Game.Manager.objectMan;
+                var isSeasonItem = objectMan.IsType(id, ObjConfigType.SeasonItem);
+                if (isSeasonItem)
+                {
+                    ret.Item1 = objectMan.TransSeasonItemToRealId(id);
+                    return false;
+                }
+                return true;
+            }
+        }
+
         public class CoordConverter : ConverterBase<CoordConfig>
         {
             protected override bool DoConvert(string text, ref CoordConfig ret)

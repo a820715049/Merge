@@ -253,5 +253,9 @@ namespace FAT
         #region 倍率排行榜
         public static readonly ReasonString multi_ranking_token = new(nameof(multi_ranking_token));
         #endregion
+
+        #region  train mission
+        public static readonly ReasonString train_mission = new(nameof(train_mission));
+        #endregion
     }
 }

@@ -25,33 +25,33 @@ namespace fat.rawdata {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "CiRyYXdkYXRhL1NldmVuRGF5VGFza0RldGFpbENvbmYucHJvdG8SB3Jhd2Rh",
-            "dGEiVAoSU2V2ZW5EYXlUYXNrRGV0YWlsEgoKAmlkGAEgASgFEgwKBGRpZmYY",
-            "AiABKAUSEQoJcG9pbnRzUndkGAMgAygFEhEKCXRhc2tHcm91cBgEIAMoBSLa",
-            "AQocU2V2ZW5EYXlUYXNrRGV0YWlsTWFwQUJWYWx1ZRJfChVTZXZlbkRheVRh",
-            "c2tEZXRhaWxNYXAYASADKAsyQC5yYXdkYXRhLlNldmVuRGF5VGFza0RldGFp",
-            "bE1hcEFCVmFsdWUuU2V2ZW5EYXlUYXNrRGV0YWlsTWFwRW50cnkaWQoaU2V2",
-            "ZW5EYXlUYXNrRGV0YWlsTWFwRW50cnkSCwoDa2V5GAEgASgFEioKBXZhbHVl",
-            "GAIgASgLMhsucmF3ZGF0YS5TZXZlbkRheVRhc2tEZXRhaWw6AjgBIukEChZT",
-            "ZXZlbkRheVRhc2tEZXRhaWxDb25mElkKFVNldmVuRGF5VGFza0RldGFpbE1h",
-            "cBgBIAMoCzI6LnJhd2RhdGEuU2V2ZW5EYXlUYXNrRGV0YWlsQ29uZi5TZXZl",
-            "bkRheVRhc2tEZXRhaWxNYXBFbnRyeRJdChdTZXZlbkRheVRhc2tEZXRhaWxN",
-            "YXBBQhgCIAMoCzI8LnJhd2RhdGEuU2V2ZW5EYXlUYXNrRGV0YWlsQ29uZi5T",
-            "ZXZlbkRheVRhc2tEZXRhaWxNYXBBQkVudHJ5EmcKHFNldmVuRGF5VGFza0Rl",
-            "dGFpbE1hcEFCUGF0Y2gYAyADKAsyQS5yYXdkYXRhLlNldmVuRGF5VGFza0Rl",
-            "dGFpbENvbmYuU2V2ZW5EYXlUYXNrRGV0YWlsTWFwQUJQYXRjaEVudHJ5GlkK",
-            "GlNldmVuRGF5VGFza0RldGFpbE1hcEVudHJ5EgsKA2tleRgBIAEoBRIqCgV2",
-            "YWx1ZRgCIAEoCzIbLnJhd2RhdGEuU2V2ZW5EYXlUYXNrRGV0YWlsOgI4ARpl",
-            "ChxTZXZlbkRheVRhc2tEZXRhaWxNYXBBQkVudHJ5EgsKA2tleRgBIAEoCRI0",
-            "CgV2YWx1ZRgCIAEoCzIlLnJhd2RhdGEuU2V2ZW5EYXlUYXNrRGV0YWlsTWFw",
-            "QUJWYWx1ZToCOAEaagohU2V2ZW5EYXlUYXNrRGV0YWlsTWFwQUJQYXRjaEVu",
-            "dHJ5EgsKA2tleRgBIAEoCRI0CgV2YWx1ZRgCIAEoCzIlLnJhd2RhdGEuU2V2",
-            "ZW5EYXlUYXNrRGV0YWlsTWFwQUJWYWx1ZToCOAFCPVotZ2l0bGFiLmZ1bnBs",
-            "dXMuaW8vZmF0L2NvbmYvZ2VuL2dvbGFuZy9yYXdkYXRhqgILZmF0LnJhd2Rh",
-            "dGFiBnByb3RvMw=="));
+            "dGEiZwoSU2V2ZW5EYXlUYXNrRGV0YWlsEgoKAmlkGAEgASgFEgwKBGRpZmYY",
+            "AiABKAUSEQoJZmluYWxfYm94GAUgASgJEhEKCXBvaW50c1J3ZBgDIAMoBRIR",
+            "Cgl0YXNrR3JvdXAYBCADKAUi2gEKHFNldmVuRGF5VGFza0RldGFpbE1hcEFC",
+            "VmFsdWUSXwoVU2V2ZW5EYXlUYXNrRGV0YWlsTWFwGAEgAygLMkAucmF3ZGF0",
+            "YS5TZXZlbkRheVRhc2tEZXRhaWxNYXBBQlZhbHVlLlNldmVuRGF5VGFza0Rl",
+            "dGFpbE1hcEVudHJ5GlkKGlNldmVuRGF5VGFza0RldGFpbE1hcEVudHJ5EgsK",
+            "A2tleRgBIAEoBRIqCgV2YWx1ZRgCIAEoCzIbLnJhd2RhdGEuU2V2ZW5EYXlU",
+            "YXNrRGV0YWlsOgI4ASLpBAoWU2V2ZW5EYXlUYXNrRGV0YWlsQ29uZhJZChVT",
+            "ZXZlbkRheVRhc2tEZXRhaWxNYXAYASADKAsyOi5yYXdkYXRhLlNldmVuRGF5",
+            "VGFza0RldGFpbENvbmYuU2V2ZW5EYXlUYXNrRGV0YWlsTWFwRW50cnkSXQoX",
+            "U2V2ZW5EYXlUYXNrRGV0YWlsTWFwQUIYAiADKAsyPC5yYXdkYXRhLlNldmVu",
+            "RGF5VGFza0RldGFpbENvbmYuU2V2ZW5EYXlUYXNrRGV0YWlsTWFwQUJFbnRy",
+            "eRJnChxTZXZlbkRheVRhc2tEZXRhaWxNYXBBQlBhdGNoGAMgAygLMkEucmF3",
+            "ZGF0YS5TZXZlbkRheVRhc2tEZXRhaWxDb25mLlNldmVuRGF5VGFza0RldGFp",
+            "bE1hcEFCUGF0Y2hFbnRyeRpZChpTZXZlbkRheVRhc2tEZXRhaWxNYXBFbnRy",
+            "eRILCgNrZXkYASABKAUSKgoFdmFsdWUYAiABKAsyGy5yYXdkYXRhLlNldmVu",
+            "RGF5VGFza0RldGFpbDoCOAEaZQocU2V2ZW5EYXlUYXNrRGV0YWlsTWFwQUJF",
+            "bnRyeRILCgNrZXkYASABKAkSNAoFdmFsdWUYAiABKAsyJS5yYXdkYXRhLlNl",
+            "dmVuRGF5VGFza0RldGFpbE1hcEFCVmFsdWU6AjgBGmoKIVNldmVuRGF5VGFz",
+            "a0RldGFpbE1hcEFCUGF0Y2hFbnRyeRILCgNrZXkYASABKAkSNAoFdmFsdWUY",
+            "AiABKAsyJS5yYXdkYXRhLlNldmVuRGF5VGFza0RldGFpbE1hcEFCVmFsdWU6",
+            "AjgBQj1aLWdpdGxhYi5mdW5wbHVzLmlvL2ZhdC9jb25mL2dlbi9nb2xhbmcv",
+            "cmF3ZGF0YaoCC2ZhdC5yYXdkYXRhYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.SevenDayTaskDetail), global::fat.rawdata.SevenDayTaskDetail.Parser, new[]{ "Id", "Diff", "PointsRwd", "TaskGroup" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.SevenDayTaskDetail), global::fat.rawdata.SevenDayTaskDetail.Parser, new[]{ "Id", "Diff", "FinalBox", "PointsRwd", "TaskGroup" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.SevenDayTaskDetailMapABValue), global::fat.rawdata.SevenDayTaskDetailMapABValue.Parser, new[]{ "SevenDayTaskDetailMap" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.SevenDayTaskDetailConf), global::fat.rawdata.SevenDayTaskDetailConf.Parser, new[]{ "SevenDayTaskDetailMap", "SevenDayTaskDetailMapAB", "SevenDayTaskDetailMapABPatch" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, null, })
           }));
@@ -98,6 +98,7 @@ namespace fat.rawdata {
     public SevenDayTaskDetail(SevenDayTaskDetail other) : this() {
       id_ = other.id_;
       diff_ = other.diff_;
+      finalBox_ = other.finalBox_;
       pointsRwd_ = other.pointsRwd_.Clone();
       taskGroup_ = other.taskGroup_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
@@ -135,6 +136,20 @@ namespace fat.rawdata {
       get { return diff_; }
       set {
         diff_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "final_box" field.</summary>
+    public const int FinalBoxFieldNumber = 5;
+    private string finalBox_ = "";
+    /// <summary>
+    /// 最终大奖宝箱图
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string FinalBox {
+      get { return finalBox_; }
+      set {
+        finalBox_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
@@ -183,6 +198,7 @@ namespace fat.rawdata {
       }
       if (Id != other.Id) return false;
       if (Diff != other.Diff) return false;
+      if (FinalBox != other.FinalBox) return false;
       if(!pointsRwd_.Equals(other.pointsRwd_)) return false;
       if(!taskGroup_.Equals(other.taskGroup_)) return false;
       return Equals(_unknownFields, other._unknownFields);
@@ -193,6 +209,7 @@ namespace fat.rawdata {
       int hash = 1;
       if (Id != 0) hash ^= Id.GetHashCode();
       if (Diff != 0) hash ^= Diff.GetHashCode();
+      if (FinalBox.Length != 0) hash ^= FinalBox.GetHashCode();
       hash ^= pointsRwd_.GetHashCode();
       hash ^= taskGroup_.GetHashCode();
       if (_unknownFields != null) {
@@ -221,6 +238,10 @@ namespace fat.rawdata {
       }
       pointsRwd_.WriteTo(output, _repeated_pointsRwd_codec);
       taskGroup_.WriteTo(output, _repeated_taskGroup_codec);
+      if (FinalBox.Length != 0) {
+        output.WriteRawTag(42);
+        output.WriteString(FinalBox);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -240,6 +261,10 @@ namespace fat.rawdata {
       }
       pointsRwd_.WriteTo(ref output, _repeated_pointsRwd_codec);
       taskGroup_.WriteTo(ref output, _repeated_taskGroup_codec);
+      if (FinalBox.Length != 0) {
+        output.WriteRawTag(42);
+        output.WriteString(FinalBox);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -254,6 +279,9 @@ namespace fat.rawdata {
       }
       if (Diff != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Diff);
+      }
+      if (FinalBox.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(FinalBox);
       }
       size += pointsRwd_.CalculateSize(_repeated_pointsRwd_codec);
       size += taskGroup_.CalculateSize(_repeated_taskGroup_codec);
@@ -273,6 +301,9 @@ namespace fat.rawdata {
       }
       if (other.Diff != 0) {
         Diff = other.Diff;
+      }
+      if (other.FinalBox.Length != 0) {
+        FinalBox = other.FinalBox;
       }
       pointsRwd_.Add(other.pointsRwd_);
       taskGroup_.Add(other.taskGroup_);
@@ -308,6 +339,10 @@ namespace fat.rawdata {
             taskGroup_.AddEntriesFrom(input, _repeated_taskGroup_codec);
             break;
           }
+          case 42: {
+            FinalBox = input.ReadString();
+            break;
+          }
         }
       }
     #endif
@@ -338,6 +373,10 @@ namespace fat.rawdata {
           case 34:
           case 32: {
             taskGroup_.AddEntriesFrom(ref input, _repeated_taskGroup_codec);
+            break;
+          }
+          case 42: {
+            FinalBox = input.ReadString();
             break;
           }
         }

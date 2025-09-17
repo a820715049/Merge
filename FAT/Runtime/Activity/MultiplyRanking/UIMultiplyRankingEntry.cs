@@ -44,6 +44,12 @@ namespace FAT
             MessageCenter.Get<MSG.MULTIPLY_RANKING_ENTRY_REFRESH_RED_DOT>().AddListener(RefreshRedDot);
             MessageCenter.Get<MSG.MULTIPLY_RANKING_BLOCK_ENTRY_UPDATE>().AddListener(_BlockRefresh);
             MessageCenter.Get<MSG.MULTIPLY_RANKING_RANKING_CHANGE>().AddListener(_RefreshRanking);
+            MessageCenter.Get<MSG.BOARD_FLY_START>().AddListener(_BoardFlyStart);
+        }
+
+        private void _BoardFlyStart()
+        {
+            MessageCenter.Get<MSG.BOARD_ORDER_SCROLL_SETTARGET>().Dispatch(this.transform);
         }
 
         private void _BlockRefresh()
@@ -211,6 +217,7 @@ namespace FAT
             MessageCenter.Get<MSG.MULTIPLY_RANKING_ENTRY_REFRESH_RED_DOT>().RemoveListener(RefreshRedDot);
             MessageCenter.Get<MSG.MULTIPLY_RANKING_BLOCK_ENTRY_UPDATE>().RemoveListener(_BlockRefresh);
             MessageCenter.Get<MSG.MULTIPLY_RANKING_RANKING_CHANGE>().RemoveListener(_RefreshRanking);
+            MessageCenter.Get<MSG.BOARD_FLY_START>().RemoveListener(_BoardFlyStart);
         }
     }
 }

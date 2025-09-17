@@ -51,6 +51,7 @@ namespace FAT
                 EventType.Landmark => (feature.IsFeatureEntryUnlocked(FeatureLandmark), rf),
                 EventType.MultiplierRanking => (feature.IsFeatureEntryUnlocked(FeatureMultiplierRanking), rf),
                 EventType.FrozenItem => (feature.IsFeatureEntryUnlocked(FeatureFrozenItem), rf),
+                EventType.TrainMission => (feature.IsFeatureEntryUnlocked(FeatureTrainMission), rf),
                 EventType.MicMilestone => (feature.IsFeatureEntryUnlocked(FeatureMicMilestone), rf),
                 _ => (true, null),
             };
@@ -95,6 +96,7 @@ namespace FAT
                 EventType.Landmark => new LandMarkActivity(lite_),
                 EventType.MultiplierRanking => new ActivityMultiplierRanking(lite_),
                 EventType.FrozenItem => new ActivityFrozenItem(lite_),
+                EventType.TrainMission => new TrainMissionActivity(lite_),
                 EventType.MicMilestone => new ActivityScoreMic(lite_),
                 _ => null,
             };

@@ -13,12 +13,14 @@ using Spine;
 using static EL.PoolMapping;
 using System.Threading.Tasks;
 
-namespace FAT {
+namespace FAT
+{
     using static UILayer;
     using static PoolMapping;
     using static MessageCenter;
 
-    public partial class UIConfig {
+    public partial class UIConfig
+    {
         public static UIResource UIActivityGuess = new("UIActivityGuess.prefab", AboveStatus, "event_guesscolor_default");
         public static UIResource UIActivityGuessStart = new("UIActivityGuessStart.prefab", AboveStatus, "event_guesscolor_default");
         public static UIResource UIActivityGuessEnd = new("UIActivityGuessEnd.prefab", AboveStatus, "event_guesscolor_default");
@@ -28,7 +30,8 @@ namespace FAT {
         public static UIResource UIActivityGuessHelp = new("UIActivityGuessHelp.prefab", AboveStatus, "event_guesscolor_default");
     }
 
-    public class ActivityGuess : ActivityLike, IBoardEntry {
+    public class ActivityGuess : ActivityLike, IBoardEntry
+    {
         public static readonly ReasonString guess = new(nameof(guess));
         public static readonly ReasonString guess_milestone = new(nameof(guess_milestone));
         public EventGuessRound confR;
@@ -57,7 +60,7 @@ namespace FAT {
         public int AnswerNext { get; private set; }
         public bool TokenReady => Token > 0;
         public bool AnswerReady => AnswerNext >= answer.Count;
-        public int Token { get ; private set; }
+        public int Token { get; private set; }
         public int Score { get; private set; }
         public int ScorePhase { get; private set; }
         public RewardCommitData scoreCommit { get; private set; }
@@ -78,7 +81,8 @@ namespace FAT {
         public int levelIndexR;
         private GuessSpawnBonusHandler spawnBonusHandler;
 
-        public static void DebugTest() {
+        public static void DebugTest()
+        {
             var a = Game.Manager.activity;
             // ActivityLiteFlex.CreateInfo(1, ActivityLite.FromInternal, default, out var info);
             // ActivityLiteFlex.CreateInstance(info, EventType.Default, out var lite);
@@ -91,7 +95,8 @@ namespace FAT {
             // acti.Open();
             a.DebugInsert("-1 guess 1");
             a.DebugActivate("-1,600");
-            async Task F() {
+            async Task F()
+            {
                 await Task.Delay(500);
                 var acti = (ActivityGuess)a.LookupAny(EventType.Guess);
                 acti.Token = 1000;
@@ -102,7 +107,8 @@ namespace FAT {
             _ = F();
         }
 
-        public static void DebugLastM() {
+        public static void DebugLastM()
+        {
             var a = Game.Manager.activity;
             var acti = (ActivityGuess)a.LookupAny(EventType.Guess);
             var n = acti.prize.Count - 1;
@@ -110,25 +116,28 @@ namespace FAT {
             acti.Milestone = acti.prize[n].Value - 50;
         }
 
-        public static void DebugReady() {
+        public static void DebugReady()
+        {
             var a = Game.Manager.activity;
             var acti = (ActivityGuess)a.LookupAny(EventType.Guess);
             var aK = acti.AnswerKey();
             acti.ApplyGenerate(acti.answer.Count, aK, aK, 0, 0, 0, 0);
         }
-        
-        public ActivityGuess() {}
-        public ActivityGuess(ActivityLite lite_) {
+
+        public ActivityGuess() { }
+        public ActivityGuess(ActivityLite lite_)
+        {
             Lite = lite_;
             confR = GetEventGuessRound(lite_.Param);
             scoreCommit = null;
             SetupBonusHandler();
         }
 
-        public void SetupTheme() {
+        public void SetupTheme()
+        {
             VisualMain.Setup(confD.GuessMainTheme);
             VisualStart.Setup(confD.StartTheme, this);
-            VisualEnd.Setup(confD.RecontinueTheme, this, active_:false);
+            VisualEnd.Setup(confD.RecontinueTheme, this, active_: false);
             VisualReward.Setup(confD.RewardTheme, this);
             VisualRestart.Setup(confD.RestartTheme, this);
             VisualLoading.Setup(confD.LoadingTheme);
@@ -155,7 +164,8 @@ namespace FAT {
             map.TryCopy("desc2", "subTitle1");
         }
 
-        public void SetupDetail(int n_, int id_ = 0, int level_ = 0, int milestone_ = 0) {
+        public void SetupDetail(int n_, int id_ = 0, int level_ = 0, int milestone_ = 0)
+        {
             roundIndex = n_;
             var n = n_;
             var id = confR.IncludeGuessId[n];
@@ -164,7 +174,8 @@ namespace FAT {
             DebugEx.Info($"{nameof(ActivityGuess)} round index:{roundIndex} detail id:{id}");
             confD1 = GetEventGuessDetail(id);
             prize.Clear();
-            foreach(var c in confD1.Milestones) {
+            foreach (var c in confD1.Milestones)
+            {
                 var e = new GuessMilestone(c);
                 prize.Add(e);
             }
@@ -176,11 +187,13 @@ namespace FAT {
             SetupTheme();
         }
 
-        public void SetupLevel(int level_) {
+        public void SetupLevel(int level_)
+        {
             levelIndex = level_;
             tokenCost = 0;
             var list = confD1.IncludeLevel;
-            if (level_ >= list.Count) {
+            if (level_ >= list.Count)
+            {
                 level_ -= list.Count;
                 list = confD1.IncludeCycleLevel;
             }
@@ -190,18 +203,21 @@ namespace FAT {
             DebugEx.Info($"{nameof(ActivityGuess)} level id:{id} index:{levelIndex}");
         }
 
-        public void NextLevel() {
+        public void NextLevel()
+        {
             DataTracker.GuessLevelComplete(this);
             ++levelIndexR;
             SetupLevel(++levelIndex);
             Generate();
         }
 
-        public bool SetupNextRound(bool loop_ = false) {
+        public bool SetupNextRound(bool loop_ = false)
+        {
             var n = roundIndex + 1;
             var rCount = confR.IncludeGuessId.Count;
             if (loop_) n %= rCount;
-            if (n >= rCount) {
+            if (n >= rCount)
+            {
                 return false;
             }
             SetupDetail(n);
@@ -210,7 +226,8 @@ namespace FAT {
             return true;
         }
 
-        public override void SaveSetup(ActivityInstance data_) {
+        public override void SaveSetup(ActivityInstance data_)
+        {
             var any = data_.AnyState;
             any.Add(ToRecord(1, ScorePhase));
             any.Add(ToRecord(2, Score));
@@ -231,16 +248,19 @@ namespace FAT {
             any.Add(ToRecord(30, handCount));
             any.Add(ToRecord(31, HandKey()));
             any.Add(ToRecord(32, PlaceKey()));
-            for (var k = 0; k < answer.Count; ++k) {
+            for (var k = 0; k < answer.Count; ++k)
+            {
                 any.Add(ToRecord(51 + k, answer[k].record));
             }
             any.Add(ToRecord(100, record.Count));
-            for(var k = 0; k < record.Count; ++k) {
+            for (var k = 0; k < record.Count; ++k)
+            {
                 any.Add(ToRecord(101 + k, record[k].value));
             }
         }
 
-        public override void LoadSetup(ActivityInstance data_) {
+        public override void LoadSetup(ActivityInstance data_)
+        {
             if (!Valid) return;
             var any = data_.AnyState;
             ScorePhase = ReadInt(1, any);
@@ -265,23 +285,27 @@ namespace FAT {
             var placeK = ReadInt(32, any);
             ApplyGenerate(count, answerK, betK, matchK, fromK, handK, placeK);
             var (valid, rs) = ValidateLevel();
-            if (!valid) {
+            if (!valid)
+            {
                 DebugEx.Error($"{nameof(ActivityGuess)} reason:{rs}");
                 Generate();
                 return;
             }
-            for (var k = 0; k < answer.Count; ++k) {
+            for (var k = 0; k < answer.Count; ++k)
+            {
                 var rc = ReadInt(51 + k, any);
                 answer[k].record = rc;
-                foreach(var v in UnpackSet(rc)) answer[k].recordB |= 1 << (v - 1);
+                foreach (var v in UnpackSet(rc)) answer[k].recordB |= 1 << (v - 1);
             }
             var r = ReadInt(100, any);
-            for (var k = 0; k < r; ++k) {
+            for (var k = 0; k < r; ++k)
+            {
                 record.Add(new(ReadInt(101 + k, any)));
             }
         }
 
-        public override void SetupFresh() {
+        public override void SetupFresh()
+        {
             SetupDetail(0);
             Generate();
             Token = 0;
@@ -290,52 +314,65 @@ namespace FAT {
             if (firstInType) DebugEx.Info($"{nameof(ActivityGuess)} first in type");
         }
 
-        public (bool, string) ValidateLevel() {
+        public (bool, string) ValidateLevel()
+        {
             if (answer.Count == 0) return (false, "answer empty");
-            try {
+            try
+            {
                 var map = new Dictionary<int, int>();
-                void V(int k_, int c_) {
+                void V(int k_, int c_)
+                {
                     map.TryGetValue(k_, out var v);
                     map[k_] = v + c_;
                 }
-                for (var k = 0; k < answer.Count; ++k) {
+                for (var k = 0; k < answer.Count; ++k)
+                {
                     var a = answer[k];
                     var v = a.value;
-                    if (v == 0) {
+                    if (v == 0)
+                    {
                         return (false, $"invalid answer at {k}");
                     }
                     V(v, 1);
                     V(a.bet, -1);
                 }
-                for (var k = 0; k < hand.Count; ++k) {
+                for (var k = 0; k < hand.Count; ++k)
+                {
                     V(hand[k].value, -1);
                 }
-                foreach (var (k, v) in map) {
-                    if (k != 0 && v != 0) {
+                foreach (var (k, v) in map)
+                {
+                    if (k != 0 && v != 0)
+                    {
                         return (false, $"answer not fullfillable card {k} diff:{v}");
                     }
                 }
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 return (false, $"answer validate fail:{e.Message}\n{e.StackTrace}");
             }
             return (true, null);
         }
 
-        public override void TryPopup(ScreenPopup popup_, PopupType state_) {
+        public override void TryPopup(ScreenPopup popup_, PopupType state_)
+        {
             if (MilestoneComplete) return;
-            VisualStart.Popup(popup_, state_, limit_:1);
+            VisualStart.Popup(popup_, state_, limit_: 1);
         }
 
-        public override void Open() {
-            if (Game.Manager.networkMan.isWeakNetwork) {
+        public override void Open()
+        {
+            if (Game.Manager.networkMan.isWeakNetwork)
+            {
                 Game.Manager.commonTipsMan.ShowPopTips(Toast.IapNetworkError);
                 return;
             }
             ActivityTransit.Enter(this, VisualLoading, VisualMain.res);
         }
 
-        public bool TryNextRound() {
+        public bool TryNextRound()
+        {
             if (!MilestoneComplete) return false;
             if (UIManager.Instance.IsOpen(UIConfig.UIActivityGuess))
             {
@@ -346,7 +383,8 @@ namespace FAT {
             {
                 DebugEx.Info("TryNextRound outside UIActivityGuess");
             }
-            if (SetupNextRound()) {
+            if (SetupNextRound())
+            {
                 VisualRestart.Popup();
                 return true;
             }
@@ -356,8 +394,10 @@ namespace FAT {
 
         public void Exit(UIResource ui_) => ActivityTransit.Exit(this, ui_);
 
-        public override void WhenActive(bool new_) {
-            if (!new_) {
+        public override void WhenActive(bool new_)
+        {
+            if (!new_)
+            {
                 if (MilestoneComplete) TryNextRound();
                 return;
             }
@@ -376,10 +416,10 @@ namespace FAT {
             var listT = PoolMappingAccess.Take(out List<RewardCommitData> list);
             using var _ = PoolMappingAccess.Borrow(out Dictionary<int, int> map);
             map[confD.TokenId] = Token;
-            ActivityExpire.ConvertToReward(confD.ExpirePopup, list, guess, token_:map);
+            ActivityExpire.ConvertToReward(confD.ExpirePopup, list, guess, token_: map);
             VisualStart.res.ActiveR.Close();
             VisualRestart.res.ActiveR.Close();
-            VisualEnd.Popup(custom_:listT);
+            VisualEnd.Popup(custom_: listT);
         }
 
         public ListActivity.IEntrySetup SetupEntry(ListActivity.Entry e_)
@@ -400,7 +440,8 @@ namespace FAT {
         }
 
         public void Generate() => Generate(level.conf.ItemInfo);
-        public int Generate(IList<int> weight_, int offset = -1) {
+        public int Generate(IList<int> weight_, int offset = -1)
+        {
             ClearGenerate();
             var max = 7;
             var random = new Random();
@@ -408,34 +449,42 @@ namespace FAT {
             int T(int v_) => (v_ + offset) % max + 1;
             using var _0 = PoolMappingAccess.Borrow(out List<int> list);
             using var _1 = PoolMappingAccess.Borrow(out List<(int, int)> listH);
-            for(var i = 0; i < weight_.Count; ++i) {
+            for (var i = 0; i < weight_.Count; ++i)
+            {
                 var w = weight_[i];
-                for (var k = 0; k < w; ++k) {
+                for (var k = 0; k < w; ++k)
+                {
                     list.Add(i);
                 }
                 listH.Add((i, w));
             }
-            while(list.Count > 0) {
+            while (list.Count > 0)
+            {
                 var n = random.Next(list.Count);
-                answer.Add(new() {
+                answer.Add(new()
+                {
                     value = T(list[n]),
                 });
                 list.RemoveAt(n);
             }
-            while (listH.Count > 0) {
+            while (listH.Count > 0)
+            {
                 var n = random.Next(listH.Count);
                 var (k, h) = listH[n];
-                for (var o = 0; o < h; ++o) {
+                for (var o = 0; o < h; ++o)
+                {
                     hand.Add(new() { value = T(k), place = hand.Count });
                 }
                 listH.RemoveAt(n);
             }
             handCount = hand.Count;
             var c = 0;
-            for (; c < answer.Count; ++c) {
+            for (; c < answer.Count; ++c)
+            {
                 if (answer[c].value != T(c)) break;
             }
-            if (c == answer.Count) {
+            if (c == answer.Count)
+            {
                 var n0 = answer[0];
                 var n1 = answer[^1];
                 (n1.value, n0.value) = (n0.value, n1.value);
@@ -445,16 +494,19 @@ namespace FAT {
             return offset;
         }
 
-        public void ClearGenerate() {
+        public void ClearGenerate()
+        {
             answer.Clear();
             hand.Clear();
             record.Clear();
             AnswerNext = 0;
         }
 
-        public void ApplyGenerate(int count_, int answer_, int bet_, int match_, int from_, int hand_, int place_) {
+        public void ApplyGenerate(int count_, int answer_, int bet_, int match_, int from_, int hand_, int place_)
+        {
             ClearGenerate();
-            foreach(var (a, b, m, f, h, p) in UnpackKey(count_, answer_, bet_, match_, from_, hand_, place_)) {
+            foreach (var (a, b, m, f, h, p) in UnpackKey(count_, answer_, bet_, match_, from_, hand_, place_))
+            {
                 answer.Add(new() { value = a, bet = b, from = f, match = m > 0 });
                 hand.Add(new() { value = h, place = p });
             }
@@ -463,28 +515,36 @@ namespace FAT {
             PrintAnswer();
         }
 
-        public void CountAnswer() {
+        public void CountAnswer()
+        {
             AnswerNext = answer.Count;
-            for (var k = 0; k < answer.Count; ++k) {
-                if (answer[k].bet == 0) {
+            for (var k = 0; k < answer.Count; ++k)
+            {
+                if (answer[k].bet == 0)
+                {
                     AnswerNext = k;
                     break;
                 }
             }
         }
 
-        public void CountHand() {
+        public void CountHand()
+        {
             handCount = 0;
-            for (var k = 0; k < hand.Count; ++k) {
+            for (var k = 0; k < hand.Count; ++k)
+            {
                 var h = hand[k];
                 if (h.value == 0) continue;
                 h.place = handCount++;
             }
         }
 
-        public void PrintAnswer() {
-            int F(int v_) {
-                for (var k = 0; k < hand.Count; ++k) {
+        public void PrintAnswer()
+        {
+            int F(int v_)
+            {
+                for (var k = 0; k < hand.Count; ++k)
+                {
                     if (hand[k].value == v_) return k + 1;
                 }
                 return 0;
@@ -495,31 +555,40 @@ namespace FAT {
 
         public void UpdateScoreOrToken(int rewardId, int addNum)
         {
-            switch (rewardId) {
-                case var _ when rewardId == confD.TokenId: {
-                    UpdateToken(addNum);
-                } break;
-                case var _ when rewardId == confD.RequireScoreId: {
-                    var prev = Score;
-                    Score += addNum;
-                    Get<MSG.ACTIVITY_GUESS_SCORE>().Dispatch(prev, Score);
-                    CheckScore();
-                    DataTracker.token_change.Track(rewardId, addNum, Score, guess);
-                } break;
-                case var _ when rewardId == confD.MilestoneScoreId: {
-                    UpdateMilestone(addNum);
-                } break;
+            switch (rewardId)
+            {
+                case var _ when rewardId == confD.TokenId:
+                    {
+                        UpdateToken(addNum);
+                    }
+                    break;
+                case var _ when rewardId == confD.RequireScoreId:
+                    {
+                        var prev = Score;
+                        Score += addNum;
+                        Get<MSG.ACTIVITY_GUESS_SCORE>().Dispatch(prev, Score);
+                        CheckScore();
+                        DataTracker.token_change.Track(rewardId, addNum, Score, guess);
+                    }
+                    break;
+                case var _ when rewardId == confD.MilestoneScoreId:
+                    {
+                        UpdateMilestone(addNum);
+                    }
+                    break;
             }
         }
 
-        public void UpdateToken(int v_) {
+        public void UpdateToken(int v_)
+        {
             var vo = Token;
             Token += v_;
             Get<MSG.ACTIVITY_GUESS_TOKEN>().Dispatch(vo, Token);
             DataTracker.token_change.Track(confD.TokenId, v_, Token, guess);
         }
 
-        public void UpdateMilestone(int v_) {
+        public void UpdateMilestone(int v_)
+        {
             var vo = Milestone;
             if (vo >= MilestoneMax) return;
             Milestone += v_;
@@ -528,14 +597,17 @@ namespace FAT {
             CheckMilestone();
         }
 
-        public void CheckMilestone() {
+        public void CheckMilestone()
+        {
             if (milestoneIndex >= prize.Count) return;
             var rMan = Game.Manager.rewardMan;
             GuessMilestone node;
-            while (milestoneIndex < prize.Count && Milestone >= (node = prize[milestoneIndex]).Value) {
+            while (milestoneIndex < prize.Count && Milestone >= (node = prize[milestoneIndex]).Value)
+            {
                 ++milestoneIndex;
                 var listT = PoolMappingAccess.Take<List<RewardCommitData>>(out var list);
-                foreach(var r in node.reward) {
+                foreach (var r in node.reward)
+                {
                     var d = rMan.BeginReward(r.Id, r.Count, guess_milestone);
                     list.Add(d);
                 }
@@ -545,12 +617,14 @@ namespace FAT {
             }
         }
 
-        public bool ToHand(int i_, out int ii_, out int ni_, bool auto_ = false) {
+        public bool ToHand(int i_, out int ii_, out int ni_, bool auto_ = false)
+        {
             var a = answer[i_];
             ii_ = a.from - 1;
             ni_ = i_;
             if (ii_ < 0 || a.match) return false;
-            if (!auto_) {
+            if (!auto_)
+            {
                 UpdateToken(1);
                 --tokenCost;
             }
@@ -558,7 +632,8 @@ namespace FAT {
             h.value = a.bet;
             a.bet = 0;
             a.from = 0;
-            if (AnswerNext > i_) {
+            if (AnswerNext > i_)
+            {
                 ni_ = AnswerNext;
                 AnswerNext = i_;
             }
@@ -566,7 +641,8 @@ namespace FAT {
             return true;
         }
 
-        public bool ToAnswer(int i_, out int ii_, out int ni_) {
+        public bool ToAnswer(int i_, out int ii_, out int ni_)
+        {
             var h = hand[i_];
             ii_ = AnswerNext;
             ni_ = AnswerNext;
@@ -577,15 +653,18 @@ namespace FAT {
             a.from = i_ + 1;
             a.bet = h.value;
             h.value = 0;
-            if (!PutRepeatedItem && (a.recordB & 1 << (a.bet - 1)) != 0) {
+            if (!PutRepeatedItem && (a.recordB & 1 << (a.bet - 1)) != 0)
+            {
                 PutRepeatedItem = true;
-                if (UIManager.Instance.TryGetCache(VisualMain.res.ActiveR, out var uiV) && uiV is UIActivityGuess ui) {
+                if (UIManager.Instance.TryGetCache(VisualMain.res.ActiveR, out var uiV) && uiV is UIActivityGuess ui)
+                {
                     PutRepeatedItemTarget = ui.answer[ii_].card.transform;
                 }
                 DebugEx.Info($"guess repeat {ii_} {PutRepeatedItemTarget.parent.name}");
                 Game.Manager.guideMan.TriggerGuide();
             }
-            while(++AnswerNext < answer.Count) {
+            while (++AnswerNext < answer.Count)
+            {
                 if (answer[AnswerNext].bet <= 0) break;
             }
             ni_ = AnswerNext;
@@ -593,23 +672,28 @@ namespace FAT {
             return true;
         }
 
-        public int PackKey(IEnumerable<int> v_) {
+        public int PackKey(IEnumerable<int> v_)
+        {
             var key = 0;
             var k = 0;
-            foreach(var v in v_.Reverse()) {
+            foreach (var v in v_.Reverse())
+            {
                 key += v * (int)Math.Pow(10, k);
                 ++k;
             }
             return key;
         }
 
-        public IEnumerable<(int, int, int, int, int, int)> UnpackKey(int count_, int v1_, int v2_, int v3_, int v4_, int v5_, int v6_) {
-            static int P(ref int v_, int f_) {
+        public IEnumerable<(int, int, int, int, int, int)> UnpackKey(int count_, int v1_, int v2_, int v3_, int v4_, int v5_, int v6_)
+        {
+            static int P(ref int v_, int f_)
+            {
                 var v = v_ / f_;
                 v_ %= f_;
                 return v;
             }
-            for (var k = count_ - 1; k >= 0; --k) {
+            for (var k = count_ - 1; k >= 0; --k)
+            {
                 var f = (int)Math.Pow(10, k);
                 yield return (
                     P(ref v1_, f),
@@ -622,54 +706,64 @@ namespace FAT {
             }
         }
 
-        public IEnumerable<int> UnpackSet(int v_) {
-            static int P(ref int v_, int f_) {
+        public IEnumerable<int> UnpackSet(int v_)
+        {
+            static int P(ref int v_, int f_)
+            {
                 var v = v_ % f_;
                 v_ /= f_;
                 return v;
             }
-            while(v_ > 0) {
+            while (v_ > 0)
+            {
                 yield return P(ref v_, 10);
             }
         }
 
-        public int AnswerKey() {
+        public int AnswerKey()
+        {
             var _ = PoolMappingAccess.Borrow(out List<int> list);
-            foreach(var a in answer) list.Add(a.value);
+            foreach (var a in answer) list.Add(a.value);
             return PackKey(list);
         }
 
-        public int BetKey() {
+        public int BetKey()
+        {
             var _ = PoolMappingAccess.Borrow(out List<int> list);
-            foreach(var a in answer) list.Add(a.bet);
+            foreach (var a in answer) list.Add(a.bet);
             return PackKey(list);
         }
 
-        public int MatchKey() {
+        public int MatchKey()
+        {
             var _ = PoolMappingAccess.Borrow(out List<int> list);
-            foreach(var a in answer) list.Add(a.match ? 1 : 0);
+            foreach (var a in answer) list.Add(a.match ? 1 : 0);
             return PackKey(list);
         }
 
-        public int FromKey() {
+        public int FromKey()
+        {
             var _ = PoolMappingAccess.Borrow(out List<int> list);
-            foreach(var a in answer) list.Add(a.from);
+            foreach (var a in answer) list.Add(a.from);
             return PackKey(list);
         }
 
-        public int HandKey() {
+        public int HandKey()
+        {
             var _ = PoolMappingAccess.Borrow(out List<int> list);
-            foreach(var h in hand) list.Add(h.value);
+            foreach (var h in hand) list.Add(h.value);
             return PackKey(list);
         }
 
-        public int PlaceKey() {
+        public int PlaceKey()
+        {
             var _ = PoolMappingAccess.Borrow(out List<int> list);
-            foreach(var h in hand) list.Add(h.place);
+            foreach (var h in hand) list.Add(h.place);
             return PackKey(list);
         }
 
-        public bool CheckRecord() {
+        public bool CheckRecord()
+        {
             var key = BetKey();
             var r = new GuessRecord(key);
             if (record.Contains(r)) return false;
@@ -678,12 +772,15 @@ namespace FAT {
             return true;
         }
 
-        public (bool, bool, List<GuessCheck>, Ref<List<RewardCommitData>>) CheckAnswer() {
-            if (!AnswerReady) {
+        public (bool, bool, List<GuessCheck>, Ref<List<RewardCommitData>>) CheckAnswer()
+        {
+            if (!AnswerReady)
+            {
                 DebugEx.Warning($"{nameof(ActivityGuess)} answer not complete {AnswerNext}<{answer.Count}");
                 return default;
             }
-            if (firstInType) {
+            if (firstInType)
+            {
                 FirstInTypeHack();
                 firstInType = false;
                 FirstCheck = true;
@@ -691,7 +788,8 @@ namespace FAT {
             }
             check.Clear();
             var m = 0;
-            for (var k = 0 ; k < answer.Count; ++k) {
+            for (var k = 0; k < answer.Count; ++k)
+            {
                 var a = answer[k];
                 var mO = a.match;
                 var mN = a.bet == a.value;
@@ -699,15 +797,17 @@ namespace FAT {
                 a.match = mN;
                 var cc = new GuessCheck(a, hand[a.from - 1], mO != mN, rC);
                 if (mN) ++m;
-                else {
+                else
+                {
                     var vh = 1 << (a.bet - 1);
                     rC = (a.recordB & vh) == 0;
-                    if (rC) {
+                    if (rC)
+                    {
                         a.recordB |= vh;
                         a.record *= 10;
                         a.record += a.bet;
                     }
-                    ToHand(k, out var ii, out _, auto_:true);
+                    ToHand(k, out var ii, out _, auto_: true);
                 }
                 cc.changeR = rC;
                 check.Add(cc);
@@ -720,10 +820,12 @@ namespace FAT {
             return (true, complete, check, reward);
         }
 
-        public Ref<List<RewardCommitData>> LevelComplete() {
+        public Ref<List<RewardCommitData>> LevelComplete()
+        {
             var ret = PoolMappingAccess.Take<List<RewardCommitData>>(out var list);
             var rMan = Game.Manager.rewardMan;
-            foreach(var r in level.reward) {
+            foreach (var r in level.reward)
+            {
                 var d = rMan.BeginReward(r.Id, r.Count, guess);
                 list.Add(d);
             }
@@ -731,22 +833,27 @@ namespace FAT {
             return ret;
         }
 
-        public void FirstInTypeHack() {
+        public void FirstInTypeHack()
+        {
             var aa = answer[^1];
             var ba = aa.bet;
             var va = aa.value;
             aa.value = ba;
             var count = answer.Count - 1;
-            for (var k = 0; k < count; ++k) {
+            for (var k = 0; k < count; ++k)
+            {
                 var a = answer[k];
-                if (a.value == ba) {
+                if (a.value == ba)
+                {
                     a.value = va;
                     break;
                 }
             }
-            for (var k = 0; k < count; ++k) {
+            for (var k = 0; k < count; ++k)
+            {
                 var a = answer[k];
-                if (a.bet == a.value) {
+                if (a.bet == a.value)
+                {
                     var o = answer[(k + 1) % count];
                     (o.value, a.value) = (a.value, o.value);
                 }
@@ -769,7 +876,7 @@ namespace FAT {
             {
                 //说明在棋盘内
                 var curBoardId = activeWorld.activeBoard.boardId;
-                if (curBoardId != confD.BoardId)
+                if (curBoardId != confD.BoardId && !activeWorld.isEquivalentToMain)
                 {
                     return null;
                 }
@@ -779,7 +886,7 @@ namespace FAT {
             return reward;
         }
 
-        public void CheckScore() 
+        public void CheckScore()
         {
             var cycle = ScorePhase >= confD1.NormalScore.Count;
             var max = cycle ? confD1.CycleScore : confD1.NormalScore[ScorePhase];
@@ -823,47 +930,53 @@ namespace FAT {
     }
 }
 
-namespace FAT.MSG {
+namespace FAT.MSG
+{
     public class ACTIVITY_GUESS_TOKEN : MessageBase<int, int> { }
     public class ACTIVITY_GUESS_SCORE : MessageBase<int, int> { }
     public class ACTIVITY_GUESS_MILESTONE : MessageBase<int, int> { }
     public class ACTIVITY_GUESS_ENTRY_REFRESH_RED_DOT : MessageBase { }
 }
 
-public partial class DataTracker {
-    public static void GuessLevelComplete(FAT.ActivityGuess acti_) {
+public partial class DataTracker
+{
+    public static void GuessLevelComplete(FAT.ActivityGuess acti_)
+    {
         var data = BorrowTrackObject();
         FillActivity(data, acti_);
         data["level_id"] = acti_.level.conf.Id;
         data["level_queue"] = acti_.levelIndexR + 1;
-        data["round_num"]= acti_.roundIndex + 1;
+        data["round_num"] = acti_.roundIndex + 1;
         data["token_use"] = acti_.tokenCost;
         TrackObject(data, "guess_level_complete");
     }
 
-    public static void GuessMilestone(FAT.ActivityGuess acti_, EventGuessMilestone conf_, int index1_, int count_) {
+    public static void GuessMilestone(FAT.ActivityGuess acti_, EventGuessMilestone conf_, int index1_, int count_)
+    {
         var data = BorrowTrackObject();
         FillActivity(data, acti_);
         data["milestone_id"] = conf_.Id;
         data["milestone_queue"] = index1_;
         data["milestone_difficulty"] = conf_.Diff;
         data["milestone_num"] = count_;
-        data["round_num"]= acti_.roundIndex + 1;
+        data["round_num"] = acti_.roundIndex + 1;
         data["is_final"] = index1_ == count_;
         TrackObject(data, "event_guess_milestone");
     }
 
-    public static void GuessRestart(FAT.ActivityGuess acti_) {
+    public static void GuessRestart(FAT.ActivityGuess acti_)
+    {
         var data = BorrowTrackObject();
         FillActivity(data, acti_);
-        data["round_num"]= acti_.roundIndex + 1;
+        data["round_num"] = acti_.roundIndex + 1;
         TrackObject(data, "event_guess_restart");
     }
 
-    public static void GuessEnd(FAT.ActivityGuess acti_) {
+    public static void GuessEnd(FAT.ActivityGuess acti_)
+    {
         var data = BorrowTrackObject();
         FillActivity(data, acti_);
-        data["round_total"]= acti_.roundIndex;
+        data["round_total"] = acti_.roundIndex;
         data["token_expire_num"] = acti_.Token;
         TrackObject(data, "event_guess_end");
     }

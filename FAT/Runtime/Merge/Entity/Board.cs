@@ -26,6 +26,7 @@ namespace FAT.Merge
         JumpCDExpired,
         FarmAnimal, //农场棋盘中被动物直接吃掉
         WishBoard,
+        TokenMultiExpired,
     }
 
     // 服务于ISpawnBonusHandler
@@ -179,6 +180,8 @@ namespace FAT.Merge
         public event System.Action<Item> onUseTimeScaleSource;                  //when use tesla
         public event System.Action<Item> onJumpCDBegin;                //when use jumpcd
         public event System.Action onJumpCDEnd;                        //jumpcd expired
+        public event System.Action<Item> onTokenMultiBegin;                //when use tokenMulti
+        public event System.Action onTokenMultiEnd;                        //tokenMulti expired
         public event System.Action onLackOfEnergy;                  //when user lack of energy to do some operation
         public event System.Action<Item, FeatureEntry> onFeatureClicked; //when feature clicked
         public event System.Action<Item, List<int>, System.Action<int>> onChoiceBoxWaiting; //when choicebox clicked
@@ -1566,6 +1569,26 @@ namespace FAT.Merge
                 return false;
             }
         }
+        
+        public bool CanUseTokenMultiItem(Item item)
+        {
+            var com = item.GetItemComponent<ItemTokenMultiComponent>();
+            return com != null && item.isActive && !item.isDead;
+        }
+
+        public bool UseTokenMulti(Item item)
+        {
+            if (CanUseTokenMultiItem(item))
+            {
+                mParent.UseTokenMultiItem(item);
+                return true;
+            }
+            else
+            {
+                DebugEx.FormatInfo("Merge::Board.UseTokenMulti ----> no TokenMulti for item {0}", item.tid);
+                return false;
+            }
+        }
 
         public bool CanUseOrderBoxItem(Item item)
         {
@@ -1610,6 +1633,21 @@ namespace FAT.Merge
             }
         }
 
+        /// <summary>
+        /// 转换生成器
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="tid"></param>
+        /// <param name="reason"></param>
+        /// <returns></returns>
+        public Item ConvertItem(Item item, int tid)
+        {
+            var pos = item.coord;
+            _DisposeItem(item);
+            var newItem = _SpawnItem(tid, _CalculateIdxByCoord(pos.x, pos.y), pos.x, pos.y, false, false, false);
+            return newItem;
+        }
+        
         public Item KillBubbleItem(Item item, ItemBubbleType type, out int transItemId)
         {
             transItemId = 0;
@@ -2009,6 +2047,19 @@ namespace FAT.Merge
                     return true;
                 }
             }
+            else if (item.HasComponent(ItemComponentType.TokenMulti))
+            {
+                // 物品是<token翻倍> 且当前没有正在激活的效果
+                if (!world.tokenMulti.hasActiveTokenMulti)
+                {
+                    if (UseTokenMulti(item))
+                    {
+                        Env.Instance.NotifyItemUse(item, ItemComponentType.TokenMulti);
+                        DebugEx.FormatInfo("Merge::Board::_TryUseRewardItemImmediately ----> use tokenMulti {0}", item);
+                    }
+                    return true;
+                }
+            }
             return false;
         }
 
@@ -2253,6 +2304,18 @@ namespace FAT.Merge
         public void TriggerJumpCDEnd()
         {
             onJumpCDEnd?.Invoke();
+        }
+        
+        public void TriggerTokenMultiBegin(Item item)
+        {
+            onTokenMultiBegin?.Invoke(item);
+            MessageCenter.Get<MSG.GAME_ORDER_TOKEN_MULTI_BEGIN>().Dispatch(item);
+        }
+
+        public void TriggerTokenMultiEnd()
+        {
+            onTokenMultiEnd?.Invoke();
+            MessageCenter.Get<MSG.GAME_ORDER_TOKEN_MULTI_END>().Dispatch();
         }
 
         private void _TriggerUnlockAround(int col, int row, ItemStateChangeContext context = null)

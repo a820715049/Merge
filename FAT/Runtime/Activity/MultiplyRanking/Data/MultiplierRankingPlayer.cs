@@ -2,7 +2,7 @@
  * @Author: chaoran.zhang
  * @Date: 2025-07-21 17:46:21
  * @LastEditors: chaoran.zhang
- * @LastEditTime: 2025-08-26 11:25:35
+ * @LastEditTime: 2025-09-11 10:43:49
  */
 using System.Linq;
 using fat.rawdata;
@@ -101,7 +101,6 @@ namespace FAT
             else if (isChasing) { nextUpdateTime += detail.PtGrowthTime.First(); }
             else { nextUpdateTime += Random.Range(detail.PtGrowthTime.First(), detail.PtGrowthTime.Last() + 1); }
             needPrepare = false;
-            Debug.LogWarningFormat("multiRanking prepareUpdate: robot {0}, next update time {1}, isWaiting {2}, isChasing {3}, id {4}", data.id, nextUpdateTime - Game.Instance.GetTimestampSeconds(), isWaiting, isChasing, configID);
             return false;
         }
 
@@ -128,7 +127,6 @@ namespace FAT
             if (isChasing) { data.score += (int)(Random.Range(detail.PtGrowthRange.First(), detail.PtGrowthRange.Last() + 1) * multi * detail.AccelMultiplier); }
             else if (isWaiting) { data.score += (int)(Random.Range(detail.PtGrowthRange.First(), detail.PtGrowthRange.Last() + 1) * detail.DecelMultiplier * multi); }
             else { data.score += Random.Range(detail.PtGrowthRange.First(), detail.PtGrowthRange.Last() + 1) * multi; }
-            Debug.LogErrorFormat("multiranking addscore: robot {0}, isWaiting {1}, isChasing {2}, score {3}, id {4}", data.id, isWaiting, isChasing, data.score - before, configID);
             updateCount++;
         }
 
@@ -140,7 +138,6 @@ namespace FAT
             if (detail == null) { return; }
             isWaiting = detail.IfChasing && rank.CheckNeedWaiting(this);
             isChasing = detail.IfChasing && rank.CheckNeedChasing(this);
-            Debug.LogWarningFormat("Add Offline Score :robot {0}, isWaiting {1}, isChasing {2}, current score {3}, max {4}", data.id, isWaiting, isChasing, data.score, detail.MaxPt);
             if (data.score >= detail.MaxPt && !isChasing) { return; }
             var growth = detail.OfflinePtGrowth.ConvertToInt3();
             var baseScore = offline / growth.Item1 * growth.Item2;
@@ -150,7 +147,6 @@ namespace FAT
             else { addscore = baseScore; }
             CheckChasingOrWaiting(ref addscore, rank);
             AddScoreOffline(addscore);
-            Debug.LogErrorFormat("Add Offline Score :robot {0}, offline time {1}, score {2}, max {3}", data.id, offline, addscore, detail.MaxPt);
         }
 
         /// <summary>

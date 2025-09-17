@@ -35,7 +35,7 @@ namespace FAT
         public void UpdateContentByValue(bool isCur, bool isDone, bool isGoal)
         {
             item.Refresh(_node.reward, isCur ? 17 : 50);
-            num.text.text = _node.showNum.ToString();
+            num.text.text = (_node.showNum + 1).ToString();
             num.Select(isCur ? 1 : 0);
             goal.gameObject.SetActive(isGoal);
             goalLock.gameObject.SetActive(isGoal);
@@ -47,9 +47,9 @@ namespace FAT
             bg4.gameObject.SetActive(isCur && _node.isPrime);
             sweep.gameObject.SetActive((isCur && _node.isPrime) || (!isCur && _node.isPrime));
             up.gameObject.SetActive(true);
-            down.gameObject.SetActive(_node.showNum > 1);
-            complete.gameObject.SetActive(_node.isComplete && !isCur && !isGoal);
-            item.gameObject.SetActive(!(_node.isComplete && !isCur && !isGoal));
+            down.gameObject.SetActive(_node.showNum > 0);
+            complete.gameObject.SetActive(isDone);
+            item.gameObject.SetActive(!isDone);
             
             RectTransform upRect = upV.GetComponent<RectTransform>();
             upRect.sizeDelta = new Vector2(isDone && !isCur && !isGoal ? 0 : -99, 0);

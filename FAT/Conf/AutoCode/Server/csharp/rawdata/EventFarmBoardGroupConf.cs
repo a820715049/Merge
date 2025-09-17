@@ -68,7 +68,7 @@ namespace fat.rawdata {
   /// <summary>
   /// annotation@annotation_type(type="rawdata")
   /// annotation@rawdata(row="EventFarmBoardGroup",table="EventFarmBoardGroupMap",table_wrapper="EventFarmBoardGroupConf",map="true",map_key_type="int32",data="EventFarmBoardGroupConf")
-  /// annotation@ab(table_ab="EventFarmBoardGroupMapAB",table_ab_patch="EventFarmBoardGroupMapABPatch",table_ab_value="EventFarmBoardGroupMapABValue",ab_patch="false")
+  /// annotation@ab(table_ab="EventFarmBoardGroupMapAB",table_ab_patch="EventFarmBoardGroupMapABPatch",table_ab_value="EventFarmBoardGroupMapABValue",ab_patch="true")
   /// annotation@filter(just_server="false",just_client="false")
   /// annotation@EventFarmBoardGroup(id="id")
   /// </summary>

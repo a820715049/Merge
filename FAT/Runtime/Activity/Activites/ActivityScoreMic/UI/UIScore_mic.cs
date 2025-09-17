@@ -17,7 +17,7 @@ namespace FAT
         public const float ToNextTime = 0.99f * 0.5f;
         public const float ToThisTime = 0.8f * 0.5f;
         
-        public const int MinNum = 6;
+        public const int MinNum = 7;
 
         #region 数据
         
@@ -33,7 +33,6 @@ namespace FAT
             public bool isCur;
             public bool isDone;
             public bool isGoal;
-            public bool isComplete;
         }
 
         private void SetupMilestone()
@@ -61,11 +60,10 @@ namespace FAT
             for (int i = 0; i < ListM.Count; i++)
             {
                 var m = ListM[i];
-                var idx = m.showNum - 1;
+                var idx = m.showNum;
                 m.isCur = curMileStoneIndex == idx;
                 m.isGoal = idx > curMileStoneIndex;
                 m.isDone = idx < curMileStoneIndex;
-                m.isComplete = m.showNum > ListM.Count - 5;
                 ListM[i] = m;
             }
         }
@@ -94,19 +92,19 @@ namespace FAT
         [SerializeField] private Transform helpRoot;       // 帮助界面根节点
         [SerializeField] private Button helpBtn;           // 帮助按钮
         [SerializeField] private Button block;             // 遮罩按钮
-        [SerializeField] private TextProOnACircle title;   // 标题文本
         [SerializeField] private TMP_Text cd;              // 倒计时文本
-        [SerializeField] private TMP_Text tip;             // 提示文本#SysComDesc1711
+        [SerializeField] private TMP_Text tip;             // 提示文本
         [SerializeField] private UIImageRes bg;            // 背景图片
-        [SerializeField] private UIImageRes cdBg;          // 倒计时背景
+        [SerializeField] private UIImageRes bg2;            // 背景图片
         [SerializeField] private UIImageRes titleBg;       // 标题背景
 
         [Header("里程碑相关")]
         [SerializeField] private ScrollRect scroll;
         [SerializeField] private GameObject cell;
         [SerializeField] private GameObject cellRoot;
+        [SerializeField] private RectTransform cellArea;
         
-        [SerializeField] private UICommonItem item;        // 大奖显示组件
+        [SerializeField] private TMP_Text helpTitle;
         [SerializeField] private MBRewardProgress rewardProgress;  // 进度条组件
         [SerializeField] private MBRewardIcon rewardIcon;   // 奖励图标
         [SerializeField] private Animation progressItemAnim; // 进度条Item动画
@@ -126,6 +124,7 @@ namespace FAT
         // Cell管理
         private List<Node> nodes = new();
         private List<GameObject> cellList = new();
+        private int nodeOffset = 0;
 
         // 动画状态管理
         private Coroutine _progressAnimationCoroutine;     // 进度条动画协程
@@ -138,28 +137,24 @@ namespace FAT
 
         protected override void OnCreate()
         {
-            SetupMilestone();
-            
             transform.AddButton("Content/close", Close);
             helpBtn.onClick.AddListener(OnClickHelp);
             playBtn.onClick.AddListener(OnClickPlay);
             block.onClick.AddListener(OnClickBlock);
             
-            // MBI18NText.SetPlainText(tip.gameObject, "#SysComDesc1711", activity.Conf.Token);
             GameObjectPoolManager.Instance.PreparePool(PoolItemType.SCORE_MIC_CELL, cell);
         }
 
         protected override void OnParse(params object[] items)
         {
             activity = (ActivityScoreMic)items[0];
-            if (items.Length > 1 && items[1] is PoolMapping.Ref<List<RewardCommitData>> data)
+            RefreshUI();
+            SetupMilestone();
+            
+            shouldPopup = activity.LastMilestoneLevel < activity.CurMilestoneLevel;
+            if (shouldPopup)
             {
-                rewardCommitData = data;
-                shouldPopup = true;
-            }
-            else
-            {
-                shouldPopup = false;
+                rewardCommitData = activity.PopCommitDataList();
             }
         }
         
@@ -200,6 +195,11 @@ namespace FAT
 
             // 刷新rewardIcon显示
             RefreshRewardIcon(curMilestoneIndex);
+            
+            if (shouldPopup)
+            {
+                PreCoPlayProgressAnimation();
+            }
         }
 
         protected override void OnPostOpen()
@@ -242,6 +242,7 @@ namespace FAT
                 GameObjectPoolManager.Instance.ReleaseObject(PoolItemType.SCORE_MIC_CELL, cellObj);
             }
             cellList.Clear();
+            activity.CheckCanEnd();
         }
 
         protected override void OnAddListener()
@@ -308,6 +309,12 @@ namespace FAT
 
         #region 数据刷新和显示
 
+        private void RefreshUI()
+        {
+            MBI18NText.SetFormatKey(tip.gameObject, "#SysComDesc1711", UIUtility.FormatTMPString(activity.Conf.Token));
+            MBI18NText.SetFormatKey(helpTitle.gameObject, "#SysComDesc1712", UIUtility.FormatTMPString(activity.Conf.Token));
+        }
+
         /// <summary>
         /// 刷新里程碑列表
         /// 根据当前里程碑索引正确显示里程碑状态
@@ -321,22 +328,26 @@ namespace FAT
                     continue;
                 nodes.Add(ListM[i]);
             }
+
+            nodeOffset = 0;
             if (nodes.Count < MinNum)
             {
                 var needNum = MinNum - nodes.Count;
                 for (int i = 0; i < needNum; i++)
                 {
                     nodes.Add(ListM[currentMilestoneIndex - 2 - i]);
+                    nodeOffset++;
                 }
             }
 
             float height = (itemHeight + spacing) * nodes.Count + topAndBottome;
             if (currentMilestoneIndex != 0)
             {
-                height -= (itemHeight + spacing) * 2 + spacing;
+                height -= (itemHeight + spacing) + spacing;
             }
             scroll.content.sizeDelta = new Vector2(scroll.content.sizeDelta.x, height);
             scroll.normalizedPosition = new Vector2(scroll.normalizedPosition.x, 0f);
+            cellArea.anchoredPosition = new Vector2(cellArea.anchoredPosition.x, currentMilestoneIndex != 0 ? -(itemHeight + spacing + spacing) / 2f : 0);
             for (int i = 0; i < nodes.Count; i++)
             {
                 var cellSand = GameObjectPoolManager.Instance.CreateObject(PoolItemType.SCORE_MIC_CELL, cellRoot.transform);
@@ -365,6 +376,19 @@ namespace FAT
 
         #region 动画播放
 
+        private void PreCoPlayProgressAnimation()
+        {
+            var startMilestoneIndex = activity.LastMilestoneLevel;
+            var endMilestoneIndex = activity.CurMilestoneLevel;
+            int offset = nodeOffset + (startMilestoneIndex != 0 ? 1 : 0);
+            
+            for (int milestoneIndex = startMilestoneIndex; milestoneIndex <= endMilestoneIndex; milestoneIndex++)
+            {
+                var uiItem = cellList[^(1 + offset + milestoneIndex - startMilestoneIndex)].GetComponent<UIMicItem>();
+                uiItem.UpdateContentByValue(milestoneIndex == startMilestoneIndex, milestoneIndex < startMilestoneIndex, milestoneIndex > startMilestoneIndex);
+            }
+        }
+
         /// <summary>
         /// 播放进度条动画
         /// 动画流程：
@@ -384,13 +408,7 @@ namespace FAT
             var endMilestoneIndex = activity.CurMilestoneLevel;
             var endShowScore = activity.CurMilestoneNum;
             var endMilestoneScore = activity.GetCurMilestoneNumMax(activity.CurMilestoneLevel);
-            
-            int offset = startMilestoneIndex != 0 ? 1 : 0;
-            for (int milestoneIndex = startMilestoneIndex; milestoneIndex <= endMilestoneIndex; milestoneIndex++)
-            {
-                var uiItem = cellList[^(1 + offset + milestoneIndex - startMilestoneIndex)].GetComponent<UIMicItem>();
-                uiItem.UpdateContentByValue(milestoneIndex == startMilestoneIndex, milestoneIndex < startMilestoneIndex, milestoneIndex > startMilestoneIndex);
-            }
+            int offset = nodeOffset + (startMilestoneIndex != 0 ? 1 : 0);
 
             // 第二步：进度条逐个充满每个里程碑
             for (int milestoneIndex = startMilestoneIndex; milestoneIndex <= endMilestoneIndex; milestoneIndex++)
@@ -440,6 +458,8 @@ namespace FAT
                     // 播放领奖动画
                     // rewardIcon.gameObject.SetActive(false);
                     yield return StartCoroutine(PlayRewardAnimation(milestoneIndex));
+                    if (IsComplete(milestoneIndex)) 
+                        yield break;
 
                     // 动画完成后刷新图标
                     // rewardIcon.gameObject.SetActive(true);
@@ -451,7 +471,11 @@ namespace FAT
             // 第三步：轨道动画 - 逐个播放里程碑动画和领奖动画
             // 从起始里程碑开始，逐个播放每个里程碑的动画
             int num = endMilestoneIndex - startMilestoneIndex;
-            scroll.content.DOSizeDelta(new Vector2(scroll.content.sizeDelta.x, scroll.content.sizeDelta.y - num * (itemHeight + spacing) * 2), (ToNextTime + ToThisTime) * num).SetEase(Ease.Linear).SetLink(gameObject);
+            float height = Mathf.Max(scroll.content.sizeDelta.y - num * (itemHeight + spacing), (itemHeight + spacing) * (MinNum - 1) + topAndBottome);
+            float moveNum = (scroll.content.sizeDelta.y - height) / (itemHeight + spacing);
+            float areaPos = cellArea.anchoredPosition.y - (itemHeight + spacing) / 2f * moveNum;
+            scroll.content.DOSizeDelta(new Vector2(scroll.content.sizeDelta.x, height), (ToNextTime + ToThisTime) * num).SetEase(Ease.Linear).SetLink(gameObject);
+            cellArea.DOAnchorPos(new Vector2(cellArea.anchoredPosition.x, areaPos), (ToNextTime + ToThisTime) * num).SetEase(Ease.Linear).SetLink(gameObject);
             for (int milestoneIndex = startMilestoneIndex; milestoneIndex <= endMilestoneIndex; milestoneIndex++)
             {
                 yield return StartCoroutine(PlayCellAnimation(milestoneIndex - startMilestoneIndex + offset, milestoneIndex == startMilestoneIndex, milestoneIndex == endMilestoneIndex));
@@ -494,14 +518,24 @@ namespace FAT
                 {
                     yield return new WaitForSeconds(1.5f);
                 }
-                if (milestoneIndex == milestoneList.Count - 1)
+                if (IsComplete(milestoneIndex))
                 {
-                    if (activity.IsComplete())
-                    {
-                        Close();
-                    }
+                    Close();
                 }
             }
+        }
+
+        private bool IsComplete(int milestoneIndex)
+        {
+            if (milestoneIndex == ListM.Count - 1)
+            {
+                if (activity.IsComplete())
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         /// <summary>

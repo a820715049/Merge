@@ -25,35 +25,36 @@ namespace fat.rawdata {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "CilyYXdkYXRhL0NvbU1lcmdlVG9rZW5NdWx0aXBsaWVyQ29uZi5wcm90bxIH",
-            "cmF3ZGF0YSJbChdDb21NZXJnZVRva2VuTXVsdGlwbGllchIKCgJpZBgBIAEo",
-            "BRIMCgR0aW1lGAIgASgFEg0KBXRva2VuGAMgAygFEhcKD3Rva2VuTXVsdGlw",
-            "bGllchgEIAEoBSL4AQohQ29tTWVyZ2VUb2tlbk11bHRpcGxpZXJNYXBBQlZh",
-            "bHVlEm4KGkNvbU1lcmdlVG9rZW5NdWx0aXBsaWVyTWFwGAEgAygLMkoucmF3",
-            "ZGF0YS5Db21NZXJnZVRva2VuTXVsdGlwbGllck1hcEFCVmFsdWUuQ29tTWVy",
-            "Z2VUb2tlbk11bHRpcGxpZXJNYXBFbnRyeRpjCh9Db21NZXJnZVRva2VuTXVs",
-            "dGlwbGllck1hcEVudHJ5EgsKA2tleRgBIAEoBRIvCgV2YWx1ZRgCIAEoCzIg",
-            "LnJhd2RhdGEuQ29tTWVyZ2VUb2tlbk11bHRpcGxpZXI6AjgBIrkFChtDb21N",
-            "ZXJnZVRva2VuTXVsdGlwbGllckNvbmYSaAoaQ29tTWVyZ2VUb2tlbk11bHRp",
-            "cGxpZXJNYXAYASADKAsyRC5yYXdkYXRhLkNvbU1lcmdlVG9rZW5NdWx0aXBs",
-            "aWVyQ29uZi5Db21NZXJnZVRva2VuTXVsdGlwbGllck1hcEVudHJ5EmwKHENv",
-            "bU1lcmdlVG9rZW5NdWx0aXBsaWVyTWFwQUIYAiADKAsyRi5yYXdkYXRhLkNv",
+            "cmF3ZGF0YSJtChdDb21NZXJnZVRva2VuTXVsdGlwbGllchIKCgJpZBgBIAEo",
+            "BRIMCgR0aW1lGAIgASgFEhAKCHRpcHNJY29uGAUgASgJEg0KBXRva2VuGAMg",
+            "AygFEhcKD3Rva2VuTXVsdGlwbGllchgEIAEoBSL4AQohQ29tTWVyZ2VUb2tl",
+            "bk11bHRpcGxpZXJNYXBBQlZhbHVlEm4KGkNvbU1lcmdlVG9rZW5NdWx0aXBs",
+            "aWVyTWFwGAEgAygLMkoucmF3ZGF0YS5Db21NZXJnZVRva2VuTXVsdGlwbGll",
+            "ck1hcEFCVmFsdWUuQ29tTWVyZ2VUb2tlbk11bHRpcGxpZXJNYXBFbnRyeRpj",
+            "Ch9Db21NZXJnZVRva2VuTXVsdGlwbGllck1hcEVudHJ5EgsKA2tleRgBIAEo",
+            "BRIvCgV2YWx1ZRgCIAEoCzIgLnJhd2RhdGEuQ29tTWVyZ2VUb2tlbk11bHRp",
+            "cGxpZXI6AjgBIrkFChtDb21NZXJnZVRva2VuTXVsdGlwbGllckNvbmYSaAoa",
+            "Q29tTWVyZ2VUb2tlbk11bHRpcGxpZXJNYXAYASADKAsyRC5yYXdkYXRhLkNv",
             "bU1lcmdlVG9rZW5NdWx0aXBsaWVyQ29uZi5Db21NZXJnZVRva2VuTXVsdGlw",
-            "bGllck1hcEFCRW50cnkSdgohQ29tTWVyZ2VUb2tlbk11bHRpcGxpZXJNYXBB",
-            "QlBhdGNoGAMgAygLMksucmF3ZGF0YS5Db21NZXJnZVRva2VuTXVsdGlwbGll",
-            "ckNvbmYuQ29tTWVyZ2VUb2tlbk11bHRpcGxpZXJNYXBBQlBhdGNoRW50cnka",
-            "YwofQ29tTWVyZ2VUb2tlbk11bHRpcGxpZXJNYXBFbnRyeRILCgNrZXkYASAB",
-            "KAUSLwoFdmFsdWUYAiABKAsyIC5yYXdkYXRhLkNvbU1lcmdlVG9rZW5NdWx0",
-            "aXBsaWVyOgI4ARpvCiFDb21NZXJnZVRva2VuTXVsdGlwbGllck1hcEFCRW50",
-            "cnkSCwoDa2V5GAEgASgJEjkKBXZhbHVlGAIgASgLMioucmF3ZGF0YS5Db21N",
-            "ZXJnZVRva2VuTXVsdGlwbGllck1hcEFCVmFsdWU6AjgBGnQKJkNvbU1lcmdl",
-            "VG9rZW5NdWx0aXBsaWVyTWFwQUJQYXRjaEVudHJ5EgsKA2tleRgBIAEoCRI5",
-            "CgV2YWx1ZRgCIAEoCzIqLnJhd2RhdGEuQ29tTWVyZ2VUb2tlbk11bHRpcGxp",
-            "ZXJNYXBBQlZhbHVlOgI4AUI9Wi1naXRsYWIuZnVucGx1cy5pby9mYXQvY29u",
-            "Zi9nZW4vZ29sYW5nL3Jhd2RhdGGqAgtmYXQucmF3ZGF0YWIGcHJvdG8z"));
+            "bGllck1hcEVudHJ5EmwKHENvbU1lcmdlVG9rZW5NdWx0aXBsaWVyTWFwQUIY",
+            "AiADKAsyRi5yYXdkYXRhLkNvbU1lcmdlVG9rZW5NdWx0aXBsaWVyQ29uZi5D",
+            "b21NZXJnZVRva2VuTXVsdGlwbGllck1hcEFCRW50cnkSdgohQ29tTWVyZ2VU",
+            "b2tlbk11bHRpcGxpZXJNYXBBQlBhdGNoGAMgAygLMksucmF3ZGF0YS5Db21N",
+            "ZXJnZVRva2VuTXVsdGlwbGllckNvbmYuQ29tTWVyZ2VUb2tlbk11bHRpcGxp",
+            "ZXJNYXBBQlBhdGNoRW50cnkaYwofQ29tTWVyZ2VUb2tlbk11bHRpcGxpZXJN",
+            "YXBFbnRyeRILCgNrZXkYASABKAUSLwoFdmFsdWUYAiABKAsyIC5yYXdkYXRh",
+            "LkNvbU1lcmdlVG9rZW5NdWx0aXBsaWVyOgI4ARpvCiFDb21NZXJnZVRva2Vu",
+            "TXVsdGlwbGllck1hcEFCRW50cnkSCwoDa2V5GAEgASgJEjkKBXZhbHVlGAIg",
+            "ASgLMioucmF3ZGF0YS5Db21NZXJnZVRva2VuTXVsdGlwbGllck1hcEFCVmFs",
+            "dWU6AjgBGnQKJkNvbU1lcmdlVG9rZW5NdWx0aXBsaWVyTWFwQUJQYXRjaEVu",
+            "dHJ5EgsKA2tleRgBIAEoCRI5CgV2YWx1ZRgCIAEoCzIqLnJhd2RhdGEuQ29t",
+            "TWVyZ2VUb2tlbk11bHRpcGxpZXJNYXBBQlZhbHVlOgI4AUI9Wi1naXRsYWIu",
+            "ZnVucGx1cy5pby9mYXQvY29uZi9nZW4vZ29sYW5nL3Jhd2RhdGGqAgtmYXQu",
+            "cmF3ZGF0YWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.ComMergeTokenMultiplier), global::fat.rawdata.ComMergeTokenMultiplier.Parser, new[]{ "Id", "Time", "Token", "TokenMultiplier" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.ComMergeTokenMultiplier), global::fat.rawdata.ComMergeTokenMultiplier.Parser, new[]{ "Id", "Time", "TipsIcon", "Token", "TokenMultiplier" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.ComMergeTokenMultiplierMapABValue), global::fat.rawdata.ComMergeTokenMultiplierMapABValue.Parser, new[]{ "ComMergeTokenMultiplierMap" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.ComMergeTokenMultiplierConf), global::fat.rawdata.ComMergeTokenMultiplierConf.Parser, new[]{ "ComMergeTokenMultiplierMap", "ComMergeTokenMultiplierMapAB", "ComMergeTokenMultiplierMapABPatch" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, null, })
           }));
@@ -100,6 +101,7 @@ namespace fat.rawdata {
     public ComMergeTokenMultiplier(ComMergeTokenMultiplier other) : this() {
       id_ = other.id_;
       time_ = other.time_;
+      tipsIcon_ = other.tipsIcon_;
       token_ = other.token_.Clone();
       tokenMultiplier_ = other.tokenMultiplier_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
@@ -136,6 +138,20 @@ namespace fat.rawdata {
       get { return time_; }
       set {
         time_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "tipsIcon" field.</summary>
+    public const int TipsIconFieldNumber = 5;
+    private string tipsIcon_ = "";
+    /// <summary>
+    /// 道具tips图标
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string TipsIcon {
+      get { return tipsIcon_; }
+      set {
+        tipsIcon_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
@@ -182,6 +198,7 @@ namespace fat.rawdata {
       }
       if (Id != other.Id) return false;
       if (Time != other.Time) return false;
+      if (TipsIcon != other.TipsIcon) return false;
       if(!token_.Equals(other.token_)) return false;
       if (TokenMultiplier != other.TokenMultiplier) return false;
       return Equals(_unknownFields, other._unknownFields);
@@ -192,6 +209,7 @@ namespace fat.rawdata {
       int hash = 1;
       if (Id != 0) hash ^= Id.GetHashCode();
       if (Time != 0) hash ^= Time.GetHashCode();
+      if (TipsIcon.Length != 0) hash ^= TipsIcon.GetHashCode();
       hash ^= token_.GetHashCode();
       if (TokenMultiplier != 0) hash ^= TokenMultiplier.GetHashCode();
       if (_unknownFields != null) {
@@ -223,6 +241,10 @@ namespace fat.rawdata {
         output.WriteRawTag(32);
         output.WriteInt32(TokenMultiplier);
       }
+      if (TipsIcon.Length != 0) {
+        output.WriteRawTag(42);
+        output.WriteString(TipsIcon);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -245,6 +267,10 @@ namespace fat.rawdata {
         output.WriteRawTag(32);
         output.WriteInt32(TokenMultiplier);
       }
+      if (TipsIcon.Length != 0) {
+        output.WriteRawTag(42);
+        output.WriteString(TipsIcon);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -259,6 +285,9 @@ namespace fat.rawdata {
       }
       if (Time != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Time);
+      }
+      if (TipsIcon.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(TipsIcon);
       }
       size += token_.CalculateSize(_repeated_token_codec);
       if (TokenMultiplier != 0) {
@@ -280,6 +309,9 @@ namespace fat.rawdata {
       }
       if (other.Time != 0) {
         Time = other.Time;
+      }
+      if (other.TipsIcon.Length != 0) {
+        TipsIcon = other.TipsIcon;
       }
       token_.Add(other.token_);
       if (other.TokenMultiplier != 0) {
@@ -316,6 +348,10 @@ namespace fat.rawdata {
             TokenMultiplier = input.ReadInt32();
             break;
           }
+          case 42: {
+            TipsIcon = input.ReadString();
+            break;
+          }
         }
       }
     #endif
@@ -345,6 +381,10 @@ namespace fat.rawdata {
           }
           case 32: {
             TokenMultiplier = input.ReadInt32();
+            break;
+          }
+          case 42: {
+            TipsIcon = input.ReadString();
             break;
           }
         }

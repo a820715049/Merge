@@ -328,7 +328,7 @@ namespace fat.rawdata {
     /// </summary>
     [pbr::OriginalName("EventTypeWishEndlessPack")] WishEndlessPack = 61,
     /// <summary>
-    /// 通行证
+    /// 通行证bp
     /// </summary>
     [pbr::OriginalName("EventTypeBp")] Bp = 62,
     /// <summary>

@@ -34,6 +34,7 @@ namespace FAT.Platform {
             CGHelpshift.Instance.SetDelegate(this);
             // sdk v5.8.3 在没有广告配置时不能设置delegate 会导致启动阶段黑屏(ios)
             CGAdvertising.Instance.SetDelegate(this);
+            CGAdvertising.Instance.Install();
             CGSurvey.Instance.SetDelegate(this);
             CGFacebook.Instance.SetDelegate(this);
             CGCDKey.Instance.SetDelegate(this);
@@ -255,6 +256,10 @@ namespace FAT.Platform {
 
         void CGPayment.IDelegate.OnCreateOrderIdComplete(string productId, string orderId, string throughCargo) {
             Adapter.LogInfo($"OnCreateOrderIdComplete {productId}-{orderId}-{throughCargo}");
+        }
+
+        void CGPayment.IDelegate.OnFetchAppleStoreFrontCountryCodeComplete(string countryCode) {
+            Adapter.LogInfo($"OnFetchAppleStoreFrontCountryCodeComplete {countryCode}");
         }
 
         // asia版支付成功走了这个回调 | 国内版走的是OnPurchaseSuccess

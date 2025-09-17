@@ -30,6 +30,8 @@ namespace FAT
         public class UI_NEWLY_FINISHED_ORDER_SHOW : MessageBase<Transform> { } // 订单transform
         public class UI_ORDER_REQUEST_SCROLL : MessageBase<Transform> { } // 订单transform
         public class BOARD_AREA_ADAPTER_COMPLETE : MessageBase<float> { }
+        public class GAME_ORDER_TOKEN_MULTI_BEGIN : MessageBase<Merge.Item> { }
+        public class GAME_ORDER_TOKEN_MULTI_END : MessageBase { }
 
         #endregion
 
@@ -272,6 +274,12 @@ namespace FAT
         public class BOARD_FLY_TEXT : MessageBase<Item, int, string> { }    //灯泡/特殊道具 飘字
         #endregion
 
+        #region 积分活动变种(麦克风版)
+
+        public class SCORE_MIC_NUM_ADD : MessageBase<int, int> { }    // 积分数量增加
+
+        #endregion
+
         #region 寻宝
 
         public class TREASURE_SCORE_UPDATE : MessageBase<int, int> { }    //寻宝积分更新
@@ -418,6 +426,8 @@ namespace FAT
 
         #endregion
         public class BOARD_ORDER_SCROLL_RESET : MessageBase { }
+        public class BOARD_ORDER_SCROLL_SETTARGET : MessageBase<Transform> { }
+        public class BOARD_FLY_START : MessageBase { }
 
         public class MINIGAME_UNLOCK_LEVEL : MessageBase
         {
@@ -443,9 +453,9 @@ namespace FAT
         #endregion
 
         #region bingo task
-        public class UI_BINGO_TASK_COMPLETE_ITEM : MessageBase<BingoResult,int>{ }
-        public class UI_BINGO_CLOSE : MessageBase{ }
-        public class BINGO_TASK_QUIT_SPECIAL : MessageBase<int>{ }
+        public class UI_BINGO_TASK_COMPLETE_ITEM : MessageBase<BingoResult, int> { }
+        public class UI_BINGO_CLOSE : MessageBase { }
+        public class BINGO_TASK_QUIT_SPECIAL : MessageBase<int> { }
         #endregion
 
         #region orderlike | 好评订单
@@ -460,6 +470,13 @@ namespace FAT
 
         #region 周任务
         public class ACTIVITY_WEEKLY_TASK_END : MessageBase { }
+        #endregion
+
+        #region 火车任务
+        public class UI_TRAIN_MISSION_SCROLLIN : MessageBase<MBTrainMissionTrain.TrainType> { } // 火车驶入
+        public class UI_TRAIN_MISSION_SCROLLSTOP : MessageBase<MBTrainMissionTrain.TrainType> { } // 火车停止
+        public class UI_TRAIN_MISSION_SCROLLOUT : MessageBase<MBTrainMissionTrain.TrainType> { } // 火车驶出
+        public class UI_TRAIN_MISSION_COMPLETE_TRAIN_MISSION : MessageBase<MBTrainMissionTrain.TrainType, int> { } // 完成火车所有任务
         #endregion
 
         #region 钓鱼棋盘
@@ -548,7 +565,7 @@ namespace FAT
         #region 每日任务路径主题
         public class LANDMARK_TOKEN_CHANGE : MessageBase { } // LandMark 活动专用：token 数量变更
         #endregion
-        
+
         #region 倍率排行
         public class MULTIPLIER_RANKING_SLOTS_CHANGE : MessageBase<int> { }    // 倍率排行转盘槽位发生变化
         public class MULTIPLY_RANKING_ENTRY_REFRESH_RED_DOT : MessageBase { }    // 倍率排行入口刷新红点

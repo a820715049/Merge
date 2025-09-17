@@ -65,6 +65,12 @@ public static class StringConverterExt
         return mCommonInt3Converter.Get(text);
     }
 
+    private static CommonInt4Converter mCommonInt4Converter = new();
+    public static (int, int, int, int) ConvertToInt4(this string text)
+    {
+        return mCommonInt4Converter.Get(text);
+    }
+
     public static int ConvertToInt(this string text)
     {
         if (!string.IsNullOrEmpty(text) && double.TryParse(text, System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out var r))
@@ -89,9 +95,9 @@ public static class StringConverterExt
             return fat.rawdata.GuideMergeRequireType.BoardItem;          //that should never happen
         }
     }
-    
+
     //坐标类配置转换 为策划方便 先解析行 再解析列 如：(3:5) 拆分成 col = 5, row = 3  
-    private static CoordConverter mCoordConverter = new ();
+    private static CoordConverter mCoordConverter = new();
     public static CoordConfig ConvertToCoord(this string text)
     {
         return mCoordConverter.Get(text);

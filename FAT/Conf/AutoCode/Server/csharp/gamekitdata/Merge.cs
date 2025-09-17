@@ -24,111 +24,116 @@ namespace fat.gamekitdata {
     static MergeReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChdnYW1la2l0ZGF0YS9tZXJnZS5wcm90bxILZ2FtZWtpdGRhdGEiuwIKCkVu",
-            "ZXJneUluZm8SDgoGRW5lcmd5GAEgASgFEhUKDUxhc3RBZGRFbmVyZ3kYAiAB",
-            "KAMSGwoTRW5lcmd5UHVyY2hhc2VDb3VudBgDIAEoBRIZChFFbmVyZ3lQdXJj",
-            "aGFzZURheRgEIAEoBRIUCgxGcmVlU2xvdHNEYXkYBSABKAUSLwoORnJlZVNs",
-            "b3RzU3RhdGUYBiADKA4yFy5nYW1la2l0ZGF0YS5Hb29kc1N0YXRlEhcKD0lu",
-            "ZmluaXRlRW5kVGltZRgHIAEoAxI7CgpDbGFpbUNvdW50GAggAygLMicuZ2Ft",
-            "ZWtpdGRhdGEuRW5lcmd5SW5mby5DbGFpbUNvdW50RW50cnkaMQoPQ2xhaW1D",
-            "b3VudEVudHJ5EgsKA2tleRgBIAEoBRINCgV2YWx1ZRgCIAEoBToCOAEiPgoR",
-            "UmFuZG9tT3V0cHV0UGFyYW0SEgoKUmFuZG9tU2VlZBgBIAEoBRIVCg1SYW5k",
-            "b21OZXh0SWR4GAIgASgFIucFCgtNZXJnZUdsb2JhbBIXCg9GcmVlU3BlZWRV",
-            "cFVzZWQYASABKAUSGAoQRnJlZVJlY2hhcmdlVXNlZBgCIAEoBRJCCg1GaXhl",
-            "ZE91dHB1dElkGAMgAygLMisuZ2FtZWtpdGRhdGEuTWVyZ2VHbG9iYWwuRml4",
-            "ZWRPdXRwdXRJZEVudHJ5EkoKEUNhdGVnb3J5U2hvd0NvdW50GAQgAygLMi8u",
-            "Z2FtZWtpdGRhdGEuTWVyZ2VHbG9iYWwuQ2F0ZWdvcnlTaG93Q291bnRFbnRy",
-            "eRJSChVCdWJibGVTcGF3bk1lcmdlQ291bnQYBSADKAsyMy5nYW1la2l0ZGF0",
-            "YS5NZXJnZUdsb2JhbC5CdWJibGVTcGF3bk1lcmdlQ291bnRFbnRyeRI8CgpG",
-            "aXhlZEVhdElkGAYgAygLMiguZ2FtZWtpdGRhdGEuTWVyZ2VHbG9iYWwuRml4",
-            "ZWRFYXRJZEVudHJ5Ek4KE0ZpeGVkT3V0cHV0QnlJdGVtSWQYByADKAsyMS5n",
-            "YW1la2l0ZGF0YS5NZXJnZUdsb2JhbC5GaXhlZE91dHB1dEJ5SXRlbUlkRW50",
-            "cnkSFgoORnJlZUJ1YmJsZVVzZWQYCCABKAUaNAoSRml4ZWRPdXRwdXRJZEVu",
-            "dHJ5EgsKA2tleRgBIAEoBRINCgV2YWx1ZRgCIAEoBToCOAEaOAoWQ2F0ZWdv",
-            "cnlTaG93Q291bnRFbnRyeRILCgNrZXkYASABKAUSDQoFdmFsdWUYAiABKAU6",
-            "AjgBGjwKGkJ1YmJsZVNwYXduTWVyZ2VDb3VudEVudHJ5EgsKA2tleRgBIAEo",
-            "BRINCgV2YWx1ZRgCIAEoBToCOAEaMQoPRml4ZWRFYXRJZEVudHJ5EgsKA2tl",
-            "eRgBIAEoBRINCgV2YWx1ZRgCIAEoBToCOAEaOgoYRml4ZWRPdXRwdXRCeUl0",
-            "ZW1JZEVudHJ5EgsKA2tleRgBIAEoBRINCgV2YWx1ZRgCIAEoBToCOAEiVAoI",
-            "TWVyZ2VCYWcSCgoCSWQYASABKAUSEwoLSW52Q2FwYWNpdHkYAiABKAUSEAoI",
-            "SW52SXRlbXMYAyADKAUSFQoNUmVkUG9pbnRJdGVtcxgEIAMoBSKbAQoLUmFu",
-            "ZG9tUGFyYW0SDAoEVHlwZRgBIAEoBRIQCghJbnRQYXJhbRgCIAMoBRI6CglN",
-            "YXBQYXJhbTEYAyADKAsyJy5nYW1la2l0ZGF0YS5SYW5kb21QYXJhbS5NYXBQ",
-            "YXJhbTFFbnRyeRowCg5NYXBQYXJhbTFFbnRyeRILCgNrZXkYASABKAUSDQoF",
-            "dmFsdWUYAiABKAU6AjgBIjgKCE9yZGVyQm94EhcKD09yZGVyQm94SXRlbVRp",
-            "ZBgBIAEoBRITCgtMaWZlQ291bnRlchgCIAEoBSIzCgZKdW1wQ0QSFAoMSnVt",
-            "cENESXRlbUlkGAEgASgFEhMKC0xpZmVDb3VudGVyGAIgASgFIvUFCgVNZXJn",
-            "ZRIRCglXYWl0Q2hlc3QYAyABKAUSFgoOV2FpdENoZXN0U3RhcnQYBCABKAMS",
-            "EgoKTGFzdEl0ZW1JZBgFIAEoBRISCgpSZXdhcmRMaXN0GAYgAygFEhMKC0lu",
-            "dkNhcGFjaXR5GAkgASgFEhAKCEludkl0ZW1zGAogAygFEiUKBUl0ZW1zGAsg",
-            "AygLMhYuZ2FtZWtpdGRhdGEuTWVyZ2VJdGVtEhYKDkxhc3RBY3RpdmVUaW1l",
-            "GBAgASgDEg8KB0JvYXJkSWQYEiABKAUSHQoVUmV3YXJkTGlzdFVucmVhZENv",
-            "dW50GBQgASgFEg4KBkNsb3VkcxgVIAEoDRIVCg1Db25maWdWZXJzaW9uGBYg",
-            "ASgFEhMKC0Rpc2FibGVDb21zGBcgASgEEkQKEVJhbmRvbU91dHB1dEZvcklk",
-            "GBggAygLMikuZ2FtZWtpdGRhdGEuTWVyZ2UuUmFuZG9tT3V0cHV0Rm9ySWRF",
-            "bnRyeRIoCglJbnZlbnRvcnkYGSADKAsyFS5nYW1la2l0ZGF0YS5NZXJnZUJh",
-            "ZxJCChBSYW5kb21QYXJhbUZvcklkGBogAygLMiguZ2FtZWtpdGRhdGEuTWVy",
-            "Z2UuUmFuZG9tUGFyYW1Gb3JJZEVudHJ5EhgKEFJld2FyZExpc3RJdGVtSWQY",
-            "GyADKAUSJwoIT3JkZXJCb3gYHCABKAsyFS5nYW1la2l0ZGF0YS5PcmRlckJv",
-            "eBIjCgZKdW1wQ0QYHSABKAsyEy5nYW1la2l0ZGF0YS5KdW1wQ0QaWAoWUmFu",
-            "ZG9tT3V0cHV0Rm9ySWRFbnRyeRILCgNrZXkYASABKAUSLQoFdmFsdWUYAiAB",
-            "KAsyHi5nYW1la2l0ZGF0YS5SYW5kb21PdXRwdXRQYXJhbToCOAEaUQoVUmFu",
-            "ZG9tUGFyYW1Gb3JJZEVudHJ5EgsKA2tleRgBIAEoBRInCgV2YWx1ZRgCIAEo",
-            "CzIYLmdhbWVraXRkYXRhLlJhbmRvbVBhcmFtOgI4ASIhCgVPcmRlchILCgNO",
-            "cGMYASABKAUSCwoDUG9zGAIgASgFIisKCE1lcmdlRGVsEhAKCEludkl0ZW1z",
-            "GAEgAygFEg0KBUl0ZW1zGAIgAygFIicKCENvbUR5aW5nEgwKBExpZmUYASAB",
-            "KAUSDQoFU3RhcnQYAiABKAMikgIKDkNvbUNsaWNrU291cmNlEhUKDVJldml2",
-            "ZUNvdW50ZXIYASABKAUSEwoLUmV2aXZlU3RhcnQYAiABKAMSFQoNT3V0cHV0",
-            "Q291bnRlchgDIAEoBRITCgtPdXRwdXRTdGFydBgEIAEoAxIWCg5JdGVtSW5S",
-            "ZWNoYXJnZRgFIAEoBRIMCgRJdGVtGAYgASgFEhMKC05vQ0RDb3VudGVyGAcg",
-            "ASgFEhIKClJhbmRvbVNlZWQYCCABKAUSFQoNUmFuZG9tTmV4dElkeBgJIAEo",
-            "BRITCgtPdXRwdXRDb3VudBgKIAEoBRIVCg1Jc0ZpcnN0UmV2aXZlGAsgASgI",
-            "EhYKDkJvb3N0SXRlbUNvdW50GAwgASgFIi0KCENvbUNoZXN0Eg4KBk9wZW5l",
-            "ZBgBIAEoCBIRCglVc2VkQ291bnQYAiABKAUiNgoJQ29tQnViYmxlEgwKBExp",
-            "ZmUYASABKAUSDQoFU3RhcnQYAiABKAMSDAoEVHlwZRgDIAEoBSJdCg1Db21B",
-            "dXRvU291cmNlEhUKDU91dHB1dENvdW50ZXIYASABKAUSDQoFU3RhcnQYAiAB",
-            "KAMSEQoJSXRlbUNvdW50GAMgASgFEhMKC1RvdGFsT3V0cHV0GAQgASgFIhsK",
-            "BkNvbUJveBIRCglVc2VkQ291bnQYASABKAUiNQoIQ29tU2tpbGwSEwoLQnVm",
-            "ZkNvdW50ZXIYASABKAUSFAoMU3RhY2tDb3VudGVyGAIgASgFIvEBCg9Db21F",
-            "YXRpbmdTb3VyY2USEQoJQ291bnRMZWZ0GAEgASgFEhYKDkVhdGluZ1RpbWVM",
-            "ZWZ0GAIgASgFEkIKC0l0ZW1zV2l0aGluGAMgAygLMi0uZ2FtZWtpdGRhdGEu",
-            "Q29tRWF0aW5nU291cmNlLkl0ZW1zV2l0aGluRW50cnkSFQoNUmFuZG9tTmV4",
-            "dElkeBgEIAEoBRISCgpSYW5kb21TZWVkGAUgASgFEhAKCEVhdEdyb3VwGAYg",
-            "ASgFGjIKEEl0ZW1zV2l0aGluRW50cnkSCwoDa2V5GAEgASgFEg0KBXZhbHVl",
-            "GAIgASgFOgI4ASI5CgtDb21BY3Rpdml0eRISCgpBY3Rpdml0eUlkGAEgASgF",
-            "EhYKDkFjdGl2aXR5RW5lcmd5GAIgASgFIjcKDUNvbVRvb2xTb3VyY2USEQoJ",
-            "SXRlbUNvdW50GAEgASgFEhMKC1RvdGFsT3V0cHV0GAIgASgFIiIKDUNvbVNw",
-            "ZWNpYWxCb3gSEQoJSXRlbUNvdW50GAEgASgFIqcBCgxDb21NaXhTb3VyY2US",
-            "FQoNUmV2aXZlQ291bnRlchgBIAEoBRIVCg1PdXRwdXRDb3VudGVyGAIgASgF",
-            "EhYKDkl0ZW1JblJlY2hhcmdlGAMgASgFEhEKCUl0ZW1Db3VudBgEIAEoBRIT",
-            "CgtPdXRwdXRDb3VudBgFIAEoBRIVCg1Jc0ZpcnN0UmV2aXZlGAYgASgIEhIK",
-            "Ck1peGVkSXRlbXMYByADKAUiJQoNQ29tVHJpZ1NvdXJjZRIUCgxUcmlnZ2Vy",
-            "Q291bnQYASABKAUiJAoPQ29tQWN0aXZlU291cmNlEhEKCUl0ZW1Db3VudBgB",
-            "IAEoBSKDBgoJTWVyZ2VJdGVtEgoKAklkGAEgASgFEgsKA1RpZBgCIAEoBRIN",
-            "CgVTdGF0ZRgDIAEoBRIJCgFYGAQgASgFEgkKAVkYBSABKAUSCwoDQ29tGAYg",
-            "ASgNEicKCENvbUR5aW5nGAcgASgLMhUuZ2FtZWtpdGRhdGEuQ29tRHlpbmcS",
-            "MwoOQ29tQ2xpY2tTb3VyY2UYCCABKAsyGy5nYW1la2l0ZGF0YS5Db21DbGlj",
-            "a1NvdXJjZRInCghDb21DaGVzdBgJIAEoCzIVLmdhbWVraXRkYXRhLkNvbUNo",
-            "ZXN0EikKCUNvbUJ1YmJsZRgKIAEoCzIWLmdhbWVraXRkYXRhLkNvbUJ1YmJs",
-            "ZRIxCg1Db21BdXRvU291cmNlGAsgASgLMhouZ2FtZWtpdGRhdGEuQ29tQXV0",
-            "b1NvdXJjZRIjCgZDb21Cb3gYDCABKAsyEy5nYW1la2l0ZGF0YS5Db21Cb3gS",
-            "NQoPQ29tRWF0aW5nU291cmNlGA0gASgLMhwuZ2FtZWtpdGRhdGEuQ29tRWF0",
-            "aW5nU291cmNlEicKCENvbVNraWxsGA4gASgLMhUuZ2FtZWtpdGRhdGEuQ29t",
-            "U2tpbGwSLQoLQ29tQWN0aXZpdHkYDyABKAsyGC5nYW1la2l0ZGF0YS5Db21B",
-            "Y3Rpdml0eRIRCglTdGF0ZUNvbmYYECABKAUSMQoNQ29tVG9vbFNvdXJjZRgR",
-            "IAEoCzIaLmdhbWVraXRkYXRhLkNvbVRvb2xTb3VyY2USMQoNQ29tU3BlY2lh",
-            "bEJveBgSIAEoCzIaLmdhbWVraXRkYXRhLkNvbVNwZWNpYWxCb3gSLwoMQ29t",
-            "TWl4U291cmNlGBMgASgLMhkuZ2FtZWtpdGRhdGEuQ29tTWl4U291cmNlEjEK",
-            "DUNvbVRyaWdTb3VyY2UYFCABKAsyGi5nYW1la2l0ZGF0YS5Db21UcmlnU291",
-            "cmNlEjUKD0NvbUFjdGl2ZVNvdXJjZRgVIAEoCzIcLmdhbWVraXRkYXRhLkNv",
-            "bUFjdGl2ZVNvdXJjZSIoCgtSZWNvcmRTdGF0ZRIKCgJJZBgBIAEoBRINCgVT",
-            "dGF0ZRgCIAEoBSppCgpHb29kc1N0YXRlEhYKEkdvb2RzU3RhdGVDYW5DbGFp",
-            "bRAAEhYKEkdvb2RzU3RhdGVOb3RTdGFydBABEhQKEEdvb2RzU3RhdGVNaXNz",
-            "ZWQQAhIVChFHb29kc1N0YXRlQ2xhaW1lZBADQkVaMWdpdGxhYi5mdW5wbHVz",
-            "LmlvL2ZhdC9jb25mL2dlbi9nb2xhbmcvZ2FtZWtpdGRhdGGqAg9mYXQuZ2Ft",
-            "ZWtpdGRhdGFiBnByb3RvMw=="));
+            "ChdnYW1la2l0ZGF0YS9tZXJnZS5wcm90bxILZ2FtZWtpdGRhdGEaGGdhbWVr",
+            "aXRkYXRhL3NoYXJlZC5wcm90byK7AgoKRW5lcmd5SW5mbxIOCgZFbmVyZ3kY",
+            "ASABKAUSFQoNTGFzdEFkZEVuZXJneRgCIAEoAxIbChNFbmVyZ3lQdXJjaGFz",
+            "ZUNvdW50GAMgASgFEhkKEUVuZXJneVB1cmNoYXNlRGF5GAQgASgFEhQKDEZy",
+            "ZWVTbG90c0RheRgFIAEoBRIvCg5GcmVlU2xvdHNTdGF0ZRgGIAMoDjIXLmdh",
+            "bWVraXRkYXRhLkdvb2RzU3RhdGUSFwoPSW5maW5pdGVFbmRUaW1lGAcgASgD",
+            "EjsKCkNsYWltQ291bnQYCCADKAsyJy5nYW1la2l0ZGF0YS5FbmVyZ3lJbmZv",
+            "LkNsYWltQ291bnRFbnRyeRoxCg9DbGFpbUNvdW50RW50cnkSCwoDa2V5GAEg",
+            "ASgFEg0KBXZhbHVlGAIgASgFOgI4ASI+ChFSYW5kb21PdXRwdXRQYXJhbRIS",
+            "CgpSYW5kb21TZWVkGAEgASgFEhUKDVJhbmRvbU5leHRJZHgYAiABKAUi5wUK",
+            "C01lcmdlR2xvYmFsEhcKD0ZyZWVTcGVlZFVwVXNlZBgBIAEoBRIYChBGcmVl",
+            "UmVjaGFyZ2VVc2VkGAIgASgFEkIKDUZpeGVkT3V0cHV0SWQYAyADKAsyKy5n",
+            "YW1la2l0ZGF0YS5NZXJnZUdsb2JhbC5GaXhlZE91dHB1dElkRW50cnkSSgoR",
+            "Q2F0ZWdvcnlTaG93Q291bnQYBCADKAsyLy5nYW1la2l0ZGF0YS5NZXJnZUds",
+            "b2JhbC5DYXRlZ29yeVNob3dDb3VudEVudHJ5ElIKFUJ1YmJsZVNwYXduTWVy",
+            "Z2VDb3VudBgFIAMoCzIzLmdhbWVraXRkYXRhLk1lcmdlR2xvYmFsLkJ1YmJs",
+            "ZVNwYXduTWVyZ2VDb3VudEVudHJ5EjwKCkZpeGVkRWF0SWQYBiADKAsyKC5n",
+            "YW1la2l0ZGF0YS5NZXJnZUdsb2JhbC5GaXhlZEVhdElkRW50cnkSTgoTRml4",
+            "ZWRPdXRwdXRCeUl0ZW1JZBgHIAMoCzIxLmdhbWVraXRkYXRhLk1lcmdlR2xv",
+            "YmFsLkZpeGVkT3V0cHV0QnlJdGVtSWRFbnRyeRIWCg5GcmVlQnViYmxlVXNl",
+            "ZBgIIAEoBRo0ChJGaXhlZE91dHB1dElkRW50cnkSCwoDa2V5GAEgASgFEg0K",
+            "BXZhbHVlGAIgASgFOgI4ARo4ChZDYXRlZ29yeVNob3dDb3VudEVudHJ5EgsK",
+            "A2tleRgBIAEoBRINCgV2YWx1ZRgCIAEoBToCOAEaPAoaQnViYmxlU3Bhd25N",
+            "ZXJnZUNvdW50RW50cnkSCwoDa2V5GAEgASgFEg0KBXZhbHVlGAIgASgFOgI4",
+            "ARoxCg9GaXhlZEVhdElkRW50cnkSCwoDa2V5GAEgASgFEg0KBXZhbHVlGAIg",
+            "ASgFOgI4ARo6ChhGaXhlZE91dHB1dEJ5SXRlbUlkRW50cnkSCwoDa2V5GAEg",
+            "ASgFEg0KBXZhbHVlGAIgASgFOgI4ASJUCghNZXJnZUJhZxIKCgJJZBgBIAEo",
+            "BRITCgtJbnZDYXBhY2l0eRgCIAEoBRIQCghJbnZJdGVtcxgDIAMoBRIVCg1S",
+            "ZWRQb2ludEl0ZW1zGAQgAygFIpsBCgtSYW5kb21QYXJhbRIMCgRUeXBlGAEg",
+            "ASgFEhAKCEludFBhcmFtGAIgAygFEjoKCU1hcFBhcmFtMRgDIAMoCzInLmdh",
+            "bWVraXRkYXRhLlJhbmRvbVBhcmFtLk1hcFBhcmFtMUVudHJ5GjAKDk1hcFBh",
+            "cmFtMUVudHJ5EgsKA2tleRgBIAEoBRINCgV2YWx1ZRgCIAEoBToCOAEiOAoI",
+            "T3JkZXJCb3gSFwoPT3JkZXJCb3hJdGVtVGlkGAEgASgFEhMKC0xpZmVDb3Vu",
+            "dGVyGAIgASgFIjMKBkp1bXBDRBIUCgxKdW1wQ0RJdGVtSWQYASABKAUSEwoL",
+            "TGlmZUNvdW50ZXIYAiABKAUiOwoKVG9rZW5NdWx0aRIYChBUb2tlbk11bHRp",
+            "SXRlbUlkGAEgASgFEhMKC0xpZmVDb3VudGVyGAIgASgFIqIGCgVNZXJnZRIR",
+            "CglXYWl0Q2hlc3QYAyABKAUSFgoOV2FpdENoZXN0U3RhcnQYBCABKAMSEgoK",
+            "TGFzdEl0ZW1JZBgFIAEoBRISCgpSZXdhcmRMaXN0GAYgAygFEhMKC0ludkNh",
+            "cGFjaXR5GAkgASgFEhAKCEludkl0ZW1zGAogAygFEiUKBUl0ZW1zGAsgAygL",
+            "MhYuZ2FtZWtpdGRhdGEuTWVyZ2VJdGVtEhYKDkxhc3RBY3RpdmVUaW1lGBAg",
+            "ASgDEg8KB0JvYXJkSWQYEiABKAUSHQoVUmV3YXJkTGlzdFVucmVhZENvdW50",
+            "GBQgASgFEg4KBkNsb3VkcxgVIAEoDRIVCg1Db25maWdWZXJzaW9uGBYgASgF",
+            "EhMKC0Rpc2FibGVDb21zGBcgASgEEkQKEVJhbmRvbU91dHB1dEZvcklkGBgg",
+            "AygLMikuZ2FtZWtpdGRhdGEuTWVyZ2UuUmFuZG9tT3V0cHV0Rm9ySWRFbnRy",
+            "eRIoCglJbnZlbnRvcnkYGSADKAsyFS5nYW1la2l0ZGF0YS5NZXJnZUJhZxJC",
+            "ChBSYW5kb21QYXJhbUZvcklkGBogAygLMiguZ2FtZWtpdGRhdGEuTWVyZ2Uu",
+            "UmFuZG9tUGFyYW1Gb3JJZEVudHJ5EhgKEFJld2FyZExpc3RJdGVtSWQYGyAD",
+            "KAUSJwoIT3JkZXJCb3gYHCABKAsyFS5nYW1la2l0ZGF0YS5PcmRlckJveBIj",
+            "CgZKdW1wQ0QYHSABKAsyEy5nYW1la2l0ZGF0YS5KdW1wQ0QSKwoKVG9rZW5N",
+            "dWx0aRgeIAEoCzIXLmdhbWVraXRkYXRhLlRva2VuTXVsdGkaWAoWUmFuZG9t",
+            "T3V0cHV0Rm9ySWRFbnRyeRILCgNrZXkYASABKAUSLQoFdmFsdWUYAiABKAsy",
+            "Hi5nYW1la2l0ZGF0YS5SYW5kb21PdXRwdXRQYXJhbToCOAEaUQoVUmFuZG9t",
+            "UGFyYW1Gb3JJZEVudHJ5EgsKA2tleRgBIAEoBRInCgV2YWx1ZRgCIAEoCzIY",
+            "LmdhbWVraXRkYXRhLlJhbmRvbVBhcmFtOgI4ASIhCgVPcmRlchILCgNOcGMY",
+            "ASABKAUSCwoDUG9zGAIgASgFIisKCE1lcmdlRGVsEhAKCEludkl0ZW1zGAEg",
+            "AygFEg0KBUl0ZW1zGAIgAygFIicKCENvbUR5aW5nEgwKBExpZmUYASABKAUS",
+            "DQoFU3RhcnQYAiABKAMikgIKDkNvbUNsaWNrU291cmNlEhUKDVJldml2ZUNv",
+            "dW50ZXIYASABKAUSEwoLUmV2aXZlU3RhcnQYAiABKAMSFQoNT3V0cHV0Q291",
+            "bnRlchgDIAEoBRITCgtPdXRwdXRTdGFydBgEIAEoAxIWCg5JdGVtSW5SZWNo",
+            "YXJnZRgFIAEoBRIMCgRJdGVtGAYgASgFEhMKC05vQ0RDb3VudGVyGAcgASgF",
+            "EhIKClJhbmRvbVNlZWQYCCABKAUSFQoNUmFuZG9tTmV4dElkeBgJIAEoBRIT",
+            "CgtPdXRwdXRDb3VudBgKIAEoBRIVCg1Jc0ZpcnN0UmV2aXZlGAsgASgIEhYK",
+            "DkJvb3N0SXRlbUNvdW50GAwgASgFIi0KCENvbUNoZXN0Eg4KBk9wZW5lZBgB",
+            "IAEoCBIRCglVc2VkQ291bnQYAiABKAUiNgoJQ29tQnViYmxlEgwKBExpZmUY",
+            "ASABKAUSDQoFU3RhcnQYAiABKAMSDAoEVHlwZRgDIAEoBSJdCg1Db21BdXRv",
+            "U291cmNlEhUKDU91dHB1dENvdW50ZXIYASABKAUSDQoFU3RhcnQYAiABKAMS",
+            "EQoJSXRlbUNvdW50GAMgASgFEhMKC1RvdGFsT3V0cHV0GAQgASgFIhsKBkNv",
+            "bUJveBIRCglVc2VkQ291bnQYASABKAUiNQoIQ29tU2tpbGwSEwoLQnVmZkNv",
+            "dW50ZXIYASABKAUSFAoMU3RhY2tDb3VudGVyGAIgASgFIvEBCg9Db21FYXRp",
+            "bmdTb3VyY2USEQoJQ291bnRMZWZ0GAEgASgFEhYKDkVhdGluZ1RpbWVMZWZ0",
+            "GAIgASgFEkIKC0l0ZW1zV2l0aGluGAMgAygLMi0uZ2FtZWtpdGRhdGEuQ29t",
+            "RWF0aW5nU291cmNlLkl0ZW1zV2l0aGluRW50cnkSFQoNUmFuZG9tTmV4dElk",
+            "eBgEIAEoBRISCgpSYW5kb21TZWVkGAUgASgFEhAKCEVhdEdyb3VwGAYgASgF",
+            "GjIKEEl0ZW1zV2l0aGluRW50cnkSCwoDa2V5GAEgASgFEg0KBXZhbHVlGAIg",
+            "ASgFOgI4ASI5CgtDb21BY3Rpdml0eRISCgpBY3Rpdml0eUlkGAEgASgFEhYK",
+            "DkFjdGl2aXR5RW5lcmd5GAIgASgFIjcKDUNvbVRvb2xTb3VyY2USEQoJSXRl",
+            "bUNvdW50GAEgASgFEhMKC1RvdGFsT3V0cHV0GAIgASgFIiIKDUNvbVNwZWNp",
+            "YWxCb3gSEQoJSXRlbUNvdW50GAEgASgFIqcBCgxDb21NaXhTb3VyY2USFQoN",
+            "UmV2aXZlQ291bnRlchgBIAEoBRIVCg1PdXRwdXRDb3VudGVyGAIgASgFEhYK",
+            "Dkl0ZW1JblJlY2hhcmdlGAMgASgFEhEKCUl0ZW1Db3VudBgEIAEoBRITCgtP",
+            "dXRwdXRDb3VudBgFIAEoBRIVCg1Jc0ZpcnN0UmV2aXZlGAYgASgIEhIKCk1p",
+            "eGVkSXRlbXMYByADKAUiJQoNQ29tVHJpZ1NvdXJjZRIUCgxUcmlnZ2VyQ291",
+            "bnQYASABKAUiJAoPQ29tQWN0aXZlU291cmNlEhEKCUl0ZW1Db3VudBgBIAEo",
+            "BSI8ChBDb21BY3Rpdml0eVRva2VuEigKCVBhcmFtTGlzdBgBIAMoCzIVLmdh",
+            "bWVraXRkYXRhLkFueVN0YXRlIrwGCglNZXJnZUl0ZW0SCgoCSWQYASABKAUS",
+            "CwoDVGlkGAIgASgFEg0KBVN0YXRlGAMgASgFEgkKAVgYBCABKAUSCQoBWRgF",
+            "IAEoBRILCgNDb20YBiABKA0SJwoIQ29tRHlpbmcYByABKAsyFS5nYW1la2l0",
+            "ZGF0YS5Db21EeWluZxIzCg5Db21DbGlja1NvdXJjZRgIIAEoCzIbLmdhbWVr",
+            "aXRkYXRhLkNvbUNsaWNrU291cmNlEicKCENvbUNoZXN0GAkgASgLMhUuZ2Ft",
+            "ZWtpdGRhdGEuQ29tQ2hlc3QSKQoJQ29tQnViYmxlGAogASgLMhYuZ2FtZWtp",
+            "dGRhdGEuQ29tQnViYmxlEjEKDUNvbUF1dG9Tb3VyY2UYCyABKAsyGi5nYW1l",
+            "a2l0ZGF0YS5Db21BdXRvU291cmNlEiMKBkNvbUJveBgMIAEoCzITLmdhbWVr",
+            "aXRkYXRhLkNvbUJveBI1Cg9Db21FYXRpbmdTb3VyY2UYDSABKAsyHC5nYW1l",
+            "a2l0ZGF0YS5Db21FYXRpbmdTb3VyY2USJwoIQ29tU2tpbGwYDiABKAsyFS5n",
+            "YW1la2l0ZGF0YS5Db21Ta2lsbBItCgtDb21BY3Rpdml0eRgPIAEoCzIYLmdh",
+            "bWVraXRkYXRhLkNvbUFjdGl2aXR5EhEKCVN0YXRlQ29uZhgQIAEoBRIxCg1D",
+            "b21Ub29sU291cmNlGBEgASgLMhouZ2FtZWtpdGRhdGEuQ29tVG9vbFNvdXJj",
+            "ZRIxCg1Db21TcGVjaWFsQm94GBIgASgLMhouZ2FtZWtpdGRhdGEuQ29tU3Bl",
+            "Y2lhbEJveBIvCgxDb21NaXhTb3VyY2UYEyABKAsyGS5nYW1la2l0ZGF0YS5D",
+            "b21NaXhTb3VyY2USMQoNQ29tVHJpZ1NvdXJjZRgUIAEoCzIaLmdhbWVraXRk",
+            "YXRhLkNvbVRyaWdTb3VyY2USNQoPQ29tQWN0aXZlU291cmNlGBUgASgLMhwu",
+            "Z2FtZWtpdGRhdGEuQ29tQWN0aXZlU291cmNlEjcKEENvbUFjdGl2aXR5VG9r",
+            "ZW4YFiABKAsyHS5nYW1la2l0ZGF0YS5Db21BY3Rpdml0eVRva2VuIigKC1Jl",
+            "Y29yZFN0YXRlEgoKAklkGAEgASgFEg0KBVN0YXRlGAIgASgFKmkKCkdvb2Rz",
+            "U3RhdGUSFgoSR29vZHNTdGF0ZUNhbkNsYWltEAASFgoSR29vZHNTdGF0ZU5v",
+            "dFN0YXJ0EAESFAoQR29vZHNTdGF0ZU1pc3NlZBACEhUKEUdvb2RzU3RhdGVD",
+            "bGFpbWVkEANCRVoxZ2l0bGFiLmZ1bnBsdXMuaW8vZmF0L2NvbmYvZ2VuL2dv",
+            "bGFuZy9nYW1la2l0ZGF0YaoCD2ZhdC5nYW1la2l0ZGF0YWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { },
+          new pbr::FileDescriptor[] { global::fat.gamekitdata.SharedReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::fat.gamekitdata.GoodsState), }, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.gamekitdata.EnergyInfo), global::fat.gamekitdata.EnergyInfo.Parser, new[]{ "Energy", "LastAddEnergy", "EnergyPurchaseCount", "EnergyPurchaseDay", "FreeSlotsDay", "FreeSlotsState", "InfiniteEndTime", "ClaimCount" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.gamekitdata.RandomOutputParam), global::fat.gamekitdata.RandomOutputParam.Parser, new[]{ "RandomSeed", "RandomNextIdx" }, null, null, null, null),
@@ -137,7 +142,8 @@ namespace fat.gamekitdata {
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.gamekitdata.RandomParam), global::fat.gamekitdata.RandomParam.Parser, new[]{ "Type", "IntParam", "MapParam1" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.gamekitdata.OrderBox), global::fat.gamekitdata.OrderBox.Parser, new[]{ "OrderBoxItemTid", "LifeCounter" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.gamekitdata.JumpCD), global::fat.gamekitdata.JumpCD.Parser, new[]{ "JumpCDItemId", "LifeCounter" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::fat.gamekitdata.Merge), global::fat.gamekitdata.Merge.Parser, new[]{ "WaitChest", "WaitChestStart", "LastItemId", "RewardList", "InvCapacity", "InvItems", "Items", "LastActiveTime", "BoardId", "RewardListUnreadCount", "Clouds", "ConfigVersion", "DisableComs", "RandomOutputForId", "Inventory", "RandomParamForId", "RewardListItemId", "OrderBox", "JumpCD" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, }),
+            new pbr::GeneratedClrTypeInfo(typeof(global::fat.gamekitdata.TokenMulti), global::fat.gamekitdata.TokenMulti.Parser, new[]{ "TokenMultiItemId", "LifeCounter" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::fat.gamekitdata.Merge), global::fat.gamekitdata.Merge.Parser, new[]{ "WaitChest", "WaitChestStart", "LastItemId", "RewardList", "InvCapacity", "InvItems", "Items", "LastActiveTime", "BoardId", "RewardListUnreadCount", "Clouds", "ConfigVersion", "DisableComs", "RandomOutputForId", "Inventory", "RandomParamForId", "RewardListItemId", "OrderBox", "JumpCD", "TokenMulti" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.gamekitdata.Order), global::fat.gamekitdata.Order.Parser, new[]{ "Npc", "Pos" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.gamekitdata.MergeDel), global::fat.gamekitdata.MergeDel.Parser, new[]{ "InvItems", "Items" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.gamekitdata.ComDying), global::fat.gamekitdata.ComDying.Parser, new[]{ "Life", "Start" }, null, null, null, null),
@@ -154,7 +160,8 @@ namespace fat.gamekitdata {
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.gamekitdata.ComMixSource), global::fat.gamekitdata.ComMixSource.Parser, new[]{ "ReviveCounter", "OutputCounter", "ItemInRecharge", "ItemCount", "OutputCount", "IsFirstRevive", "MixedItems" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.gamekitdata.ComTrigSource), global::fat.gamekitdata.ComTrigSource.Parser, new[]{ "TriggerCount" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.gamekitdata.ComActiveSource), global::fat.gamekitdata.ComActiveSource.Parser, new[]{ "ItemCount" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::fat.gamekitdata.MergeItem), global::fat.gamekitdata.MergeItem.Parser, new[]{ "Id", "Tid", "State", "X", "Y", "Com", "ComDying", "ComClickSource", "ComChest", "ComBubble", "ComAutoSource", "ComBox", "ComEatingSource", "ComSkill", "ComActivity", "StateConf", "ComToolSource", "ComSpecialBox", "ComMixSource", "ComTrigSource", "ComActiveSource" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::fat.gamekitdata.ComActivityToken), global::fat.gamekitdata.ComActivityToken.Parser, new[]{ "ParamList" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::fat.gamekitdata.MergeItem), global::fat.gamekitdata.MergeItem.Parser, new[]{ "Id", "Tid", "State", "X", "Y", "Com", "ComDying", "ComClickSource", "ComChest", "ComBubble", "ComAutoSource", "ComBox", "ComEatingSource", "ComSkill", "ComActivity", "StateConf", "ComToolSource", "ComSpecialBox", "ComMixSource", "ComTrigSource", "ComActiveSource", "ComActivityToken" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.gamekitdata.RecordState), global::fat.gamekitdata.RecordState.Parser, new[]{ "Id", "State" }, null, null, null, null)
           }));
     }
@@ -2118,6 +2125,217 @@ namespace fat.gamekitdata {
 
   }
 
+  public sealed partial class TokenMulti : pb::IMessage<TokenMulti>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<TokenMulti> _parser = new pb::MessageParser<TokenMulti>(() => new TokenMulti());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<TokenMulti> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::fat.gamekitdata.MergeReflection.Descriptor.MessageTypes[7]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public TokenMulti() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public TokenMulti(TokenMulti other) : this() {
+      tokenMultiItemId_ = other.tokenMultiItemId_;
+      lifeCounter_ = other.lifeCounter_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public TokenMulti Clone() {
+      return new TokenMulti(this);
+    }
+
+    /// <summary>Field number for the "TokenMultiItemId" field.</summary>
+    public const int TokenMultiItemIdFieldNumber = 1;
+    private int tokenMultiItemId_;
+    /// <summary>
+    ///目前正在生效的棋子的唯一id
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int TokenMultiItemId {
+      get { return tokenMultiItemId_; }
+      set {
+        tokenMultiItemId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "LifeCounter" field.</summary>
+    public const int LifeCounterFieldNumber = 2;
+    private int lifeCounter_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int LifeCounter {
+      get { return lifeCounter_; }
+      set {
+        lifeCounter_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as TokenMulti);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(TokenMulti other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (TokenMultiItemId != other.TokenMultiItemId) return false;
+      if (LifeCounter != other.LifeCounter) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (TokenMultiItemId != 0) hash ^= TokenMultiItemId.GetHashCode();
+      if (LifeCounter != 0) hash ^= LifeCounter.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (TokenMultiItemId != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(TokenMultiItemId);
+      }
+      if (LifeCounter != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(LifeCounter);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (TokenMultiItemId != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(TokenMultiItemId);
+      }
+      if (LifeCounter != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(LifeCounter);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (TokenMultiItemId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(TokenMultiItemId);
+      }
+      if (LifeCounter != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(LifeCounter);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(TokenMulti other) {
+      if (other == null) {
+        return;
+      }
+      if (other.TokenMultiItemId != 0) {
+        TokenMultiItemId = other.TokenMultiItemId;
+      }
+      if (other.LifeCounter != 0) {
+        LifeCounter = other.LifeCounter;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            TokenMultiItemId = input.ReadInt32();
+            break;
+          }
+          case 16: {
+            LifeCounter = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            TokenMultiItemId = input.ReadInt32();
+            break;
+          }
+          case 16: {
+            LifeCounter = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
   public sealed partial class Merge : pb::IMessage<Merge>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
@@ -2130,7 +2348,7 @@ namespace fat.gamekitdata {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::fat.gamekitdata.MergeReflection.Descriptor.MessageTypes[7]; }
+      get { return global::fat.gamekitdata.MergeReflection.Descriptor.MessageTypes[8]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2166,6 +2384,7 @@ namespace fat.gamekitdata {
       rewardListItemId_ = other.rewardListItemId_.Clone();
       orderBox_ = other.orderBox_ != null ? other.orderBox_.Clone() : null;
       jumpCD_ = other.jumpCD_ != null ? other.jumpCD_.Clone() : null;
+      tokenMulti_ = other.tokenMulti_ != null ? other.tokenMulti_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -2424,6 +2643,20 @@ namespace fat.gamekitdata {
       }
     }
 
+    /// <summary>Field number for the "TokenMulti" field.</summary>
+    public const int TokenMultiFieldNumber = 30;
+    private global::fat.gamekitdata.TokenMulti tokenMulti_;
+    /// <summary>
+    /// 活动token翻倍 全局buff
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::fat.gamekitdata.TokenMulti TokenMulti {
+      get { return tokenMulti_; }
+      set {
+        tokenMulti_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as Merge);
@@ -2456,6 +2689,7 @@ namespace fat.gamekitdata {
       if(!rewardListItemId_.Equals(other.rewardListItemId_)) return false;
       if (!object.Equals(OrderBox, other.OrderBox)) return false;
       if (!object.Equals(JumpCD, other.JumpCD)) return false;
+      if (!object.Equals(TokenMulti, other.TokenMulti)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -2481,6 +2715,7 @@ namespace fat.gamekitdata {
       hash ^= rewardListItemId_.GetHashCode();
       if (orderBox_ != null) hash ^= OrderBox.GetHashCode();
       if (jumpCD_ != null) hash ^= JumpCD.GetHashCode();
+      if (tokenMulti_ != null) hash ^= TokenMulti.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -2552,6 +2787,10 @@ namespace fat.gamekitdata {
         output.WriteRawTag(234, 1);
         output.WriteMessage(JumpCD);
       }
+      if (tokenMulti_ != null) {
+        output.WriteRawTag(242, 1);
+        output.WriteMessage(TokenMulti);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -2616,6 +2855,10 @@ namespace fat.gamekitdata {
         output.WriteRawTag(234, 1);
         output.WriteMessage(JumpCD);
       }
+      if (tokenMulti_ != null) {
+        output.WriteRawTag(242, 1);
+        output.WriteMessage(TokenMulti);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -2667,6 +2910,9 @@ namespace fat.gamekitdata {
       }
       if (jumpCD_ != null) {
         size += 2 + pb::CodedOutputStream.ComputeMessageSize(JumpCD);
+      }
+      if (tokenMulti_ != null) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(TokenMulti);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -2727,6 +2973,12 @@ namespace fat.gamekitdata {
           JumpCD = new global::fat.gamekitdata.JumpCD();
         }
         JumpCD.MergeFrom(other.JumpCD);
+      }
+      if (other.tokenMulti_ != null) {
+        if (tokenMulti_ == null) {
+          TokenMulti = new global::fat.gamekitdata.TokenMulti();
+        }
+        TokenMulti.MergeFrom(other.TokenMulti);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -2825,6 +3077,13 @@ namespace fat.gamekitdata {
               JumpCD = new global::fat.gamekitdata.JumpCD();
             }
             input.ReadMessage(JumpCD);
+            break;
+          }
+          case 242: {
+            if (tokenMulti_ == null) {
+              TokenMulti = new global::fat.gamekitdata.TokenMulti();
+            }
+            input.ReadMessage(TokenMulti);
             break;
           }
         }
@@ -2926,6 +3185,13 @@ namespace fat.gamekitdata {
             input.ReadMessage(JumpCD);
             break;
           }
+          case 242: {
+            if (tokenMulti_ == null) {
+              TokenMulti = new global::fat.gamekitdata.TokenMulti();
+            }
+            input.ReadMessage(TokenMulti);
+            break;
+          }
         }
       }
     }
@@ -2945,7 +3211,7 @@ namespace fat.gamekitdata {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::fat.gamekitdata.MergeReflection.Descriptor.MessageTypes[8]; }
+      get { return global::fat.gamekitdata.MergeReflection.Descriptor.MessageTypes[9]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3153,7 +3419,7 @@ namespace fat.gamekitdata {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::fat.gamekitdata.MergeReflection.Descriptor.MessageTypes[9]; }
+      get { return global::fat.gamekitdata.MergeReflection.Descriptor.MessageTypes[10]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3343,7 +3609,7 @@ namespace fat.gamekitdata {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::fat.gamekitdata.MergeReflection.Descriptor.MessageTypes[10]; }
+      get { return global::fat.gamekitdata.MergeReflection.Descriptor.MessageTypes[11]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3557,7 +3823,7 @@ namespace fat.gamekitdata {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::fat.gamekitdata.MergeReflection.Descriptor.MessageTypes[11]; }
+      get { return global::fat.gamekitdata.MergeReflection.Descriptor.MessageTypes[12]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4155,7 +4421,7 @@ namespace fat.gamekitdata {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::fat.gamekitdata.MergeReflection.Descriptor.MessageTypes[12]; }
+      get { return global::fat.gamekitdata.MergeReflection.Descriptor.MessageTypes[13]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4369,7 +4635,7 @@ namespace fat.gamekitdata {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::fat.gamekitdata.MergeReflection.Descriptor.MessageTypes[13]; }
+      get { return global::fat.gamekitdata.MergeReflection.Descriptor.MessageTypes[14]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4622,7 +4888,7 @@ namespace fat.gamekitdata {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::fat.gamekitdata.MergeReflection.Descriptor.MessageTypes[14]; }
+      get { return global::fat.gamekitdata.MergeReflection.Descriptor.MessageTypes[15]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4914,7 +5180,7 @@ namespace fat.gamekitdata {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::fat.gamekitdata.MergeReflection.Descriptor.MessageTypes[15]; }
+      get { return global::fat.gamekitdata.MergeReflection.Descriptor.MessageTypes[16]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5086,7 +5352,7 @@ namespace fat.gamekitdata {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::fat.gamekitdata.MergeReflection.Descriptor.MessageTypes[16]; }
+      get { return global::fat.gamekitdata.MergeReflection.Descriptor.MessageTypes[17]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5300,7 +5566,7 @@ namespace fat.gamekitdata {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::fat.gamekitdata.MergeReflection.Descriptor.MessageTypes[17]; }
+      get { return global::fat.gamekitdata.MergeReflection.Descriptor.MessageTypes[18]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5659,7 +5925,7 @@ namespace fat.gamekitdata {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::fat.gamekitdata.MergeReflection.Descriptor.MessageTypes[18]; }
+      get { return global::fat.gamekitdata.MergeReflection.Descriptor.MessageTypes[19]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5873,7 +6139,7 @@ namespace fat.gamekitdata {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::fat.gamekitdata.MergeReflection.Descriptor.MessageTypes[19]; }
+      get { return global::fat.gamekitdata.MergeReflection.Descriptor.MessageTypes[20]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -6087,7 +6353,7 @@ namespace fat.gamekitdata {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::fat.gamekitdata.MergeReflection.Descriptor.MessageTypes[20]; }
+      get { return global::fat.gamekitdata.MergeReflection.Descriptor.MessageTypes[21]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -6262,7 +6528,7 @@ namespace fat.gamekitdata {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::fat.gamekitdata.MergeReflection.Descriptor.MessageTypes[21]; }
+      get { return global::fat.gamekitdata.MergeReflection.Descriptor.MessageTypes[22]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -6662,7 +6928,7 @@ namespace fat.gamekitdata {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::fat.gamekitdata.MergeReflection.Descriptor.MessageTypes[22]; }
+      get { return global::fat.gamekitdata.MergeReflection.Descriptor.MessageTypes[23]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -6837,7 +7103,7 @@ namespace fat.gamekitdata {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::fat.gamekitdata.MergeReflection.Descriptor.MessageTypes[23]; }
+      get { return global::fat.gamekitdata.MergeReflection.Descriptor.MessageTypes[24]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -7000,6 +7266,170 @@ namespace fat.gamekitdata {
 
   }
 
+  public sealed partial class ComActivityToken : pb::IMessage<ComActivityToken>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<ComActivityToken> _parser = new pb::MessageParser<ComActivityToken>(() => new ComActivityToken());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ComActivityToken> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::fat.gamekitdata.MergeReflection.Descriptor.MessageTypes[25]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ComActivityToken() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ComActivityToken(ComActivityToken other) : this() {
+      paramList_ = other.paramList_.Clone();
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ComActivityToken Clone() {
+      return new ComActivityToken(this);
+    }
+
+    /// <summary>Field number for the "ParamList" field.</summary>
+    public const int ParamListFieldNumber = 1;
+    private static readonly pb::FieldCodec<global::fat.gamekitdata.AnyState> _repeated_paramList_codec
+        = pb::FieldCodec.ForMessage(10, global::fat.gamekitdata.AnyState.Parser);
+    private readonly pbc::RepeatedField<global::fat.gamekitdata.AnyState> paramList_ = new pbc::RepeatedField<global::fat.gamekitdata.AnyState>();
+    /// <summary>
+    ///记录本组件可能用到的参数列表 便于后续扩展
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::fat.gamekitdata.AnyState> ParamList {
+      get { return paramList_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ComActivityToken);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ComActivityToken other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if(!paramList_.Equals(other.paramList_)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      hash ^= paramList_.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      paramList_.WriteTo(output, _repeated_paramList_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      paramList_.WriteTo(ref output, _repeated_paramList_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      size += paramList_.CalculateSize(_repeated_paramList_codec);
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ComActivityToken other) {
+      if (other == null) {
+        return;
+      }
+      paramList_.Add(other.paramList_);
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            paramList_.AddEntriesFrom(input, _repeated_paramList_codec);
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            paramList_.AddEntriesFrom(ref input, _repeated_paramList_codec);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
   public sealed partial class MergeItem : pb::IMessage<MergeItem>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
@@ -7012,7 +7442,7 @@ namespace fat.gamekitdata {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::fat.gamekitdata.MergeReflection.Descriptor.MessageTypes[24]; }
+      get { return global::fat.gamekitdata.MergeReflection.Descriptor.MessageTypes[26]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -7050,6 +7480,7 @@ namespace fat.gamekitdata {
       comMixSource_ = other.comMixSource_ != null ? other.comMixSource_.Clone() : null;
       comTrigSource_ = other.comTrigSource_ != null ? other.comTrigSource_.Clone() : null;
       comActiveSource_ = other.comActiveSource_ != null ? other.comActiveSource_.Clone() : null;
+      comActivityToken_ = other.comActivityToken_ != null ? other.comActivityToken_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -7310,6 +7741,17 @@ namespace fat.gamekitdata {
       }
     }
 
+    /// <summary>Field number for the "ComActivityToken" field.</summary>
+    public const int ComActivityTokenFieldNumber = 22;
+    private global::fat.gamekitdata.ComActivityToken comActivityToken_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::fat.gamekitdata.ComActivityToken ComActivityToken {
+      get { return comActivityToken_; }
+      set {
+        comActivityToken_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as MergeItem);
@@ -7344,6 +7786,7 @@ namespace fat.gamekitdata {
       if (!object.Equals(ComMixSource, other.ComMixSource)) return false;
       if (!object.Equals(ComTrigSource, other.ComTrigSource)) return false;
       if (!object.Equals(ComActiveSource, other.ComActiveSource)) return false;
+      if (!object.Equals(ComActivityToken, other.ComActivityToken)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -7371,6 +7814,7 @@ namespace fat.gamekitdata {
       if (comMixSource_ != null) hash ^= ComMixSource.GetHashCode();
       if (comTrigSource_ != null) hash ^= ComTrigSource.GetHashCode();
       if (comActiveSource_ != null) hash ^= ComActiveSource.GetHashCode();
+      if (comActivityToken_ != null) hash ^= ComActivityToken.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -7471,6 +7915,10 @@ namespace fat.gamekitdata {
         output.WriteRawTag(170, 1);
         output.WriteMessage(ComActiveSource);
       }
+      if (comActivityToken_ != null) {
+        output.WriteRawTag(178, 1);
+        output.WriteMessage(ComActivityToken);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -7564,6 +8012,10 @@ namespace fat.gamekitdata {
         output.WriteRawTag(170, 1);
         output.WriteMessage(ComActiveSource);
       }
+      if (comActivityToken_ != null) {
+        output.WriteRawTag(178, 1);
+        output.WriteMessage(ComActivityToken);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -7635,6 +8087,9 @@ namespace fat.gamekitdata {
       }
       if (comActiveSource_ != null) {
         size += 2 + pb::CodedOutputStream.ComputeMessageSize(ComActiveSource);
+      }
+      if (comActivityToken_ != null) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(ComActivityToken);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -7751,6 +8206,12 @@ namespace fat.gamekitdata {
           ComActiveSource = new global::fat.gamekitdata.ComActiveSource();
         }
         ComActiveSource.MergeFrom(other.ComActiveSource);
+      }
+      if (other.comActivityToken_ != null) {
+        if (comActivityToken_ == null) {
+          ComActivityToken = new global::fat.gamekitdata.ComActivityToken();
+        }
+        ComActivityToken.MergeFrom(other.ComActivityToken);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -7890,6 +8351,13 @@ namespace fat.gamekitdata {
               ComActiveSource = new global::fat.gamekitdata.ComActiveSource();
             }
             input.ReadMessage(ComActiveSource);
+            break;
+          }
+          case 178: {
+            if (comActivityToken_ == null) {
+              ComActivityToken = new global::fat.gamekitdata.ComActivityToken();
+            }
+            input.ReadMessage(ComActivityToken);
             break;
           }
         }
@@ -8032,6 +8500,13 @@ namespace fat.gamekitdata {
             input.ReadMessage(ComActiveSource);
             break;
           }
+          case 178: {
+            if (comActivityToken_ == null) {
+              ComActivityToken = new global::fat.gamekitdata.ComActivityToken();
+            }
+            input.ReadMessage(ComActivityToken);
+            break;
+          }
         }
       }
     }
@@ -8051,7 +8526,7 @@ namespace fat.gamekitdata {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::fat.gamekitdata.MergeReflection.Descriptor.MessageTypes[25]; }
+      get { return global::fat.gamekitdata.MergeReflection.Descriptor.MessageTypes[27]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

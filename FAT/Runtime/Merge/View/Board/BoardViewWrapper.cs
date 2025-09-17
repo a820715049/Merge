@@ -102,7 +102,7 @@ namespace FAT
                         confirmList.Count > 0)
                     {
                         // 使用正式的弹窗 | UI关闭时释放temp
-                        UIManager.Instance.OpenWindow(UIConfig.UICompleteOrderBag,confirmList, new Action(() =>
+                        UIManager.Instance.OpenWindow(UIConfig.UICompleteOrderBag, confirmList, new Action(() =>
                         {
                             temp.Free();
                             MessageCenter.Get<MSG.GAME_ORDER_TRY_FINISH_FROM_UI>().Dispatch(order, false);
@@ -207,7 +207,7 @@ namespace FAT
 
         public static void FillBoardOrder(List<IOrderData> container, int mask = (int)OrderProviderTypeMask.All)
         {
-            if (_IsMain())
+            if (_IsMain() || Game.Manager.mergeBoardMan.activeWorld.isEquivalentToMain)
             {
                 Game.Manager.mainOrderMan.FillActiveOrders(container, mask);
             }

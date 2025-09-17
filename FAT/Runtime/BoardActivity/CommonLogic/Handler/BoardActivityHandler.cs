@@ -127,6 +127,7 @@ namespace FAT
                 EventType.Fight => feature.IsFeatureEntryUnlocked(FeatureFight),
                 EventType.WishBoard => feature.IsFeatureEntryUnlocked(FeatureWishBoard),
                 EventType.MineCart => feature.IsFeatureEntryUnlocked(FeatureMineCart),
+                EventType.TrainMission => feature.IsFeatureEntryUnlocked(FeatureTrainMission),
                 _ => false
             };
         }
@@ -151,6 +152,7 @@ namespace FAT
                     break;
                 case EventType.WishBoard: boardActivity = new WishBoardActivity(lite); return true;
                 case EventType.MineCart: boardActivity = new MineCartActivity(lite); return true;
+                case EventType.TrainMission: boardActivity = new TrainMissionActivity(lite); return true;
                 default:
                     break;
             }

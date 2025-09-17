@@ -258,6 +258,7 @@ namespace FAT
                 BPActivity bpActivity => new BPEntry(e_, bpActivity),
                 PackErgList packErgList => packErgList.SetupEntry(e_),
                 ActivityRedeemShopLike redeemShop => new RedeemShopEntry(e_, redeemShop),
+                TrainMissionActivity trainMission => new TrainMissionEntry(e_, trainMission),
                 WishBoardActivity wishBoard => new WishBoardEntry(e_, wishBoard),
                 ActivityWeeklyRaffle weeklyRaffle => new WeeklyRaffleEntry(e_, weeklyRaffle),
                 PackSpin packSpin => new EntrySpin(e_, packSpin),

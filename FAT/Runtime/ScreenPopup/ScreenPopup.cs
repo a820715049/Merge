@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using EL;
@@ -137,8 +139,12 @@ namespace FAT
 
         public void Check(int c_ = 1)
         {
-            if (blockDelay) return;
-            next:
+            if (blockDelay)
+            {
+                CheckIgnoreDelay(c_);
+                return;
+            }
+        next:
             if (list.Count == 0)
             {
                 if (CheckState(query))
@@ -187,6 +193,67 @@ namespace FAT
             {
                 DebugEx.Info($"{nameof(ScreenPopup)} popup limit {limit} reached, clear {list.Count}");
                 LimitClear();
+            }
+        }
+
+        public void CheckIgnoreDelay(int c_)
+        {
+            if (list.Count == 0 || !(Game.Manager.mergeBoardMan.activeWorld?.isEquivalentToMain ?? false)) { return; }
+            if (changed)
+            {
+                changed = false;
+                list.Sort(WeightSort);
+            }
+            while (list.FirstOrDefault(x => x.option.ignoreDelay == true) != null)
+            {
+                var peek = list.FirstOrDefault(x => x.option.ignoreDelay == true);
+                if (peek.option.delay || !peek.Ready()) return;
+                active = peek;
+                list.Remove(active);
+                if (changed)
+                {
+                    changed = false;
+                    list.Sort(WeightSort);
+                }
+                if (!active.CheckValid(out var rs))
+                {
+                    DebugEx.Error($"{nameof(ScreenPopup)} reject active popup {active} reason={rs}");
+                    continue;
+                }
+                var id = active.PopupId;
+                record.TryGetValue(id, out var v);
+                var limit = active.QueueState == PopupNone ? 100 : popupLimit;
+                DebugEx.Info($"{nameof(ScreenPopup)} try popup {id} {v}<{active.PopupLimit} {popupCount}<{limit}");
+                if (active.PopupLimit >= 0 && v >= active.PopupLimit) { continue; }
+                ;
+                var ui = active.PopupRes;
+                if (ui == null)
+                {
+                    DebugEx.Error($"{nameof(ScreenPopup)} no ui to popup, please check:{active}");
+                    continue;
+                }
+                ui.ActivePopup = true;
+                if (!active.OpenPopup()) { continue; }
+                record[id] = v + c_;
+                Game.Manager.archiveMan.SendImmediately(true);
+                popupCount += c_;
+                if (popupCount >= limit && list.Count > 0)
+                {
+                    DebugEx.Info($"{nameof(ScreenPopup)} popup limit {limit} reached, clear {list.Count}");
+                    LimitClear();
+                }
+            }
+            if (list.Count == 0)
+            {
+                if (CheckState(query))
+                {
+                    EndClear();
+                    DropCache();
+                }
+                if (TryResumeCache())
+                {
+                    c_ = 0;
+                }
             }
         }
 

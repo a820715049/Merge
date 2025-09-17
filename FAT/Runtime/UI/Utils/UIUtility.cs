@@ -69,6 +69,11 @@ namespace FAT
                 text_ = UIUtility.CountDownFormat(confCD.Time / 1000, CdStyle.OmitZero);
                 return true;
             }
+            var confToken = GetComMergeTokenMultiplier(id_);
+            if (confToken != null) {
+                text_ = UIUtility.CountDownFormat(confToken.Time / 1000, CdStyle.OmitZero);
+                return true;
+            }
             text_ = string.Empty;
             return false;
         }

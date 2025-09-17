@@ -222,12 +222,12 @@ namespace FAT
         public override IEnumerable<(string, AssetTag)> ResEnumerate()
         {
             if (!Valid) yield break;
-            foreach(var v in VisualEnd.ResEnumerate()) yield return v;
-            foreach(var v in VisualGift.ResEnumerate()) yield return v;
-            foreach(var v in VisualHelp.ResEnumerate()) yield return v;
-            foreach(var v in VisualStart.ResEnumerate()) yield return v;
-            foreach(var v in VisualPanel.ResEnumerate()) yield return v;
-            foreach(var v in VisualNewRound.ResEnumerate()) yield return v;
+            foreach (var v in VisualEnd.ResEnumerate()) yield return v;
+            foreach (var v in VisualGift.ResEnumerate()) yield return v;
+            foreach (var v in VisualHelp.ResEnumerate()) yield return v;
+            foreach (var v in VisualStart.ResEnumerate()) yield return v;
+            foreach (var v in VisualPanel.ResEnumerate()) yield return v;
+            foreach (var v in VisualNewRound.ResEnumerate()) yield return v;
         }
 
         public override void LoadSetup(ActivityInstance data_)
@@ -316,7 +316,7 @@ namespace FAT
             {
                 //说明在棋盘内
                 var curBoardId = activeWorld.activeBoard.boardId;
-                if (curBoardId != boardId)
+                if (curBoardId != boardId && !activeWorld.isEquivalentToMain)
                 {
                     DebugEx.FormatError(
                         "[ActivityDigging.AddScore]: ActiveBoardId != DiggingConfigId But TryAddScore, activeBoardId = {0}, eventDiggingConfigBoardId = {1}",
@@ -449,8 +449,8 @@ namespace FAT
         /// </summary>
         public bool TryDiggingCell(int cellIndex, List<RewardCommitData> rewards, out DiggingCellState state, out DiggingResult result, bool isChainReaction = false)
         {
-            result = new DiggingResult 
-            { 
+            result = new DiggingResult
+            {
                 bombItems = new List<DiggingItem>(),
                 obtainedItems = new List<DiggingItem>(),
                 explodedCells = new List<int>()
@@ -459,7 +459,7 @@ namespace FAT
             rewards.Clear();
             var rewardMgr = Game.Manager.rewardMan;
             state = DiggingCellState.None;
-            
+
             //钥匙不够且不是连锁反应
             if (keyNum <= 0 && !isChainReaction)
             {
@@ -479,7 +479,7 @@ namespace FAT
                 //扣钥匙
                 UpdateScoreOrKey(diggingConfig.TokenId, -1);
             }
-            
+
             //是否挖到东西
             if (IsDiggingSuccess(cellIndex, out DiggingItem diggingItem))
             {
@@ -495,7 +495,7 @@ namespace FAT
                     var (row, col) = GetBoardSize();
                     var currentRow = cellIndex / col;
                     var currentCol = cellIndex % col;
-                    
+
                     List<int> cellsToExplode = new List<int>();
                     var validCount = 0;
                     // 根据炸弹类型确定需要爆炸的格子
@@ -531,42 +531,42 @@ namespace FAT
                             }
                         }
                     }
-                    
+
                     // 记录被炸的格子
                     result.explodedCells.AddRange(cellsToExplode);
                     DataTracker.digging_boom.Track(this, GetCurrentLevel().ShowNum, diggingBoardId, validCount);
                     // 处理连锁爆炸
                     foreach (var idx in cellsToExplode)
                     {
-                        var chainResult = new DiggingResult 
-                        { 
+                        var chainResult = new DiggingResult
+                        {
                             bombItems = new List<DiggingItem>(),
                             obtainedItems = new List<DiggingItem>(),
                             explodedCells = new List<int>()
                         };
                         var chainState = DiggingCellState.None;
                         List<RewardCommitData> chainRewards = new List<RewardCommitData>();
-                        
+
                         TryDiggingCell(idx, chainRewards, out chainState, out chainResult, true);
-                        
+
                         if (chainRewards.Count > 0)
                         {
                             rewards.AddRange(chainRewards);
                         }
-                        
+
                         // 收集连锁反应中的炸弹和被炸格子
                         if (chainResult.bombItems.Count > 0)
                         {
                             result.bombItems.AddRange(chainResult.bombItems);
                             result.explodedCells.AddRange(chainResult.explodedCells);
                         }
-                        
+
                         if (chainState == DiggingCellState.Get || chainState == DiggingCellState.BombAndGet)
                         {
                             hasGotItem = true;
                             result.obtainedItems.AddRange(chainResult.obtainedItems);
                         }
-                        
+
                         if (chainState == DiggingCellState.GetAll || chainState == DiggingCellState.BombAndGetAll)
                         {
                             hasGotAll = true;
@@ -574,7 +574,7 @@ namespace FAT
                         }
                     }
                 }
-                
+
                 if (HasGot(diggingItem.x, diggingItem.y, diggingItem.item.ColSize, diggingItem.item.RowSize))
                 {
                     hasGotItem = true;
@@ -583,7 +583,7 @@ namespace FAT
                         result.obtainedItems.Add(diggingItem);
                     }
                 }
-                
+
                 if (HasGotAll())
                 {
                     hasGotAll = true;
@@ -685,11 +685,11 @@ namespace FAT
                                     totalWeight += weight;
                                     list.Add((i, weight));
                                 }
-                                
+
                                 var roll = Random.Range(1, totalWeight + 1);
                                 var weightSum = 0;
                                 int selectedIndex = 0;
-                                
+
                                 foreach (var item in list)
                                 {
                                     weightSum += item.weight;
@@ -699,7 +699,7 @@ namespace FAT
                                         break;
                                     }
                                 }
-                                
+
                                 var selectedRewardInfo = curLevel.RandomRewardInfo[selectedIndex];
                                 var rewardConfig = selectedRewardInfo.ConvertToRewardConfig();
                                 var r = rewardMgr.BeginReward(rewardConfig.Id, rewardConfig.Count, ReasonString.digging_random);
@@ -753,7 +753,7 @@ namespace FAT
             diggingItem = new DiggingItem();
             if (diggingBoardId <= 0) return false;
             var boardConfig = Game.Manager.configMan.GetEventDiggingBoard(diggingBoardId);
-            
+
             foreach (var item in boardConfig.ItemInfo)
             {
                 var (itemId, x, y) = item.ConvertToInt3();
@@ -946,7 +946,7 @@ namespace FAT
             var listT = PoolMappingAccess.Take(out List<RewardCommitData> list);
             using var _ = PoolMappingAccess.Borrow(out Dictionary<int, int> map);
             map[diggingConfig.TokenId] = keyNum;
-            ActivityExpire.ConvertToReward(diggingConfig.ExpirePopup, list, ReasonString.digging_end, token_:map);
+            ActivityExpire.ConvertToReward(diggingConfig.ExpirePopup, list, ReasonString.digging_end, token_: map);
             var roundNum = HasNextRound() ? currentRoundIndex : roundConfig.IncludeDiggingId.Count;
             DataTracker.digging_end.Track(this, roundNum, getKeyNum, useKeyNum, keyNum);
             keyNum = 0;
@@ -1062,10 +1062,10 @@ namespace FAT
         {
             var (row, col) = GetBoardSize();
             if (row <= 0 || col <= 0) return "";
-            
+
             var x = cellIndex % col + 1;
             var y = cellIndex / col + 1;
-            
+
             return $"{x}:{y}";
         }
 

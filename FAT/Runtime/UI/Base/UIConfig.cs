@@ -182,8 +182,12 @@ namespace FAT
         public static UIResource UIScoreMilestone = new UIResource("UIScoreMilestone_cook.prefab", AboveStatus, "event_score_cook").SupportNavBack().AllowHideUI();
         public static UIResource UIScoreFinish_Track = new UIResource("UIScoreFinish_track.prefab", AboveStatus, "event_score_track").SupportNavBack();
         public static UIResource UIScoreFinish_Piece = new UIResource("UIScoreFinish_piece.prefab", AboveStatus, "event_score_piece").SupportNavBack();
+        #endregion
+        
+        #region 新积分活动-合成音符
         public static UIResource UIScoreConvert_Mic = new UIResource("UIScoreConvert_Mic.prefab", AboveStatus, "event_score_mic").AllowHideUI();
         public static UIResource UIScore_Mic = new UIResource("UIScore_mic.prefab", UILayer.AboveStatus, "event_score_mic").SupportNavBack().AllowHideUI();
+        public static UIResource UIMicInfo = new UIResource("UIMicTips.prefab", SubStatus, "event_score_mic").SupportNavBack().AllowHideUI();
         #endregion
 
         #region 订单额外奖励活动
@@ -365,6 +369,23 @@ namespace FAT
         public static UIResource UIActivityFightEnd = new UIResource("UIActivityFightEnd.prefab", AboveStatus, "event_fight_default").SupportNavBack();
         public static UIResource UIActivityFightBegin = new UIResource("UIActivityFightBegin.prefab", AboveStatus, "event_fight_default").SupportNavBack();
         public static UIResource UIActivityFightMilestoneTips = new UIResource("UIActivityFightMilestoneTips.prefab", SubStatus, "event_fight_default").SupportNavBack();
+        #endregion
+
+
+        #region 火车任务
+        public static UIResource UITrainMissionMain = new UIResource("UITrainMissionMain_s001.prefab", BelowStatus, "event_trainmission_s001").SupportNavBack();
+        public static UIResource UITrainMissionBegin = new UIResource("UITrainMissionBegin_s001.prefab", AboveStatus, "event_trainmission_s001").SupportNavBack();
+        public static UIResource UITrainMissionChooseGroup = new UIResource("UITrainMissionChooseGroup_s001.prefab", SubStatus, "event_trainmission_s001").SupportNavBack();
+        public static UIResource UITrainMissionComplete = new UIResource("UITrainMissionComplete_s001.prefab", SubStatus, "event_trainmission_s001");
+        public static UIResource UITrainMissionEnd = new UIResource("UITrainMissionEnd_s001.prefab", SubStatus, "event_trainmission_s001");
+        public static UIResource UITrainMissionHelp = new UIResource("UITrainMissionHelp_s001.prefab", SubStatus, "event_trainmission_s001");
+        public static UIResource UITrainMissionLoading = new UIResource("UITrainMissionLoading_s001.prefab", SubStatus, "event_trainmission_s001").SetMute();
+        public static UIResource UITrainMissionPreview = new UIResource("UITrainMissionPreview_s001.prefab", SubStatus, "event_trainmission_s001").SupportNavBack();
+        public static UIResource UITrainMissionItemInfo = new UIResource("UITrainMissionItemInfo_s001.prefab", SubStatus, "event_trainmission_s001");
+        public static UIResource UITrainMissionReward = new UIResource("UITrainMissionReward_s001.prefab", SubStatus, "event_trainmission_s001");
+        public static UIResource UITrainMissionBag = new UIResource("UITrainMissionBag.prefab", SubStatus, "event_trainmission_default");
+        public static UIResource UITrainMissionCompleteOrderBag = new UIResource("UITrainMissionCompleteOrderBag.prefab", SubStatus, "event_trainmission_default");
+        public static UIResource UITrainMissionRecycleReward = new UIResource("UITrainMissionRecycleReward_s001.prefab", SubStatus, "event_trainmission_s001");
         #endregion
 
         #region 周任务

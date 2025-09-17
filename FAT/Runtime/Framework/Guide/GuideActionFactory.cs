@@ -84,6 +84,7 @@ namespace FAT
                 case "open_ui_multi_help": imp = new GuideActImpUIMultihelp(); break;
                 case "open_ui_wish_help": imp = new GuideActImpOpenWishHelp(); break;
                 case "open_ui_frozen_help": imp = new GuideActImpOpenFrozenHelp(); break;
+                case "open_ui_train_help": imp = new GuideActImpOpenTrainHelp(); break;
                 case "plot": imp = new GuideActImpPlot(); break;
                 case "save": imp = new GuideActImpSave(); break;
                 case "source_ctrl": imp = new GuideActImpSourceCtrl(); break;
@@ -98,6 +99,7 @@ namespace FAT
                 case "wait_select": imp = new GuideActImpWaitSelect(); break;
                 case "wait_uistate": imp = new GuideActWaitUIState(); break;
                 case "token_mask": imp = new GuideActImpTokenMask(); break; // 签到抽奖活动
+                case "hand_pro_train_spawner": imp = new GuideActImpHandProTrainSpawner(); break;
 
                 #region sp
                 case "claw_order_mask_show": imp = new GuideActImpClawOrderMaskShow(); break;

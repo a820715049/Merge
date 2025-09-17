@@ -24,44 +24,45 @@ namespace fat.rawdata {
     static OrderRandomerConfReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "Ch9yYXdkYXRhL09yZGVyUmFuZG9tZXJDb25mLnByb3RvEgdyYXdkYXRhIqUF",
+            "Ch9yYXdkYXRhL09yZGVyUmFuZG9tZXJDb25mLnByb3RvEgdyYXdkYXRhIrsF",
             "Cg1PcmRlclJhbmRvbWVyEgoKAmlkGAEgASgFEhQKDGFjdERpZmZHcnBJZBgW",
             "IAEoBRIUCgxhY3RpdmVJdGVtSWQYAiADKAUSEwoLYWN0aXZlTGV2ZWwYAyAB",
             "KAUSFQoNYWN0aXZlT3JkZXJJZBgEIAMoBRIPCgdib2FyZElkGAYgASgFEhQK",
             "DGRpc3BsYXlMZXZlbBgIIAEoBRITCgtlYXN5QWN0RGlmZhgdIAEoBRITCgtl",
             "YXN5UGF5RGlmZhgeIAEoBRITCgtoYXJkQWN0RGlmZhgfIAEoBRITCgtoYXJk",
             "UGF5RGlmZhggIAEoBRISCgppc0FwaU9yZGVyGBogASgIEhAKCGlzQXBpVXNl",
-            "GBsgASgIEhAKCGlzQ3RybGVkGCEgASgIEhQKDGlzT3JkZXJCb251cxgmIAEo",
-            "CBITCgtpc09yZGVyQ2xhdxgoIAEoCBIRCglpc1Bhc3NpdmUYEyABKAgSEwoL",
-            "aXNSZWxhdGVCb3gYHCABKAgSGAoQaXNTa2lwQ2F0ZWdvcnlXdBgnIAEoCBIR",
-            "Cglpc1dpc2hpbmcYJCABKAgSEwoLbWluRGlmZlJhdGUYFSABKAUSFAoMbW9k",
-            "ZWxWZXJzaW9uGCUgASgJEg0KBW51bVd0GBIgAygFEhQKDHBheURpZmZHcnBJ",
-            "ZBgXIAEoBRITCgtyZXdhcmRHcnBJZBgYIAEoBRIOCgZyb2xlSWQYCyABKAUS",
-            "EwoLc2FmZUFjdERpZmYYIiABKAUSEwoLc2FmZVBheURpZmYYIyABKAUSFgoO",
-            "c2h1dGRvd25JdGVtSWQYDCADKAUSFQoNc2h1dGRvd25MZXZlbBgNIAEoBRIX",
-            "Cg9zaHV0ZG93bk9yZGVySWQYDiADKAUSFgoOc2h1dGRvd25SYW5kSWQYGSAD",
-            "KAUivAEKF09yZGVyUmFuZG9tZXJNYXBBQlZhbHVlElAKEE9yZGVyUmFuZG9t",
-            "ZXJNYXAYASADKAsyNi5yYXdkYXRhLk9yZGVyUmFuZG9tZXJNYXBBQlZhbHVl",
-            "Lk9yZGVyUmFuZG9tZXJNYXBFbnRyeRpPChVPcmRlclJhbmRvbWVyTWFwRW50",
-            "cnkSCwoDa2V5GAEgASgFEiUKBXZhbHVlGAIgASgLMhYucmF3ZGF0YS5PcmRl",
-            "clJhbmRvbWVyOgI4ASKZBAoRT3JkZXJSYW5kb21lckNvbmYSSgoQT3JkZXJS",
-            "YW5kb21lck1hcBgBIAMoCzIwLnJhd2RhdGEuT3JkZXJSYW5kb21lckNvbmYu",
-            "T3JkZXJSYW5kb21lck1hcEVudHJ5Ek4KEk9yZGVyUmFuZG9tZXJNYXBBQhgC",
-            "IAMoCzIyLnJhd2RhdGEuT3JkZXJSYW5kb21lckNvbmYuT3JkZXJSYW5kb21l",
-            "ck1hcEFCRW50cnkSWAoXT3JkZXJSYW5kb21lck1hcEFCUGF0Y2gYAyADKAsy",
-            "Ny5yYXdkYXRhLk9yZGVyUmFuZG9tZXJDb25mLk9yZGVyUmFuZG9tZXJNYXBB",
-            "QlBhdGNoRW50cnkaTwoVT3JkZXJSYW5kb21lck1hcEVudHJ5EgsKA2tleRgB",
-            "IAEoBRIlCgV2YWx1ZRgCIAEoCzIWLnJhd2RhdGEuT3JkZXJSYW5kb21lcjoC",
-            "OAEaWwoXT3JkZXJSYW5kb21lck1hcEFCRW50cnkSCwoDa2V5GAEgASgJEi8K",
-            "BXZhbHVlGAIgASgLMiAucmF3ZGF0YS5PcmRlclJhbmRvbWVyTWFwQUJWYWx1",
-            "ZToCOAEaYAocT3JkZXJSYW5kb21lck1hcEFCUGF0Y2hFbnRyeRILCgNrZXkY",
-            "ASABKAkSLwoFdmFsdWUYAiABKAsyIC5yYXdkYXRhLk9yZGVyUmFuZG9tZXJN",
-            "YXBBQlZhbHVlOgI4AUI9Wi1naXRsYWIuZnVucGx1cy5pby9mYXQvY29uZi9n",
-            "ZW4vZ29sYW5nL3Jhd2RhdGGqAgtmYXQucmF3ZGF0YWIGcHJvdG8z"));
+            "GBsgASgIEhAKCGlzQ3RybGVkGCEgASgIEhQKDGlzRXh0cmFTY29yZRgpIAEo",
+            "CBIUCgxpc09yZGVyQm9udXMYJiABKAgSEwoLaXNPcmRlckNsYXcYKCABKAgS",
+            "EQoJaXNQYXNzaXZlGBMgASgIEhMKC2lzUmVsYXRlQm94GBwgASgIEhgKEGlz",
+            "U2tpcENhdGVnb3J5V3QYJyABKAgSEQoJaXNXaXNoaW5nGCQgASgIEhMKC21p",
+            "bkRpZmZSYXRlGBUgASgFEhQKDG1vZGVsVmVyc2lvbhglIAEoCRINCgVudW1X",
+            "dBgSIAMoBRIUCgxwYXlEaWZmR3JwSWQYFyABKAUSEwoLcmV3YXJkR3JwSWQY",
+            "GCABKAUSDgoGcm9sZUlkGAsgASgFEhMKC3NhZmVBY3REaWZmGCIgASgFEhMK",
+            "C3NhZmVQYXlEaWZmGCMgASgFEhYKDnNodXRkb3duSXRlbUlkGAwgAygFEhUK",
+            "DXNodXRkb3duTGV2ZWwYDSABKAUSFwoPc2h1dGRvd25PcmRlcklkGA4gAygF",
+            "EhYKDnNodXRkb3duUmFuZElkGBkgAygFIrwBChdPcmRlclJhbmRvbWVyTWFw",
+            "QUJWYWx1ZRJQChBPcmRlclJhbmRvbWVyTWFwGAEgAygLMjYucmF3ZGF0YS5P",
+            "cmRlclJhbmRvbWVyTWFwQUJWYWx1ZS5PcmRlclJhbmRvbWVyTWFwRW50cnka",
+            "TwoVT3JkZXJSYW5kb21lck1hcEVudHJ5EgsKA2tleRgBIAEoBRIlCgV2YWx1",
+            "ZRgCIAEoCzIWLnJhd2RhdGEuT3JkZXJSYW5kb21lcjoCOAEimQQKEU9yZGVy",
+            "UmFuZG9tZXJDb25mEkoKEE9yZGVyUmFuZG9tZXJNYXAYASADKAsyMC5yYXdk",
+            "YXRhLk9yZGVyUmFuZG9tZXJDb25mLk9yZGVyUmFuZG9tZXJNYXBFbnRyeRJO",
+            "ChJPcmRlclJhbmRvbWVyTWFwQUIYAiADKAsyMi5yYXdkYXRhLk9yZGVyUmFu",
+            "ZG9tZXJDb25mLk9yZGVyUmFuZG9tZXJNYXBBQkVudHJ5ElgKF09yZGVyUmFu",
+            "ZG9tZXJNYXBBQlBhdGNoGAMgAygLMjcucmF3ZGF0YS5PcmRlclJhbmRvbWVy",
+            "Q29uZi5PcmRlclJhbmRvbWVyTWFwQUJQYXRjaEVudHJ5Gk8KFU9yZGVyUmFu",
+            "ZG9tZXJNYXBFbnRyeRILCgNrZXkYASABKAUSJQoFdmFsdWUYAiABKAsyFi5y",
+            "YXdkYXRhLk9yZGVyUmFuZG9tZXI6AjgBGlsKF09yZGVyUmFuZG9tZXJNYXBB",
+            "QkVudHJ5EgsKA2tleRgBIAEoCRIvCgV2YWx1ZRgCIAEoCzIgLnJhd2RhdGEu",
+            "T3JkZXJSYW5kb21lck1hcEFCVmFsdWU6AjgBGmAKHE9yZGVyUmFuZG9tZXJN",
+            "YXBBQlBhdGNoRW50cnkSCwoDa2V5GAEgASgJEi8KBXZhbHVlGAIgASgLMiAu",
+            "cmF3ZGF0YS5PcmRlclJhbmRvbWVyTWFwQUJWYWx1ZToCOAFCPVotZ2l0bGFi",
+            "LmZ1bnBsdXMuaW8vZmF0L2NvbmYvZ2VuL2dvbGFuZy9yYXdkYXRhqgILZmF0",
+            "LnJhd2RhdGFiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.OrderRandomer), global::fat.rawdata.OrderRandomer.Parser, new[]{ "Id", "ActDiffGrpId", "ActiveItemId", "ActiveLevel", "ActiveOrderId", "BoardId", "DisplayLevel", "EasyActDiff", "EasyPayDiff", "HardActDiff", "HardPayDiff", "IsApiOrder", "IsApiUse", "IsCtrled", "IsOrderBonus", "IsOrderClaw", "IsPassive", "IsRelateBox", "IsSkipCategoryWt", "IsWishing", "MinDiffRate", "ModelVersion", "NumWt", "PayDiffGrpId", "RewardGrpId", "RoleId", "SafeActDiff", "SafePayDiff", "ShutdownItemId", "ShutdownLevel", "ShutdownOrderId", "ShutdownRandId" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.OrderRandomer), global::fat.rawdata.OrderRandomer.Parser, new[]{ "Id", "ActDiffGrpId", "ActiveItemId", "ActiveLevel", "ActiveOrderId", "BoardId", "DisplayLevel", "EasyActDiff", "EasyPayDiff", "HardActDiff", "HardPayDiff", "IsApiOrder", "IsApiUse", "IsCtrled", "IsExtraScore", "IsOrderBonus", "IsOrderClaw", "IsPassive", "IsRelateBox", "IsSkipCategoryWt", "IsWishing", "MinDiffRate", "ModelVersion", "NumWt", "PayDiffGrpId", "RewardGrpId", "RoleId", "SafeActDiff", "SafePayDiff", "ShutdownItemId", "ShutdownLevel", "ShutdownOrderId", "ShutdownRandId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.OrderRandomerMapABValue), global::fat.rawdata.OrderRandomerMapABValue.Parser, new[]{ "OrderRandomerMap" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.OrderRandomerConf), global::fat.rawdata.OrderRandomerConf.Parser, new[]{ "OrderRandomerMap", "OrderRandomerMapAB", "OrderRandomerMapABPatch" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, null, })
           }));
@@ -120,6 +121,7 @@ namespace fat.rawdata {
       isApiOrder_ = other.isApiOrder_;
       isApiUse_ = other.isApiUse_;
       isCtrled_ = other.isCtrled_;
+      isExtraScore_ = other.isExtraScore_;
       isOrderBonus_ = other.isOrderBonus_;
       isOrderClaw_ = other.isOrderClaw_;
       isPassive_ = other.isPassive_;
@@ -371,6 +373,20 @@ namespace fat.rawdata {
       get { return isCtrled_; }
       set {
         isCtrled_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "isExtraScore" field.</summary>
+    public const int IsExtraScoreFieldNumber = 41;
+    private bool isExtraScore_;
+    /// <summary>
+    /// 使用ExtraScore模版的活动，关注那些订单（仅针对左下角的积分情况）
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool IsExtraScore {
+      get { return isExtraScore_; }
+      set {
+        isExtraScore_ = value;
       }
     }
 
@@ -690,6 +706,7 @@ namespace fat.rawdata {
       if (IsApiOrder != other.IsApiOrder) return false;
       if (IsApiUse != other.IsApiUse) return false;
       if (IsCtrled != other.IsCtrled) return false;
+      if (IsExtraScore != other.IsExtraScore) return false;
       if (IsOrderBonus != other.IsOrderBonus) return false;
       if (IsOrderClaw != other.IsOrderClaw) return false;
       if (IsPassive != other.IsPassive) return false;
@@ -728,6 +745,7 @@ namespace fat.rawdata {
       if (IsApiOrder != false) hash ^= IsApiOrder.GetHashCode();
       if (IsApiUse != false) hash ^= IsApiUse.GetHashCode();
       if (IsCtrled != false) hash ^= IsCtrled.GetHashCode();
+      if (IsExtraScore != false) hash ^= IsExtraScore.GetHashCode();
       if (IsOrderBonus != false) hash ^= IsOrderBonus.GetHashCode();
       if (IsOrderClaw != false) hash ^= IsOrderClaw.GetHashCode();
       if (IsPassive != false) hash ^= IsPassive.GetHashCode();
@@ -872,6 +890,10 @@ namespace fat.rawdata {
         output.WriteRawTag(192, 2);
         output.WriteBool(IsOrderClaw);
       }
+      if (IsExtraScore != false) {
+        output.WriteRawTag(200, 2);
+        output.WriteBool(IsExtraScore);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -991,6 +1013,10 @@ namespace fat.rawdata {
         output.WriteRawTag(192, 2);
         output.WriteBool(IsOrderClaw);
       }
+      if (IsExtraScore != false) {
+        output.WriteRawTag(200, 2);
+        output.WriteBool(IsExtraScore);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -1036,6 +1062,9 @@ namespace fat.rawdata {
         size += 2 + 1;
       }
       if (IsCtrled != false) {
+        size += 2 + 1;
+      }
+      if (IsExtraScore != false) {
         size += 2 + 1;
       }
       if (IsOrderBonus != false) {
@@ -1132,6 +1161,9 @@ namespace fat.rawdata {
       }
       if (other.IsCtrled != false) {
         IsCtrled = other.IsCtrled;
+      }
+      if (other.IsExtraScore != false) {
+        IsExtraScore = other.IsExtraScore;
       }
       if (other.IsOrderBonus != false) {
         IsOrderBonus = other.IsOrderBonus;
@@ -1327,6 +1359,10 @@ namespace fat.rawdata {
             IsOrderClaw = input.ReadBool();
             break;
           }
+          case 328: {
+            IsExtraScore = input.ReadBool();
+            break;
+          }
         }
       }
     #endif
@@ -1473,6 +1509,10 @@ namespace fat.rawdata {
           }
           case 320: {
             IsOrderClaw = input.ReadBool();
+            break;
+          }
+          case 328: {
+            IsExtraScore = input.ReadBool();
             break;
           }
         }

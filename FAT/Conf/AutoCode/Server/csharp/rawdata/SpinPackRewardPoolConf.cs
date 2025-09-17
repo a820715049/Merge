@@ -63,7 +63,7 @@ namespace fat.rawdata {
   /// <summary>
   /// annotation@annotation_type(type="rawdata")
   /// annotation@rawdata(row="SpinPackRewardPool",table="SpinPackRewardPoolMap",table_wrapper="SpinPackRewardPoolConf",map="true",map_key_type="int32",data="SpinPackRewardPoolConf")
-  /// annotation@ab(table_ab="SpinPackRewardPoolMapAB",table_ab_patch="SpinPackRewardPoolMapABPatch",table_ab_value="SpinPackRewardPoolMapABValue",ab_patch="false")
+  /// annotation@ab(table_ab="SpinPackRewardPoolMapAB",table_ab_patch="SpinPackRewardPoolMapABPatch",table_ab_value="SpinPackRewardPoolMapABValue",ab_patch="true")
   /// annotation@filter(just_server="false",just_client="false")
   /// annotation@SpinPackRewardPool(id="id")
   /// </summary>

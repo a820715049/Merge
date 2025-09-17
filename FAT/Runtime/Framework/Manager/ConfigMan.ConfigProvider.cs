@@ -244,6 +244,11 @@ namespace FAT
         {
             return conf.Data.GetComMergeChoiceBoxMap().Values;
         }
+        
+        public IEnumerable<ComMergeTokenMultiplier> GetComMergeTokenMultiplierConfigs()
+        {
+            return conf.Data.GetComMergeTokenMultiplierMap().Values;
+        }
 
         public IEnumerable<ComMergeMixSource> GetComMergeMixSourceConfigs()
         {
@@ -716,6 +721,11 @@ namespace FAT
         public MicMilestoneGroup GetMicMilestoneGroupConfig(int id)
         {
             return conf.Data.GetMicMilestoneGroup(id);
+        }
+        
+        public ComMergeTokenMultiplier GetComMergeTokenMultiplierConfig(int id)
+        {
+            return conf.Data.GetComMergeTokenMultiplier(id);
         }
 
         #endregion

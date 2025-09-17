@@ -102,6 +102,7 @@ namespace FAT
             FightBoard,
             WishBoard,  //许愿棋盘
             MineCartBoard,      //矿车棋盘
+            TrainMission,
         }
         public EntryType type;
         public MergeWorld world;

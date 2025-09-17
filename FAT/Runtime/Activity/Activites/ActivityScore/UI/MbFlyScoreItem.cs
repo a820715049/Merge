@@ -36,13 +36,23 @@ namespace FAT
             yield return new WaitForSeconds(0.5f);
             float waitProgress = 0;
             Game.Manager.activity.LookupAny(fat.rawdata.EventType.Score, out var activity);
-            if (activity is ActivityScore scoreActivity && Game.Manager.mapSceneMan.scene.Active)
+            if (activity is ActivityScore scoreActivity)
             {
-                waitProgress = 0.5f;
-                MessageCenter.Get<MSG.GAME_SCORE_GET_PROGRESS_BOARD>()
-                    .Dispatch(scoreActivity.TotalScore - r.rewardCount, scoreActivity.TotalScore);
-            }
+                if (Game.Manager.mapSceneMan.scene.Active)
+                {
+                    waitProgress = 0.5f;
+                    MessageCenter.Get<MSG.GAME_SCORE_GET_PROGRESS_BOARD>()
+                        .Dispatch(scoreActivity.TotalScore - r.rewardCount, scoreActivity.TotalScore);
+                }
+                else if (Game.Manager.mergeBoardMan.activeWorld?.isEquivalentToMain ?? false)
+                {
 
+                    waitProgress = 0.5f;
+                    MessageCenter.Get<MSG.GAME_SCORE_GET_PROGRESS_BOARD>()
+                        .Dispatch(scoreActivity.TotalScore - r.rewardCount, scoreActivity.TotalScore);
+                }
+
+            }
             if (waitProgress > 0)
             {
                 yield return new WaitForSeconds(waitProgress);

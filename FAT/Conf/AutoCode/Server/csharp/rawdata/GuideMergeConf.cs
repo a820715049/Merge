@@ -59,7 +59,7 @@ namespace fat.rawdata {
   /// <summary>
   /// annotation@annotation_type(type="rawdata")
   /// annotation@rawdata(row="GuideMerge",table="GuideMergeMap",table_wrapper="GuideMergeConf",map="true",map_key_type="int32",data="GuideMergeConf")
-  /// annotation@ab(table_ab="GuideMergeMapAB",table_ab_patch="GuideMergeMapABPatch",table_ab_value="GuideMergeMapABValue",ab_patch="false")
+  /// annotation@ab(table_ab="GuideMergeMapAB",table_ab_patch="GuideMergeMapABPatch",table_ab_value="GuideMergeMapABValue",ab_patch="true")
   /// annotation@filter(just_server="false",just_client="false")
   /// annotation@GuideMerge(id="id")
   /// </summary>

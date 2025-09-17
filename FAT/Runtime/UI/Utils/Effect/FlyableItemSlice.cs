@@ -68,7 +68,8 @@ namespace FAT
                 Reason = FlyReason.None;
             else if (Game.Manager.objectMan.IsType(ID, ObjConfigType.Coin) || ID == Constant.kMergeEnergyObjId ||
                      FlyType == FlyType.EventScore || FlyType == FlyType.DecorateToken || FlyType == FlyType.RaceToken
-                     || ID == DailyEvent.TokenId || FlyType == FlyType.EndlessToken || FlyType == FlyType.EndlessThreeToken)
+                     || ID == DailyEvent.TokenId || FlyType == FlyType.EndlessToken || FlyType == FlyType.EndlessThreeToken 
+                     || FlyType == FlyType.ScoreMicToken)
                 Reason = FlyReason.CoinChange;
             else if (ID == Constant.kMergeExpObjId)
                 Reason = FlyReason.ExpChange;
@@ -95,7 +96,7 @@ namespace FAT
                         };
                         Size = FlyType switch
                         {
-                            FlyType.EventScore or FlyType.OrderLikeToken or FlyType.PuzzleToken => 70f,
+                            FlyType.EventScore or FlyType.OrderLikeToken or FlyType.PuzzleToken or FlyType.ScoreMicToken => 70f,
                             FlyType.FightBoardMonster or FlyType.FightBoardTreasure => 85f,
                             FlyType.Inventory => 136f,
                             _ => Size,

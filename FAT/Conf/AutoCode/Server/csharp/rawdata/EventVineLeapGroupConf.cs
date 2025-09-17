@@ -27,7 +27,7 @@ namespace fat.rawdata {
             "CiRyYXdkYXRhL0V2ZW50VmluZUxlYXBHcm91cENvbmYucHJvdG8SB3Jhd2Rh",
             "dGEibAoSRXZlbnRWaW5lTGVhcEdyb3VwEgoKAmlkGAEgASgFEgwKBGRpZmYY",
             "AiABKAUSEgoKZXh0cmFTY29yZRgDIAEoBRIPCgdsZXZlbElkGAQgAygFEhcK",
-            "D21pbGVzdG9uZVJld2FyZBgFIAMoBSLaAQocRXZlbnRWaW5lTGVhcEdyb3Vw",
+            "D21pbGVzdG9uZVJld2FyZBgFIAEoBSLaAQocRXZlbnRWaW5lTGVhcEdyb3Vw",
             "TWFwQUJWYWx1ZRJfChVFdmVudFZpbmVMZWFwR3JvdXBNYXAYASADKAsyQC5y",
             "YXdkYXRhLkV2ZW50VmluZUxlYXBHcm91cE1hcEFCVmFsdWUuRXZlbnRWaW5l",
             "TGVhcEdyb3VwTWFwRW50cnkaWQoaRXZlbnRWaW5lTGVhcEdyb3VwTWFwRW50",
@@ -100,7 +100,7 @@ namespace fat.rawdata {
       diff_ = other.diff_;
       extraScore_ = other.extraScore_;
       levelId_ = other.levelId_.Clone();
-      milestoneReward_ = other.milestoneReward_.Clone();
+      milestoneReward_ = other.milestoneReward_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -167,15 +167,16 @@ namespace fat.rawdata {
 
     /// <summary>Field number for the "milestoneReward" field.</summary>
     public const int MilestoneRewardFieldNumber = 5;
-    private static readonly pb::FieldCodec<int> _repeated_milestoneReward_codec
-        = pb::FieldCodec.ForInt32(42);
-    private readonly pbc::RepeatedField<int> milestoneReward_ = new pbc::RepeatedField<int>();
+    private int milestoneReward_;
     /// <summary>
     /// 奖励id
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<int> MilestoneReward {
+    public int MilestoneReward {
       get { return milestoneReward_; }
+      set {
+        milestoneReward_ = value;
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -195,7 +196,7 @@ namespace fat.rawdata {
       if (Diff != other.Diff) return false;
       if (ExtraScore != other.ExtraScore) return false;
       if(!levelId_.Equals(other.levelId_)) return false;
-      if(!milestoneReward_.Equals(other.milestoneReward_)) return false;
+      if (MilestoneReward != other.MilestoneReward) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -206,7 +207,7 @@ namespace fat.rawdata {
       if (Diff != 0) hash ^= Diff.GetHashCode();
       if (ExtraScore != 0) hash ^= ExtraScore.GetHashCode();
       hash ^= levelId_.GetHashCode();
-      hash ^= milestoneReward_.GetHashCode();
+      if (MilestoneReward != 0) hash ^= MilestoneReward.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -236,7 +237,10 @@ namespace fat.rawdata {
         output.WriteInt32(ExtraScore);
       }
       levelId_.WriteTo(output, _repeated_levelId_codec);
-      milestoneReward_.WriteTo(output, _repeated_milestoneReward_codec);
+      if (MilestoneReward != 0) {
+        output.WriteRawTag(40);
+        output.WriteInt32(MilestoneReward);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -259,7 +263,10 @@ namespace fat.rawdata {
         output.WriteInt32(ExtraScore);
       }
       levelId_.WriteTo(ref output, _repeated_levelId_codec);
-      milestoneReward_.WriteTo(ref output, _repeated_milestoneReward_codec);
+      if (MilestoneReward != 0) {
+        output.WriteRawTag(40);
+        output.WriteInt32(MilestoneReward);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -279,7 +286,9 @@ namespace fat.rawdata {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(ExtraScore);
       }
       size += levelId_.CalculateSize(_repeated_levelId_codec);
-      size += milestoneReward_.CalculateSize(_repeated_milestoneReward_codec);
+      if (MilestoneReward != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(MilestoneReward);
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -301,7 +310,9 @@ namespace fat.rawdata {
         ExtraScore = other.ExtraScore;
       }
       levelId_.Add(other.levelId_);
-      milestoneReward_.Add(other.milestoneReward_);
+      if (other.MilestoneReward != 0) {
+        MilestoneReward = other.MilestoneReward;
+      }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -333,9 +344,8 @@ namespace fat.rawdata {
             levelId_.AddEntriesFrom(input, _repeated_levelId_codec);
             break;
           }
-          case 42:
           case 40: {
-            milestoneReward_.AddEntriesFrom(input, _repeated_milestoneReward_codec);
+            MilestoneReward = input.ReadInt32();
             break;
           }
         }
@@ -369,9 +379,8 @@ namespace fat.rawdata {
             levelId_.AddEntriesFrom(ref input, _repeated_levelId_codec);
             break;
           }
-          case 42:
           case 40: {
-            milestoneReward_.AddEntriesFrom(ref input, _repeated_milestoneReward_codec);
+            MilestoneReward = input.ReadInt32();
             break;
           }
         }

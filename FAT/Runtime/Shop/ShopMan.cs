@@ -3,8 +3,8 @@
  * @Description: 商城管理器
  * @Doc: https://centurygames.yuque.com/ywqzgn/ne0fhm/rgceg0giq9to7nk5
  * @Date: 2023-11-08 11:11:38
- * @LastEditors: ange.shentu
- * @LastEditTime: 2025-07-08 16:18:00
+ * @LastEditors: chaoran.zhang
+ * @LastEditTime: 2025-08-19 17:39:46
  */
 
 using UnityEngine;
@@ -27,7 +27,7 @@ namespace FAT
         //飞奖励起始大小
         private static float _rewardSize = 0;
         //钻石不足弹窗
-        private PopupOOG popupOOG = new();
+        private PopupOOG popupOOG = new() { option = new() { ignoreDelay = true } };
 
         public void Reset()
         {

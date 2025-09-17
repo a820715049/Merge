@@ -838,6 +838,66 @@ public partial class DataTracker
     }
 
     #endregion
+    
+    #region 积分活动变种(麦克风版)
+
+    //玩家成功领取里程碑奖励时记录
+    [Serializable]
+    internal class event_mic_milestone : MergeCommonData
+    {
+        public int event_id;
+        public int event_from; //活动来源（0：EventTime，1：EventTrigger）
+        public int event_param;
+        public int milestone_queue; //该奖励位于里程碑奖励的序数（从1开始，本次计算在内）
+        public int milestone_num;   //本轮里程碑的总个数
+        public int milestone_difficulty;   //本轮活动难度
+        public int round_num;   //活动期间的第几轮（固定为1）
+        public bool is_final;   //是否是本轮最后一个里程碑
+
+        public static void Track(ActivityLike acti_, int index, int milestoneNum, int diff, bool isFinal)
+        {
+            var data = _GetTrackData<event_mic_milestone>();
+            data.event_id = acti_.Id;
+            data.event_from = acti_.From;
+            data.event_param = acti_.Param;
+            data.milestone_queue = index;
+            data.milestone_num = milestoneNum;
+            data.milestone_difficulty = diff;
+            data.round_num = 1;
+            data.is_final = isFinal;
+            _TrackData(data);
+        }
+    }
+    
+    //玩家积分增长时记录
+    [Serializable]
+    internal class event_mic_token : MergeCommonData
+    {
+        public int event_id;
+        public int event_from; //活动来源（0：EventTime，1：EventTrigger）
+        public int event_param;
+        public int id; //获得token的id
+        public string from;   //积分来源
+        public bool is_add;   //是否是增加
+        public int amount_change;   //获得积分数量（按基础积分换算后的值）
+        public bool is_double;   //是否是双倍
+
+        public static void Track(ActivityLike acti_, int id, ReasonString reason, bool isAdd, int num, bool isDouble)
+        {
+            var data = _GetTrackData<event_mic_token>();
+            data.event_id = acti_.Id;
+            data.event_from = acti_.From;
+            data.event_param = acti_.Param;
+            data.id = id;
+            data.from = reason;
+            data.is_add = isAdd;
+            data.amount_change = num;
+            data.is_double = isDouble;
+            _TrackData(data);
+        }
+    }
+    
+    #endregion
 
     #region 寻宝活动
 
@@ -3900,8 +3960,9 @@ public partial class DataTracker
         public int milestone_difficulty;
         public int round_num;
         public bool is_final;
+        public bool is_cycle;
 
-        public static void Track(ActivityLike act, int queue, int num, int diff, int round, bool isFinal)
+        public static void Track(ActivityLike act, int queue, int num, int diff, int round, bool isFinal, bool isCycle)
         {
             var data = _GetTrackData<event_puzzle_rwd>();
             (data.event_id, data.event_from, data.event_param) = act.Info3;
@@ -3910,6 +3971,7 @@ public partial class DataTracker
             data.milestone_difficulty = diff;
             data.round_num = round;
             data.is_final = isFinal;
+            data.is_cycle = isCycle;
             _TrackData(data);
         }
     }
@@ -4503,6 +4565,166 @@ public partial class DataTracker
 
     }
     #endregion
+
+    #region 火车任务
+    internal class event_train_choose_group : MergeCommonData
+    {
+        public int event_id;
+        public int event_from;
+        public int event_param;
+        public int group_id;
+        public static void Track(ActivityLike act, int group)
+        {
+            var data = _GetTrackData<event_train_choose_group>();
+            (data.event_id, data.event_from, data.event_param) = act.Info3;
+            data.group_id = group;
+            _TrackData(data);
+        }
+
+    }
+
+    internal class event_train_complete_item : MergeCommonData
+    {
+        public int event_id;
+        public int event_from;
+        public int event_param;
+        public int group_id;
+        public int challenge_id;
+        public int challenge_queue;
+        public int train_id;
+        public int item_id;
+        public string reward_info;
+        public bool is_limit;
+        public string limit_reward_info;
+        public int limit_item_queue;
+        public int round_num;
+
+        public static void Track(ActivityLike act, int group, int challengeID, int challengeQueue, int trainID, int itemID, string rewardInfo, bool isLimit, string limitReward, int limitQueue, int round)
+        {
+            var data = _GetTrackData<event_train_complete_item>();
+            (data.event_id, data.event_from, data.event_param) = act.Info3;
+            data.group_id = group;
+            data.challenge_id = challengeID;
+            data.challenge_queue = challengeQueue;
+            data.train_id = trainID;
+            data.item_id = itemID;
+            data.reward_info = rewardInfo;
+            data.is_limit = isLimit;
+            data.limit_reward_info = limitReward;
+            data.limit_item_queue = limitQueue;
+            data.round_num = round;
+            _TrackData(data);
+        }
+
+    }
+
+    internal class event_train_complete_train : MergeCommonData
+    {
+        public int event_id;
+        public int event_from;
+        public int event_param;
+        public int group_id;
+        public int challenge_id;
+        public int challenge_queue;
+        public int train_id;
+        public string reward_info;
+        public int train_queue;
+        public int round_num;
+        public static void Track(ActivityLike act, int group, int challengeID, int challengeQueue, int train, string reward, int trainQueue, int round)
+        {
+            var data = _GetTrackData<event_train_complete_train>();
+            (data.event_id, data.event_from, data.event_param) = act.Info3;
+            data.group_id = group;
+            data.challenge_id = challengeID;
+            data.challenge_queue = challengeQueue;
+            data.train_id = train;
+            data.reward_info = reward;
+            data.train_queue = trainQueue;
+            data.round_num = round;
+            _TrackData(data);
+        }
+
+    }
+
+    internal class event_train_complete_milestone : MergeCommonData
+    {
+        public int event_id;
+        public int event_from;
+        public int event_param;
+        public int group_id;
+        public int challenge_id;
+        public int milestone_id;
+        public int milestone_queue;
+        public string reward_info;
+        public bool is_final;
+        public int round_num;
+        public static void Track(ActivityLike act, int group, int challengeID, int milestoneID, int milestoneQueue, string reward, bool isFinal, int round)
+        {
+            var data = _GetTrackData<event_train_complete_milestone>();
+            (data.event_id, data.event_from, data.event_param) = act.Info3;
+            data.group_id = group;
+            data.challenge_id = challengeID;
+            data.milestone_id = milestoneID;
+            data.milestone_queue = milestoneQueue;
+            data.reward_info = reward;
+            data.is_final = isFinal;
+            data.round_num = round;
+            _TrackData(data);
+        }
+
+    }
+
+    internal class event_train_challenge_complete : MergeCommonData
+    {
+        public int event_id;
+        public int event_from;
+        public int event_param;
+        public int group_id;
+        public int challenge_id;
+        public int challenge_queue;
+        public bool is_final;
+        public int round_num;
+        public static void Track(ActivityLike act, int group, int challengeID, int challengeQueue, bool isFinal, int round)
+        {
+            var data = _GetTrackData<event_train_challenge_complete>();
+            (data.event_id, data.event_from, data.event_param) = act.Info3;
+            data.group_id = group;
+            data.challenge_id = challengeID;
+            data.challenge_queue = challengeQueue;
+            data.is_final = isFinal;
+            data.round_num = round;
+            _TrackData(data);
+        }
+
+    }
+
+    internal class event_train_end : MergeCommonData
+    {
+        public int event_id;
+        public int event_from;
+        public int event_param;
+        public int group_id;
+        public int challenge_id;
+        public int challenge_queue;
+        public string item_info;
+        public int item_diff;
+        public int round_num;
+        public static void Track(ActivityLike act, int group, int challengeID, int challengeQueue, string itemInfo, int diff, int round)
+        {
+            var data = _GetTrackData<event_train_end>();
+            (data.event_id, data.event_from, data.event_param) = act.Info3;
+            data.group_id = group;
+            data.challenge_id = challengeID;
+            data.challenge_queue = challengeQueue;
+            data.item_info = itemInfo;
+            data.item_diff = diff;
+            data.round_num = round;
+            _TrackData(data);
+        }
+
+    }
+    #endregion
+
     #region 许愿棋盘
     /// <summary>
     /// 许愿棋盘完成里程碑时

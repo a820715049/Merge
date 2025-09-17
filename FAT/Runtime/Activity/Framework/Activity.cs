@@ -10,8 +10,6 @@ using System.Text;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using EL.Resource;
-using UnityEngine;
-using EventType = fat.rawdata.EventType;
 
 namespace FAT
 {
@@ -574,7 +572,7 @@ namespace FAT
                     => Game.Manager.miniBoardMultiMan.ActivityHandler,
                 EventType.Pachinko
                     => Game.Manager.pachinkoMan.Group,
-                EventType.Mine or EventType.Fish or EventType.FarmBoard or EventType.Fight or EventType.WishBoard or EventType.MineCart
+                EventType.Mine or EventType.Fish or EventType.FarmBoard or EventType.Fight or EventType.WishBoard or EventType.MineCart or EventType.TrainMission
                     => boardActivityHandler,
                 _ => common,
             };
@@ -632,13 +630,6 @@ namespace FAT
             foreach (var p in confR)
             {
                 var id2 = (p.Id, FromEventTime);
-                if (p.Id == 991037)
-                {
-                    var a1 = !Active(p, t);
-                    var a2 = IsActive(id2);
-                    var a3 = (info.TryGetValue(p.EventType, out var infoT1) && !infoT1.ready);
-                    var a4 = (info.TryGetValue(p.EventType, out var infoT2) && tagCheck && WaitTag(infoT2));
-                }
                 if (!Active(p, t) || IsActive(id2)
                     || (info.TryGetValue(p.EventType, out var infoT) && !infoT.ready)
                     || (tagCheck && WaitTag(infoT))) continue;

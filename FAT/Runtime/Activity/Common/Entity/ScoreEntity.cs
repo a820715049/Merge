@@ -26,13 +26,13 @@ namespace FAT
             Merge,
             Joker,
         }
-        
+
         public class ScoreFlyRewardData
         {
             public int rewardId;
             public int rewardCount;
         }
-        
+
         private int RequireCoinId;
         private int BoardId;
         private int EventExtraScoreId;
@@ -107,7 +107,7 @@ namespace FAT
         {
             Game.Manager.mergeBoardMan.UnregisterGlobalMergeBonusHandler(mergeHandler);
         }
-        
+
         private void OnUseJokerItemTryAddScore(Item item, int score)
         {
             if (Activity is IActivityComplete c && !c.IsActive) return;
@@ -115,15 +115,15 @@ namespace FAT
             if (r != null)
                 MessageCenter.Get<MSG.BOARD_FLY_SCORE>().Dispatch((item, r, MergeScorePrefab));
         }
-        
+
         private void OnUseSpeedUpItemTryAddScore(Item item, int score)
         {
             if (Activity is IActivityComplete c && !c.IsActive) return;
             var r = AddScore(ScoreType.Bubble, score);
             if (r != null)
                 MessageCenter.Get<MSG.BOARD_FLY_SCORE>().Dispatch((item, r, MergeScorePrefab));
-        }       
-        
+        }
+
         private void OnMergeItemTryAddScore(Item item, int score)
         {
             if (Activity is IActivityComplete c && !c.IsActive) return;
@@ -131,7 +131,7 @@ namespace FAT
             if (r != null)
                 MessageCenter.Get<MSG.BOARD_FLY_SCORE>().Dispatch((item, r, MergeScorePrefab));
         }
-        
+
         private void OnBuyShopItemTryAddScore(int price, int boardId)
         {
             if (Activity is IActivityComplete c && !c.IsActive) return;
@@ -154,7 +154,7 @@ namespace FAT
             if (Activity is IActivityComplete c && !c.IsActive) return;
             orderScoreRewardBR = AddScore(ScoreType.OrderRight, score);
         }
-        
+
         private void OnCommitOrderAnimComplete(Vector3 from, bool isBottomLeft)
         {
             if (!isBottomLeft && orderScoreRewardBR != null)
@@ -184,11 +184,12 @@ namespace FAT
                 //不需要飞向中心时 直接飞
                 else
                 {
-                    UIFlyUtility.FlyReward(commitData, from);
+                    if (Game.Manager.mergeBoardMan.activeWorld.activeBoard.boardId == Constant.MainBoardId)
+                        UIFlyUtility.FlyReward(commitData, from);
                 }
             }
         }
-        
+
         public void UpdateScore(int score)
         {
             Score = score;
@@ -208,9 +209,11 @@ namespace FAT
             {
                 //说明在棋盘内
                 var curBoardId = activeWorld.activeBoard.boardId;
-                if (curBoardId != BoardId)
+                if (curBoardId != BoardId && !activeWorld.isEquivalentToMain)
                 {
-                    DebugEx.FormatError("[ScoreEntity.AddScore]: ActiveBoardId != ScoreConfigId But TryAddScore, activeBoardId = {0}, eventScoreConfigBoardId = {1}", curBoardId, BoardId);
+                    DebugEx.FormatError(
+                        "[ScoreEntity.AddScore]: ActiveBoardId != ScoreConfigId But TryAddScore, activeBoardId = {0}, eventScoreConfigBoardId = {1}",
+                        curBoardId, BoardId);
                     return null;
                 }
             }
@@ -225,7 +228,7 @@ namespace FAT
             ScoreFlyRewardData data = new();
             data.rewardId = RequireCoinId;
             data.rewardCount = score;
-            
+
             PrevScore = Score;
             Score += score;
             MessageCenter.Get<MSG.SCORE_ENTITY_ADD_COMPLETE>().Dispatch((PrevScore, Score, RequireCoinId));
@@ -234,7 +237,7 @@ namespace FAT
             var r = ZString.Concat(ReasonString, "_", type.ToString().ToLower());
             var reason = new ReasonString(r);
             DataTracker.token_change.Track(RequireCoinId, score, Score, reason);
-            
+
             //活动已通关
             if (willCheckComplete)
             {
@@ -246,7 +249,7 @@ namespace FAT
             }
             return data;
         }
-        
+
         private int CalculateScoreByType(ScoreType type, int score)
         {
             //策划不配代表不支持此积分来源
@@ -297,7 +300,7 @@ namespace FAT
             }
             OrderAttachmentUtility.slot_score.UpdateScoreData(order, Activity.Id, scoreTotal);
         }
-        
+
         //计算订单右下角的积分
         public void CalcOrderScoreBR(OrderData order, MergeWorldTracer tracer)
         {
@@ -316,7 +319,7 @@ namespace FAT
             }
             OrderAttachmentUtility.slot_score_br.UpdateScoreDataBR(order, Activity.Id, scoreTotal);
         }
-        
+
         private int CalculateOrderScore(int diff, int rate)
         {
             var eventScoreConfig = Game.Manager.configMan.GetEventExtraScoreConfig(EventExtraScoreId);
@@ -327,7 +330,7 @@ namespace FAT
             var finalOrderScore = RoundScore(orderScore);
             return finalOrderScore;
         }
-        
+
         private int CalculateOrderScoreBR(int diff, int rate)
         {
             var eventScoreConfig = Game.Manager.configMan.GetEventExtraScoreConfig(EventExtraScoreId);
@@ -341,7 +344,7 @@ namespace FAT
                 finalOrderScore = 1;
             return finalOrderScore;
         }
-        
+
         private int RoundScore(float score)
         {
             var idx = FindBoundIndex(score, roundScoreList.Count, roundScoreVisitor);
@@ -356,7 +359,7 @@ namespace FAT
                 ret = 1;
             return ret;
         }
-        
+
         // 区间有序 / 二分查找
         private int FindBoundIndex(float target, int count, Func<int, int> visitor)
         {
