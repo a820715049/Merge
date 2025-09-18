@@ -86,6 +86,7 @@ namespace FAT
                 EventType.EnergyMultiPack => new PackEnergyMultiPack(lite_),
                 EventType.ShinnyGuarPack => new PackShinnyGuar(lite_),
                 EventType.DiscountPack => new PackDiscount(lite_),
+                EventType.LevelPack => new PackLevel(lite_),
                 EventType.ErgListPack => new PackErgList(lite_),
                 EventType.FightOnePlusOne => new PackOnePlusOneFight(lite_),
                 EventType.WishEndlessPack => new PackEndlessWishBoard(lite_),

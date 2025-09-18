@@ -28,6 +28,7 @@ namespace FAT
         {
             mView = null;
             itemId = -1;
+            _ResetUI();
         }
 
         public void RefreshActivityTokenState()
@@ -44,6 +45,7 @@ namespace FAT
 
         private void _RefreshRes(Item item)
         {
+            _ResetUI();
             if (item == null)
                 return;
             if (!item.TryGetItemComponent<ItemActivityTokenComponent>(out var comp))
@@ -64,7 +66,6 @@ namespace FAT
 
         private void _RefreshBL(ItemActivityTokenComponent comp, ItemTokenMultiComponent tokenMultiComp)
         {
-            scoreMicIcon.gameObject.SetActive(false);
             if (comp.CanShow_BL)
             {
                 if (Game.Manager.activity.Lookup(comp.ActivityId_BL, out var act) && act.Active)
@@ -80,6 +81,11 @@ namespace FAT
                     }
                 }
             }
+        }
+
+        private void _ResetUI()
+        {
+            scoreMicIcon.gameObject.SetActive(false);
         }
     }
 }

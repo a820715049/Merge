@@ -2,7 +2,7 @@
  * @Author: chaoran.zhang
  * @Date: 2025-08-04 16:21:01
  * @LastEditors: chaoran.zhang
- * @LastEditTime: 2025-09-10 14:26:01
+ * @LastEditTime: 2025-09-17 18:01:03
  */
 using System;
 using System.Collections.Generic;
@@ -238,13 +238,14 @@ namespace FAT
                 {
                     var config = mission.EndRecycle[i].ConvertToInt3();
                     if (totalDiff > config.Item1) { continue; }
-                    _recycleReward = Game.Manager.rewardMan.BeginReward(config.Item2, config.Item3, ReasonString.train_mission);
+                    _recycleReward = Game.Manager.rewardMan.BeginReward(config.Item2, config.Item3, ReasonString.train_end_reward);
                     _hasConvert = true;
                     break;
                 }
             }
             EndPopup.Popup(0, _recycleReward);
-            DataTracker.event_train_end.Track(this, groupDetailID, trainChallenge.Id, _challengeQueue + 1, ZString.Concat(list.Select(it => it.tid)), totalDiff, phase + 1);
+            DataTracker.event_train_end.Track(this, groupDetailID, trainChallenge.Id, _challengeQueue + 1, ZString.Concat(list.Select(it => it.tid)), totalDiff,
+                phase + 1, _recycleReward == null ? "" : ZString.Format("{0}:{1}", _recycleReward.rewardId, _recycleReward.rewardCount));
         }
         #endregion
 
@@ -337,13 +338,13 @@ namespace FAT
                         order.orderID, ZString.Format("{0}/{1}", _orderRewardWaitCommit[0].rewardId, _orderRewardWaitCommit[0].rewardCount), _trainQueue, phase + 1);
                 }
             }
-            list.Add(Game.Manager.rewardMan.BeginReward(info.rewardID, info.rewardCount, ReasonString.train_mission));
+            list.Add(Game.Manager.rewardMan.BeginReward(info.rewardID, info.rewardCount, ReasonString.train_item_reward));
             if (order.TryGetSpecialMission(index, out var endTime, out _))
             {
                 if (Game.Instance.GetTimestampSeconds() < endTime)
                 {
                     var special = order.specialMissionInfos.FirstOrDefault(e => e.orderIndex - 1 == index);
-                    list.Add(Game.Manager.rewardMan.BeginReward(special.rewardID, special.rewardCount, ReasonString.train_mission));
+                    list.Add(Game.Manager.rewardMan.BeginReward(special.rewardID, special.rewardCount, ReasonString.train_limit_item_reward));
                     _limitCommitCount++;
                 }
             }
@@ -505,7 +506,7 @@ namespace FAT
                 {
                     var config = mission.EndRecycle[i].ConvertToInt3();
                     if (totalDiff > config.Item1) { continue; }
-                    _recycleReward = Game.Manager.rewardMan.BeginReward(config.Item2, config.Item3, ReasonString.train_mission);
+                    _recycleReward = Game.Manager.rewardMan.BeginReward(config.Item2, config.Item3, ReasonString.train_end_reward);
                     _hasConvert = true;
                     break;
                 }
@@ -514,7 +515,8 @@ namespace FAT
             if (phase >= missionRound.IncludeTrainId.Count)
             {
                 Game.Manager.activity.EndImmediate(this, false);
-                DataTracker.event_train_end.Track(this, groupDetailID, trainChallenge.Id, _challengeQueue, ZString.Join(',', LogList.Select(it => it.tid)), totalDiff, phase);
+                DataTracker.event_train_end.Track(this, groupDetailID, trainChallenge.Id, _challengeQueue,
+                ZString.Join(',', LogList.Select(it => it.tid)), totalDiff, phase, _recycleReward == null ? "" : ZString.Format("{0}:{1}", _recycleReward.rewardId, _recycleReward.rewardCount));
             }
             else { _EnterNextRound(); }
             return list;
@@ -757,7 +759,7 @@ namespace FAT
         {
             if (!order.CheckAllFinish()) { return false; }
             _challengeComplete |= 1 << trainChallenge.IncludeTrainMission.IndexOf(order.orderID);
-            foreach (var config in order.rewardConfigs) { _orderRewardWaitCommit.Add(Game.Manager.rewardMan.BeginReward(config.Id, config.Count, ReasonString.train_mission)); }
+            foreach (var config in order.rewardConfigs) { _orderRewardWaitCommit.Add(Game.Manager.rewardMan.BeginReward(config.Id, config.Count, ReasonString.train_reward)); }
             if (topOrder.orderID == order.orderID) { topOrder = new TrainMissionOrder(); }
             else { bottomOrder = new TrainMissionOrder(); }
             _UpdateOrder();
@@ -795,7 +797,7 @@ namespace FAT
         private void _BeginMilestoneReward(TrainMilestone trainMilestone)
         {
             var reward = trainMilestone.Reward.ConvertToRewardConfig();
-            _trainMilestoneRewardWaitCommit = Game.Manager.rewardMan.BeginReward(reward.Id, reward.Count, ReasonString.train_mission);
+            _trainMilestoneRewardWaitCommit = Game.Manager.rewardMan.BeginReward(reward.Id, reward.Count, ReasonString.train_milestone_reward);
         }
 
         private void _EnterNextRound()
@@ -803,6 +805,7 @@ namespace FAT
             Game.Manager.mergeBoardMan.UnregisterMergeWorldEntry(World);
             SetupFresh();
             _waitRecycle = false;
+            DataTracker.event_train_restart.Track(this, phase + 1);
         }
 
         public ItemIndType CheckIndicator(int itemId, out string asset)

@@ -176,6 +176,8 @@ namespace FAT
 
             _view.OnBoardLeave();
             BoardViewWrapper.PopWorld();
+            _recycleSequence.Kill();
+            _tapBonusSequence.Kill();
         }
 
         protected override void OnPostClose()
@@ -236,7 +238,7 @@ namespace FAT
                 return;
             }
 
-            if (_activity.waitRecycle)
+            if (_activity.waitRecycle || recycle.activeSelf) // 用UI辅助判断 处理多轮的情况
             {
                 OnClickRecycleBtn();
                 return;

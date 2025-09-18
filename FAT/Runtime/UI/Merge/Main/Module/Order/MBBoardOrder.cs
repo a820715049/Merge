@@ -1554,31 +1554,16 @@ namespace FAT
             _RefreshScore();
         }
 
-        private bool _CheckTokenCanMulti(int tokenId, out int rate)
-        {
-            rate = 1;
-            var curWorld = BoardViewManager.Instance.world;
-            if (curWorld == null)
-                return false;
-            var hasActiveTokenMulti = curWorld.tokenMulti.hasActiveTokenMulti;
-            if (hasActiveTokenMulti)
-            {
-                var activeItem = curWorld.activeBoard.FindItemById(curWorld.tokenMulti.activeTokenMultiId);
-                var tokenMultiComp = activeItem?.GetItemComponent<ItemTokenMultiComponent>();
-                rate = tokenMultiComp?.config?.TokenMultiplier ?? 1;
-                return ItemUtility.CheckTokenCanMulti(tokenMultiComp, tokenId);
-            }
-            return false;
-        }
-
         private void _RefreshScoreMic(ActivityScoreMic activityScoreMic, int score)
         {
+            if (activityScoreMic == null)
+                return;
             var tokenId = activityScoreMic.Conf.Token;
             //设置图片
             scoreGroup.icon.SetImage(Game.Manager.objectMan.GetBasicConfig(tokenId).Image);
             //根据是否有倍率决定不同颜色和样式
-            var isMulti = _CheckTokenCanMulti(tokenId, out var rate);
-            var key = isMulti ? "scoreMulti" : "score";
+            var isMulti = activityScoreMic.CheckTokenMultiRate(tokenId, out var rate);
+            var key = activityScoreMic.GetScoreTextStyleKey(isMulti);
             activityScoreMic.Visual.RefreshStyle(scoreGroup.txtScore, key);
             var scoreStr = isMulti ? score * rate : score;
             scoreGroup.txtScore.text = $"{scoreStr}";

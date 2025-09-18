@@ -77,6 +77,7 @@ namespace fat.conf.conf_loader
 			ComTrigAutoSourceVisitor.Initialize();
 			CommunityLinkVisitor.Initialize();
 			CurrencyPackVisitor.Initialize();
+			CustCmpltVIPVisitor.Initialize();
 			DEGroupVisitor.Initialize();
 			DEMInfoVisitor.Initialize();
 			DailyEventGroupVisitor.Initialize();
@@ -620,6 +621,7 @@ namespace fat.conf.conf_loader
 		public ComTrigAutoSourceConf ComTrigAutoSourceMap = new ComTrigAutoSourceConf();
 		public CommunityLinkConf CommunityLinkMap = new CommunityLinkConf();
 		public CurrencyPackConf CurrencyPackMap = new CurrencyPackConf();
+		public CustCmpltVIPConf CustCmpltVIPMap = new CustCmpltVIPConf();
 		public DEGroupConf DEGroupMap = new DEGroupConf();
 		public DEMInfoConf DEMInfoMap = new DEMInfoConf();
 		public DailyEventGroupConf DailyEventGroupMap = new DailyEventGroupConf();
@@ -1027,6 +1029,7 @@ namespace fat.conf.conf_loader
 		public Dictionary<string, List<int>> ComTrigAutoSourceSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> CommunityLinkSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> CurrencyPackSortedKeys = new Dictionary<string, List<int>>();
+		public Dictionary<string, List<int>> CustCmpltVIPSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> DEGroupSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> DEMInfoSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> DailyEventGroupSortedKeys = new Dictionary<string, List<int>>();

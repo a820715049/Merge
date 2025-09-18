@@ -25,34 +25,35 @@ namespace fat.rawdata {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "CiJyYXdkYXRhL0V2ZW50U2NvcmVEZXRhaWxDb25mLnByb3RvEgdyYXdkYXRh",
-            "IsMBChBFdmVudFNjb3JlRGV0YWlsEgoKAmlkGAEgASgFEgwKBGRpZmYYByAB",
+            "ItYBChBFdmVudFNjb3JlRGV0YWlsEgoKAmlkGAEgASgFEgwKBGRpZmYYByAB",
             "KAUSEgoKZXh0cmFTY29yZRgCIAEoBRIcChRmaW5hbE1pbGVzdG9uZVJld2Fy",
             "ZBgDIAMoCRIbChNmaW5hbE1pbGVzdG9uZVNjb3JlGAQgASgFEhcKD21pbGVz",
             "dG9uZVJld2FyZBgFIAMoCRIWCg5taWxlc3RvbmVTY29yZRgGIAMoBRIVCg1y",
-            "ZXdhcmRTdGVwTnVtGAggAygFIs4BChpFdmVudFNjb3JlRGV0YWlsTWFwQUJW",
-            "YWx1ZRJZChNFdmVudFNjb3JlRGV0YWlsTWFwGAEgAygLMjwucmF3ZGF0YS5F",
-            "dmVudFNjb3JlRGV0YWlsTWFwQUJWYWx1ZS5FdmVudFNjb3JlRGV0YWlsTWFw",
-            "RW50cnkaVQoYRXZlbnRTY29yZURldGFpbE1hcEVudHJ5EgsKA2tleRgBIAEo",
-            "BRIoCgV2YWx1ZRgCIAEoCzIZLnJhd2RhdGEuRXZlbnRTY29yZURldGFpbDoC",
-            "OAEiyQQKFEV2ZW50U2NvcmVEZXRhaWxDb25mElMKE0V2ZW50U2NvcmVEZXRh",
-            "aWxNYXAYASADKAsyNi5yYXdkYXRhLkV2ZW50U2NvcmVEZXRhaWxDb25mLkV2",
-            "ZW50U2NvcmVEZXRhaWxNYXBFbnRyeRJXChVFdmVudFNjb3JlRGV0YWlsTWFw",
-            "QUIYAiADKAsyOC5yYXdkYXRhLkV2ZW50U2NvcmVEZXRhaWxDb25mLkV2ZW50",
-            "U2NvcmVEZXRhaWxNYXBBQkVudHJ5EmEKGkV2ZW50U2NvcmVEZXRhaWxNYXBB",
-            "QlBhdGNoGAMgAygLMj0ucmF3ZGF0YS5FdmVudFNjb3JlRGV0YWlsQ29uZi5F",
-            "dmVudFNjb3JlRGV0YWlsTWFwQUJQYXRjaEVudHJ5GlUKGEV2ZW50U2NvcmVE",
-            "ZXRhaWxNYXBFbnRyeRILCgNrZXkYASABKAUSKAoFdmFsdWUYAiABKAsyGS5y",
-            "YXdkYXRhLkV2ZW50U2NvcmVEZXRhaWw6AjgBGmEKGkV2ZW50U2NvcmVEZXRh",
-            "aWxNYXBBQkVudHJ5EgsKA2tleRgBIAEoCRIyCgV2YWx1ZRgCIAEoCzIjLnJh",
-            "d2RhdGEuRXZlbnRTY29yZURldGFpbE1hcEFCVmFsdWU6AjgBGmYKH0V2ZW50",
-            "U2NvcmVEZXRhaWxNYXBBQlBhdGNoRW50cnkSCwoDa2V5GAEgASgJEjIKBXZh",
-            "bHVlGAIgASgLMiMucmF3ZGF0YS5FdmVudFNjb3JlRGV0YWlsTWFwQUJWYWx1",
-            "ZToCOAFCPVotZ2l0bGFiLmZ1bnBsdXMuaW8vZmF0L2NvbmYvZ2VuL2dvbGFu",
-            "Zy9yYXdkYXRhqgILZmF0LnJhd2RhdGFiBnByb3RvMw=="));
+            "ZXdhcmRTdGVwTnVtGAggAygFEhEKCXNjb3JlVHlwZRgJIAEoBSLOAQoaRXZl",
+            "bnRTY29yZURldGFpbE1hcEFCVmFsdWUSWQoTRXZlbnRTY29yZURldGFpbE1h",
+            "cBgBIAMoCzI8LnJhd2RhdGEuRXZlbnRTY29yZURldGFpbE1hcEFCVmFsdWUu",
+            "RXZlbnRTY29yZURldGFpbE1hcEVudHJ5GlUKGEV2ZW50U2NvcmVEZXRhaWxN",
+            "YXBFbnRyeRILCgNrZXkYASABKAUSKAoFdmFsdWUYAiABKAsyGS5yYXdkYXRh",
+            "LkV2ZW50U2NvcmVEZXRhaWw6AjgBIskEChRFdmVudFNjb3JlRGV0YWlsQ29u",
+            "ZhJTChNFdmVudFNjb3JlRGV0YWlsTWFwGAEgAygLMjYucmF3ZGF0YS5FdmVu",
+            "dFNjb3JlRGV0YWlsQ29uZi5FdmVudFNjb3JlRGV0YWlsTWFwRW50cnkSVwoV",
+            "RXZlbnRTY29yZURldGFpbE1hcEFCGAIgAygLMjgucmF3ZGF0YS5FdmVudFNj",
+            "b3JlRGV0YWlsQ29uZi5FdmVudFNjb3JlRGV0YWlsTWFwQUJFbnRyeRJhChpF",
+            "dmVudFNjb3JlRGV0YWlsTWFwQUJQYXRjaBgDIAMoCzI9LnJhd2RhdGEuRXZl",
+            "bnRTY29yZURldGFpbENvbmYuRXZlbnRTY29yZURldGFpbE1hcEFCUGF0Y2hF",
+            "bnRyeRpVChhFdmVudFNjb3JlRGV0YWlsTWFwRW50cnkSCwoDa2V5GAEgASgF",
+            "EigKBXZhbHVlGAIgASgLMhkucmF3ZGF0YS5FdmVudFNjb3JlRGV0YWlsOgI4",
+            "ARphChpFdmVudFNjb3JlRGV0YWlsTWFwQUJFbnRyeRILCgNrZXkYASABKAkS",
+            "MgoFdmFsdWUYAiABKAsyIy5yYXdkYXRhLkV2ZW50U2NvcmVEZXRhaWxNYXBB",
+            "QlZhbHVlOgI4ARpmCh9FdmVudFNjb3JlRGV0YWlsTWFwQUJQYXRjaEVudHJ5",
+            "EgsKA2tleRgBIAEoCRIyCgV2YWx1ZRgCIAEoCzIjLnJhd2RhdGEuRXZlbnRT",
+            "Y29yZURldGFpbE1hcEFCVmFsdWU6AjgBQj1aLWdpdGxhYi5mdW5wbHVzLmlv",
+            "L2ZhdC9jb25mL2dlbi9nb2xhbmcvcmF3ZGF0YaoCC2ZhdC5yYXdkYXRhYgZw",
+            "cm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EventScoreDetail), global::fat.rawdata.EventScoreDetail.Parser, new[]{ "Id", "Diff", "ExtraScore", "FinalMilestoneReward", "FinalMilestoneScore", "MilestoneReward", "MilestoneScore", "RewardStepNum" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EventScoreDetail), global::fat.rawdata.EventScoreDetail.Parser, new[]{ "Id", "Diff", "ExtraScore", "FinalMilestoneReward", "FinalMilestoneScore", "MilestoneReward", "MilestoneScore", "RewardStepNum", "ScoreType" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EventScoreDetailMapABValue), global::fat.rawdata.EventScoreDetailMapABValue.Parser, new[]{ "EventScoreDetailMap" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EventScoreDetailConf), global::fat.rawdata.EventScoreDetailConf.Parser, new[]{ "EventScoreDetailMap", "EventScoreDetailMapAB", "EventScoreDetailMapABPatch" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, null, })
           }));
@@ -105,6 +106,7 @@ namespace fat.rawdata {
       milestoneReward_ = other.milestoneReward_.Clone();
       milestoneScore_ = other.milestoneScore_.Clone();
       rewardStepNum_ = other.rewardStepNum_.Clone();
+      scoreType_ = other.scoreType_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -225,6 +227,24 @@ namespace fat.rawdata {
       get { return rewardStepNum_; }
     }
 
+    /// <summary>Field number for the "scoreType" field.</summary>
+    public const int ScoreTypeFieldNumber = 9;
+    private int scoreType_;
+    /// <summary>
+    /// 积分规则类型
+    /// 1:普通里程碑
+    /// 2:循环里程碑
+    /// 3:普通里程碑+结束额外大奖（棋子版）
+    /// 4:获得积分后不发奖，打开UI再结算（新 街机版）
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int ScoreType {
+      get { return scoreType_; }
+      set {
+        scoreType_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as EventScoreDetail);
@@ -246,6 +266,7 @@ namespace fat.rawdata {
       if(!milestoneReward_.Equals(other.milestoneReward_)) return false;
       if(!milestoneScore_.Equals(other.milestoneScore_)) return false;
       if(!rewardStepNum_.Equals(other.rewardStepNum_)) return false;
+      if (ScoreType != other.ScoreType) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -260,6 +281,7 @@ namespace fat.rawdata {
       hash ^= milestoneReward_.GetHashCode();
       hash ^= milestoneScore_.GetHashCode();
       hash ^= rewardStepNum_.GetHashCode();
+      if (ScoreType != 0) hash ^= ScoreType.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -296,6 +318,10 @@ namespace fat.rawdata {
         output.WriteInt32(Diff);
       }
       rewardStepNum_.WriteTo(output, _repeated_rewardStepNum_codec);
+      if (ScoreType != 0) {
+        output.WriteRawTag(72);
+        output.WriteInt32(ScoreType);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -325,6 +351,10 @@ namespace fat.rawdata {
         output.WriteInt32(Diff);
       }
       rewardStepNum_.WriteTo(ref output, _repeated_rewardStepNum_codec);
+      if (ScoreType != 0) {
+        output.WriteRawTag(72);
+        output.WriteInt32(ScoreType);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -350,6 +380,9 @@ namespace fat.rawdata {
       size += milestoneReward_.CalculateSize(_repeated_milestoneReward_codec);
       size += milestoneScore_.CalculateSize(_repeated_milestoneScore_codec);
       size += rewardStepNum_.CalculateSize(_repeated_rewardStepNum_codec);
+      if (ScoreType != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(ScoreType);
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -377,6 +410,9 @@ namespace fat.rawdata {
       milestoneReward_.Add(other.milestoneReward_);
       milestoneScore_.Add(other.milestoneScore_);
       rewardStepNum_.Add(other.rewardStepNum_);
+      if (other.ScoreType != 0) {
+        ScoreType = other.ScoreType;
+      }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -425,6 +461,10 @@ namespace fat.rawdata {
             rewardStepNum_.AddEntriesFrom(input, _repeated_rewardStepNum_codec);
             break;
           }
+          case 72: {
+            ScoreType = input.ReadInt32();
+            break;
+          }
         }
       }
     #endif
@@ -471,6 +511,10 @@ namespace fat.rawdata {
           case 66:
           case 64: {
             rewardStepNum_.AddEntriesFrom(ref input, _repeated_rewardStepNum_codec);
+            break;
+          }
+          case 72: {
+            ScoreType = input.ReadInt32();
             break;
           }
         }

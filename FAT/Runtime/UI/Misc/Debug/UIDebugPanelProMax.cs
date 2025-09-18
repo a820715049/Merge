@@ -183,6 +183,7 @@ namespace FAT
             _RegisterButton("clear board", _OnBtnClearBoard);
             _RegisterButton("quick merge", _OnBtnQuickMerge);
             _RegisterButton("auto quick merge", _OnBtnAutoQuickMerge);
+            _RegisterButton("delete select item", _OnBtnDeleteSelectItem);
             _RegisterButton("Freeze Item", _OnBtnFreezeItem);               // 锁住选中的item
             _RegisterButtonWithInput("guide flip", _OnBtnGuideFlip);        // 切换guide状态
             _RegisterButtonWithInput("board step(s)", _OnUpdateBoard);
@@ -622,6 +623,7 @@ namespace FAT
             _RegisterButton("quick merge", _OnBtnQuickMerge);
             _RegisterButton("auto quick merge", _OnBtnAutoQuickMerge);
             _RegisterButton("unlock board", _UnfrozenAndUnlockAllItems);
+            _RegisterButton("delete select item", _OnBtnDeleteSelectItem);
 
             _StartGroupB("活动重置");
             _RegisterButton("pack reset", () => Game.Manager.activity.DebugReset());
@@ -1066,6 +1068,14 @@ namespace FAT
             }
         }
 
+        //删除当前选中的棋子
+        private void _OnBtnDeleteSelectItem()
+        {
+            var item = BoardViewManager.Instance?.GetCurrentBoardInfoItem();
+            if (item != null) 
+                Game.Manager.mergeBoardMan.activeWorld?.activeBoard?.DisposeItem(item);
+        }
+        
         private void _OnBtnFreezeItem()
         {
             var item = BoardViewManager.Instance?.GetCurrentBoardInfoItem();

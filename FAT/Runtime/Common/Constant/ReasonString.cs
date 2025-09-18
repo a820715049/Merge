@@ -84,7 +84,7 @@ namespace FAT
         public static readonly ReasonString mine_milestone_reward = new(nameof(mine_milestone_reward)); //挖矿活动中获得里程碑奖励时
         public static readonly ReasonString mine_end_token_energy = new(nameof(mine_end_token_energy)); //挖矿活动结束代币转化体力
         public static readonly ReasonString wish_upon_reward = new(nameof(wish_upon_reward)); //耗体自选活动获得奖励
-        
+
 
         #region 农场棋盘
 
@@ -95,9 +95,9 @@ namespace FAT
         public static readonly ReasonString farm_end_token_energy = new(nameof(farm_end_token_energy)); //农场棋盘活动结束代币转化体力
 
         #endregion
-        
+
         #region  矿车棋盘
-        
+
         public static readonly ReasonString mine_cart_start = new(nameof(mine_cart_start)); //矿车棋盘获得初始棋子
         public static readonly ReasonString mine_cart_tap = new(nameof(mine_cart_tap));  //从主棋盘通过点击耗体行为产棋子到矿车棋盘活动
         public static readonly ReasonString mine_cart_order = new(nameof(mine_cart_order));  //从订单产活动棋子到矿车棋盘活动
@@ -214,7 +214,11 @@ namespace FAT
 
         #region 积分活动变种(麦克风版)
 
-        public static readonly ReasonString score_mic = new(nameof(score_mic));
+        public static readonly ReasonString score_mic = new(nameof(score_mic)); //通过活动里程碑完成发出来的奖
+        public static readonly ReasonString score_mic_convert = new(nameof(score_mic_convert)); //通过活动结束回收棋子发出来的奖
+        public static readonly ReasonString score_mic_order = new(nameof(score_mic_order)); //完成订单时发积分
+        public static readonly ReasonString score_mic_board = new(nameof(score_mic_board)); //从棋盘上通过各种行为发积分
+        public static readonly ReasonString score_mic_shop = new(nameof(score_mic_shop)); //在商店购买棋子时发积分
 
         #endregion
 
@@ -249,13 +253,17 @@ namespace FAT
         #region 每日任务路径主题
         public static readonly ReasonString landmark_reward = new(nameof(landmark_reward));
         #endregion
-        
+
         #region 倍率排行榜
         public static readonly ReasonString multi_ranking_token = new(nameof(multi_ranking_token));
         #endregion
 
         #region  train mission
-        public static readonly ReasonString train_mission = new(nameof(train_mission));
+        public static readonly ReasonString train_item_reward = new(nameof(train_item_reward));
+        public static readonly ReasonString train_limit_item_reward = new(nameof(train_limit_item_reward));
+        public static readonly ReasonString train_reward = new(nameof(train_reward));
+        public static readonly ReasonString train_milestone_reward = new(nameof(train_milestone_reward));
+        public static readonly ReasonString train_end_reward = new(nameof(train_end_reward));
         #endregion
     }
 }

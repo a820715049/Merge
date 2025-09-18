@@ -23,6 +23,7 @@ namespace FAT
         
         private readonly List<Node> ListM = new();
         private bool shouldPopup;
+        private bool hasTriggerGuide;
         private PoolMapping.Ref<List<RewardCommitData>> rewardCommitData;
         public struct Node
         {
@@ -156,6 +157,15 @@ namespace FAT
             {
                 rewardCommitData = activity.PopCommitDataList();
             }
+
+            if (items.Length > 1 && items[1] is bool)
+            {
+                hasTriggerGuide = (bool)items[1];
+            }
+            else
+            {
+                hasTriggerGuide = true;
+            }
         }
         
         protected override void OnPreOpen()
@@ -199,6 +209,11 @@ namespace FAT
             if (shouldPopup)
             {
                 PreCoPlayProgressAnimation();
+            }
+
+            if (!hasTriggerGuide)
+            {
+                OnClickHelp();
             }
         }
 

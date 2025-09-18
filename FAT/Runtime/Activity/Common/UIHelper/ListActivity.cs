@@ -37,6 +37,7 @@ namespace FAT
             public TextMeshProUGUI dotCount;
             public GameObject sale;
             public TextMeshProUGUI token;
+            public TextMeshProUGUI innerTxt;
             public TextMeshProUGUI discount;
             public UITextState tokenState;
             public UIImageState frame;
@@ -87,6 +88,7 @@ namespace FAT
                 dotCount = root.Access<TextMeshProUGUI>("dotCount/Count"),
                 sale = root.TryFind("icon/sale"),
                 token = root.Access<TextMeshProUGUI>("icon/token"),
+                innerTxt = root.Access<TextMeshProUGUI>("icon/innerTxt"),
                 discount = root.Access<TextMeshProUGUI>("icon/discount"),
                 tokenState = root.Access<UITextState>("icon/token"),
                 frame = root.Access<UIImageState>("icon/frame"),
@@ -225,6 +227,7 @@ namespace FAT
             e_.dotCount.gameObject.SetActive(false);
             e_.sale.SetActive(_CheckIsShowSale(p_));
             e_.token.gameObject.SetActive(false);
+            e_.innerTxt.gameObject.SetActive(false);
             e_.discount.gameObject.SetActive(false);
             e_.frame.gameObject.SetActive(false);
             e_.up.gameObject.SetActive(false);
@@ -262,6 +265,7 @@ namespace FAT
                 WishBoardActivity wishBoard => new WishBoardEntry(e_, wishBoard),
                 ActivityWeeklyRaffle weeklyRaffle => new WeeklyRaffleEntry(e_, weeklyRaffle),
                 PackSpin packSpin => new EntrySpin(e_, packSpin),
+                PackLevel packLevel => new PackLevelEntry(e_, packLevel),
                 FightBoardActivity fightBoard => new FightBoardEntry(e_, fightBoard),
                 ActivityBingoTask bingoTask => new BingoTaskEntry(e_, bingoTask),
                 ActivityMultiplierRanking multiplierRanking => new MultiplierRankingEntry(e_, multiplierRanking),

@@ -145,6 +145,13 @@ namespace FAT
         {
             if (!NeedFlyCenter) return;
             if (Activity is IActivityComplete c && !c.IsActive) return;
+            //积分活动麦克风版在发积分时，还要考虑当前是否有倍率buff
+            if (Activity is ActivityScoreMic scoreMic)
+            {
+                var isMulti = scoreMic.CheckTokenMultiRate(RequireCoinId, out var rate);
+                var oldScore = score;
+                score = isMulti ? oldScore * rate : oldScore;
+            }
             orderScoreReward = AddScore(ScoreType.OrderLeft, score);
         }
 

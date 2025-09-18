@@ -11,10 +11,10 @@ namespace FAT.Merge
         public int priority;
         int IDisposeBonusHandler.priority => priority;        //越小越先出
         
-        private ActivityFrozenItem _actInst;
+        private ActivityScoreMic _actInst;
         private bool _isValid => _actInst != null && _actInst.Active;
         
-        public ScoreMicDisposeBonusHandler(ActivityFrozenItem act)
+        public ScoreMicDisposeBonusHandler(ActivityScoreMic act)
         {
             _actInst = act;
         }
@@ -24,6 +24,28 @@ namespace FAT.Merge
             //活动实例非法时返回
             if (!_isValid)
                 return;
+            var selfItem = context.item;
+            var targetItem = context.dieToTarget;
+            if (selfItem == null || targetItem == null)
+                return;
+            var dt = context.deadType;
+            if (dt == ItemDeadType.BubbleTimeout || dt == ItemDeadType.None)
+            {
+                //泡泡棋子因超时自然销毁时 不给发上面可能带着的积分
+                //因为棋子积分挂接的来源由ScoreMicSpawnBonusHandler决定，所以这里不过度对ItemDeadType的类型做判断，只要判断棋子身上有没有积分组件就好
+                return;
+            }
+            //没有ItemActivityTokenComponent或左下角没有数据时返回
+            if (!selfItem.TryGetItemComponent<ItemActivityTokenComponent>(out var comp, true) || !comp.CanShow_BL)
+                return;
+            var isMulti = _actInst.CheckTokenMultiRate(comp.TokenId_BL, out var rate);
+            //发麦克风积分
+            var num = isMulti ? comp.TokenNum_BL * rate : comp.TokenNum_BL;
+            var reward = Game.Manager.rewardMan.BeginReward(comp.TokenId_BL, num, ReasonString.score_mic_board);
+            var pos = BoardUtility.GetWorldPosByCoord(targetItem.coord);
+            UIFlyUtility.FlyRewardSetType(reward, pos, FlyType.ScoreMicToken);
+            //积分发完后清理组件上的分数
+            comp.ClearActivityInfo_BL();
         }
 
         void IDisposeBonusHandler.OnRegister()

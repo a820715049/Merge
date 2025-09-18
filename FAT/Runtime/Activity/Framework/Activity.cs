@@ -558,7 +558,7 @@ namespace FAT
                 EventType.NewSession or EventType.ThreeForOnePack or EventType.EndlessThreePack or EventType.GemEndlessThree or
                 EventType.GemThreeForOne or EventType.OnePlusTwo or EventType.ProgressPack or EventType.RetentionPack or EventType.MarketSlidePack or
                 EventType.EnergyMultiPack or EventType.ShinnyGuarPack or EventType.DiscountPack or EventType.ErgListPack or EventType.FightOnePlusOne or EventType.WishEndlessPack or
-                EventType.SpinPack or EventType.Bp or EventType.CartOnePlusOne
+                EventType.SpinPack or EventType.Bp or EventType.CartOnePlusOne or EventType.LevelPack
                     => giftpack,
                 EventType.De or EventType.Dem
                     => Game.Manager.dailyEvent.ActivityGroup,

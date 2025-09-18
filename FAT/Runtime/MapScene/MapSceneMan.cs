@@ -420,7 +420,8 @@ namespace FAT
             {
                 if (b.info.area != area_) continue;
                 b.asset.SetActive(true);
-                var d = b.asset.PlayAny("ans_dyn_idle", false);
+                //装饰区完成预览时，idle动画改为循环播放
+                var d = b.asset.PlayAny("ans_dyn_idle", true);
             }
             Game.Manager.audioMan.TriggerSound("DecoratePlaceConfirm");
             uiMgr.Block(false);

@@ -62,7 +62,7 @@ namespace fat.rawdata {
   /// <summary>
   /// annotation@annotation_type(type="rawdata")
   /// annotation@rawdata(row="GuideMergeAction",table="GuideMergeActionMap",table_wrapper="GuideMergeActionConf",map="true",map_key_type="int32",data="GuideMergeActionConf")
-  /// annotation@ab(table_ab="GuideMergeActionMapAB",table_ab_patch="GuideMergeActionMapABPatch",table_ab_value="GuideMergeActionMapABValue",ab_patch="true")
+  /// annotation@ab(table_ab="GuideMergeActionMapAB",table_ab_patch="GuideMergeActionMapABPatch",table_ab_value="GuideMergeActionMapABValue",ab_patch="false")
   /// annotation@filter(just_server="false",just_client="false")
   /// annotation@GuideMergeAction(id="id")
   /// </summary>

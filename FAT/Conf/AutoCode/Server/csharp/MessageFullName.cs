@@ -337,6 +337,9 @@ namespace fat.rawdata {
 	public sealed partial class CurrencyPack {public static string FullName { get;} = "rawdata.CurrencyPack";}
 	public sealed partial class CurrencyPackConf {public static string FullName { get;} = "rawdata.CurrencyPackConf";}
 	public sealed partial class CurrencyPackMapABValue {public static string FullName { get;} = "rawdata.CurrencyPackMapABValue";}
+	public sealed partial class CustCmpltVIP {public static string FullName { get;} = "rawdata.CustCmpltVIP";}
+	public sealed partial class CustCmpltVIPConf {public static string FullName { get;} = "rawdata.CustCmpltVIPConf";}
+	public sealed partial class CustCmpltVIPMapABValue {public static string FullName { get;} = "rawdata.CustCmpltVIPMapABValue";}
 	public sealed partial class DEGroup {public static string FullName { get;} = "rawdata.DEGroup";}
 	public sealed partial class DEGroupConf {public static string FullName { get;} = "rawdata.DEGroupConf";}
 	public sealed partial class DEGroupMapABValue {public static string FullName { get;} = "rawdata.DEGroupMapABValue";}

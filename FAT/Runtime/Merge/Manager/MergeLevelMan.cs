@@ -20,6 +20,7 @@ namespace FAT
         public bool canLevelupAfterFly => mNextLevel != null && mExp >= mNextLevel.Exp;
         public MergeLevel nextLevelConfig => mNextLevel;
         public int displayLevel => mLevel;
+        public bool isLevelUp { get; private set; }
         public int level => mLevel;
         public int realExp => mExp;
         public int exp => Mathf.Max(0, mExp - mFlyExp);     // 存在debt时 exp可能没有预先addFlyExp
@@ -143,6 +144,10 @@ namespace FAT
             Game.Manager.mainOrderMan.OnMergeLevelChange();
             GuideUtility.OnMergeLevelChange();
             Game.Manager.miniGameDataMan.OnMergeLevelChange();
+            // 升级时触发活动
+            isLevelUp = true;
+            Game.Manager.activity.CheckEventTrigger();
+            isLevelUp = false;
         }
 
         public void AddFlyExp(int addCount, ReasonString reason)

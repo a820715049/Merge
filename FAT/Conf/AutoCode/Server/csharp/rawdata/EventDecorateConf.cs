@@ -68,7 +68,7 @@ namespace fat.rawdata {
   /// <summary>
   /// annotation@annotation_type(type="rawdata")
   /// annotation@rawdata(row="EventDecorate",table="EventDecorateMap",table_wrapper="EventDecorateConf",map="true",map_key_type="int32",data="EventDecorateConf")
-  /// annotation@ab(table_ab="EventDecorateMapAB",table_ab_patch="EventDecorateMapABPatch",table_ab_value="EventDecorateMapABValue",ab_patch="true")
+  /// annotation@ab(table_ab="EventDecorateMapAB",table_ab_patch="EventDecorateMapABPatch",table_ab_value="EventDecorateMapABValue",ab_patch="false")
   /// annotation@filter(just_server="false",just_client="false")
   /// annotation@EventDecorate(id="id")
   /// </summary>

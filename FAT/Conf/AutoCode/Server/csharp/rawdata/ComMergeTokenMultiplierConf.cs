@@ -131,7 +131,7 @@ namespace fat.rawdata {
     public const int TimeFieldNumber = 2;
     private int time_;
     /// <summary>
-    /// 持续时间（秒）
+    /// 持续时间（毫秒）
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int Time {

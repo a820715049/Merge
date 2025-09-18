@@ -26,20 +26,20 @@ namespace fat.claim.protocol {
           string.Concat(
             "ChpjbGFpbS9wcm90b2NvbC9kc3luYy5wcm90bxIIcHJvdG9jb2wiPgoLU3lu",
             "Y0RhdGFTZXQSHwoDc2V0GAEgAygLMhIucHJvdG9jb2wuU3luY0RhdGESDgoG",
-            "c291cmNlGAIgASgJIsIBCghTeW5jRGF0YRIgCgR0eXBlGAEgASgOMhIucHJv",
+            "c291cmNlGAIgASgJItIBCghTeW5jRGF0YRIgCgR0eXBlGAEgASgOMhIucHJv",
             "dG9jb2wuU3luY1R5cGUSCwoDdXJpGAIgASgJEgsKA3JhdxgDIAEoDBIPCgdj",
             "aGFuZ2VzGAQgASgEEjYKCmR5bkNoYW5nZXMYBSADKAsyIi5wcm90b2NvbC5T",
-            "eW5jRGF0YS5EeW5DaGFuZ2VzRW50cnkaMQoPRHluQ2hhbmdlc0VudHJ5EgsK",
-            "A2tleRgBIAEoCRINCgV2YWx1ZRgCIAEoCDoCOAEiEwoRR2V0QWxsU3luY0Rh",
-            "dGFSZXEqRQoIU3luY1R5cGUSCgoGVVBEQVRFEAASCgoGUkVNT1ZFEAESBwoD",
-            "QUREEAISDAoIRnVsbFN5bmMQAxIKCgZFeHBpcmUQBEI7WiRnaXRsYWIuZnVu",
-            "cGx1cy5pby9zbGcvY2xhaW0vcHJvdG9jb2yqAhJmYXQuY2xhaW0ucHJvdG9j",
-            "b2xiBnByb3RvMw=="));
+            "eW5jRGF0YS5EeW5DaGFuZ2VzRW50cnkSDgoGc2NlbmVzGAYgASgMGjEKD0R5",
+            "bkNoYW5nZXNFbnRyeRILCgNrZXkYASABKAkSDQoFdmFsdWUYAiABKAg6AjgB",
+            "IhMKEUdldEFsbFN5bmNEYXRhUmVxKkUKCFN5bmNUeXBlEgoKBlVQREFURRAA",
+            "EgoKBlJFTU9WRRABEgcKA0FERBACEgwKCEZ1bGxTeW5jEAMSCgoGRXhwaXJl",
+            "EARCO1okZ2l0bGFiLmZ1bnBsdXMuaW8vc2xnL2NsYWltL3Byb3RvY29sqgIS",
+            "ZmF0LmNsYWltLnByb3RvY29sYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::fat.claim.protocol.SyncType), }, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.claim.protocol.SyncDataSet), global::fat.claim.protocol.SyncDataSet.Parser, new[]{ "Set", "Source" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::fat.claim.protocol.SyncData), global::fat.claim.protocol.SyncData.Parser, new[]{ "Type", "Uri", "Raw", "Changes", "DynChanges" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
+            new pbr::GeneratedClrTypeInfo(typeof(global::fat.claim.protocol.SyncData), global::fat.claim.protocol.SyncData.Parser, new[]{ "Type", "Uri", "Raw", "Changes", "DynChanges", "Scenes" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.claim.protocol.GetAllSyncDataReq), global::fat.claim.protocol.GetAllSyncDataReq.Parser, null, null, null, null, null)
           }));
     }
@@ -313,6 +313,7 @@ namespace fat.claim.protocol {
       raw_ = other.raw_;
       changes_ = other.changes_;
       dynChanges_ = other.dynChanges_.Clone();
+      scenes_ = other.scenes_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -390,6 +391,20 @@ namespace fat.claim.protocol {
       get { return dynChanges_; }
     }
 
+    /// <summary>Field number for the "scenes" field.</summary>
+    public const int ScenesFieldNumber = 6;
+    private pb::ByteString scenes_ = pb::ByteString.Empty;
+    /// <summary>
+    /// 用于跟踪一条数据是经过哪些Scene的许可才同步的
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pb::ByteString Scenes {
+      get { return scenes_; }
+      set {
+        scenes_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as SyncData);
@@ -408,6 +423,7 @@ namespace fat.claim.protocol {
       if (Raw != other.Raw) return false;
       if (Changes != other.Changes) return false;
       if (!DynChanges.Equals(other.DynChanges)) return false;
+      if (Scenes != other.Scenes) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -419,6 +435,7 @@ namespace fat.claim.protocol {
       if (Raw.Length != 0) hash ^= Raw.GetHashCode();
       if (Changes != 0UL) hash ^= Changes.GetHashCode();
       hash ^= DynChanges.GetHashCode();
+      if (Scenes.Length != 0) hash ^= Scenes.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -452,6 +469,10 @@ namespace fat.claim.protocol {
         output.WriteUInt64(Changes);
       }
       dynChanges_.WriteTo(output, _map_dynChanges_codec);
+      if (Scenes.Length != 0) {
+        output.WriteRawTag(50);
+        output.WriteBytes(Scenes);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -478,6 +499,10 @@ namespace fat.claim.protocol {
         output.WriteUInt64(Changes);
       }
       dynChanges_.WriteTo(ref output, _map_dynChanges_codec);
+      if (Scenes.Length != 0) {
+        output.WriteRawTag(50);
+        output.WriteBytes(Scenes);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -500,6 +525,9 @@ namespace fat.claim.protocol {
         size += 1 + pb::CodedOutputStream.ComputeUInt64Size(Changes);
       }
       size += dynChanges_.CalculateSize(_map_dynChanges_codec);
+      if (Scenes.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(Scenes);
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -524,6 +552,9 @@ namespace fat.claim.protocol {
         Changes = other.Changes;
       }
       dynChanges_.Add(other.dynChanges_);
+      if (other.Scenes.Length != 0) {
+        Scenes = other.Scenes;
+      }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -558,6 +589,10 @@ namespace fat.claim.protocol {
             dynChanges_.AddEntriesFrom(input, _map_dynChanges_codec);
             break;
           }
+          case 50: {
+            Scenes = input.ReadBytes();
+            break;
+          }
         }
       }
     #endif
@@ -590,6 +625,10 @@ namespace fat.claim.protocol {
           }
           case 42: {
             dynChanges_.AddEntriesFrom(ref input, _map_dynChanges_codec);
+            break;
+          }
+          case 50: {
+            Scenes = input.ReadBytes();
             break;
           }
         }

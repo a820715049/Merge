@@ -79,7 +79,7 @@ namespace fat.rawdata {
   /// <summary>
   /// annotation@annotation_type(type="rawdata")
   /// annotation@rawdata(row="ComMergeTapSource",table="ComMergeTapSourceMap",table_wrapper="ComMergeTapSourceConf",map="true",map_key_type="string",data="ComMergeTapSourceConf")
-  /// annotation@ab(table_ab="ComMergeTapSourceMapAB",table_ab_patch="ComMergeTapSourceMapABPatch",table_ab_value="ComMergeTapSourceMapABValue",ab_patch="true")
+  /// annotation@ab(table_ab="ComMergeTapSourceMapAB",table_ab_patch="ComMergeTapSourceMapABPatch",table_ab_value="ComMergeTapSourceMapABValue",ab_patch="false")
   /// annotation@filter(just_server="false",just_client="false")
   /// annotation@ComMergeTapSource(id="id,configVersion")
   /// </summary>

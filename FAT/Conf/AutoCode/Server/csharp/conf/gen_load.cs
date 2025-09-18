@@ -94,6 +94,8 @@ using rawCommunityLink = fat.rawdata.CommunityLink;
 using CommunityLinkVisitor = fat.conf.CommunityLinkVisitor;
 using rawCurrencyPack = fat.rawdata.CurrencyPack;
 using CurrencyPackVisitor = fat.conf.CurrencyPackVisitor;
+using rawCustCmpltVIP = fat.rawdata.CustCmpltVIP;
+using CustCmpltVIPVisitor = fat.conf.CustCmpltVIPVisitor;
 using rawDEGroup = fat.rawdata.DEGroup;
 using DEGroupVisitor = fat.conf.DEGroupVisitor;
 using rawDEMInfo = fat.rawdata.DEMInfo;
@@ -894,6 +896,7 @@ public static partial class Data {
 		    cur.ComTrigAutoSourceMap = new fat.rawdata.ComTrigAutoSourceConf();
 		    cur.CommunityLinkMap = new fat.rawdata.CommunityLinkConf();
 		    cur.CurrencyPackMap = new fat.rawdata.CurrencyPackConf();
+		    cur.CustCmpltVIPMap = new fat.rawdata.CustCmpltVIPConf();
 		    cur.DEGroupMap = new fat.rawdata.DEGroupConf();
 		    cur.DEMInfoMap = new fat.rawdata.DEMInfoConf();
 		    cur.DailyEventGroupMap = new fat.rawdata.DailyEventGroupConf();
@@ -1741,6 +1744,17 @@ public static partial class Data {
 		public static List<rawCurrencyPack> GetCurrencyPackByFilter(Func<rawCurrencyPack, bool> filterFunc,string tag="") => CurrencyPackVisitor.GetByFilter(filterFunc,tag);
 		public static rawCurrencyPack? GetOneCurrencyPackByFilter(Func<rawCurrencyPack, bool> filterFunc,string tag="") => CurrencyPackVisitor.GetOneByFilter(filterFunc,tag);
 	#endregion CurrencyPack
+	#region CustCmpltVIP
+		public static int GetCountCustCmpltVIPMap(string tag="") => CustCmpltVIPVisitor.GetCount(tag);
+		public static string GetFileNameCustCmpltVIPMap() => CustCmpltVIPVisitor.GetFileName();
+		public static List<int> SortedKeysCustCmpltVIPMap(string tag="") => CustCmpltVIPVisitor.SortedKeys(tag);
+		public static PBC::MapField<int, rawCustCmpltVIP> GetCustCmpltVIPMap(string tag="") => CustCmpltVIPVisitor.All(tag);
+		public static void RangeCustCmpltVIPMap(Action<int, rawCustCmpltVIP> filter,string tag="") => CustCmpltVIPVisitor.Range(filter,tag);
+		public static List<int> KeysCustCmpltVIPMap(string tag="") => CustCmpltVIPVisitor.Keys(tag);
+		public static rawCustCmpltVIP? GetCustCmpltVIP(int key,string tag="") => CustCmpltVIPVisitor.Get(key,tag);
+		public static List<rawCustCmpltVIP> GetCustCmpltVIPByFilter(Func<rawCustCmpltVIP, bool> filterFunc,string tag="") => CustCmpltVIPVisitor.GetByFilter(filterFunc,tag);
+		public static rawCustCmpltVIP? GetOneCustCmpltVIPByFilter(Func<rawCustCmpltVIP, bool> filterFunc,string tag="") => CustCmpltVIPVisitor.GetOneByFilter(filterFunc,tag);
+	#endregion CustCmpltVIP
 	#region DEGroup
 		public static int GetCountDEGroupMap(string tag="") => DEGroupVisitor.GetCount(tag);
 		public static string GetFileNameDEGroupMap() => DEGroupVisitor.GetFileName();

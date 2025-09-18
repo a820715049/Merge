@@ -55,6 +55,16 @@ namespace FAT.Merge
             TokenId_BL = tokenId;
             TokenNum_BL = tokenNum;
         }
+
+        //左下角活动积分用完后清理
+        public void ClearActivityInfo_BL()
+        {
+            ActivityId_BL = 0;
+            TokenId_BL = 0;
+            TokenNum_BL = 0;
+            //触发item的组件刷新事件 进而触发界面刷新
+            item.OnComponentChanged(this);
+        }
         
         private void _SerializeBL(ref int index, IList<AnyState> paramList)
         {

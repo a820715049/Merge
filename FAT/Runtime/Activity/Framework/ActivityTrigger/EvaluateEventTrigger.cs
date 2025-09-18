@@ -35,6 +35,7 @@ namespace FAT
                 (ValueN n, nameof(IAPTotal)) => (IAPTotal(), true),
                 (ValueN n, nameof(LoginLv)) => LoginLv(),
                 (ValueN n, nameof(LastLoginLT)) => LastLoginLT(),
+                (ValueN _, nameof(LvUp)) => LvUp(),
                 (ValueN _, nameof(PayLT)) => PayLT(),
                 (ValueN _, nameof(LastPayLT)) => LastPayLT(),
                 (ValueN n, _) => throw new Exception($"unrecognized named value {n}"),
@@ -89,6 +90,8 @@ namespace FAT
 
         public static (float, bool) LoginLv() => (Game.Manager.archiveMan.LoginLevel, true);
         public static (float, bool) LastLoginLT() => (Game.Manager.archiveMan.OfflineDays, true);
+        // 正在升级
+        public static (float, bool) LvUp() => (Game.Manager.mergeLevelMan.level, Game.Manager.mergeLevelMan.isLevelUp);
 
         public bool Ready(Expr e) {
             if ((e.token.Contains(nameof(IAPTotal)) || e.token.Contains(nameof(PayLT)))

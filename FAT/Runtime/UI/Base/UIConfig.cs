@@ -48,6 +48,7 @@ namespace FAT
         public static UIResource UIRandomBox = new UIResource("UIRandomBox.prefab", UILayer.SubStatus, "chest_randomchest_common");
         public static UIResource UISingleReward = new UIResource("UISingleReward.prefab", UILayer.SubStatus, "chest_randomchest_common");
         public static UIResource UIRewardPanel = new UIResource("UIRewardPanel.prefab", UILayer.SubStatus, "fat_global");
+        public static UIResource UIMultipleReward = new UIResource("UIMultipleReward.prefab", UILayer.SubStatus, "fat_global").SupportNavBack().SetMute();
         public static UIResource UIRandomBoxTips = new UIResource("UIRandomBoxTips.prefab", UILayer.SubStatus, "chest_randomchest_common").SetMute().SupportNavBack().IsTips();
         public static UIResource UIRandomBoxSpecialTips = new UIResource(string.Empty, UILayer.SubStatus, string.Empty).SetMute().SupportNavBack().IsTips();
         public static UIResource UIOrderBoxTips = new UIResource("UIOrderBoxTips.prefab", UILayer.SubStatus, "chest_randomchest_common").SetMute().IsTips();
@@ -532,6 +533,11 @@ namespace FAT
         public static UIResource UIMailNotRewardReshipment = new UIResource("UIMailNotRewardReshipment.prefab", AboveStatus, "fat_global");
         #endregion
 
+        #region 等级礼包
+        
+        public static UIResource UILevelPackPanel = new UIResource("UILevelPackPanel_s001.prefab", AboveStatus, "event_levelpack_s001").SupportNavBack().AllowHideUI();
+        #endregion
+        
         #region 许愿棋盘
         public static UIResource UIWishBoardMain = new UIResource("UIWishBoardMain.prefab", BelowStatus, "event_wishboard_default").SupportNavBack();
         public static UIResource UIWishBoardHelp = new UIResource("UIWishBoardHelp.prefab", AboveStatus, "event_wishboard_default").SupportNavBack();
@@ -569,7 +575,7 @@ namespace FAT
         public static UIResource UIMineCartBoardHelp = new UIResource("UIMineCartBoardHelp.prefab", SubStatus, "event_minecartboard_common").SupportNavBack();
         public static UIResource UIMineCartBoardBannerTip = new UIResource("UIMineCartBoardBannerTip.prefab", SubStatus, "event_minecartboard_common");
         #endregion
-        
+
         #region 倍率排行榜
         public static UIResource UIMultiplyRankingMain = new UIResource("UIMultiplyRankingMain.prefab", AboveStatus, "event_multiplyranking_default").SupportNavBack();
         public static UIResource UIMultiplyRankingStart = new UIResource("UIMultiplyRankingStart.prefab", AboveStatus, "event_multiplyranking_default");

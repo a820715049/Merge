@@ -46,26 +46,28 @@ namespace FAT
             _RefreshScoreEntity();
             //刷新产棋子回调模块
             _RefreshSpawnBonusHandler();
+            //刷新棋子销毁回调模块
+            _RefreshDisposeBonusHandler();
+            // 活动弹板
+            Game.Manager.screenPopup.TryQueue(MainPopup.popup, (PopupType)(-1), false);
         }
 
         public override void SaveSetup(ActivityInstance data_)
         {
             var any = data_.AnyState;
             any.Add(ToRecord(0, _detailId));
-            any.Add(ToRecord(1, HasTriggerGuide));
-            any.Add(ToRecord(2, TotalScore));
-            any.Add(ToRecord(3, CurMilestoneLevel));
-            any.Add(ToRecord(4, CurMilestoneNum));
+            any.Add(ToRecord(1, TotalScore));
+            any.Add(ToRecord(2, CurMilestoneLevel));
+            any.Add(ToRecord(3, CurMilestoneNum));
         }
 
         public override void LoadSetup(ActivityInstance data_)
         {
             var any = data_.AnyState;
             _detailId = ReadInt(0, any);
-            HasTriggerGuide = ReadBool(1, any);
-            TotalScore = ReadInt(2, any);
-            CurMilestoneLevel = ReadInt(3, any);
-            CurMilestoneNum = ReadInt(4, any);
+            TotalScore = ReadInt(1, any);
+            CurMilestoneLevel = ReadInt(2, any);
+            CurMilestoneNum = ReadInt(3, any);
             
             LastMilestoneLevel = CurMilestoneLevel;
             LastMilestoneNum = CurMilestoneNum;
@@ -76,6 +78,8 @@ namespace FAT
             _RefreshScoreEntity();
             //刷新产棋子回调模块
             _RefreshSpawnBonusHandler();
+            //刷新棋子销毁回调模块
+            _RefreshDisposeBonusHandler();
         }
         
         public override void WhenReset()
@@ -92,7 +96,7 @@ namespace FAT
             {
                 //回收主棋盘上可能存在的积分双倍buff棋子
                 var convertReward = PoolMapping.PoolMappingAccess.Take(out List<RewardCommitData> convertRewardList);
-                ActivityExpire.ConvertToReward(Conf.ExpireItem, convertRewardList, ReasonString.score_mic);
+                ActivityExpire.ConvertToReward(Conf.ExpireItem, convertRewardList, ReasonString.score_mic_convert);
                 //弹活动结算界面，convertReward中可能会没有奖励
                 Game.Manager.screenPopup.TryQueue(SettlePopup.popup, PopupType.Login, convertReward);
             }
@@ -102,6 +106,8 @@ namespace FAT
             _TryCommitReward();
             //清理产棋子回调模块
             _ClearSpawnBonusHandler();
+            //清理棋子销毁回调模块
+            _ClearDisposeBonusHandler();
         }
 
         #region 界面 入口 换皮 弹脸
@@ -123,15 +129,15 @@ namespace FAT
         string IBoardEntry.BoardEntryAsset()
         {
             MainPopup.visual.AssetMap.TryGetValue("boardEntry", out var key);
-            if (string.IsNullOrEmpty(key))
-            {
-                return "event_score_mic#UIScoreEntry_mic.prefab";
-            }
             return key;
         }
 
-        //是否已触发过新手引导(进存档)
-        public bool HasTriggerGuide = false;
+        private static string scoreKey = "score";
+        private static string scoreMultiKey = "scoreMulti";
+        public string GetScoreTextStyleKey(bool isMulti)
+        {
+            return isMulti ? scoreMultiKey : scoreKey;
+        }
 
         #endregion
 
@@ -160,7 +166,7 @@ namespace FAT
             LastMilestoneLevel = CurMilestoneLevel;
             LastMilestoneNum = CurMilestoneNum;
         }
-        
+
         //进度条动画播完，或者切换到其他场景导致入口隐藏时，主动调用
         public void TryPopupLevelUp()
         {
@@ -216,7 +222,7 @@ namespace FAT
             var isDouble = false;
             if (!_TryAddScore(transNum)) 
                 return;
-            if (reason != ReasonString.score_mic)
+            if (reason != ReasonString.score_mic_order)
             {
                 //非完成订单获得货币时 单独向ScoreEntity中同步最新分数  并单独打点token_change
                 _scoreEntity.UpdateScore(TotalScore);
@@ -258,7 +264,7 @@ namespace FAT
                 //无需监听_scoreEntity内部的SCORE_ENTITY_ADD_COMPLETE消息
                 //因为所有积分发放最后都会走BeginReward, 而本活动内部处理了积分变化的逻辑 
                 _scoreEntity.Setup(TotalScore, this, Conf.Token, Conf.ExtraScore,
-                    ReasonString.score_mic, "", Constant.MainBoardId);
+                    ReasonString.score_mic_order, "", Constant.MainBoardId);
             }
         }
 
@@ -385,7 +391,7 @@ namespace FAT
 
         #region 棋盘相关逻辑
 
-        #region FrozenItemSpawnBonusHandler
+        #region ScoreMicSpawnBonusHandler
 
         private ScoreMicSpawnBonusHandler spawnBonusHandler;
 
@@ -402,7 +408,43 @@ namespace FAT
         }
 
         #endregion
+        
+        #region ScoreMicDisposeBonusHandler
 
+        private ScoreMicDisposeBonusHandler disposeBonusHandler;
+
+        private void _RefreshDisposeBonusHandler()
+        {
+            disposeBonusHandler ??= new ScoreMicDisposeBonusHandler(this);
+            Game.Manager.mergeBoardMan.RegisterGlobalDisposeBonusHandler(disposeBonusHandler);
+        }
+        
+        private void _ClearDisposeBonusHandler()
+        {
+            Game.Manager.mergeBoardMan.UnregisterGlobalDisposeBonusHandler(disposeBonusHandler);
+            disposeBonusHandler = null;
+        }
+
+        #endregion
+
+        //检查传入的tokenId在目前情况下是否可被翻倍，同时返回对应倍率
+        public bool CheckTokenMultiRate(int tokenId, out int rate)
+        {
+            rate = 1;
+            var curWorld = BoardViewManager.Instance.world;
+            if (curWorld == null)
+                return false;
+            var hasActiveTokenMulti = curWorld.tokenMulti.hasActiveTokenMulti;
+            if (hasActiveTokenMulti)
+            {
+                var activeItem = curWorld.activeBoard.FindItemById(curWorld.tokenMulti.activeTokenMultiId);
+                var tokenMultiComp = activeItem?.GetItemComponent<ItemTokenMultiComponent>();
+                rate = tokenMultiComp?.config?.TokenMultiplier ?? 1;
+                return ItemUtility.CheckTokenCanMulti(tokenMultiComp, tokenId);
+            }
+            return false;
+        }
+        
         #endregion
     }
 }

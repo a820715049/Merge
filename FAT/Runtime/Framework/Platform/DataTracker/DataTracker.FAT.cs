@@ -337,7 +337,7 @@ public partial class DataTracker
             _TrackData(data);
         }
     }
-    
+
     //把冰冻棋子和其他棋子合成时
     [Serializable]
     internal class event_frozen_item_merge : MergeCommonData
@@ -355,7 +355,7 @@ public partial class DataTracker
             _TrackData(data);
         }
     }
-    
+
     //冰冻棋子过期时
     [Serializable]
     internal class event_frozen_item_expire : MergeCommonData
@@ -1376,6 +1376,29 @@ public partial class DataTracker
         }
     }
 
+    //等级礼包领取奖励
+    [Serializable]
+    internal class level_pack_reward : MergeCommonData
+    {
+        public int event_id;
+        public int event_from; //活动来源（0：EventTime，1：EventTrigger）
+        public int event_param;
+        public int pack_id;
+        public int level_default;
+
+        //index = 1付费奖励 =2第一列免费奖励 =3第二列免费奖励
+        public static void Track(ActivityLike acti_, int packId, int levelDefault)
+        {
+            var data = _GetTrackData<level_pack_reward>();
+            data.event_id = acti_.Id;
+            data.event_from = acti_.From;
+            data.event_param = acti_.Param;
+            data.pack_id = packId;
+            data.level_default = levelDefault;
+            _TrackData(data);
+        }
+    }
+
     [Serializable]
     internal class threeforone_reward : MergeCommonData
     {
@@ -2293,7 +2316,7 @@ public partial class DataTracker
     #endregion
 
     #region 矿车棋盘
-    
+
     //使用最高级进度棋子时
     [Serializable]
     internal class event_minecart_foward : MergeCommonData
@@ -2391,7 +2414,7 @@ public partial class DataTracker
             _TrackData(data);
         }
     }
-    
+
     //提交随机订单获得棋子时
     [Serializable]
     internal class event_minecart_getitem_order : MergeCommonData
@@ -2425,7 +2448,7 @@ public partial class DataTracker
             _TrackData(data);
         }
     }
-    
+
     //点击耗体生成器获得棋子时
     [Serializable]
     internal class event_minecart_getitem_tap : MergeCommonData
@@ -2457,7 +2480,7 @@ public partial class DataTracker
             _TrackData(data);
         }
     }
-    
+
     //活动结束领取遗留奖励时
     [Serializable]
     internal class event_minecart_end_reward : MergeCommonData
@@ -2477,7 +2500,7 @@ public partial class DataTracker
             _TrackData(data);
         }
     }
-    
+
     //矿车 1+1 领取奖励时
     [Serializable]
     internal class oneplusone_minecart_reward : MergeCommonData
@@ -3947,7 +3970,7 @@ public partial class DataTracker
     }
 
     #endregion
-    
+
     #region 拼图
 
     internal class event_puzzle_rwd : MergeCommonData
@@ -4709,7 +4732,8 @@ public partial class DataTracker
         public string item_info;
         public int item_diff;
         public int round_num;
-        public static void Track(ActivityLike act, int group, int challengeID, int challengeQueue, string itemInfo, int diff, int round)
+        public string reward;
+        public static void Track(ActivityLike act, int group, int challengeID, int challengeQueue, string itemInfo, int diff, int round, string reward)
         {
             var data = _GetTrackData<event_train_end>();
             (data.event_id, data.event_from, data.event_param) = act.Info3;
@@ -4719,6 +4743,23 @@ public partial class DataTracker
             data.item_info = itemInfo;
             data.item_diff = diff;
             data.round_num = round;
+            data.reward = reward;
+            _TrackData(data);
+        }
+
+    }
+
+    internal class event_train_restart : MergeCommonData
+    {
+        public int event_id;
+        public int event_from;
+        public int event_param;
+        public int rounud_total;
+        public static void Track(ActivityLike act, int round)
+        {
+            var data = _GetTrackData<event_train_restart>();
+            (data.event_id, data.event_from, data.event_param) = act.Info3;
+            data.rounud_total = round;
             _TrackData(data);
         }
 
