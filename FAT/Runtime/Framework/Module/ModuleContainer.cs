@@ -41,6 +41,7 @@ namespace FAT
         [ModuleMark(ArchiveLoaded)] public DailyEvent dailyEvent;
         [ModuleMark(ArchiveLoaded)] public CardMan cardMan;
         [ModuleMark(ArchiveLoaded)] public DecorateMan decorateMan;
+        [ModuleMark(ArchiveLoaded)] public TaskManager taskMan;
         [ModuleMark(ArchiveLoaded)] public MiniBoardMan miniBoardMan;
         [ModuleMark(ArchiveLoaded)] public MiniBoardMultiMan miniBoardMultiMan;
         [ModuleMark(ArchiveLoaded)] public MineBoardMan mineBoardMan;

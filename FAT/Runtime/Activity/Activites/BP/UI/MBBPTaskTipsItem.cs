@@ -14,7 +14,7 @@ namespace FAT
 {
     public class MBBPTaskTipsItem : MonoBehaviour
     {
-        public BpTaskType BoundType { get; private set; }
+        public TaskType BoundType { get; private set; }
         public BPTaskChangeType ChangeType { get; private set; }
         public bool IsInShowState => _isShowing || _isIdle;
 
@@ -37,7 +37,7 @@ namespace FAT
         {
             _bpActivity = activity as BPActivity;
         }
-        
+
         public void Play(BPTaskData data, BPTaskChangeType changeType, Action<MBBPTaskTipsItem> onComplete)
         {
             UpdateData(data, changeType);
@@ -57,7 +57,7 @@ namespace FAT
             if (_bpActivity == null || data == null)
                 return;
             //更新持有的数据
-            BoundType = (BpTaskType)data.TaskType;
+            BoundType = (TaskType)data.TaskType;
             ChangeType = changeType;
             //UI刷新
             taskIcon.SetImage(data.Conf.TaskIcon);
@@ -143,7 +143,7 @@ namespace FAT
                 _onComplete?.Invoke(this);
             }
         }
-        
+
         public void HideImmediately()
         {
             animator.ResetTrigger("Show");
@@ -163,7 +163,7 @@ namespace FAT
             finishAnim.gameObject.SetActive(true);
             finishAnim.SetTrigger("Show");
         }
-        
+
         private void _StopCoroutine()
         {
             if (_finishCo != null)

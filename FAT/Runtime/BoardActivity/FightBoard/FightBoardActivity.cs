@@ -41,6 +41,7 @@ namespace FAT
         public VisualRes LoadingRes { get; } = new(UIConfig.UIActivityFightLoading);
         public VisualRes HelpRes { get; } = new(UIConfig.UIActivityFightHelp);
         public VisualRes MilestoneRes { get; } = new(UIConfig.UIActivityFightMilestone);
+        public VisualRes MilestoneTipsRes { get; } = new(UIConfig.UIActivityFightMilestoneTips);
         #endregion
 
         #region 存档字段
@@ -258,6 +259,9 @@ namespace FAT
             ConvertPopup.Setup(eventFight.ExpirePopup, this, active_: false);
             BoardRes.Setup(eventFight.BoardTheme);
             LoadingRes.Setup(eventFight.LoadingTheme);
+            HelpRes.Setup(eventFight.HelpTheme);
+            MilestoneRes.Setup(eventFight.RewardTheme);
+            MilestoneTipsRes.Setup(eventFight.CycleTipTheme);
         }
         /// <summary>
         /// 里程碑进入下一个阶段
@@ -630,7 +634,7 @@ namespace FAT
         {
             var showRedPoint = act.CheckIsShowRedPoint(out var redNum);
             ent.dot.SetActive(showRedPoint && redNum > 0);
-            ent.dotCount.SetText(redNum.ToString());
+            ent.dotCount.SetRedPoint(redNum);
             ent.dotCount.gameObject.SetActive(showRedPoint && redNum > 0);
         }
 

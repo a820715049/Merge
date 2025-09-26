@@ -24,7 +24,7 @@ namespace fat.rawdata {
     static EventTypeReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChdyYXdkYXRhL0V2ZW50VHlwZS5wcm90bxIHcmF3ZGF0YSqNEAoJRXZlbnRU",
+            "ChdyYXdkYXRhL0V2ZW50VHlwZS5wcm90bxIHcmF3ZGF0YSrlEAoJRXZlbnRU",
             "eXBlEhQKEEV2ZW50VHlwZURlZmF1bHQQABITCg9FdmVudFR5cGVFbmVyZ3kQ",
             "ARIVChFFdmVudFR5cGVEYWlseVBvcBACEhQKEEV2ZW50VHlwZU5ld1VzZXIQ",
             "AxIXChNFdmVudFR5cGVPbmVQbHVzT25lEAQSGAoURXZlbnRUeXBlRW5kbGVz",
@@ -70,9 +70,11 @@ namespace fat.rawdata {
             "ZW50VHlwZUxpbWl0TWVyZ2UQThITCg9FdmVudFR5cGVPbmxpbmUQTxIWChJF",
             "dmVudFR5cGVMZXZlbFBhY2sQUBIZChVFdmVudFR5cGVTZXZlbkRheVRhc2sQ",
             "URIZChVFdmVudFR5cGVNaWNNaWxlc3RvbmUQUhIUChBFdmVudFR5cGVTZWFS",
-            "YWNlEFMSFQoRRXZlbnRUeXBlVmluZUxlYXAQVEI9Wi1naXRsYWIuZnVucGx1",
-            "cy5pby9mYXQvY29uZi9nZW4vZ29sYW5nL3Jhd2RhdGGqAgtmYXQucmF3ZGF0",
-            "YWIGcHJvdG8z"));
+            "YWNlEFMSFQoRRXZlbnRUeXBlVmluZUxlYXAQVBIZChVFdmVudFR5cGVJbmRl",
+            "cGVuQmluZ28QVRIaChZFdmVudFR5cGVNb25vcG9seUJvYXJkEFYSHwobRXZl",
+            "bnRUeXBlTW9ub3BvbHlPbmVQbHVzT25lEFdCPVotZ2l0bGFiLmZ1bnBsdXMu",
+            "aW8vZmF0L2NvbmYvZ2VuL2dvbGFuZy9yYXdkYXRhqgILZmF0LnJhd2RhdGFi",
+            "BnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::fat.rawdata.EventType), }, null, null));
@@ -415,6 +417,18 @@ namespace fat.rawdata {
     /// 飞跃藤蔓
     /// </summary>
     [pbr::OriginalName("EventTypeVineLeap")] VineLeap = 84,
+    /// <summary>
+    /// 独立棋盘棋子bingo
+    /// </summary>
+    [pbr::OriginalName("EventTypeIndepenBingo")] IndepenBingo = 85,
+    /// <summary>
+    /// 大富翁棋盘
+    /// </summary>
+    [pbr::OriginalName("EventTypeMonopolyBoard")] MonopolyBoard = 86,
+    /// <summary>
+    /// 大富翁棋盘1+1礼包
+    /// </summary>
+    [pbr::OriginalName("EventTypeMonopolyOnePlusOne")] MonopolyOnePlusOne = 87,
   }
 
   #endregion

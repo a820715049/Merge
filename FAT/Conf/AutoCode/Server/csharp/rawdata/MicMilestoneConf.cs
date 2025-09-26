@@ -24,37 +24,37 @@ namespace fat.rawdata {
     static MicMilestoneConfReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "Ch5yYXdkYXRhL01pY01pbGVzdG9uZUNvbmYucHJvdG8SB3Jhd2RhdGEi/gIK",
-            "DE1pY01pbGVzdG9uZRIKCgJpZBgBIAEoBRIPCgdib2FyZElkGAIgASgFEgwK",
-            "BGNvc3QYAyABKAUSEgoKZXZlbnRHcm91cBgEIAEoBRIWCg5ldmVudE1haW5U",
-            "aGVtZRgFIAEoBRIYChBldmVudFNldHRsZVRoZW1lGAYgASgFEjkKCmV4cGly",
-            "ZUl0ZW0YByADKAsyJS5yYXdkYXRhLk1pY01pbGVzdG9uZS5FeHBpcmVJdGVt",
-            "RW50cnkSEgoKZXh0cmFTY29yZRgIIAEoBRI5CgpleHRyYVRva2VuGAkgAygL",
-            "MiUucmF3ZGF0YS5NaWNNaWxlc3RvbmUuRXh0cmFUb2tlbkVudHJ5Eg0KBXRv",
-            "a2VuGAogASgFGjEKD0V4cGlyZUl0ZW1FbnRyeRILCgNrZXkYASABKAUSDQoF",
-            "dmFsdWUYAiABKAk6AjgBGjEKD0V4dHJhVG9rZW5FbnRyeRILCgNrZXkYASAB",
-            "KAUSDQoFdmFsdWUYAiABKAU6AjgBIrYBChZNaWNNaWxlc3RvbmVNYXBBQlZh",
-            "bHVlEk0KD01pY01pbGVzdG9uZU1hcBgBIAMoCzI0LnJhd2RhdGEuTWljTWls",
-            "ZXN0b25lTWFwQUJWYWx1ZS5NaWNNaWxlc3RvbmVNYXBFbnRyeRpNChRNaWNN",
-            "aWxlc3RvbmVNYXBFbnRyeRILCgNrZXkYASABKAUSJAoFdmFsdWUYAiABKAsy",
-            "FS5yYXdkYXRhLk1pY01pbGVzdG9uZToCOAEiiQQKEE1pY01pbGVzdG9uZUNv",
-            "bmYSRwoPTWljTWlsZXN0b25lTWFwGAEgAygLMi4ucmF3ZGF0YS5NaWNNaWxl",
-            "c3RvbmVDb25mLk1pY01pbGVzdG9uZU1hcEVudHJ5EksKEU1pY01pbGVzdG9u",
-            "ZU1hcEFCGAIgAygLMjAucmF3ZGF0YS5NaWNNaWxlc3RvbmVDb25mLk1pY01p",
-            "bGVzdG9uZU1hcEFCRW50cnkSVQoWTWljTWlsZXN0b25lTWFwQUJQYXRjaBgD",
-            "IAMoCzI1LnJhd2RhdGEuTWljTWlsZXN0b25lQ29uZi5NaWNNaWxlc3RvbmVN",
-            "YXBBQlBhdGNoRW50cnkaTQoUTWljTWlsZXN0b25lTWFwRW50cnkSCwoDa2V5",
-            "GAEgASgFEiQKBXZhbHVlGAIgASgLMhUucmF3ZGF0YS5NaWNNaWxlc3RvbmU6",
-            "AjgBGlkKFk1pY01pbGVzdG9uZU1hcEFCRW50cnkSCwoDa2V5GAEgASgJEi4K",
-            "BXZhbHVlGAIgASgLMh8ucmF3ZGF0YS5NaWNNaWxlc3RvbmVNYXBBQlZhbHVl",
-            "OgI4ARpeChtNaWNNaWxlc3RvbmVNYXBBQlBhdGNoRW50cnkSCwoDa2V5GAEg",
-            "ASgJEi4KBXZhbHVlGAIgASgLMh8ucmF3ZGF0YS5NaWNNaWxlc3RvbmVNYXBB",
-            "QlZhbHVlOgI4AUI9Wi1naXRsYWIuZnVucGx1cy5pby9mYXQvY29uZi9nZW4v",
-            "Z29sYW5nL3Jhd2RhdGGqAgtmYXQucmF3ZGF0YWIGcHJvdG8z"));
+            "Ch5yYXdkYXRhL01pY01pbGVzdG9uZUNvbmYucHJvdG8SB3Jhd2RhdGEi7QIK",
+            "DE1pY01pbGVzdG9uZRIKCgJpZBgBIAEoBRIMCgRjb3N0GAMgASgFEhIKCmV2",
+            "ZW50R3JvdXAYBCABKAUSFgoOZXZlbnRNYWluVGhlbWUYBSABKAUSGAoQZXZl",
+            "bnRTZXR0bGVUaGVtZRgGIAEoBRI5CgpleHBpcmVJdGVtGAcgAygLMiUucmF3",
+            "ZGF0YS5NaWNNaWxlc3RvbmUuRXhwaXJlSXRlbUVudHJ5EhIKCmV4dHJhU2Nv",
+            "cmUYCCABKAUSOQoKZXh0cmFUb2tlbhgJIAMoCzIlLnJhd2RhdGEuTWljTWls",
+            "ZXN0b25lLkV4dHJhVG9rZW5FbnRyeRINCgV0b2tlbhgKIAEoBRoxCg9FeHBp",
+            "cmVJdGVtRW50cnkSCwoDa2V5GAEgASgFEg0KBXZhbHVlGAIgASgJOgI4ARox",
+            "Cg9FeHRyYVRva2VuRW50cnkSCwoDa2V5GAEgASgFEg0KBXZhbHVlGAIgASgF",
+            "OgI4ASK2AQoWTWljTWlsZXN0b25lTWFwQUJWYWx1ZRJNCg9NaWNNaWxlc3Rv",
+            "bmVNYXAYASADKAsyNC5yYXdkYXRhLk1pY01pbGVzdG9uZU1hcEFCVmFsdWUu",
+            "TWljTWlsZXN0b25lTWFwRW50cnkaTQoUTWljTWlsZXN0b25lTWFwRW50cnkS",
+            "CwoDa2V5GAEgASgFEiQKBXZhbHVlGAIgASgLMhUucmF3ZGF0YS5NaWNNaWxl",
+            "c3RvbmU6AjgBIokEChBNaWNNaWxlc3RvbmVDb25mEkcKD01pY01pbGVzdG9u",
+            "ZU1hcBgBIAMoCzIuLnJhd2RhdGEuTWljTWlsZXN0b25lQ29uZi5NaWNNaWxl",
+            "c3RvbmVNYXBFbnRyeRJLChFNaWNNaWxlc3RvbmVNYXBBQhgCIAMoCzIwLnJh",
+            "d2RhdGEuTWljTWlsZXN0b25lQ29uZi5NaWNNaWxlc3RvbmVNYXBBQkVudHJ5",
+            "ElUKFk1pY01pbGVzdG9uZU1hcEFCUGF0Y2gYAyADKAsyNS5yYXdkYXRhLk1p",
+            "Y01pbGVzdG9uZUNvbmYuTWljTWlsZXN0b25lTWFwQUJQYXRjaEVudHJ5Gk0K",
+            "FE1pY01pbGVzdG9uZU1hcEVudHJ5EgsKA2tleRgBIAEoBRIkCgV2YWx1ZRgC",
+            "IAEoCzIVLnJhd2RhdGEuTWljTWlsZXN0b25lOgI4ARpZChZNaWNNaWxlc3Rv",
+            "bmVNYXBBQkVudHJ5EgsKA2tleRgBIAEoCRIuCgV2YWx1ZRgCIAEoCzIfLnJh",
+            "d2RhdGEuTWljTWlsZXN0b25lTWFwQUJWYWx1ZToCOAEaXgobTWljTWlsZXN0",
+            "b25lTWFwQUJQYXRjaEVudHJ5EgsKA2tleRgBIAEoCRIuCgV2YWx1ZRgCIAEo",
+            "CzIfLnJhd2RhdGEuTWljTWlsZXN0b25lTWFwQUJWYWx1ZToCOAFCPVotZ2l0",
+            "bGFiLmZ1bnBsdXMuaW8vZmF0L2NvbmYvZ2VuL2dvbGFuZy9yYXdkYXRhqgIL",
+            "ZmF0LnJhd2RhdGFiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.MicMilestone), global::fat.rawdata.MicMilestone.Parser, new[]{ "Id", "BoardId", "Cost", "EventGroup", "EventMainTheme", "EventSettleTheme", "ExpireItem", "ExtraScore", "ExtraToken", "Token" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, }),
+            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.MicMilestone), global::fat.rawdata.MicMilestone.Parser, new[]{ "Id", "Cost", "EventGroup", "EventMainTheme", "EventSettleTheme", "ExpireItem", "ExtraScore", "ExtraToken", "Token" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.MicMilestoneMapABValue), global::fat.rawdata.MicMilestoneMapABValue.Parser, new[]{ "MicMilestoneMap" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.MicMilestoneConf), global::fat.rawdata.MicMilestoneConf.Parser, new[]{ "MicMilestoneMap", "MicMilestoneMapAB", "MicMilestoneMapABPatch" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, null, })
           }));
@@ -100,7 +100,6 @@ namespace fat.rawdata {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public MicMilestone(MicMilestone other) : this() {
       id_ = other.id_;
-      boardId_ = other.boardId_;
       cost_ = other.cost_;
       eventGroup_ = other.eventGroup_;
       eventMainTheme_ = other.eventMainTheme_;
@@ -129,20 +128,6 @@ namespace fat.rawdata {
       get { return id_; }
       set {
         id_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "boardId" field.</summary>
-    public const int BoardIdFieldNumber = 2;
-    private int boardId_;
-    /// <summary>
-    /// 适用棋盘
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int BoardId {
-      get { return boardId_; }
-      set {
-        boardId_ = value;
       }
     }
 
@@ -278,7 +263,6 @@ namespace fat.rawdata {
         return true;
       }
       if (Id != other.Id) return false;
-      if (BoardId != other.BoardId) return false;
       if (Cost != other.Cost) return false;
       if (EventGroup != other.EventGroup) return false;
       if (EventMainTheme != other.EventMainTheme) return false;
@@ -294,7 +278,6 @@ namespace fat.rawdata {
     public override int GetHashCode() {
       int hash = 1;
       if (Id != 0) hash ^= Id.GetHashCode();
-      if (BoardId != 0) hash ^= BoardId.GetHashCode();
       if (Cost != 0) hash ^= Cost.GetHashCode();
       if (EventGroup != 0) hash ^= EventGroup.GetHashCode();
       if (EventMainTheme != 0) hash ^= EventMainTheme.GetHashCode();
@@ -322,10 +305,6 @@ namespace fat.rawdata {
       if (Id != 0) {
         output.WriteRawTag(8);
         output.WriteInt32(Id);
-      }
-      if (BoardId != 0) {
-        output.WriteRawTag(16);
-        output.WriteInt32(BoardId);
       }
       if (Cost != 0) {
         output.WriteRawTag(24);
@@ -366,10 +345,6 @@ namespace fat.rawdata {
         output.WriteRawTag(8);
         output.WriteInt32(Id);
       }
-      if (BoardId != 0) {
-        output.WriteRawTag(16);
-        output.WriteInt32(BoardId);
-      }
       if (Cost != 0) {
         output.WriteRawTag(24);
         output.WriteInt32(Cost);
@@ -408,9 +383,6 @@ namespace fat.rawdata {
       if (Id != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Id);
       }
-      if (BoardId != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(BoardId);
-      }
       if (Cost != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Cost);
       }
@@ -444,9 +416,6 @@ namespace fat.rawdata {
       }
       if (other.Id != 0) {
         Id = other.Id;
-      }
-      if (other.BoardId != 0) {
-        BoardId = other.BoardId;
       }
       if (other.Cost != 0) {
         Cost = other.Cost;
@@ -484,10 +453,6 @@ namespace fat.rawdata {
             break;
           case 8: {
             Id = input.ReadInt32();
-            break;
-          }
-          case 16: {
-            BoardId = input.ReadInt32();
             break;
           }
           case 24: {
@@ -538,10 +503,6 @@ namespace fat.rawdata {
             break;
           case 8: {
             Id = input.ReadInt32();
-            break;
-          }
-          case 16: {
-            BoardId = input.ReadInt32();
             break;
           }
           case 24: {

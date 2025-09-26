@@ -508,6 +508,7 @@ namespace FAT
                     }
                 }
                 Game.Instance.StartCoroutineGlobal(ShowEnd());
+                MessageCenter.Get<TASK_RACE_WIN>().Dispatch();
             }
         }
 
@@ -581,10 +582,14 @@ namespace FAT
 
         public bool OnPreUpdate(OrderData order, IOrderHelper helper, MergeWorldTracer tracer)
         {
-            if ((order as IOrderData).IsMagicHour)
+            if (order == null || order.ConfRandomer == null || !order.ConfRandomer.IsExtraScore)
+            {
                 return false;
+            }
             if (!HasStartRound)
+            {
                 return false;
+            }
             var changed = false;
             var state = order.GetState((int)OrderParamType.ScoreEventId);
             if (state == null || state.Value != Id)

@@ -37,6 +37,7 @@ namespace FAT
 
         public override void Clear()
         {
+            _Clear(Vector2.zero, null);
             MessageCenter.Get<UI_BOARD_DRAG_ITEM_END_CUSTOM>().RemoveListener(_Clear);
         }
 

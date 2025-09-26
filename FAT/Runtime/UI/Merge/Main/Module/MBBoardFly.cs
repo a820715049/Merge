@@ -96,13 +96,6 @@ namespace FAT
                 scoreAct.Visual.RefreshStyle(num, scoreAct.themeFontStyleId_Score);
                 scoreEffect.gameObject.SetActive(true);
             }
-            else if (act is ActivityScoreMic scoreMic)
-            {
-                var isMulti = scoreMic.CheckTokenMultiRate(re.rewardId, out _);
-                var key = scoreMic.GetScoreTextStyleKey(isMulti);
-                scoreMic.Visual.RefreshStyle(num, key);
-                normalEffect.gameObject.SetActive(true);
-            }
             else
             {
                 normalEffect.gameObject.SetActive(true);

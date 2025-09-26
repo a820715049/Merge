@@ -56,7 +56,7 @@ namespace fat.rawdata {
   /// <summary>
   /// annotation@annotation_type(type="rawdata")
   /// annotation@rawdata(row="DEGroup",table="DEGroupMap",table_wrapper="DEGroupConf",map="true",map_key_type="int32",data="DEGroupConf")
-  /// annotation@ab(table_ab="DEGroupMapAB",table_ab_patch="DEGroupMapABPatch",table_ab_value="DEGroupMapABValue",ab_patch="true")
+  /// annotation@ab(table_ab="DEGroupMapAB",table_ab_patch="DEGroupMapABPatch",table_ab_value="DEGroupMapABValue",ab_patch="false")
   /// annotation@filter(just_server="false",just_client="false")
   /// annotation@DEGroup(id="id")
   /// </summary>

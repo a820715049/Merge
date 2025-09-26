@@ -205,7 +205,6 @@ namespace FAT
             var difficulty = OrderUtility.CalcRealDifficultyForRequires(itemIds);
             var reward = Game.Manager.mergeItemMan.GetOrderRewardConfig(Game.Manager.userGradeMan.GetTargetConfigDataId(cfgRandomer.RewardGrpId)).Reward;
             order = OrderUtility.MakeOrderByConfig(helper, OrderProviderType.Random, cfgRandomer.Id, cfgRandomer.RoleId, 0, difficulty, itemIds, reward);
-            order.ConfRandomer = cfgRandomer;
             order.OrderType = (int)OrderType.Streak;
             order.Record.OrderType = order.OrderType;
             var any = order.Record.Extra;

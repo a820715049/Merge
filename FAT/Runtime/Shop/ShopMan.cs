@@ -4,7 +4,7 @@
  * @Doc: https://centurygames.yuque.com/ywqzgn/ne0fhm/rgceg0giq9to7nk5
  * @Date: 2023-11-08 11:11:38
  * @LastEditors: chaoran.zhang
- * @LastEditTime: 2025-08-19 17:39:46
+ * @LastEditTime: 2025-09-23 18:51:27
  */
 
 using UnityEngine;
@@ -201,6 +201,8 @@ namespace FAT
         private void _PurchaseComplete(bool isSuccess, IAPPack iapPack)
         {
             _ProcessShopGemIAP(isSuccess, iapPack);
+            if (isSuccess)
+                MessageCenter.Get<MSG.TASK_PAY_SUCCESS>().Dispatch();
         }
 
         //补单逻辑
@@ -211,6 +213,7 @@ namespace FAT
             {
                 delivery.ClaimReason = nameof(_ShopGemGoodsLateDelivery);
             }
+            MessageCenter.Get<MSG.TASK_PAY_SUCCESS>().Dispatch();
         }
 
         //处理购买结果逻辑

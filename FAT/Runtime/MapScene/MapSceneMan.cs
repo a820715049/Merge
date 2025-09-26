@@ -189,7 +189,6 @@ namespace FAT
                 var z = zoom < 0f ? a.zoom : zoom;
                 if (overview_) {
                     UIManager.Instance.Visible(UIConfig.UISceneHud, false);
-                    Get<GAME_STATUS_UI_STATE_CHANGE>().Dispatch(false);
                     scene.OverviewStateForEvent();
                     v = () => {
                         viewport.SetupAs(a.overview);
@@ -208,7 +207,6 @@ namespace FAT
         }
 
         public void ExitOverview() {
-            Get<GAME_STATUS_UI_STATE_CHANGE>().Dispatch(true);
             if (viewport.setting == scene.info.setting) return;
             viewport.SetupAs(scene.info.setting);
             scene.RefreshStateForEvent();

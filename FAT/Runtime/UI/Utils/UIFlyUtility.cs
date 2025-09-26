@@ -48,7 +48,7 @@ namespace FAT
         {
             if (UIFlyFactory.CheckNeedFlyIcon(reward.rewardId))
             {
-                if (type != FlyType.TapBonus && Game.Manager.mergeBoardMan.activeWorld.activeBoard.boardId != Constant.MainBoardId && reward.rewardType == ObjConfigType.ActivityToken) { return; }
+                if (type != FlyType.TapBonus && (Game.Manager.mergeBoardMan.activeWorld?.isEquivalentToMain ?? false) && reward.rewardType == ObjConfigType.ActivityToken) { return; }
                 var to = UIFlyFactory.ResolveFlyTarget(type);
 
                 if (to.x < 0 && (type == FlyType.MiniBoard || type == FlyType.MiniBoardMulti)) to.x = -10;
@@ -161,7 +161,6 @@ namespace FAT
             switch (item.FlyType)
             {
                 case FlyType.EventScore:
-                case FlyType.ScoreMicToken:
                     break;
                 case FlyType.Handbook:
                     Game.Manager.audioMan.TriggerSound("AddGemShort");
@@ -223,7 +222,8 @@ namespace FAT
                                 item.FlyType != FlyType.BPExp &&
                                 item.FlyType != FlyType.DuelToken && item.FlyType != FlyType.DuelMilestone && item.FlyType != FlyType.FightBoardMonster
                                 && item.FlyType != FlyType.FightBoardTreasure
-                                && item.FlyType != FlyType.WishBoardScore && item.FlyType != FlyType.CastleToken)
+                                && item.FlyType != FlyType.WishBoardScore && item.FlyType != FlyType.CastleToken
+                                && item.FlyType != FlyType.SevenDayToken)
                                 _TweenRewardSingle(item, trans);
                             else if (item.FlyType == FlyType.Inventory)
                                 _TweenRewardSingle(item, trans);
@@ -349,7 +349,7 @@ namespace FAT
             if (item.Reason == FlyReason.ExpChange || item.FlyType == FlyType.EventScore ||
                 item.FlyType == FlyType.RaceToken || item.FlyType == FlyType.MiniBoard || item.FlyType == FlyType.MiniBoardMulti
                 || item.FlyType == FlyType.EndlessToken || item.FlyType == FlyType.EndlessThreeToken
-                || item.FlyType == FlyType.GuessMilestone || item.FlyType == FlyType.DuelToken || item.FlyType == FlyType.ScoreMicToken)
+                || item.FlyType == FlyType.GuessMilestone || item.FlyType == FlyType.DuelToken)
                 UIFlyFactory.CreateCurveTween(seq, trans, item.WorldTo);
             else
             {

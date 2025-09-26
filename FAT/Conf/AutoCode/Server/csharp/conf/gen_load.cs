@@ -244,6 +244,12 @@ using rawEventGuessMilestone = fat.rawdata.EventGuessMilestone;
 using EventGuessMilestoneVisitor = fat.conf.EventGuessMilestoneVisitor;
 using rawEventGuessRound = fat.rawdata.EventGuessRound;
 using EventGuessRoundVisitor = fat.conf.EventGuessRoundVisitor;
+using rawEventIndepenBingo = fat.rawdata.EventIndepenBingo;
+using EventIndepenBingoVisitor = fat.conf.EventIndepenBingoVisitor;
+using rawEventIndepenBingoDetail = fat.rawdata.EventIndepenBingoDetail;
+using EventIndepenBingoDetailVisitor = fat.conf.EventIndepenBingoDetailVisitor;
+using rawEventIndepenBingoRound = fat.rawdata.EventIndepenBingoRound;
+using EventIndepenBingoRoundVisitor = fat.conf.EventIndepenBingoRoundVisitor;
 using rawEventInvite = fat.rawdata.EventInvite;
 using EventInviteVisitor = fat.conf.EventInviteVisitor;
 using rawEventItemBingo = fat.rawdata.EventItemBingo;
@@ -306,6 +312,10 @@ using rawEventMiniBoardMultiGroup = fat.rawdata.EventMiniBoardMultiGroup;
 using EventMiniBoardMultiGroupVisitor = fat.conf.EventMiniBoardMultiGroupVisitor;
 using rawEventMiniBoardMultiInfo = fat.rawdata.EventMiniBoardMultiInfo;
 using EventMiniBoardMultiInfoVisitor = fat.conf.EventMiniBoardMultiInfoVisitor;
+using rawEventMonopoly = fat.rawdata.EventMonopoly;
+using EventMonopolyVisitor = fat.conf.EventMonopolyVisitor;
+using rawEventMonopolyDetail = fat.rawdata.EventMonopolyDetail;
+using EventMonopolyDetailVisitor = fat.conf.EventMonopolyDetailVisitor;
 using rawEventOnline = fat.rawdata.EventOnline;
 using EventOnlineVisitor = fat.conf.EventOnlineVisitor;
 using rawEventOnlineDetail = fat.rawdata.EventOnlineDetail;
@@ -550,6 +560,12 @@ using rawIAPPack = fat.rawdata.IAPPack;
 using IAPPackVisitor = fat.conf.IAPPackVisitor;
 using rawIAPProduct = fat.rawdata.IAPProduct;
 using IAPProductVisitor = fat.conf.IAPProductVisitor;
+using rawIndepenBingoBoard = fat.rawdata.IndepenBingoBoard;
+using IndepenBingoBoardVisitor = fat.conf.IndepenBingoBoardVisitor;
+using rawIndepenBingoGroupDetail = fat.rawdata.IndepenBingoGroupDetail;
+using IndepenBingoGroupDetailVisitor = fat.conf.IndepenBingoGroupDetailVisitor;
+using rawIndepenBingoGroups = fat.rawdata.IndepenBingoGroups;
+using IndepenBingoGroupsVisitor = fat.conf.IndepenBingoGroupsVisitor;
 using rawInventoryItem = fat.rawdata.InventoryItem;
 using InventoryItemVisitor = fat.conf.InventoryItemVisitor;
 using rawInventoryProducer = fat.rawdata.InventoryProducer;
@@ -672,6 +688,14 @@ using rawMiniGameSlideMergeLevel = fat.rawdata.MiniGameSlideMergeLevel;
 using MiniGameSlideMergeLevelVisitor = fat.conf.MiniGameSlideMergeLevelVisitor;
 using rawMiniGameSlideMergeStage = fat.rawdata.MiniGameSlideMergeStage;
 using MiniGameSlideMergeStageVisitor = fat.conf.MiniGameSlideMergeStageVisitor;
+using rawMonopolyGrid = fat.rawdata.MonopolyGrid;
+using MonopolyGridVisitor = fat.conf.MonopolyGridVisitor;
+using rawMonopolyOrderItem = fat.rawdata.MonopolyOrderItem;
+using MonopolyOrderItemVisitor = fat.conf.MonopolyOrderItemVisitor;
+using rawMonopolyPack = fat.rawdata.MonopolyPack;
+using MonopolyPackVisitor = fat.conf.MonopolyPackVisitor;
+using rawMonopolyStage = fat.rawdata.MonopolyStage;
+using MonopolyStageVisitor = fat.conf.MonopolyStageVisitor;
 using rawMonster = fat.rawdata.Monster;
 using MonsterVisitor = fat.conf.MonsterVisitor;
 using rawMonsterTalk = fat.rawdata.MonsterTalk;
@@ -830,6 +854,8 @@ using rawUserTag = fat.rawdata.UserTag;
 using UserTagVisitor = fat.conf.UserTagVisitor;
 using rawUserTagGroup = fat.rawdata.UserTagGroup;
 using UserTagGroupVisitor = fat.conf.UserTagGroupVisitor;
+using rawWebshopCountryWhitelist = fat.rawdata.WebshopCountryWhitelist;
+using WebshopCountryWhitelistVisitor = fat.conf.WebshopCountryWhitelistVisitor;
 using PBC = global::Google.Protobuf.Collections;
 
 namespace fat.conf {
@@ -971,6 +997,9 @@ public static partial class Data {
 		    cur.EventGuessLevelMap = new fat.rawdata.EventGuessLevelConf();
 		    cur.EventGuessMilestoneMap = new fat.rawdata.EventGuessMilestoneConf();
 		    cur.EventGuessRoundMap = new fat.rawdata.EventGuessRoundConf();
+		    cur.EventIndepenBingoMap = new fat.rawdata.EventIndepenBingoConf();
+		    cur.EventIndepenBingoDetailMap = new fat.rawdata.EventIndepenBingoDetailConf();
+		    cur.EventIndepenBingoRoundMap = new fat.rawdata.EventIndepenBingoRoundConf();
 		    cur.EventInviteMap = new fat.rawdata.EventInviteConf();
 		    cur.EventItemBingoMap = new fat.rawdata.EventItemBingoConf();
 		    cur.EventItemBingoDetailMap = new fat.rawdata.EventItemBingoDetailConf();
@@ -1002,6 +1031,8 @@ public static partial class Data {
 		    cur.EventMiniBoardMultiDropMap = new fat.rawdata.EventMiniBoardMultiDropConf();
 		    cur.EventMiniBoardMultiGroupMap = new fat.rawdata.EventMiniBoardMultiGroupConf();
 		    cur.EventMiniBoardMultiInfoMap = new fat.rawdata.EventMiniBoardMultiInfoConf();
+		    cur.EventMonopolyMap = new fat.rawdata.EventMonopolyConf();
+		    cur.EventMonopolyDetailMap = new fat.rawdata.EventMonopolyDetailConf();
 		    cur.EventOnlineMap = new fat.rawdata.EventOnlineConf();
 		    cur.EventOnlineDetailMap = new fat.rawdata.EventOnlineDetailConf();
 		    cur.EventOrderBonusMap = new fat.rawdata.EventOrderBonusConf();
@@ -1124,6 +1155,9 @@ public static partial class Data {
 		    cur.IAPFreeMap = new fat.rawdata.IAPFreeConf();
 		    cur.IAPPackMap = new fat.rawdata.IAPPackConf();
 		    cur.IAPProductMap = new fat.rawdata.IAPProductConf();
+		    cur.IndepenBingoBoardMap = new fat.rawdata.IndepenBingoBoardConf();
+		    cur.IndepenBingoGroupDetailMap = new fat.rawdata.IndepenBingoGroupDetailConf();
+		    cur.IndepenBingoGroupsMap = new fat.rawdata.IndepenBingoGroupsConf();
 		    cur.InventoryItemMap = new fat.rawdata.InventoryItemConf();
 		    cur.InventoryProducerMap = new fat.rawdata.InventoryProducerConf();
 		    cur.InventoryToolMap = new fat.rawdata.InventoryToolConf();
@@ -1185,6 +1219,10 @@ public static partial class Data {
 		    cur.MiniGameSlideMergeItemMap = new fat.rawdata.MiniGameSlideMergeItemConf();
 		    cur.MiniGameSlideMergeLevelMap = new fat.rawdata.MiniGameSlideMergeLevelConf();
 		    cur.MiniGameSlideMergeStageMap = new fat.rawdata.MiniGameSlideMergeStageConf();
+		    cur.MonopolyGridMap = new fat.rawdata.MonopolyGridConf();
+		    cur.MonopolyOrderItemMap = new fat.rawdata.MonopolyOrderItemConf();
+		    cur.MonopolyPackMap = new fat.rawdata.MonopolyPackConf();
+		    cur.MonopolyStageMap = new fat.rawdata.MonopolyStageConf();
 		    cur.MonsterMap = new fat.rawdata.MonsterConf();
 		    cur.MonsterTalkMap = new fat.rawdata.MonsterTalkConf();
 		    cur.MultiRankMap = new fat.rawdata.MultiRankConf();
@@ -1264,6 +1302,7 @@ public static partial class Data {
 		    cur.UserGradeGroupMap = new fat.rawdata.UserGradeGroupConf();
 		    cur.UserTagMap = new fat.rawdata.UserTagConf();
 		    cur.UserTagGroupMap = new fat.rawdata.UserTagGroupConf();
+		    cur.WebshopCountryWhitelistMap = new fat.rawdata.WebshopCountryWhitelistConf();
 		}
 	#endregion loader
 	#region AdSetting
@@ -2565,6 +2604,39 @@ public static partial class Data {
 		public static List<rawEventGuessRound> GetEventGuessRoundByFilter(Func<rawEventGuessRound, bool> filterFunc,string tag="") => EventGuessRoundVisitor.GetByFilter(filterFunc,tag);
 		public static rawEventGuessRound? GetOneEventGuessRoundByFilter(Func<rawEventGuessRound, bool> filterFunc,string tag="") => EventGuessRoundVisitor.GetOneByFilter(filterFunc,tag);
 	#endregion EventGuessRound
+	#region EventIndepenBingo
+		public static int GetCountEventIndepenBingoMap(string tag="") => EventIndepenBingoVisitor.GetCount(tag);
+		public static string GetFileNameEventIndepenBingoMap() => EventIndepenBingoVisitor.GetFileName();
+		public static List<int> SortedKeysEventIndepenBingoMap(string tag="") => EventIndepenBingoVisitor.SortedKeys(tag);
+		public static PBC::MapField<int, rawEventIndepenBingo> GetEventIndepenBingoMap(string tag="") => EventIndepenBingoVisitor.All(tag);
+		public static void RangeEventIndepenBingoMap(Action<int, rawEventIndepenBingo> filter,string tag="") => EventIndepenBingoVisitor.Range(filter,tag);
+		public static List<int> KeysEventIndepenBingoMap(string tag="") => EventIndepenBingoVisitor.Keys(tag);
+		public static rawEventIndepenBingo? GetEventIndepenBingo(int key,string tag="") => EventIndepenBingoVisitor.Get(key,tag);
+		public static List<rawEventIndepenBingo> GetEventIndepenBingoByFilter(Func<rawEventIndepenBingo, bool> filterFunc,string tag="") => EventIndepenBingoVisitor.GetByFilter(filterFunc,tag);
+		public static rawEventIndepenBingo? GetOneEventIndepenBingoByFilter(Func<rawEventIndepenBingo, bool> filterFunc,string tag="") => EventIndepenBingoVisitor.GetOneByFilter(filterFunc,tag);
+	#endregion EventIndepenBingo
+	#region EventIndepenBingoDetail
+		public static int GetCountEventIndepenBingoDetailMap(string tag="") => EventIndepenBingoDetailVisitor.GetCount(tag);
+		public static string GetFileNameEventIndepenBingoDetailMap() => EventIndepenBingoDetailVisitor.GetFileName();
+		public static List<int> SortedKeysEventIndepenBingoDetailMap(string tag="") => EventIndepenBingoDetailVisitor.SortedKeys(tag);
+		public static PBC::MapField<int, rawEventIndepenBingoDetail> GetEventIndepenBingoDetailMap(string tag="") => EventIndepenBingoDetailVisitor.All(tag);
+		public static void RangeEventIndepenBingoDetailMap(Action<int, rawEventIndepenBingoDetail> filter,string tag="") => EventIndepenBingoDetailVisitor.Range(filter,tag);
+		public static List<int> KeysEventIndepenBingoDetailMap(string tag="") => EventIndepenBingoDetailVisitor.Keys(tag);
+		public static rawEventIndepenBingoDetail? GetEventIndepenBingoDetail(int key,string tag="") => EventIndepenBingoDetailVisitor.Get(key,tag);
+		public static List<rawEventIndepenBingoDetail> GetEventIndepenBingoDetailByFilter(Func<rawEventIndepenBingoDetail, bool> filterFunc,string tag="") => EventIndepenBingoDetailVisitor.GetByFilter(filterFunc,tag);
+		public static rawEventIndepenBingoDetail? GetOneEventIndepenBingoDetailByFilter(Func<rawEventIndepenBingoDetail, bool> filterFunc,string tag="") => EventIndepenBingoDetailVisitor.GetOneByFilter(filterFunc,tag);
+	#endregion EventIndepenBingoDetail
+	#region EventIndepenBingoRound
+		public static int GetCountEventIndepenBingoRoundMap(string tag="") => EventIndepenBingoRoundVisitor.GetCount(tag);
+		public static string GetFileNameEventIndepenBingoRoundMap() => EventIndepenBingoRoundVisitor.GetFileName();
+		public static List<int> SortedKeysEventIndepenBingoRoundMap(string tag="") => EventIndepenBingoRoundVisitor.SortedKeys(tag);
+		public static PBC::MapField<int, rawEventIndepenBingoRound> GetEventIndepenBingoRoundMap(string tag="") => EventIndepenBingoRoundVisitor.All(tag);
+		public static void RangeEventIndepenBingoRoundMap(Action<int, rawEventIndepenBingoRound> filter,string tag="") => EventIndepenBingoRoundVisitor.Range(filter,tag);
+		public static List<int> KeysEventIndepenBingoRoundMap(string tag="") => EventIndepenBingoRoundVisitor.Keys(tag);
+		public static rawEventIndepenBingoRound? GetEventIndepenBingoRound(int key,string tag="") => EventIndepenBingoRoundVisitor.Get(key,tag);
+		public static List<rawEventIndepenBingoRound> GetEventIndepenBingoRoundByFilter(Func<rawEventIndepenBingoRound, bool> filterFunc,string tag="") => EventIndepenBingoRoundVisitor.GetByFilter(filterFunc,tag);
+		public static rawEventIndepenBingoRound? GetOneEventIndepenBingoRoundByFilter(Func<rawEventIndepenBingoRound, bool> filterFunc,string tag="") => EventIndepenBingoRoundVisitor.GetOneByFilter(filterFunc,tag);
+	#endregion EventIndepenBingoRound
 	#region EventInvite
 		public static int GetCountEventInviteMap(string tag="") => EventInviteVisitor.GetCount(tag);
 		public static string GetFileNameEventInviteMap() => EventInviteVisitor.GetFileName();
@@ -2906,6 +2978,28 @@ public static partial class Data {
 		public static List<rawEventMiniBoardMultiInfo> GetEventMiniBoardMultiInfoByFilter(Func<rawEventMiniBoardMultiInfo, bool> filterFunc,string tag="") => EventMiniBoardMultiInfoVisitor.GetByFilter(filterFunc,tag);
 		public static rawEventMiniBoardMultiInfo? GetOneEventMiniBoardMultiInfoByFilter(Func<rawEventMiniBoardMultiInfo, bool> filterFunc,string tag="") => EventMiniBoardMultiInfoVisitor.GetOneByFilter(filterFunc,tag);
 	#endregion EventMiniBoardMultiInfo
+	#region EventMonopoly
+		public static int GetCountEventMonopolyMap(string tag="") => EventMonopolyVisitor.GetCount(tag);
+		public static string GetFileNameEventMonopolyMap() => EventMonopolyVisitor.GetFileName();
+		public static List<int> SortedKeysEventMonopolyMap(string tag="") => EventMonopolyVisitor.SortedKeys(tag);
+		public static PBC::MapField<int, rawEventMonopoly> GetEventMonopolyMap(string tag="") => EventMonopolyVisitor.All(tag);
+		public static void RangeEventMonopolyMap(Action<int, rawEventMonopoly> filter,string tag="") => EventMonopolyVisitor.Range(filter,tag);
+		public static List<int> KeysEventMonopolyMap(string tag="") => EventMonopolyVisitor.Keys(tag);
+		public static rawEventMonopoly? GetEventMonopoly(int key,string tag="") => EventMonopolyVisitor.Get(key,tag);
+		public static List<rawEventMonopoly> GetEventMonopolyByFilter(Func<rawEventMonopoly, bool> filterFunc,string tag="") => EventMonopolyVisitor.GetByFilter(filterFunc,tag);
+		public static rawEventMonopoly? GetOneEventMonopolyByFilter(Func<rawEventMonopoly, bool> filterFunc,string tag="") => EventMonopolyVisitor.GetOneByFilter(filterFunc,tag);
+	#endregion EventMonopoly
+	#region EventMonopolyDetail
+		public static int GetCountEventMonopolyDetailMap(string tag="") => EventMonopolyDetailVisitor.GetCount(tag);
+		public static string GetFileNameEventMonopolyDetailMap() => EventMonopolyDetailVisitor.GetFileName();
+		public static List<int> SortedKeysEventMonopolyDetailMap(string tag="") => EventMonopolyDetailVisitor.SortedKeys(tag);
+		public static PBC::MapField<int, rawEventMonopolyDetail> GetEventMonopolyDetailMap(string tag="") => EventMonopolyDetailVisitor.All(tag);
+		public static void RangeEventMonopolyDetailMap(Action<int, rawEventMonopolyDetail> filter,string tag="") => EventMonopolyDetailVisitor.Range(filter,tag);
+		public static List<int> KeysEventMonopolyDetailMap(string tag="") => EventMonopolyDetailVisitor.Keys(tag);
+		public static rawEventMonopolyDetail? GetEventMonopolyDetail(int key,string tag="") => EventMonopolyDetailVisitor.Get(key,tag);
+		public static List<rawEventMonopolyDetail> GetEventMonopolyDetailByFilter(Func<rawEventMonopolyDetail, bool> filterFunc,string tag="") => EventMonopolyDetailVisitor.GetByFilter(filterFunc,tag);
+		public static rawEventMonopolyDetail? GetOneEventMonopolyDetailByFilter(Func<rawEventMonopolyDetail, bool> filterFunc,string tag="") => EventMonopolyDetailVisitor.GetOneByFilter(filterFunc,tag);
+	#endregion EventMonopolyDetail
 	#region EventOnline
 		public static int GetCountEventOnlineMap(string tag="") => EventOnlineVisitor.GetCount(tag);
 		public static string GetFileNameEventOnlineMap() => EventOnlineVisitor.GetFileName();
@@ -4238,6 +4332,39 @@ public static partial class Data {
 		public static List<rawIAPProduct> GetIAPProductByFilter(Func<rawIAPProduct, bool> filterFunc,string tag="") => IAPProductVisitor.GetByFilter(filterFunc,tag);
 		public static rawIAPProduct? GetOneIAPProductByFilter(Func<rawIAPProduct, bool> filterFunc,string tag="") => IAPProductVisitor.GetOneByFilter(filterFunc,tag);
 	#endregion IAPProduct
+	#region IndepenBingoBoard
+		public static int GetCountIndepenBingoBoardMap(string tag="") => IndepenBingoBoardVisitor.GetCount(tag);
+		public static string GetFileNameIndepenBingoBoardMap() => IndepenBingoBoardVisitor.GetFileName();
+		public static List<int> SortedKeysIndepenBingoBoardMap(string tag="") => IndepenBingoBoardVisitor.SortedKeys(tag);
+		public static PBC::MapField<int, rawIndepenBingoBoard> GetIndepenBingoBoardMap(string tag="") => IndepenBingoBoardVisitor.All(tag);
+		public static void RangeIndepenBingoBoardMap(Action<int, rawIndepenBingoBoard> filter,string tag="") => IndepenBingoBoardVisitor.Range(filter,tag);
+		public static List<int> KeysIndepenBingoBoardMap(string tag="") => IndepenBingoBoardVisitor.Keys(tag);
+		public static rawIndepenBingoBoard? GetIndepenBingoBoard(int key,string tag="") => IndepenBingoBoardVisitor.Get(key,tag);
+		public static List<rawIndepenBingoBoard> GetIndepenBingoBoardByFilter(Func<rawIndepenBingoBoard, bool> filterFunc,string tag="") => IndepenBingoBoardVisitor.GetByFilter(filterFunc,tag);
+		public static rawIndepenBingoBoard? GetOneIndepenBingoBoardByFilter(Func<rawIndepenBingoBoard, bool> filterFunc,string tag="") => IndepenBingoBoardVisitor.GetOneByFilter(filterFunc,tag);
+	#endregion IndepenBingoBoard
+	#region IndepenBingoGroupDetail
+		public static int GetCountIndepenBingoGroupDetailMap(string tag="") => IndepenBingoGroupDetailVisitor.GetCount(tag);
+		public static string GetFileNameIndepenBingoGroupDetailMap() => IndepenBingoGroupDetailVisitor.GetFileName();
+		public static List<int> SortedKeysIndepenBingoGroupDetailMap(string tag="") => IndepenBingoGroupDetailVisitor.SortedKeys(tag);
+		public static PBC::MapField<int, rawIndepenBingoGroupDetail> GetIndepenBingoGroupDetailMap(string tag="") => IndepenBingoGroupDetailVisitor.All(tag);
+		public static void RangeIndepenBingoGroupDetailMap(Action<int, rawIndepenBingoGroupDetail> filter,string tag="") => IndepenBingoGroupDetailVisitor.Range(filter,tag);
+		public static List<int> KeysIndepenBingoGroupDetailMap(string tag="") => IndepenBingoGroupDetailVisitor.Keys(tag);
+		public static rawIndepenBingoGroupDetail? GetIndepenBingoGroupDetail(int key,string tag="") => IndepenBingoGroupDetailVisitor.Get(key,tag);
+		public static List<rawIndepenBingoGroupDetail> GetIndepenBingoGroupDetailByFilter(Func<rawIndepenBingoGroupDetail, bool> filterFunc,string tag="") => IndepenBingoGroupDetailVisitor.GetByFilter(filterFunc,tag);
+		public static rawIndepenBingoGroupDetail? GetOneIndepenBingoGroupDetailByFilter(Func<rawIndepenBingoGroupDetail, bool> filterFunc,string tag="") => IndepenBingoGroupDetailVisitor.GetOneByFilter(filterFunc,tag);
+	#endregion IndepenBingoGroupDetail
+	#region IndepenBingoGroups
+		public static int GetCountIndepenBingoGroupsMap(string tag="") => IndepenBingoGroupsVisitor.GetCount(tag);
+		public static string GetFileNameIndepenBingoGroupsMap() => IndepenBingoGroupsVisitor.GetFileName();
+		public static List<int> SortedKeysIndepenBingoGroupsMap(string tag="") => IndepenBingoGroupsVisitor.SortedKeys(tag);
+		public static PBC::MapField<int, rawIndepenBingoGroups> GetIndepenBingoGroupsMap(string tag="") => IndepenBingoGroupsVisitor.All(tag);
+		public static void RangeIndepenBingoGroupsMap(Action<int, rawIndepenBingoGroups> filter,string tag="") => IndepenBingoGroupsVisitor.Range(filter,tag);
+		public static List<int> KeysIndepenBingoGroupsMap(string tag="") => IndepenBingoGroupsVisitor.Keys(tag);
+		public static rawIndepenBingoGroups? GetIndepenBingoGroups(int key,string tag="") => IndepenBingoGroupsVisitor.Get(key,tag);
+		public static List<rawIndepenBingoGroups> GetIndepenBingoGroupsByFilter(Func<rawIndepenBingoGroups, bool> filterFunc,string tag="") => IndepenBingoGroupsVisitor.GetByFilter(filterFunc,tag);
+		public static rawIndepenBingoGroups? GetOneIndepenBingoGroupsByFilter(Func<rawIndepenBingoGroups, bool> filterFunc,string tag="") => IndepenBingoGroupsVisitor.GetOneByFilter(filterFunc,tag);
+	#endregion IndepenBingoGroups
 	#region InventoryItem
 		public static int GetCountInventoryItemMap(string tag="") => InventoryItemVisitor.GetCount(tag);
 		public static string GetFileNameInventoryItemMap() => InventoryItemVisitor.GetFileName();
@@ -4874,6 +5001,50 @@ public static partial class Data {
 		public static List<rawMiniGameSlideMergeStage> GetMiniGameSlideMergeStageByFilter(Func<rawMiniGameSlideMergeStage, bool> filterFunc,string tag="") => MiniGameSlideMergeStageVisitor.GetByFilter(filterFunc,tag);
 		public static rawMiniGameSlideMergeStage? GetOneMiniGameSlideMergeStageByFilter(Func<rawMiniGameSlideMergeStage, bool> filterFunc,string tag="") => MiniGameSlideMergeStageVisitor.GetOneByFilter(filterFunc,tag);
 	#endregion MiniGameSlideMergeStage
+	#region MonopolyGrid
+		public static int GetCountMonopolyGridMap(string tag="") => MonopolyGridVisitor.GetCount(tag);
+		public static string GetFileNameMonopolyGridMap() => MonopolyGridVisitor.GetFileName();
+		public static List<int> SortedKeysMonopolyGridMap(string tag="") => MonopolyGridVisitor.SortedKeys(tag);
+		public static PBC::MapField<int, rawMonopolyGrid> GetMonopolyGridMap(string tag="") => MonopolyGridVisitor.All(tag);
+		public static void RangeMonopolyGridMap(Action<int, rawMonopolyGrid> filter,string tag="") => MonopolyGridVisitor.Range(filter,tag);
+		public static List<int> KeysMonopolyGridMap(string tag="") => MonopolyGridVisitor.Keys(tag);
+		public static rawMonopolyGrid? GetMonopolyGrid(int key,string tag="") => MonopolyGridVisitor.Get(key,tag);
+		public static List<rawMonopolyGrid> GetMonopolyGridByFilter(Func<rawMonopolyGrid, bool> filterFunc,string tag="") => MonopolyGridVisitor.GetByFilter(filterFunc,tag);
+		public static rawMonopolyGrid? GetOneMonopolyGridByFilter(Func<rawMonopolyGrid, bool> filterFunc,string tag="") => MonopolyGridVisitor.GetOneByFilter(filterFunc,tag);
+	#endregion MonopolyGrid
+	#region MonopolyOrderItem
+		public static int GetCountMonopolyOrderItemMap(string tag="") => MonopolyOrderItemVisitor.GetCount(tag);
+		public static string GetFileNameMonopolyOrderItemMap() => MonopolyOrderItemVisitor.GetFileName();
+		public static List<int> SortedKeysMonopolyOrderItemMap(string tag="") => MonopolyOrderItemVisitor.SortedKeys(tag);
+		public static PBC::MapField<int, rawMonopolyOrderItem> GetMonopolyOrderItemMap(string tag="") => MonopolyOrderItemVisitor.All(tag);
+		public static void RangeMonopolyOrderItemMap(Action<int, rawMonopolyOrderItem> filter,string tag="") => MonopolyOrderItemVisitor.Range(filter,tag);
+		public static List<int> KeysMonopolyOrderItemMap(string tag="") => MonopolyOrderItemVisitor.Keys(tag);
+		public static rawMonopolyOrderItem? GetMonopolyOrderItem(int key,string tag="") => MonopolyOrderItemVisitor.Get(key,tag);
+		public static List<rawMonopolyOrderItem> GetMonopolyOrderItemByFilter(Func<rawMonopolyOrderItem, bool> filterFunc,string tag="") => MonopolyOrderItemVisitor.GetByFilter(filterFunc,tag);
+		public static rawMonopolyOrderItem? GetOneMonopolyOrderItemByFilter(Func<rawMonopolyOrderItem, bool> filterFunc,string tag="") => MonopolyOrderItemVisitor.GetOneByFilter(filterFunc,tag);
+	#endregion MonopolyOrderItem
+	#region MonopolyPack
+		public static int GetCountMonopolyPackMap(string tag="") => MonopolyPackVisitor.GetCount(tag);
+		public static string GetFileNameMonopolyPackMap() => MonopolyPackVisitor.GetFileName();
+		public static List<int> SortedKeysMonopolyPackMap(string tag="") => MonopolyPackVisitor.SortedKeys(tag);
+		public static PBC::MapField<int, rawMonopolyPack> GetMonopolyPackMap(string tag="") => MonopolyPackVisitor.All(tag);
+		public static void RangeMonopolyPackMap(Action<int, rawMonopolyPack> filter,string tag="") => MonopolyPackVisitor.Range(filter,tag);
+		public static List<int> KeysMonopolyPackMap(string tag="") => MonopolyPackVisitor.Keys(tag);
+		public static rawMonopolyPack? GetMonopolyPack(int key,string tag="") => MonopolyPackVisitor.Get(key,tag);
+		public static List<rawMonopolyPack> GetMonopolyPackByFilter(Func<rawMonopolyPack, bool> filterFunc,string tag="") => MonopolyPackVisitor.GetByFilter(filterFunc,tag);
+		public static rawMonopolyPack? GetOneMonopolyPackByFilter(Func<rawMonopolyPack, bool> filterFunc,string tag="") => MonopolyPackVisitor.GetOneByFilter(filterFunc,tag);
+	#endregion MonopolyPack
+	#region MonopolyStage
+		public static int GetCountMonopolyStageMap(string tag="") => MonopolyStageVisitor.GetCount(tag);
+		public static string GetFileNameMonopolyStageMap() => MonopolyStageVisitor.GetFileName();
+		public static List<int> SortedKeysMonopolyStageMap(string tag="") => MonopolyStageVisitor.SortedKeys(tag);
+		public static PBC::MapField<int, rawMonopolyStage> GetMonopolyStageMap(string tag="") => MonopolyStageVisitor.All(tag);
+		public static void RangeMonopolyStageMap(Action<int, rawMonopolyStage> filter,string tag="") => MonopolyStageVisitor.Range(filter,tag);
+		public static List<int> KeysMonopolyStageMap(string tag="") => MonopolyStageVisitor.Keys(tag);
+		public static rawMonopolyStage? GetMonopolyStage(int key,string tag="") => MonopolyStageVisitor.Get(key,tag);
+		public static List<rawMonopolyStage> GetMonopolyStageByFilter(Func<rawMonopolyStage, bool> filterFunc,string tag="") => MonopolyStageVisitor.GetByFilter(filterFunc,tag);
+		public static rawMonopolyStage? GetOneMonopolyStageByFilter(Func<rawMonopolyStage, bool> filterFunc,string tag="") => MonopolyStageVisitor.GetOneByFilter(filterFunc,tag);
+	#endregion MonopolyStage
 	#region Monster
 		public static int GetCountMonsterMap(string tag="") => MonsterVisitor.GetCount(tag);
 		public static string GetFileNameMonsterMap() => MonsterVisitor.GetFileName();
@@ -5726,6 +5897,17 @@ public static partial class Data {
 		public static List<rawUserTagGroup> GetUserTagGroupByFilter(Func<rawUserTagGroup, bool> filterFunc,string tag="") => UserTagGroupVisitor.GetByFilter(filterFunc,tag);
 		public static rawUserTagGroup? GetOneUserTagGroupByFilter(Func<rawUserTagGroup, bool> filterFunc,string tag="") => UserTagGroupVisitor.GetOneByFilter(filterFunc,tag);
 	#endregion UserTagGroup
+	#region WebshopCountryWhitelist
+		public static int GetCountWebshopCountryWhitelistMap(string tag="") => WebshopCountryWhitelistVisitor.GetCount(tag);
+		public static string GetFileNameWebshopCountryWhitelistMap() => WebshopCountryWhitelistVisitor.GetFileName();
+		public static List<string> SortedKeysWebshopCountryWhitelistMap(string tag="") => WebshopCountryWhitelistVisitor.SortedKeys(tag);
+		public static PBC::MapField<string, rawWebshopCountryWhitelist> GetWebshopCountryWhitelistMap(string tag="") => WebshopCountryWhitelistVisitor.All(tag);
+		public static void RangeWebshopCountryWhitelistMap(Action<string, rawWebshopCountryWhitelist> filter,string tag="") => WebshopCountryWhitelistVisitor.Range(filter,tag);
+		public static List<string> KeysWebshopCountryWhitelistMap(string tag="") => WebshopCountryWhitelistVisitor.Keys(tag);
+		public static rawWebshopCountryWhitelist? GetWebshopCountryWhitelist(string key,string tag="") => WebshopCountryWhitelistVisitor.Get(key,tag);
+		public static List<rawWebshopCountryWhitelist> GetWebshopCountryWhitelistByFilter(Func<rawWebshopCountryWhitelist, bool> filterFunc,string tag="") => WebshopCountryWhitelistVisitor.GetByFilter(filterFunc,tag);
+		public static rawWebshopCountryWhitelist? GetOneWebshopCountryWhitelistByFilter(Func<rawWebshopCountryWhitelist, bool> filterFunc,string tag="") => WebshopCountryWhitelistVisitor.GetOneByFilter(filterFunc,tag);
+	#endregion WebshopCountryWhitelist
 	}
 }
 #endregion Designer generated code

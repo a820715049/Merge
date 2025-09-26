@@ -293,8 +293,6 @@ namespace FAT
             MessageCenter.Get<MSG.ACTIVITY_ENTRY_LAYOUT_REFRESH>().AddListener(_RefreshScore);
             MessageCenter.Get<MSG.ROCKET_ANIM_COMPLETE>().AddListener(WhenBonusShowEnd);
             MessageCenter.Get<MSG.CLEAR_BONUS>().AddListener(ClearBonus);
-            MessageCenter.Get<MSG.GAME_ORDER_TOKEN_MULTI_BEGIN>().AddListener(_OnMessageTokenMultiBegin);
-            MessageCenter.Get<MSG.GAME_ORDER_TOKEN_MULTI_END>().AddListener(_OnMessageTokenMultiEnd);
         }
 
         private void _UnRegister()
@@ -313,8 +311,6 @@ namespace FAT
             MessageCenter.Get<MSG.ACTIVITY_ENTRY_LAYOUT_REFRESH>().RemoveListener(_RefreshScore);
             MessageCenter.Get<MSG.ROCKET_ANIM_COMPLETE>().RemoveListener(WhenBonusShowEnd);
             MessageCenter.Get<MSG.CLEAR_BONUS>().RemoveListener(ClearBonus);
-            MessageCenter.Get<MSG.GAME_ORDER_TOKEN_MULTI_BEGIN>().RemoveListener(_OnMessageTokenMultiBegin);
-            MessageCenter.Get<MSG.GAME_ORDER_TOKEN_MULTI_END>().RemoveListener(_OnMessageTokenMultiEnd);
         }
 
         private void _Refresh()
@@ -533,10 +529,6 @@ namespace FAT
                     scoreGroup.icon.SetImage(Game.Manager.objectMan.GetBasicConfig(coinID).Image);
                     scoreGroup.txtScore.text = $"{score}";
                     _SetScoreState(true);
-                }
-                else if (act is ActivityScoreMic activityScoreMic && !activityScoreMic.IsComplete())
-                {
-                    _RefreshScoreMic(activityScoreMic, score);
                 }
                 else
                 {
@@ -813,10 +805,6 @@ namespace FAT
             if (act is ActivityScore activityScore)
             {
                 return activityScore.HasCycleMilestone();
-            }
-            if (act is ActivityScoreMic activityScoreMic)
-            {
-                return !activityScoreMic.IsComplete();
             }
             // 其他情况分数都有效
             return true;
@@ -1500,74 +1488,6 @@ namespace FAT
                 magicHourTargetOrder = data.targetOrder;
                 magicHourRewardItem = data.item;
             }
-        }
-
-        #endregion
-
-        #region 活动token棋子翻倍
-
-        private void _OnMessageTokenMultiBegin(Item item)
-        {
-            var score = mData.Score;
-            if (score <= 0)
-            {
-                _SetScoreState(false);
-                return;
-            }
-            var seq = DOTween.Sequence();
-            // 棋子可能正在从礼物盒拿出 效果延迟到棋子落地再处理
-            float delay = 0.5f; //拖尾特效飞行时间
-            var itemView = BoardViewManager.Instance.GetItemView(item.id);
-            if (!itemView.IsViewIdle())
-            {
-                delay += 0.7f;
-            }
-            seq.AppendInterval(delay);
-            seq.AppendCallback(() =>
-            {
-                //先播特效
-                var effType_Disp = BoardUtility.EffTypeToPoolType(ItemEffectType.TokenMultiTrigger).ToString();
-                var disappear = GameObjectPoolManager.Instance.CreateObject(effType_Disp, BoardViewManager.Instance.boardView.topEffectRoot);
-                disappear.transform.position = scoreGroup.txtScore.transform.position;
-                BoardUtility.AddAutoReleaseComponent(disappear, 2f, effType_Disp);
-            });
-            //延迟一段时间 等特效播到一定程度后 再刷新UI
-            delay = 0.15f;
-            seq.AppendInterval(delay);
-            seq.AppendCallback(() =>
-            {
-                var act = Game.Manager.activity.Lookup(mData.GetValue(OrderParamType.ScoreEventId));
-                if (act is ActivityScoreMic activityScoreMic && !activityScoreMic.IsComplete())
-                {
-                    _RefreshScoreMic(activityScoreMic, score);
-                }
-                else
-                {
-                    _SetScoreState(false);
-                }
-            });
-            seq.Play();
-        }
-
-        private void _OnMessageTokenMultiEnd()
-        {
-            _RefreshScore();
-        }
-
-        private void _RefreshScoreMic(ActivityScoreMic activityScoreMic, int score)
-        {
-            if (activityScoreMic == null)
-                return;
-            var tokenId = activityScoreMic.Conf.Token;
-            //设置图片
-            scoreGroup.icon.SetImage(Game.Manager.objectMan.GetBasicConfig(tokenId).Image);
-            //根据是否有倍率决定不同颜色和样式
-            var isMulti = activityScoreMic.CheckTokenMultiRate(tokenId, out var rate);
-            var key = activityScoreMic.GetScoreTextStyleKey(isMulti);
-            activityScoreMic.Visual.RefreshStyle(scoreGroup.txtScore, key);
-            var scoreStr = isMulti ? score * rate : score;
-            scoreGroup.txtScore.text = $"{scoreStr}";
-            _SetScoreState(true);
         }
 
         #endregion

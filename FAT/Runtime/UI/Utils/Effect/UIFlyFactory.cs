@@ -78,6 +78,8 @@ namespace FAT
                     ft = FlyType.CastleToken;
                 else if (tokenConf.Feature == FeatureEntry.FeatureMultiplierRanking)
                     ft = FlyType.MultiRankingToken;
+                else if (tokenConf.Feature == FeatureEntry.FeatureSevenDayTask)
+                    ft = FlyType.SevenDayToken;
                 else if (tokenConf.Feature == FeatureEntry.FeatureGuess)
                 {
                     var acti = (ActivityGuess)Game.Manager.activity.LookupAny(fat.rawdata.EventType.Guess);
@@ -111,10 +113,6 @@ namespace FAT
                 else if (tokenConf.Feature == FeatureEntry.FeatureBp)
                 {
                     ft = FlyType.BPExp;
-                }
-                else if (tokenConf.Feature == FeatureEntry.FeatureMicMilestone)
-                {
-                    ft = FlyType.ScoreMicToken;
                 }
             }
             else if (mgr.IsType(rewardId, ObjConfigType.Coin))
@@ -370,7 +368,9 @@ namespace FAT
         public static bool CheckNeedFlyIcon(int id)
         {
             return !Game.Manager.objectMan.IsType(id, ObjConfigType.RandomBox)
-                   && !Game.Manager.objectMan.IsType(id, ObjConfigType.CardJoker);
+                   && !Game.Manager.objectMan.IsType(id, ObjConfigType.CardJoker)
+                   //卡包如果配置了获得时自动开启 则也不需要飞图标
+                   && !Game.Manager.cardMan.CheckIsAutoOpen(id);
         }
 
         public static void CreateStraightTween(Sequence seq, Transform trans, Vector3 to, float duration = 0)

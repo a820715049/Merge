@@ -234,6 +234,7 @@ namespace FAT
                 if (ChangeItemToken(false, num))
                 {
                     DataTracker.token_change.Track(id, -num, _tokenNum, reason);
+                    MessageCenter.Get<MSG.TASK_ACTIVITY_TOKEN_USE>().Dispatch(id, num);
                     return true;
                 }
             }

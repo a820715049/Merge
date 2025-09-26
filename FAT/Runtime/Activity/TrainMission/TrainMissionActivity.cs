@@ -2,7 +2,7 @@
  * @Author: chaoran.zhang
  * @Date: 2025-08-04 16:21:01
  * @LastEditors: chaoran.zhang
- * @LastEditTime: 2025-09-17 18:01:03
+ * @LastEditTime: 2025-09-23 11:17:38
  */
 using System;
 using System.Collections.Generic;
@@ -763,6 +763,7 @@ namespace FAT
             if (topOrder.orderID == order.orderID) { topOrder = new TrainMissionOrder(); }
             else { bottomOrder = new TrainMissionOrder(); }
             _UpdateOrder();
+            _trainQueue++;
             return true;
         }
 

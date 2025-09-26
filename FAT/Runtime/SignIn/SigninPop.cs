@@ -10,5 +10,7 @@ namespace FAT
             PopupRes = uiResource;
             PopupId = popupId;
         }
+
+        public override bool Ready() => UIManager.Instance.CheckUIIsIdleStateForPopup();
     }
 }

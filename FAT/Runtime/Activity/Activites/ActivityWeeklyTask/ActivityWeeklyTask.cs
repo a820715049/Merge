@@ -48,14 +48,7 @@ namespace FAT
         {
             Lite = lite_;
             Conf = fat.conf.Data.GetEventWeeklyTask(lite_.Param);
-            MessageCenter.Get<MSG.GAME_COIN_USE>().AddListener(WhenCoinUse);
-            MessageCenter.Get<MSG.GAME_COIN_ADD>().AddListener(WhenCoinAdd);
-            MessageCenter.Get<MSG.GAME_BOARD_ITEM_MERGE>().AddListener(WhenBoardMerge);
-            MessageCenter.Get<MSG.ORDER_FINISH>().AddListener(WhenOrderFinish);
-            MessageCenter.Get<MSG.GAME_CARD_DRAW_FINISH>().AddListener(WhenCardDrawFinish);
-            MessageCenter.Get<MSG.GAME_MERGE_PRE_BEGIN_REWARD>().AddListener(WhenTokenGet);
-            MessageCenter.Get<MSG.GAME_MINE_BOARD_TOKEN_CHANGE>().AddListener(WhenTokenChange);
-            MessageCenter.Get<MSG.ON_USE_SPEED_UP_ITEM_SUCCESS>().AddListener(WhenUnleashBubble);
+            MessageCenter.Get<MSG.TASK_UPDATE>().AddListener(UpdateTask);
         }
 
         public override void WhenReset()
@@ -65,14 +58,12 @@ namespace FAT
 
         private void RemoveListeners()
         {
-            MessageCenter.Get<MSG.GAME_COIN_USE>().RemoveListener(WhenCoinUse);
-            MessageCenter.Get<MSG.GAME_COIN_ADD>().RemoveListener(WhenCoinAdd);
-            MessageCenter.Get<MSG.GAME_BOARD_ITEM_MERGE>().RemoveListener(WhenBoardMerge);
-            MessageCenter.Get<MSG.ORDER_FINISH>().RemoveListener(WhenOrderFinish);
-            MessageCenter.Get<MSG.GAME_CARD_DRAW_FINISH>().RemoveListener(WhenCardDrawFinish);
-            MessageCenter.Get<MSG.GAME_MERGE_PRE_BEGIN_REWARD>().RemoveListener(WhenTokenGet);
-            MessageCenter.Get<MSG.GAME_MINE_BOARD_TOKEN_CHANGE>().RemoveListener(WhenTokenChange);
-            MessageCenter.Get<MSG.ON_USE_SPEED_UP_ITEM_SUCCESS>().RemoveListener(WhenUnleashBubble);
+            MessageCenter.Get<MSG.TASK_UPDATE>().RemoveListener(UpdateTask);
+        }
+
+        private void UpdateTask(TaskType type, int count)
+        {
+            UpdateValue(type, count);
         }
 
         public override void WhenActive(bool new_)
@@ -232,90 +223,23 @@ namespace FAT
             DataTracker.event_weeklytask_stage.Track(this, phase_ + 1, DetailConf.TaskGroup.Count, DetailConf.Diff, 1, phase_ == DetailConf.TaskGroup.Count - 1);
         }
 
-        private void WhenUnleashBubble()
-        {
-            UpdateValue(WeeklyTaskType.TaskBubble, 1);
-        }
-
-        private void WhenTokenChange(int tokenNum, int tokenId)
-        {
-            if (tokenNum > 0)
-            {
-                return;
-            }
-            UpdateValueByToken(Mathf.Abs(tokenNum), tokenId);
-        }
-
-        private void WhenTokenGet(RewardCommitData data_)
-        {
-            // 检查是否有任务类型为TaskTokenGet的任务
-            bool hasTokenGetTask = false;
-            for (int i = 0; i < PHASE_COUNT; i++)
-            {
-                for (int j = 0; j < phaseTasks[i].Count; j++)
-                {
-                    if (phaseTasks[i][j].conf.TaskType == (int)WeeklyTaskType.TaskTokenGet && data_.rewardId == phaseTasks[i][j].conf.TokenId)
-                    {
-                        hasTokenGetTask = true;
-                        break;
-                    }
-                }
-                if (hasTokenGetTask) break;
-            }
-
-            if (hasTokenGetTask)
-            {
-                UpdateValueByToken(data_.rewardCount, data_.rewardId);
-            }
-        }
-
-        private void UpdateValueByToken(int tokenNum, int tokenId)
+        private void WhenTokenChange(TaskType type, int amount)
         {
             for (int i = 0; i < PHASE_COUNT; i++)
             {
                 for (int j = 0; j < phaseTasks[i].Count; j++)
                 {
-                    if (phaseTasks[i][j].conf.TokenId == tokenId && !phaseTasks[i][j].complete)
+                    if (phaseTasks[i][j].conf.TaskType == (int)type && !phaseTasks[i][j].complete)
                     {
                         var pre = phaseTasks[i][j].value;
-                        phaseTasks[i][j].value += tokenNum;
+                        phaseTasks[i][j].value += amount;
                         CheckComplete(i, j, pre);
                     }
                 }
             }
         }
 
-        private void WhenOrderFinish()
-        {
-            UpdateValue(WeeklyTaskType.TaskOrder, 1);
-        }
-
-        private void WhenCardDrawFinish()
-        {
-            UpdateValue(WeeklyTaskType.TaskCardPack, 1);
-        }
-
-        private void WhenCoinUse(CoinChange change_)
-        {
-            if (change_.type == CoinType.MergeCoin && change_.reason == ReasonString.undo_sell_item)
-            {
-                UpdateValue(WeeklyTaskType.TaskCoin, -change_.amount);
-            }
-        }
-
-        private void WhenCoinAdd(CoinChange change_)
-        {
-            if (change_.type == CoinType.MergeCoin) UpdateValue(WeeklyTaskType.TaskCoin, change_.amount);
-        }
-
-        private void WhenBoardMerge(Merge.Item t_)
-        {
-            var b = t_?.world?.activeBoard;
-            if (b == null || b.boardId != Constant.MainBoardId) return;
-            UpdateValue(WeeklyTaskType.TaskMerge, 1);
-        }
-
-        private void UpdateValue(WeeklyTaskType type_, int value_)
+        private void UpdateValue(TaskType type_, int value_)
         {
             for (int i = 0; i < PHASE_COUNT; i++)
             {

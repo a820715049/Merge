@@ -24,14 +24,14 @@ namespace fat.rawdata {
     static CoinTypeReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChZyYXdkYXRhL0NvaW5UeXBlLnByb3RvEgdyYXdkYXRhKtoBCghDb2luVHlw",
+            "ChZyYXdkYXRhL0NvaW5UeXBlLnByb3RvEgdyYXdkYXRhKuYBCghDb2luVHlw",
             "ZRIMCghOb25lQ29pbhAAEgcKA0dlbRABEg0KCU1lcmdlQ29pbhACEgsKB0lB",
             "UENvaW4QAxIMCghUb29sVGlsZRAEEg0KCVRvb2xTdG9uZRAFEg8KC1Rvb2xQ",
             "YWludGVyEAYSDAoIVG9vbFBpcGUQBxIQCgxUb29sQ2VyYW1pY3MQCBIRCg1U",
             "b29sV2FsbHBhcGVyEAkSDgoKVG9vbFdpbmRvdxAKEgwKCFRvb2xXaXJlEAsS",
-            "DAoIVG9vbFdvb2QQDBIOCgpUb29sV3JlbmNoEA1CPVotZ2l0bGFiLmZ1bnBs",
-            "dXMuaW8vZmF0L2NvbmYvZ2VuL2dvbGFuZy9yYXdkYXRhqgILZmF0LnJhd2Rh",
-            "dGFiBnByb3RvMw=="));
+            "DAoIVG9vbFdvb2QQDBIOCgpUb29sV3JlbmNoEA0SCgoGVGlja2V0EA5CPVot",
+            "Z2l0bGFiLmZ1bnBsdXMuaW8vZmF0L2NvbmYvZ2VuL2dvbGFuZy9yYXdkYXRh",
+            "qgILZmF0LnJhd2RhdGFiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::fat.rawdata.CoinType), }, null, null));
@@ -55,6 +55,7 @@ namespace fat.rawdata {
     [pbr::OriginalName("ToolWire")] ToolWire = 11,
     [pbr::OriginalName("ToolWood")] ToolWood = 12,
     [pbr::OriginalName("ToolWrench")] ToolWrench = 13,
+    [pbr::OriginalName("Ticket")] Ticket = 14,
   }
 
   #endregion

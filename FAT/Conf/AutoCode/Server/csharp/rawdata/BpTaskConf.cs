@@ -24,28 +24,27 @@ namespace fat.rawdata {
     static BpTaskConfReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChhyYXdkYXRhL0JwVGFza0NvbmYucHJvdG8SB3Jhd2RhdGEaGHJhd2RhdGEv",
-            "QnBUYXNrVHlwZS5wcm90byKQAQoGQnBUYXNrEgoKAmlkGAEgASgFEhEKCXBh",
-            "cmFtZXRlchgCIAEoCRIOCgZyZXdhcmQYAyABKAkSDAoEc29ydBgIIAEoBRIQ",
-            "Cgh0YXNrRGVzYxgEIAEoCRIQCgh0YXNrSWNvbhgFIAEoCRIlCgh0YXNrVHlw",
-            "ZRgHIAEoDjITLnJhd2RhdGEuQnBUYXNrVHlwZSKSAQoQQnBUYXNrTWFwQUJW",
-            "YWx1ZRI7CglCcFRhc2tNYXAYASADKAsyKC5yYXdkYXRhLkJwVGFza01hcEFC",
-            "VmFsdWUuQnBUYXNrTWFwRW50cnkaQQoOQnBUYXNrTWFwRW50cnkSCwoDa2V5",
-            "GAEgASgFEh4KBXZhbHVlGAIgASgLMg8ucmF3ZGF0YS5CcFRhc2s6AjgBIqkD",
-            "CgpCcFRhc2tDb25mEjUKCUJwVGFza01hcBgBIAMoCzIiLnJhd2RhdGEuQnBU",
-            "YXNrQ29uZi5CcFRhc2tNYXBFbnRyeRI5CgtCcFRhc2tNYXBBQhgCIAMoCzIk",
-            "LnJhd2RhdGEuQnBUYXNrQ29uZi5CcFRhc2tNYXBBQkVudHJ5EkMKEEJwVGFz",
-            "a01hcEFCUGF0Y2gYAyADKAsyKS5yYXdkYXRhLkJwVGFza0NvbmYuQnBUYXNr",
-            "TWFwQUJQYXRjaEVudHJ5GkEKDkJwVGFza01hcEVudHJ5EgsKA2tleRgBIAEo",
-            "BRIeCgV2YWx1ZRgCIAEoCzIPLnJhd2RhdGEuQnBUYXNrOgI4ARpNChBCcFRh",
-            "c2tNYXBBQkVudHJ5EgsKA2tleRgBIAEoCRIoCgV2YWx1ZRgCIAEoCzIZLnJh",
-            "d2RhdGEuQnBUYXNrTWFwQUJWYWx1ZToCOAEaUgoVQnBUYXNrTWFwQUJQYXRj",
-            "aEVudHJ5EgsKA2tleRgBIAEoCRIoCgV2YWx1ZRgCIAEoCzIZLnJhd2RhdGEu",
-            "QnBUYXNrTWFwQUJWYWx1ZToCOAFCPVotZ2l0bGFiLmZ1bnBsdXMuaW8vZmF0",
-            "L2NvbmYvZ2VuL2dvbGFuZy9yYXdkYXRhqgILZmF0LnJhd2RhdGFiBnByb3Rv",
-            "Mw=="));
+            "ChhyYXdkYXRhL0JwVGFza0NvbmYucHJvdG8SB3Jhd2RhdGEaFnJhd2RhdGEv",
+            "VGFza1R5cGUucHJvdG8ijgEKBkJwVGFzaxIKCgJpZBgBIAEoBRIRCglwYXJh",
+            "bWV0ZXIYAiABKAkSDgoGcmV3YXJkGAMgASgJEgwKBHNvcnQYCCABKAUSEAoI",
+            "dGFza0Rlc2MYBCABKAkSEAoIdGFza0ljb24YBSABKAkSIwoIdGFza1R5cGUY",
+            "ByABKA4yES5yYXdkYXRhLlRhc2tUeXBlIpIBChBCcFRhc2tNYXBBQlZhbHVl",
+            "EjsKCUJwVGFza01hcBgBIAMoCzIoLnJhd2RhdGEuQnBUYXNrTWFwQUJWYWx1",
+            "ZS5CcFRhc2tNYXBFbnRyeRpBCg5CcFRhc2tNYXBFbnRyeRILCgNrZXkYASAB",
+            "KAUSHgoFdmFsdWUYAiABKAsyDy5yYXdkYXRhLkJwVGFzazoCOAEiqQMKCkJw",
+            "VGFza0NvbmYSNQoJQnBUYXNrTWFwGAEgAygLMiIucmF3ZGF0YS5CcFRhc2tD",
+            "b25mLkJwVGFza01hcEVudHJ5EjkKC0JwVGFza01hcEFCGAIgAygLMiQucmF3",
+            "ZGF0YS5CcFRhc2tDb25mLkJwVGFza01hcEFCRW50cnkSQwoQQnBUYXNrTWFw",
+            "QUJQYXRjaBgDIAMoCzIpLnJhd2RhdGEuQnBUYXNrQ29uZi5CcFRhc2tNYXBB",
+            "QlBhdGNoRW50cnkaQQoOQnBUYXNrTWFwRW50cnkSCwoDa2V5GAEgASgFEh4K",
+            "BXZhbHVlGAIgASgLMg8ucmF3ZGF0YS5CcFRhc2s6AjgBGk0KEEJwVGFza01h",
+            "cEFCRW50cnkSCwoDa2V5GAEgASgJEigKBXZhbHVlGAIgASgLMhkucmF3ZGF0",
+            "YS5CcFRhc2tNYXBBQlZhbHVlOgI4ARpSChVCcFRhc2tNYXBBQlBhdGNoRW50",
+            "cnkSCwoDa2V5GAEgASgJEigKBXZhbHVlGAIgASgLMhkucmF3ZGF0YS5CcFRh",
+            "c2tNYXBBQlZhbHVlOgI4AUI9Wi1naXRsYWIuZnVucGx1cy5pby9mYXQvY29u",
+            "Zi9nZW4vZ29sYW5nL3Jhd2RhdGGqAgtmYXQucmF3ZGF0YWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::fat.rawdata.BpTaskTypeReflection.Descriptor, },
+          new pbr::FileDescriptor[] { global::fat.rawdata.TaskTypeReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.BpTask), global::fat.rawdata.BpTask.Parser, new[]{ "Id", "Parameter", "Reward", "Sort", "TaskDesc", "TaskIcon", "TaskType" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.BpTaskMapABValue), global::fat.rawdata.BpTaskMapABValue.Parser, new[]{ "BpTaskMap" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
@@ -199,13 +198,13 @@ namespace fat.rawdata {
 
     /// <summary>Field number for the "taskType" field.</summary>
     public const int TaskTypeFieldNumber = 7;
-    private global::fat.rawdata.BpTaskType taskType_ = global::fat.rawdata.BpTaskType.Order;
+    private global::fat.rawdata.TaskType taskType_ = global::fat.rawdata.TaskType.Coin;
     /// <summary>
     /// 任务类型
     /// BpTaskType@enum
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::fat.rawdata.BpTaskType TaskType {
+    public global::fat.rawdata.TaskType TaskType {
       get { return taskType_; }
       set {
         taskType_ = value;
@@ -244,7 +243,7 @@ namespace fat.rawdata {
       if (Sort != 0) hash ^= Sort.GetHashCode();
       if (TaskDesc.Length != 0) hash ^= TaskDesc.GetHashCode();
       if (TaskIcon.Length != 0) hash ^= TaskIcon.GetHashCode();
-      if (TaskType != global::fat.rawdata.BpTaskType.Order) hash ^= TaskType.GetHashCode();
+      if (TaskType != global::fat.rawdata.TaskType.Coin) hash ^= TaskType.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -281,7 +280,7 @@ namespace fat.rawdata {
         output.WriteRawTag(42);
         output.WriteString(TaskIcon);
       }
-      if (TaskType != global::fat.rawdata.BpTaskType.Order) {
+      if (TaskType != global::fat.rawdata.TaskType.Coin) {
         output.WriteRawTag(56);
         output.WriteEnum((int) TaskType);
       }
@@ -318,7 +317,7 @@ namespace fat.rawdata {
         output.WriteRawTag(42);
         output.WriteString(TaskIcon);
       }
-      if (TaskType != global::fat.rawdata.BpTaskType.Order) {
+      if (TaskType != global::fat.rawdata.TaskType.Coin) {
         output.WriteRawTag(56);
         output.WriteEnum((int) TaskType);
       }
@@ -353,7 +352,7 @@ namespace fat.rawdata {
       if (TaskIcon.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(TaskIcon);
       }
-      if (TaskType != global::fat.rawdata.BpTaskType.Order) {
+      if (TaskType != global::fat.rawdata.TaskType.Coin) {
         size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) TaskType);
       }
       if (_unknownFields != null) {
@@ -385,7 +384,7 @@ namespace fat.rawdata {
       if (other.TaskIcon.Length != 0) {
         TaskIcon = other.TaskIcon;
       }
-      if (other.TaskType != global::fat.rawdata.BpTaskType.Order) {
+      if (other.TaskType != global::fat.rawdata.TaskType.Coin) {
         TaskType = other.TaskType;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
@@ -423,7 +422,7 @@ namespace fat.rawdata {
             break;
           }
           case 56: {
-            TaskType = (global::fat.rawdata.BpTaskType) input.ReadEnum();
+            TaskType = (global::fat.rawdata.TaskType) input.ReadEnum();
             break;
           }
           case 64: {
@@ -465,7 +464,7 @@ namespace fat.rawdata {
             break;
           }
           case 56: {
-            TaskType = (global::fat.rawdata.BpTaskType) input.ReadEnum();
+            TaskType = (global::fat.rawdata.TaskType) input.ReadEnum();
             break;
           }
           case 64: {

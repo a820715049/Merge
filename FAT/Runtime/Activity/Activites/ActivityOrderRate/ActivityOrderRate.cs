@@ -340,11 +340,11 @@ namespace FAT
                 trail.transform.position = view.transform.position;
                 trail.SetActive(true);
                 var script = trail.GetOrAddComponent<MBAutoRelease>();
+                script.Setup(trail_res_key, 3f);
                 var animator = trail.transform.Find("Icon").GetComponent<Animator>();
                 animator.SetInteger("State", 0);
                 var icon = trail.transform.Find("Icon").GetComponent<UIImageRes>();
-                icon.SetImage(Game.Manager.configMan.GetEventOrderRateBoxConfig(curShowPhase).OrderInfo);
-                script.Setup(trail_res_key, 3f);
+                icon.SetImage(Game.Manager.configMan.GetEventOrderRateBoxConfig(curShowPhase == 0 ? 1 : curShowPhase).OrderInfo);
                 trail.transform.Find("particle").gameObject.SetActive(false);
 
                 IEnumerator par()

@@ -58,7 +58,7 @@ namespace FAT
             mDataHolder.activeOrderList.Clear();
             foreach (var rec in records)
             {
-                mDataHolder.activeOrderList.Add(OrderUtility.MakeOrderByRecord(rec));
+                mDataHolder.activeOrderList.Add(OrderUtility.MakeOrderByRecord(rec, _helper));
             }
         }
 

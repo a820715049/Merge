@@ -30,8 +30,6 @@ namespace FAT
         public class UI_NEWLY_FINISHED_ORDER_SHOW : MessageBase<Transform> { } // 订单transform
         public class UI_ORDER_REQUEST_SCROLL : MessageBase<Transform> { } // 订单transform
         public class BOARD_AREA_ADAPTER_COMPLETE : MessageBase<float> { }
-        public class GAME_ORDER_TOKEN_MULTI_BEGIN : MessageBase<Merge.Item> { }
-        public class GAME_ORDER_TOKEN_MULTI_END : MessageBase { }
 
         #endregion
 
@@ -244,7 +242,7 @@ namespace FAT
         public class UI_JUMP_TO_ALBUM_MAIN_VIEW : MessageBase { }    //通知卡册界面返回主视图
         public class UI_GIVE_CARD_SUCCESS : MessageBase { }     //赠送卡片成功时
         public class UI_PULL_PENDING_CARD_INFO_SUCCESS : MessageBase { }   //拉取服务器发来的待收取卡片信息成功
-        public class GAME_CARD_ADD : MessageBase { }
+        public class GAME_CARD_ADD : MessageBase<CardData> { }
 
         #endregion
 
@@ -272,12 +270,6 @@ namespace FAT
         public class SCORE_ADD_DEBUG : MessageBase { }    //积分活动debug gm add score
         public class ACTIVITY_ENTRY_LAYOUT_REFRESH : MessageBase { }    //棋盘活动入口布局刷新
         public class BOARD_FLY_TEXT : MessageBase<Item, int, string> { }    //灯泡/特殊道具 飘字
-        #endregion
-
-        #region 积分活动变种(麦克风版)
-
-        public class SCORE_MIC_NUM_ADD : MessageBase<int, int> { }    // 积分数量增加
-
         #endregion
 
         #region 寻宝
@@ -494,6 +486,10 @@ namespace FAT
         public class GAME_SIGN_IN_CLICK : MessageBase { }
         #endregion
 
+        #region 七天任务
+        public class SEVEN_DAY_TASK_UPDATE : MessageBase { }
+        #endregion
+
         #region 农场棋盘
         public class FARM_BOARD_TOKEN_CHANGE : MessageBase { }    // 农场棋盘Token数量改变
         public class UI_FARM_BOARD_UNLOCK_ITEM : MessageBase<Item> { } // 农场盘棋子在图鉴中第一次解锁时发消息(用于界面表现)
@@ -571,6 +567,17 @@ namespace FAT
         public class MULTIPLY_RANKING_ENTRY_REFRESH_RED_DOT : MessageBase { }    // 倍率排行入口刷新红点
         public class MULTIPLY_RANKING_BLOCK_ENTRY_UPDATE : MessageBase { }
         public class MULTIPLY_RANKING_RANKING_CHANGE : MessageBase { }
+        #endregion
+
+        #region 任务统计
+        public class TASK_UPDATE : MessageBase<TaskType, int> { }
+        public class TASK_PAY_SUCCESS : MessageBase { }
+        public class TASK_BUILD_UPGRADE : MessageBase { }
+        public class TASK_COMPLETE_DAILY_TASK : MessageBase { }
+        public class TASK_RACE_WIN : MessageBase { }
+        public class TASK_SCORE_DUEL_WIN : MessageBase { }
+        public class TASK_FARM_TOKEN_COST : MessageBase { }
+        public class TASK_ACTIVITY_TOKEN_USE : MessageBase<int, int> { }
         #endregion
     }
 }

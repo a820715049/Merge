@@ -39,6 +39,7 @@ namespace FAT
                 EventType.Puzzle => (feature.IsFeatureEntryUnlocked(FeaturePuzzle), rf),
                 EventType.ScoreDuel => (feature.IsFeatureEntryUnlocked(FeatureScoreDuel), rf),
                 EventType.WishUpon => (feature.IsFeatureEntryUnlocked(FeatureWishUpon), rf),
+                EventType.Online => (feature.IsFeatureEntryUnlocked(FeatureOnline), rf),
                 EventType.WeeklyTask => (feature.IsFeatureEntryUnlocked(FeatureWeeklyTask), rf),
                 EventType.CastleMilestone => (feature.IsFeatureEntryUnlocked(FeatureCastleMilestone), rf),
                 EventType.OrderRate => (feature.IsFeatureEntryUnlocked(FeatureOrderRate), rf),
@@ -52,7 +53,8 @@ namespace FAT
                 EventType.MultiplierRanking => (feature.IsFeatureEntryUnlocked(FeatureMultiplierRanking), rf),
                 EventType.FrozenItem => (feature.IsFeatureEntryUnlocked(FeatureFrozenItem), rf),
                 EventType.TrainMission => (feature.IsFeatureEntryUnlocked(FeatureTrainMission), rf),
-                EventType.MicMilestone => (feature.IsFeatureEntryUnlocked(FeatureMicMilestone), rf),
+                EventType.LimitMerge => (feature.IsFeatureEntryUnlocked(FeatureLimitMerge), rf),
+                EventType.SevenDayTask => (feature.IsFeatureEntryUnlocked(FeatureSevenDayTask), rf),
                 _ => (true, null),
             };
         }
@@ -83,6 +85,7 @@ namespace FAT
                 EventType.Puzzle => new ActivityPuzzle(lite_),
                 EventType.ScoreDuel => new ActivityDuel(lite_),
                 EventType.WishUpon => new ActivityWishUpon(lite_),
+                EventType.Online => new ActivityOnlineReward(lite_),
                 EventType.WeeklyTask => new ActivityWeeklyTask(lite_),
                 EventType.CastleMilestone => new ActivityCastle(lite_),
                 EventType.OrderRate => new ActivityOrderRate(lite_),
@@ -97,7 +100,8 @@ namespace FAT
                 EventType.MultiplierRanking => new ActivityMultiplierRanking(lite_),
                 EventType.FrozenItem => new ActivityFrozenItem(lite_),
                 EventType.TrainMission => new TrainMissionActivity(lite_),
-                EventType.MicMilestone => new ActivityScoreMic(lite_),
+                EventType.LimitMerge => new ActivityLimitMergeOrder(lite_),
+                EventType.SevenDayTask => new ActivitySevenDayTask(lite_),
                 _ => null,
             };
     }

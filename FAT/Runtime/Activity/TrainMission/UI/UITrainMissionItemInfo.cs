@@ -16,6 +16,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UI.Extensions;
 
+
 namespace FAT
 {
     public class UITrainMissionItemInfo : UIBase

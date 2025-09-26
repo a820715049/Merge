@@ -202,41 +202,6 @@ namespace FAT.Merge
             }
             return false;
         }
-        
-        //检测棋盘上的棋子是否含有ActivityToken组件，且持有的tokenId可以被翻倍
-        public static bool CheckSourceCanTokenMulti(ItemTokenMultiComponent tokenMultiComp, Item checkItem)
-        {
-            if (checkItem.TryGetItemComponent(out ItemActivityTokenComponent activityToken))
-            {
-                var tokenList = tokenMultiComp.config.Token;
-                if (activityToken.CanShow_BL)
-                {
-                    foreach (var tokenId in tokenList)
-                    {
-                        if (activityToken.TokenId_BL == tokenId)
-                            return true;
-                    }
-                }
-            }
-            return false;
-        }
-        
-        //检查指定token是否可被加倍
-        public static bool CheckTokenCanMulti(ItemTokenMultiComponent tokenMultiComp, int checkTokenId)
-        {
-            if (tokenMultiComp == null || checkTokenId <= 0)
-                return false;
-            var tokenList = tokenMultiComp.config.Token;
-            if (tokenList != null)
-            {
-                foreach (var tokenId in tokenList)
-                {
-                    if (checkTokenId == tokenId)
-                        return true;
-                }
-            }
-            return false;
-        }
 
         public static bool CanConsumeAny(Item itemA, Item itemB, out Item consume, out Item dst)
         {
@@ -648,7 +613,6 @@ namespace FAT.Merge
                     (!item.HasComponent(ItemComponentType.Bubble)) &&         //bubble item cann't in inventory
                     (!item.HasComponent(ItemComponentType.OrderBox)) &&       //OrderBox item cann't in inventory
                     (!item.HasComponent(ItemComponentType.JumpCD)) &&       //jump cd item cann't in inventory
-                    (!item.HasComponent(ItemComponentType.TokenMulti)) &&       //token multi item cann't in inventory
                     item.isActive && !isLightbulb;                                    //inactive item cann't in inventory
             if (ret)
             {
@@ -772,11 +736,6 @@ namespace FAT.Merge
             {
                 // <跳过冷却>仅显示这句话
                 return I18N.Text("#SysComDesc278");
-            }
-            else if (item.HasComponent(ItemComponentType.TokenMulti))
-            {
-                // <活动Token翻倍>仅显示这句话
-                return I18N.Text("#SysComDesc1716");
             }
             else if (item.TryGetItemComponent(out ItemSkillComponent compSkill))
             {

@@ -115,8 +115,11 @@ namespace FAT
                 }
                 if (coin.GetValue() >= m_amount)
                 {
-                    //钻石金额达到全局表里的配置值，弹出钻石二级弹窗
-                    if (m_type == CoinType.Gem && m_whenSuccess != null && m_amount >= Game.Manager.configMan.globalConfig.SpdGemTips)
+                    //钻石金额达到全局表里的配置值，且开关开启时，弹出钻石二级弹窗
+                    if (m_type == CoinType.Gem
+                    && m_whenSuccess != null
+                    && m_amount >= Game.Manager.configMan.globalConfig.SpdGemTips
+                    && Game.Manager.featureUnlockMan.IsFeatureEntryUnlocked(FeatureEntry.FeatureGemVerify))
                     {
                         // 弹出窗口事件拆分成消费逻辑和成功回调
                         // 成功回调每个地方都不一样，而消耗钻石的逻辑是统一的

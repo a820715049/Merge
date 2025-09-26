@@ -108,7 +108,7 @@ namespace FAT
             recentPayDffyList.AddRange(data.RecentPayDffy);
             recentStrategy = data.RecentStrategy;
             if (data.RecentApiOrder != null)
-                recentApiOrder = OrderUtility.MakeOrderByRecord(data.RecentApiOrder);
+                recentApiOrder = OrderUtility.MakeOrderByRecord(data.RecentApiOrder, orderHelper);
 
             recentApiActDffyList.AddRange(data.RecentApiActDffy);
             recentApiPayDffyList.AddRange(data.RecentApiPayDffy);
@@ -174,6 +174,11 @@ namespace FAT
         public IOrderProvider GetProvider(OrderProviderType type)
         {
             return orderProviders[type];
+        }
+
+        public OrderRandomer GetRandomerSlotConf(int slotId)
+        {
+            return (orderProviders[OrderProviderType.Random] as OrderProviderRandom).GetSlotConf(slotId);
         }
 
         public bool TryFinishOrder(IOrderData order, ICollection<RewardCommitData> rewards)

@@ -25,7 +25,7 @@ namespace fat.rawdata {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "CiNyYXdkYXRhL0d1aWRlTWVyZ2VSZXF1aXJlVHlwZS5wcm90bxIHcmF3ZGF0",
-            "YSqrCAoVR3VpZGVNZXJnZVJlcXVpcmVUeXBlEgsKB1Vpc3RhdGUQABINCglC",
+            "YSq5CAoVR3VpZGVNZXJnZVJlcXVpcmVUeXBlEgsKB1Vpc3RhdGUQABINCglC",
             "b2FyZEl0ZW0QARIUChBPcmRlckNvbW1pdHRhYmxlEAISEQoNT3JkZXJDb21w",
             "bGV0ZRADEg4KCkNhbkxldmVsVXAQBBIPCgtCb2FyZFJld2FyZBAFEg4KClNl",
             "bGVjdEl0ZW0QBhIPCgtDb2xsZWN0SXRlbRAHEgkKBUxldmVsEAgSDwoLSXNs",
@@ -48,9 +48,9 @@ namespace fat.rawdata {
             "Cg9GaXJzdEZpc2hVbmxvY2sQLRITCg9EZWNvcmF0ZVByZXZpZXcQLhINCglT",
             "dG9ja0l0ZW0QLxIRCg1MZXZlbENhbkJvb3N0EDASGAoUQ2xhd09yZGVyUGlj",
             "a1N1Y2Nlc3MQMRIZChVNaW5lQ2FydFJvdW5kQ29tcGxldGUQMhITCg9UcmFp",
-            "blNwYXduZXJOdW0QMxIVChFGcm96ZW5JdGVtT25Cb2FyZBA0Qj1aLWdpdGxh",
-            "Yi5mdW5wbHVzLmlvL2ZhdC9jb25mL2dlbi9nb2xhbmcvcmF3ZGF0YaoCC2Zh",
-            "dC5yYXdkYXRhYgZwcm90bzM="));
+            "blNwYXduZXJOdW0QMxIVChFGcm96ZW5JdGVtT25Cb2FyZBA0EgwKCFZpbmVM",
+            "ZWFwEDVCPVotZ2l0bGFiLmZ1bnBsdXMuaW8vZmF0L2NvbmYvZ2VuL2dvbGFu",
+            "Zy9yYXdkYXRhqgILZmF0LnJhd2RhdGFiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::fat.rawdata.GuideMergeRequireType), }, null, null));
@@ -113,6 +113,7 @@ namespace fat.rawdata {
     [pbr::OriginalName("MineCartRoundComplete")] MineCartRoundComplete = 50,
     [pbr::OriginalName("TrainSpawnerNum")] TrainSpawnerNum = 51,
     [pbr::OriginalName("FrozenItemOnBoard")] FrozenItemOnBoard = 52,
+    [pbr::OriginalName("VineLeap")] VineLeap = 53,
   }
 
   #endregion

@@ -24,7 +24,7 @@ namespace fat.rawdata {
     static FeatureEntryReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChpyYXdkYXRhL0ZlYXR1cmVFbnRyeS5wcm90bxIHcmF3ZGF0YSq1EwoMRmVh",
+            "ChpyYXdkYXRhL0ZlYXR1cmVFbnRyeS5wcm90bxIHcmF3ZGF0YSrsFAoMRmVh",
             "dHVyZUVudHJ5Eg8KC0ZlYXR1cmVOb25lEAASEwoPRmVhdHVyZUl0ZW1TYWxl",
             "EAESEgoORmVhdHVyZUJhZ0l0ZW0QAhIWChJGZWF0dXJlQmFnUHJvZHVjZXIQ",
             "AxISCg5GZWF0dXJlQmFnVG9vbBAEEhEKDUZlYXR1cmVCdWJibGUQBRIVChFG",
@@ -80,8 +80,12 @@ namespace fat.rawdata {
             "a2lwUmFuZG9tQ2hlc3QQZxIXChNGZWF0dXJlU2tpcENhcmRQYWNrEGgSFwoT",
             "RmVhdHVyZU1pY01pbGVzdG9uZRBpEhIKDkZlYXR1cmVTZWFSYWNlEGoSEwoP",
             "RmVhdHVyZVZpbmVMZWFwEGsSHwobRmVhdHVyZUNvbW11bml0eVNldHRpbmdz",
-            "UmVkEGxCPVotZ2l0bGFiLmZ1bnBsdXMuaW8vZmF0L2NvbmYvZ2VuL2dvbGFu",
-            "Zy9yYXdkYXRhqgILZmF0LnJhd2RhdGFiBnByb3RvMw=="));
+            "UmVkEGwSFwoTRmVhdHVyZUluZGVwZW5CaW5nbxBtEhcKE0ZlYXR1cmVDYXRl",
+            "Z3JveUluZm8QbhIYChRGZWF0dXJlVGFwU291cmNlSW5mbxBvEhgKFEZlYXR1",
+            "cmVNb25vcG9seUJvYXJkEHASHQoZRmVhdHVyZU1vbm9wb2x5T25lUGx1c09u",
+            "ZRBxEhoKFkZlYXR1cmVXZWJzaG9wRW50cmFuY2UQchIUChBGZWF0dXJlVGlj",
+            "a2V0VXNlEHNCPVotZ2l0bGFiLmZ1bnBsdXMuaW8vZmF0L2NvbmYvZ2VuL2dv",
+            "bGFuZy9yYXdkYXRhqgILZmF0LnJhd2RhdGFiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::fat.rawdata.FeatureEntry), }, null, null));
@@ -527,6 +531,34 @@ namespace fat.rawdata {
     /// 社群引流设置页入口红点
     /// </summary>
     [pbr::OriginalName("FeatureCommunitySettingsRed")] FeatureCommunitySettingsRed = 108,
+    /// <summary>
+    /// 独立棋盘棋子bingo
+    /// </summary>
+    [pbr::OriginalName("FeatureIndepenBingo")] FeatureIndepenBingo = 109,
+    /// <summary>
+    /// 棋子数量显示与定位
+    /// </summary>
+    [pbr::OriginalName("FeatureCategroyInfo")] FeatureCategroyInfo = 110,
+    /// <summary>
+    /// 生成器定位提示
+    /// </summary>
+    [pbr::OriginalName("FeatureTapSourceInfo")] FeatureTapSourceInfo = 111,
+    /// <summary>
+    /// 大富翁棋盘
+    /// </summary>
+    [pbr::OriginalName("FeatureMonopolyBoard")] FeatureMonopolyBoard = 112,
+    /// <summary>
+    /// 大富翁棋盘1+1礼包
+    /// </summary>
+    [pbr::OriginalName("FeatureMonopolyOnePlusOne")] FeatureMonopolyOnePlusOne = 113,
+    /// <summary>
+    /// WebShop跳转功能
+    /// </summary>
+    [pbr::OriginalName("FeatureWebshopEntrance")] FeatureWebshopEntrance = 114,
+    /// <summary>
+    /// WebShop支付代币ticket使用功能
+    /// </summary>
+    [pbr::OriginalName("FeatureTicketUse")] FeatureTicketUse = 115,
   }
 
   #endregion

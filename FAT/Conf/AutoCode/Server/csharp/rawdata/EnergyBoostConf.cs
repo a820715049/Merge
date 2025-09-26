@@ -61,7 +61,7 @@ namespace fat.rawdata {
   /// <summary>
   /// annotation@annotation_type(type="rawdata")
   /// annotation@rawdata(row="EnergyBoost",table="EnergyBoostMap",table_wrapper="EnergyBoostConf",map="true",map_key_type="int32",data="EnergyBoostConf")
-  /// annotation@ab(table_ab="EnergyBoostMapAB",table_ab_patch="EnergyBoostMapABPatch",table_ab_value="EnergyBoostMapABValue",ab_patch="true")
+  /// annotation@ab(table_ab="EnergyBoostMapAB",table_ab_patch="EnergyBoostMapABPatch",table_ab_value="EnergyBoostMapABValue",ab_patch="false")
   /// annotation@filter(just_server="false",just_client="false")
   /// annotation@EnergyBoost(id="id")
   /// </summary>
@@ -190,7 +190,7 @@ namespace fat.rawdata {
     /// <summary>
     /// 是否被动启用
     /// TRUE：
-    /// 需要被活动启用
+    /// 适用activeLv，且需要被活动启用
     /// FALSE：
     /// 可以直接根据activeLv开启
     /// （由于目前2、4倍没有对于此字段的需求，后面有需求了再加实现逻辑）

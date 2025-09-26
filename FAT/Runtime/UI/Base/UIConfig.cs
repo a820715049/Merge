@@ -113,6 +113,7 @@ namespace FAT
         public static UIResource UIGemSecondConfirm = new UIResource("UIGemSecondConfirm.prefab", SubStatus, "fat_global").SupportNavBack();
         public static UIResource UIActivityWishUponMain = new UIResource("UIActivityWishUponMain.prefab", AboveStatus, "event_wishupon_default");
         public static UIResource UIFrozenItemHelp = new UIResource("UIFrozenItemHelp.prefab", AboveStatus, "event_frozen_item");
+        public static UIResource UIActivityOnlineRewardMain = new UIResource("UIActivityOnlineRewardMain.prefab", AboveStatus, "event_online_default");
         #region 卡册系统相关界面
 
         //debug 模拟抽卡界面
@@ -184,16 +185,16 @@ namespace FAT
         public static UIResource UIScoreFinish_Track = new UIResource("UIScoreFinish_track.prefab", AboveStatus, "event_score_track").SupportNavBack();
         public static UIResource UIScoreFinish_Piece = new UIResource("UIScoreFinish_piece.prefab", AboveStatus, "event_score_piece").SupportNavBack();
         #endregion
-        
-        #region 新积分活动-合成音符
-        public static UIResource UIScoreConvert_Mic = new UIResource("UIScoreConvert_Mic.prefab", AboveStatus, "event_score_mic").AllowHideUI();
-        public static UIResource UIScore_Mic = new UIResource("UIScore_mic.prefab", UILayer.AboveStatus, "event_score_mic").SupportNavBack().AllowHideUI();
-        public static UIResource UIMicInfo = new UIResource("UIMicTips.prefab", SubStatus, "event_score_mic").SupportNavBack().AllowHideUI();
-        #endregion
 
         #region 订单额外奖励活动
 
         public static UIResource UIOrderExtra = new UIResource("UIOrderExtra.prefab", AboveStatus, "fat_global").SupportNavBack().AllowHideUI();
+
+        #endregion
+
+        #region 自选限时订单
+        
+        public static UIResource UIOrderDiffchoice = new UIResource("UIOrderDiffchoice.prefab", AboveStatus, "event_orderdiffchoice_default");
 
         #endregion
 
@@ -214,7 +215,7 @@ namespace FAT
         public static UIResource UIDecorateRestartNotice = new UIResource("UIDecorateRestartNotice.prefab", AboveStatus, "event_decorate_common").AllowHideUI();
         public static UIResource UIDecorateEnd = new UIResource("UIDecorateEnd.prefab", AboveStatus, "event_decorate_common").AllowHideUI();
         public static UIResource UIDecorateRes = new UIResource("UIDecorateRes.prefab", SubStatus, "event_decorate_common").IgnoreNavBack();
-        public static UIResource UIDecorateOverview = new UIResource("UIDecorateOverview.prefab", SubStatus, "event_decorate_common");
+        public static UIResource UIDecorateOverview = new UIResource("UIDecorateOverview.prefab", SubStatus, "event_decorate_common").AllowHideUI(true, true);
 
         #endregion
 
@@ -384,7 +385,7 @@ namespace FAT
         public static UIResource UITrainMissionPreview = new UIResource("UITrainMissionPreview_s001.prefab", SubStatus, "event_trainmission_s001").SupportNavBack();
         public static UIResource UITrainMissionItemInfo = new UIResource("UITrainMissionItemInfo_s001.prefab", SubStatus, "event_trainmission_s001");
         public static UIResource UITrainMissionReward = new UIResource("UITrainMissionReward_s001.prefab", SubStatus, "event_trainmission_s001");
-        public static UIResource UITrainMissionBag = new UIResource("UITrainMissionBag.prefab", SubStatus, "event_trainmission_default");
+        public static UIResource UITrainMissionBag = new UIResource("UITrainMissionBag.prefab", AboveStatus, "event_trainmission_default");
         public static UIResource UITrainMissionCompleteOrderBag = new UIResource("UITrainMissionCompleteOrderBag.prefab", SubStatus, "event_trainmission_default");
         public static UIResource UITrainMissionRecycleReward = new UIResource("UITrainMissionRecycleReward_s001.prefab", SubStatus, "event_trainmission_s001");
         #endregion
@@ -585,6 +586,13 @@ namespace FAT
         public static UIResource UIMultiplyRankingMilestone = new UIResource("UIMultiplyRankingMilestone.prefab", SubStatus, "event_multiplyranking_default").SupportNavBack();
         public static UIResource UIRankingEntryTips = new UIResource("UIRankingEntryTips.prefab", SubStatus, "event_multiplyranking_default").SupportNavBack().IsTips();
         public static UIResource UIRankingTurntableTips = new UIResource("UIRankingTurntableTips.prefab", SubStatus, "event_multiplyranking_default").SupportNavBack().IsTips();
+        #endregion
+
+        #region 七天
+        public static UIResource UISevenDayTaskPanel = new UIResource("UISevenDayTaskPanel.prefab", AboveStatus, "event_sevendaytask_default");
+        public static UIResource UISevenDayTaskEntry = new UIResource("UISevenDayTaskEntry.prefab", AboveStatus, "event_sevendaytask_default");
+        public static UIResource UISevenDayTaskTips = new UIResource("UISevenDayTaskTips.prefab", SubStatus, "event_sevendaytask_default").IsTips().SupportNavBack();
+        public static UIResource UISevenDayTaskEnd = new UIResource("UISevenDayTaskConvert.prefab", SubStatus, "event_sevendaytask_default");
         #endregion
     }
 }

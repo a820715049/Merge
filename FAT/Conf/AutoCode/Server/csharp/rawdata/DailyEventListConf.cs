@@ -67,7 +67,7 @@ namespace fat.rawdata {
   /// <summary>
   /// annotation@annotation_type(type="rawdata")
   /// annotation@rawdata(row="DailyEventList",table="DailyEventListMap",table_wrapper="DailyEventListConf",map="true",map_key_type="int32",data="DailyEventListConf")
-  /// annotation@ab(table_ab="DailyEventListMapAB",table_ab_patch="DailyEventListMapABPatch",table_ab_value="DailyEventListMapABValue",ab_patch="true")
+  /// annotation@ab(table_ab="DailyEventListMapAB",table_ab_patch="DailyEventListMapABPatch",table_ab_value="DailyEventListMapABValue",ab_patch="false")
   /// annotation@filter(just_server="false",just_client="false")
   /// annotation@DailyEventList(id="id")
   /// </summary>

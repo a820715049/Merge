@@ -255,7 +255,7 @@ namespace FAT
         public bool OnPreUpdate(OrderData order, IOrderHelper helper, MergeWorldTracer tracer)
         {
             var changed = false;
-            if ((order as IOrderData).IsMagicHour) { return changed; }
+            if (order == null || order.ConfRandomer == null || !order.ConfRandomer.IsExtraScore) { return changed; }
             var state = order.GetState((int)OrderParamType.ScoreEventId);
             if (state == null || state.Value != Id)
             {
@@ -283,7 +283,7 @@ namespace FAT
         }
 
         /// <summary>
-        /// 初始化活动基本配置信息 
+        /// 初始化活动基本配置信息
         /// </summary>
         private void _InitConf() => conf = fat.conf.MultiRankVisitor.Get(Lite.Param);
 

@@ -68,6 +68,9 @@ namespace FAT
         public void PlayCompleteAnimation()
         {
             check.gameObject.SetActive(true);
+            cur.gameObject.SetActive(false);
+            goal.gameObject.SetActive(false);
+            done.gameObject.SetActive(true);
             animatorComplete.SetTrigger("Punch");
         }
     }

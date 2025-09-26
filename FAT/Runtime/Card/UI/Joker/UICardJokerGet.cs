@@ -48,13 +48,12 @@ namespace FAT
 
         private void _OnBtnClaim()
         {
-            Game.Manager.specialRewardMan.TryFinishSpecialReward(ObjConfigType.CardJoker, curShowJokerId);
             Close();
         }
         
         protected override void OnPostClose()
         {
-            Game.Manager.specialRewardMan.TryDisplaySpecialReward();
+            Game.Manager.specialRewardMan.OnSpecialRewardUIClosed(ObjConfigType.CardJoker, curShowJokerId);
         }
     }
 }

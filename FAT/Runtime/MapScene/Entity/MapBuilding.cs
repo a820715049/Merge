@@ -401,6 +401,7 @@ namespace FAT
             SetupByLevel(level, phase, upgrade_: true);
             DataTracker.TraceUser().MetaUpdate().Apply();
             Refresh(upgrade_: true);
+            Get<MSG.TASK_BUILD_UPGRADE>().Dispatch();
         }
 
         internal void PrepareUpgrade()

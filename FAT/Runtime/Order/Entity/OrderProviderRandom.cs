@@ -181,19 +181,9 @@ namespace FAT
                     mApiOrderSet.AddIfAbsent(cfg.Id);
             }
 
-            using var _ = PoolMapping.PoolMappingAccess.Borrow<Dictionary<int, OrderRandomer>>(out var dict);
-            foreach (var cfg in mDataHolder.orderConfigList)
-            {
-                dict.Add(cfg.Id, cfg);
-            }
-
             foreach (var rec in records)
             {
-                var order = OrderUtility.MakeOrderByRecord(rec);
-                if (dict.TryGetValue(order.Id, out var cfg))
-                {
-                    order.ConfRandomer = cfg;
-                }
+                var order = OrderUtility.MakeOrderByRecord(rec, _helper);
                 mDataHolder.activeOrderList.Add(order);
             }
         }
@@ -266,6 +256,16 @@ namespace FAT
                 _RefreshOrderList();
             }
         }
+
+        public OrderRandomer GetSlotConf(int slotId)
+        {
+            if (mDataHolder.orderConfigDict.TryGetValue(slotId, out var cfg))
+            {
+                return cfg;
+            }
+            return null;
+        }
+
 
         // 此订单是否被配置为<受控订单>
         public bool IsCtrledOrder(IOrderData order)
@@ -788,9 +788,6 @@ namespace FAT
             var newOrder = OrderUtility.MakeOrderByConfig(mHelper, OrderProviderType.Random, cfg.Id, cfg.RoleId, cfg.DisplayLevel,
                                                             realDffyRound,
                                                             mCacheRequireId, reward);
-            // 记录conf
-            newOrder.ConfRandomer = cfg;
-
             // 随机订单需要记录pay难度(付出难度)
             newOrder.Record.Extra.Add(RecordStateHelper.ToRecord((int)OrderParamType.PayDifficulty, payDffy));
             // 随机订单需要记录act难度(实际难度)

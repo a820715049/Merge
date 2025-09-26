@@ -114,8 +114,6 @@ namespace FAT
             board.onUseTimeScaleSource += _OnUseTimeScaleSource;
             board.onJumpCDBegin += _OnJumpCDBegin;
             board.onJumpCDEnd += _OnJumpCDEnd;
-            board.onTokenMultiBegin += _OnTokenMultiBegin;
-            board.onTokenMultiEnd += _OnTokenMultiEnd;
             board.onChoiceBoxWaiting += _OnChoiceBoxWaiting;
 
             MessageCenter.Get<MSG.GAME_BACKGROUND_BACK>().AddListener(_OnMessageFocused);
@@ -155,8 +153,6 @@ namespace FAT
             board.onUseTimeScaleSource -= _OnUseTimeScaleSource;
             board.onJumpCDBegin -= _OnJumpCDBegin;
             board.onJumpCDEnd -= _OnJumpCDEnd;
-            board.onTokenMultiBegin -= _OnTokenMultiBegin;
-            board.onTokenMultiEnd -= _OnTokenMultiEnd;
             board.onChoiceBoxWaiting -= _OnChoiceBoxWaiting;
 
             MessageCenter.Get<MSG.GAME_BACKGROUND_BACK>().RemoveListener(_OnMessageFocused);
@@ -1760,60 +1756,6 @@ namespace FAT
                         if (itemView != null)
                         {
                             itemView.RefreshJumpCdState();
-                        }
-                    }
-                }
-            }
-        }
-        
-        private void _OnTokenMultiBegin(Item source)
-        {
-            if (!source.TryGetItemComponent<ItemTokenMultiComponent>(out var tokenMultiComp))
-                return;
-            var sourceItem = BoardViewManager.Instance.GetItemView(source.id);
-            sourceItem.RefreshTokenMultiState();
-
-            // 棋子可能正在从礼物盒拿出 效果延迟到棋子落地再处理
-            float delay = 0f;
-            if (!sourceItem.IsViewIdle())
-            {
-                delay = 0.7f;
-            }
-            //延迟播放首次生效时的背光特效
-            view.boardEffect.ShowTokenMultiStartEffect(sourceItem, delay);
-            Item item;
-            for (int i = 0; i < width; ++i)
-            {
-                for (int j = 0; j < height; j++)
-                {
-                    item = board.GetItemByCoord(i, j);
-                    if (item != null)
-                    {
-                        //检测棋盘上的棋子是否含有ActivityToken组件，且持有的tokenId可以被翻倍
-                        if (ItemUtility.CheckSourceCanTokenMulti(tokenMultiComp, item))
-                        {
-                            view.boardEffect.ShowTokenMultiEffect(source.coord, item.coord, item, delay);
-                        }
-                    }
-                }
-            }
-        }
-
-        private void _OnTokenMultiEnd()
-        {
-            Item item;
-            for (int i = 0; i < width; ++i)
-            {
-                for (int j = 0; j < height; j++)
-                {
-                    item = board.GetItemByCoord(i, j);
-                    if (item != null)
-                    {
-                        var itemView = BoardViewManager.Instance.GetItemView(item.id);
-                        if (itemView != null)
-                        {
-                            itemView.RefreshTokenMultiState();
-                            itemView.RefreshActivityTokenState();
                         }
                     }
                 }

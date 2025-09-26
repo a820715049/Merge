@@ -166,6 +166,8 @@ namespace FAT
 
             // 进游戏时尝试准备loading图
             MBGlobalLoading.Instance.loadingBg.TryPrepareLoadingImage();
+            //进游戏时尝试弹出在之前session中没有来的及解析的特殊奖励（如玩家杀端）
+            Game.Manager.specialRewardMan.TryPumpWhenLogin();
 
             DataTracker.game_start.Track();
             DataTracker.board_info.Track(Game.Manager.mainMergeMan.world.activeBoard);

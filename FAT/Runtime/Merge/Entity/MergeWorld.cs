@@ -29,7 +29,6 @@ namespace FAT.Merge
         ItemEventTrigAutoSource,
         ItemEventMoveToRewardBox,   //棋盘棋子移动到奖励箱
         ItemBubbleFrozenBreak,      //冰冻棋子过期时破碎
-        ItemEventTokenMultiActivate,//活动token翻倍棋子生效
     }
     public class MergeWorldParam
     {
@@ -84,7 +83,6 @@ namespace FAT.Merge
         public Board activeBoard => mBoard;
         public OrderBox orderBox => mOrderBox;
         public JumpCD jumpCD => mJumpCD;
-        public TokenMulti tokenMulti => mTokenMulti;
         public int currentWaitChest => mWaitChest;
         public int currentWaitChestTime => mWaitChestTime;
         public Item undoItem => mSoldItem;
@@ -109,7 +107,6 @@ namespace FAT.Merge
         private Inventory mInventory;
         private OrderBox mOrderBox;     // 订单随机礼盒
         private JumpCD mJumpCD;     // 跳过冷却
-        private TokenMulti mTokenMulti;     // 活动token翻倍
         private List<Item> mRewardList = new List<Item>();            //注意，越往后越优先
         private HashSet<ItemComponentType> mDisabledComponent = new HashSet<ItemComponentType>();
         private List<Item> mItemsToDispose = new List<Item>();
@@ -233,7 +230,6 @@ namespace FAT.Merge
             mBoard = new Board(this);
             mOrderBox = new OrderBox(this);
             mJumpCD = new JumpCD(this);
-            mTokenMulti = new TokenMulti(this);
             mLastTickMilli = Game.Instance.GetTimestamp();
             mMergeBonusHandlers.Add(new Merge.ConfigMergeBonusHandler());
             mMergeBonusHandlers.Add(new Merge.BubbleMergeBonusHandler());
@@ -292,11 +288,6 @@ namespace FAT.Merge
             {
                 // 销毁的是当前激活的<跳过冷却>棋子 需要强行结束当前跳过冷却状态
                 mJumpCD.ClearJumpCD();
-            }
-            else if (tokenMulti.activeTokenMultiId == item.id)
-            {
-                // 销毁的是当前激活的<token翻倍>棋子 需要强行结束当前翻倍状态
-                mTokenMulti.ClearTokenMulti();
             }
             else if (currentWaitChest == item.id)
             {
@@ -552,7 +543,6 @@ namespace FAT.Merge
             mInventory.Update(milli);
             mOrderBox.Update(milli);
             mJumpCD.Update(milli);
-            mTokenMulti.Update(milli);
 
             if (mItemsToDispose.Count > 0)
             {
@@ -671,31 +661,6 @@ namespace FAT.Merge
             }
             return false;
         }
-        
-        public bool OnTokenMultiItemExpired(int itemId)
-        {
-            var item = activeBoard.FindItemById(itemId);
-            if (item != null)
-            {
-                _DisposeItem(item, ItemDeadType.TokenMultiExpired);
-                DebugEx.FormatInfo("Merge::World::OnTokenMultiItemExpired ----> dispose tokenMulti {0}", item);
-                return true;
-            }
-            return false;
-        }
-
-        public bool UseTokenMultiItem(Item item)
-        {
-            if (mTokenMulti.TryActivateTokenMulti(item))
-            {
-                DataTracker.board_active.Track(item.tid);
-                activeBoard.TriggerTokenMultiBegin(item);
-                Env.Instance.NotifyItemEvent(item, ItemEventType.ItemEventTokenMultiActivate);
-                DebugEx.FormatInfo("Merge::World::UseTokenMultiItem ----> activate tokenMulti {0}", item);
-                return true;
-            }
-            return false;
-        }
 
         public BonusClaimRewardData CollectActivityEnergy(ItemActivityComponent com, Item disposeTarget)
         {
@@ -781,7 +746,6 @@ namespace FAT.Merge
             mInventory.Serialize(data);
             mOrderBox.Serialize(data);
             mJumpCD.Serialize(data);
-            mTokenMulti.Serialize(data);
 
             data.WaitChest = mWaitChest;
             data.WaitChestStart = (lastTickMilli - (long)mWaitChestTime) / 1000;
@@ -1133,8 +1097,6 @@ namespace FAT.Merge
 
             // jumpcd依赖棋盘上的item
             mJumpCD.Deserialize(data);
-            // TokenMulti依赖棋盘上的item
-            mTokenMulti.Deserialize(data);
         }
 
         public void SetRewardListRead()

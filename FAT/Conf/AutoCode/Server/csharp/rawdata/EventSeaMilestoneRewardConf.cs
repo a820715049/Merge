@@ -130,7 +130,7 @@ namespace fat.rawdata {
         = pb::FieldCodec.ForString(18);
     private readonly pbc::RepeatedField<string> reward_ = new pbc::RepeatedField<string>();
     /// <summary>
-    /// 回合奖励详情
+    /// 里程碑奖励详情
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<string> Reward {
@@ -141,7 +141,7 @@ namespace fat.rawdata {
     public const int RewardIconFieldNumber = 3;
     private string rewardIcon_ = "";
     /// <summary>
-    /// 回合奖励icon
+    /// 里程碑奖励icon
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public string RewardIcon {

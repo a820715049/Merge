@@ -24,7 +24,7 @@ namespace fat.rawdata {
     static GlobalConfReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChhyYXdkYXRhL0dsb2JhbENvbmYucHJvdG8SB3Jhd2RhdGEi7EIKBkdsb2Jh",
+            "ChhyYXdkYXRhL0dsb2JhbENvbmYucHJvdG8SB3Jhd2RhdGEiokMKBkdsb2Jh",
             "bBIaChJBY3Rpdml0eUNvbnN1bWVOdW0YASABKAUSFgoOQWN0aXZpdHlNYXhO",
             "dW0YAiABKAUSHQoVQW5udWFsU3VtbWFyeURlYWRsaW5lGAMgASgDEhoKEkJw",
             "R3JvdXBSYW5raW5nSGlkZRgEIAEoCBIbChNCcFJhbmtpbmdGcmllbmRIaWRl",
@@ -199,37 +199,39 @@ namespace fat.rawdata {
             "UmVtaW5kUG9wdXBJZBiLAiABKAUSGQoQdXNlclJlY29yZE1heERheRjUASAB",
             "KAUSHQoUdXNlclJlY29yZFJlZnJlc2hVdGMY1QEgASgFEhoKEXVzZXJSZWNv",
             "cmRXZWVrZGF5GNgBIAEoBRIQCgd2ZXJzaW9uGLoBIAEoBRIZChB3YWxsUGFw",
-            "ZXJEaXNwbGF5GLsBIAEoCRo8ChpBYkluZm9BdHRyaWJ1dGVEaXZpZGVFbnRy",
-            "eRILCgNrZXkYASABKAUSDQoFdmFsdWUYAiABKAk6AjgBGjIKEEJ1YmJsZUJv",
-            "bnVzRW50cnkSCwoDa2V5GAEgASgFEg0KBXZhbHVlGAIgASgFOgI4ARo0ChJE",
-            "YWlseVRhc2tOdW1zRW50cnkSCwoDa2V5GAEgASgFEg0KBXZhbHVlGAIgASgF",
-            "OgI4ARo2ChRGcmVlQnViYmxlQ291bnRFbnRyeRILCgNrZXkYASABKAUSDQoF",
-            "dmFsdWUYAiABKAU6AjgBGjoKGEZyZWVFbmVyZ3lDbGFpbVRpbWVFbnRyeRIL",
-            "CgNrZXkYASABKAUSDQoFdmFsdWUYAiABKAU6AjgBGj0KG0ZyZWVFbmVyZ3lO",
-            "b3RpZmljYXRpb25FbnRyeRILCgNrZXkYASABKAUSDQoFdmFsdWUYAiABKAU6",
-            "AjgBGjUKE0l0ZW1TY2FsZVRlc3RCRW50cnkSCwoDa2V5GAEgASgFEg0KBXZh",
-            "bHVlGAIgASgFOgI4ARo+ChxOZXdVc2VyR3JhbmRQcml6ZVJld2FyZEVudHJ5",
-            "EgsKA2tleRgBIAEoBRINCgV2YWx1ZRgCIAEoBToCOAEaPgocTmV3VXNlclJl",
-            "d2FyZEZvckludml0ZWVFbnRyeRILCgNrZXkYASABKAUSDQoFdmFsdWUYAiAB",
-            "KAU6AjgBGj4KHE5ld1VzZXJSZXdhcmRGb3JJbnZpdG9yRW50cnkSCwoDa2V5",
-            "GAEgASgFEg0KBXZhbHVlGAIgASgFOgI4ARo1ChNQdXNoU2hvcE1heE51bUVu",
-            "dHJ5EgsKA2tleRgBIAEoBRINCgV2YWx1ZRgCIAEoBToCOAEaNAoSVGFwU291",
-            "cmNlVGlwc0VudHJ5EgsKA2tleRgBIAEoBRINCgV2YWx1ZRgCIAEoBToCOAEi",
-            "OgoSR2xvYmFsU2xpY2VBQlZhbHVlEiQKC0dsb2JhbFNsaWNlGAEgAygLMg8u",
-            "cmF3ZGF0YS5HbG9iYWwi5QIKCkdsb2JhbENvbmYSJAoLR2xvYmFsU2xpY2UY",
-            "ASADKAsyDy5yYXdkYXRhLkdsb2JhbBI9Cg1HbG9iYWxTbGljZUFCGAIgAygL",
-            "MiYucmF3ZGF0YS5HbG9iYWxDb25mLkdsb2JhbFNsaWNlQUJFbnRyeRJHChJH",
-            "bG9iYWxTbGljZUFCUGF0Y2gYAyADKAsyKy5yYXdkYXRhLkdsb2JhbENvbmYu",
-            "R2xvYmFsU2xpY2VBQlBhdGNoRW50cnkaUQoSR2xvYmFsU2xpY2VBQkVudHJ5",
-            "EgsKA2tleRgBIAEoCRIqCgV2YWx1ZRgCIAEoCzIbLnJhd2RhdGEuR2xvYmFs",
-            "U2xpY2VBQlZhbHVlOgI4ARpWChdHbG9iYWxTbGljZUFCUGF0Y2hFbnRyeRIL",
-            "CgNrZXkYASABKAkSKgoFdmFsdWUYAiABKAsyGy5yYXdkYXRhLkdsb2JhbFNs",
-            "aWNlQUJWYWx1ZToCOAFCPVotZ2l0bGFiLmZ1bnBsdXMuaW8vZmF0L2NvbmYv",
-            "Z2VuL2dvbGFuZy9yYXdkYXRhqgILZmF0LnJhd2RhdGFiBnByb3RvMw=="));
+            "ZXJEaXNwbGF5GLsBIAEoCRIXCg53ZWJzaG9wQWRkcmVzcxiTAiABKAkSGwoS",
+            "d2Vic2hvcFNob3dQYXltZW50GJQCIAEoBRo8ChpBYkluZm9BdHRyaWJ1dGVE",
+            "aXZpZGVFbnRyeRILCgNrZXkYASABKAUSDQoFdmFsdWUYAiABKAk6AjgBGjIK",
+            "EEJ1YmJsZUJvbnVzRW50cnkSCwoDa2V5GAEgASgFEg0KBXZhbHVlGAIgASgF",
+            "OgI4ARo0ChJEYWlseVRhc2tOdW1zRW50cnkSCwoDa2V5GAEgASgFEg0KBXZh",
+            "bHVlGAIgASgFOgI4ARo2ChRGcmVlQnViYmxlQ291bnRFbnRyeRILCgNrZXkY",
+            "ASABKAUSDQoFdmFsdWUYAiABKAU6AjgBGjoKGEZyZWVFbmVyZ3lDbGFpbVRp",
+            "bWVFbnRyeRILCgNrZXkYASABKAUSDQoFdmFsdWUYAiABKAU6AjgBGj0KG0Zy",
+            "ZWVFbmVyZ3lOb3RpZmljYXRpb25FbnRyeRILCgNrZXkYASABKAUSDQoFdmFs",
+            "dWUYAiABKAU6AjgBGjUKE0l0ZW1TY2FsZVRlc3RCRW50cnkSCwoDa2V5GAEg",
+            "ASgFEg0KBXZhbHVlGAIgASgFOgI4ARo+ChxOZXdVc2VyR3JhbmRQcml6ZVJl",
+            "d2FyZEVudHJ5EgsKA2tleRgBIAEoBRINCgV2YWx1ZRgCIAEoBToCOAEaPgoc",
+            "TmV3VXNlclJld2FyZEZvckludml0ZWVFbnRyeRILCgNrZXkYASABKAUSDQoF",
+            "dmFsdWUYAiABKAU6AjgBGj4KHE5ld1VzZXJSZXdhcmRGb3JJbnZpdG9yRW50",
+            "cnkSCwoDa2V5GAEgASgFEg0KBXZhbHVlGAIgASgFOgI4ARo1ChNQdXNoU2hv",
+            "cE1heE51bUVudHJ5EgsKA2tleRgBIAEoBRINCgV2YWx1ZRgCIAEoBToCOAEa",
+            "NAoSVGFwU291cmNlVGlwc0VudHJ5EgsKA2tleRgBIAEoBRINCgV2YWx1ZRgC",
+            "IAEoBToCOAEiOgoSR2xvYmFsU2xpY2VBQlZhbHVlEiQKC0dsb2JhbFNsaWNl",
+            "GAEgAygLMg8ucmF3ZGF0YS5HbG9iYWwi5QIKCkdsb2JhbENvbmYSJAoLR2xv",
+            "YmFsU2xpY2UYASADKAsyDy5yYXdkYXRhLkdsb2JhbBI9Cg1HbG9iYWxTbGlj",
+            "ZUFCGAIgAygLMiYucmF3ZGF0YS5HbG9iYWxDb25mLkdsb2JhbFNsaWNlQUJF",
+            "bnRyeRJHChJHbG9iYWxTbGljZUFCUGF0Y2gYAyADKAsyKy5yYXdkYXRhLkds",
+            "b2JhbENvbmYuR2xvYmFsU2xpY2VBQlBhdGNoRW50cnkaUQoSR2xvYmFsU2xp",
+            "Y2VBQkVudHJ5EgsKA2tleRgBIAEoCRIqCgV2YWx1ZRgCIAEoCzIbLnJhd2Rh",
+            "dGEuR2xvYmFsU2xpY2VBQlZhbHVlOgI4ARpWChdHbG9iYWxTbGljZUFCUGF0",
+            "Y2hFbnRyeRILCgNrZXkYASABKAkSKgoFdmFsdWUYAiABKAsyGy5yYXdkYXRh",
+            "Lkdsb2JhbFNsaWNlQUJWYWx1ZToCOAFCPVotZ2l0bGFiLmZ1bnBsdXMuaW8v",
+            "ZmF0L2NvbmYvZ2VuL2dvbGFuZy9yYXdkYXRhqgILZmF0LnJhd2RhdGFiBnBy",
+            "b3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.Global), global::fat.rawdata.Global.Parser, new[]{ "ActivityConsumeNum", "ActivityMaxNum", "AnnualSummaryDeadline", "BpGroupRankingHide", "BpRankingFriendHide", "BpRankingHide", "BpRankingWorldHide", "Bpiconovertip1", "Bpiconovertip2", "CardShopRedRefreshUtc", "ClientHttpContinue", "ClientHttpTimeout", "DropProbability", "EventRoleShowAmount", "EventRoleShowLimitation", "FBCommunityWebsite", "GroupRankingHide", "GuildAnnouncementLimit", "GuildApplyCd", "GuildApplyExpireDay", "GuildApplyLimit", "GuildCreatePrice", "GuildJoinCd", "GuildKickoutLimitation", "GuildLeaderInactionDuration", "GuildListNum", "GuildMemberNum", "GuildModifyNamePrice", "GuildNameInvalidChar", "GuildNameLenMax", "GuildNameLenMin", "GuildRefreshInterval", "HobbitsName", "HobbitsName2", "LightLoadingInterval", "LoadingImage", "MiniGameShareImgUrl", "NoNetQuitTime", "NoticeFetchIntervalSec", "NoticeShowIntervalMinMaxSec", "NoticeTimeoutSec", "NotificationApplicationLevel", "NotificationPopLimit", "PacketDelateDays", "PioneerIdx", "PrivacyPolicy", "RankingAnnounceDuration", "RankingAreaHide", "RankingAreaHideInfo", "RankingAreaShowLimitation", "RankingHide", "RankingLevelAreaHideInfo", "RankingLevelAreaShowLimitaion", "RankingLevelHideInfo", "RankingLevelShowLimitaion", "RankingLevelWorldHideInfo", "RankingLevelWorldShowLimitaion", "RankingWorldHide", "RankingWorldHideInfo", "RankingWorldNormalAvatar", "RankingWorldShowLimitaion", "RankingWorldTopAvatar", "RetentionPackRefreshUtc", "ShopRefreshTime", "SignCoinPrize", "SignEnergyLimitPrize", "TermsOfService", "TrackSpeedup", "UnlockEventRoleShow", "UserAvatarCount", "UserTzOffset", "WechatIOSDisablePayVersion", "YDSeq", "AbInfoAttributeDivide", "ActivityCoolDown", "AdIdAndroid", "AdIdAndroidAdmobAsia", "AdIdIos", "AdIdIosAdmobAsia", "AncCdTime", "AncNightStopTime", "AncSessionLimit", "AutoFingerTriggerTime", "BindSocialGem", "BoardClearGem", "BoardColors", "BoostLevel", "BoostLevel4X", "BoostRate", "BoostRate4X", "BotColor", "BotFirstRankLevel", "BoxPossibleOffset", "BpTaskRefresh", "BubbleAdId", "BubbleBonus", "BubbleBonusProb", "BubbleDeadItem", "BubbleDeadWeight", "BubbleExpired", "BubbleGuideItemId", "BubbleLevelDiffParam", "BubbleMaxNum", "BuddyApplyLimitNum", "BuddyApplyLimitTime", "BuddyEnergyDailyLimit", "BuddyEnergyEachSent", "BuddyVisitExtraReward", "BuddyVisitLimit", "BuddyVisitReward", "CardTradeGroupLink", "DailyOrderReward", "DailyTaskNums", "DeRefreshUtc", "DecoShopRefreshGem", "DecoShopRefreshInterval", "DefaultHome", "DefaultRolePart", "DemRefreshWeekday", "DetectiveUnlockLevel", "DiffApiTimeout", "ExitNewUser", "EyeBaseColor", "FishBoardRepeatNum", "FloorDecoDisplay", "FreeBubbleCount", "FreeEnergyClaimCost", "FreeEnergyClaimNum", "FreeEnergyClaimTime", "FreeEnergyNotification", "FreeRechargeTimes", "FreeRolePart", "FreeSpeedUpTimes", "FriendLimit", "FriendOpinionFriendship", "FrozenItemDeadWeight", "GalleryFingerLv", "GiftAutoRollingTime", "GiftBoxStopShaking", "GiveCardNum", "GiveCardRefreshUtc", "GuideMusic", "HairBaseColor", "InitIdleCoin", "InventoryInitCap", "InventoryProducerExtraGrid", "InviteGemRewardNum", "InvitedGemRewardNum", "IsAndFacebook", "IsAndGoogle", "IsFaq", "IsInAppReview", "IsIosApple", "IsIosFacebook", "IsIosGoogle", "IsNewOrderView", "IsOrderApiOnlyWhitelist", "IslandChangeItemGold", "ItemScaleTestB", "LuckyBoxCD", "LuckyBoxLimit", "LuckyBoxNum", "LuckyWheelAdsCount", "LuckyWheelFreeCount", "LuckyWheelGemCost", "LuckyWheelGemCount", "LvPopupCardAlbum", "LvPopupCloseDialog", "LvPopupDE", "LvPopupNewSession", "LvPopupNewSessionId", "MailSystemMax", "MapBuildStartAim", "MapBuildStopAim", "MarketRefresh", "MarketRefreshNum", "MarketUtcClock", "MaxFameLevelToViewActivityFeed", "MaxPullFriendInfoNum", "MaxToastId", "MaxToolCount", "MergeBonus", "MergeBonusLevel", "MergeEnergyAutoMax", "MergeEnergyAutoSec", "MergeEnergyPrice", "MergeRemindTriggerTime", "MergeTutorialInterval", "MergeTutorialStop", "MouthBaseColor", "MysteryStoreCustomNum", "MysteryStoreCustomRate", "MysteryStoreRefreshPrice", "MysteryStoreRefreshTime", "NameMax", "NameMin", "NewUserGrandPrizeInviteNum", "NewUserGrandPrizeReward", "NewUserInviteeMaxLevel", "NewUserRewardForInvitee", "NewUserRewardForInvitor", "NewUserRewardLevel", "NormalToastId", "NoticeCombackTime", "NoticeEventValidTime", "NotifiPopupEventTheme", "NotifiPopupShutdownLv", "NotificationEnergyBonus", "OldUserLetterDuration", "OrderApiLiveopsGrade", "OrderApiPastNum", "OrderCtrlNum", "OrderCtrlTooHigh", "OrderCtrlTooHighTarget", "OrderCtrlTooLow", "OrderCtrlTooLowTarget", "OrderEnterApiDelay", "OrderEnterDelay", "OrderLimitCount", "PackApiTimeout", "PetNPC", "PopupLimit", "PopupRefresh", "PostCardIParamIsland1", "PostCardParam", "PostcardGiftOthersReward", "PostcardMinNum", "PullFriendInfoWaitTime", "PushShopCD", "PushShopCDIce", "PushShopDuration", "PushShopMaxNum", "PushShopPopTimes", "RankBotOrderLimitNum", "RankCoinsParam", "RankCoinsParamNew", "RankMemberNum", "RankOrderNum", "RankingWhitelist", "RateBuildingBase", "RateRedirectLv", "RateTaskOpen", "RequireTypeADInit", "RequireTypeLTInit", "RequireTypeUtcClock", "RestartTime", "ServerTimeCheckRange", "SettingFBFollowGem", "SettingHelpshiftWebsite", "SkinBaseColor", "SpdGemTips", "SpdUpDivide", "SpdUpParam", "SpecialStudentCdInterval", "StudentAnchorPointAmount", "StudentGroupTotal", "StudentShowInterval", "SunRankMemberNum", "SunRankStopNewTime", "SunRankTime", "SurveyAdsPos", "TapSourceTips", "TaskDailyFinalChest", "TaskDailyHardRate", "TaskDailyTotalNum", "TaskPlotTime", "UpdateRemindPopupId", "UserRecordMaxDay", "UserRecordRefreshUtc", "UserRecordWeekday", "Version", "WallPaperDisplay" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, null, null, null, null, null, null, null, null, null, null, }),
+            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.Global), global::fat.rawdata.Global.Parser, new[]{ "ActivityConsumeNum", "ActivityMaxNum", "AnnualSummaryDeadline", "BpGroupRankingHide", "BpRankingFriendHide", "BpRankingHide", "BpRankingWorldHide", "Bpiconovertip1", "Bpiconovertip2", "CardShopRedRefreshUtc", "ClientHttpContinue", "ClientHttpTimeout", "DropProbability", "EventRoleShowAmount", "EventRoleShowLimitation", "FBCommunityWebsite", "GroupRankingHide", "GuildAnnouncementLimit", "GuildApplyCd", "GuildApplyExpireDay", "GuildApplyLimit", "GuildCreatePrice", "GuildJoinCd", "GuildKickoutLimitation", "GuildLeaderInactionDuration", "GuildListNum", "GuildMemberNum", "GuildModifyNamePrice", "GuildNameInvalidChar", "GuildNameLenMax", "GuildNameLenMin", "GuildRefreshInterval", "HobbitsName", "HobbitsName2", "LightLoadingInterval", "LoadingImage", "MiniGameShareImgUrl", "NoNetQuitTime", "NoticeFetchIntervalSec", "NoticeShowIntervalMinMaxSec", "NoticeTimeoutSec", "NotificationApplicationLevel", "NotificationPopLimit", "PacketDelateDays", "PioneerIdx", "PrivacyPolicy", "RankingAnnounceDuration", "RankingAreaHide", "RankingAreaHideInfo", "RankingAreaShowLimitation", "RankingHide", "RankingLevelAreaHideInfo", "RankingLevelAreaShowLimitaion", "RankingLevelHideInfo", "RankingLevelShowLimitaion", "RankingLevelWorldHideInfo", "RankingLevelWorldShowLimitaion", "RankingWorldHide", "RankingWorldHideInfo", "RankingWorldNormalAvatar", "RankingWorldShowLimitaion", "RankingWorldTopAvatar", "RetentionPackRefreshUtc", "ShopRefreshTime", "SignCoinPrize", "SignEnergyLimitPrize", "TermsOfService", "TrackSpeedup", "UnlockEventRoleShow", "UserAvatarCount", "UserTzOffset", "WechatIOSDisablePayVersion", "YDSeq", "AbInfoAttributeDivide", "ActivityCoolDown", "AdIdAndroid", "AdIdAndroidAdmobAsia", "AdIdIos", "AdIdIosAdmobAsia", "AncCdTime", "AncNightStopTime", "AncSessionLimit", "AutoFingerTriggerTime", "BindSocialGem", "BoardClearGem", "BoardColors", "BoostLevel", "BoostLevel4X", "BoostRate", "BoostRate4X", "BotColor", "BotFirstRankLevel", "BoxPossibleOffset", "BpTaskRefresh", "BubbleAdId", "BubbleBonus", "BubbleBonusProb", "BubbleDeadItem", "BubbleDeadWeight", "BubbleExpired", "BubbleGuideItemId", "BubbleLevelDiffParam", "BubbleMaxNum", "BuddyApplyLimitNum", "BuddyApplyLimitTime", "BuddyEnergyDailyLimit", "BuddyEnergyEachSent", "BuddyVisitExtraReward", "BuddyVisitLimit", "BuddyVisitReward", "CardTradeGroupLink", "DailyOrderReward", "DailyTaskNums", "DeRefreshUtc", "DecoShopRefreshGem", "DecoShopRefreshInterval", "DefaultHome", "DefaultRolePart", "DemRefreshWeekday", "DetectiveUnlockLevel", "DiffApiTimeout", "ExitNewUser", "EyeBaseColor", "FishBoardRepeatNum", "FloorDecoDisplay", "FreeBubbleCount", "FreeEnergyClaimCost", "FreeEnergyClaimNum", "FreeEnergyClaimTime", "FreeEnergyNotification", "FreeRechargeTimes", "FreeRolePart", "FreeSpeedUpTimes", "FriendLimit", "FriendOpinionFriendship", "FrozenItemDeadWeight", "GalleryFingerLv", "GiftAutoRollingTime", "GiftBoxStopShaking", "GiveCardNum", "GiveCardRefreshUtc", "GuideMusic", "HairBaseColor", "InitIdleCoin", "InventoryInitCap", "InventoryProducerExtraGrid", "InviteGemRewardNum", "InvitedGemRewardNum", "IsAndFacebook", "IsAndGoogle", "IsFaq", "IsInAppReview", "IsIosApple", "IsIosFacebook", "IsIosGoogle", "IsNewOrderView", "IsOrderApiOnlyWhitelist", "IslandChangeItemGold", "ItemScaleTestB", "LuckyBoxCD", "LuckyBoxLimit", "LuckyBoxNum", "LuckyWheelAdsCount", "LuckyWheelFreeCount", "LuckyWheelGemCost", "LuckyWheelGemCount", "LvPopupCardAlbum", "LvPopupCloseDialog", "LvPopupDE", "LvPopupNewSession", "LvPopupNewSessionId", "MailSystemMax", "MapBuildStartAim", "MapBuildStopAim", "MarketRefresh", "MarketRefreshNum", "MarketUtcClock", "MaxFameLevelToViewActivityFeed", "MaxPullFriendInfoNum", "MaxToastId", "MaxToolCount", "MergeBonus", "MergeBonusLevel", "MergeEnergyAutoMax", "MergeEnergyAutoSec", "MergeEnergyPrice", "MergeRemindTriggerTime", "MergeTutorialInterval", "MergeTutorialStop", "MouthBaseColor", "MysteryStoreCustomNum", "MysteryStoreCustomRate", "MysteryStoreRefreshPrice", "MysteryStoreRefreshTime", "NameMax", "NameMin", "NewUserGrandPrizeInviteNum", "NewUserGrandPrizeReward", "NewUserInviteeMaxLevel", "NewUserRewardForInvitee", "NewUserRewardForInvitor", "NewUserRewardLevel", "NormalToastId", "NoticeCombackTime", "NoticeEventValidTime", "NotifiPopupEventTheme", "NotifiPopupShutdownLv", "NotificationEnergyBonus", "OldUserLetterDuration", "OrderApiLiveopsGrade", "OrderApiPastNum", "OrderCtrlNum", "OrderCtrlTooHigh", "OrderCtrlTooHighTarget", "OrderCtrlTooLow", "OrderCtrlTooLowTarget", "OrderEnterApiDelay", "OrderEnterDelay", "OrderLimitCount", "PackApiTimeout", "PetNPC", "PopupLimit", "PopupRefresh", "PostCardIParamIsland1", "PostCardParam", "PostcardGiftOthersReward", "PostcardMinNum", "PullFriendInfoWaitTime", "PushShopCD", "PushShopCDIce", "PushShopDuration", "PushShopMaxNum", "PushShopPopTimes", "RankBotOrderLimitNum", "RankCoinsParam", "RankCoinsParamNew", "RankMemberNum", "RankOrderNum", "RankingWhitelist", "RateBuildingBase", "RateRedirectLv", "RateTaskOpen", "RequireTypeADInit", "RequireTypeLTInit", "RequireTypeUtcClock", "RestartTime", "ServerTimeCheckRange", "SettingFBFollowGem", "SettingHelpshiftWebsite", "SkinBaseColor", "SpdGemTips", "SpdUpDivide", "SpdUpParam", "SpecialStudentCdInterval", "StudentAnchorPointAmount", "StudentGroupTotal", "StudentShowInterval", "SunRankMemberNum", "SunRankStopNewTime", "SunRankTime", "SurveyAdsPos", "TapSourceTips", "TaskDailyFinalChest", "TaskDailyHardRate", "TaskDailyTotalNum", "TaskPlotTime", "UpdateRemindPopupId", "UserRecordMaxDay", "UserRecordRefreshUtc", "UserRecordWeekday", "Version", "WallPaperDisplay", "WebshopAddress", "WebshopShowPayment" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, null, null, null, null, null, null, null, null, null, null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.GlobalSliceABValue), global::fat.rawdata.GlobalSliceABValue.Parser, new[]{ "GlobalSlice" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.GlobalConf), global::fat.rawdata.GlobalConf.Parser, new[]{ "GlobalSlice", "GlobalSliceAB", "GlobalSliceABPatch" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, })
           }));
@@ -241,7 +243,7 @@ namespace fat.rawdata {
   /// <summary>
   /// annotation@annotation_type(type="rawdata")
   /// annotation@rawdata(row="Global",table="GlobalSlice",table_wrapper="GlobalConf",map="false",map_key_type="",data="GlobalConf")
-  /// annotation@ab(table_ab="GlobalSliceAB",table_ab_patch="GlobalSliceABPatch",table_ab_value="GlobalSliceABValue",ab_patch="true")
+  /// annotation@ab(table_ab="GlobalSliceAB",table_ab_patch="GlobalSliceABPatch",table_ab_value="GlobalSliceABValue",ab_patch="false")
   /// annotation@filter(just_server="false",just_client="false")
   /// </summary>
   public sealed partial class Global : pb::IMessage<Global>
@@ -545,6 +547,8 @@ namespace fat.rawdata {
       userRecordWeekday_ = other.userRecordWeekday_;
       version_ = other.version_;
       wallPaperDisplay_ = other.wallPaperDisplay_;
+      webshopAddress_ = other.webshopAddress_;
+      webshopShowPayment_ = other.webshopShowPayment_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -4303,6 +4307,34 @@ namespace fat.rawdata {
       }
     }
 
+    /// <summary>Field number for the "webshopAddress" field.</summary>
+    public const int WebshopAddressFieldNumber = 275;
+    private string webshopAddress_ = "";
+    /// <summary>
+    /// WebShop地址
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string WebshopAddress {
+      get { return webshopAddress_; }
+      set {
+        webshopAddress_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "webshopShowPayment" field.</summary>
+    public const int WebshopShowPaymentFieldNumber = 276;
+    private int webshopShowPayment_;
+    /// <summary>
+    /// WebShop开启所需充值美金，约定≥参数
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int WebshopShowPayment {
+      get { return webshopShowPayment_; }
+      set {
+        webshopShowPayment_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as Global);
@@ -4588,6 +4620,8 @@ namespace fat.rawdata {
       if (UserRecordWeekday != other.UserRecordWeekday) return false;
       if (Version != other.Version) return false;
       if (WallPaperDisplay != other.WallPaperDisplay) return false;
+      if (WebshopAddress != other.WebshopAddress) return false;
+      if (WebshopShowPayment != other.WebshopShowPayment) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -4866,6 +4900,8 @@ namespace fat.rawdata {
       if (UserRecordWeekday != 0) hash ^= UserRecordWeekday.GetHashCode();
       if (Version != 0) hash ^= Version.GetHashCode();
       if (WallPaperDisplay.Length != 0) hash ^= WallPaperDisplay.GetHashCode();
+      if (WebshopAddress.Length != 0) hash ^= WebshopAddress.GetHashCode();
+      if (WebshopShowPayment != 0) hash ^= WebshopShowPayment.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -5796,6 +5832,14 @@ namespace fat.rawdata {
         output.WriteRawTag(144, 17);
         output.WriteInt32(NormalToastId);
       }
+      if (WebshopAddress.Length != 0) {
+        output.WriteRawTag(154, 17);
+        output.WriteString(WebshopAddress);
+      }
+      if (WebshopShowPayment != 0) {
+        output.WriteRawTag(160, 17);
+        output.WriteInt32(WebshopShowPayment);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -6719,6 +6763,14 @@ namespace fat.rawdata {
         output.WriteRawTag(144, 17);
         output.WriteInt32(NormalToastId);
       }
+      if (WebshopAddress.Length != 0) {
+        output.WriteRawTag(154, 17);
+        output.WriteString(WebshopAddress);
+      }
+      if (WebshopShowPayment != 0) {
+        output.WriteRawTag(160, 17);
+        output.WriteInt32(WebshopShowPayment);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -7427,6 +7479,12 @@ namespace fat.rawdata {
       }
       if (WallPaperDisplay.Length != 0) {
         size += 2 + pb::CodedOutputStream.ComputeStringSize(WallPaperDisplay);
+      }
+      if (WebshopAddress.Length != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeStringSize(WebshopAddress);
+      }
+      if (WebshopShowPayment != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeInt32Size(WebshopShowPayment);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -8138,6 +8196,12 @@ namespace fat.rawdata {
       }
       if (other.WallPaperDisplay.Length != 0) {
         WallPaperDisplay = other.WallPaperDisplay;
+      }
+      if (other.WebshopAddress.Length != 0) {
+        WebshopAddress = other.WebshopAddress;
+      }
+      if (other.WebshopShowPayment != 0) {
+        WebshopShowPayment = other.WebshopShowPayment;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -9274,6 +9338,14 @@ namespace fat.rawdata {
             NormalToastId = input.ReadInt32();
             break;
           }
+          case 2202: {
+            WebshopAddress = input.ReadString();
+            break;
+          }
+          case 2208: {
+            WebshopShowPayment = input.ReadInt32();
+            break;
+          }
         }
       }
     #endif
@@ -10407,6 +10479,14 @@ namespace fat.rawdata {
           }
           case 2192: {
             NormalToastId = input.ReadInt32();
+            break;
+          }
+          case 2202: {
+            WebshopAddress = input.ReadString();
+            break;
+          }
+          case 2208: {
+            WebshopShowPayment = input.ReadInt32();
             break;
           }
         }

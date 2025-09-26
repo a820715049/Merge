@@ -79,7 +79,7 @@ namespace FAT
         public ActivityDuel(ActivityLite lite_)
         {
             Lite = lite_;
-            Conf = Game.Manager.configMan.GetEventScoreDuelConfig(lite_.Param);
+            Conf = Game.Manager.configMan.GetEventScoreDuelConfig(1);
             Get<SCORE_ENTITY_ADD_COMPLETE>().AddListener(OnUpdateScore);
             Get<GAME_ONE_SECOND_DRIVER>().AddListener(UpdateRobotScore);
             SetupTheme();
@@ -588,6 +588,7 @@ namespace FAT
             nextScoreTs = 0;
             offsetStrategyUsedTimes = 0;
             var delay = win_ ? 2.5f : 0f;
+            if (win_) { Get<TASK_SCORE_DUEL_WIN>().Dispatch(); }
             DOVirtual.DelayedCall(delay, () =>
             {
                 if (!UIManager.Instance.IsShow(VisualMain.res.ActiveR))
@@ -635,8 +636,10 @@ namespace FAT
 
         public bool OnPreUpdate(OrderData order, IOrderHelper helper, MergeWorldTracer tracer)
         {
-            if ((order as IOrderData).IsMagicHour)
+            if (order == null || order.ConfRandomer == null || !order.ConfRandomer.IsExtraScore)
+            {
                 return false;
+            }
             if (IsComplete())
                 return false;
             if (isInRound == 0)

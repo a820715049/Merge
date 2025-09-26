@@ -152,6 +152,9 @@ namespace fat.conf.conf_loader
 			EventGuessLevelVisitor.Initialize();
 			EventGuessMilestoneVisitor.Initialize();
 			EventGuessRoundVisitor.Initialize();
+			EventIndepenBingoVisitor.Initialize();
+			EventIndepenBingoDetailVisitor.Initialize();
+			EventIndepenBingoRoundVisitor.Initialize();
 			EventInviteVisitor.Initialize();
 			EventItemBingoVisitor.Initialize();
 			EventItemBingoDetailVisitor.Initialize();
@@ -183,6 +186,8 @@ namespace fat.conf.conf_loader
 			EventMiniBoardMultiDropVisitor.Initialize();
 			EventMiniBoardMultiGroupVisitor.Initialize();
 			EventMiniBoardMultiInfoVisitor.Initialize();
+			EventMonopolyVisitor.Initialize();
+			EventMonopolyDetailVisitor.Initialize();
 			EventOnlineVisitor.Initialize();
 			EventOnlineDetailVisitor.Initialize();
 			EventOrderBonusVisitor.Initialize();
@@ -305,6 +310,9 @@ namespace fat.conf.conf_loader
 			IAPFreeVisitor.Initialize();
 			IAPPackVisitor.Initialize();
 			IAPProductVisitor.Initialize();
+			IndepenBingoBoardVisitor.Initialize();
+			IndepenBingoGroupDetailVisitor.Initialize();
+			IndepenBingoGroupsVisitor.Initialize();
 			InventoryItemVisitor.Initialize();
 			InventoryProducerVisitor.Initialize();
 			InventoryToolVisitor.Initialize();
@@ -366,6 +374,10 @@ namespace fat.conf.conf_loader
 			MiniGameSlideMergeItemVisitor.Initialize();
 			MiniGameSlideMergeLevelVisitor.Initialize();
 			MiniGameSlideMergeStageVisitor.Initialize();
+			MonopolyGridVisitor.Initialize();
+			MonopolyOrderItemVisitor.Initialize();
+			MonopolyPackVisitor.Initialize();
+			MonopolyStageVisitor.Initialize();
 			MonsterVisitor.Initialize();
 			MonsterTalkVisitor.Initialize();
 			MultiRankVisitor.Initialize();
@@ -445,6 +457,7 @@ namespace fat.conf.conf_loader
 			UserGradeGroupVisitor.Initialize();
 			UserTagVisitor.Initialize();
 			UserTagGroupVisitor.Initialize();
+			WebshopCountryWhitelistVisitor.Initialize();
 		}
 		// 主配置数据
         public delegate Google.Protobuf.CodedInputStream DataStreamProvider(string name);
@@ -696,6 +709,9 @@ namespace fat.conf.conf_loader
 		public EventGuessLevelConf EventGuessLevelMap = new EventGuessLevelConf();
 		public EventGuessMilestoneConf EventGuessMilestoneMap = new EventGuessMilestoneConf();
 		public EventGuessRoundConf EventGuessRoundMap = new EventGuessRoundConf();
+		public EventIndepenBingoConf EventIndepenBingoMap = new EventIndepenBingoConf();
+		public EventIndepenBingoDetailConf EventIndepenBingoDetailMap = new EventIndepenBingoDetailConf();
+		public EventIndepenBingoRoundConf EventIndepenBingoRoundMap = new EventIndepenBingoRoundConf();
 		public EventInviteConf EventInviteMap = new EventInviteConf();
 		public EventItemBingoConf EventItemBingoMap = new EventItemBingoConf();
 		public EventItemBingoDetailConf EventItemBingoDetailMap = new EventItemBingoDetailConf();
@@ -727,6 +743,8 @@ namespace fat.conf.conf_loader
 		public EventMiniBoardMultiDropConf EventMiniBoardMultiDropMap = new EventMiniBoardMultiDropConf();
 		public EventMiniBoardMultiGroupConf EventMiniBoardMultiGroupMap = new EventMiniBoardMultiGroupConf();
 		public EventMiniBoardMultiInfoConf EventMiniBoardMultiInfoMap = new EventMiniBoardMultiInfoConf();
+		public EventMonopolyConf EventMonopolyMap = new EventMonopolyConf();
+		public EventMonopolyDetailConf EventMonopolyDetailMap = new EventMonopolyDetailConf();
 		public EventOnlineConf EventOnlineMap = new EventOnlineConf();
 		public EventOnlineDetailConf EventOnlineDetailMap = new EventOnlineDetailConf();
 		public EventOrderBonusConf EventOrderBonusMap = new EventOrderBonusConf();
@@ -849,6 +867,9 @@ namespace fat.conf.conf_loader
 		public IAPFreeConf IAPFreeMap = new IAPFreeConf();
 		public IAPPackConf IAPPackMap = new IAPPackConf();
 		public IAPProductConf IAPProductMap = new IAPProductConf();
+		public IndepenBingoBoardConf IndepenBingoBoardMap = new IndepenBingoBoardConf();
+		public IndepenBingoGroupDetailConf IndepenBingoGroupDetailMap = new IndepenBingoGroupDetailConf();
+		public IndepenBingoGroupsConf IndepenBingoGroupsMap = new IndepenBingoGroupsConf();
 		public InventoryItemConf InventoryItemMap = new InventoryItemConf();
 		public InventoryProducerConf InventoryProducerMap = new InventoryProducerConf();
 		public InventoryToolConf InventoryToolMap = new InventoryToolConf();
@@ -910,6 +931,10 @@ namespace fat.conf.conf_loader
 		public MiniGameSlideMergeItemConf MiniGameSlideMergeItemMap = new MiniGameSlideMergeItemConf();
 		public MiniGameSlideMergeLevelConf MiniGameSlideMergeLevelMap = new MiniGameSlideMergeLevelConf();
 		public MiniGameSlideMergeStageConf MiniGameSlideMergeStageMap = new MiniGameSlideMergeStageConf();
+		public MonopolyGridConf MonopolyGridMap = new MonopolyGridConf();
+		public MonopolyOrderItemConf MonopolyOrderItemMap = new MonopolyOrderItemConf();
+		public MonopolyPackConf MonopolyPackMap = new MonopolyPackConf();
+		public MonopolyStageConf MonopolyStageMap = new MonopolyStageConf();
 		public MonsterConf MonsterMap = new MonsterConf();
 		public MonsterTalkConf MonsterTalkMap = new MonsterTalkConf();
 		public MultiRankConf MultiRankMap = new MultiRankConf();
@@ -989,6 +1014,7 @@ namespace fat.conf.conf_loader
 		public UserGradeGroupConf UserGradeGroupMap = new UserGradeGroupConf();
 		public UserTagConf UserTagMap = new UserTagConf();
 		public UserTagGroupConf UserTagGroupMap = new UserTagGroupConf();
+		public WebshopCountryWhitelistConf WebshopCountryWhitelistMap = new WebshopCountryWhitelistConf();
 		public Dictionary<string, List<int>> AdSettingSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> BpDetailSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> BpMilestoneSortedKeys = new Dictionary<string, List<int>>();
@@ -1102,6 +1128,9 @@ namespace fat.conf.conf_loader
 		public Dictionary<string, List<int>> EventGuessLevelSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> EventGuessMilestoneSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> EventGuessRoundSortedKeys = new Dictionary<string, List<int>>();
+		public Dictionary<string, List<int>> EventIndepenBingoSortedKeys = new Dictionary<string, List<int>>();
+		public Dictionary<string, List<int>> EventIndepenBingoDetailSortedKeys = new Dictionary<string, List<int>>();
+		public Dictionary<string, List<int>> EventIndepenBingoRoundSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> EventInviteSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> EventItemBingoSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> EventItemBingoDetailSortedKeys = new Dictionary<string, List<int>>();
@@ -1133,6 +1162,8 @@ namespace fat.conf.conf_loader
 		public Dictionary<string, List<int>> EventMiniBoardMultiDropSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> EventMiniBoardMultiGroupSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> EventMiniBoardMultiInfoSortedKeys = new Dictionary<string, List<int>>();
+		public Dictionary<string, List<int>> EventMonopolySortedKeys = new Dictionary<string, List<int>>();
+		public Dictionary<string, List<int>> EventMonopolyDetailSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> EventOnlineSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> EventOnlineDetailSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> EventOrderBonusSortedKeys = new Dictionary<string, List<int>>();
@@ -1250,6 +1281,9 @@ namespace fat.conf.conf_loader
 		public Dictionary<string, List<int>> IAPFreeSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> IAPPackSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> IAPProductSortedKeys = new Dictionary<string, List<int>>();
+		public Dictionary<string, List<int>> IndepenBingoBoardSortedKeys = new Dictionary<string, List<int>>();
+		public Dictionary<string, List<int>> IndepenBingoGroupDetailSortedKeys = new Dictionary<string, List<int>>();
+		public Dictionary<string, List<int>> IndepenBingoGroupsSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> InventoryItemSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> InventoryProducerSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> InventoryToolSortedKeys = new Dictionary<string, List<int>>();
@@ -1293,6 +1327,10 @@ namespace fat.conf.conf_loader
 		public Dictionary<string, List<int>> MiniGameSlideMergeItemSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> MiniGameSlideMergeLevelSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> MiniGameSlideMergeStageSortedKeys = new Dictionary<string, List<int>>();
+		public Dictionary<string, List<int>> MonopolyGridSortedKeys = new Dictionary<string, List<int>>();
+		public Dictionary<string, List<int>> MonopolyOrderItemSortedKeys = new Dictionary<string, List<int>>();
+		public Dictionary<string, List<int>> MonopolyPackSortedKeys = new Dictionary<string, List<int>>();
+		public Dictionary<string, List<int>> MonopolyStageSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> MonsterSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> MonsterTalkSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> MultiRankSortedKeys = new Dictionary<string, List<int>>();
@@ -1363,6 +1401,7 @@ namespace fat.conf.conf_loader
 		public Dictionary<string, List<int>> UserGradeGroupSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> UserTagSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> UserTagGroupSortedKeys = new Dictionary<string, List<int>>();
+		public Dictionary<string, List<string>> WebshopCountryWhitelistSortedKeys = new Dictionary<string, List<string>>();
 
 
 		public static void referenceUpdateWithInstance(Dictionary<string, object> ctx, ConfManager cmInstance){

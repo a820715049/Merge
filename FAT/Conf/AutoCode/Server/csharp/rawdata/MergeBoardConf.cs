@@ -25,35 +25,36 @@ namespace fat.rawdata {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "ChxyYXdkYXRhL01lcmdlQm9hcmRDb25mLnByb3RvEgdyYXdkYXRhGhpyYXdk",
-            "YXRhL0ZlYXR1cmVFbnRyeS5wcm90byLVAgoKTWVyZ2VCb2FyZBIKCgJpZBgB",
+            "YXRhL0ZlYXR1cmVFbnRyeS5wcm90byKEAwoKTWVyZ2VCb2FyZBIKCgJpZBgB",
             "IAEoBRIOCgZfdGFnc18YAiADKAkSFAoMYW1iaWVudEF1ZGlvGAMgASgJEhQK",
             "DGJhY2tHcm91bmRCRxgEIAEoCRIXCg9ib3hVbmxvY2tFZmZlY3QYBSABKAkS",
             "CwoDY29sGAYgAygJEhAKCGNvbENvdW50GAcgASgFEhMKC2RldGFpbFBhcmFt",
-            "GBAgASgFEiYKB2ZlYXR1cmUYESABKA4yFS5yYXdkYXRhLkZlYXR1cmVFbnRy",
-            "eRINCgVpbWdCRxgIIAEoCRIOCgZpbWdCb3gYCSADKAkSDwoHaW1nVGlsZRgK",
-            "IAEoCRIOCgZpbWdUb3AYCyABKAkSEAoIaXNsYW5kSWQYDCABKAUSEAoIcm93",
-            "Q291bnQYDSABKAUSEQoJc2hvd09yZGVyGA4gASgFEhMKC3dhbGxQYXBlcklk",
-            "GA8gASgFIqoBChRNZXJnZUJvYXJkTWFwQUJWYWx1ZRJHCg1NZXJnZUJvYXJk",
-            "TWFwGAEgAygLMjAucmF3ZGF0YS5NZXJnZUJvYXJkTWFwQUJWYWx1ZS5NZXJn",
-            "ZUJvYXJkTWFwRW50cnkaSQoSTWVyZ2VCb2FyZE1hcEVudHJ5EgsKA2tleRgB",
-            "IAEoBRIiCgV2YWx1ZRgCIAEoCzITLnJhd2RhdGEuTWVyZ2VCb2FyZDoCOAEi",
-            "6QMKDk1lcmdlQm9hcmRDb25mEkEKDU1lcmdlQm9hcmRNYXAYASADKAsyKi5y",
-            "YXdkYXRhLk1lcmdlQm9hcmRDb25mLk1lcmdlQm9hcmRNYXBFbnRyeRJFCg9N",
-            "ZXJnZUJvYXJkTWFwQUIYAiADKAsyLC5yYXdkYXRhLk1lcmdlQm9hcmRDb25m",
-            "Lk1lcmdlQm9hcmRNYXBBQkVudHJ5Ek8KFE1lcmdlQm9hcmRNYXBBQlBhdGNo",
-            "GAMgAygLMjEucmF3ZGF0YS5NZXJnZUJvYXJkQ29uZi5NZXJnZUJvYXJkTWFw",
-            "QUJQYXRjaEVudHJ5GkkKEk1lcmdlQm9hcmRNYXBFbnRyeRILCgNrZXkYASAB",
-            "KAUSIgoFdmFsdWUYAiABKAsyEy5yYXdkYXRhLk1lcmdlQm9hcmQ6AjgBGlUK",
-            "FE1lcmdlQm9hcmRNYXBBQkVudHJ5EgsKA2tleRgBIAEoCRIsCgV2YWx1ZRgC",
-            "IAEoCzIdLnJhd2RhdGEuTWVyZ2VCb2FyZE1hcEFCVmFsdWU6AjgBGloKGU1l",
-            "cmdlQm9hcmRNYXBBQlBhdGNoRW50cnkSCwoDa2V5GAEgASgJEiwKBXZhbHVl",
-            "GAIgASgLMh0ucmF3ZGF0YS5NZXJnZUJvYXJkTWFwQUJWYWx1ZToCOAFCPVot",
-            "Z2l0bGFiLmZ1bnBsdXMuaW8vZmF0L2NvbmYvZ2VuL2dvbGFuZy9yYXdkYXRh",
-            "qgILZmF0LnJhd2RhdGFiBnByb3RvMw=="));
+            "GBAgASgFEhYKDmVxdWFsTWFpbkJvYXJkGBIgASgIEiYKB2ZlYXR1cmUYESAB",
+            "KA4yFS5yYXdkYXRhLkZlYXR1cmVFbnRyeRIVCg1naWZ0Qm94dW5hYmxlGBMg",
+            "ASgIEg0KBWltZ0JHGAggASgJEg4KBmltZ0JveBgJIAMoCRIPCgdpbWdUaWxl",
+            "GAogASgJEg4KBmltZ1RvcBgLIAEoCRIQCghpc2xhbmRJZBgMIAEoBRIQCghy",
+            "b3dDb3VudBgNIAEoBRIRCglzaG93T3JkZXIYDiABKAUSEwoLd2FsbFBhcGVy",
+            "SWQYDyABKAUiqgEKFE1lcmdlQm9hcmRNYXBBQlZhbHVlEkcKDU1lcmdlQm9h",
+            "cmRNYXAYASADKAsyMC5yYXdkYXRhLk1lcmdlQm9hcmRNYXBBQlZhbHVlLk1l",
+            "cmdlQm9hcmRNYXBFbnRyeRpJChJNZXJnZUJvYXJkTWFwRW50cnkSCwoDa2V5",
+            "GAEgASgFEiIKBXZhbHVlGAIgASgLMhMucmF3ZGF0YS5NZXJnZUJvYXJkOgI4",
+            "ASLpAwoOTWVyZ2VCb2FyZENvbmYSQQoNTWVyZ2VCb2FyZE1hcBgBIAMoCzIq",
+            "LnJhd2RhdGEuTWVyZ2VCb2FyZENvbmYuTWVyZ2VCb2FyZE1hcEVudHJ5EkUK",
+            "D01lcmdlQm9hcmRNYXBBQhgCIAMoCzIsLnJhd2RhdGEuTWVyZ2VCb2FyZENv",
+            "bmYuTWVyZ2VCb2FyZE1hcEFCRW50cnkSTwoUTWVyZ2VCb2FyZE1hcEFCUGF0",
+            "Y2gYAyADKAsyMS5yYXdkYXRhLk1lcmdlQm9hcmRDb25mLk1lcmdlQm9hcmRN",
+            "YXBBQlBhdGNoRW50cnkaSQoSTWVyZ2VCb2FyZE1hcEVudHJ5EgsKA2tleRgB",
+            "IAEoBRIiCgV2YWx1ZRgCIAEoCzITLnJhd2RhdGEuTWVyZ2VCb2FyZDoCOAEa",
+            "VQoUTWVyZ2VCb2FyZE1hcEFCRW50cnkSCwoDa2V5GAEgASgJEiwKBXZhbHVl",
+            "GAIgASgLMh0ucmF3ZGF0YS5NZXJnZUJvYXJkTWFwQUJWYWx1ZToCOAEaWgoZ",
+            "TWVyZ2VCb2FyZE1hcEFCUGF0Y2hFbnRyeRILCgNrZXkYASABKAkSLAoFdmFs",
+            "dWUYAiABKAsyHS5yYXdkYXRhLk1lcmdlQm9hcmRNYXBBQlZhbHVlOgI4AUI9",
+            "Wi1naXRsYWIuZnVucGx1cy5pby9mYXQvY29uZi9nZW4vZ29sYW5nL3Jhd2Rh",
+            "dGGqAgtmYXQucmF3ZGF0YWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::fat.rawdata.FeatureEntryReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.MergeBoard), global::fat.rawdata.MergeBoard.Parser, new[]{ "Id", "Tags", "AmbientAudio", "BackGroundBG", "BoxUnlockEffect", "Col", "ColCount", "DetailParam", "Feature", "ImgBG", "ImgBox", "ImgTile", "ImgTop", "IslandId", "RowCount", "ShowOrder", "WallPaperId" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.MergeBoard), global::fat.rawdata.MergeBoard.Parser, new[]{ "Id", "Tags", "AmbientAudio", "BackGroundBG", "BoxUnlockEffect", "Col", "ColCount", "DetailParam", "EqualMainBoard", "Feature", "GiftBoxunable", "ImgBG", "ImgBox", "ImgTile", "ImgTop", "IslandId", "RowCount", "ShowOrder", "WallPaperId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.MergeBoardMapABValue), global::fat.rawdata.MergeBoardMapABValue.Parser, new[]{ "MergeBoardMap" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.MergeBoardConf), global::fat.rawdata.MergeBoardConf.Parser, new[]{ "MergeBoardMap", "MergeBoardMapAB", "MergeBoardMapABPatch" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, null, })
           }));
@@ -106,7 +107,9 @@ namespace fat.rawdata {
       col_ = other.col_.Clone();
       colCount_ = other.colCount_;
       detailParam_ = other.detailParam_;
+      equalMainBoard_ = other.equalMainBoard_;
       feature_ = other.feature_;
+      giftBoxunable_ = other.giftBoxunable_;
       imgBG_ = other.imgBG_;
       imgBox_ = other.imgBox_.Clone();
       imgTile_ = other.imgTile_;
@@ -232,6 +235,27 @@ namespace fat.rawdata {
       }
     }
 
+    /// <summary>Field number for the "equalMainBoard" field.</summary>
+    public const int EqualMainBoardFieldNumber = 18;
+    private bool equalMainBoard_;
+    /// <summary>
+    /// 【是否等价于主棋盘】
+    /// 控制两个功能
+    /// 1. 在活动棋盘，消耗主棋盘体力，进行合成操作，产出相关代币【火车】
+    /// 2. 在活动棋盘，弹出其他活动弹窗后，点击play按钮返回本棋盘
+    /// 
+    /// 状态说明
+    /// FALSE/空：不等价
+    /// TRUE：等价于主棋盘
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool EqualMainBoard {
+      get { return equalMainBoard_; }
+      set {
+        equalMainBoard_ = value;
+      }
+    }
+
     /// <summary>Field number for the "feature" field.</summary>
     public const int FeatureFieldNumber = 17;
     private global::fat.rawdata.FeatureEntry feature_ = global::fat.rawdata.FeatureEntry.FeatureNone;
@@ -245,6 +269,23 @@ namespace fat.rawdata {
       get { return feature_; }
       set {
         feature_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "giftBoxunable" field.</summary>
+    public const int GiftBoxunableFieldNumber = 19;
+    private bool giftBoxunable_;
+    /// <summary>
+    /// 棋盘奖励箱不可用
+    /// 
+    /// TRUE：不可用，奖励发到主棋盘
+    /// FALSE/空：可用，奖励发到对应活动棋盘
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool GiftBoxunable {
+      get { return giftBoxunable_; }
+      set {
+        giftBoxunable_ = value;
       }
     }
 
@@ -380,7 +421,9 @@ namespace fat.rawdata {
       if(!col_.Equals(other.col_)) return false;
       if (ColCount != other.ColCount) return false;
       if (DetailParam != other.DetailParam) return false;
+      if (EqualMainBoard != other.EqualMainBoard) return false;
       if (Feature != other.Feature) return false;
+      if (GiftBoxunable != other.GiftBoxunable) return false;
       if (ImgBG != other.ImgBG) return false;
       if(!imgBox_.Equals(other.imgBox_)) return false;
       if (ImgTile != other.ImgTile) return false;
@@ -403,7 +446,9 @@ namespace fat.rawdata {
       hash ^= col_.GetHashCode();
       if (ColCount != 0) hash ^= ColCount.GetHashCode();
       if (DetailParam != 0) hash ^= DetailParam.GetHashCode();
+      if (EqualMainBoard != false) hash ^= EqualMainBoard.GetHashCode();
       if (Feature != global::fat.rawdata.FeatureEntry.FeatureNone) hash ^= Feature.GetHashCode();
+      if (GiftBoxunable != false) hash ^= GiftBoxunable.GetHashCode();
       if (ImgBG.Length != 0) hash ^= ImgBG.GetHashCode();
       hash ^= imgBox_.GetHashCode();
       if (ImgTile.Length != 0) hash ^= ImgTile.GetHashCode();
@@ -487,6 +532,14 @@ namespace fat.rawdata {
         output.WriteRawTag(136, 1);
         output.WriteEnum((int) Feature);
       }
+      if (EqualMainBoard != false) {
+        output.WriteRawTag(144, 1);
+        output.WriteBool(EqualMainBoard);
+      }
+      if (GiftBoxunable != false) {
+        output.WriteRawTag(152, 1);
+        output.WriteBool(GiftBoxunable);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -555,6 +608,14 @@ namespace fat.rawdata {
         output.WriteRawTag(136, 1);
         output.WriteEnum((int) Feature);
       }
+      if (EqualMainBoard != false) {
+        output.WriteRawTag(144, 1);
+        output.WriteBool(EqualMainBoard);
+      }
+      if (GiftBoxunable != false) {
+        output.WriteRawTag(152, 1);
+        output.WriteBool(GiftBoxunable);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -584,8 +645,14 @@ namespace fat.rawdata {
       if (DetailParam != 0) {
         size += 2 + pb::CodedOutputStream.ComputeInt32Size(DetailParam);
       }
+      if (EqualMainBoard != false) {
+        size += 2 + 1;
+      }
       if (Feature != global::fat.rawdata.FeatureEntry.FeatureNone) {
         size += 2 + pb::CodedOutputStream.ComputeEnumSize((int) Feature);
+      }
+      if (GiftBoxunable != false) {
+        size += 2 + 1;
       }
       if (ImgBG.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(ImgBG);
@@ -640,8 +707,14 @@ namespace fat.rawdata {
       if (other.DetailParam != 0) {
         DetailParam = other.DetailParam;
       }
+      if (other.EqualMainBoard != false) {
+        EqualMainBoard = other.EqualMainBoard;
+      }
       if (other.Feature != global::fat.rawdata.FeatureEntry.FeatureNone) {
         Feature = other.Feature;
+      }
+      if (other.GiftBoxunable != false) {
+        GiftBoxunable = other.GiftBoxunable;
       }
       if (other.ImgBG.Length != 0) {
         ImgBG = other.ImgBG;
@@ -747,6 +820,14 @@ namespace fat.rawdata {
             Feature = (global::fat.rawdata.FeatureEntry) input.ReadEnum();
             break;
           }
+          case 144: {
+            EqualMainBoard = input.ReadBool();
+            break;
+          }
+          case 152: {
+            GiftBoxunable = input.ReadBool();
+            break;
+          }
         }
       }
     #endif
@@ -827,6 +908,14 @@ namespace fat.rawdata {
           }
           case 136: {
             Feature = (global::fat.rawdata.FeatureEntry) input.ReadEnum();
+            break;
+          }
+          case 144: {
+            EqualMainBoard = input.ReadBool();
+            break;
+          }
+          case 152: {
+            GiftBoxunable = input.ReadBool();
             break;
           }
         }

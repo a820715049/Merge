@@ -165,6 +165,7 @@ namespace FAT
 
             goTrail.SetActive(false);
             goTrail.transform.position = BoardUtility.GetWorldPosByCoord(from);
+            // goTrail.SetActive(true);
             var seq = DOTween.Sequence();
             seq.AppendInterval(delay);
             seq.AppendCallback(() => { goTrail.SetActive(true); });
@@ -180,46 +181,6 @@ namespace FAT
             seq.Play();
         }
 
-        public void ShowTokenMultiEffect(Vector2Int from, Vector2Int to, Item target, float delay)
-        {
-            var targetItemView = BoardViewManager.Instance.GetItemView(target.id);
-            if (targetItemView == null)
-                return;
-            var effRoot = BoardViewManager.Instance.boardView.topEffectRoot;
-            var effType = BoardUtility.EffTypeToPoolType(ItemEffectType.JumpCDTrail).ToString();
-            var goTrail = GameObjectPoolManager.Instance.CreateObject(effType, effRoot);
-            BoardUtility.AddAutoReleaseComponent(goTrail, 2f, effType);
-
-            goTrail.SetActive(false);
-            goTrail.transform.position = BoardUtility.GetWorldPosByCoord(from);
-            var seq = DOTween.Sequence();
-            seq.AppendInterval(delay);
-            seq.AppendCallback(() => { goTrail.SetActive(true); });
-            seq.Append(goTrail.transform.DOMove(BoardUtility.GetWorldPosByCoord(to), 0.5f).SetEase(Ease.Linear));
-            seq.AppendCallback(() =>
-            {
-                var effType_Disp = BoardUtility.EffTypeToPoolType(ItemEffectType.TokenMultiTrigger).ToString();
-                var disappear = GameObjectPoolManager.Instance.CreateObject(effType_Disp, effRoot);
-                disappear.transform.position = targetItemView.GetActivityTokenCtrl().GetScoreMicRect().position;
-                BoardUtility.AddAutoReleaseComponent(disappear, 2f, effType_Disp);
-            });
-            //延迟一段时间 等特效播到一定程度后 再刷新icon
-            seq.AppendInterval(0.15f);
-            seq.AppendCallback(() =>
-            {
-                targetItemView.RefreshActivityTokenState();
-            });
-            seq.Play();
-        }
-
-        public void ShowTokenMultiStartEffect(MBItemView target, float delay)
-        {
-            var seq = DOTween.Sequence();
-            seq.AppendInterval(delay);
-            seq.AppendCallback(target.AddTokenMultiEffect);
-            seq.Play();
-        }
-        
         // public void ShowSellTip(Vector2Int coord)
         // {
         //     _ShowEffect(coord, ItemEffectType.Sell_Tip, 1f);

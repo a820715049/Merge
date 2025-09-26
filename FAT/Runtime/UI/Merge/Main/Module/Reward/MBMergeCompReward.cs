@@ -140,8 +140,8 @@ namespace FAT
 
         private void _OnMessagePreBeginReward(RewardCommitData data)
         {
-            // 发棋子奖励和卡包 尝试在commit之后再刷新
-            if (data.rewardType == ObjConfigType.MergeItem || data.rewardType == ObjConfigType.CardPack)
+            // 发棋子奖励和卡包(非自动开启) 尝试在commit之后再刷新
+            if (data.rewardType == ObjConfigType.MergeItem || (data.rewardType == ObjConfigType.CardPack && !Game.Manager.cardMan.CheckIsAutoOpen(data.rewardId)))
             {
                 //若奖励来源为迷你棋盘相关 则无视
                 if (data.reason == ReasonString.miniboard_getitem
@@ -155,7 +155,7 @@ namespace FAT
 
         private void _OnMessagePostCommitReward(RewardCommitData data)
         {
-            if ((data.rewardType == ObjConfigType.MergeItem || data.rewardType == ObjConfigType.CardPack) && ignoreRefresh)
+            if ((data.rewardType == ObjConfigType.MergeItem || (data.rewardType == ObjConfigType.CardPack && !Game.Manager.cardMan.CheckIsAutoOpen(data.rewardId))) && ignoreRefresh)
             {
                 //若奖励来源为迷你棋盘相关或者矿车棋盘相关 则无视
                 if (data.reason == ReasonString.miniboard_getitem

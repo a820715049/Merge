@@ -51,7 +51,7 @@ namespace fat.rawdata {
   /// <summary>
   /// annotation@annotation_type(type="rawdata")
   /// annotation@rawdata(row="BGM",table="BGMSlice",table_wrapper="BGMConf",map="false",map_key_type="",data="BGMConf")
-  /// annotation@ab(table_ab="BGMSliceAB",table_ab_patch="BGMSliceABPatch",table_ab_value="BGMSliceABValue",ab_patch="true")
+  /// annotation@ab(table_ab="BGMSliceAB",table_ab_patch="BGMSliceABPatch",table_ab_value="BGMSliceABValue",ab_patch="false")
   /// annotation@filter(just_server="false",just_client="false")
   /// </summary>
   public sealed partial class BGM : pb::IMessage<BGM>

@@ -351,15 +351,6 @@ namespace FAT.Merge
                 com = _AddItemComponent<ItemActivityComponent>();
             }
         }
-        
-        public void AppendWithActivityTokenComponent()
-        {
-            var com = GetItemComponent<ItemActivityTokenComponent>();
-            if (com == null)
-            {
-                com = _AddItemComponent<ItemActivityTokenComponent>();
-            }
-        }
 
         public void SetNoCoinUnfrozen()
         {
@@ -581,7 +572,6 @@ namespace FAT.Merge
             ItemComponentTable.ValidateAndAddComponent(this, comConfig, ItemComponentType.MixSource);
             ItemComponentTable.ValidateAndAddComponent(this, comConfig, ItemComponentType.TrigAutoSource);
             ItemComponentTable.ValidateAndAddComponent(this, comConfig, ItemComponentType.ActiveSource);
-            ItemComponentTable.ValidateAndAddComponent(this, comConfig, ItemComponentType.TokenMulti);
         }
 
         private void _RefreshEffectList()

@@ -5,6 +5,7 @@ using fat.gamekitdata;
 using static fat.conf.Data;
 using EL;
 using static fat.rawdata.FeatureEntry;
+using FAT.MSG;
 
 namespace FAT
 {
@@ -124,6 +125,7 @@ namespace FAT
             pack_.PurchaseSuccess(packId_, list, late_);
         end:
             WhenComplete_?.Invoke(list);
+            MessageCenter.Get<TASK_PAY_SUCCESS>().Dispatch();
         }
 
         public void LateDelivery(IAPLateDelivery delivery_)

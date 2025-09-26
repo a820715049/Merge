@@ -66,7 +66,7 @@ namespace fat.rawdata {
   /// <summary>
   /// annotation@annotation_type(type="rawdata")
   /// annotation@rawdata(row="EventWishBoardGroup",table="EventWishBoardGroupMap",table_wrapper="EventWishBoardGroupConf",map="true",map_key_type="int32",data="EventWishBoardGroupConf")
-  /// annotation@ab(table_ab="EventWishBoardGroupMapAB",table_ab_patch="EventWishBoardGroupMapABPatch",table_ab_value="EventWishBoardGroupMapABValue",ab_patch="true")
+  /// annotation@ab(table_ab="EventWishBoardGroupMapAB",table_ab_patch="EventWishBoardGroupMapABPatch",table_ab_value="EventWishBoardGroupMapABValue",ab_patch="false")
   /// annotation@filter(just_server="false",just_client="false")
   /// annotation@EventWishBoardGroup(id="id")
   /// </summary>
@@ -194,7 +194,7 @@ namespace fat.rawdata {
         = pb::FieldCodec.ForInt32(42);
     private readonly pbc::RepeatedField<int> dropId_ = new pbc::RepeatedField<int>();
     /// <summary>
-    /// 活动棋子-点击掉落
+    /// 活动棋子-点击掉落 （需注意超出）
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<int> DropId {

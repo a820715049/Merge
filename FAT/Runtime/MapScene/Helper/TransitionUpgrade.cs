@@ -8,16 +8,20 @@ using DG.Tweening;
 using Spine.Unity;
 using UnityEngine.Assertions.Must;
 
-namespace FAT {
-    public class TransitionUpgrade : MonoBehaviour {
-        public struct Wall {
+namespace FAT
+{
+    public class TransitionUpgrade : MonoBehaviour
+    {
+        public struct Wall
+        {
             public GameObject obj;
             public Transform root;
             public SkeletonAnimation anim;
             public MeshRenderer sprite;
         }
 
-        public struct Cloud {
+        public struct Cloud
+        {
             public GameObject obj;
             public Transform root;
             public SortingGroup sort;
@@ -25,7 +29,8 @@ namespace FAT {
             public ParticleSystem ps2;
         }
 
-        public class WallGroup {
+        public class WallGroup
+        {
             public Transform rootBL;
             public Transform rootBR;
             public Transform rootTL;
@@ -41,10 +46,13 @@ namespace FAT {
             public int CountT => wallBL.Count;
             public int count;
 
-            public void Init(Transform root_, string n_) {
-                static void SetupWall(List<Wall> list_, Transform root_) {
+            public void Init(Transform root_, string n_)
+            {
+                static void SetupWall(List<Wall> list_, Transform root_)
+                {
                     list_.Clear();
-                    if(root_ != null) {
+                    if (root_ != null)
+                    {
                         var w = ParseWall(root_.gameObject);
                         w.obj.SetActive(false);
                         w.anim.loop = false;
@@ -65,7 +73,8 @@ namespace FAT {
                 SetupWall(wallTR, rootTR.Find("d"));
             }
 
-            public void Resize(int n_, Vector2 size_, Vector2 offset_, float oY_) {
+            public void Resize(int n_, Vector2 size_, Vector2 offset_, float oY_)
+            {
                 count = n_;
                 var hX = n_ * size_.x + offset_.x;
                 var hY = n_ * size_.y + offset_.y;
@@ -75,31 +84,37 @@ namespace FAT {
                 rootTR.localPosition = new(0, hY + oY_);
             }
 
-            public void Refresh(int count_, int order_, int of_, Vector2 size_) {
-                static void Create(List<Wall> list_) {
+            public void Refresh(int count_, int order_, int of_, Vector2 size_)
+            {
+                static void Create(List<Wall> list_)
+                {
                     var template = list_[0];
                     var obj = GameObject.Instantiate(template.obj, template.root.parent);
                     var t = ParseWall(obj);
                     list_.Add(t);
                 }
-                static void Create4(WallGroup g_) {
+                static void Create4(WallGroup g_)
+                {
                     Create(g_.wallBL);
                     Create(g_.wallBR);
                     Create(g_.wallTL);
                     Create(g_.wallTR);
                 }
-                static Wall Use(Wall wall_, int order_) {
+                static Wall Use(Wall wall_, int order_)
+                {
                     wall_.sprite.sortingOrder = order_;
                     return wall_;
                 }
-                static (Wall, Wall, Wall, Wall) Use4(WallGroup g_, int n_) {
+                static (Wall, Wall, Wall, Wall) Use4(WallGroup g_, int n_)
+                {
                     var bl = Use(g_.wallBL[n_], g_.count - n_);
                     var br = Use(g_.wallBR[n_], n_);
                     var tl = Use(g_.wallTL[n_], n_);
                     var tr = Use(g_.wallTR[n_], n_);
                     return (bl, br, tl, tr);
                 }
-                static void Disable4(WallGroup g_, int n_) {
+                static void Disable4(WallGroup g_, int n_)
+                {
                     g_.wallBL[n_].obj.SetActive(false);
                     g_.wallBR[n_].obj.SetActive(false);
                     g_.wallTL[n_].obj.SetActive(false);
@@ -109,46 +124,57 @@ namespace FAT {
                 sortBR.sortingOrder = order_ + (3 + of_);
                 sortTL.sortingOrder = order_ - (2 + of_);
                 sortTR.sortingOrder = order_ - (1 + of_);
-                for (var n = wallBL.Count; n < count_; ++n) {
+                for (var n = wallBL.Count; n < count_; ++n)
+                {
                     Create4(this);
                 }
-                for (var n = 0; n < count_; ++n) {
+                for (var n = 0; n < count_; ++n)
+                {
                     var (bl, br, tl, tr) = Use4(this, n);
                     bl.root.localPosition = new(-size_.x * n, size_.y * n);
                     br.root.localPosition = new(-size_.x * n, -size_.y * n);
                     tl.root.localPosition = new(size_.x * n, size_.y * n);
                     tr.root.localPosition = new(size_.x * n, -size_.y * n);
                 }
-                for (var n = 0; n < wallBL.Count; ++n) {
+                for (var n = 0; n < wallBL.Count; ++n)
+                {
                     Disable4(this, n);
                 }
             }
 
-            public (IEnumerator, IEnumerator) AnimateIn(string n_, float i_, float i1_, float d_, out float t_) {
-                static void A(Wall wall_, string anim_) {
+            public (IEnumerator, IEnumerator) AnimateIn(string n_, float i_, float i1_, float d_, out float t_)
+            {
+                static void A(Wall wall_, string anim_)
+                {
                     wall_.obj.SetActive(true);
                     wall_.anim.AnimationName = anim_;
                 }
-                IEnumerator R1() {
+                IEnumerator R1()
+                {
                     var wait = new WaitForSeconds(i_);
-                    for(var n = count - 1; n >= 0; --n) {
+                    for (var n = count - 1; n >= 0; --n)
+                    {
                         A(wallBL[n], n_);
                         yield return wait;
                     }
-                    for(var n = count - 1; n >= 0; --n) {
+                    for (var n = count - 1; n >= 0; --n)
+                    {
                         A(wallBR[n], n_);
                         yield return wait;
                     }
                 }
-                IEnumerator R2() {
+                IEnumerator R2()
+                {
                     var waitD = new WaitForSeconds(i1_);
                     var wait = new WaitForSeconds(i_);
                     yield return waitD;
-                    for(var n = count - 1; n >= 0; --n) {
+                    for (var n = count - 1; n >= 0; --n)
+                    {
                         A(wallTL[n], n_);
                         yield return wait;
                     }
-                    for(var n = count - 1; n >= 0; --n) {
+                    for (var n = count - 1; n >= 0; --n)
+                    {
                         A(wallTR[n], n_);
                         yield return wait;
                     }
@@ -157,8 +183,10 @@ namespace FAT {
                 return (R1(), R2());
             }
 
-            public void AnimateOut(string n_) {
-                for (var n = 0; n < count; ++n) {
+            public void AnimateOut(string n_)
+            {
+                for (var n = 0; n < count; ++n)
+                {
                     wallBL[n].anim.AnimationName = n_;
                     wallBR[n].anim.AnimationName = n_;
                     wallTL[n].anim.AnimationName = n_;
@@ -195,14 +223,18 @@ namespace FAT {
         private int count1;
         private int count2;
 
-        private void OnValidate() {
+        private void OnValidate()
+        {
             if (Application.isPlaying) return;
             var template1 = ParseWall(transform.TryFind("BL/a"));
             var template2 = ParseWall(transform.TryFind("BL2/a"));
-            static void Check(SkeletonAnimation target_, string in_, ref float dIn_) {
+            static void Check(SkeletonAnimation target_, string in_, ref float dIn_)
+            {
                 var clip = target_.skeletonDataAsset.GetSkeletonData(false).Animations;
-                foreach (var c in clip) {
-                    if (c.Name == in_) {
+                foreach (var c in clip)
+                {
+                    if (c.Name == in_)
+                    {
                         dIn_ = c.Duration;
                         break;
                     }
@@ -212,10 +244,12 @@ namespace FAT {
             Check(template2.anim, wallIn, ref wall2DurationIn);
         }
 
-        public void Awake() {
+        public void Awake()
+        {
             var objCloud = transform.TryFind("cloud");
             var rootCloud = objCloud.transform;
-            cloud = new() {
+            cloud = new()
+            {
                 obj = objCloud, root = rootCloud,
                 sort = rootCloud.GetComponent<SortingGroup>(),
                 ps1 = rootCloud.FindEx<ParticleSystem>("eff"),
@@ -225,16 +259,19 @@ namespace FAT {
             wall2.Init(transform, "2");
         }
 
-        private static Wall ParseWall(GameObject obj_) {
+        private static Wall ParseWall(GameObject obj_)
+        {
             var root = obj_.transform;
-            return new() {
+            return new()
+            {
                 obj = obj_, root = root,
                 anim = root.Access<SkeletonAnimation>("n"),
                 sprite = root.Access<MeshRenderer>("n"),
             };
         }
 
-        public void Resize(Bounds bounds, int order_) {
+        public void Resize(Bounds bounds, int order_)
+        {
             var hSize = bounds.extents;
             var n1 = Mathf.CeilToInt(hSize.x / size1.x);
             count1 = n1 + padding1;
@@ -242,7 +279,8 @@ namespace FAT {
             count2 = n2;
             var hY1 = count1 * size1.y;
             var hY2 = count2 * size2.y;
-            if (hY2 - hY1 < wall2Offset) {
+            if (hY2 - hY1 < wall2Offset)
+            {
                 count2 += padding2;
                 hY2 = count2 * size2.y;
             }
@@ -257,12 +295,14 @@ namespace FAT {
             wall2.Refresh(count2, order_, 3, size2);
         }
 
-        private void UpdatePS(ParticleSystem ps_, int rate_) {
+        private void UpdatePS(ParticleSystem ps_, int rate_)
+        {
             var e = ps_.emission;
             e.rateOverTime = rate_;
         }
 
-        public IEnumerator AnimateSold(Animation sold_) {
+        public IEnumerator AnimateSold(Animation sold_)
+        {
             var waitS1 = new WaitForSeconds(soldDelay);
             var waitS2 = new WaitForSeconds(sold_.clip.length + soldWait);
             yield return waitS1;
@@ -270,8 +310,11 @@ namespace FAT {
             yield return waitS2;
         }
 
-        public IEnumerator AnimateIn() {
+        public IEnumerator AnimateIn()
+        {
+            cloud.obj.SetActive(false);
             yield return new WaitForSeconds(wallInDelay);
+            this.gameObject.SetActive(true);
             var (a11, a12) = wall1.AnimateIn(wallIn, wall1IntervalIn, 0, wall1DurationIn, out var t1);
             StartCoroutine(a11);
             StartCoroutine(a12);
@@ -281,14 +324,14 @@ namespace FAT {
             var waitI = new WaitForSeconds(Mathf.Max(cloudWait, Mathf.Max(t1, t2)));
             UpdatePS(cloud.ps1, (int)cloudEmission.x);
             UpdatePS(cloud.ps2, (int)cloudEmission.y);
-            cloud.obj.SetActive(false);
             cloud.obj.SetActive(true);
             // 建造音效
             Game.Manager.audioMan.TriggerSound("HouseComplete");
             yield return waitI;
         }
 
-        public IEnumerator AnimateOut() {
+        public IEnumerator AnimateOut()
+        {
             yield return null;
             var waitO = new WaitForSeconds(outWait);
             UpdatePS(cloud.ps1, 0);
@@ -296,6 +339,7 @@ namespace FAT {
             wall1.AnimateOut(wallOut);
             wall2.AnimateOut(wallOut);
             yield return waitO;
+            this.gameObject.SetActive(false);
         }
     }
 }

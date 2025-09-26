@@ -283,6 +283,9 @@ namespace FAT
                 {
                     temp.Free();
                     ResolveCommit();
+                    
+                    // 通知其他车厢检查状态
+                    MessageCenter.Get<MSG.UI_BOARD_DIRTY>().Dispatch();
                 }));
             }
             else

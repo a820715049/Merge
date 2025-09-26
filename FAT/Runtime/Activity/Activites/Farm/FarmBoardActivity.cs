@@ -25,11 +25,11 @@ namespace FAT
         public MergeWorldTracer WorldTracer { get; private set; }   //世界实体追踪器
         public EventFarmBoard ConfD { get; private set; }
         //用户分层 区别棋盘配置 对应EventFarmBoardGroup.id
-        public int GroupId { get; private set; }  
+        public int GroupId { get; private set; }
         //从0开始 表示当前合成链中已解锁的最大等级棋子 如：0表示什么都没解锁  3代表当前已解锁合成链中第3个棋子
-        public int UnlockMaxLevel { get; private set; } 
+        public int UnlockMaxLevel { get; private set; }
         //当前已解锁的农田数量
-        public int UnlockFarmlandNum { get; private set; } 
+        public int UnlockFarmlandNum { get; private set; }
         //当前代币产出类型
         public TokenOutputType OutputType { get; private set; } = TokenOutputType.None;
         //当前代币数量
@@ -42,19 +42,19 @@ namespace FAT
         {
             return Game.Manager.configMan.GetEventFarmBoardGroupConfig(GroupId);
         }
-        
+
         //debug面板重置当前棋盘 避免来回调时间导致棋盘没有重置
         public void DebugResetFarmBoard()
         {
             _ClearFarmBoardData();
         }
-        
+
         public FarmBoardActivity(ActivityLite lite_)
         {
             Lite = lite_;
             ConfD = Game.Manager.configMan.GetEventFarmBoardConfig(lite_.Param);
         }
-        
+
         // 活动首次初始化 | 此时不走读档流程 不会调用LoadSetup
         public override void SetupFresh()
         {
@@ -123,7 +123,7 @@ namespace FAT
             //清理scoreEntity
             _ClearScoreEntity();
         }
-        
+
         public override void WhenEnd()
         {
             var conf = GetCurGroupConfig();
@@ -151,9 +151,9 @@ namespace FAT
             //清理棋盘相关数据
             _ClearFarmBoardData();
         }
-        
+
         #region 界面 入口 换皮 弹脸
-        
+
         public override ActivityVisual Visual => StartPopup.visual;
 
         public VisualRes VisualBoard { get; } = new(UIConfig.UIFarmBoardMain); //棋盘UI
@@ -168,7 +168,7 @@ namespace FAT
         public VisualPopup StartPopup { get; } = new(UIConfig.UIFarmBoardBegin); //活动开启theme
         public VisualPopup EndPopup { get; } = new(UIConfig.UIFarmBoardEnd); //活动结束
         public VisualPopup ConvertPopup { get; } = new(UIConfig.UIFarmBoardConvert); //补领
-        
+
         public override void Open()
         {
             ActivityTransit.Enter(this, this.VisualLoading, this.VisualBoard.res);
@@ -178,7 +178,7 @@ namespace FAT
         {
             ActivityTransit.Exit(this, this.VisualBoard.res.ActiveR);
         }
-        
+
         private void _RefreshPopupInfo()
         {
             if (!Valid)
@@ -192,25 +192,25 @@ namespace FAT
             VisualLoading.Setup(ConfD.LoadingTheme);
             VisualComplete.Setup(ConfD.FinishTheme);
         }
-        
+
         string IBoardEntry.BoardEntryAsset()
         {
             StartPopup.visual.AssetMap.TryGetValue("boardEntry", out var key);
             return key;
         }
-        
+
         #endregion
 
         #endregion
-        
+
         #region 图鉴相关
-        
+
         //图鉴棋子是否解锁
         public bool IsItemUnlock(int itemId)
         {
             return Game.Manager.handbookMan.IsItemUnlocked(itemId);
         }
-        
+
         public List<int> GetAllItemIdList()
         {
             return _allItemIdList;
@@ -237,7 +237,7 @@ namespace FAT
             if (!Valid || itemId <= 0) return false;
             return _allItemIdList.Contains(itemId);
         }
-        
+
         //当农场棋盘中有新棋子解锁时刷新相关数据(数据层)
         void IBoardActivityHandbook.OnNewItemUnlock()
         {
@@ -253,7 +253,7 @@ namespace FAT
             if (IsEnergyType())
                 _spawnBonusHandler.SetDirty();
         }
-        
+
         //当农场棋盘中有新棋子解锁时执行相关表现(表现层)
         void IBoardActivityHandbook.OnNewItemShow(Merge.Item itemData)
         {
@@ -264,13 +264,13 @@ namespace FAT
                 MessageCenter.Get<MSG.UI_FARM_BOARD_UNLOCK_ITEM>().Dispatch(itemData);
                 var totalCount = _allItemIdList.Count;
                 var isFinal = UnlockMaxLevel >= totalCount;
-                DataTracker.event_farm_milestone.Track(this, UnlockMaxLevel, totalCount, 
+                DataTracker.event_farm_milestone.Track(this, UnlockMaxLevel, totalCount,
                     GetCurGroupConfig()?.Diff ?? 0, World.activeBoard?.boardId ?? 0, _curDepthIndex, UnlockFarmlandNum, isFinal);
             }
         }
-        
+
         private List<int> _allItemIdList = new List<int>();    //当前活动主链条的所有棋子idList 按等级由小到大排序
-        
+
         private void _RefreshAllItemIdList()
         {
             _allItemIdList.Clear();
@@ -284,11 +284,11 @@ namespace FAT
         }
 
         #endregion
-        
+
         #region 棋盘相关逻辑
-        
+
         #region 基础创建
-        
+
         FeatureEntry IBoardArchive.Feature => FeatureEntry.FeatureFarmBoard;
 
         //此接口在活动第一次创建时不会走到，创建后每次都会走,且时机在LoadSetup之后
@@ -307,7 +307,7 @@ namespace FAT
         {
             World?.Serialize(data);
         }
-        
+
         //初始化农场棋盘 只在活动创建时走一次
         private void _InitFarmBoardData()
         {
@@ -344,7 +344,7 @@ namespace FAT
             // World.BindOrderHelper(Game.Manager.mainOrderMan.curOrderHelper);
             Game.Manager.mergeBoardMan.InitializeBoard(this, World, boardId, isFirstCreate);
         }
-        
+
         private void _ClearFarmBoardData()
         {
             //清理handler
@@ -356,7 +356,7 @@ namespace FAT
             World = null;
             WorldTracer = null;
         }
-        
+
         #endregion
 
         #region 棋盘下降逻辑
@@ -460,7 +460,7 @@ namespace FAT
                 };
             }
         }
-        
+
         void IActivityUpdate.ActivityUpdate(float deltaTime)
         {
             //棋盘上升相关
@@ -480,7 +480,7 @@ namespace FAT
                 }
             }
         }
-        
+
         //外部界面准备好后调用
         public void StartMoveUpBoard()
         {
@@ -493,7 +493,7 @@ namespace FAT
                 _isBoardMoving = false;
             }
         }
-        
+
         //棋盘下降一系列流程 先数据层后表现层
         private void _MoveDownBoard(Board board, int downRowCount, int detailParam)
         {
@@ -593,7 +593,7 @@ namespace FAT
         //当前的农田产出信息
         private RewardConfig farmlandOutputInfo;
         private string farmlandOutputInfoStr = "";
-        
+
         //传入解锁等级，获取该等级是否有对应的可解锁农田
         public bool CheckHasFarmland(int unlockLevel)
         {
@@ -676,7 +676,7 @@ namespace FAT
             }
             return 4;
         }
-        
+
         private void _RefreshFarmlandInfo()
         {
             var idList = GetCurGroupConfig()?.AreaId;
@@ -719,7 +719,7 @@ namespace FAT
         {
             return _GetAnimalConfig()?.ItemId ?? 0;
         }
-        
+
         //在合适时机自行检查棋盘上是否存在目标棋子，如棋子合成时、第一次进界面时
         public bool CheckHasConsumeItem()
         {
@@ -744,8 +744,8 @@ namespace FAT
             var conf = _GetAnimalConfig();
             if (conf == null || conf.ItemId != item.tid)
                 return false;
-            var board = Valid ? World?.activeBoard : null; 
-            if (board == null) 
+            var board = Valid ? World?.activeBoard : null;
+            if (board == null)
                 return false;
             //要消耗的棋子直接死亡
             if (!board.DisposeItem(item, ItemDeadType.FarmAnimal))
@@ -770,10 +770,10 @@ namespace FAT
                 return 0;
             if (!_TryGetNextOutputItem(out var outputId))
                 return 0;
-            var board = Valid ? World?.activeBoard : null; 
-            if (board == null) 
+            var board = Valid ? World?.activeBoard : null;
+            if (board == null)
                 return 0;
-            
+
             //从动物飞往棋盘对应坐标位置
             BoardUtility.ClearSpawnRequest();
             BoardUtility.RegisterSpawnRequest(outputId, animalPos);
@@ -792,7 +792,7 @@ namespace FAT
             BoardUtility.ClearSpawnRequest();
             return 2;
         }
-        
+
         //尝试获取下一个要产出的棋子id
         private bool _TryGetNextOutputItem(out int itemId)
         {
@@ -812,7 +812,7 @@ namespace FAT
                 _animalOutputInfo.Add(outputId);
             }
         }
-        
+
         //获取当前棋盘对应的动物配置
         private EventFarmBoardAnimal _GetAnimalConfig()
         {
@@ -823,9 +823,9 @@ namespace FAT
         #endregion
 
         #endregion
-        
+
         #region 代币相关
-        
+
         //代币产出类型
         public enum TokenOutputType
         {
@@ -834,7 +834,7 @@ namespace FAT
             Order = 2,  //完成订单产出
             All = 3,    //既可以耗体又可以完成订单产出
         }
-        
+
         //判断目前是否是耗体产出类型
         public bool IsEnergyType()
         {
@@ -865,7 +865,7 @@ namespace FAT
         }
 
         #region 代币增加/消耗逻辑
-        
+
         public void TryAddToken(int id, int num, ReasonString reason)
         {
             if (ConfD == null || id <= 0 || num <= 0)
@@ -875,7 +875,7 @@ namespace FAT
                 if (ChangeItemToken(true, num) && reason != ReasonString.farm_order)
                 {
                     //非完成订单获得货币时 单独向ScoreEntity中同步最新分数  并单独打点token_change
-                    if (IsOrderType()) 
+                    if (IsOrderType())
                         _scoreEntity.UpdateScore(TokenNum);
                     DataTracker.token_change.Track(id, num, TokenNum, reason);
                 }
@@ -893,6 +893,7 @@ namespace FAT
                     DataTracker.token_change.Track(id, -num, TokenNum, reason);
                     //消耗代币时额外打个点，便于查看当时状态
                     DataTracker.event_farm_use_token.Track(this, UnlockMaxLevel, _allItemIdList.Count, GetCurGroupConfig()?.Diff ?? 0, World.activeBoard?.boardId ?? 0, _curDepthIndex, UnlockFarmlandNum, farmlandOutputInfoStr);
+                    MessageCenter.Get<MSG.TASK_ACTIVITY_TOKEN_USE>().Dispatch(id, num);
                     return true;
                 }
             }
@@ -924,7 +925,7 @@ namespace FAT
             }
             return false;
         }
-        
+
         //根据配置设置初始代币数量
         private void _InitStartToken()
         {
@@ -934,7 +935,7 @@ namespace FAT
         }
 
         #endregion
-        
+
         #region 主棋盘订单右下角积分
 
         private ScoreEntity _scoreEntity;
@@ -956,7 +957,7 @@ namespace FAT
                     ReasonString.farm_order, "", Constant.MainBoardId, false);
             }
         }
-        
+
         private void _ClearScoreEntity()
         {
             //活动结束时 根据类型决定是否清理_scoreEntity
@@ -986,7 +987,7 @@ namespace FAT
         #endregion
 
         #region 点击耗体生成器产代币逻辑
-        
+
         private FarmBoardItemSpawnBonusHandler _spawnBonusHandler;
 
         private void _RefreshSpawnBonusHandler()
@@ -996,7 +997,7 @@ namespace FAT
             _spawnBonusHandler ??= new FarmBoardItemSpawnBonusHandler(this);
             Game.Manager.mergeBoardMan.RegisterGlobalSpawnBonusHandler(_spawnBonusHandler);
         }
-        
+
         private void _ClearSpawnBonusHandler()
         {
             //活动结束时 根据类型决定是否取消注册handler
@@ -1004,7 +1005,7 @@ namespace FAT
                 Game.Manager.mergeBoardMan.UnregisterGlobalSpawnBonusHandler(_spawnBonusHandler);
             _spawnBonusHandler = null;
         }
-        
+
         public EventFarmDrop GetCurDropConf()
         {
             var confId = _GetCurDropConfId();
@@ -1022,7 +1023,7 @@ namespace FAT
         }
 
         #endregion
-        
+
         #endregion
     }
 
@@ -1045,7 +1046,7 @@ namespace FAT
         {
             MessageCenter.Get<MSG.FARM_BOARD_TOKEN_CHANGE>().RemoveListener(RefreshEntry);
         }
-        
+
         private void RefreshEntry()
         {
             entry.dotCount.SetRedPoint(activity.TokenNum);

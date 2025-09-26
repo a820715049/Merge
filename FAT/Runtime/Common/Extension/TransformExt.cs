@@ -9,7 +9,7 @@ using FAT;
 namespace EL
 {
     public static class TransformExt
-    {   
+    {
         public static T FindEx<T>(this Transform target, string path) where T : Component
             => GameUIUtility.Access<T>(target, path);
         private static System.Collections.Generic.Queue<Transform> sCachedTransformQueue = new System.Collections.Generic.Queue<Transform>();
@@ -17,14 +17,14 @@ namespace EL
         {
             sCachedTransformQueue.Clear();
             sCachedTransformQueue.Enqueue(target);
-            while(sCachedTransformQueue.Count > 0)
+            while (sCachedTransformQueue.Count > 0)
             {
                 var t = sCachedTransformQueue.Dequeue();
                 int childCount = t.childCount;
-                for(int i = 0; i < childCount; i++)
+                for (int i = 0; i < childCount; i++)
                 {
                     var c = t.GetChild(i);
-                    if(c.name == name)
+                    if (c.name == name)
                     {
                         return c;
                     }
@@ -43,7 +43,7 @@ namespace EL
         public static bool FindEx(this Transform target, string path, out Transform com)
             => GameUIUtility.Access(target, path, out com);
 
-        public static Button AddButton(this Transform target, string path, UnityEngine.Events.UnityAction callback)
+        public static Button AddButton(this Transform target, string path, UnityEngine.Events.UnityAction callback, bool needscale = true)
         {
             var t = target;
             if (!string.IsNullOrEmpty(path))
@@ -57,7 +57,7 @@ namespace EL
                 if (btn != null)
                 {
                     btn.onClick.AddListener(callback);
-                    ButtonExt.TryAddClickScale(btn);
+                    if (needscale) ButtonExt.TryAddClickScale(btn);
                     return btn;
                 }
             }
@@ -82,7 +82,7 @@ namespace EL
         public static string GetPath(this Transform target, System.Text.StringBuilder sb = null)
         {
             sb ??= new();
-            if(target.parent != null)
+            if (target.parent != null)
             {
                 GetPath(target.parent, sb);
                 sb.Append("/");
@@ -94,7 +94,7 @@ namespace EL
         public static void DestroyAllChildren(this Transform target)
         {
             var count = target.childCount;
-            for(var i = count - 1; i >= 0; --i)
+            for (var i = count - 1; i >= 0; --i)
             {
                 GameObject.Destroy(target.GetChild(i).gameObject);
             }

@@ -333,6 +333,10 @@ namespace FAT
                 Requires = new List<ItemCountInfo>(),
                 Rewards = new List<Config.RewardConfig>(),
             };
+            if (data.ProviderType == (int)OrderProviderType.Random)
+            {
+                data.ConfRandomer = helper.proxy.GetRandomerSlotConf(data.Id);
+            }
             return data;
         }
 
@@ -409,7 +413,7 @@ namespace FAT
             return data;
         }
 
-        public static OrderData MakeOrderByRecord(OrderRecord orderRecord)
+        public static OrderData MakeOrderByRecord(OrderRecord orderRecord, IOrderHelper helper)
         {
             var data = new OrderData()
             {
@@ -423,14 +427,18 @@ namespace FAT
                 Rewards = new List<Config.RewardConfig>(),
                 Record = orderRecord,
             };
-            for (int i = 0; i < orderRecord.RequireIds.Count; i++)
+            if (data.ProviderType == (int)OrderProviderType.Random)
+            {
+                data.ConfRandomer = helper.proxy.GetRandomerSlotConf(data.Id);
+            }
+            for (var i = 0; i < orderRecord.RequireIds.Count; i++)
             {
                 var info = new ItemCountInfo();
                 data.Requires.Add(info);
                 info.Id = orderRecord.RequireIds[i];
                 info.TargetCount = orderRecord.RequireNums[i];
             }
-            for (int i = 0; i < orderRecord.RewardIds.Count; i++)
+            for (var i = 0; i < orderRecord.RewardIds.Count; i++)
             {
                 var r = new Config.RewardConfig();
                 data.Rewards.Add(r);

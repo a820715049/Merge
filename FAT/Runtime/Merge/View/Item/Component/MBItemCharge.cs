@@ -43,7 +43,6 @@ namespace FAT
         private ItemJumpCDComponent jumpCDComp;
         private ItemBonusCompoent bonusComp;
         private ItemBubbleComponent bubbleFrozenComp;   //冰冻棋子
-        private ItemTokenMultiComponent tokenMultiComp;
 
         private bool mIsCostEnergy;
 
@@ -79,7 +78,6 @@ namespace FAT
                 bubbleFrozenComp = comp;
             else
                 bubbleFrozenComp = null;
-            tokenMultiComp = mView.data.GetItemComponent<ItemTokenMultiComponent>();
 
             progressBar.SetActive(false);
             progressBarMini.SetActive(false);
@@ -155,10 +153,6 @@ namespace FAT
             else if (bubbleFrozenComp != null)
             {
                 _RefreshFrozenItemTime();
-            }
-            else if (tokenMultiComp != null)
-            {
-                _RefreshTokenMulti();
             }
         }
 
@@ -514,29 +508,6 @@ namespace FAT
         private void _RefreshJumpCD()
         {
             var com = jumpCDComp;
-            if (com.isCounting)
-            {
-                // 倒计时展示
-                UIUtility.CountDownFormat(countdownLock.txtTime, com.countdown / 1000);
-                countdownLock.goLock.SetActive(false);
-                countdownLock.goRoot.SetActive(true);
-                fixedTimeLock.goRoot.SetActive(false);
-            }
-            else
-            {
-                // 常规展示
-                if (!fixedTimeLock.goRoot.activeSelf)
-                {
-                    UIUtility.CountDownFormat(fixedTimeLock.txtTime, com.config.Time / 1000, UIUtility.CdStyle.OmitZero);
-                    fixedTimeLock.goRoot.SetActive(true);
-                    countdownLock.goRoot.SetActive(false);
-                }
-            }
-        }
-        
-        private void _RefreshTokenMulti()
-        {
-            var com = tokenMultiComp;
             if (com.isCounting)
             {
                 // 倒计时展示

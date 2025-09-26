@@ -67,7 +67,7 @@ namespace FAT
             {
                 IsOwn = true;
                 OwnCount++;
-                MessageCenter.Get<MSG.GAME_CARD_ADD>().Dispatch();
+                MessageCenter.Get<MSG.GAME_CARD_ADD>().Dispatch(this);
             }
             else if (OwnCount > 1)  //只有自己拥有大于1张卡时才允许卡片减少(换卡)
             {

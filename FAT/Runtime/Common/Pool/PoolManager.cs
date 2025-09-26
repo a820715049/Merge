@@ -89,11 +89,6 @@ public enum PoolItemType
 
     #endregion
 
-    #region 积分活动 音乐会
-
-    SCORE_MIC_CELL,
-
-    #endregion
 
     #region 周任务活动
 
@@ -156,10 +151,6 @@ public enum PoolItemType
     MERGE_ITEM_EFFECT_TRIG_AUTO_SOURCE,
     MERGE_ITEM_EFFECT_LIGHTBULB,
     MERGE_ITEM_EFFECT_FROZEN_ITEM,
-    
-    MERGE_ITEM_EFFECT_TOKEN_MULTI_TRIGGER,
-    MERGE_ITEM_EFFECT_TOKEN_MULTI_SELF_TRIGGER,
-    MERGE_ITEM_EFFECT_TOKEN_MULTI_BG,
 
     Auto_Guide_Finger,
     PACK_MARKET_SLIDE_CELL,

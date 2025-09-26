@@ -225,7 +225,7 @@ namespace fat.rawdata {
         = pb::FieldCodec.ForInt32(58);
     private readonly pbc::RepeatedField<int> levelId_ = new pbc::RepeatedField<int>();
     /// <summary>
-    /// 对应阶段掉落信息
+    /// 对应阶段掉落信息（需注意超出）
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<int> LevelId {

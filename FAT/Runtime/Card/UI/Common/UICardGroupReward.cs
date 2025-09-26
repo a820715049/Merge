@@ -35,6 +35,7 @@ namespace FAT
         private int _layoutGroupSapcing3 = 70;  //有3个奖励时 layoutGroup的spacing
         private int _layoutGroupSapcing4 = 30;  //有4个奖励时 layoutGroup的spacing
         private int _tipOffset = 4;
+        private int _curCardPackId = 0;    //当前奖励的来源卡包id
 
         protected override void OnCreate()
         {
@@ -71,6 +72,7 @@ namespace FAT
                 {
                     _rewardConfigList.AddRange(rewards);
                 }
+                _curCardPackId = (int)items[2];
             }
         }
 
@@ -152,8 +154,18 @@ namespace FAT
         {
             //领奖延迟到界面关闭时
             UIFlyUtility.FlyRewardList(_rewardConfigList, getRewardBtn.transform.position);
-            //领奖后，检查是否有随机宝箱等特殊奖励，如果有则执行特殊奖励的相关表现，如果没有就通过事件来执行 TryOpenPackDisplay
-            Game.Manager.specialRewardMan.CheckSpecialRewardFinish();
+            //根据卡包是否自动开启决定执行不同的方法
+            var isAutoOpen = Game.Manager.cardMan.CheckIsAutoOpen(_curCardPackId);
+            if (isAutoOpen)
+            {
+                //尝试执行之后的抽卡流程表现
+                Game.Manager.cardMan.TryOpenPackDisplay();
+            }
+            else
+            {
+                //领奖后，检查是否有随机宝箱等特殊奖励，如果有则执行特殊奖励的相关表现，如果没有就通过事件来执行 TryOpenPackDisplay
+                Game.Manager.specialRewardMan.CheckSpecialRewardFinish();
+            }
         }
         
         private void _OnTipsBtnClick(int groupIndex)

@@ -31,6 +31,8 @@ namespace FAT
         private Image _boardEntry;
         [SerializeField] private ScrollRect scroll;
         [SerializeField] private GameObject block;
+        [SerializeField] private GameObject fishObj;
+        [SerializeField] private GameObject fishObjRoot;
         [SerializeField] private GameObject efx;
         [SerializeField] private GameObject efxRoot;
         [SerializeField] private SkeletonGraphic spine;
@@ -48,8 +50,10 @@ namespace FAT
         [SerializeField] private float waitForFishSipne = 1.5f;
         [SerializeField] private float flyDuration = 1f;
         [SerializeField] private float waitForFly = 0.8f;
+        private string fishObj_key = "fish_obj";
         private string efx_key = "fish_milestone_star";
         private List<Item> items = new();
+        private List<GameObject> fishItems = new();
         private bool isTransitioning = false;
 
         protected override void OnCreate()
@@ -57,6 +61,7 @@ namespace FAT
             RegiestComp();
             Setup();
             AddButton();
+            GameObjectPoolManager.Instance.PreparePool(fishObj_key, fishObj);
         }
 
         private void RegiestComp()
@@ -376,6 +381,11 @@ namespace FAT
 
         protected override void OnPostClose()
         {
+            foreach (var item in fishItems)
+            {
+                GameObjectPoolManager.Instance.ReleaseObject(fishObj_key, item);
+            }
+            fishItems.Clear();
             MessageCenter.Get<MSG.UI_TOP_BAR_POP_STATE>().Dispatch();
             MessageCenter.Get<MSG.GAME_SHOP_ENTRY_STATE_CHANGE>().Dispatch(true);
             MessageCenter.Get<MSG.GAME_LEVEL_GO_STATE_CHANGE>().Dispatch(true);
@@ -389,12 +399,15 @@ namespace FAT
 
         private void RefreshFish()
         {
+            fishItems.Clear();
             scroll.content.sizeDelta = new Vector2((154 + 32) * _activity.FishInfoList.Count, 0);
             for (int i = 0; i < _activity.FishInfoList.Count; i++)
             {
                 var fish = _activity.FishInfoList[i];
-                var item = scroll.content.GetChild(0).GetChild(i).GetComponent<MBFishItem>();
+                var obj = GameObjectPoolManager.Instance.CreateObject(fishObj_key, fishObjRoot.transform);
+                var item = obj.GetComponent<MBFishItem>();
                 item.Setup(_activity, fish);
+                fishItems.Add(obj);
             }
         }
 

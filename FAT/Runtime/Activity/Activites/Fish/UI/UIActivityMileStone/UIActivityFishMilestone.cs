@@ -118,7 +118,7 @@ namespace FAT
                 // 根据配置构建数据
                 var itemData = new MilestoneItemData()
                 {
-                    index = milestoneId,
+                    index = mileStone.ShowNum,
                     reward = reward
                 };
 

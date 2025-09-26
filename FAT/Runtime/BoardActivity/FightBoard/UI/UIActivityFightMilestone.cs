@@ -97,7 +97,7 @@ namespace FAT
             {
                 listMilestoneWithoutLast.Add(listMilestone[i]);
             }
-            scroll.content.sizeDelta = new Vector2(scroll.content.sizeDelta.x, (172 + 8) * listMilestoneWithoutLast.Count + 28);
+            scroll.content.sizeDelta = new Vector2(scroll.content.sizeDelta.x, (172 + 8) * listMilestoneWithoutLast.Count);
             scroll.normalizedPosition = new Vector2(scroll.normalizedPosition.x, 0f);
             for (int i = 0; i < listMilestoneWithoutLast.Count; i++)
             {

@@ -15,6 +15,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using fat.rawdata;
 
 namespace FAT
 {
@@ -84,6 +85,12 @@ namespace FAT
         private TextMeshProUGUI _openTips;
         private GameObject _spinePrefab;
         private int _totalStar;
+        
+        // NEW: 跳过/控制
+        private Coroutine _openDelayRoutine;    // Open阶段-卡牌飞入的延时协程
+        private bool _cardsAnimStarted = false; // 防重复启动飞入
+        private TrackEntry _openTrackEntry; // 记录 cardpack_open 的 TrackEntry
+        private bool _canSkipOpenAnim = false;  //策划配置——是否允许跳过开启动画
 
         private void Update()
         {
@@ -107,6 +114,7 @@ namespace FAT
 
         protected override void OnPreOpen()
         {
+            _canSkipOpenAnim = Game.Manager.featureUnlockMan.IsFeatureEntryUnlocked(FeatureEntry.FeatureSkipCardPack);
             MessageCenter.Get<MSG.GAME_CARD_PACK_OPEN>().Dispatch();
         }
 
@@ -232,6 +240,10 @@ namespace FAT
             transform.Find("Content/SpineNode").gameObject.SetActive(false);
             transform.Find("Mask").GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
             _openTips.gameObject.SetActive(true);
+            
+            _ClearRoutine();
+            _cardsAnimStarted = false;
+            _openTrackEntry = null;
 
             //尝试执行之后的抽卡流程表现
             Game.Manager.cardMan.TryOpenPackDisplay();
@@ -461,6 +473,10 @@ namespace FAT
 
         private void _PlayShowCardAnim()
         {
+            //防重复
+            if (_cardsAnimStarted) 
+                return;
+            _cardsAnimStarted = true;
             foreach (var kv in _cardAnimDataList)
             {
                 kv.Card.SetActive(true);
@@ -481,7 +497,8 @@ namespace FAT
 
         private void _ClickContinue()
         {
-            if (_block)
+            // Open 阶段允许点击用于“跳过”
+            if (_curState != AnimState.Open && _block) 
                 return;
             if (_curState == AnimState.None)
                 return;
@@ -495,28 +512,31 @@ namespace FAT
                 case AnimState.Idle:
                 {
                     _block = true;
-                    _cardPackAnim.AnimationState.SetAnimation(0, "cardpack_open", false).Complete +=
-                        delegate(TrackEntry entry)
-                        {
-                            _cardPackAnim.AnimationState.SetAnimation(0, "cardpack_waitclose", true);
-                            _cardPackEffectAnimator.SetBool("close", true);
-                            _curState = AnimState.WaitClose;
-                            _block = false;
-                            _openTips.text = I18N.Text("#SysComDesc111");
-                            lightNode.transform.position = new Vector3(-Screen.width - 628, Screen.height / 2 + 200, 0);
-                            lightNode.transform.DOMove(new Vector3(Screen.width + 628, Screen.height / 2 + 200, 0),
-                                lightSpeed).onComplete += () => { _lightFinish = true; };
-                        };
+                    // 播放撕开动画并记录 TrackEntry
+                    _openTrackEntry = _cardPackAnim.AnimationState.SetAnimation(0, "cardpack_open", false);
+                    _openTrackEntry.Complete += _OnOpenAnimComplete;
                     //播放卡包打开音效
                     Game.Manager.audioMan.TriggerSound("CardOpen");
-                    //StartCoroutine(DelayInvoke(0.1f, () => Game.Manager.audioMan.TriggerSound("CardOpen")));
-                    StartCoroutine(DelayInvoke(delay, _PlayShowCardAnim));
+                    // 安排卡牌飞入 —— 记录句柄，便于跳过时 Stop
+                    _openDelayRoutine = StartCoroutine(DelayInvoke(delay, () =>
+                    {
+                        _openDelayRoutine = null;
+                        _PlayShowCardAnim();
+                    }));
+                    //状态切换
                     _curState = AnimState.Open;
                     _cardPackEffectAnimator.SetBool("open", true);
                     break;
                 }
                 case AnimState.Open:
                 {
+                    // 依据配置决定是否允许跳过
+                    if (!_canSkipOpenAnim)
+                    {
+                        break;
+                    }
+                    //Open 分支：加入“跳过”入口
+                    _SkipOpenAnimation();
                     break;
                 }
                 case AnimState.WaitClose:
@@ -532,10 +552,9 @@ namespace FAT
 
                         transform.Find("Mask").GetComponent<Image>().DOFade(0, 0.5f);
                         _spinePrefab.SetActive(false);
-                        //地图按钮位置
-                        var pos = UIManager.Instance.GetLayerRootByType(UILayer.BelowStatus).FindInChild("Adapter")
-                            .GetComponent<MBBoardAreaAdapter>().JumpCardAlbumIconPos();
-                        _cardAlnumNode.transform.position = pos;
+                        
+                        //以自身适配好的位置作为目标点
+                        var pos = _cardAlnumNode.transform.position;
 
                         _cardAlnumNode.GetComponent<Image>().DOFade(1, 0.3f).onComplete += () =>
                         {
@@ -544,8 +563,7 @@ namespace FAT
                         };
                         StartCoroutine(DelayInvoke(0.6f, () =>
                         {
-                            _cardAlnumNode.GetComponent<Image>().DOFade(0, 0.5f);
-                            _cardAlnumNode.transform.DOMove(pos, 0.5f).onComplete += () =>
+                            _cardAlnumNode.GetComponent<Image>().DOFade(0, 0.5f).onComplete += () =>
                             {
                                 //收集到容器时的音效
                                 Game.Manager.audioMan.TriggerSound("CardRecycle");
@@ -566,6 +584,77 @@ namespace FAT
 
                     break;
                 }
+            }
+        }
+        
+        //新增：open 动画完成回调（替代原匿名委托里的逻辑）
+        private void _OnOpenAnimComplete(TrackEntry entry)
+        {
+            _openTrackEntry = null;
+            _OnOpenAnimationFinished(false);
+        }
+        
+        //新增：统一完成逻辑（正常/跳过都走这里）
+        private void _OnOpenAnimationFinished(bool isSkip)
+        {
+            _cardPackAnim.AnimationState.SetAnimation(0, "cardpack_waitclose", true);
+            _cardPackEffectAnimator.SetBool("close", true);
+
+            _curState = AnimState.WaitClose;
+            _block = false;
+            _openTips.text = I18N.Text("#SysComDesc111");
+
+            if (isSkip)
+            {
+                _lightFinish = true;
+                lightNode.transform.DOKill();
+            }
+            else
+            {
+                lightNode.transform.position = new Vector3(-Screen.width - 628, Screen.height / 2 + 200, 0);
+                lightNode.transform.DOMove(new Vector3(Screen.width + 628, Screen.height / 2 + 200, 0), lightSpeed)
+                    .onComplete += () => { _lightFinish = true; };
+            }
+        }
+        
+        //新增：开启动画中“跳过”的实现
+        private void _SkipOpenAnimation()
+        {
+            // 1) 停止延时，立即启动卡牌飞入（保留飞入演出；若想瞬移可改为直接赋位）
+            _ClearRoutine();
+            if (!_cardsAnimStarted) 
+                _PlayShowCardAnim();
+
+            // 2) 解绑回调并强制打断 Spine open
+            if (_openTrackEntry != null)
+            {
+                _openTrackEntry.Complete -= _OnOpenAnimComplete;
+                _openTrackEntry = null;
+            }
+            var state = _cardPackAnim.AnimationState;
+            if (state != null)
+            {
+                state.ClearTrack(0); // 关键：硬停当前与队列动画
+                state.SetAnimation(0, "cardpack_waitclose", true);
+            }
+
+            // 3) 特效同步至 close
+            if (_cardPackEffectAnimator != null)
+            {
+                _cardPackEffectAnimator.SetBool("open", false);
+                _cardPackEffectAnimator.SetBool("close", true);
+            }
+
+            // 4) 统一完成（跳过：不播扫光）
+            _OnOpenAnimationFinished(true);
+        }
+
+        private void _ClearRoutine()
+        {
+            if (_openDelayRoutine != null)
+            {
+                StopCoroutine(_openDelayRoutine);
+                _openDelayRoutine = null;
             }
         }
 

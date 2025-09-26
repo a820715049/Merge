@@ -219,30 +219,12 @@ namespace FAT
 
         private void _AddListener()
         {
-            MessageCenter.Get<GAME_COIN_USE>().AddListener(_WhenCoinUse);
-            MessageCenter.Get<GAME_COIN_ADD>().AddListener(_WhenCoinChange);
-            MessageCenter.Get<GAME_BOARD_ITEM_MERGE>().AddListener(_WhenMerge);
-            MessageCenter.Get<ORDER_FINISH_DATA>().AddListener(_WhenFinishOrder);
-            MessageCenter.Get<GAME_CARD_DRAW_FINISH>().AddListener(_WhenCardDraw);
-            MessageCenter.Get<GAME_MERGE_PRE_BEGIN_REWARD>().AddListener(_WhenTokenGet);
-            MessageCenter.Get<GAME_MINE_BOARD_TOKEN_CHANGE>().AddListener(_WhenTokenCost);
-            MessageCenter.Get<ON_USE_SPEED_UP_ITEM_SUCCESS>().AddListener(_WhendUnleashBubble);
-            MessageCenter.Get<GAME_CARD_ADD>().AddListener(_WhenCardAdd);
-            MessageCenter.Get<MSG.GAME_BOARD_ITEM_SKILL>().AddListener(_WhenBoardSkill);
+            MessageCenter.Get<TASK_UPDATE>().AddListener(_WhenTaskUpdate);
         }
 
         private void _RemoveListener()
         {
-            MessageCenter.Get<GAME_COIN_USE>().RemoveListener(_WhenCoinUse);
-            MessageCenter.Get<GAME_COIN_ADD>().RemoveListener(_WhenCoinChange);
-            MessageCenter.Get<GAME_BOARD_ITEM_MERGE>().RemoveListener(_WhenMerge);
-            MessageCenter.Get<ORDER_FINISH_DATA>().RemoveListener(_WhenFinishOrder);
-            MessageCenter.Get<GAME_CARD_DRAW_FINISH>().RemoveListener(_WhenCardDraw);
-            MessageCenter.Get<GAME_MERGE_PRE_BEGIN_REWARD>().RemoveListener(_WhenTokenGet);
-            MessageCenter.Get<GAME_MINE_BOARD_TOKEN_CHANGE>().RemoveListener(_WhenTokenCost);
-            MessageCenter.Get<ON_USE_SPEED_UP_ITEM_SUCCESS>().RemoveListener(_WhendUnleashBubble);
-            MessageCenter.Get<GAME_CARD_ADD>().RemoveListener(_WhenCardAdd);
-            MessageCenter.Get<MSG.GAME_BOARD_ITEM_SKILL>().RemoveListener(_WhenBoardSkill);
+            MessageCenter.Get<TASK_UPDATE>().RemoveListener(_WhenTaskUpdate);
         }
 
         /// <summary>
@@ -342,43 +324,8 @@ namespace FAT
         #endregion
 
         #region 事件
+        private void _WhenTaskUpdate(TaskType type, int num) => _taskMap.UpdateCellScoreAll((int)type, num);
 
-        private void _WhenCoinUse(CoinChange change_)
-        {
-            if (change_.type == CoinType.MergeCoin && change_.reason == ReasonString.undo_sell_item) { _taskMap.UpdateCellScoreAll((int)EventBingoTaskType.BingoTaskCoin, -change_.amount); }
-        }
-
-        private void _WhenCoinChange(CoinChange change_)
-        {
-            if (change_.type == CoinType.MergeCoin) { _taskMap.UpdateCellScoreAll((int)EventBingoTaskType.BingoTaskCoin, change_.amount); }
-        }
-
-        private void _WhenMerge(Item item)
-        {
-            if (item?.world?.activeBoard?.boardId != Constant.MainBoardId) { return; }
-            _taskMap.UpdateCellScoreAll((int)EventBingoTaskType.BingoTaskMerge, 1);
-        }
-        private void _WhenTokenGet(RewardCommitData reward)
-        {
-            if (reward.rewardType != ObjConfigType.ActivityToken) { return; }
-            var tokenConf = Game.Manager.objectMan.GetTokenConfig(reward.rewardId);
-            if (tokenConf.Feature == FeatureEntry.FeatureOrderLike) { _taskMap.UpdateCellScoreAll((int)EventBingoTaskType.BingoTaskOrderLike, reward.rewardCount); }
-            else { _taskMap.UpdateCellScoreAll((int)EventBingoTaskType.BingoTaskTokenGet, reward.rewardCount); }
-        }
-
-        private void _WhenBoardSkill(Item item, SkillType skillType)
-        {
-            var board = item?.world?.activeBoard;
-            if (board == null || board.boardId != Constant.MainBoardId) { return; }
-            if (skillType != SkillType.Upgrade) { return; }
-            _taskMap.UpdateCellScoreAll((int)EventBingoTaskType.BingoTaskMerge, 1);
-        }
-
-        private void _WhenFinishOrder(IOrderData data) => _taskMap.UpdateCellScoreAll((int)EventBingoTaskType.BingoTaskOrder, data.OrderType != (int)OrderType.MagicHour ? 1 : 0);
-        private void _WhenCardDraw() => _taskMap.UpdateCellScoreAll((int)EventBingoTaskType.BingoTaskCardPack, 1);
-        private void _WhendUnleashBubble() => _taskMap.UpdateCellScoreAll((int)EventBingoTaskType.BingoTaskBubble, 1);
-        private void _WhenTokenCost(int num, int id) => _taskMap.UpdateCellScoreAll((int)EventBingoTaskType.BingoTaskTokenCost, num < 0 ? -num : 0);
-        private void _WhenCardAdd() => _taskMap.UpdateCellScoreAll((int)EventBingoTaskType.BingoTaskCardNum, 1);
 
         #endregion
 

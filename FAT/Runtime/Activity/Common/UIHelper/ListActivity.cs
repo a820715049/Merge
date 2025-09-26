@@ -270,6 +270,7 @@ namespace FAT
                 ActivityBingoTask bingoTask => new BingoTaskEntry(e_, bingoTask),
                 ActivityMultiplierRanking multiplierRanking => new MultiplierRankingEntry(e_, multiplierRanking),
                 ActivityPuzzle puzzle => new PuzzleEntry(e_, puzzle),
+                ActivityOnlineReward onlineReward => new OnlineRewardEntry(e_, onlineReward),
                 _ => null
             };
         }

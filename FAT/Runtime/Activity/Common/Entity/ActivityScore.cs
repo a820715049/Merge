@@ -74,6 +74,7 @@ namespace FAT
 
         public override void TryPopup(ScreenPopup popup_, PopupType state_)
         {
+            UIManager.Instance.OpenWindow(UIConfig.UIOrderDiffchoice, this, false);
             if (HasCycleMilestone())
                 popup_.TryQueue(Popup, state_, true);
         }
@@ -500,8 +501,10 @@ namespace FAT
 
         public bool OnPreUpdate(OrderData order, IOrderHelper helper, MergeWorldTracer tracer)
         {
-            if ((order as IOrderData).IsMagicHour)
+            if (order == null || order.ConfRandomer == null || !order.ConfRandomer.IsExtraScore)
+            {
                 return false;
+            }
             if (!HasCycleMilestone())
                 return false;
             var changed = false;

@@ -20,6 +20,7 @@ namespace FAT
         MagicHour = 5,  // 星想事成活动 随机订单
         OrderDash = 6,
         Streak = 7,      // 连续订单活动
+        LimitMergeOrder = 8, // 限时合成订单
     }
 
     // 只增不删 避免错误解析用户存档
@@ -213,7 +214,7 @@ namespace FAT
 
         #region flash
         // 限时订单 | 共用了倒计时的逻辑
-        bool IsFlash => OrderType == (int)FAT.OrderType.Flash || OrderType == (int)FAT.OrderType.Challenge || OrderType == (int)FAT.OrderType.OrderDash || OrderType == (int)FAT.OrderType.Streak;
+        bool IsFlash => OrderType == (int)FAT.OrderType.Flash || OrderType == (int)FAT.OrderType.Challenge || OrderType == (int)FAT.OrderType.OrderDash || OrderType == (int)FAT.OrderType.Streak || OrderType == (int)FAT.OrderType.LimitMergeOrder;
         #endregion
 
         #region score
@@ -309,6 +310,10 @@ namespace FAT
                 {
                     res = ActivityOrderStreak.GetOrderThemeRes(GetValue(OrderParamType.EventId), GetValue(OrderParamType.EventParam));
                 }
+                else if (OrderType == (int)FAT.OrderType.LimitMergeOrder)
+                {
+                    res = ActivityLimitMergeOrder.GetOrderThemeRes();
+                }
             }
             else if (HasBonus)
             {
@@ -376,6 +381,11 @@ namespace FAT
         bool TryGetClawOrderRes(out string res)
         {
             res = ActivityClawOrder.GetOrderAttachmentRes();
+            return !string.IsNullOrEmpty(res);
+        }
+        bool TryGetLimitMergeOrderRes(out string res)
+        {
+            res = ActivityLimitMergeOrder.GetOrderAttachmentRes();
             return !string.IsNullOrEmpty(res);
         }
         #endregion

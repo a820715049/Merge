@@ -25,16 +25,16 @@ namespace FAT
         public EventBp ConfD { get; private set; }
 
         #region 活动基础
-        
+
         //用户分层 对应BpDetail.id
         private int _detailId;
-        
+
         //外部调用需判空
         public BpDetail GetCurDetailConfig()
         {
             return Game.Manager.configMan.GetBpDetailConfig(_detailId);
         }
-        
+
         public BPActivity(ActivityLite lite_)
         {
             Lite = lite_;
@@ -174,7 +174,7 @@ namespace FAT
             //上线加载存档时 检查任务跨天刷新
             _CheckTaskRefresh();
         }
-        
+
         private long TSOffset() => Game.Timestamp(new DateTime(2024, 1, 1));
 
         public override IEnumerable<(string, AssetTag)> ResEnumerate()
@@ -199,23 +199,39 @@ namespace FAT
             //活动结束时打点
             DataTracker.bp_end_settle.Track(this, GetCurDetailConfig()?.Diff ?? 0, _purchaseState, _milestoneLevel + 1);
         }
-        
+
         private void AddListener()
         {
-            MessageCenter.Get<MSG.GAME_COIN_USE>().AddListener(_WhenCoinUse);
-            MessageCenter.Get<MSG.GAME_BOARD_ITEM_MERGE>().AddListener(_WhenBoardMerge);
-            MessageCenter.Get<MSG.GAME_BOARD_ITEM_SKILL>().AddListener(_WhenBoardSkill);
-            MessageCenter.Get<MSG.ORDER_FINISH_DATA>().AddListener(_WhenOrderFinish);
             MessageCenter.Get<MSG.GAME_ONE_SECOND_DRIVER>().AddListener(_OnSecondUpdate);
+            MessageCenter.Get<MSG.TASK_UPDATE>().AddListener(UpdateTask);
         }
 
         private void RemoveListener()
         {
-            MessageCenter.Get<MSG.GAME_COIN_USE>().RemoveListener(_WhenCoinUse);
-            MessageCenter.Get<MSG.GAME_BOARD_ITEM_MERGE>().RemoveListener(_WhenBoardMerge);
-            MessageCenter.Get<MSG.GAME_BOARD_ITEM_SKILL>().RemoveListener(_WhenBoardSkill);
-            MessageCenter.Get<MSG.ORDER_FINISH_DATA>().RemoveListener(_WhenOrderFinish);
             MessageCenter.Get<MSG.GAME_ONE_SECOND_DRIVER>().RemoveListener(_OnSecondUpdate);
+            MessageCenter.Get<MSG.TASK_UPDATE>().RemoveListener(UpdateTask);
+        }
+
+        private void UpdateTask(TaskType type, int count)
+        {
+            switch (type)
+            {
+                case TaskType.TaskDiamond:
+                    {
+                        _WhenCoinUse(count);
+                        break;
+                    }
+                case TaskType.Merge:
+                    {
+                        _WhenBoardMerge();
+                        break;
+                    }
+                case TaskType.Order:
+                    {
+                        _WhenOrderFinish();
+                        break;
+                    }
+            }
         }
 
         private void _OnSecondUpdate()
@@ -223,9 +239,9 @@ namespace FAT
             //在线期间 检查任务跨天刷新
             _CheckTaskRefresh();
         }
-        
+
         #region 界面 入口 换皮 弹脸 红点
-        
+
         public override ActivityVisual Visual => VisualMain.visual;
 
         public VisualRes VisualMain { get; } = new(UIConfig.UIBPMain); // 主界面
@@ -265,7 +281,7 @@ namespace FAT
             VisualBuyOneSuccess.Setup(ConfD.BuySuccessTheme1);
             VisualBuyTwoSuccess.Setup(ConfD.BuySuccessTheme2);
             VisualDoubleCheck.Setup(ConfD.ConfirmTheme);
-            
+
             // 任务Item
             VisualTaskItem.Setup(ConfD.TaskAssetTheme);
         }
@@ -337,7 +353,7 @@ namespace FAT
                 if (isFree)
                     //找到没有领取免费奖励的id 检查目前等级下是否可以领取
                     if (state.Value.Item1) continue;
-                else
+                    else
                     //找到没有领取免费奖励或付费奖励的id 检查目前等级下是否可以领取
                     if (state.Value.Item1 && state.Value.Item2) continue;
                 var id = state.Key;
@@ -386,7 +402,7 @@ namespace FAT
             }
             return (completeCount, totalCount);
         }
-        
+
         //界面调用检查目前是否可以弹出购买弹窗
         //注意 如果配了3 5 7级能弹，若一下从1级升到10级，则只会弹一遍
         public bool CheckCanPopBuy()
@@ -439,7 +455,7 @@ namespace FAT
         #endregion
 
         #endregion
-        
+
         #region 购买逻辑
 
         //BP的购买项类型
@@ -451,7 +467,7 @@ namespace FAT
             Up = 3,         //一档升级到二档 补差价
             End = 4,        //活动结束时挽留
         }
-        
+
         //BP的购买状态
         public enum BPPurchaseState
         {
@@ -463,7 +479,7 @@ namespace FAT
         //当前购买状态 默认初始为免费
         private int _purchaseState = (int)BPPurchaseState.Free;
         public BPPurchaseState PurchaseState => (BPPurchaseState)_purchaseState;
-        
+
         //自行构造购买项相关信息 Value.Item1为IAPPack.id BonusReward目前应该是空的没有内容
         private Dictionary<BPPurchaseType, (int, IAPPack, BonusReward)> _purchaseInfoDict = new();
 
@@ -482,7 +498,7 @@ namespace FAT
             };
             return packInfoId <= 0 ? null : Game.Manager.configMan.GetBpPackInfoConfig(packInfoId);
         }
-        
+
         public IAPPack GetIAPPackByType(BPPurchaseType type)
         {
             return _purchaseInfoDict.TryGetValue(type, out var info) ? info.Item2 : null;
@@ -507,7 +523,7 @@ namespace FAT
             Game.Manager.activity.giftpack.Purchase(this, iapPack);
 #endif
         }
-        
+
         //正常购买成功或补单成功后的回调
         //这里无论是正常购买、单次购买后补单还是重复购买后补单，都会依照packId_是多少来处理对应逻辑
         //且保证不会重复处理一样的packId_或状态，这样做的目的是避免重复购买时，如果有客诉，补偿时会比较纯粹
@@ -536,7 +552,7 @@ namespace FAT
             if (!late_)
             {
                 //非补单情况下 填充IAPPack本身的奖励 目前从配置上来讲会配空
-                rewardList.AddRange(rewards_);  
+                rewardList.AddRange(rewards_);
             }
             //根据购买类型决定最终的购买状态
             if (purchaseType == BPPurchaseType.Normal)
@@ -594,7 +610,7 @@ namespace FAT
                 {
                     //已付费 则尝试领取所有付费奖励 + 循环奖励
                     var rewardMap = ObjectPool<Dictionary<int, int>>.GlobalPool.Alloc();    //奖励整合结果
-                    //收集奖励同时会打点和修改对应数据
+                                                                                            //收集奖励同时会打点和修改对应数据
                     _TryClaimAllMilestoneReward(false, rewardMap);
                     //统一领取整理好后的任务奖励
                     var rewardMan = Game.Manager.rewardMan;
@@ -613,8 +629,8 @@ namespace FAT
             //发事件通知界面做表现 late_会告知界面此次购买回调是否是补单，补单时的界面表现需要具体情况具体处理
             MessageCenter.Get<MSG.GAME_BP_BUY_SUCCESS>().Dispatch(purchaseType, container, late_);
         }
-        
-        public override BonusReward MatchPack(int packId_) 
+
+        public override BonusReward MatchPack(int packId_)
         {
             foreach (var info in _purchaseInfoDict)
             {
@@ -625,7 +641,7 @@ namespace FAT
             }
             return null;
         }
-        
+
         public override void RefreshContent()
         {
             _purchaseInfoDict.Clear();
@@ -636,7 +652,7 @@ namespace FAT
             _RefreshPackInfo(BPPurchaseType.Up);
             _RefreshPackInfo(BPPurchaseType.End);
         }
-        
+
         private void _RefreshPackInfo(BPPurchaseType type)
         {
             var packId = GetBpPackInfoByType(type)?.PackId ?? 0;
@@ -655,7 +671,7 @@ namespace FAT
         public override int ThemeId { get; }
         public override int StockTotal => -1;   //设成-1 避免此字段的影响
         public override void RefreshPack() { }
-        
+
         #endregion
 
         #region 里程碑
@@ -685,7 +701,7 @@ namespace FAT
             }
             return conf;
         }
-        
+
         public int GetCurMilestoneLevel()
         {
             return _milestoneLevel;
@@ -742,7 +758,7 @@ namespace FAT
                 if (finalMilestoneNum < tempMilestoneMax)
                     break;
                 finalMilestoneNum -= tempMilestoneMax;   //此时finalMilestoneNum代表多余的进度值
-                //先递进
+                                                         //先递进
                 _milestoneLevel++;
                 _milestoneNum = finalMilestoneNum;
                 //检查下当前是否处于循环奖励阶段 是的话循环奖励的可领取次数+1
@@ -756,14 +772,14 @@ namespace FAT
                     DataTracker.bp_cycle_complete.Track(this, curGroupConf.Diff, CycleAvailableCount, CycleReceivedCount, _milestoneLevel + 1);
                 }
                 var nextMilestoneConf = GetMilestoneInfo(_milestoneLevel);  //这里获得的配置已经是升级后的配置 因为_milestoneLevel在前面已经+1了
-                //里程碑升级时打点
+                                                                            //里程碑升级时打点
                 var isFinal = _milestoneLevel >= totalCount - 2;
                 var levelNum = nextMilestoneConf?.Id ?? tempMilestoneInfo.Id;   //nextMilestoneConf为空时说明满级 此时用当前等级的id打点（其实二者都是循环档位的id）
-                DataTracker.bp_milestone_complete.Track(this, curGroupConf.Diff, _milestoneLevel + 1, totalCount - 1, isFinal, 
+                DataTracker.bp_milestone_complete.Track(this, curGroupConf.Diff, _milestoneLevel + 1, totalCount - 1, isFinal,
                     levelNum, _purchaseState, _milestoneLevel + 1);
             }
-            while(true);
-            
+            while (true);
+
             //进度条动画  进度条满时发奖流程  发完奖后若还有多余的进度值，剩余的进度值也要有动画
             MessageCenter.Get<MSG.UI_BP_MILESTONE_CHANGE>().Dispatch(finalMilestoneNum, curMilestoneMax);
         }
@@ -800,7 +816,7 @@ namespace FAT
             var hasClaim = isClaimFree ? claimStateInfo.Item1 : claimStateInfo.Item2;
             return !hasClaim;
         }
-        
+
         //UI上手动领取里程碑奖励 调用时自行维护container,方法内部不负责Clear或Free 
         public bool TryClaimMilestoneReward(int id, bool isClaimFree, PoolMapping.Ref<List<RewardCommitData>> container)
         {
@@ -847,7 +863,7 @@ namespace FAT
             var detailConf = GetCurDetailConfig();
             var totalCount = detailConf?.MileStones?.Count ?? 0;
             totalCount = totalCount > 0 ? totalCount - 1 : 0;
-            DataTracker.bp_milestone_claim.Track(this, detailConf?.Diff ?? 0, level + 1, 
+            DataTracker.bp_milestone_claim.Track(this, detailConf?.Diff ?? 0, level + 1,
                 totalCount, id, isClaimFree, _purchaseState);
             return true;
         }
@@ -864,9 +880,9 @@ namespace FAT
                 RewardClaimStateDict.Add(id, (false, false, false));
             }
         }
-        
+
         #endregion
-        
+
         #region 循环奖励
 
         //循环奖励的可领取次数 会进存档
@@ -875,7 +891,7 @@ namespace FAT
         public int CycleReceivedCount { get; private set; } = 0;
         //缓存循环奖励的随机池
         private List<(int, int, int)> _cycleRandomPool = new List<(int, int, int)>();
-        
+
         public List<(int, int, int)> GetCycleRandomPool()
         {
             return _cycleRandomPool;
@@ -887,7 +903,7 @@ namespace FAT
             var allMilestoneInfo = GetCurDetailConfig()?.MileStones;
             return allMilestoneInfo != null && _milestoneLevel + 1 >= allMilestoneInfo.Count - 1;
         }
-        
+
         //获取循环奖励配置信息id 对应BpMilestone.id
         public int GetCycleMilestoneId()
         {
@@ -897,7 +913,7 @@ namespace FAT
             //默认最后一个是循环奖励id
             return allMilestoneInfo[^1];
         }
-        
+
         //UI上手动一次性领取全部的循环奖励 调用时自行维护container,方法内部不负责Clear或Free 
         public bool TryClaimAllCycleReward(PoolMapping.Ref<List<RewardCommitData>> container)
         {
@@ -966,7 +982,7 @@ namespace FAT
             Pay,    //纯付费奖励 包括所有未领取的付费档里程碑奖励 + 所有的循环宝箱
             All,    //免费+付费
         }
-        
+
         //收集且合并展示当前可获得的所有奖励 区分纯免费 付费一档 付费二档 挽留
         //container 存储奖励的id和数量
         public void CollectAllCanClaimReward(RewardCollectType collectType, PoolMapping.Ref<List<(int, int)>> container)
@@ -1005,11 +1021,11 @@ namespace FAT
             foreach (var state in RewardClaimStateDict)
             {
                 //找到没有领取免费奖励的id 检查目前等级下是否可以领取
-                if (state.Value.Item1) 
+                if (state.Value.Item1)
                     continue;
                 //获取对应配置信息
                 var curMilestoneInfo = Game.Manager.configMan.GetBpMilestoneConfig(state.Key);
-                if (curMilestoneInfo == null) 
+                if (curMilestoneInfo == null)
                     continue;
                 //检查该里程碑是否达到领奖等级
                 var level = curMilestoneInfo.ShowNum - 1;
@@ -1026,7 +1042,7 @@ namespace FAT
                 }
             }
         }
-        
+
         //收集目前可以领取的所有付费奖励 = 里程碑奖励+循环奖励  循环奖励以宝箱icon的形式展示出来
         private void _CollectPayReward(Dictionary<int, int> rewardMap)
         {
@@ -1034,11 +1050,11 @@ namespace FAT
             foreach (var state in RewardClaimStateDict)
             {
                 //找到没有领取付费奖励的id 检查目前等级下是否可以领取
-                if (state.Value.Item2) 
+                if (state.Value.Item2)
                     continue;
                 //获取对应配置信息
                 var curMilestoneInfo = Game.Manager.configMan.GetBpMilestoneConfig(state.Key);
-                if (curMilestoneInfo == null) 
+                if (curMilestoneInfo == null)
                     continue;
                 //检查该里程碑是否达到领奖等级
                 var level = curMilestoneInfo.ShowNum - 1;
@@ -1080,8 +1096,8 @@ namespace FAT
             //实际领取
             var container = PoolMapping.PoolMappingAccess.Take(out List<RewardCommitData> rewardList);
             var rewardMap = ObjectPool<Dictionary<int, int>>.GlobalPool.Alloc();    //奖励整合结果
-            //收集奖励同时会打点和修改对应数据 区分已付费和未付费
-            //先领取所有免费的
+                                                                                    //收集奖励同时会打点和修改对应数据 区分已付费和未付费
+                                                                                    //先领取所有免费的
             _TryClaimAllMilestoneReward(true, rewardMap);
             //统一领取整理好后的免费奖励
             foreach (var rewardInfo in rewardMap)
@@ -1102,8 +1118,8 @@ namespace FAT
                 }
             }
             //弹脸
-            object[] customParams = 
-            { 
+            object[] customParams =
+            {
                 container,      //参数1: 活动结束时 直接自动帮领的所有奖励
                 previewAll,     //参数2: 用于玩家未购买BP或者已购买时界面上的预览显示（数据层要提前构造好 因为实际领取后就拿不到了）
                 previewFree     //参数3: 用于玩家未购买且放弃挽留购买项时界面上的预览显示（数据层要提前构造好 因为实际领取后就拿不到了）
@@ -1112,7 +1128,7 @@ namespace FAT
             //数据回收
             ObjectPool<Dictionary<int, int>>.GlobalPool.Free(rewardMap);
         }
-        
+
         //仅在内部结算时使用 领取所有可领取的免费/付费里程碑+循环奖励  可以传参决定是否仅领取免费奖励
         private void _TryClaimAllMilestoneReward(bool isOnlyFree, Dictionary<int, int> rewardMap)
         {
@@ -1122,17 +1138,17 @@ namespace FAT
             var totalCount = detailConf?.MileStones?.Count ?? 0;
             totalCount = totalCount > 0 ? totalCount - 1 : 0;
             //收集发生变化的id列表
-            var changeIdList = ObjectPool<List<int>>.GlobalPool.Alloc();    
+            var changeIdList = ObjectPool<List<int>>.GlobalPool.Alloc();
             //收集里程碑奖励
             foreach (var state in RewardClaimStateDict)
             {
                 if (isOnlyFree)
                     //找到没有领取免费奖励的id 检查目前等级下是否可以领取
                     if (state.Value.Item1) continue;
-                else
+                    else
                     //找到没有领取免费奖励或付费奖励的id 检查目前等级下是否可以领取
                     if (state.Value.Item1 && state.Value.Item2) continue;
-                
+
                 var id = state.Key;
                 //获取对应配置信息
                 var curMilestoneInfo = Game.Manager.configMan.GetBpMilestoneConfig(id);
@@ -1229,13 +1245,13 @@ namespace FAT
                 }
             }
         }
-        
-        #endregion
 
         #endregion
 
         #endregion
-        
+
+        #endregion
+
         #region 任务
 
         #region 对外参数/方法
@@ -1244,7 +1260,7 @@ namespace FAT
         public long TaskRefreshTs => _nextRefreshTs;
         //目前未领取奖励的循环任务数量
         public int UnClaimCycleTaskCount => _cycleFinishCount - _cycleClaimCount;
-        
+
         //获取所有任务数据
         //注意这里拿到的数据始终是排序好后的顺序，且包含循环任务
         public List<BPTaskData> GetBPTaskDataList()
@@ -1266,7 +1282,7 @@ namespace FAT
             }
             return hasUnClaim || UnClaimCycleTaskCount > 0;
         }
-        
+
         //任务刷新界面中主动调用填充新解锁的任务
         public bool FillNewTaskList(PoolMapping.Ref<List<BPTaskData>> container)
         {
@@ -1280,7 +1296,7 @@ namespace FAT
             }
             return true;
         }
-        
+
         //任务完成界面中主动调用填充目前处于已完成待领奖状态的任务 若循环任务有已完成待领奖次数，则也会加进去
         public bool FillUnClaimTaskList(PoolMapping.Ref<List<BPTaskData>> container)
         {
@@ -1363,17 +1379,17 @@ namespace FAT
         }
 
         #endregion
-        
+
         #region 任务基本数据
 
         //当前所有任务数据List 包含日刷任务和循环任务 且始终为排序好后的顺序
         private List<BPTaskData> _bpTaskDataList = new List<BPTaskData>();
-        
+
         //进存档字段
         //记录各个任务类型在活动期间的进度值。
         //Item1记录日刷任务进度值，会在跨天时清0；Item2记录循环任务进度值，跨天时不清0
         private List<(int, int)> _progressValue;
-        
+
         //BP任务的状态类型
         public enum BPTaskState
         {
@@ -1381,7 +1397,7 @@ namespace FAT
             UnClaim = 1,    //已完成未领奖
             Claimed = 2,    //已完成已领奖
         }
-        
+
         public class BPTaskData
         {
             public int Id;                  //任务配置Id
@@ -1390,11 +1406,11 @@ namespace FAT
             public int Priority;            //排序优先级
             public int TaskType;            //任务类型
             public bool IsCycle;            //是否是循环任务
-            //进存档
+                                            //进存档
             public int RequireCount;        //该任务完成所需要的总数值
             public BPTaskState State;       //该任务目前状态 
             public int ArchiveState;           //该任务目前状态 仅用于存档时使用 避免存档时频繁转换类型
-            //界面使用
+                                               //界面使用
             public int BelongActId;         //任务所属活动Id
             public int ProgressValue;       //当前任务进度值 存一下用于界面显示
 
@@ -1412,7 +1428,7 @@ namespace FAT
                 State = BPTaskState.UnFinish;
                 BelongActId = belongActId;
             }
-            
+
             //读存档时创建
             public void InitById(int id, int requireCount, int state, int belongActId, bool isCycle)
             {
@@ -1450,7 +1466,7 @@ namespace FAT
                     rewardNum = rewardNum * privilege / 10;     //配置上倍率会扩大10倍 所以实际计算时再除回去
                 DataTracker.bp_task_complete.Track(act, diff, Id, typeId, type, rewardNum);
             }
-            
+
             public override string ToString()
             {
                 return $"ErgTaskData(Id={Id}, RequireCount={RequireCount}, State={State}, BelongActId = {BelongActId}, ProgressValue = {ProgressValue}, IsCycle = {IsCycle}, Conf={Conf})";
@@ -1460,14 +1476,14 @@ namespace FAT
         private void _InitTaskProgressValue()
         {
             //使用这种方式初始化是为了便于存档读取
-            var count = Enum.GetValues(typeof(BpTaskType)).Length;
+            var count = Enum.GetValues(typeof(TaskType)).Length;
             _progressValue = new List<(int, int)>(count);
             for (var i = 0; i < count; i++)
             {
                 _progressValue.Add((0, 0));
             }
         }
-        
+
         private void _InitTaskDataList()
         {
             if (!Valid)
@@ -1504,7 +1520,7 @@ namespace FAT
         {
             _bpTaskDataList.Sort(_Compare);
         }
-        
+
         //排序规则  日刷未完成＞循环＞日刷已完成  状态一致时用Priority从小到大排序
         private static int _Compare(BPTaskData a, BPTaskData b)
         {
@@ -1516,7 +1532,7 @@ namespace FAT
                 return cycleCompare;
             return a.Priority.CompareTo(b.Priority);
         }
-        
+
         // 状态权重排序：1（未领奖） > 0（未完成） > 2（已领奖）
         private static int _GetStateWeight(BPTaskState state)
         {
@@ -1528,13 +1544,13 @@ namespace FAT
                 _ => 3,
             };
         }
-        
+
         // 是否为循环任务排序 0(日刷任务) > 1(循环任务)
         private static int _GetCycleTypeWeight(bool isCycle)
         {
             return isCycle ? 1 : 0;
         }
-        
+
         //初始时刷新任务目前最新的进度值
         private void _UpdateTaskProgressValue()
         {
@@ -1553,42 +1569,28 @@ namespace FAT
 
         #region 任务进度变化
 
-        private void _WhenCoinUse(CoinChange change)
+        private void _WhenCoinUse(int change)
         {
-            if (change.type == CoinType.Gem) 
-                _UpdateProgressValue(BpTaskType.Diamond, change.amount);
-        }
-        
-        //只接受来自主棋盘的棋子合成
-        private void _WhenBoardMerge(Item item)
-        {
-            var board = item?.world?.activeBoard;
-            if (board == null || board.boardId != Constant.MainBoardId) 
-                return;
-            _UpdateProgressValue(BpTaskType.Merge, 1);
+            _UpdateProgressValue(TaskType.TaskDiamond, change);
         }
 
-        private void _WhenBoardSkill(Item item, SkillType skillType)
+        //只接受来自主棋盘的棋子合成
+        private void _WhenBoardMerge()
         {
-            var board = item?.world?.activeBoard;
-            //只考虑主棋盘
-            if (board == null || board.boardId != Constant.MainBoardId) 
-                return;
-            //只在使用了万能棋子时才统计棋子合成次数
-            if (skillType != SkillType.Upgrade)
-                return;
-            _UpdateProgressValue(BpTaskType.Merge, 1);
+            _UpdateProgressValue(TaskType.Merge, 1);
         }
-        
-        private void _WhenOrderFinish(IOrderData orderData)
+
+        private void _WhenBoardSkill()
         {
-            //心想事成订单不计入任务进度
-            if (orderData.IsMagicHour)
-                return;
-            _UpdateProgressValue(BpTaskType.Order, 1);
+            _UpdateProgressValue(TaskType.Merge, 1);
         }
-        
-        private void _UpdateProgressValue(BpTaskType type, int value) 
+
+        private void _WhenOrderFinish()
+        {
+            _UpdateProgressValue(TaskType.Order, 1);
+        }
+
+        private void _UpdateProgressValue(TaskType type, int value)
         {
             if (!Valid || _progressValue == null) return;
             var key = (int)type;
@@ -1604,7 +1606,7 @@ namespace FAT
         #endregion
 
         #region 任务状态变化
-        
+
         #region 任务进度/状态发生变化时 主棋盘任务Tips表现需要的内容
 
         // 任务变化类型
@@ -1617,11 +1619,11 @@ namespace FAT
         // 单条任务更新信息
         public struct BPTaskUpdateInfo
         {
-            public BpTaskType TaskType;
+            public TaskType TaskType;
             public BPTaskData TaskData;
             public BPTaskChangeType ChangeType;
 
-            public BPTaskUpdateInfo(BpTaskType type, BPTaskData data, BPTaskChangeType changeType)
+            public BPTaskUpdateInfo(TaskType type, BPTaskData data, BPTaskChangeType changeType)
             {
                 TaskType = type;
                 TaskData = data;
@@ -1636,7 +1638,7 @@ namespace FAT
             _taskUpdateInfoList.Clear();
         }
 
-        private void _AddTaskUpdateInfo(BpTaskType type, BPTaskData data, BPTaskChangeType changeType)
+        private void _AddTaskUpdateInfo(TaskType type, BPTaskData data, BPTaskChangeType changeType)
         {
             _taskUpdateInfoList.Add(new BPTaskUpdateInfo(type, data, changeType));
         }
@@ -1650,7 +1652,7 @@ namespace FAT
         }
 
         #endregion
-        
+
         //目前认为循环任务只会有一个，所以起全局值来记录，避免存档中填充无效信息
         //循环任务累计完成次数
         private int _cycleFinishCount = 0;
@@ -1658,11 +1660,11 @@ namespace FAT
         private int _cycleClaimCount = 0;
         //日刷任务下次刷新时间
         private long _nextRefreshTs = 0;
-        
+
         //检查各个任务是否已完成 已经是完成状态的则跳过
         //新完成的任务不会立即帮领，需要玩家手动领取，活动结束后如果付费了但是没领完 则会帮领
         //日刷任务使用checkValue   循环任务使用checkValueCycle
-        private void _CheckTaskState(BpTaskType type, int checkValue, int checkValueCycle)
+        private void _CheckTaskState(TaskType type, int checkValue, int checkValueCycle)
         {
             if (checkValue <= 0 || checkValueCycle <= 0)
                 return;
@@ -1733,7 +1735,7 @@ namespace FAT
             //广播任务刷新事件
             _TryDispatchTaskUpdate();
         }
-        
+
         //跨天循环任务刷新
         private void _CheckTaskRefresh()
         {
@@ -1819,7 +1821,7 @@ namespace FAT
         {
             if (_progressValue == null)
                 return;
-            var count = Enum.GetValues(typeof(BpTaskType)).Length;
+            var count = Enum.GetValues(typeof(TaskType)).Length;
             for (var i = 0; i < count; i++)
             {
                 //Item1记录日刷任务进度值，会在跨天时清0；Item2记录循环任务进度值，跨天时不清0
@@ -1829,7 +1831,7 @@ namespace FAT
             }
             _UpdateTaskProgressValue();
         }
-        
+
         #endregion
 
         #endregion

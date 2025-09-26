@@ -24,32 +24,33 @@ namespace fat.rawdata {
     static IAPProductConfReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChxyYXdkYXRhL0lBUFByb2R1Y3RDb25mLnByb3RvEgdyYXdkYXRhIsMBCgpJ",
+            "ChxyYXdkYXRhL0lBUFByb2R1Y3RDb25mLnByb3RvEgdyYXdkYXRhItgBCgpJ",
             "QVBQcm9kdWN0EgoKAmlkGAEgASgFEhAKCGFuZFRva2VuGBEgASgJEgwKBGRl",
             "c2MYAiABKAkSEwoLZWRpdG9yUHJpY2UYECABKAISDwoHaWFwTmFtZRgDIAEo",
             "CRINCgVpbWFnZRgEIAEoCRIQCghpb3NUb2tlbhgSIAEoCRINCgVwcmljZRgF",
-            "IAEoBRIRCglwcmljZVR5cGUYBiABKAUSEQoJcHJvZHVjdElkGAcgASgJEg0K",
-            "BXRpdGxlGAggASgJIqoBChRJQVBQcm9kdWN0TWFwQUJWYWx1ZRJHCg1JQVBQ",
-            "cm9kdWN0TWFwGAEgAygLMjAucmF3ZGF0YS5JQVBQcm9kdWN0TWFwQUJWYWx1",
-            "ZS5JQVBQcm9kdWN0TWFwRW50cnkaSQoSSUFQUHJvZHVjdE1hcEVudHJ5EgsK",
-            "A2tleRgBIAEoBRIiCgV2YWx1ZRgCIAEoCzITLnJhd2RhdGEuSUFQUHJvZHVj",
-            "dDoCOAEi6QMKDklBUFByb2R1Y3RDb25mEkEKDUlBUFByb2R1Y3RNYXAYASAD",
-            "KAsyKi5yYXdkYXRhLklBUFByb2R1Y3RDb25mLklBUFByb2R1Y3RNYXBFbnRy",
-            "eRJFCg9JQVBQcm9kdWN0TWFwQUIYAiADKAsyLC5yYXdkYXRhLklBUFByb2R1",
-            "Y3RDb25mLklBUFByb2R1Y3RNYXBBQkVudHJ5Ek8KFElBUFByb2R1Y3RNYXBB",
-            "QlBhdGNoGAMgAygLMjEucmF3ZGF0YS5JQVBQcm9kdWN0Q29uZi5JQVBQcm9k",
-            "dWN0TWFwQUJQYXRjaEVudHJ5GkkKEklBUFByb2R1Y3RNYXBFbnRyeRILCgNr",
-            "ZXkYASABKAUSIgoFdmFsdWUYAiABKAsyEy5yYXdkYXRhLklBUFByb2R1Y3Q6",
-            "AjgBGlUKFElBUFByb2R1Y3RNYXBBQkVudHJ5EgsKA2tleRgBIAEoCRIsCgV2",
-            "YWx1ZRgCIAEoCzIdLnJhd2RhdGEuSUFQUHJvZHVjdE1hcEFCVmFsdWU6AjgB",
-            "GloKGUlBUFByb2R1Y3RNYXBBQlBhdGNoRW50cnkSCwoDa2V5GAEgASgJEiwK",
-            "BXZhbHVlGAIgASgLMh0ucmF3ZGF0YS5JQVBQcm9kdWN0TWFwQUJWYWx1ZToC",
-            "OAFCPVotZ2l0bGFiLmZ1bnBsdXMuaW8vZmF0L2NvbmYvZ2VuL2dvbGFuZy9y",
-            "YXdkYXRhqgILZmF0LnJhd2RhdGFiBnByb3RvMw=="));
+            "IAEoBRIRCglwcmljZVR5cGUYBiABKAUSEQoJcHJvZHVjdElkGAcgASgJEhMK",
+            "C3RpY2tldFByaWNlGBMgASgCEg0KBXRpdGxlGAggASgJIqoBChRJQVBQcm9k",
+            "dWN0TWFwQUJWYWx1ZRJHCg1JQVBQcm9kdWN0TWFwGAEgAygLMjAucmF3ZGF0",
+            "YS5JQVBQcm9kdWN0TWFwQUJWYWx1ZS5JQVBQcm9kdWN0TWFwRW50cnkaSQoS",
+            "SUFQUHJvZHVjdE1hcEVudHJ5EgsKA2tleRgBIAEoBRIiCgV2YWx1ZRgCIAEo",
+            "CzITLnJhd2RhdGEuSUFQUHJvZHVjdDoCOAEi6QMKDklBUFByb2R1Y3RDb25m",
+            "EkEKDUlBUFByb2R1Y3RNYXAYASADKAsyKi5yYXdkYXRhLklBUFByb2R1Y3RD",
+            "b25mLklBUFByb2R1Y3RNYXBFbnRyeRJFCg9JQVBQcm9kdWN0TWFwQUIYAiAD",
+            "KAsyLC5yYXdkYXRhLklBUFByb2R1Y3RDb25mLklBUFByb2R1Y3RNYXBBQkVu",
+            "dHJ5Ek8KFElBUFByb2R1Y3RNYXBBQlBhdGNoGAMgAygLMjEucmF3ZGF0YS5J",
+            "QVBQcm9kdWN0Q29uZi5JQVBQcm9kdWN0TWFwQUJQYXRjaEVudHJ5GkkKEklB",
+            "UFByb2R1Y3RNYXBFbnRyeRILCgNrZXkYASABKAUSIgoFdmFsdWUYAiABKAsy",
+            "Ey5yYXdkYXRhLklBUFByb2R1Y3Q6AjgBGlUKFElBUFByb2R1Y3RNYXBBQkVu",
+            "dHJ5EgsKA2tleRgBIAEoCRIsCgV2YWx1ZRgCIAEoCzIdLnJhd2RhdGEuSUFQ",
+            "UHJvZHVjdE1hcEFCVmFsdWU6AjgBGloKGUlBUFByb2R1Y3RNYXBBQlBhdGNo",
+            "RW50cnkSCwoDa2V5GAEgASgJEiwKBXZhbHVlGAIgASgLMh0ucmF3ZGF0YS5J",
+            "QVBQcm9kdWN0TWFwQUJWYWx1ZToCOAFCPVotZ2l0bGFiLmZ1bnBsdXMuaW8v",
+            "ZmF0L2NvbmYvZ2VuL2dvbGFuZy9yYXdkYXRhqgILZmF0LnJhd2RhdGFiBnBy",
+            "b3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.IAPProduct), global::fat.rawdata.IAPProduct.Parser, new[]{ "Id", "AndToken", "Desc", "EditorPrice", "IapName", "Image", "IosToken", "Price", "PriceType", "ProductId", "Title" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.IAPProduct), global::fat.rawdata.IAPProduct.Parser, new[]{ "Id", "AndToken", "Desc", "EditorPrice", "IapName", "Image", "IosToken", "Price", "PriceType", "ProductId", "TicketPrice", "Title" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.IAPProductMapABValue), global::fat.rawdata.IAPProductMapABValue.Parser, new[]{ "IAPProductMap" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.IAPProductConf), global::fat.rawdata.IAPProductConf.Parser, new[]{ "IAPProductMap", "IAPProductMapAB", "IAPProductMapABPatch" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, null, })
           }));
@@ -104,6 +105,7 @@ namespace fat.rawdata {
       price_ = other.price_;
       priceType_ = other.priceType_;
       productId_ = other.productId_;
+      ticketPrice_ = other.ticketPrice_;
       title_ = other.title_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -264,6 +266,20 @@ namespace fat.rawdata {
       }
     }
 
+    /// <summary>Field number for the "ticketPrice" field.</summary>
+    public const int TicketPriceFieldNumber = 19;
+    private float ticketPrice_;
+    /// <summary>
+    /// 支付代币价格
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public float TicketPrice {
+      get { return ticketPrice_; }
+      set {
+        ticketPrice_ = value;
+      }
+    }
+
     /// <summary>Field number for the "title" field.</summary>
     public const int TitleFieldNumber = 8;
     private string title_ = "";
@@ -303,6 +319,7 @@ namespace fat.rawdata {
       if (Price != other.Price) return false;
       if (PriceType != other.PriceType) return false;
       if (ProductId != other.ProductId) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(TicketPrice, other.TicketPrice)) return false;
       if (Title != other.Title) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -320,6 +337,7 @@ namespace fat.rawdata {
       if (Price != 0) hash ^= Price.GetHashCode();
       if (PriceType != 0) hash ^= PriceType.GetHashCode();
       if (ProductId.Length != 0) hash ^= ProductId.GetHashCode();
+      if (TicketPrice != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(TicketPrice);
       if (Title.Length != 0) hash ^= Title.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -381,6 +399,10 @@ namespace fat.rawdata {
         output.WriteRawTag(146, 1);
         output.WriteString(IosToken);
       }
+      if (TicketPrice != 0F) {
+        output.WriteRawTag(157, 1);
+        output.WriteFloat(TicketPrice);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -434,6 +456,10 @@ namespace fat.rawdata {
         output.WriteRawTag(146, 1);
         output.WriteString(IosToken);
       }
+      if (TicketPrice != 0F) {
+        output.WriteRawTag(157, 1);
+        output.WriteFloat(TicketPrice);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -472,6 +498,9 @@ namespace fat.rawdata {
       }
       if (ProductId.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(ProductId);
+      }
+      if (TicketPrice != 0F) {
+        size += 2 + 4;
       }
       if (Title.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Title);
@@ -516,6 +545,9 @@ namespace fat.rawdata {
       }
       if (other.ProductId.Length != 0) {
         ProductId = other.ProductId;
+      }
+      if (other.TicketPrice != 0F) {
+        TicketPrice = other.TicketPrice;
       }
       if (other.Title.Length != 0) {
         Title = other.Title;
@@ -578,6 +610,10 @@ namespace fat.rawdata {
             IosToken = input.ReadString();
             break;
           }
+          case 157: {
+            TicketPrice = input.ReadFloat();
+            break;
+          }
         }
       }
     #endif
@@ -634,6 +670,10 @@ namespace fat.rawdata {
           }
           case 146: {
             IosToken = input.ReadString();
+            break;
+          }
+          case 157: {
+            TicketPrice = input.ReadFloat();
             break;
           }
         }

@@ -41,6 +41,8 @@ namespace FAT
 
         private long lifeTime => ConfD.Lifetime;
         private int actEndTime;
+        // 是否“静音”（不生成任务、不给订单挂额外奖励）
+        private bool _muted;
         public ActivityExtraRewardOrder(ActivityLite lite_)
         {
             Lite = lite_;
@@ -56,11 +58,12 @@ namespace FAT
             VisualPanel.Setup(ConfD.EventTheme, Res);
         }
 
-        public override IEnumerable<(string, AssetTag)> ResEnumerate() {
+        public override IEnumerable<(string, AssetTag)> ResEnumerate()
+        {
             if (!Valid) yield break;
-            foreach(var v in Visual.ResEnumerate()) yield return v;
-            foreach(var v in VisualEntry.ResEnumerate()) yield return v;
-            foreach(var v in VisualPanel.ResEnumerate()) yield return v;
+            foreach (var v in Visual.ResEnumerate()) yield return v;
+            foreach (var v in VisualEntry.ResEnumerate()) yield return v;
+            foreach (var v in VisualPanel.ResEnumerate()) yield return v;
         }
 
         public override void TryPopup(ScreenPopup popup_, PopupType state_)
@@ -72,12 +75,14 @@ namespace FAT
         {
             var any = data_.AnyState;
             actEndTime = ReadInt((int)ParamKey.ActStartTime, any);
+            _muted = ReadInt(1, any) != 0;
         }
 
         public override void SaveSetup(ActivityInstance data_)
         {
             var any = data_.AnyState;
             any.Add(ToRecord((int)ParamKey.ActStartTime, actEndTime));
+            any.Add(ToRecord(1, _muted ? 1 : 0));
         }
 
         public override void SetupClear()
@@ -117,6 +122,30 @@ namespace FAT
                 actEndTime = (int)Lite.EndTS;
             }
             return (Lite.StartTS, actEndTime);
+        }
+
+        public override void WhenReset()
+        {
+            base.WhenReset();
+            _muted = false;
+        }
+
+        public override void WhenActive(bool new_)
+        {
+            if (!new_)
+            {
+                return;
+            }
+            // DeadLine 期内：静音，不做奖励挂载
+            var now = Game.TimestampNow();
+            var deadline = ConfD.Deadline; // 直接使用配置字段（单位：秒）
+            if (deadline <= 0)
+            {
+                _muted = false;
+                return;
+            }
+            var preDeadlineOk = now < (endTS - deadline);
+            _muted = !preDeadlineOk;
         }
 
         public List<RewardConfig> GetExtraReward(int orderRandomId)
@@ -219,12 +248,31 @@ namespace FAT
         {
             return ConfD.BoardId == boardId;
         }
-
+        /// <summary>
+        /// V39，限时合成订单用到了这里，但是两个活动开启等级不一样，所以需要单独处理
+        /// 44对应位置是商业化总表 - EventOrderExtra id
+        /// </summary>
+        /// <returns></returns>
+        bool IsBlockByOtherActivity()
+        {
+            if (ConfD.Id == 44)
+            {
+                return !Game.Manager.featureUnlockMan.IsFeatureEntryUnlocked(FeatureEntry.FeatureLimitMerge);
+            }
+            return false;
+        }
         bool IActivityOrderHandler.OnPreUpdate(OrderData order, IOrderHelper helper, MergeWorldTracer tracer)
         {
+            if (_muted)
+                return false;
+            if (IsBlockByOtherActivity())
+            {
+                return false;
+            }
             if ((order as IOrderData).IsMagicHour)
                 return false;
-
+            if (ConfD == null)
+                return false;
             var changed = false;
             var shouldAddExtraReward = false;
             var (key_eventId, key_eventParam, key_rewardId, key_rewardNum) = GetOrderParamKey();
@@ -239,7 +287,7 @@ namespace FAT
             }
             else if (state.Value != Id)
             {
-                // 不是同一期活动 
+                // 不是同一期活动
                 OrderUtility.RemoveOrderRewardByStateKey(order, key_rewardId, key_rewardNum);
                 if (_IsRewardAvailableForSlot(order.Id))
                 {

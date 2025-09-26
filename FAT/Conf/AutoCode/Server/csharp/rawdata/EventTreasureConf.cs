@@ -24,7 +24,7 @@ namespace fat.rawdata {
     static EventTreasureConfReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "Ch9yYXdkYXRhL0V2ZW50VHJlYXN1cmVDb25mLnByb3RvEgdyYXdkYXRhIrcF",
+            "Ch9yYXdkYXRhL0V2ZW50VHJlYXN1cmVDb25mLnByb3RvEgdyYXdkYXRhIs4F",
             "Cg1FdmVudFRyZWFzdXJlEgoKAmlkGAEgASgFEg8KB2JvYXJkSWQYAiABKAUS",
             "EgoKYm9udXNUb2tlbhgcIAEoBRIQCghidXlUaGVtZRgDIAEoBRIMCgRjb3N0",
             "GAQgASgFEhgKEGN5Y2xlTGV2ZWxSZXdhcmQYBSABKAkSFwoPY3ljbGVMZXZl",
@@ -35,34 +35,34 @@ namespace fat.rawdata {
             "CgZrZXlOdW0YDCABKAUSEwoLbGV2ZWxSZXdhcmQYDSADKAkSGAoQbGV2ZWxS",
             "ZXdhcmRUaGVtZRgZIAEoBRISCgpsZXZlbFNjb3JlGA4gAygFEhQKDGxvYWRp",
             "bmdUaGVtZRgaIAEoBRIbChNtaWxlc3RvbmVSZXdhcmRJY29uGA8gASgJEgwK",
-            "BG5hbWUYECABKAkSEQoJcGFja0dycElkGBEgASgFEhEKCXBhY2tUaW1lcxgV",
-            "IAEoBRIbChNwcm9ncmVzc1Jld2FyZFRoZW1lGBsgASgFEhcKD3JlY29udGlu",
-            "dWVUaGVtZRgSIAEoBRIVCg1yZXF1aXJlQ29pbklkGBMgASgFEhYKDnJlcXVp",
-            "cmVTY29yZUlkGBYgASgFEhIKCnJld2FyZEljb24YFCABKAkSFQoNdHJlYXN1",
-            "cmVUaGVtZRgXIAEoBRoyChBFeHBpcmVQb3B1cEVudHJ5EgsKA2tleRgBIAEo",
-            "BRINCgV2YWx1ZRgCIAEoCToCOAEivAEKF0V2ZW50VHJlYXN1cmVNYXBBQlZh",
-            "bHVlElAKEEV2ZW50VHJlYXN1cmVNYXAYASADKAsyNi5yYXdkYXRhLkV2ZW50",
-            "VHJlYXN1cmVNYXBBQlZhbHVlLkV2ZW50VHJlYXN1cmVNYXBFbnRyeRpPChVF",
-            "dmVudFRyZWFzdXJlTWFwRW50cnkSCwoDa2V5GAEgASgFEiUKBXZhbHVlGAIg",
-            "ASgLMhYucmF3ZGF0YS5FdmVudFRyZWFzdXJlOgI4ASKZBAoRRXZlbnRUcmVh",
-            "c3VyZUNvbmYSSgoQRXZlbnRUcmVhc3VyZU1hcBgBIAMoCzIwLnJhd2RhdGEu",
-            "RXZlbnRUcmVhc3VyZUNvbmYuRXZlbnRUcmVhc3VyZU1hcEVudHJ5Ek4KEkV2",
-            "ZW50VHJlYXN1cmVNYXBBQhgCIAMoCzIyLnJhd2RhdGEuRXZlbnRUcmVhc3Vy",
-            "ZUNvbmYuRXZlbnRUcmVhc3VyZU1hcEFCRW50cnkSWAoXRXZlbnRUcmVhc3Vy",
-            "ZU1hcEFCUGF0Y2gYAyADKAsyNy5yYXdkYXRhLkV2ZW50VHJlYXN1cmVDb25m",
-            "LkV2ZW50VHJlYXN1cmVNYXBBQlBhdGNoRW50cnkaTwoVRXZlbnRUcmVhc3Vy",
-            "ZU1hcEVudHJ5EgsKA2tleRgBIAEoBRIlCgV2YWx1ZRgCIAEoCzIWLnJhd2Rh",
-            "dGEuRXZlbnRUcmVhc3VyZToCOAEaWwoXRXZlbnRUcmVhc3VyZU1hcEFCRW50",
-            "cnkSCwoDa2V5GAEgASgJEi8KBXZhbHVlGAIgASgLMiAucmF3ZGF0YS5FdmVu",
-            "dFRyZWFzdXJlTWFwQUJWYWx1ZToCOAEaYAocRXZlbnRUcmVhc3VyZU1hcEFC",
-            "UGF0Y2hFbnRyeRILCgNrZXkYASABKAkSLwoFdmFsdWUYAiABKAsyIC5yYXdk",
-            "YXRhLkV2ZW50VHJlYXN1cmVNYXBBQlZhbHVlOgI4AUI9Wi1naXRsYWIuZnVu",
-            "cGx1cy5pby9mYXQvY29uZi9nZW4vZ29sYW5nL3Jhd2RhdGGqAgtmYXQucmF3",
-            "ZGF0YWIGcHJvdG8z"));
+            "BG5hbWUYECABKAkSFQoNbmV3Um91bmRUaGVtZRgdIAEoBRIRCglwYWNrR3Jw",
+            "SWQYESABKAUSEQoJcGFja1RpbWVzGBUgASgFEhsKE3Byb2dyZXNzUmV3YXJk",
+            "VGhlbWUYGyABKAUSFwoPcmVjb250aW51ZVRoZW1lGBIgASgFEhUKDXJlcXVp",
+            "cmVDb2luSWQYEyABKAUSFgoOcmVxdWlyZVNjb3JlSWQYFiABKAUSEgoKcmV3",
+            "YXJkSWNvbhgUIAEoCRIVCg10cmVhc3VyZVRoZW1lGBcgASgFGjIKEEV4cGly",
+            "ZVBvcHVwRW50cnkSCwoDa2V5GAEgASgFEg0KBXZhbHVlGAIgASgJOgI4ASK8",
+            "AQoXRXZlbnRUcmVhc3VyZU1hcEFCVmFsdWUSUAoQRXZlbnRUcmVhc3VyZU1h",
+            "cBgBIAMoCzI2LnJhd2RhdGEuRXZlbnRUcmVhc3VyZU1hcEFCVmFsdWUuRXZl",
+            "bnRUcmVhc3VyZU1hcEVudHJ5Gk8KFUV2ZW50VHJlYXN1cmVNYXBFbnRyeRIL",
+            "CgNrZXkYASABKAUSJQoFdmFsdWUYAiABKAsyFi5yYXdkYXRhLkV2ZW50VHJl",
+            "YXN1cmU6AjgBIpkEChFFdmVudFRyZWFzdXJlQ29uZhJKChBFdmVudFRyZWFz",
+            "dXJlTWFwGAEgAygLMjAucmF3ZGF0YS5FdmVudFRyZWFzdXJlQ29uZi5FdmVu",
+            "dFRyZWFzdXJlTWFwRW50cnkSTgoSRXZlbnRUcmVhc3VyZU1hcEFCGAIgAygL",
+            "MjIucmF3ZGF0YS5FdmVudFRyZWFzdXJlQ29uZi5FdmVudFRyZWFzdXJlTWFw",
+            "QUJFbnRyeRJYChdFdmVudFRyZWFzdXJlTWFwQUJQYXRjaBgDIAMoCzI3LnJh",
+            "d2RhdGEuRXZlbnRUcmVhc3VyZUNvbmYuRXZlbnRUcmVhc3VyZU1hcEFCUGF0",
+            "Y2hFbnRyeRpPChVFdmVudFRyZWFzdXJlTWFwRW50cnkSCwoDa2V5GAEgASgF",
+            "EiUKBXZhbHVlGAIgASgLMhYucmF3ZGF0YS5FdmVudFRyZWFzdXJlOgI4ARpb",
+            "ChdFdmVudFRyZWFzdXJlTWFwQUJFbnRyeRILCgNrZXkYASABKAkSLwoFdmFs",
+            "dWUYAiABKAsyIC5yYXdkYXRhLkV2ZW50VHJlYXN1cmVNYXBBQlZhbHVlOgI4",
+            "ARpgChxFdmVudFRyZWFzdXJlTWFwQUJQYXRjaEVudHJ5EgsKA2tleRgBIAEo",
+            "CRIvCgV2YWx1ZRgCIAEoCzIgLnJhd2RhdGEuRXZlbnRUcmVhc3VyZU1hcEFC",
+            "VmFsdWU6AjgBQj1aLWdpdGxhYi5mdW5wbHVzLmlvL2ZhdC9jb25mL2dlbi9n",
+            "b2xhbmcvcmF3ZGF0YaoCC2ZhdC5yYXdkYXRhYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EventTreasure), global::fat.rawdata.EventTreasure.Parser, new[]{ "Id", "BoardId", "BonusToken", "BuyTheme", "Cost", "CycleLevelReward", "CycleLevelScore", "EventTheme", "ExpirePopup", "GradeId", "HelpKeyTheme", "HelpPlayTheme", "IncludeGrpId", "KeyNum", "LevelReward", "LevelRewardTheme", "LevelScore", "LoadingTheme", "MilestoneRewardIcon", "Name", "PackGrpId", "PackTimes", "ProgressRewardTheme", "RecontinueTheme", "RequireCoinId", "RequireScoreId", "RewardIcon", "TreasureTheme" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
+            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EventTreasure), global::fat.rawdata.EventTreasure.Parser, new[]{ "Id", "BoardId", "BonusToken", "BuyTheme", "Cost", "CycleLevelReward", "CycleLevelScore", "EventTheme", "ExpirePopup", "GradeId", "HelpKeyTheme", "HelpPlayTheme", "IncludeGrpId", "KeyNum", "LevelReward", "LevelRewardTheme", "LevelScore", "LoadingTheme", "MilestoneRewardIcon", "Name", "NewRoundTheme", "PackGrpId", "PackTimes", "ProgressRewardTheme", "RecontinueTheme", "RequireCoinId", "RequireScoreId", "RewardIcon", "TreasureTheme" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EventTreasureMapABValue), global::fat.rawdata.EventTreasureMapABValue.Parser, new[]{ "EventTreasureMap" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EventTreasureConf), global::fat.rawdata.EventTreasureConf.Parser, new[]{ "EventTreasureMap", "EventTreasureMapAB", "EventTreasureMapABPatch" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, null, })
           }));
@@ -127,6 +127,7 @@ namespace fat.rawdata {
       loadingTheme_ = other.loadingTheme_;
       milestoneRewardIcon_ = other.milestoneRewardIcon_;
       name_ = other.name_;
+      newRoundTheme_ = other.newRoundTheme_;
       packGrpId_ = other.packGrpId_;
       packTimes_ = other.packTimes_;
       progressRewardTheme_ = other.progressRewardTheme_;
@@ -439,6 +440,21 @@ namespace fat.rawdata {
       }
     }
 
+    /// <summary>Field number for the "newRoundTheme" field.</summary>
+    public const int NewRoundThemeFieldNumber = 29;
+    private int newRoundTheme_;
+    /// <summary>
+    /// 新一轮弹板ID
+    /// （EventTheme.id）
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int NewRoundTheme {
+      get { return newRoundTheme_; }
+      set {
+        newRoundTheme_ = value;
+      }
+    }
+
     /// <summary>Field number for the "packGrpId" field.</summary>
     public const int PackGrpIdFieldNumber = 17;
     private int packGrpId_;
@@ -593,6 +609,7 @@ namespace fat.rawdata {
       if (LoadingTheme != other.LoadingTheme) return false;
       if (MilestoneRewardIcon != other.MilestoneRewardIcon) return false;
       if (Name != other.Name) return false;
+      if (NewRoundTheme != other.NewRoundTheme) return false;
       if (PackGrpId != other.PackGrpId) return false;
       if (PackTimes != other.PackTimes) return false;
       if (ProgressRewardTheme != other.ProgressRewardTheme) return false;
@@ -627,6 +644,7 @@ namespace fat.rawdata {
       if (LoadingTheme != 0) hash ^= LoadingTheme.GetHashCode();
       if (MilestoneRewardIcon.Length != 0) hash ^= MilestoneRewardIcon.GetHashCode();
       if (Name.Length != 0) hash ^= Name.GetHashCode();
+      if (NewRoundTheme != 0) hash ^= NewRoundTheme.GetHashCode();
       if (PackGrpId != 0) hash ^= PackGrpId.GetHashCode();
       if (PackTimes != 0) hash ^= PackTimes.GetHashCode();
       if (ProgressRewardTheme != 0) hash ^= ProgressRewardTheme.GetHashCode();
@@ -751,6 +769,10 @@ namespace fat.rawdata {
         output.WriteRawTag(224, 1);
         output.WriteInt32(BonusToken);
       }
+      if (NewRoundTheme != 0) {
+        output.WriteRawTag(232, 1);
+        output.WriteInt32(NewRoundTheme);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -860,6 +882,10 @@ namespace fat.rawdata {
         output.WriteRawTag(224, 1);
         output.WriteInt32(BonusToken);
       }
+      if (NewRoundTheme != 0) {
+        output.WriteRawTag(232, 1);
+        output.WriteInt32(NewRoundTheme);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -920,6 +946,9 @@ namespace fat.rawdata {
       }
       if (Name.Length != 0) {
         size += 2 + pb::CodedOutputStream.ComputeStringSize(Name);
+      }
+      if (NewRoundTheme != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeInt32Size(NewRoundTheme);
       }
       if (PackGrpId != 0) {
         size += 2 + pb::CodedOutputStream.ComputeInt32Size(PackGrpId);
@@ -1007,6 +1036,9 @@ namespace fat.rawdata {
       }
       if (other.Name.Length != 0) {
         Name = other.Name;
+      }
+      if (other.NewRoundTheme != 0) {
+        NewRoundTheme = other.NewRoundTheme;
       }
       if (other.PackGrpId != 0) {
         PackGrpId = other.PackGrpId;
@@ -1160,6 +1192,10 @@ namespace fat.rawdata {
             BonusToken = input.ReadInt32();
             break;
           }
+          case 232: {
+            NewRoundTheme = input.ReadInt32();
+            break;
+          }
         }
       }
     #endif
@@ -1286,6 +1322,10 @@ namespace fat.rawdata {
           }
           case 224: {
             BonusToken = input.ReadInt32();
+            break;
+          }
+          case 232: {
+            NewRoundTheme = input.ReadInt32();
             break;
           }
         }

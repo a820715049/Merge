@@ -34,7 +34,7 @@ namespace FAT
             }
             for (int i = 0; i < node.reward.Length; i++)
             {
-                item[i].Refresh(node.reward[i], 17);
+                item[i].Refresh(node.reward[i], node.isCur ? 17 : item[i].TryFind("count").GetComponent<UITextState>().state[0].style);
                 item[i].transform.Find("finish").gameObject.SetActive(node.isDone);
                 item[i].transform.Find("count").gameObject.SetActive(!node.isDone);
             }

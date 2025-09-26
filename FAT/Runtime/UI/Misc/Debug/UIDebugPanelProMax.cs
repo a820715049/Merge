@@ -260,8 +260,8 @@ namespace FAT
             _RegisterButton("reset dec", Game.Manager.decorateMan.ClearUnlock);
             _RegisterButton("deco overview", () =>
             {
-                GameProcedure.MergeToSceneArea(Game.Manager.decorateMan.Activity.CurArea,
-                    () => UIManager.Instance.OpenWindow(UIConfig.UIDecorateOverview), overview_: true);
+                UIManager.Instance.OpenWindow(UIConfig.UIDecorateOverview);
+                GameProcedure.MergeToSceneArea(Game.Manager.decorateMan.Activity.CurArea, overview_: true);
             });
 
             _StartGroupA("阶梯活动");
@@ -588,6 +588,7 @@ namespace FAT
                 }
             });
             _RegisterButtonWithInput("get item", _OnBtnAddItem);
+            _RegisterButtonWithInput("Update Task", _OnBtnUpdateTask);
             //图鉴按链条id发送链上所有棋子到主棋盘
             _RegisterButtonWithInput("get handbook item", _OnBtnHandBook);
 
@@ -1024,6 +1025,19 @@ namespace FAT
             if (board != null)
                 board.activeBoard.SpawnItemMustWithReason(rewardID,
                     ItemSpawnContext.CreateWithType(ItemSpawnContext.SpawnType.Cheat), 0, 0, false, false);
+        }
+
+        private void _OnBtnUpdateTask(string str, string strCount)
+        {
+            if (strCount.StartsWith("m")) strCount = strCount.Substring(1);
+
+            if (!int.TryParse(strCount, out var count)) count = 1;
+
+            var isNumber = ulong.TryParse(str, out var id);
+            if (isNumber)
+            {
+                Game.Manager.taskMan.DebugUpdateTask((TaskType)id, count);
+            }
         }
 
         private void _OnBtnSetMIniGame(string str, string strIndex)

@@ -28,6 +28,5 @@ namespace FAT.Merge
         public ComMergeMixSource mixSourceConfig;
         public ComTrigAutoSource trigAutoSourceConfig;
         public ComMergeActiveSource activeSourceConfig;
-        public ComMergeTokenMultiplier tokenMultiConfig;
     }
 }

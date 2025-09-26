@@ -46,8 +46,7 @@ namespace FAT
         {
             if (!Game.Manager.objectMan.IsType(id_, ObjConfigType.MergeItem)) return false;
             var confC = Merge.Env.Instance.GetItemComConfig(id_);
-            return confC.jumpCDConfig != null || confC.specialBoxConfig != null || confC.choiceBoxConfig != null 
-                   || confC.tokenMultiConfig != null;
+            return confC.jumpCDConfig != null || confC.specialBoxConfig != null || confC.choiceBoxConfig != null;
         }
 
         //显示物品气泡tips形式的信息 需要指定气泡显示的起始位置和偏移  气泡的箭头需要指向道具Icon中心
@@ -65,10 +64,6 @@ namespace FAT
                 else if (Merge.Env.Instance.GetItemComConfig(itemId).specialBoxConfig != null)
                 {
                     UIManager.Instance.OpenWindow(UIConfig.UISpecialBoxInfo, itemId);
-                }
-                else if (Merge.Env.Instance.GetItemComConfig(itemId).tokenMultiConfig != null)
-                {
-                    UIManager.Instance.OpenWindow(UIConfig.UIMicInfo, startWorldPos, offset, itemId);
                 }
                 else
                 {
@@ -302,6 +297,13 @@ namespace FAT
                 btn.gameObject.SetActive(true);
                 btn.onClick.RemoveAllListeners();
                 btn.WithClickScale().onClick.AddListener(() => _OnBtnInfo(btn.transform as RectTransform, id));
+            }
+            // v41限时合成订单新增，如果这里展示有图鉴的东西，点击弹出图鉴界面
+            else if (UIUtility.CanShowInfo(id))
+            {
+                btn.gameObject.SetActive(true);
+                btn.onClick.RemoveAllListeners();
+                btn.WithClickScale().onClick.AddListener(() => _OnBtnInfo(id));
             }
             else
             {

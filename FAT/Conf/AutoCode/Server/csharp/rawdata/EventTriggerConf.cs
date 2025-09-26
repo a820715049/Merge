@@ -64,7 +64,7 @@ namespace fat.rawdata {
   /// <summary>
   /// annotation@annotation_type(type="rawdata")
   /// annotation@rawdata(row="EventTrigger",table="EventTriggerMap",table_wrapper="EventTriggerConf",map="true",map_key_type="int32",data="EventTriggerConf")
-  /// annotation@ab(table_ab="EventTriggerMapAB",table_ab_patch="EventTriggerMapABPatch",table_ab_value="EventTriggerMapABValue",ab_patch="true")
+  /// annotation@ab(table_ab="EventTriggerMapAB",table_ab_patch="EventTriggerMapABPatch",table_ab_value="EventTriggerMapABValue",ab_patch="false")
   /// annotation@filter(just_server="false",just_client="false")
   /// annotation@EventTrigger(id="id")
   /// </summary>

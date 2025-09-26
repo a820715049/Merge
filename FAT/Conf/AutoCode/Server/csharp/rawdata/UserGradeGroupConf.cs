@@ -63,7 +63,7 @@ namespace fat.rawdata {
   /// <summary>
   /// annotation@annotation_type(type="rawdata")
   /// annotation@rawdata(row="UserGradeGroup",table="UserGradeGroupMap",table_wrapper="UserGradeGroupConf",map="true",map_key_type="int32",data="UserGradeGroupConf")
-  /// annotation@ab(table_ab="UserGradeGroupMapAB",table_ab_patch="UserGradeGroupMapABPatch",table_ab_value="UserGradeGroupMapABValue",ab_patch="true")
+  /// annotation@ab(table_ab="UserGradeGroupMapAB",table_ab_patch="UserGradeGroupMapABPatch",table_ab_value="UserGradeGroupMapABValue",ab_patch="false")
   /// annotation@filter(just_server="false",just_client="false")
   /// annotation@UserGradeGroup(id="id")
   /// </summary>

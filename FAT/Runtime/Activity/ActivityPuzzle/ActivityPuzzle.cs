@@ -86,7 +86,7 @@ namespace FAT
                 }
             }
 
-            RefreshRoundConf();
+            RefreshRoundConf(_grpId);
         }
 
         public override void SaveSetup(ActivityInstance instance)
@@ -157,7 +157,7 @@ namespace FAT
             }
         }
 
-        private void RefreshRoundConf()
+        private void RefreshRoundConf(int groupId = 0)
         {
             // 根据是否循环模式来获取模板ID
             int roundIndex;
@@ -174,7 +174,7 @@ namespace FAT
             
             var templateId = conf.NormalRoundId[roundIndex];
             confR = fat.conf.EventPuzzleRoundVisitor.GetOneByFilter(x => x.Id == templateId);
-            _grpId = Game.Manager.userGradeMan.GetTargetConfigDataId(confR.GradeId);
+            _grpId = groupId > 0 ? groupId : Game.Manager.userGradeMan.GetTargetConfigDataId(confR.GradeId);
             confD = fat.conf.EventPuzzleDetaileVisitor.GetOneByFilter(x => x.Id == _grpId);
             _curRoundTokenDict.Clear();
             foreach (var info in confD.NumInfo)

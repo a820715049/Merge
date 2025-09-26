@@ -88,9 +88,10 @@ namespace FAT
                 UIManager.Instance.Block(false);
                 rootAnimator.SetTrigger("Punch");
                 MessageCenter.Get<MSG.GAME_SIGN_IN_CLICK>().Dispatch();
-                if (Game.Manager.loginSignMan.SignInReward != null && Game.Manager.loginSignMan.SignInReward.rewardType != ObjConfigType.RandomBox)
+                var reward = Game.Manager.loginSignMan.SignInReward;
+                if (reward != null && UIFlyFactory.CheckNeedFlyIcon(reward.rewardId))
                 {
-                    UIFlyUtility.FlyReward(Game.Manager.loginSignMan.SignInReward, icon.transform.position);
+                    UIFlyUtility.FlyReward(reward, icon.transform.position);
                     Game.Manager.loginSignMan.ClearConsecutiveReward();
                 }
             };

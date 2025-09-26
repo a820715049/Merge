@@ -305,23 +305,31 @@ namespace FAT
                 return;
             }
 
-            var tokenConf = mgr.GetTokenConfig(data.rewardId);
-            if (tokenConf != null && tokenConf.Feature == FeatureEntry.FeatureScore)
+            // 只处理token
+            if (!mgr.IsType(data.rewardId, ObjConfigType.ActivityToken))
             {
-                // 排除积分活动
                 return;
             }
 
-            // 如果是活动ID 也显示入口
-            if (mgr.IsType(data.rewardId, ObjConfigType.ActivityToken))
+            var tokenConf = mgr.GetTokenConfig(data.rewardId);
+            if (tokenConf != null && tokenConf.Feature == FeatureEntry.FeatureScore)
             {
-                // 判断是否有对应图标的配置
-                if (string.IsNullOrEmpty(Game.Manager.rewardMan.GetRewardIcon(data.rewardId, data.rewardCount).Asset))
-                {
-                    return;
-                }
+                // 排除积分活动 不飞入口 飞积分活动滑动条
+                return;
+            }
 
-                CheckTapBonus();
+            // 判断是否有对应图标的配置
+            if (string.IsNullOrEmpty(Game.Manager.rewardMan.GetRewardIcon(data.rewardId, data.rewardCount).Asset))
+            {
+                return;
+            }
+
+            // 显示入口
+            CheckTapBonus();
+
+            // 从上次选择的棋子位置飞图标
+            if (_selectedSourceItem != null)
+            {
                 var view = BoardViewManager.Instance.GetItemView(_selectedSourceItem.id);
                 UIFlyUtility.FlyReward(data, view.transform.position);
             }
@@ -351,7 +359,7 @@ namespace FAT
             var tokenConf = mgr.GetTokenConfig(slice.ID);
             if (tokenConf != null && tokenConf.Feature == FeatureEntry.FeatureScore)
             {
-                // 排除积分活动
+                // 排除积分活动 不飞入口 飞积分活动滑动条
                 return;
             }
 

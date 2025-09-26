@@ -67,7 +67,7 @@ namespace FAT
         protected override void OnPostClose()
         {
             _ClearBoxSpine();
-            Game.Manager.specialRewardMan.TryDisplaySpecialReward();
+            Game.Manager.specialRewardMan.OnSpecialRewardUIClosed(ObjConfigType.RandomBox, _curRandomBoxData?.RandomBoxId ?? 0);
         }
 
         // 统一入口：根据配置决定使用Spine或图片

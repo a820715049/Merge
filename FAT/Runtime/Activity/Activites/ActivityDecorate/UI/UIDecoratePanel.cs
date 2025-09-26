@@ -63,7 +63,8 @@ namespace FAT
 
             UIManager.Instance.OpenWindow(UIConfig.UIDecorateRes);
             MessageCenter.Get<MSG.GAME_ONE_SECOND_DRIVER>().AddListener(RefreshCD);
-            _preview.SetActive(Game.Manager.decorateMan.CheckCanPreview());
+            if (_preview != null)
+                _preview.SetActive(Game.Manager.decorateMan.CheckCanPreview());
         }
 
         protected override void OnPreClose()
@@ -230,8 +231,8 @@ namespace FAT
         public void ClickPreview()
         {
             Close();
-            GameProcedure.MergeToSceneArea(Game.Manager.decorateMan.Activity.CurArea,
-                    () => UIManager.Instance.OpenWindow(UIConfig.UIDecorateOverview), overview_: true);
+            UIManager.Instance.OpenWindow(UIConfig.UIDecorateOverview);
+            GameProcedure.MergeToSceneArea(Game.Manager.decorateMan.Activity.CurArea, overview_: true);
         }
     }
 }

@@ -23,7 +23,6 @@ namespace FAT.Merge
         [SerializeField] private MBItemAnimation animCtrl;
         [SerializeField] private MBItemEffect effectCtrl;
         [SerializeField] private MBItemIndicator indicatorCtrl;
-        [SerializeField] private MBItemActivityToken activityTokenCtrl;
 
         public ItemLifecycle currentStateType { get; private set; }
         public Item data { get; private set; }
@@ -75,7 +74,6 @@ namespace FAT.Merge
             effectCtrl.SetData(this);
             animCtrl.SetData(this);
             indicatorCtrl.SetData(this);
-            activityTokenCtrl.SetData(this);
 
             currentStateType = ItemLifecycle.None;
 
@@ -93,7 +91,6 @@ namespace FAT.Merge
             effectCtrl.ClearData();
             animCtrl.ClearData();
             indicatorCtrl.ClearData();
-            activityTokenCtrl.ClearData();
 
             this.data = null;
             debugName = null;
@@ -112,14 +109,12 @@ namespace FAT.Merge
             effectCtrl.ClearData();
             animCtrl.ClearData();
             indicatorCtrl.ClearData();
-            activityTokenCtrl.ClearData();
 
             contentCtrl.SetData(this);
             chargeCtrl.SetData(this);
             effectCtrl.SetData(this);
             animCtrl.SetData(this);
             indicatorCtrl.SetData(this);
-            activityTokenCtrl.SetData(this);
 
             TryApplyFilter();
         }
@@ -127,26 +122,6 @@ namespace FAT.Merge
         public void RefreshJumpCdState()
         {
             effectCtrl.TryRefreshJumpCDState();
-        }
-        
-        public void RefreshTokenMultiState()
-        {
-            effectCtrl.TryRefreshTokenMultiState();
-        }
-        
-        public void AddTokenMultiEffect()
-        {
-            effectCtrl.AddTokenMultiEffect();
-        }
-
-        public void RefreshActivityTokenState()
-        {
-            activityTokenCtrl.RefreshActivityTokenState();
-        }
-        
-        public MBItemActivityToken GetActivityTokenCtrl()
-        {
-            return activityTokenCtrl;
         }
 
         public bool IsDragging()

@@ -24,13 +24,13 @@ namespace fat.rawdata {
     static PaymentTypeReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChlyYXdkYXRhL1BheW1lbnRUeXBlLnByb3RvEgdyYXdkYXRhKq8BCgtQYXlt",
+            "ChlyYXdkYXRhL1BheW1lbnRUeXBlLnByb3RvEgdyYXdkYXRhKrwBCgtQYXlt",
             "ZW50VHlwZRIWChJQYXltZW50VHlwZURlZmF1bHQQABIMCghQdXNoU2hvcBAB",
             "EgwKCEFjdGl2aXR5EAISFAoQU2hvcFByb3ZpZGVyQmFzZRADEg8KC1N0YXJ0",
             "ZXJQYWNrEAQSDQoJQmFzZUlBUHgyEAUSEAoMRGV0ZWN0aXZlVmlwEAYSFAoQ",
-            "TmV3VXNlckZsYXNoU2FsZRAHEg4KCkN1c3RvbUdpZnQQCEI9Wi1naXRsYWIu",
-            "ZnVucGx1cy5pby9mYXQvY29uZi9nZW4vZ29sYW5nL3Jhd2RhdGGqAgtmYXQu",
-            "cmF3ZGF0YWIGcHJvdG8z"));
+            "TmV3VXNlckZsYXNoU2FsZRAHEg4KCkN1c3RvbUdpZnQQCBILCgdXZWJTaG9w",
+            "EAlCPVotZ2l0bGFiLmZ1bnBsdXMuaW8vZmF0L2NvbmYvZ2VuL2dvbGFuZy9y",
+            "YXdkYXRhqgILZmF0LnJhd2RhdGFiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::fat.rawdata.PaymentType), }, null, null));
@@ -49,6 +49,7 @@ namespace fat.rawdata {
     [pbr::OriginalName("DetectiveVip")] DetectiveVip = 6,
     [pbr::OriginalName("NewUserFlashSale")] NewUserFlashSale = 7,
     [pbr::OriginalName("CustomGift")] CustomGift = 8,
+    [pbr::OriginalName("WebShop")] WebShop = 9,
   }
 
   #endregion

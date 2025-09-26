@@ -838,66 +838,6 @@ public partial class DataTracker
     }
 
     #endregion
-    
-    #region 积分活动变种(麦克风版)
-
-    //玩家成功领取里程碑奖励时记录
-    [Serializable]
-    internal class event_mic_milestone : MergeCommonData
-    {
-        public int event_id;
-        public int event_from; //活动来源（0：EventTime，1：EventTrigger）
-        public int event_param;
-        public int milestone_queue; //该奖励位于里程碑奖励的序数（从1开始，本次计算在内）
-        public int milestone_num;   //本轮里程碑的总个数
-        public int milestone_difficulty;   //本轮活动难度
-        public int round_num;   //活动期间的第几轮（固定为1）
-        public bool is_final;   //是否是本轮最后一个里程碑
-
-        public static void Track(ActivityLike acti_, int index, int milestoneNum, int diff, bool isFinal)
-        {
-            var data = _GetTrackData<event_mic_milestone>();
-            data.event_id = acti_.Id;
-            data.event_from = acti_.From;
-            data.event_param = acti_.Param;
-            data.milestone_queue = index;
-            data.milestone_num = milestoneNum;
-            data.milestone_difficulty = diff;
-            data.round_num = 1;
-            data.is_final = isFinal;
-            _TrackData(data);
-        }
-    }
-    
-    //玩家积分增长时记录
-    [Serializable]
-    internal class event_mic_token : MergeCommonData
-    {
-        public int event_id;
-        public int event_from; //活动来源（0：EventTime，1：EventTrigger）
-        public int event_param;
-        public int id; //获得token的id
-        public string from;   //积分来源
-        public bool is_add;   //是否是增加
-        public int amount_change;   //获得积分数量（按基础积分换算后的值）
-        public bool is_double;   //是否是双倍
-
-        public static void Track(ActivityLike acti_, int id, ReasonString reason, bool isAdd, int num, bool isDouble)
-        {
-            var data = _GetTrackData<event_mic_token>();
-            data.event_id = acti_.Id;
-            data.event_from = acti_.From;
-            data.event_param = acti_.Param;
-            data.id = id;
-            data.from = reason;
-            data.is_add = isAdd;
-            data.amount_change = num;
-            data.is_double = isDouble;
-            _TrackData(data);
-        }
-    }
-    
-    #endregion
 
     #region 寻宝活动
 
@@ -3971,6 +3911,32 @@ public partial class DataTracker
 
     #endregion
 
+    #region 在线奖励
+
+    internal class event_online_rwd : MergeCommonData
+    {
+        public int event_id;
+        public int event_from;
+        public int event_param;
+        public int milestone_queue;
+        public int milestone_num;
+        public bool is_final;
+        public int time;
+
+        public static void Track(ActivityLike act, int queue, int num, bool isFinal, int time)
+        {
+            var data = _GetTrackData<event_online_rwd>();
+            (data.event_id, data.event_from, data.event_param) = act.Info3;
+            data.milestone_queue = queue;
+            data.milestone_num = num;
+            data.is_final = isFinal;
+            data.time = time;
+            _TrackData(data);
+        }
+    }
+
+    #endregion
+
     #region 拼图
 
     internal class event_puzzle_rwd : MergeCommonData
@@ -5172,6 +5138,88 @@ public partial class DataTracker
 
     #endregion
 
+    #region 七天
+    internal class event_7daytask_task : MergeCommonData
+    {
+        public int event_id;
+        public int event_from;
+        public int event_param;
+        public int milestone_stage;
+        public int milestone_queue;
+        public int task_queue;
+        public int milestone_num;
+        public int milestone_difficulty;
+        public bool is_final;
+        public static void Track(ActivityLike acti_, int stage, int queue, int task, int num, int diff, bool final)
+        {
+            var data = _GetTrackData<event_7daytask_task>();
+            data.event_id = acti_.Id;
+            data.event_from = acti_.From;
+            data.event_param = acti_.Param;
+            data.milestone_stage = stage;
+            data.milestone_queue = queue;
+            data.task_queue = task;
+            data.milestone_num = num;
+            data.milestone_difficulty = diff;
+            data.is_final = final;
+            _TrackData(data);
+        }
+    }
+    internal class event_7daytask_claim : MergeCommonData
+    {
+        public int event_id;
+        public int event_from;
+        public int event_param;
+        public int milestone_stage;
+        public int milestone_queue;
+        public int milestone_num;
+        public int milestone_difficulty;
+        public int reward_id;
+        public bool is_final;
+        public static void Track(ActivityLike acti_, int stage, int queue, int num, int diff, int reward, bool final)
+        {
+            var data = _GetTrackData<event_7daytask_claim>();
+            data.event_id = acti_.Id;
+            data.event_from = acti_.From;
+            data.event_param = acti_.Param;
+            data.milestone_stage = stage;
+            data.milestone_queue = queue;
+            data.milestone_num = num;
+            data.milestone_difficulty = diff;
+            data.reward_id = reward;
+            data.is_final = final;
+            _TrackData(data);
+        }
+    }
+    internal class event_7daytask_milestone : MergeCommonData
+    {
+        public int event_id;
+        public int event_from;
+        public int event_param;
+        public int milestone_stage;
+        public int milestone_queue;
+        public int milestone_num;
+        public int milestone_difficulty;
+        public int reward_id;
+        public bool is_final;
+        public static void Track(ActivityLike acti_, int stage, int queue, int num, int diff, int reward, bool final)
+        {
+            var data = _GetTrackData<event_7daytask_milestone>();
+            data.event_id = acti_.Id;
+            data.event_from = acti_.From;
+            data.event_param = acti_.Param;
+            data.milestone_stage = stage;
+            data.milestone_queue = queue;
+            data.milestone_num = num;
+            data.milestone_difficulty = diff;
+            data.reward_id = reward;
+            data.is_final = final;
+            _TrackData(data);
+        }
+    }
+
+    #endregion
+
     #region 补单弹窗
 
     [Serializable]
@@ -5245,6 +5293,7 @@ public partial class DataTracker
             data.key = key;
             data.local_time = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss");
             data.get_reward = getReward;
+            _TrackData(data);
         }
     }
     #endregion

@@ -188,7 +188,7 @@ namespace FAT
                 _curTemplateId = Game.Manager.userGradeMan.GetTargetConfigDataId(_conf.GradeId);
             }
             _confDetail = GetEventFishDetail(_curTemplateId);
-            InitFish();
+            InitFish(_confDetail.CollectfishId);
             RefreshMilestone();
         }
 
@@ -209,11 +209,20 @@ namespace FAT
             RewardPopup.Setup(this, VisualConvert.visual, VisualConvert.res, false, false);
         }
 
-        private void InitFish()
+        private void InitFish(IList<int> targetFishIds)
         {
             _fishInfoList.Clear();
+            using var _ = PoolMapping.PoolMappingAccess.Borrow<HashSet<int>>(out var cache);
+            foreach (var _fid in targetFishIds)
+            {
+                cache.Add(_fid);
+            }
             var allFish = GetFishInfoMap();
-            foreach (var fish in allFish) _fishInfoList.Add(fish.Value);
+            foreach (var fish in allFish)
+            {
+                if (cache.Contains(fish.Key))
+                    _fishInfoList.Add(fish.Value);
+            }
             _fishInfoList.Sort((a, b) => a.Id.CompareTo(b.Id));
         }
 

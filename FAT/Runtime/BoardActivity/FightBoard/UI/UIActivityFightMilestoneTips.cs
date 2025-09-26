@@ -26,6 +26,7 @@ namespace FAT
 
         // Object字段
         private System.Action _callback;
+        private FightBoardActivity _activity;
 
         protected override void OnCreate()
         {
@@ -43,6 +44,8 @@ namespace FAT
             Game.Manager.audioMan.TriggerSound("GuessCardRight");
             transform.GetComponent<Animator>().SetTrigger("Show");
             transform.AddButton("Mask", OnClickMask);
+            _activity = items[1] as FightBoardActivity;
+            _activity.MilestoneTipsRes.visual.Refresh(_Desc, "desc");
         }
 
         private void OnClickMask()

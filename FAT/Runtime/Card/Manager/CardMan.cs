@@ -93,6 +93,8 @@ namespace FAT
             CardActHandler?.RefreshCardActivity(GetCardActivity());
             //立即存档
             Game.Manager.archiveMan.SendImmediately(true);
+            //在这个时机尝试执行一下当前开卡流程的后续回调(如果有) 这样后面开集卡界面时会拿到最新数据刷
+            TryOpenPackDisplay();
             //重置后打开新一轮集卡界面
             OpenCardAlbumUI();
             //如果是第一次重玩 则算作积极行为
@@ -164,9 +166,19 @@ namespace FAT
             }
         }
 
+        //检查传入的id是否是卡包 如果是的话 检查是否在获得时可以自动开启
+        public bool CheckIsAutoOpen(int cardPackId)
+        {
+            var objectMan = Game.Manager.objectMan;
+            if (!objectMan.IsType(cardPackId, ObjConfigType.CardPack))
+                return false;
+            var packConf = objectMan.GetCardPackConfig(cardPackId);
+            return packConf?.IsAutoOpen ?? false;
+        }
+        
         //传入cardPackId尝试开启卡包，返回开卡包是否成功
         //后续如果有打点需求 bool值可以换成Enum用于表示结果类型 
-        public bool TryOpenCardPack(int cardPackId, Vector3 fromPos)
+        public bool TryOpenCardPack(int cardPackId, Vector3 fromPos, bool display = true)
         {
             //判断是否在开卡包流程中 是的话返回
             if (IsInOpenPackState)
@@ -204,17 +216,21 @@ namespace FAT
             {
                 IsInOpenPackState = false;
                 _openPackDisplayCb.Clear();
+                _curOpenCardPackId = 0;
                 return false;
             }
-            //尝试执行开卡包流程相关界面表现
-            TryOpenPackDisplay();
+            if (display)
+            {
+                //尝试执行开卡包流程相关界面表现
+                TryOpenPackDisplay();
+            }
             return true;
         }
 
         //尝试执行开卡包流程相关界面表现
         public void TryOpenPackDisplay()
         {
-            if (_openPackDisplayCb == null || _openPackDisplayCb.Count < 1)
+            if (_openPackDisplayCb == null || _openPackDisplayCb.Count < 1 || !Game.Instance.isRunning)
             {
                 //所有界面表现结束后 置为false
                 IsInOpenPackState = false;
@@ -369,6 +385,9 @@ namespace FAT
             _isWaitOpenJoker = false;
             ResetShowGoldAlbumState();
             _isWaitFriendsInfo = false;
+            IsInOpenPackState = false;
+            _isInUseJokerState = false;
+            _openPackDisplayCb?.Clear();
         }
 
         public void LoadConfig() { }
@@ -488,6 +507,8 @@ namespace FAT
             if (!UIManager.Instance.CheckUIIsIdleState()) return;
             // 如果目前既不在主棋盘也不在meta场景 则返回
             if (!UIManager.Instance.IsOpen(UIConfig.UIMergeBoardMain) && !Game.Manager.mapSceneMan.scene.Active) return;
+            // 虚拟奖励箱有非本次session的奖励时return
+            if (Game.Manager.specialRewardMan.HasOldRewardData()) return;
             //检查目前所有万能卡中是否有过期了的且值得被使用的卡 如果没有则返回
             if (!roundData.CheckHasExpireUsefulJokerCard(out var firstUsefulIndex)) return;
             //从firstUsefulIndex开始展示  本次展示流程只展示值得被使用的万能卡 直到整个流程结束
@@ -573,11 +594,13 @@ namespace FAT
         #region 开卡包相关逻辑
 
         private List<int> _curCardPackResult = new List<int>(); //当前卡包开的结果
+        private int _curOpenCardPackId = 0;    //当前正在开的卡包id
 
         private void _OpenCardPack(int cardPackId)
         {
             _curCardPackResult.Clear();
             _openPackDisplayCb.Clear();
+            _curOpenCardPackId = 0;
             var curAlbumData = GetCardAlbumData();
             if (curAlbumData == null)
             {
@@ -590,6 +613,7 @@ namespace FAT
                 DebugEx.FormatError("[CardMan.OpenCardPack]: cardPackConfig is null , cardPackId = {0}, CurCardActId = {1}", cardPackId, CurCardActId);
                 return;
             }
+            _curOpenCardPackId = cardPackId;
             string drawStr = "";
             string errorLog = "";
             //根据配置判断是否是闪卡必得卡包，如果是的话 有单独的开包流程
@@ -814,8 +838,12 @@ namespace FAT
             _openPackDisplayCb.Add((_OpenUICardPackOpen, cardPackId, null));
             //检查是否有卡组/卡册的集齐奖励 构建表现回调
             _CheckCollectReward();
+            //检查卡册是否能重开 如果可以的话 则把重开确认界面加入回调队列
+            _CheckRestartAlbum(cardPackId);
             //检查是否有盖章活动(卡包版) 构建表现回调
             _CheckStampActivity(cardPackId);
+            //如果本卡册是自动开启的 则构建调用OnSpecialRewardUIClosed的回调
+            _CheckAutoOpen(cardPackId);
         }
 
         //检查是否有卡组/卡册的集齐奖励 构建表现回调
@@ -875,10 +903,14 @@ namespace FAT
                     DataTracker.TrackCardAlbumComplete(CurCardActId, GetCardActivity()?.From ?? 0, curAlbumData.CardAlbumId, curAlbumData.CardLimitTempId, curAlbumData.StartTotalIAP, GetCardRoundData().GetCurRoundNum());
                 }
             }
+        }
+
+        private void _CheckRestartAlbum(int cardPackId)
+        {
             //最后检查是否可以重玩卡册 如果可以的话 则把重开确认界面加入回调队列
             if (CheckCanRestartAlbum())
             {
-                _openPackDisplayCb.Add((_OpenUICardAlbumRestart, 0, null));
+                _openPackDisplayCb.Add((_OpenUICardAlbumRestart, cardPackId, null));
             }
         }
 
@@ -893,6 +925,13 @@ namespace FAT
             stampActivity.TryExecuteCost(cardPackId);
         }
 
+        private void _CheckAutoOpen(int cardPackId)
+        {
+            if (!CheckIsAutoOpen(cardPackId))
+                return;
+            _openPackDisplayCb.Add((_OpenSpecialRewardUI, cardPackId, null));
+        }
+
         private void _OpenUICardPackOpen(int cardPackId, List<RewardCommitData> empty = null)
         {
             if (cardPackId <= 0) return;
@@ -902,21 +941,30 @@ namespace FAT
         private void _OpenUICardGroupReward(int groupId, List<RewardCommitData> rewards)
         {
             if (groupId <= 0) return;
-            UIManager.Instance.OpenWindow(UIConfig.UICardGroupReward, groupId, rewards);
+            UIManager.Instance.OpenWindow(UIConfig.UICardGroupReward, groupId, rewards, _curOpenCardPackId);
         }
 
         private void _OpenUICardAlbumReward(int albumId, List<RewardCommitData> rewards)
         {
             if (albumId <= 0) return;
-            UIManager.Instance.OpenWindow(UIConfig.UICardAlbumReward, albumId, rewards);
+            UIManager.Instance.OpenWindow(UIConfig.UICardAlbumReward, albumId, rewards, _curOpenCardPackId);
         }
 
-        private void _OpenUICardAlbumRestart(int id = 0, List<RewardCommitData> empty = null)
+        private void _OpenUICardAlbumRestart(int cardPackId, List<RewardCommitData> empty = null)
         {
-            TryOpenPackDisplay();
+            //如果本次开启的卡包不会自动开启，则调用TryOpenPackDisplay，清空回调信息，方便下次打开卡包
+            if (!CheckIsAutoOpen(cardPackId))
+                TryOpenPackDisplay();
             if (!CheckCanRestartAlbum()) return;
-            UIManager.Instance.CloseWindow(UIConfig.UICardAlbum);
+            UIManager.Instance.CloseWindow(UIConfig.UICardAlbum);    //关闭可能正在开着的卡册界面
+            UIManager.Instance.CloseWindow(UIConfig.UIShop);    //关闭可能正在开着的商店界面
             UIManager.Instance.OpenWindow(UIConfig.UICardAlbumRestart);
+        }
+
+        private void _OpenSpecialRewardUI(int cardPackId, List<RewardCommitData> empty = null)
+        {
+            TryOpenPackDisplay();   //主要是为了清空回调信息，方便下次打开卡包
+            Game.Manager.specialRewardMan.OnSpecialRewardUIClosed(ObjConfigType.CardPack, cardPackId);
         }
 
         #endregion
@@ -1569,6 +1617,7 @@ namespace FAT
             //借用之前的result结构 尽量让获得卡片的流程统一
             _curCardPackResult.Clear();
             _openPackDisplayCb.Clear();
+            _curOpenCardPackId = 0;
             _curCardPackResult.Add(targetCardId);
             //构建表现回调 1、打开万能卡兑换成界面 2、检查是否有卡组/卡册的集齐奖励 
             _BuildJokerCardDisplayCb(jokerData, targetCardId);

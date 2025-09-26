@@ -9,7 +9,7 @@ using EL;
 
 namespace FAT
 {
-    public class SpecialRewardMan : IGameModule
+    public partial class SpecialRewardMan : IGameModule
     {
         //特殊奖励数据
         private class RewardDisplayData
@@ -26,35 +26,43 @@ namespace FAT
             Finish  //完成领取
         }
 
+        #region 内部方法
+        
         //维护现在要依次执行表现的奖励队列
         //Item1 物品类型 Item2 物品id Item3 物品是否已执行commit
         private List<RewardDisplayData> _rewardDisplayList = new List<RewardDisplayData>();
 
         //begin reward
-        public void TryBeginSpecialReward(ObjConfigType type, int rewardId, int rewardNum, ReasonString reason = null)
+        private bool _TryBeginSpecialReward(ObjConfigType type, int rewardId, int rewardNum, ReasonString reason = null)
         {
             //用之前清理
             _ClearFinishRewardDisplayData();
+            var isSuccess = true;
             switch (type)
             {
                 case ObjConfigType.RandomBox:
                     _GenRewardDisplayData(type, rewardId, rewardNum);
-                    Game.Manager.randomBoxMan.TryBeginRandomBox(rewardId, rewardNum, reason);
+                    isSuccess = Game.Manager.randomBoxMan.TryBeginRandomBox(rewardId, rewardNum, reason);
                     break;
                 case ObjConfigType.CardJoker:
-                    if (Game.Manager.cardMan.OnGetCardJoker(rewardId, rewardNum))
-                    {
-                        _GenRewardDisplayData(type, rewardId, rewardNum);
-                    }
+                    _GenRewardDisplayData(type, rewardId, rewardNum);
+                    isSuccess= Game.Manager.cardMan.OnGetCardJoker(rewardId, rewardNum);
+                    break;
+                case ObjConfigType.CardPack:
+                    _GenRewardDisplayData(type, rewardId, rewardNum);
+                    var fromPos = UIFlyFactory.ResolveFlyTarget(FlyType.MergeItemFlyTarget);
+                    isSuccess = Game.Manager.cardMan.TryOpenCardPack(rewardId, fromPos, false);
                     break;
                 default:
                     DebugEx.FormatError("SpecialRewardMan.TryBeginSpecialReward : error reward type! {0}", type);
-                    return;
+                    isSuccess = false;
+                    break;
             }
+            return isSuccess;
         }
         
         //commit reward
-        public void TryCommitSpecialReward(ObjConfigType type, int rewardId, int rewardNum)
+        private void _TryCommitSpecialReward(ObjConfigType type, int rewardId, int rewardNum)
         {
             switch (type)
             {
@@ -64,30 +72,19 @@ namespace FAT
                 case ObjConfigType.CardJoker:
                     //走通用逻辑 无需其他处理
                     break;
+                case ObjConfigType.CardPack:
+                    //走通用逻辑 无需其他处理
+                    break;
                 default:
                     DebugEx.FormatError("SpecialRewardMan.TryCommitSpecialReward : error reward type! {0}", type);
                     return;
             }
-            //检查目前是否有已经在执行表现的奖励 如果有 则不打开新的界面
-            bool hasReady = CheckCanClaimSpecialReward();
             //刷新数据状态
             _ReadyRewardDisplayData(type, rewardId, rewardNum);
-            if (!hasReady)
-            {
-                //执行表现
-                TryDisplaySpecialReward();
-            }
         }
 
-        //各个特殊系统在数据结束时 主动调用finish
-        public void TryFinishSpecialReward(ObjConfigType type, int rewardId)
-        {
-            _FinishRewardDisplayData(type, rewardId);
-        }
-
-        //展示当前队列中第一个奖励对应的弹脸界面
-        //在commit中主动调用一次，在相关奖励界面关闭OnPostClose时也要调用一次
-        public void TryDisplaySpecialReward()
+        //展示当前队列中第一个奖励对应的弹脸界面 会在commit中主动调用
+        private void _TryDisplaySpecialReward()
         {
             var data = _GetFirstCanClaimSpecialReward();
             if (data != null)
@@ -100,11 +97,21 @@ namespace FAT
                     case ObjConfigType.CardJoker:
                         Game.Manager.cardMan.TryOpenJokerGet();
                         break;
+                    case ObjConfigType.CardPack:
+                        Game.Manager.cardMan.TryOpenPackDisplay();
+                        break;
                 }
             }
             Game.Manager.autoGuide.TryInterruptGuide();
-            CheckSpecialRewardFinish();
         }
+        
+        //在即将关闭奖励展示界面时，主动调用finish 便于后续清理不再使用的数据
+        private void _TryFinishSpecialReward(ObjConfigType type, int rewardId)
+        {
+            _FinishRewardDisplayData(type, rewardId);
+        }
+        
+        #endregion
 
         //在一个奖励展示完后 检查是否有后续特殊奖励 没有的话就Dispatch事件 用于通知其他系统
         public void CheckSpecialRewardFinish()
@@ -173,6 +180,8 @@ namespace FAT
         {
             //reset时清理所有特殊奖励 无论其是否commit
             _rewardDisplayList.Clear();
+            _priorityQueue.Clear();
+            _isPumping = false;
         }
 
         public void LoadConfig() { }
@@ -231,18 +240,6 @@ namespace FAT
             {
                 var displayData = _rewardDisplayList[i];
                 if (displayData.State == SpecialRewardState.Finish)
-                {
-                    _rewardDisplayList.RemoveAt(i);
-                }
-            }
-        }
-        
-        private void _ClearReadyRewardDisplayData()
-        {
-            for (int i = _rewardDisplayList.Count - 1; i >= 0; i--)
-            {
-                var displayData = _rewardDisplayList[i];
-                if (displayData.State == SpecialRewardState.Ready)
                 {
                     _rewardDisplayList.RemoveAt(i);
                 }

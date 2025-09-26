@@ -132,10 +132,9 @@ namespace FAT
                     Game.Manager.coinMan.FinishFlyCoin(Game.Manager.coinMan.GetCoinTypeById(rewardId), rewardCount);
                     break;
                 case ObjConfigType.RandomBox:
-                    Game.Manager.specialRewardMan.TryCommitSpecialReward(ObjConfigType.RandomBox, rewardId, rewardCount);
-                    break;
                 case ObjConfigType.CardJoker:
-                    Game.Manager.specialRewardMan.TryCommitSpecialReward(ObjConfigType.CardJoker, rewardId, rewardCount);
+                case ObjConfigType.CardPack:
+                    Game.Manager.specialRewardMan.TryOpenSpecialReward(rewardId, rewardCount, data.reason);
                     break;
                 case ObjConfigType.ActivityToken:
                     var tokenConf = Game.Manager.objectMan.GetTokenConfig(rewardId);
@@ -232,8 +231,9 @@ namespace FAT
                     Game.Manager.coinMan.AddFlyCoin(Game.Manager.coinMan.GetCoinTypeById(id), data.rewardCount, data.reason);
                     break;
                 case ObjConfigType.RandomBox:
+                case ObjConfigType.CardJoker:
                     data.WaitCommit = true;
-                    Game.Manager.specialRewardMan.TryBeginSpecialReward(ObjConfigType.RandomBox, id, data.rewardCount, data.reason);
+                    Game.Manager.specialRewardMan.TryAddSpecialReward(id, data.rewardCount, data.reason);
                     break;
                 case ObjConfigType.ActivityToken:
                     var tokenConf = Game.Manager.objectMan.GetTokenConfig(data.rewardId);
@@ -374,12 +374,12 @@ namespace FAT
                                 activityLandMark.AddToken(data.rewardId, data.rewardCount);
                             }
                             break;
-                        case FeatureEntry.FeatureMicMilestone:
-                            Game.Manager.activity.LookupAny(EventType.MicMilestone, out var actScoreMic);
-                            if (actScoreMic != null)
+                        case FeatureEntry.FeatureSevenDayTask:
+                            Game.Manager.activity.LookupAny(EventType.SevenDayTask, out var sevenDay);
+                            if (sevenDay != null)
                             {
-                                var activityMic = (ActivityScoreMic)actScoreMic;
-                                activityMic.TryAddToken(data.rewardId, data.rewardCount, data.reason);
+                                var sevenDayTask = sevenDay as ActivitySevenDayTask;
+                                sevenDayTask.AddToken(data.rewardId, data.rewardCount);
                             }
                             break;
                         default:
@@ -395,21 +395,29 @@ namespace FAT
                 case ObjConfigType.CardPack:
                     {
                         var cfg = Game.Manager.objectMan.GetCardPackConfig(data.rewardId);
-                        // 卡包必须进主棋盘
                         var target = Game.Manager.mainMergeMan.world;
-                        data.context.targetWorld = target;
+                        var isAutoOpen = cfg.IsAutoOpen;
+                        if (isAutoOpen)
+                            data.WaitCommit = true;
                         for (int i = 0; i < data.rewardCount; i++)
                         {
-                            target.AddReward(id, cfg.IsTop || (data.flags & RewardFlags._IsPriority) > 0);
                             //获得卡包时检查是否是特殊卡包 是的话 生成对应的唯一卡池
                             if (cfg.IsShinnyGuar)
                                 Game.Manager.cardMan.OnGetSpecialCardPack(cfg.Id);
+                            //根据卡包配置决定是否在获得时直接打开
+                            //不直接开的话就进主棋盘奖励箱
+                            if (!isAutoOpen)
+                            {
+                                data.context.targetWorld = target;
+                                target.AddReward(id, cfg.IsTop || (data.flags & RewardFlags._IsPriority) > 0);
+                            }
+                            //直接打开
+                            else
+                            {
+                                Game.Manager.specialRewardMan.TryAddSpecialReward(id, 1, data.reason);
+                            }
                         }
                     }
-                    break;
-                case ObjConfigType.CardJoker:
-                    data.WaitCommit = true;
-                    Game.Manager.specialRewardMan.TryBeginSpecialReward(ObjConfigType.CardJoker, id, data.rewardCount);
                     break;
                 case ObjConfigType.MergeItem:
                     {

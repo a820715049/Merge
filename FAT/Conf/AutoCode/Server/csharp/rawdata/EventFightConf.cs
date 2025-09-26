@@ -65,7 +65,7 @@ namespace fat.rawdata {
   /// <summary>
   /// annotation@annotation_type(type="rawdata")
   /// annotation@rawdata(row="EventFight",table="EventFightMap",table_wrapper="EventFightConf",map="true",map_key_type="int32",data="EventFightConf")
-  /// annotation@ab(table_ab="EventFightMapAB",table_ab_patch="EventFightMapABPatch",table_ab_value="EventFightMapABValue",ab_patch="true")
+  /// annotation@ab(table_ab="EventFightMapAB",table_ab_patch="EventFightMapABPatch",table_ab_value="EventFightMapABValue",ab_patch="false")
   /// annotation@filter(just_server="false",just_client="false")
   /// annotation@EventFight(id="id")
   /// </summary>

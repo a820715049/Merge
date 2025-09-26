@@ -142,7 +142,7 @@ namespace FAT
         MineCartRewardBubble, //矿车棋盘发奖气泡
         MultiRankingToken,
         PuzzleToken,
-        Default, // 默认
-        ScoreMicToken,    //积分活动麦克风版 从订单或合成行为产出积分并飞到活动入口
+        Default,
+        SevenDayToken,
     }
 }

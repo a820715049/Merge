@@ -1,6 +1,6 @@
 /*
  * @Author: tang.yan
- * @Description: 来源与产出界面 
+ * @Description: 来源与产出界面
  * @Date: 2023-11-23 20:11:02
  */
 
@@ -115,7 +115,7 @@ namespace FAT
             _sixGroupScroll.InitLayout();
             _sixGroupScroll.SetScrollableMax(5);
         }
-        
+
         protected override void OnPreOpen()
         {
             _RefreshItemBaseInfo();
@@ -392,8 +392,9 @@ namespace FAT
             bottomText.gameObject.SetActive(false);
             bottomText.text = "";
         }
-        
+
         //刷新阶梯活动相关信息 需要在底部信息刷新完后再调用
+        //限时合成订单也用这个方法，在时间显示上略有不同
         private void _RefreshStepActPanel()
         {
             var itemInfoData = Game.Manager.itemInfoMan.CurShowItemData;
@@ -510,7 +511,7 @@ namespace FAT
             stepActTime.SetActive(true);
             _RefreshFrozenItemTime();
         }
-        
+
         private void _RefreshFrozenItemTime()
         {
             if (_frozenItemLifeTime != -1)
@@ -527,7 +528,7 @@ namespace FAT
             var curShowItemData = Game.Manager.itemInfoMan.CurShowItemData;
             if (curShowItemData.OriginChainId == curShowItemData.DirectChainId)
             {
-                //这种情况下目前默认为：直接生成的棋子，其对应来源生成器合成链中当前已获得的最高等级棋子<配置的等级(OriginChainLevel) 
+                //这种情况下目前默认为：直接生成的棋子，其对应来源生成器合成链中当前已获得的最高等级棋子<配置的等级(OriginChainLevel)
                 UIManager.Instance.OpenWindow(UIConfig.UIItemInfoTips, mProduceIcon.transform.position, 113f, 0, curShowItemData.OriginChainLevel);
             }
             else

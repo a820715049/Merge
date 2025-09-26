@@ -34,7 +34,6 @@ namespace FAT
         //当前缓存的随机宝箱队列
         private List<RandomBoxData> _cacheRandomBoxList = new List<RandomBoxData>();
         private static int _boxIndex = 0;
-
         public void TryOpenRandomBoxTips(int itemId, Vector3 startWorldPos, float offset)
         {
             var boxConfig = Game.Manager.objectMan.GetRandomBoxConfig(itemId);
@@ -48,7 +47,7 @@ namespace FAT
             else
             {
                 UIConfig.UIRandomBoxSpecialTips.Replace(tipsPrefab.ConvertToAssetConfig());
-                UIManager.Instance.OpenWindow(UIConfig.UIRandomBoxSpecialTips, startWorldPos, offset);
+                UIManager.Instance.OpenWindow(UIConfig.UIRandomBoxSpecialTips, startWorldPos, offset, itemId);
             }
         }
 
@@ -57,7 +56,7 @@ namespace FAT
         /// </summary>
         /// <param name="randomBoxId">随机宝箱id ObjRandomChest id</param>
         /// <param name="boxNum">一次性发放的该宝箱的数量</param>
-        public void TryBeginRandomBox(int randomBoxId, int boxNum, ReasonString reason = null)
+        public bool TryBeginRandomBox(int randomBoxId, int boxNum, ReasonString reason = null)
         {
             DebugEx.FormatInfo("RandomBoxMan::TryBeginRandomBox  boxId = {0}, boxNum = {1}", randomBoxId, boxNum);
             //用之前清理
@@ -66,7 +65,7 @@ namespace FAT
             if (randomBoxConfig == null)
             {
                 DebugEx.FormatError("RandomBoxMan::TryBeginRandomBox : error randomBoxId = {0} !", randomBoxId);
-                return;
+                return false;
             }
             //构造随机id权重列表 放在最外面避免重复创建
             using var _ = ObjectPool<List<(int, int)>>.GlobalPool.AllocStub(out var randomList);
@@ -114,6 +113,7 @@ namespace FAT
                 //宝箱数据加入list
                 _cacheRandomBoxList.Add(boxData);
             }
+            return true;
         }
 
         /// <summary>
@@ -205,7 +205,6 @@ namespace FAT
                 {
                     DebugEx.FormatInfo("RandomBoxMan::TryFinishRandomBoxData boxId = {0}, boxIndex = {1}", boxData.RandomBoxId, boxData.BoxIndex);
                     boxData.State = RandomBoxState.Finish;
-                    Game.Manager.specialRewardMan.TryFinishSpecialReward(ObjConfigType.RandomBox, boxData.RandomBoxId);
                     break;
                 }
             }
@@ -217,18 +216,6 @@ namespace FAT
             {
                 var boxData = _cacheRandomBoxList[i];
                 if (boxData.State == RandomBoxState.Finish)
-                {
-                    _cacheRandomBoxList.RemoveAt(i);
-                }
-            }
-        }
-
-        private void _ClearReadyBoxData()
-        {
-            for (int i = _cacheRandomBoxList.Count - 1; i >= 0; i--)
-            {
-                var boxData = _cacheRandomBoxList[i];
-                if (boxData.State == RandomBoxState.Ready)
                 {
                     _cacheRandomBoxList.RemoveAt(i);
                 }

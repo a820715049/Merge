@@ -69,6 +69,7 @@ namespace FAT
         [SerializeField] private TextMeshProUGUI talkPlayText;
         [SerializeField] private GameObject talkDie;
         [SerializeField] private TextMeshProUGUI talkDieText;
+        [SerializeField] private TextProOnACircle title;
         [SerializeField] private float initialTextScale = 1.5f; // 初始字体大小缩放
         [SerializeField] private float finalTextScale = 1f;     // 最终字体大小缩放 
         [SerializeField] private float scaleTime = 0.2f;        // 缩放动画时间
@@ -107,7 +108,7 @@ namespace FAT
         private void RegiestComp()
         {
             transform.Access("Content/TopBg/text", out _cd);
-            transform.Access("Content/BoardRewardNode", out _reward);
+            transform.Access("Content/Center/BoardNode/CompBoard/Mask/Root/FgBoard/BgTop/BoardRewardNode", out _reward);
             transform.Access("Content/Bottom/FlyTarget/Entry", out _boardEntry);
             transform.FindEx("Content/Center/GiftNode", out _giftPackGo);
             transform.Access("Content/Center/GiftNode/Icon", out _giftPackIcon);
@@ -219,7 +220,6 @@ namespace FAT
             RefreshCD(false);
             RefreshMilestone();
             RefreshMonster();
-                        
             //打开棋盘界面时 直接打开UIStatus界面，同时修改UIStatus的位置
             UIConfig.UIStatus.Open();
             MessageCenter.Get<MSG.UI_TOP_BAR_PUSH_STATE>().Dispatch(UIStatus.LayerState.AboveStatus);
@@ -1161,7 +1161,7 @@ namespace FAT
         private void ShowCycleTalkTip(Action callback = null)
         {
             _activity.SetHasCycleHint(true);
-            UIManager.Instance.OpenWindow(UIConfig.UIActivityFightMilestoneTips, callback);
+            _activity.MilestoneTipsRes.res.ActiveR.Open(callback, _activity);
         }
     }
 }

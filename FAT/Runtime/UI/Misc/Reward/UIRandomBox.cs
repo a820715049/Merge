@@ -1,6 +1,6 @@
 /*
  * @Author: tang.yan
- * @Description: 随机宝箱界面 
+ * @Description: 随机宝箱界面
  * @Date: 2023-11-30 16:11:15
  */
 using System;
@@ -13,6 +13,7 @@ using EL;
 using Config;
 using Spine;
 using Spine.Unity;
+using fat.rawdata;
 
 namespace FAT
 {
@@ -24,8 +25,8 @@ namespace FAT
             [SerializeField] public UICommonItem reward;
             [SerializeField] public UIParticle particle;
         }
-        
-        [SerializeField] 
+
+        [SerializeField]
         [Tooltip("宝箱开启特效延迟出现时间")]
         private float effectShowDelayTime;
         [SerializeField] private GameObject boxGo;
@@ -43,6 +44,12 @@ namespace FAT
         private bool _isCurShowSpine = false;
         private bool _isPlaySpineAnim = false;
         private Coroutine _coShowEffect;
+        //策划配置——是否允许跳过随机宝箱“开启动画”
+        private bool _canSkipOpenAnim;
+        //奖励展示至少停留的时间（秒）
+        private float _minRewardShowSeconds = 0.8f;
+        //到这个时间点后才允许在 stage=1 进行领取/关闭
+        private float _stage1UnlockTime = 0f;
         
         protected override void OnCreate()
         {
@@ -57,6 +64,9 @@ namespace FAT
 
         protected override void OnPreOpen()
         {
+            //根据配置决定是否允许跳过开启动画
+            _canSkipOpenAnim = Game.Manager.featureUnlockMan.IsFeatureEntryUnlocked(FeatureEntry.FeatureSkipRandomChest);
+            _stage1UnlockTime = 0f;
             _curRandomBoxData = Game.Manager.randomBoxMan.TryGetCanClaimBoxData();
             _curShowStage = 0;
             _CreateBoxSpine();
@@ -77,7 +87,7 @@ namespace FAT
         protected override void OnPostClose()
         {
             _ClearBoxSpine();
-            Game.Manager.specialRewardMan.TryDisplaySpecialReward();
+            Game.Manager.specialRewardMan.OnSpecialRewardUIClosed(ObjConfigType.RandomBox, _curRandomBoxData?.RandomBoxId ?? 0);
         }
 
         private void _CreateBoxSpine()
@@ -102,9 +112,18 @@ namespace FAT
             _spinePrefab.SetActive(true);
             if (_skeleton != null)
             {
-                _isPlaySpineAnim = true;
-                _skeleton.AnimationState.SetAnimation(0, "box_show", false)
-                    .Complete += delegate(TrackEntry entry) { _isPlaySpineAnim = false; };
+                if (_canSkipOpenAnim)
+                {
+                    //允许跳过时 随机宝箱的展示动画可以跳过
+                    _skeleton.AnimationState.SetAnimation(0, "box_show", false);
+                }
+                else
+                {
+                    //不允许跳过时 等待动画播完
+                    _isPlaySpineAnim = true;
+                    _skeleton.AnimationState.SetAnimation(0, "box_show", false)
+                        .Complete += delegate (TrackEntry entry) { _isPlaySpineAnim = false; };
+                }
                 _skeleton.AnimationState.AddAnimation(0, "box_idle", true, 0f);
                 boxAnim.SetTrigger("Show");
                 // 宝箱出现
@@ -182,10 +201,25 @@ namespace FAT
                 Close();
                 return;
             }
-            if (_isPlaySpineAnim)
-                return;
+            
             if (_curShowStage == 0)
             {
+                //宝箱没配置spine动画时 直接跳过阶段0 并报错
+                if (_skeleton == null)
+                {
+                    DebugEx.FormatError("UIRandomBox._OnBtnClaim : random box spine is null, RandomBoxId = {0}", _curRandomBoxData.RandomBoxId);
+                    _SkipOpenAnim();
+                    return;
+                }
+                // 如果正在“开启动画”且允许跳过，则执行跳过；否则保持原有拦截逻辑
+                if (_isPlaySpineAnim)
+                {
+                    if (_coShowEffect != null && _canSkipOpenAnim)
+                    {
+                        _SkipOpenAnim();
+                    }
+                    return;
+                }
                 _isPlaySpineAnim = true;
                 _coShowEffect = StartCoroutine(_CoShowOpenEffect());
                 _skeleton.AnimationState.ClearTracks();
@@ -194,6 +228,8 @@ namespace FAT
                 {
                     boxGo.SetActive(false);
                     _curShowStage = 1;
+                    //只有允许跳过时才记录最早可点击时间
+                    _stage1UnlockTime = _canSkipOpenAnim ? (Time.unscaledTime + _minRewardShowSeconds) : 0f;
                     _RefreshTips();
                 };
                 // 宝箱打开
@@ -201,6 +237,17 @@ namespace FAT
             }
             else if (_curShowStage == 1)
             {
+                if (_canSkipOpenAnim)
+                {
+                    //允许跳过时 奖励至少展示 _minRewardShowSeconds 秒后才允许领取/关闭
+                    if (Time.unscaledTime < _stage1UnlockTime)
+                        return;
+                }
+                else if (_isPlaySpineAnim)
+                {
+                    //不允许跳过时 等待动画播完
+                    return;
+                }
                 //先领取宝箱中的奖励
                 int index = 0;
                 foreach (var reward in _curRandomBoxData.Reward)
@@ -221,7 +268,7 @@ namespace FAT
                 Close();
             }
         }
-        
+
         private IEnumerator _CoLoadRes(AssetConfig res, Transform anchor)
         {
             var req = EL.Resource.ResManager.LoadAsset(res.Group, res.Asset);
@@ -263,6 +310,40 @@ namespace FAT
             //等宝箱打开特效播完才允许进行下一步
             yield return new WaitForSeconds(0.5f);
             _isPlaySpineAnim = false;
+        }
+        
+        private void _SkipOpenAnim()
+        {
+            if (_curShowStage != 0) 
+                return;
+            // 1) 停掉开启动画链路（仅当处于开启动画阶段有意义）
+            if (_coShowEffect != null)
+            {
+                StopCoroutine(_coShowEffect);
+                _coShowEffect = null;
+            }
+
+            // 2) 立即展示开箱后的奖励与特效（跳过等待与渐进）
+            rewardEffectGo.SetActive(true);
+            rewardGo.SetActive(true);
+            foreach (var uiReward in rewardGroup)
+            {
+                uiReward.particle.gameObject.SetActive(true);
+            }
+
+            // 3) 终止Spine当前播放并隐藏宝箱外观（直接进入开箱后的状态）
+            if (_skeleton != null)
+            {
+                _skeleton.AnimationState.ClearTracks();
+            }
+            boxGo.SetActive(false);
+
+            // 4) 切换到可领取阶段
+            _isPlaySpineAnim = false;
+            _curShowStage = 1;
+            //只有允许跳过时才记录最早可点击时间
+            _stage1UnlockTime = _canSkipOpenAnim ? (Time.unscaledTime + _minRewardShowSeconds) : 0f;
+            _RefreshTips();
         }
     }
 }

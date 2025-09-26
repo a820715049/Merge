@@ -11,16 +11,16 @@ namespace FAT
     {
         public override void Play(string[] param)
         {
-            float.TryParse(param[0], System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out float objID);
-            float count = 1;
+            int.TryParse(param[0], System.Globalization.NumberStyles.Integer, System.Globalization.CultureInfo.InvariantCulture, out var objID);
+            int count = 1;
             if (param.Length == 2)
             {
-                float.TryParse(param[1], System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out count);
+                int.TryParse(param[1], System.Globalization.NumberStyles.Integer, System.Globalization.CultureInfo.InvariantCulture, out count);
             }
-            var conf = GetObjBasic((int)objID);
+            var conf = GetObjBasic(objID);
             if (conf != null)
             {
-                var data = Game.Manager.rewardMan.BeginReward(conf.Id, (int)count, ReasonString.card, RewardFlags._IsPriority);
+                var data = Game.Manager.rewardMan.BeginReward(conf.Id, count, ReasonString.card, RewardFlags._IsPriority);
                 Game.Manager.rewardMan.CommitReward(data);
             }
 
