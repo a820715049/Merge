@@ -24,29 +24,31 @@ namespace fat.rawdata {
     static IAPPackConfReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChlyYXdkYXRhL0lBUFBhY2tDb25mLnByb3RvEgdyYXdkYXRhInwKB0lBUFBh",
-            "Y2sSCgoCaWQYASABKAUSDgoGZWZmZWN0GAcgASgFEg0KBWlhcElkGAIgASgF",
-            "EhAKCHBhY2tOYW1lGAggASgJEg4KBnJld2FyZBgDIAMoCRITCgtyZXdhcmRB",
-            "bGJ1bRgGIAMoCRIPCgd0Z2FOYW1lGAQgASgJIpgBChFJQVBQYWNrTWFwQUJW",
-            "YWx1ZRI+CgpJQVBQYWNrTWFwGAEgAygLMioucmF3ZGF0YS5JQVBQYWNrTWFw",
-            "QUJWYWx1ZS5JQVBQYWNrTWFwRW50cnkaQwoPSUFQUGFja01hcEVudHJ5EgsK",
-            "A2tleRgBIAEoBRIfCgV2YWx1ZRgCIAEoCzIQLnJhd2RhdGEuSUFQUGFjazoC",
-            "OAEiuQMKC0lBUFBhY2tDb25mEjgKCklBUFBhY2tNYXAYASADKAsyJC5yYXdk",
-            "YXRhLklBUFBhY2tDb25mLklBUFBhY2tNYXBFbnRyeRI8CgxJQVBQYWNrTWFw",
-            "QUIYAiADKAsyJi5yYXdkYXRhLklBUFBhY2tDb25mLklBUFBhY2tNYXBBQkVu",
-            "dHJ5EkYKEUlBUFBhY2tNYXBBQlBhdGNoGAMgAygLMisucmF3ZGF0YS5JQVBQ",
-            "YWNrQ29uZi5JQVBQYWNrTWFwQUJQYXRjaEVudHJ5GkMKD0lBUFBhY2tNYXBF",
-            "bnRyeRILCgNrZXkYASABKAUSHwoFdmFsdWUYAiABKAsyEC5yYXdkYXRhLklB",
-            "UFBhY2s6AjgBGk8KEUlBUFBhY2tNYXBBQkVudHJ5EgsKA2tleRgBIAEoCRIp",
-            "CgV2YWx1ZRgCIAEoCzIaLnJhd2RhdGEuSUFQUGFja01hcEFCVmFsdWU6AjgB",
-            "GlQKFklBUFBhY2tNYXBBQlBhdGNoRW50cnkSCwoDa2V5GAEgASgJEikKBXZh",
-            "bHVlGAIgASgLMhoucmF3ZGF0YS5JQVBQYWNrTWFwQUJWYWx1ZToCOAFCPVot",
-            "Z2l0bGFiLmZ1bnBsdXMuaW8vZmF0L2NvbmYvZ2VuL2dvbGFuZy9yYXdkYXRh",
-            "qgILZmF0LnJhd2RhdGFiBnByb3RvMw=="));
+            "ChlyYXdkYXRhL0lBUFBhY2tDb25mLnByb3RvEgdyYXdkYXRhIuEBCgdJQVBQ",
+            "YWNrEgoKAmlkGAEgASgFEgwKBGRpZmYYCSABKAUSDgoGZWZmZWN0GAcgASgF",
+            "Eg0KBWlhcElkGAIgASgFEg0KBWlzQXBpGAogASgIEhEKCWlzSG9saWRheRgL",
+            "IAEoCBIOCgZpc1Nob3AYDCABKAgSEAoIcGFja05hbWUYCCABKAkSDwoHcGtn",
+            "VHlwZRgNIAEoCRIOCgZyZXdhcmQYAyADKAkSEwoLcmV3YXJkQWxidW0YBiAD",
+            "KAkSEgoKcmV3YXJkVHlwZRgOIAEoBRIPCgd0Z2FOYW1lGAQgASgJIpgBChFJ",
+            "QVBQYWNrTWFwQUJWYWx1ZRI+CgpJQVBQYWNrTWFwGAEgAygLMioucmF3ZGF0",
+            "YS5JQVBQYWNrTWFwQUJWYWx1ZS5JQVBQYWNrTWFwRW50cnkaQwoPSUFQUGFj",
+            "a01hcEVudHJ5EgsKA2tleRgBIAEoBRIfCgV2YWx1ZRgCIAEoCzIQLnJhd2Rh",
+            "dGEuSUFQUGFjazoCOAEiuQMKC0lBUFBhY2tDb25mEjgKCklBUFBhY2tNYXAY",
+            "ASADKAsyJC5yYXdkYXRhLklBUFBhY2tDb25mLklBUFBhY2tNYXBFbnRyeRI8",
+            "CgxJQVBQYWNrTWFwQUIYAiADKAsyJi5yYXdkYXRhLklBUFBhY2tDb25mLklB",
+            "UFBhY2tNYXBBQkVudHJ5EkYKEUlBUFBhY2tNYXBBQlBhdGNoGAMgAygLMisu",
+            "cmF3ZGF0YS5JQVBQYWNrQ29uZi5JQVBQYWNrTWFwQUJQYXRjaEVudHJ5GkMK",
+            "D0lBUFBhY2tNYXBFbnRyeRILCgNrZXkYASABKAUSHwoFdmFsdWUYAiABKAsy",
+            "EC5yYXdkYXRhLklBUFBhY2s6AjgBGk8KEUlBUFBhY2tNYXBBQkVudHJ5EgsK",
+            "A2tleRgBIAEoCRIpCgV2YWx1ZRgCIAEoCzIaLnJhd2RhdGEuSUFQUGFja01h",
+            "cEFCVmFsdWU6AjgBGlQKFklBUFBhY2tNYXBBQlBhdGNoRW50cnkSCwoDa2V5",
+            "GAEgASgJEikKBXZhbHVlGAIgASgLMhoucmF3ZGF0YS5JQVBQYWNrTWFwQUJW",
+            "YWx1ZToCOAFCPVotZ2l0bGFiLmZ1bnBsdXMuaW8vZmF0L2NvbmYvZ2VuL2dv",
+            "bGFuZy9yYXdkYXRhqgILZmF0LnJhd2RhdGFiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.IAPPack), global::fat.rawdata.IAPPack.Parser, new[]{ "Id", "Effect", "IapId", "PackName", "Reward", "RewardAlbum", "TgaName" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.IAPPack), global::fat.rawdata.IAPPack.Parser, new[]{ "Id", "Diff", "Effect", "IapId", "IsApi", "IsHoliday", "IsShop", "PackName", "PkgType", "Reward", "RewardAlbum", "RewardType", "TgaName" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.IAPPackMapABValue), global::fat.rawdata.IAPPackMapABValue.Parser, new[]{ "IAPPackMap" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.IAPPackConf), global::fat.rawdata.IAPPackConf.Parser, new[]{ "IAPPackMap", "IAPPackMapAB", "IAPPackMapABPatch" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, null, })
           }));
@@ -92,11 +94,17 @@ namespace fat.rawdata {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public IAPPack(IAPPack other) : this() {
       id_ = other.id_;
+      diff_ = other.diff_;
       effect_ = other.effect_;
       iapId_ = other.iapId_;
+      isApi_ = other.isApi_;
+      isHoliday_ = other.isHoliday_;
+      isShop_ = other.isShop_;
       packName_ = other.packName_;
+      pkgType_ = other.pkgType_;
       reward_ = other.reward_.Clone();
       rewardAlbum_ = other.rewardAlbum_.Clone();
+      rewardType_ = other.rewardType_;
       tgaName_ = other.tgaName_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -118,6 +126,20 @@ namespace fat.rawdata {
       get { return id_; }
       set {
         id_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "diff" field.</summary>
+    public const int DiffFieldNumber = 9;
+    private int diff_;
+    /// <summary>
+    /// 礼包难度分层
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Diff {
+      get { return diff_; }
+      set {
+        diff_ = value;
       }
     }
 
@@ -151,6 +173,48 @@ namespace fat.rawdata {
       }
     }
 
+    /// <summary>Field number for the "isApi" field.</summary>
+    public const int IsApiFieldNumber = 10;
+    private bool isApi_;
+    /// <summary>
+    /// 是否为Api礼包
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool IsApi {
+      get { return isApi_; }
+      set {
+        isApi_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "isHoliday" field.</summary>
+    public const int IsHolidayFieldNumber = 11;
+    private bool isHoliday_;
+    /// <summary>
+    /// 是否为节日礼包
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool IsHoliday {
+      get { return isHoliday_; }
+      set {
+        isHoliday_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "isShop" field.</summary>
+    public const int IsShopFieldNumber = 12;
+    private bool isShop_;
+    /// <summary>
+    /// 是否为商店购买项
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool IsShop {
+      get { return isShop_; }
+      set {
+        isShop_ = value;
+      }
+    }
+
     /// <summary>Field number for the "packName" field.</summary>
     public const int PackNameFieldNumber = 8;
     private string packName_ = "";
@@ -163,6 +227,20 @@ namespace fat.rawdata {
       get { return packName_; }
       set {
         packName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "pkgType" field.</summary>
+    public const int PkgTypeFieldNumber = 13;
+    private string pkgType_ = "";
+    /// <summary>
+    /// 礼包类型
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string PkgType {
+      get { return pkgType_; }
+      set {
+        pkgType_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
@@ -194,6 +272,23 @@ namespace fat.rawdata {
       get { return rewardAlbum_; }
     }
 
+    /// <summary>Field number for the "rewardType" field.</summary>
+    public const int RewardTypeFieldNumber = 14;
+    private int rewardType_;
+    /// <summary>
+    /// 奖励类型：
+    /// 0:直接购买
+    /// 1:通行证类(买权限)
+    /// 2:抽奖类型
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int RewardType {
+      get { return rewardType_; }
+      set {
+        rewardType_ = value;
+      }
+    }
+
     /// <summary>Field number for the "tgaName" field.</summary>
     public const int TgaNameFieldNumber = 4;
     private string tgaName_ = "";
@@ -223,11 +318,17 @@ namespace fat.rawdata {
         return true;
       }
       if (Id != other.Id) return false;
+      if (Diff != other.Diff) return false;
       if (Effect != other.Effect) return false;
       if (IapId != other.IapId) return false;
+      if (IsApi != other.IsApi) return false;
+      if (IsHoliday != other.IsHoliday) return false;
+      if (IsShop != other.IsShop) return false;
       if (PackName != other.PackName) return false;
+      if (PkgType != other.PkgType) return false;
       if(!reward_.Equals(other.reward_)) return false;
       if(!rewardAlbum_.Equals(other.rewardAlbum_)) return false;
+      if (RewardType != other.RewardType) return false;
       if (TgaName != other.TgaName) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -236,11 +337,17 @@ namespace fat.rawdata {
     public override int GetHashCode() {
       int hash = 1;
       if (Id != 0) hash ^= Id.GetHashCode();
+      if (Diff != 0) hash ^= Diff.GetHashCode();
       if (Effect != 0) hash ^= Effect.GetHashCode();
       if (IapId != 0) hash ^= IapId.GetHashCode();
+      if (IsApi != false) hash ^= IsApi.GetHashCode();
+      if (IsHoliday != false) hash ^= IsHoliday.GetHashCode();
+      if (IsShop != false) hash ^= IsShop.GetHashCode();
       if (PackName.Length != 0) hash ^= PackName.GetHashCode();
+      if (PkgType.Length != 0) hash ^= PkgType.GetHashCode();
       hash ^= reward_.GetHashCode();
       hash ^= rewardAlbum_.GetHashCode();
+      if (RewardType != 0) hash ^= RewardType.GetHashCode();
       if (TgaName.Length != 0) hash ^= TgaName.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -280,6 +387,30 @@ namespace fat.rawdata {
         output.WriteRawTag(66);
         output.WriteString(PackName);
       }
+      if (Diff != 0) {
+        output.WriteRawTag(72);
+        output.WriteInt32(Diff);
+      }
+      if (IsApi != false) {
+        output.WriteRawTag(80);
+        output.WriteBool(IsApi);
+      }
+      if (IsHoliday != false) {
+        output.WriteRawTag(88);
+        output.WriteBool(IsHoliday);
+      }
+      if (IsShop != false) {
+        output.WriteRawTag(96);
+        output.WriteBool(IsShop);
+      }
+      if (PkgType.Length != 0) {
+        output.WriteRawTag(106);
+        output.WriteString(PkgType);
+      }
+      if (RewardType != 0) {
+        output.WriteRawTag(112);
+        output.WriteInt32(RewardType);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -311,6 +442,30 @@ namespace fat.rawdata {
         output.WriteRawTag(66);
         output.WriteString(PackName);
       }
+      if (Diff != 0) {
+        output.WriteRawTag(72);
+        output.WriteInt32(Diff);
+      }
+      if (IsApi != false) {
+        output.WriteRawTag(80);
+        output.WriteBool(IsApi);
+      }
+      if (IsHoliday != false) {
+        output.WriteRawTag(88);
+        output.WriteBool(IsHoliday);
+      }
+      if (IsShop != false) {
+        output.WriteRawTag(96);
+        output.WriteBool(IsShop);
+      }
+      if (PkgType.Length != 0) {
+        output.WriteRawTag(106);
+        output.WriteString(PkgType);
+      }
+      if (RewardType != 0) {
+        output.WriteRawTag(112);
+        output.WriteInt32(RewardType);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -323,17 +478,35 @@ namespace fat.rawdata {
       if (Id != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Id);
       }
+      if (Diff != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Diff);
+      }
       if (Effect != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Effect);
       }
       if (IapId != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(IapId);
       }
+      if (IsApi != false) {
+        size += 1 + 1;
+      }
+      if (IsHoliday != false) {
+        size += 1 + 1;
+      }
+      if (IsShop != false) {
+        size += 1 + 1;
+      }
       if (PackName.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(PackName);
       }
+      if (PkgType.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(PkgType);
+      }
       size += reward_.CalculateSize(_repeated_reward_codec);
       size += rewardAlbum_.CalculateSize(_repeated_rewardAlbum_codec);
+      if (RewardType != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(RewardType);
+      }
       if (TgaName.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(TgaName);
       }
@@ -351,17 +524,35 @@ namespace fat.rawdata {
       if (other.Id != 0) {
         Id = other.Id;
       }
+      if (other.Diff != 0) {
+        Diff = other.Diff;
+      }
       if (other.Effect != 0) {
         Effect = other.Effect;
       }
       if (other.IapId != 0) {
         IapId = other.IapId;
       }
+      if (other.IsApi != false) {
+        IsApi = other.IsApi;
+      }
+      if (other.IsHoliday != false) {
+        IsHoliday = other.IsHoliday;
+      }
+      if (other.IsShop != false) {
+        IsShop = other.IsShop;
+      }
       if (other.PackName.Length != 0) {
         PackName = other.PackName;
       }
+      if (other.PkgType.Length != 0) {
+        PkgType = other.PkgType;
+      }
       reward_.Add(other.reward_);
       rewardAlbum_.Add(other.rewardAlbum_);
+      if (other.RewardType != 0) {
+        RewardType = other.RewardType;
+      }
       if (other.TgaName.Length != 0) {
         TgaName = other.TgaName;
       }
@@ -407,6 +598,30 @@ namespace fat.rawdata {
             PackName = input.ReadString();
             break;
           }
+          case 72: {
+            Diff = input.ReadInt32();
+            break;
+          }
+          case 80: {
+            IsApi = input.ReadBool();
+            break;
+          }
+          case 88: {
+            IsHoliday = input.ReadBool();
+            break;
+          }
+          case 96: {
+            IsShop = input.ReadBool();
+            break;
+          }
+          case 106: {
+            PkgType = input.ReadString();
+            break;
+          }
+          case 112: {
+            RewardType = input.ReadInt32();
+            break;
+          }
         }
       }
     #endif
@@ -447,6 +662,30 @@ namespace fat.rawdata {
           }
           case 66: {
             PackName = input.ReadString();
+            break;
+          }
+          case 72: {
+            Diff = input.ReadInt32();
+            break;
+          }
+          case 80: {
+            IsApi = input.ReadBool();
+            break;
+          }
+          case 88: {
+            IsHoliday = input.ReadBool();
+            break;
+          }
+          case 96: {
+            IsShop = input.ReadBool();
+            break;
+          }
+          case 106: {
+            PkgType = input.ReadString();
+            break;
+          }
+          case 112: {
+            RewardType = input.ReadInt32();
             break;
           }
         }

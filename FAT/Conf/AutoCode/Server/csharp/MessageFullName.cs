@@ -688,6 +688,9 @@ namespace fat.rawdata {
 	public sealed partial class EventOrderDash {public static string FullName { get;} = "rawdata.EventOrderDash";}
 	public sealed partial class EventOrderDashConf {public static string FullName { get;} = "rawdata.EventOrderDashConf";}
 	public sealed partial class EventOrderDashMapABValue {public static string FullName { get;} = "rawdata.EventOrderDashMapABValue";}
+	public sealed partial class EventOrderDiffChoice {public static string FullName { get;} = "rawdata.EventOrderDiffChoice";}
+	public sealed partial class EventOrderDiffChoiceConf {public static string FullName { get;} = "rawdata.EventOrderDiffChoiceConf";}
+	public sealed partial class EventOrderDiffChoiceMapABValue {public static string FullName { get;} = "rawdata.EventOrderDiffChoiceMapABValue";}
 	public sealed partial class EventOrderExtra {public static string FullName { get;} = "rawdata.EventOrderExtra";}
 	public sealed partial class EventOrderExtraConf {public static string FullName { get;} = "rawdata.EventOrderExtraConf";}
 	public sealed partial class EventOrderExtraMapABValue {public static string FullName { get;} = "rawdata.EventOrderExtraMapABValue";}
@@ -1177,6 +1180,9 @@ namespace fat.rawdata {
 	public sealed partial class MergeItemCategory {public static string FullName { get;} = "rawdata.MergeItemCategory";}
 	public sealed partial class MergeItemCategoryConf {public static string FullName { get;} = "rawdata.MergeItemCategoryConf";}
 	public sealed partial class MergeItemCategoryMapABValue {public static string FullName { get;} = "rawdata.MergeItemCategoryMapABValue";}
+	public sealed partial class MergeItemSeries {public static string FullName { get;} = "rawdata.MergeItemSeries";}
+	public sealed partial class MergeItemSeriesConf {public static string FullName { get;} = "rawdata.MergeItemSeriesConf";}
+	public sealed partial class MergeItemSeriesMapABValue {public static string FullName { get;} = "rawdata.MergeItemSeriesMapABValue";}
 	public sealed partial class MergeLevel {public static string FullName { get;} = "rawdata.MergeLevel";}
 	public sealed partial class MergeLevelConf {public static string FullName { get;} = "rawdata.MergeLevelConf";}
 	public sealed partial class MergeLevelRate {public static string FullName { get;} = "rawdata.MergeLevelRate";}
@@ -1340,6 +1346,9 @@ namespace fat.rawdata {
 	public sealed partial class OrderDetectorConf {public static string FullName { get;} = "rawdata.OrderDetectorConf";}
 	public sealed partial class OrderDetectorMapABValue {public static string FullName { get;} = "rawdata.OrderDetectorMapABValue";}
 	public sealed partial class OrderDiff {public static string FullName { get;} = "rawdata.OrderDiff";}
+	public sealed partial class OrderDiffChoiceInfo {public static string FullName { get;} = "rawdata.OrderDiffChoiceInfo";}
+	public sealed partial class OrderDiffChoiceInfoConf {public static string FullName { get;} = "rawdata.OrderDiffChoiceInfoConf";}
+	public sealed partial class OrderDiffChoiceInfoMapABValue {public static string FullName { get;} = "rawdata.OrderDiffChoiceInfoMapABValue";}
 	public sealed partial class OrderDiffConf {public static string FullName { get;} = "rawdata.OrderDiffConf";}
 	public sealed partial class OrderDiffMapABValue {public static string FullName { get;} = "rawdata.OrderDiffMapABValue";}
 	public sealed partial class OrderIgnore {public static string FullName { get;} = "rawdata.OrderIgnore";}
@@ -1477,6 +1486,9 @@ namespace fat.rawdata {
 	public sealed partial class UserTagGroupConf {public static string FullName { get;} = "rawdata.UserTagGroupConf";}
 	public sealed partial class UserTagGroupMapABValue {public static string FullName { get;} = "rawdata.UserTagGroupMapABValue";}
 	public sealed partial class UserTagMapABValue {public static string FullName { get;} = "rawdata.UserTagMapABValue";}
+	public sealed partial class WebShopToIAPPack {public static string FullName { get;} = "rawdata.WebShopToIAPPack";}
+	public sealed partial class WebShopToIAPPackConf {public static string FullName { get;} = "rawdata.WebShopToIAPPackConf";}
+	public sealed partial class WebShopToIAPPackMapABValue {public static string FullName { get;} = "rawdata.WebShopToIAPPackMapABValue";}
 	public sealed partial class WebshopCountryWhitelist {public static string FullName { get;} = "rawdata.WebshopCountryWhitelist";}
 	public sealed partial class WebshopCountryWhitelistConf {public static string FullName { get;} = "rawdata.WebshopCountryWhitelistConf";}
 	public sealed partial class WebshopCountryWhitelistMapABValue {public static string FullName { get;} = "rawdata.WebshopCountryWhitelistMapABValue";}

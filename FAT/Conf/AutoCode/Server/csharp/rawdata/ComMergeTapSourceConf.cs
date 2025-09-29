@@ -25,49 +25,49 @@ namespace fat.rawdata {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "CiNyYXdkYXRhL0NvbU1lcmdlVGFwU291cmNlQ29uZi5wcm90bxIHcmF3ZGF0",
-            "YSLFBgoRQ29tTWVyZ2VUYXBTb3VyY2USFQoNY29uZmlnVmVyc2lvbhgBIAEo",
+            "YSLdBgoRQ29tTWVyZ2VUYXBTb3VyY2USFQoNY29uZmlnVmVyc2lvbhgBIAEo",
             "BRIKCgJpZBgCIAEoBRIOCgZfdGFnc18YAyADKAkSDgoGY29zdElkGBcgAygF",
             "EhAKCGRlYWRJdGVtGAQgASgFEjgKB2RpZUludG8YGSADKAsyJy5yYXdkYXRh",
             "LkNvbU1lcmdlVGFwU291cmNlLkRpZUludG9FbnRyeRISCgplbmVyZ3lDb3N0",
             "GAUgASgFEhcKD2ZpcnN0T3V0cHV0VGltZRgGIAEoBRIOCgZmcm96ZW4YByAB",
             "KAgSEwoLaXNCb29zdEl0ZW0YHCABKAgSEwoLaXNCb29zdGFibGUYGCABKAgS",
-            "EwoLaXNGaWxsQ2xlYXIYFSABKAgSEgoKaXNKdW1wYWJsZRgaIAEoCBIWCg5p",
-            "c1NraXBEaWVBbmltZRgUIAEoCBISCgpsaW1pdENvdW50GAggASgFEjoKCG1h",
-            "eFRvYXN0GBsgAygLMigucmF3ZGF0YS5Db21NZXJnZVRhcFNvdXJjZS5NYXhU",
-            "b2FzdEVudHJ5EhQKDG1heFRvYXN0X25ldxgfIAMoBRITCgtvdXRwdXRDb3Vu",
-            "dBgJIAEoBRISCgpvdXRwdXRUaW1lGAogASgFEhQKDG91dHB1dHNGaXhlZBgM",
-            "IAMoBRIYChBvdXRwdXRzRml4ZWRUaW1lGA0gAygFEkIKDG91dHB1dHNUb2Fz",
-            "dBgWIAMoCzIsLnJhd2RhdGEuQ29tTWVyZ2VUYXBTb3VyY2UuT3V0cHV0c1Rv",
-            "YXN0RW50cnkSEwoLcmV2aXZlQ291bnQYDyABKAUSEgoKcmV2aXZlVGltZRgQ",
-            "IAEoBRIQCghzcGF3blNmeBgRIAEoCRIRCglzcGVlZENvc3QYEiABKAUSEgoK",
-            "c3RhZ2VDb3VudBgTIAEoBRouCgxEaWVJbnRvRW50cnkSCwoDa2V5GAEgASgF",
-            "Eg0KBXZhbHVlGAIgASgFOgI4ARovCg1NYXhUb2FzdEVudHJ5EgsKA2tleRgB",
-            "IAEoBRINCgV2YWx1ZRgCIAEoBToCOAEaMwoRT3V0cHV0c1RvYXN0RW50cnkS",
-            "CwoDa2V5GAEgASgFEg0KBXZhbHVlGAIgASgFOgI4ASLUAQobQ29tTWVyZ2VU",
-            "YXBTb3VyY2VNYXBBQlZhbHVlElwKFENvbU1lcmdlVGFwU291cmNlTWFwGAEg",
-            "AygLMj4ucmF3ZGF0YS5Db21NZXJnZVRhcFNvdXJjZU1hcEFCVmFsdWUuQ29t",
-            "TWVyZ2VUYXBTb3VyY2VNYXBFbnRyeRpXChlDb21NZXJnZVRhcFNvdXJjZU1h",
-            "cEVudHJ5EgsKA2tleRgBIAEoCRIpCgV2YWx1ZRgCIAEoCzIaLnJhd2RhdGEu",
-            "Q29tTWVyZ2VUYXBTb3VyY2U6AjgBItkEChVDb21NZXJnZVRhcFNvdXJjZUNv",
-            "bmYSVgoUQ29tTWVyZ2VUYXBTb3VyY2VNYXAYASADKAsyOC5yYXdkYXRhLkNv",
-            "bU1lcmdlVGFwU291cmNlQ29uZi5Db21NZXJnZVRhcFNvdXJjZU1hcEVudHJ5",
-            "EloKFkNvbU1lcmdlVGFwU291cmNlTWFwQUIYAiADKAsyOi5yYXdkYXRhLkNv",
-            "bU1lcmdlVGFwU291cmNlQ29uZi5Db21NZXJnZVRhcFNvdXJjZU1hcEFCRW50",
-            "cnkSZAobQ29tTWVyZ2VUYXBTb3VyY2VNYXBBQlBhdGNoGAMgAygLMj8ucmF3",
-            "ZGF0YS5Db21NZXJnZVRhcFNvdXJjZUNvbmYuQ29tTWVyZ2VUYXBTb3VyY2VN",
-            "YXBBQlBhdGNoRW50cnkaVwoZQ29tTWVyZ2VUYXBTb3VyY2VNYXBFbnRyeRIL",
-            "CgNrZXkYASABKAkSKQoFdmFsdWUYAiABKAsyGi5yYXdkYXRhLkNvbU1lcmdl",
-            "VGFwU291cmNlOgI4ARpjChtDb21NZXJnZVRhcFNvdXJjZU1hcEFCRW50cnkS",
-            "CwoDa2V5GAEgASgJEjMKBXZhbHVlGAIgASgLMiQucmF3ZGF0YS5Db21NZXJn",
-            "ZVRhcFNvdXJjZU1hcEFCVmFsdWU6AjgBGmgKIENvbU1lcmdlVGFwU291cmNl",
-            "TWFwQUJQYXRjaEVudHJ5EgsKA2tleRgBIAEoCRIzCgV2YWx1ZRgCIAEoCzIk",
-            "LnJhd2RhdGEuQ29tTWVyZ2VUYXBTb3VyY2VNYXBBQlZhbHVlOgI4AUI9Wi1n",
-            "aXRsYWIuZnVucGx1cy5pby9mYXQvY29uZi9nZW4vZ29sYW5nL3Jhd2RhdGGq",
-            "AgtmYXQucmF3ZGF0YWIGcHJvdG8z"));
+            "FgoOaXNDYXRlZ3JveUluZm8YICABKAgSEwoLaXNGaWxsQ2xlYXIYFSABKAgS",
+            "EgoKaXNKdW1wYWJsZRgaIAEoCBIWCg5pc1NraXBEaWVBbmltZRgUIAEoCBIS",
+            "CgpsaW1pdENvdW50GAggASgFEjoKCG1heFRvYXN0GBsgAygLMigucmF3ZGF0",
+            "YS5Db21NZXJnZVRhcFNvdXJjZS5NYXhUb2FzdEVudHJ5EhQKDG1heFRvYXN0",
+            "X25ldxgfIAMoBRITCgtvdXRwdXRDb3VudBgJIAEoBRISCgpvdXRwdXRUaW1l",
+            "GAogASgFEhQKDG91dHB1dHNGaXhlZBgMIAMoBRIYChBvdXRwdXRzRml4ZWRU",
+            "aW1lGA0gAygFEkIKDG91dHB1dHNUb2FzdBgWIAMoCzIsLnJhd2RhdGEuQ29t",
+            "TWVyZ2VUYXBTb3VyY2UuT3V0cHV0c1RvYXN0RW50cnkSEwoLcmV2aXZlQ291",
+            "bnQYDyABKAUSEgoKcmV2aXZlVGltZRgQIAEoBRIQCghzcGF3blNmeBgRIAEo",
+            "CRIRCglzcGVlZENvc3QYEiABKAUSEgoKc3RhZ2VDb3VudBgTIAEoBRouCgxE",
+            "aWVJbnRvRW50cnkSCwoDa2V5GAEgASgFEg0KBXZhbHVlGAIgASgFOgI4ARov",
+            "Cg1NYXhUb2FzdEVudHJ5EgsKA2tleRgBIAEoBRINCgV2YWx1ZRgCIAEoBToC",
+            "OAEaMwoRT3V0cHV0c1RvYXN0RW50cnkSCwoDa2V5GAEgASgFEg0KBXZhbHVl",
+            "GAIgASgFOgI4ASLUAQobQ29tTWVyZ2VUYXBTb3VyY2VNYXBBQlZhbHVlElwK",
+            "FENvbU1lcmdlVGFwU291cmNlTWFwGAEgAygLMj4ucmF3ZGF0YS5Db21NZXJn",
+            "ZVRhcFNvdXJjZU1hcEFCVmFsdWUuQ29tTWVyZ2VUYXBTb3VyY2VNYXBFbnRy",
+            "eRpXChlDb21NZXJnZVRhcFNvdXJjZU1hcEVudHJ5EgsKA2tleRgBIAEoCRIp",
+            "CgV2YWx1ZRgCIAEoCzIaLnJhd2RhdGEuQ29tTWVyZ2VUYXBTb3VyY2U6AjgB",
+            "ItkEChVDb21NZXJnZVRhcFNvdXJjZUNvbmYSVgoUQ29tTWVyZ2VUYXBTb3Vy",
+            "Y2VNYXAYASADKAsyOC5yYXdkYXRhLkNvbU1lcmdlVGFwU291cmNlQ29uZi5D",
+            "b21NZXJnZVRhcFNvdXJjZU1hcEVudHJ5EloKFkNvbU1lcmdlVGFwU291cmNl",
+            "TWFwQUIYAiADKAsyOi5yYXdkYXRhLkNvbU1lcmdlVGFwU291cmNlQ29uZi5D",
+            "b21NZXJnZVRhcFNvdXJjZU1hcEFCRW50cnkSZAobQ29tTWVyZ2VUYXBTb3Vy",
+            "Y2VNYXBBQlBhdGNoGAMgAygLMj8ucmF3ZGF0YS5Db21NZXJnZVRhcFNvdXJj",
+            "ZUNvbmYuQ29tTWVyZ2VUYXBTb3VyY2VNYXBBQlBhdGNoRW50cnkaVwoZQ29t",
+            "TWVyZ2VUYXBTb3VyY2VNYXBFbnRyeRILCgNrZXkYASABKAkSKQoFdmFsdWUY",
+            "AiABKAsyGi5yYXdkYXRhLkNvbU1lcmdlVGFwU291cmNlOgI4ARpjChtDb21N",
+            "ZXJnZVRhcFNvdXJjZU1hcEFCRW50cnkSCwoDa2V5GAEgASgJEjMKBXZhbHVl",
+            "GAIgASgLMiQucmF3ZGF0YS5Db21NZXJnZVRhcFNvdXJjZU1hcEFCVmFsdWU6",
+            "AjgBGmgKIENvbU1lcmdlVGFwU291cmNlTWFwQUJQYXRjaEVudHJ5EgsKA2tl",
+            "eRgBIAEoCRIzCgV2YWx1ZRgCIAEoCzIkLnJhd2RhdGEuQ29tTWVyZ2VUYXBT",
+            "b3VyY2VNYXBBQlZhbHVlOgI4AUI9Wi1naXRsYWIuZnVucGx1cy5pby9mYXQv",
+            "Y29uZi9nZW4vZ29sYW5nL3Jhd2RhdGGqAgtmYXQucmF3ZGF0YWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.ComMergeTapSource), global::fat.rawdata.ComMergeTapSource.Parser, new[]{ "ConfigVersion", "Id", "Tags", "CostId", "DeadItem", "DieInto", "EnergyCost", "FirstOutputTime", "Frozen", "IsBoostItem", "IsBoostable", "IsFillClear", "IsJumpable", "IsSkipDieAnime", "LimitCount", "MaxToast", "MaxToastNew", "OutputCount", "OutputTime", "OutputsFixed", "OutputsFixedTime", "OutputsToast", "ReviveCount", "ReviveTime", "SpawnSfx", "SpeedCost", "StageCount" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, null, }),
+            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.ComMergeTapSource), global::fat.rawdata.ComMergeTapSource.Parser, new[]{ "ConfigVersion", "Id", "Tags", "CostId", "DeadItem", "DieInto", "EnergyCost", "FirstOutputTime", "Frozen", "IsBoostItem", "IsBoostable", "IsCategroyInfo", "IsFillClear", "IsJumpable", "IsSkipDieAnime", "LimitCount", "MaxToast", "MaxToastNew", "OutputCount", "OutputTime", "OutputsFixed", "OutputsFixedTime", "OutputsToast", "ReviveCount", "ReviveTime", "SpawnSfx", "SpeedCost", "StageCount" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.ComMergeTapSourceMapABValue), global::fat.rawdata.ComMergeTapSourceMapABValue.Parser, new[]{ "ComMergeTapSourceMap" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.ComMergeTapSourceConf), global::fat.rawdata.ComMergeTapSourceConf.Parser, new[]{ "ComMergeTapSourceMap", "ComMergeTapSourceMapAB", "ComMergeTapSourceMapABPatch" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, null, })
           }));
@@ -123,6 +123,7 @@ namespace fat.rawdata {
       frozen_ = other.frozen_;
       isBoostItem_ = other.isBoostItem_;
       isBoostable_ = other.isBoostable_;
+      isCategroyInfo_ = other.isCategroyInfo_;
       isFillClear_ = other.isFillClear_;
       isJumpable_ = other.isJumpable_;
       isSkipDieAnime_ = other.isSkipDieAnime_;
@@ -308,6 +309,20 @@ namespace fat.rawdata {
       get { return isBoostable_; }
       set {
         isBoostable_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "isCategroyInfo" field.</summary>
+    public const int IsCategroyInfoFieldNumber = 32;
+    private bool isCategroyInfo_;
+    /// <summary>
+    /// 是否显示数量角标提示
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool IsCategroyInfo {
+      get { return isCategroyInfo_; }
+      set {
+        isCategroyInfo_ = value;
       }
     }
 
@@ -573,6 +588,7 @@ namespace fat.rawdata {
       if (Frozen != other.Frozen) return false;
       if (IsBoostItem != other.IsBoostItem) return false;
       if (IsBoostable != other.IsBoostable) return false;
+      if (IsCategroyInfo != other.IsCategroyInfo) return false;
       if (IsFillClear != other.IsFillClear) return false;
       if (IsJumpable != other.IsJumpable) return false;
       if (IsSkipDieAnime != other.IsSkipDieAnime) return false;
@@ -606,6 +622,7 @@ namespace fat.rawdata {
       if (Frozen != false) hash ^= Frozen.GetHashCode();
       if (IsBoostItem != false) hash ^= IsBoostItem.GetHashCode();
       if (IsBoostable != false) hash ^= IsBoostable.GetHashCode();
+      if (IsCategroyInfo != false) hash ^= IsCategroyInfo.GetHashCode();
       if (IsFillClear != false) hash ^= IsFillClear.GetHashCode();
       if (IsJumpable != false) hash ^= IsJumpable.GetHashCode();
       if (IsSkipDieAnime != false) hash ^= IsSkipDieAnime.GetHashCode();
@@ -722,6 +739,10 @@ namespace fat.rawdata {
         output.WriteBool(IsBoostItem);
       }
       maxToastNew_.WriteTo(output, _repeated_maxToastNew_codec);
+      if (IsCategroyInfo != false) {
+        output.WriteRawTag(128, 2);
+        output.WriteBool(IsCategroyInfo);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -815,6 +836,10 @@ namespace fat.rawdata {
         output.WriteBool(IsBoostItem);
       }
       maxToastNew_.WriteTo(ref output, _repeated_maxToastNew_codec);
+      if (IsCategroyInfo != false) {
+        output.WriteRawTag(128, 2);
+        output.WriteBool(IsCategroyInfo);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -849,6 +874,9 @@ namespace fat.rawdata {
         size += 2 + 1;
       }
       if (IsBoostable != false) {
+        size += 2 + 1;
+      }
+      if (IsCategroyInfo != false) {
         size += 2 + 1;
       }
       if (IsFillClear != false) {
@@ -926,6 +954,9 @@ namespace fat.rawdata {
       }
       if (other.IsBoostable != false) {
         IsBoostable = other.IsBoostable;
+      }
+      if (other.IsCategroyInfo != false) {
+        IsCategroyInfo = other.IsCategroyInfo;
       }
       if (other.IsFillClear != false) {
         IsFillClear = other.IsFillClear;
@@ -1091,6 +1122,10 @@ namespace fat.rawdata {
             maxToastNew_.AddEntriesFrom(input, _repeated_maxToastNew_codec);
             break;
           }
+          case 256: {
+            IsCategroyInfo = input.ReadBool();
+            break;
+          }
         }
       }
     #endif
@@ -1215,6 +1250,10 @@ namespace fat.rawdata {
           case 250:
           case 248: {
             maxToastNew_.AddEntriesFrom(ref input, _repeated_maxToastNew_codec);
+            break;
+          }
+          case 256: {
+            IsCategroyInfo = input.ReadBool();
             break;
           }
         }

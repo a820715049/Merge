@@ -24,7 +24,7 @@ namespace fat.rawdata {
     static EventTypeReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChdyYXdkYXRhL0V2ZW50VHlwZS5wcm90bxIHcmF3ZGF0YSrlEAoJRXZlbnRU",
+            "ChdyYXdkYXRhL0V2ZW50VHlwZS5wcm90bxIHcmF3ZGF0YSqDEQoJRXZlbnRU",
             "eXBlEhQKEEV2ZW50VHlwZURlZmF1bHQQABITCg9FdmVudFR5cGVFbmVyZ3kQ",
             "ARIVChFFdmVudFR5cGVEYWlseVBvcBACEhQKEEV2ZW50VHlwZU5ld1VzZXIQ",
             "AxIXChNFdmVudFR5cGVPbmVQbHVzT25lEAQSGAoURXZlbnRUeXBlRW5kbGVz",
@@ -72,9 +72,9 @@ namespace fat.rawdata {
             "URIZChVFdmVudFR5cGVNaWNNaWxlc3RvbmUQUhIUChBFdmVudFR5cGVTZWFS",
             "YWNlEFMSFQoRRXZlbnRUeXBlVmluZUxlYXAQVBIZChVFdmVudFR5cGVJbmRl",
             "cGVuQmluZ28QVRIaChZFdmVudFR5cGVNb25vcG9seUJvYXJkEFYSHwobRXZl",
-            "bnRUeXBlTW9ub3BvbHlPbmVQbHVzT25lEFdCPVotZ2l0bGFiLmZ1bnBsdXMu",
-            "aW8vZmF0L2NvbmYvZ2VuL2dvbGFuZy9yYXdkYXRhqgILZmF0LnJhd2RhdGFi",
-            "BnByb3RvMw=="));
+            "bnRUeXBlTW9ub3BvbHlPbmVQbHVzT25lEFcSHAoYRXZlbnRUeXBlT3JkZXJE",
+            "aWZmQ2hvaWNlEFhCPVotZ2l0bGFiLmZ1bnBsdXMuaW8vZmF0L2NvbmYvZ2Vu",
+            "L2dvbGFuZy9yYXdkYXRhqgILZmF0LnJhd2RhdGFiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::fat.rawdata.EventType), }, null, null));
@@ -429,6 +429,10 @@ namespace fat.rawdata {
     /// 大富翁棋盘1+1礼包
     /// </summary>
     [pbr::OriginalName("EventTypeMonopolyOnePlusOne")] MonopolyOnePlusOne = 87,
+    /// <summary>
+    /// 自选限时订单
+    /// </summary>
+    [pbr::OriginalName("EventTypeOrderDiffChoice")] OrderDiffChoice = 88,
   }
 
   #endregion

@@ -243,7 +243,7 @@ namespace fat.rawdata {
   /// <summary>
   /// annotation@annotation_type(type="rawdata")
   /// annotation@rawdata(row="Global",table="GlobalSlice",table_wrapper="GlobalConf",map="false",map_key_type="",data="GlobalConf")
-  /// annotation@ab(table_ab="GlobalSliceAB",table_ab_patch="GlobalSliceABPatch",table_ab_value="GlobalSliceABValue",ab_patch="false")
+  /// annotation@ab(table_ab="GlobalSliceAB",table_ab_patch="GlobalSliceABPatch",table_ab_value="GlobalSliceABValue",ab_patch="true")
   /// annotation@filter(just_server="false",just_client="false")
   /// </summary>
   public sealed partial class Global : pb::IMessage<Global>

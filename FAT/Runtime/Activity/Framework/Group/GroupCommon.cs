@@ -18,6 +18,7 @@ namespace FAT
             {
                 EventType.MarketIapgift => (feature.IsFeatureEntryUnlocked(FeatureMarketIapgift), rf),
                 EventType.FlashOrder => (feature.IsFeatureEntryUnlocked(FeatureFlashOrder), rf),
+                EventType.OrderDiffChoice => (feature.IsFeatureEntryUnlocked(FeatureOrderDiffChoice), rf),
                 EventType.Score => (feature.IsFeatureEntryUnlocked(FeatureScore), rf),
                 EventType.Step => (feature.IsFeatureEntryUnlocked(FeatureStep), rf),
                 EventType.OrderExtra => (feature.IsFeatureEntryUnlocked(FeatureOrderExtra), rf),
@@ -64,6 +65,7 @@ namespace FAT
             {
                 EventType.MarketIapgift => new ActivityMIG(lite_),
                 EventType.FlashOrder => new ActivityFlashOrder(lite_),
+                EventType.OrderDiffChoice => new ActivityOrderDiffChoice(lite_),
                 EventType.Score => new ActivityScore(lite_),
                 EventType.Step => new ActivityStep(lite_),
                 EventType.OrderExtra => new ActivityExtraRewardOrder(lite_),

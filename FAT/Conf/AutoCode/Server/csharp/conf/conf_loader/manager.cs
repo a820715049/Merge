@@ -194,6 +194,7 @@ namespace fat.conf.conf_loader
 			EventOrderBonusDetailVisitor.Initialize();
 			EventOrderBonusGroupVisitor.Initialize();
 			EventOrderDashVisitor.Initialize();
+			EventOrderDiffChoiceVisitor.Initialize();
 			EventOrderExtraVisitor.Initialize();
 			EventOrderLikeVisitor.Initialize();
 			EventOrderLikeDetailVisitor.Initialize();
@@ -357,6 +358,7 @@ namespace fat.conf.conf_loader
 			MergeGridVisitor.Initialize();
 			MergeGridAreaVisitor.Initialize();
 			MergeItemCategoryVisitor.Initialize();
+			MergeItemSeriesVisitor.Initialize();
 			MergeLevelVisitor.Initialize();
 			MergeLevelRateVisitor.Initialize();
 			MergeMixCostVisitor.Initialize();
@@ -412,6 +414,7 @@ namespace fat.conf.conf_loader
 			OrderCommonVisitor.Initialize();
 			OrderDetectorVisitor.Initialize();
 			OrderDiffVisitor.Initialize();
+			OrderDiffChoiceInfoVisitor.Initialize();
 			OrderIgnoreVisitor.Initialize();
 			OrderRandomerVisitor.Initialize();
 			OrderRewardVisitor.Initialize();
@@ -457,6 +460,7 @@ namespace fat.conf.conf_loader
 			UserGradeGroupVisitor.Initialize();
 			UserTagVisitor.Initialize();
 			UserTagGroupVisitor.Initialize();
+			WebShopToIAPPackVisitor.Initialize();
 			WebshopCountryWhitelistVisitor.Initialize();
 		}
 		// 主配置数据
@@ -751,6 +755,7 @@ namespace fat.conf.conf_loader
 		public EventOrderBonusDetailConf EventOrderBonusDetailMap = new EventOrderBonusDetailConf();
 		public EventOrderBonusGroupConf EventOrderBonusGroupMap = new EventOrderBonusGroupConf();
 		public EventOrderDashConf EventOrderDashMap = new EventOrderDashConf();
+		public EventOrderDiffChoiceConf EventOrderDiffChoiceMap = new EventOrderDiffChoiceConf();
 		public EventOrderExtraConf EventOrderExtraMap = new EventOrderExtraConf();
 		public EventOrderLikeConf EventOrderLikeMap = new EventOrderLikeConf();
 		public EventOrderLikeDetailConf EventOrderLikeDetailMap = new EventOrderLikeDetailConf();
@@ -914,6 +919,7 @@ namespace fat.conf.conf_loader
 		public MergeGridConf MergeGridMap = new MergeGridConf();
 		public MergeGridAreaConf MergeGridAreaSlice = new MergeGridAreaConf();
 		public MergeItemCategoryConf MergeItemCategoryMap = new MergeItemCategoryConf();
+		public MergeItemSeriesConf MergeItemSeriesMap = new MergeItemSeriesConf();
 		public MergeLevelConf MergeLevelSlice = new MergeLevelConf();
 		public MergeLevelRateConf MergeLevelRateMap = new MergeLevelRateConf();
 		public MergeMixCostConf MergeMixCostMap = new MergeMixCostConf();
@@ -969,6 +975,7 @@ namespace fat.conf.conf_loader
 		public OrderCommonConf OrderCommonMap = new OrderCommonConf();
 		public OrderDetectorConf OrderDetectorMap = new OrderDetectorConf();
 		public OrderDiffConf OrderDiffMap = new OrderDiffConf();
+		public OrderDiffChoiceInfoConf OrderDiffChoiceInfoMap = new OrderDiffChoiceInfoConf();
 		public OrderIgnoreConf OrderIgnoreMap = new OrderIgnoreConf();
 		public OrderRandomerConf OrderRandomerMap = new OrderRandomerConf();
 		public OrderRewardConf OrderRewardMap = new OrderRewardConf();
@@ -1014,6 +1021,7 @@ namespace fat.conf.conf_loader
 		public UserGradeGroupConf UserGradeGroupMap = new UserGradeGroupConf();
 		public UserTagConf UserTagMap = new UserTagConf();
 		public UserTagGroupConf UserTagGroupMap = new UserTagGroupConf();
+		public WebShopToIAPPackConf WebShopToIAPPackMap = new WebShopToIAPPackConf();
 		public WebshopCountryWhitelistConf WebshopCountryWhitelistMap = new WebshopCountryWhitelistConf();
 		public Dictionary<string, List<int>> AdSettingSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> BpDetailSortedKeys = new Dictionary<string, List<int>>();
@@ -1170,6 +1178,7 @@ namespace fat.conf.conf_loader
 		public Dictionary<string, List<int>> EventOrderBonusDetailSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> EventOrderBonusGroupSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> EventOrderDashSortedKeys = new Dictionary<string, List<int>>();
+		public Dictionary<string, List<int>> EventOrderDiffChoiceSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> EventOrderExtraSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> EventOrderLikeSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> EventOrderLikeDetailSortedKeys = new Dictionary<string, List<int>>();
@@ -1311,6 +1320,7 @@ namespace fat.conf.conf_loader
 		public Dictionary<string, List<int>> MergeDifficultySortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> MergeGridSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<string>> MergeItemCategorySortedKeys = new Dictionary<string, List<string>>();
+		public Dictionary<string, List<int>> MergeItemSeriesSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> MergeLevelRateSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> MergeMixCostSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> MergeRuleSortedKeys = new Dictionary<string, List<int>>();
@@ -1363,6 +1373,7 @@ namespace fat.conf.conf_loader
 		public Dictionary<string, List<int>> OrderCommonSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> OrderDetectorSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> OrderDiffSortedKeys = new Dictionary<string, List<int>>();
+		public Dictionary<string, List<int>> OrderDiffChoiceInfoSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> OrderIgnoreSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> OrderRandomerSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> OrderRewardSortedKeys = new Dictionary<string, List<int>>();
@@ -1401,6 +1412,7 @@ namespace fat.conf.conf_loader
 		public Dictionary<string, List<int>> UserGradeGroupSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> UserTagSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> UserTagGroupSortedKeys = new Dictionary<string, List<int>>();
+		public Dictionary<string, List<string>> WebShopToIAPPackSortedKeys = new Dictionary<string, List<string>>();
 		public Dictionary<string, List<string>> WebshopCountryWhitelistSortedKeys = new Dictionary<string, List<string>>();
 
 

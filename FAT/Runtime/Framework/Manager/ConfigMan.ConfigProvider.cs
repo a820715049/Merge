@@ -638,6 +638,20 @@ namespace FAT
         }
 
         #endregion
+        
+        #region 自选限时订单
+
+        public EventOrderDiffChoice GetEventOrderDiffChoiceConfig(int id)
+        {
+            return conf.Data.GetEventOrderDiffChoice(id);
+        }
+        
+        public OrderDiffChoiceInfo GetOrderDiffChoiceInfoConfig(int id)
+        {
+            return conf.Data.GetOrderDiffChoiceInfo(id);
+        }
+
+        #endregion
 
         #region 额外奖励订单
 

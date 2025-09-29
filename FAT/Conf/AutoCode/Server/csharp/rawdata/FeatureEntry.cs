@@ -24,7 +24,7 @@ namespace fat.rawdata {
     static FeatureEntryReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChpyYXdkYXRhL0ZlYXR1cmVFbnRyeS5wcm90bxIHcmF3ZGF0YSrsFAoMRmVh",
+            "ChpyYXdkYXRhL0ZlYXR1cmVFbnRyeS5wcm90bxIHcmF3ZGF0YSqfFQoMRmVh",
             "dHVyZUVudHJ5Eg8KC0ZlYXR1cmVOb25lEAASEwoPRmVhdHVyZUl0ZW1TYWxl",
             "EAESEgoORmVhdHVyZUJhZ0l0ZW0QAhIWChJGZWF0dXJlQmFnUHJvZHVjZXIQ",
             "AxISCg5GZWF0dXJlQmFnVG9vbBAEEhEKDUZlYXR1cmVCdWJibGUQBRIVChFG",
@@ -84,8 +84,9 @@ namespace fat.rawdata {
             "Z3JveUluZm8QbhIYChRGZWF0dXJlVGFwU291cmNlSW5mbxBvEhgKFEZlYXR1",
             "cmVNb25vcG9seUJvYXJkEHASHQoZRmVhdHVyZU1vbm9wb2x5T25lUGx1c09u",
             "ZRBxEhoKFkZlYXR1cmVXZWJzaG9wRW50cmFuY2UQchIUChBGZWF0dXJlVGlj",
-            "a2V0VXNlEHNCPVotZ2l0bGFiLmZ1bnBsdXMuaW8vZmF0L2NvbmYvZ2VuL2dv",
-            "bGFuZy9yYXdkYXRhqgILZmF0LnJhd2RhdGFiBnByb3RvMw=="));
+            "a2V0VXNlEHMSFQoRRmVhdHVyZVJhbmRvbVNlZWQQdBIaChZGZWF0dXJlT3Jk",
+            "ZXJEaWZmQ2hvaWNlEHVCPVotZ2l0bGFiLmZ1bnBsdXMuaW8vZmF0L2NvbmYv",
+            "Z2VuL2dvbGFuZy9yYXdkYXRhqgILZmF0LnJhd2RhdGFiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::fat.rawdata.FeatureEntry), }, null, null));
@@ -559,6 +560,14 @@ namespace fat.rawdata {
     /// WebShop支付代币ticket使用功能
     /// </summary>
     [pbr::OriginalName("FeatureTicketUse")] FeatureTicketUse = 115,
+    /// <summary>
+    /// 全局随机种子
+    /// </summary>
+    [pbr::OriginalName("FeatureRandomSeed")] FeatureRandomSeed = 116,
+    /// <summary>
+    /// 自选限时订单
+    /// </summary>
+    [pbr::OriginalName("FeatureOrderDiffChoice")] FeatureOrderDiffChoice = 117,
   }
 
   #endregion

@@ -21,6 +21,7 @@ namespace FAT
         OrderDash = 6,
         Streak = 7,      // 连续订单活动
         LimitMergeOrder = 8, // 限时合成订单
+        DiffChoice = 9, //自选限时订单
     }
 
     // 只增不删 避免错误解析用户存档
@@ -214,7 +215,7 @@ namespace FAT
 
         #region flash
         // 限时订单 | 共用了倒计时的逻辑
-        bool IsFlash => OrderType == (int)FAT.OrderType.Flash || OrderType == (int)FAT.OrderType.Challenge || OrderType == (int)FAT.OrderType.OrderDash || OrderType == (int)FAT.OrderType.Streak || OrderType == (int)FAT.OrderType.LimitMergeOrder;
+        bool IsFlash => OrderType == (int)FAT.OrderType.Flash || OrderType == (int)FAT.OrderType.DiffChoice || OrderType == (int)FAT.OrderType.Challenge || OrderType == (int)FAT.OrderType.OrderDash || OrderType == (int)FAT.OrderType.Streak || OrderType == (int)FAT.OrderType.LimitMergeOrder;
         #endregion
 
         #region score
@@ -305,6 +306,10 @@ namespace FAT
                 else if (OrderType == (int)FAT.OrderType.Flash)
                 {
                     res = ActivityFlashOrder.GetOrderThemeRes(GetValue(OrderParamType.EventId), GetValue(OrderParamType.EventParam));
+                }
+                else if (OrderType == (int)FAT.OrderType.DiffChoice)
+                {
+                    res = ActivityOrderDiffChoice.GetOrderThemeRes(GetValue(OrderParamType.EventId), GetValue(OrderParamType.EventParam));
                 }
                 else if (OrderType == (int)FAT.OrderType.Streak)
                 {

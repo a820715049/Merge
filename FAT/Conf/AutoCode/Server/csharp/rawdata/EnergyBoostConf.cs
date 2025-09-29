@@ -24,32 +24,33 @@ namespace fat.rawdata {
     static EnergyBoostConfReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "Ch1yYXdkYXRhL0VuZXJneUJvb3N0Q29uZi5wcm90bxIHcmF3ZGF0YSK1AQoL",
+            "Ch1yYXdkYXRhL0VuZXJneUJvb3N0Q29uZi5wcm90bxIHcmF3ZGF0YSLJAQoL",
             "RW5lcmd5Qm9vc3QSCgoCaWQYASABKAUSEAoIYWN0aXZlTHYYAiABKAUSEgoK",
             "Ym9vc3RMZXZlbBgDIAEoBRIRCglib29zdFJhdGUYBCABKAUSDQoFZ3VpZGUY",
-            "BSABKAUSEQoJaXNQYXNzaXZlGAYgASgIEhIKCmlzVG9hc3RNYXgYCCABKAgS",
-            "GAoQcmVxdWlyZUVuZXJneU51bRgHIAEoBRIRCglyZXdhcmROdW0YCSABKAUi",
-            "sAEKFUVuZXJneUJvb3N0TWFwQUJWYWx1ZRJKCg5FbmVyZ3lCb29zdE1hcBgB",
-            "IAMoCzIyLnJhd2RhdGEuRW5lcmd5Qm9vc3RNYXBBQlZhbHVlLkVuZXJneUJv",
-            "b3N0TWFwRW50cnkaSwoTRW5lcmd5Qm9vc3RNYXBFbnRyeRILCgNrZXkYASAB",
-            "KAUSIwoFdmFsdWUYAiABKAsyFC5yYXdkYXRhLkVuZXJneUJvb3N0OgI4ASL5",
-            "AwoPRW5lcmd5Qm9vc3RDb25mEkQKDkVuZXJneUJvb3N0TWFwGAEgAygLMiwu",
-            "cmF3ZGF0YS5FbmVyZ3lCb29zdENvbmYuRW5lcmd5Qm9vc3RNYXBFbnRyeRJI",
-            "ChBFbmVyZ3lCb29zdE1hcEFCGAIgAygLMi4ucmF3ZGF0YS5FbmVyZ3lCb29z",
-            "dENvbmYuRW5lcmd5Qm9vc3RNYXBBQkVudHJ5ElIKFUVuZXJneUJvb3N0TWFw",
-            "QUJQYXRjaBgDIAMoCzIzLnJhd2RhdGEuRW5lcmd5Qm9vc3RDb25mLkVuZXJn",
-            "eUJvb3N0TWFwQUJQYXRjaEVudHJ5GksKE0VuZXJneUJvb3N0TWFwRW50cnkS",
-            "CwoDa2V5GAEgASgFEiMKBXZhbHVlGAIgASgLMhQucmF3ZGF0YS5FbmVyZ3lC",
-            "b29zdDoCOAEaVwoVRW5lcmd5Qm9vc3RNYXBBQkVudHJ5EgsKA2tleRgBIAEo",
-            "CRItCgV2YWx1ZRgCIAEoCzIeLnJhd2RhdGEuRW5lcmd5Qm9vc3RNYXBBQlZh",
-            "bHVlOgI4ARpcChpFbmVyZ3lCb29zdE1hcEFCUGF0Y2hFbnRyeRILCgNrZXkY",
-            "ASABKAkSLQoFdmFsdWUYAiABKAsyHi5yYXdkYXRhLkVuZXJneUJvb3N0TWFw",
-            "QUJWYWx1ZToCOAFCPVotZ2l0bGFiLmZ1bnBsdXMuaW8vZmF0L2NvbmYvZ2Vu",
-            "L2dvbGFuZy9yYXdkYXRhqgILZmF0LnJhd2RhdGFiBnByb3RvMw=="));
+            "BSABKAUSEgoKaXNFeGNoYW5nZRgKIAEoCBIRCglpc1Bhc3NpdmUYBiABKAgS",
+            "EgoKaXNUb2FzdE1heBgIIAEoCBIYChByZXF1aXJlRW5lcmd5TnVtGAcgASgF",
+            "EhEKCXJld2FyZE51bRgJIAEoBSKwAQoVRW5lcmd5Qm9vc3RNYXBBQlZhbHVl",
+            "EkoKDkVuZXJneUJvb3N0TWFwGAEgAygLMjIucmF3ZGF0YS5FbmVyZ3lCb29z",
+            "dE1hcEFCVmFsdWUuRW5lcmd5Qm9vc3RNYXBFbnRyeRpLChNFbmVyZ3lCb29z",
+            "dE1hcEVudHJ5EgsKA2tleRgBIAEoBRIjCgV2YWx1ZRgCIAEoCzIULnJhd2Rh",
+            "dGEuRW5lcmd5Qm9vc3Q6AjgBIvkDCg9FbmVyZ3lCb29zdENvbmYSRAoORW5l",
+            "cmd5Qm9vc3RNYXAYASADKAsyLC5yYXdkYXRhLkVuZXJneUJvb3N0Q29uZi5F",
+            "bmVyZ3lCb29zdE1hcEVudHJ5EkgKEEVuZXJneUJvb3N0TWFwQUIYAiADKAsy",
+            "Li5yYXdkYXRhLkVuZXJneUJvb3N0Q29uZi5FbmVyZ3lCb29zdE1hcEFCRW50",
+            "cnkSUgoVRW5lcmd5Qm9vc3RNYXBBQlBhdGNoGAMgAygLMjMucmF3ZGF0YS5F",
+            "bmVyZ3lCb29zdENvbmYuRW5lcmd5Qm9vc3RNYXBBQlBhdGNoRW50cnkaSwoT",
+            "RW5lcmd5Qm9vc3RNYXBFbnRyeRILCgNrZXkYASABKAUSIwoFdmFsdWUYAiAB",
+            "KAsyFC5yYXdkYXRhLkVuZXJneUJvb3N0OgI4ARpXChVFbmVyZ3lCb29zdE1h",
+            "cEFCRW50cnkSCwoDa2V5GAEgASgJEi0KBXZhbHVlGAIgASgLMh4ucmF3ZGF0",
+            "YS5FbmVyZ3lCb29zdE1hcEFCVmFsdWU6AjgBGlwKGkVuZXJneUJvb3N0TWFw",
+            "QUJQYXRjaEVudHJ5EgsKA2tleRgBIAEoCRItCgV2YWx1ZRgCIAEoCzIeLnJh",
+            "d2RhdGEuRW5lcmd5Qm9vc3RNYXBBQlZhbHVlOgI4AUI9Wi1naXRsYWIuZnVu",
+            "cGx1cy5pby9mYXQvY29uZi9nZW4vZ29sYW5nL3Jhd2RhdGGqAgtmYXQucmF3",
+            "ZGF0YWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EnergyBoost), global::fat.rawdata.EnergyBoost.Parser, new[]{ "Id", "ActiveLv", "BoostLevel", "BoostRate", "Guide", "IsPassive", "IsToastMax", "RequireEnergyNum", "RewardNum" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EnergyBoost), global::fat.rawdata.EnergyBoost.Parser, new[]{ "Id", "ActiveLv", "BoostLevel", "BoostRate", "Guide", "IsExchange", "IsPassive", "IsToastMax", "RequireEnergyNum", "RewardNum" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EnergyBoostMapABValue), global::fat.rawdata.EnergyBoostMapABValue.Parser, new[]{ "EnergyBoostMap" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EnergyBoostConf), global::fat.rawdata.EnergyBoostConf.Parser, new[]{ "EnergyBoostMap", "EnergyBoostMapAB", "EnergyBoostMapABPatch" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, null, })
           }));
@@ -99,6 +100,7 @@ namespace fat.rawdata {
       boostLevel_ = other.boostLevel_;
       boostRate_ = other.boostRate_;
       guide_ = other.guide_;
+      isExchange_ = other.isExchange_;
       isPassive_ = other.isPassive_;
       isToastMax_ = other.isToastMax_;
       requireEnergyNum_ = other.requireEnergyNum_;
@@ -184,6 +186,20 @@ namespace fat.rawdata {
       }
     }
 
+    /// <summary>Field number for the "isExchange" field.</summary>
+    public const int IsExchangeFieldNumber = 10;
+    private bool isExchange_;
+    /// <summary>
+    /// 是否可以执行替换棋子逻辑
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool IsExchange {
+      get { return isExchange_; }
+      set {
+        isExchange_ = value;
+      }
+    }
+
     /// <summary>Field number for the "isPassive" field.</summary>
     public const int IsPassiveFieldNumber = 6;
     private bool isPassive_;
@@ -264,6 +280,7 @@ namespace fat.rawdata {
       if (BoostLevel != other.BoostLevel) return false;
       if (BoostRate != other.BoostRate) return false;
       if (Guide != other.Guide) return false;
+      if (IsExchange != other.IsExchange) return false;
       if (IsPassive != other.IsPassive) return false;
       if (IsToastMax != other.IsToastMax) return false;
       if (RequireEnergyNum != other.RequireEnergyNum) return false;
@@ -279,6 +296,7 @@ namespace fat.rawdata {
       if (BoostLevel != 0) hash ^= BoostLevel.GetHashCode();
       if (BoostRate != 0) hash ^= BoostRate.GetHashCode();
       if (Guide != 0) hash ^= Guide.GetHashCode();
+      if (IsExchange != false) hash ^= IsExchange.GetHashCode();
       if (IsPassive != false) hash ^= IsPassive.GetHashCode();
       if (IsToastMax != false) hash ^= IsToastMax.GetHashCode();
       if (RequireEnergyNum != 0) hash ^= RequireEnergyNum.GetHashCode();
@@ -335,6 +353,10 @@ namespace fat.rawdata {
         output.WriteRawTag(72);
         output.WriteInt32(RewardNum);
       }
+      if (IsExchange != false) {
+        output.WriteRawTag(80);
+        output.WriteBool(IsExchange);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -380,6 +402,10 @@ namespace fat.rawdata {
         output.WriteRawTag(72);
         output.WriteInt32(RewardNum);
       }
+      if (IsExchange != false) {
+        output.WriteRawTag(80);
+        output.WriteBool(IsExchange);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -403,6 +429,9 @@ namespace fat.rawdata {
       }
       if (Guide != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Guide);
+      }
+      if (IsExchange != false) {
+        size += 1 + 1;
       }
       if (IsPassive != false) {
         size += 1 + 1;
@@ -441,6 +470,9 @@ namespace fat.rawdata {
       }
       if (other.Guide != 0) {
         Guide = other.Guide;
+      }
+      if (other.IsExchange != false) {
+        IsExchange = other.IsExchange;
       }
       if (other.IsPassive != false) {
         IsPassive = other.IsPassive;
@@ -504,6 +536,10 @@ namespace fat.rawdata {
             RewardNum = input.ReadInt32();
             break;
           }
+          case 80: {
+            IsExchange = input.ReadBool();
+            break;
+          }
         }
       }
     #endif
@@ -552,6 +588,10 @@ namespace fat.rawdata {
           }
           case 72: {
             RewardNum = input.ReadInt32();
+            break;
+          }
+          case 80: {
+            IsExchange = input.ReadBool();
             break;
           }
         }

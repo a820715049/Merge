@@ -382,6 +382,7 @@ namespace FAT
 
             _StartGroupA("ClawOrder");
             _RegisterButton("clear", ActivityClawOrder.DebugReset);
+            _RegisterButton("order diffchoice window", () => UIManager.Instance.OpenWindow(UIConfig.UIOrderDiffchoice));
             _StartGroupA("倍率排行榜");
             _RegisterButtonWithInput("Add Score", (string str) =>
             {

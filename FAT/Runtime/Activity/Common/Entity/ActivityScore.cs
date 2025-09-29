@@ -74,7 +74,6 @@ namespace FAT
 
         public override void TryPopup(ScreenPopup popup_, PopupType state_)
         {
-            UIManager.Instance.OpenWindow(UIConfig.UIOrderDiffchoice, this, false);
             if (HasCycleMilestone())
                 popup_.TryQueue(Popup, state_, true);
         }

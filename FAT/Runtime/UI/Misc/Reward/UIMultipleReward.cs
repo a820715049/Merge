@@ -158,7 +158,14 @@ namespace FAT
             {
                 grid.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
                 grid.constraintCount = 3;
-                grid.childAlignment = TextAnchor.UpperLeft;
+                if (_displayList.Count <= 3)
+                {
+                    grid.padding.top = 150;
+                }
+                else
+                {
+                    grid.padding.top = 50;
+                }
             }
 
             // 清理旧实例

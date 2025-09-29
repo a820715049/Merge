@@ -191,7 +191,7 @@ namespace FAT
         {
             var changed = false;
             if (!IsOrderType()) { return changed; }
-            if (order == null || order.ConfRandomer == null || !order.ConfRandomer.IsExtraScore) { return changed; }
+            if (order.OrderType == (int)OrderType.MagicHour) { return changed; }
             var state = order.GetState((int)OrderParamType.ScoreEventIdBR);
             // 没有奖励 or 不是同一期活动时给这个订单生成右下角积分
             if (state == null || state.Value != Id)

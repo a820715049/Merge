@@ -185,6 +185,7 @@ namespace fat.rawdata {
     /// <summary>
     /// 特殊格子
     /// （格子id:次数）
+    /// （最多配置7个）
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<string> KeyGrid {
@@ -213,6 +214,7 @@ namespace fat.rawdata {
     private readonly pbc::RepeatedField<string> lapReward_ = new pbc::RepeatedField<string>();
     /// <summary>
     /// 圈数奖励
+    /// （只有循环关可配置）
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<string> LapReward {

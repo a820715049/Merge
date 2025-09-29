@@ -14,18 +14,21 @@ namespace FAT
         [Header("数据")]
         [SerializeField] private float processBackTime = 0.15f;
         [SerializeField] private float processTime = 0.15f;
+        [SerializeField] private float processBtnTime = 0.15f;
         
         [Header("基础UI组件")]
         [SerializeField] private Button downBtn;
         [SerializeField] private Button upBtn;
-        [SerializeField] private Image downImg;
-        [SerializeField] private Image upImg;
+        [SerializeField] private CanvasGroup downCg;
+        [SerializeField] private CanvasGroup upCg;
         [SerializeField] private CanvasGroup[] backs;
         [SerializeField] private CanvasGroup[] frames;
         [SerializeField] private Button[] btns;
         [SerializeField] private Image process;
-        [SerializeField] private Sprite[] btnSprites;
+        [SerializeField] private GameObject effect;
 
+        private ActivityOrderDiffChoice _activity;
+        private Action _whenCd;                             // 倒计时回调
         private int _index = 0;
 
         protected override void OnCreate()
@@ -36,14 +39,39 @@ namespace FAT
             {
                 btn.WithClickScale().FixPivot().onClick.AddListener(OnComplete);
             }
+            effect.SetActive(false);
+        }
+
+        protected override void OnParse(params object[] items)
+        {
+            _activity = (ActivityOrderDiffChoice)items[0];
         }
 
         protected override void OnPreOpen()
         {
             base.OnPreOpen();
+            RefreshCd();
             
             _index = 0;
             ChangeIndex(0, false);
+        }
+
+        protected override void OnAddListener()
+        {
+            _whenCd ??= RefreshCd;
+            MessageCenter.Get<MSG.GAME_ONE_SECOND_DRIVER>().AddListener(_whenCd);
+        }
+
+        protected override void OnRemoveListener()
+        {
+            MessageCenter.Get<MSG.GAME_ONE_SECOND_DRIVER>().RemoveListener(_whenCd);
+        }
+
+        private void RefreshCd()
+        {
+            var v = _activity.endShowTS;
+            if (v <= 0)
+                Close();
         }
 
         private void ChangeIndex(int value, bool animate = true)
@@ -81,19 +109,25 @@ namespace FAT
             {
                 process.fillAmount = (_index + 1) / 3f;
             }
-            RefreshBtnActive();
-        }
-
-        private void RefreshBtnActive()
-        {
+            
             downBtn.interactable = _index != 0;
             upBtn.interactable = _index != 2;
-            downImg.sprite = btnSprites[(_index != 0 ? 0 : 1) + 2];
-            upImg.sprite = btnSprites[_index != 2 ? 0 : 1];
+
+            if (animate)
+            {
+                downCg.DOFade(_index != 0 ? 0 : 1, processBtnTime).SetLink(gameObject).SetId("UIOrderProcess");
+                upCg.DOFade(_index != 2 ? 0 : 1, processBtnTime).SetLink(gameObject).SetId("UIOrderProcess");
+            }
+            else
+            {
+                downCg.alpha = _index != 0 ? 0 : 1;
+                upCg.alpha = _index != 2 ? 0 : 1;
+            }
         }
 
         private void OnComplete()
         {
+            _activity.TryChoiceDiff((ActivityOrderDiffChoice.DiffChoiceType)(_index + 1));
             Close();
             Debug.Log($"UIOrderDiffchoice OnComplete {_index}");
         }
@@ -101,11 +135,15 @@ namespace FAT
         private void OnClickDown()
         {
             ChangeIndex(-1);
+            effect.SetActive(false);
+            effect.SetActive(true);
         }
 
         private void OnClickUp()
         {
             ChangeIndex(1);
+            effect.SetActive(false);
+            effect.SetActive(true);
         }
     }
 }

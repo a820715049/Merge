@@ -328,6 +328,8 @@ using rawEventOrderBonusGroup = fat.rawdata.EventOrderBonusGroup;
 using EventOrderBonusGroupVisitor = fat.conf.EventOrderBonusGroupVisitor;
 using rawEventOrderDash = fat.rawdata.EventOrderDash;
 using EventOrderDashVisitor = fat.conf.EventOrderDashVisitor;
+using rawEventOrderDiffChoice = fat.rawdata.EventOrderDiffChoice;
+using EventOrderDiffChoiceVisitor = fat.conf.EventOrderDiffChoiceVisitor;
 using rawEventOrderExtra = fat.rawdata.EventOrderExtra;
 using EventOrderExtraVisitor = fat.conf.EventOrderExtraVisitor;
 using rawEventOrderLike = fat.rawdata.EventOrderLike;
@@ -654,6 +656,8 @@ using rawMergeGridArea = fat.rawdata.MergeGridArea;
 using MergeGridAreaVisitor = fat.conf.MergeGridAreaVisitor;
 using rawMergeItemCategory = fat.rawdata.MergeItemCategory;
 using MergeItemCategoryVisitor = fat.conf.MergeItemCategoryVisitor;
+using rawMergeItemSeries = fat.rawdata.MergeItemSeries;
+using MergeItemSeriesVisitor = fat.conf.MergeItemSeriesVisitor;
 using rawMergeLevel = fat.rawdata.MergeLevel;
 using MergeLevelVisitor = fat.conf.MergeLevelVisitor;
 using rawMergeLevelRate = fat.rawdata.MergeLevelRate;
@@ -764,6 +768,8 @@ using rawOrderDetector = fat.rawdata.OrderDetector;
 using OrderDetectorVisitor = fat.conf.OrderDetectorVisitor;
 using rawOrderDiff = fat.rawdata.OrderDiff;
 using OrderDiffVisitor = fat.conf.OrderDiffVisitor;
+using rawOrderDiffChoiceInfo = fat.rawdata.OrderDiffChoiceInfo;
+using OrderDiffChoiceInfoVisitor = fat.conf.OrderDiffChoiceInfoVisitor;
 using rawOrderIgnore = fat.rawdata.OrderIgnore;
 using OrderIgnoreVisitor = fat.conf.OrderIgnoreVisitor;
 using rawOrderRandomer = fat.rawdata.OrderRandomer;
@@ -854,6 +860,8 @@ using rawUserTag = fat.rawdata.UserTag;
 using UserTagVisitor = fat.conf.UserTagVisitor;
 using rawUserTagGroup = fat.rawdata.UserTagGroup;
 using UserTagGroupVisitor = fat.conf.UserTagGroupVisitor;
+using rawWebShopToIAPPack = fat.rawdata.WebShopToIAPPack;
+using WebShopToIAPPackVisitor = fat.conf.WebShopToIAPPackVisitor;
 using rawWebshopCountryWhitelist = fat.rawdata.WebshopCountryWhitelist;
 using WebshopCountryWhitelistVisitor = fat.conf.WebshopCountryWhitelistVisitor;
 using PBC = global::Google.Protobuf.Collections;
@@ -1039,6 +1047,7 @@ public static partial class Data {
 		    cur.EventOrderBonusDetailMap = new fat.rawdata.EventOrderBonusDetailConf();
 		    cur.EventOrderBonusGroupMap = new fat.rawdata.EventOrderBonusGroupConf();
 		    cur.EventOrderDashMap = new fat.rawdata.EventOrderDashConf();
+		    cur.EventOrderDiffChoiceMap = new fat.rawdata.EventOrderDiffChoiceConf();
 		    cur.EventOrderExtraMap = new fat.rawdata.EventOrderExtraConf();
 		    cur.EventOrderLikeMap = new fat.rawdata.EventOrderLikeConf();
 		    cur.EventOrderLikeDetailMap = new fat.rawdata.EventOrderLikeDetailConf();
@@ -1202,6 +1211,7 @@ public static partial class Data {
 		    cur.MergeGridMap = new fat.rawdata.MergeGridConf();
 		    cur.MergeGridAreaSlice = new fat.rawdata.MergeGridAreaConf();
 		    cur.MergeItemCategoryMap = new fat.rawdata.MergeItemCategoryConf();
+		    cur.MergeItemSeriesMap = new fat.rawdata.MergeItemSeriesConf();
 		    cur.MergeLevelSlice = new fat.rawdata.MergeLevelConf();
 		    cur.MergeLevelRateMap = new fat.rawdata.MergeLevelRateConf();
 		    cur.MergeMixCostMap = new fat.rawdata.MergeMixCostConf();
@@ -1257,6 +1267,7 @@ public static partial class Data {
 		    cur.OrderCommonMap = new fat.rawdata.OrderCommonConf();
 		    cur.OrderDetectorMap = new fat.rawdata.OrderDetectorConf();
 		    cur.OrderDiffMap = new fat.rawdata.OrderDiffConf();
+		    cur.OrderDiffChoiceInfoMap = new fat.rawdata.OrderDiffChoiceInfoConf();
 		    cur.OrderIgnoreMap = new fat.rawdata.OrderIgnoreConf();
 		    cur.OrderRandomerMap = new fat.rawdata.OrderRandomerConf();
 		    cur.OrderRewardMap = new fat.rawdata.OrderRewardConf();
@@ -1302,6 +1313,7 @@ public static partial class Data {
 		    cur.UserGradeGroupMap = new fat.rawdata.UserGradeGroupConf();
 		    cur.UserTagMap = new fat.rawdata.UserTagConf();
 		    cur.UserTagGroupMap = new fat.rawdata.UserTagGroupConf();
+		    cur.WebShopToIAPPackMap = new fat.rawdata.WebShopToIAPPackConf();
 		    cur.WebshopCountryWhitelistMap = new fat.rawdata.WebshopCountryWhitelistConf();
 		}
 	#endregion loader
@@ -3066,6 +3078,17 @@ public static partial class Data {
 		public static List<rawEventOrderDash> GetEventOrderDashByFilter(Func<rawEventOrderDash, bool> filterFunc,string tag="") => EventOrderDashVisitor.GetByFilter(filterFunc,tag);
 		public static rawEventOrderDash? GetOneEventOrderDashByFilter(Func<rawEventOrderDash, bool> filterFunc,string tag="") => EventOrderDashVisitor.GetOneByFilter(filterFunc,tag);
 	#endregion EventOrderDash
+	#region EventOrderDiffChoice
+		public static int GetCountEventOrderDiffChoiceMap(string tag="") => EventOrderDiffChoiceVisitor.GetCount(tag);
+		public static string GetFileNameEventOrderDiffChoiceMap() => EventOrderDiffChoiceVisitor.GetFileName();
+		public static List<int> SortedKeysEventOrderDiffChoiceMap(string tag="") => EventOrderDiffChoiceVisitor.SortedKeys(tag);
+		public static PBC::MapField<int, rawEventOrderDiffChoice> GetEventOrderDiffChoiceMap(string tag="") => EventOrderDiffChoiceVisitor.All(tag);
+		public static void RangeEventOrderDiffChoiceMap(Action<int, rawEventOrderDiffChoice> filter,string tag="") => EventOrderDiffChoiceVisitor.Range(filter,tag);
+		public static List<int> KeysEventOrderDiffChoiceMap(string tag="") => EventOrderDiffChoiceVisitor.Keys(tag);
+		public static rawEventOrderDiffChoice? GetEventOrderDiffChoice(int key,string tag="") => EventOrderDiffChoiceVisitor.Get(key,tag);
+		public static List<rawEventOrderDiffChoice> GetEventOrderDiffChoiceByFilter(Func<rawEventOrderDiffChoice, bool> filterFunc,string tag="") => EventOrderDiffChoiceVisitor.GetByFilter(filterFunc,tag);
+		public static rawEventOrderDiffChoice? GetOneEventOrderDiffChoiceByFilter(Func<rawEventOrderDiffChoice, bool> filterFunc,string tag="") => EventOrderDiffChoiceVisitor.GetOneByFilter(filterFunc,tag);
+	#endregion EventOrderDiffChoice
 	#region EventOrderExtra
 		public static int GetCountEventOrderExtraMap(string tag="") => EventOrderExtraVisitor.GetCount(tag);
 		public static string GetFileNameEventOrderExtraMap() => EventOrderExtraVisitor.GetFileName();
@@ -4816,6 +4839,17 @@ public static partial class Data {
 		public static rawMergeItemCategory? GetOneMergeItemCategoryByFilter(Func<rawMergeItemCategory, bool> filterFunc,string tag="") => MergeItemCategoryVisitor.GetOneByFilter(filterFunc,tag);
         public static rawMergeItemCategory GetMergeItemCategoryByCombinedKeys(MergeItemCategoryVisitor.CK ck) => MergeItemCategoryVisitor.GetByCombinedKeys(ck);
 	#endregion MergeItemCategory
+	#region MergeItemSeries
+		public static int GetCountMergeItemSeriesMap(string tag="") => MergeItemSeriesVisitor.GetCount(tag);
+		public static string GetFileNameMergeItemSeriesMap() => MergeItemSeriesVisitor.GetFileName();
+		public static List<int> SortedKeysMergeItemSeriesMap(string tag="") => MergeItemSeriesVisitor.SortedKeys(tag);
+		public static PBC::MapField<int, rawMergeItemSeries> GetMergeItemSeriesMap(string tag="") => MergeItemSeriesVisitor.All(tag);
+		public static void RangeMergeItemSeriesMap(Action<int, rawMergeItemSeries> filter,string tag="") => MergeItemSeriesVisitor.Range(filter,tag);
+		public static List<int> KeysMergeItemSeriesMap(string tag="") => MergeItemSeriesVisitor.Keys(tag);
+		public static rawMergeItemSeries? GetMergeItemSeries(int key,string tag="") => MergeItemSeriesVisitor.Get(key,tag);
+		public static List<rawMergeItemSeries> GetMergeItemSeriesByFilter(Func<rawMergeItemSeries, bool> filterFunc,string tag="") => MergeItemSeriesVisitor.GetByFilter(filterFunc,tag);
+		public static rawMergeItemSeries? GetOneMergeItemSeriesByFilter(Func<rawMergeItemSeries, bool> filterFunc,string tag="") => MergeItemSeriesVisitor.GetOneByFilter(filterFunc,tag);
+	#endregion MergeItemSeries
 	#region MergeLevel
 		public static int GetCountMergeLevelSlice(string tag="") => MergeLevelVisitor.GetCount(tag);
 		public static string GetFileNameMergeLevelSlice() => MergeLevelVisitor.GetFileName();
@@ -5416,6 +5450,17 @@ public static partial class Data {
 		public static List<rawOrderDiff> GetOrderDiffByFilter(Func<rawOrderDiff, bool> filterFunc,string tag="") => OrderDiffVisitor.GetByFilter(filterFunc,tag);
 		public static rawOrderDiff? GetOneOrderDiffByFilter(Func<rawOrderDiff, bool> filterFunc,string tag="") => OrderDiffVisitor.GetOneByFilter(filterFunc,tag);
 	#endregion OrderDiff
+	#region OrderDiffChoiceInfo
+		public static int GetCountOrderDiffChoiceInfoMap(string tag="") => OrderDiffChoiceInfoVisitor.GetCount(tag);
+		public static string GetFileNameOrderDiffChoiceInfoMap() => OrderDiffChoiceInfoVisitor.GetFileName();
+		public static List<int> SortedKeysOrderDiffChoiceInfoMap(string tag="") => OrderDiffChoiceInfoVisitor.SortedKeys(tag);
+		public static PBC::MapField<int, rawOrderDiffChoiceInfo> GetOrderDiffChoiceInfoMap(string tag="") => OrderDiffChoiceInfoVisitor.All(tag);
+		public static void RangeOrderDiffChoiceInfoMap(Action<int, rawOrderDiffChoiceInfo> filter,string tag="") => OrderDiffChoiceInfoVisitor.Range(filter,tag);
+		public static List<int> KeysOrderDiffChoiceInfoMap(string tag="") => OrderDiffChoiceInfoVisitor.Keys(tag);
+		public static rawOrderDiffChoiceInfo? GetOrderDiffChoiceInfo(int key,string tag="") => OrderDiffChoiceInfoVisitor.Get(key,tag);
+		public static List<rawOrderDiffChoiceInfo> GetOrderDiffChoiceInfoByFilter(Func<rawOrderDiffChoiceInfo, bool> filterFunc,string tag="") => OrderDiffChoiceInfoVisitor.GetByFilter(filterFunc,tag);
+		public static rawOrderDiffChoiceInfo? GetOneOrderDiffChoiceInfoByFilter(Func<rawOrderDiffChoiceInfo, bool> filterFunc,string tag="") => OrderDiffChoiceInfoVisitor.GetOneByFilter(filterFunc,tag);
+	#endregion OrderDiffChoiceInfo
 	#region OrderIgnore
 		public static int GetCountOrderIgnoreMap(string tag="") => OrderIgnoreVisitor.GetCount(tag);
 		public static string GetFileNameOrderIgnoreMap() => OrderIgnoreVisitor.GetFileName();
@@ -5897,6 +5942,17 @@ public static partial class Data {
 		public static List<rawUserTagGroup> GetUserTagGroupByFilter(Func<rawUserTagGroup, bool> filterFunc,string tag="") => UserTagGroupVisitor.GetByFilter(filterFunc,tag);
 		public static rawUserTagGroup? GetOneUserTagGroupByFilter(Func<rawUserTagGroup, bool> filterFunc,string tag="") => UserTagGroupVisitor.GetOneByFilter(filterFunc,tag);
 	#endregion UserTagGroup
+	#region WebShopToIAPPack
+		public static int GetCountWebShopToIAPPackMap(string tag="") => WebShopToIAPPackVisitor.GetCount(tag);
+		public static string GetFileNameWebShopToIAPPackMap() => WebShopToIAPPackVisitor.GetFileName();
+		public static List<string> SortedKeysWebShopToIAPPackMap(string tag="") => WebShopToIAPPackVisitor.SortedKeys(tag);
+		public static PBC::MapField<string, rawWebShopToIAPPack> GetWebShopToIAPPackMap(string tag="") => WebShopToIAPPackVisitor.All(tag);
+		public static void RangeWebShopToIAPPackMap(Action<string, rawWebShopToIAPPack> filter,string tag="") => WebShopToIAPPackVisitor.Range(filter,tag);
+		public static List<string> KeysWebShopToIAPPackMap(string tag="") => WebShopToIAPPackVisitor.Keys(tag);
+		public static rawWebShopToIAPPack? GetWebShopToIAPPack(string key,string tag="") => WebShopToIAPPackVisitor.Get(key,tag);
+		public static List<rawWebShopToIAPPack> GetWebShopToIAPPackByFilter(Func<rawWebShopToIAPPack, bool> filterFunc,string tag="") => WebShopToIAPPackVisitor.GetByFilter(filterFunc,tag);
+		public static rawWebShopToIAPPack? GetOneWebShopToIAPPackByFilter(Func<rawWebShopToIAPPack, bool> filterFunc,string tag="") => WebShopToIAPPackVisitor.GetOneByFilter(filterFunc,tag);
+	#endregion WebShopToIAPPack
 	#region WebshopCountryWhitelist
 		public static int GetCountWebshopCountryWhitelistMap(string tag="") => WebshopCountryWhitelistVisitor.GetCount(tag);
 		public static string GetFileNameWebshopCountryWhitelistMap() => WebshopCountryWhitelistVisitor.GetFileName();
