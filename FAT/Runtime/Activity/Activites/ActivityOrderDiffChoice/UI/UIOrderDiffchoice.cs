@@ -26,6 +26,9 @@ namespace FAT
         [SerializeField] private Button[] btns;
         [SerializeField] private Image process;
         [SerializeField] private GameObject effect;
+        [SerializeField] private GameObject hardEffect;
+        [SerializeField] private TMP_Text descText;
+        [SerializeField] private Animator watchAnim;
 
         private ActivityOrderDiffChoice _activity;
         private Action _whenCd;                             // 倒计时回调
@@ -40,6 +43,7 @@ namespace FAT
                 btn.WithClickScale().FixPivot().onClick.AddListener(OnComplete);
             }
             effect.SetActive(false);
+            descText.text = I18N.FormatText("#SysComDesc1771", new object[] { "<sprite name=selfselect_plus>", "<sprite name=selfselect_reduce>" });
         }
 
         protected override void OnParse(params object[] items)
@@ -69,8 +73,9 @@ namespace FAT
 
         private void RefreshCd()
         {
-            var v = _activity.endShowTS;
-            if (v <= 0)
+            var t = Game.Instance.GetTimestampSeconds();
+            var diff = _activity.endShowTS - t;
+            if (diff <= 0)
                 Close();
         }
 
@@ -144,6 +149,9 @@ namespace FAT
             ChangeIndex(1);
             effect.SetActive(false);
             effect.SetActive(true);
+            hardEffect.SetActive(false);
+            hardEffect.SetActive(true);
+            watchAnim.Play("Punch");
         }
     }
 }

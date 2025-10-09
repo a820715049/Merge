@@ -12,6 +12,7 @@ using fat.conf;
 using static FAT.RecordStateHelper;
 using System;
 using FAT.Merge;
+using FAT;
 
 namespace FAT
 {
@@ -76,6 +77,7 @@ namespace FAT
         public override void WhenEnd()
         {
             //活动结束时打点
+            DataTracker.EventOrderDiffChoiceEnd(this, _choiceType, _isWin);
         }
 
         #region 界面 入口 换皮 弹脸
@@ -198,6 +200,7 @@ namespace FAT
             any.Add(ToRecord((int)OrderParamType.EventParam, ret.paramId));
             any.Add(ToRecord((int)OrderParamType.StartTimeSec, ret.startTime));
             any.Add(ToRecord((int)OrderParamType.DurationSec, ret.duration));
+            _hasGenerateOrder = true;
             DebugEx.Info($"ActivityOrderDiffChoice::TryGeneratePassiveOrder : {ret.eventId} {order.Id} {ret.duration}");
             return true;
         }
@@ -240,5 +243,18 @@ namespace FAT
         }
 
         #endregion
+    }
+}
+
+public partial class DataTracker
+{
+    public static void EventOrderDiffChoiceEnd(ActivityLike act, int orderDiff, bool isFinal)
+    {
+        var data = BorrowTrackObject();
+        // 显式补充关键字段
+        FillActivity(data, act);
+        data["order_diff"] = orderDiff;
+        data["is_final"] = isFinal;
+        TrackObject(data, "event_orderdiffchoice_end");
     }
 }
