@@ -66,7 +66,7 @@ namespace fat.rawdata {
   /// <summary>
   /// annotation@annotation_type(type="rawdata")
   /// annotation@rawdata(row="EventOrderExtra",table="EventOrderExtraMap",table_wrapper="EventOrderExtraConf",map="true",map_key_type="int32",data="EventOrderExtraConf")
-  /// annotation@ab(table_ab="EventOrderExtraMapAB",table_ab_patch="EventOrderExtraMapABPatch",table_ab_value="EventOrderExtraMapABValue",ab_patch="true")
+  /// annotation@ab(table_ab="EventOrderExtraMapAB",table_ab_patch="EventOrderExtraMapABPatch",table_ab_value="EventOrderExtraMapABValue",ab_patch="false")
   /// annotation@filter(just_server="false",just_client="false")
   /// annotation@EventOrderExtra(id="id")
   /// </summary>

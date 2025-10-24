@@ -108,7 +108,8 @@ namespace fat.rawdata {
     public const int IdFieldNumber = 1;
     private string id_ = "";
     /// <summary>
-    /// IAPProduct.Id
+    /// webshop
+    /// Product.Id
     /// annotation@field_id(id="true")
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

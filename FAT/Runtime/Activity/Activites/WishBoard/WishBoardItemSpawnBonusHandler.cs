@@ -13,8 +13,6 @@ namespace FAT
         private bool _isValid => _actInst != null && _actInst.Active;
         //权重随机配置信息 区分耗体1 耗体2 耗体4
         private List<(int itemId, int num, int weight)> _outputsOneInfo = new();
-        private List<(int itemId, int num, int weight)> _outputsTwoInfo = new();
-        private List<(int itemId, int num, int weight)> _outputsFourInfo = new();
 
         private bool _isDirty = true;
         private WishBoardActivity _actInst;
@@ -37,8 +35,6 @@ namespace FAT
             _isDirty = false;
             var curMilestone = _actInst.GetCurDropConf();
             _InitOutputs(_outputsOneInfo, curMilestone.OutputsOne);
-            _InitOutputs(_outputsTwoInfo, curMilestone.OutputsTwo);
-            _InitOutputs(_outputsFourInfo, curMilestone.OutputsFour);
         }
 
         private void _InitOutputs(IList<(int, int, int)> container, IList<string> outputs)
@@ -78,23 +74,19 @@ namespace FAT
             if (curActivity.ConfD.Cost != comp.firstCost.Cost)
                 return;
             EnsureOutputMap();
-            //根据是否是n倍耗体 使用不同的产出权重配置
+            //统一从 OutputsOne 读取，根据能量加倍状态调整数量
             var state = Env.Instance.GetEnergyBoostState();
-            var outputsConf = !comp.config.IsBoostable ?
-                _outputsOneInfo :
-                state switch
-                {
-                    EnergyBoostState.X2 => _outputsTwoInfo,
-                    EnergyBoostState.X4 => _outputsFourInfo,
-                    _ => _outputsOneInfo,
-                };
+            var outputsConf = _outputsOneInfo;
             var output = outputsConf.RandomChooseByWeight(e => e.weight);
             //产出有效
             if (output.itemId > 0 && output.num > 0)
             {
-                DebugEx.Info($"FishingBoard Spawn : output ItemId: {output.itemId}, Num = {output.num}, BoostState = {state}");
+                var rate = comp.config.IsBoostable ? EnergyBoostUtility.GetEnergyRate() : 1;
+                var finalNum = output.num * rate;
+                DebugEx.Info($"FishingBoard Spawn : output ItemId: {output.itemId}, Num = {finalNum}, BoostState = {state}");
+                DebugEx.Info($"[EnergyBoost_opt] 活动{_actInst?.GetType().Name}，原始产出{output.num}，实际产出{finalNum}个，体力倍数{rate}。");
                 //往钓鱼棋盘上发奖励
-                var reward = Game.Manager.rewardMan.BeginReward(output.itemId, output.num, ReasonString.wish_tap);
+                var reward = Game.Manager.rewardMan.BeginReward(output.itemId, finalNum, ReasonString.wish_tap);
                 var pos = BoardUtility.GetWorldPosByCoord(from.coord);
                 UIFlyUtility.FlyRewardSetType(reward, pos, FlyType.WishBoardToken);
                 DataTracker.event_wish_getitem_tap.Track(curActivity, curActivity.GetCurProgressPhase() + 1, curActivity.GetCurGroupConfig().BarRewardId.Count,

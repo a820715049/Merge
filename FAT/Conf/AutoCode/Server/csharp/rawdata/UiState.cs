@@ -24,7 +24,7 @@ namespace fat.rawdata {
     static UiStateReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChVyYXdkYXRhL1VpU3RhdGUucHJvdG8SB3Jhd2RhdGEq0QUKB1VpU3RhdGUS",
+            "ChVyYXdkYXRhL1VpU3RhdGUucHJvdG8SB3Jhd2RhdGEqzgYKB1VpU3RhdGUS",
             "FAoQVWlTdGF0ZUJvYXJkTWFpbhAAEhQKEFVpU3RhdGVTY2VuZU1haW4QARIY",
             "ChRVaVN0YXRlU2NlbmVCdWlsZGluZxACEhYKElVpU3RhdGVPdXRPZkVuZXJn",
             "eRADEhMKD1VpU3RhdGVNYWluU2hvcBAEEg4KClVpU3RhdGVCYWcQBRITCg9V",
@@ -40,9 +40,12 @@ namespace fat.rawdata {
             "NFhHdWlkZRAYEhcKE1VpU3RhdGVNdWx0aVJhbmtpbmcQGRIYChRVaVN0YXRl",
             "TWluZUNhcnRCb2FyZBAaEhEKDVVpU3RhdGVQdXp6bGUQGxIXChNVaVN0YXRl",
             "VHJhaW5NaXNzaW9uEB0SGAoUVWlTdGF0ZUZhcm1Cb2FyZFMwMDIQHhISCg5V",
-            "aVN0YXRlU2VhUmFjZRAfEhMKD1VpU3RhdGVWaW5lTGVhcBAgQj1aLWdpdGxh",
-            "Yi5mdW5wbHVzLmlvL2ZhdC9jb25mL2dlbi9nb2xhbmcvcmF3ZGF0YaoCC2Zh",
-            "dC5yYXdkYXRhYgZwcm90bzM="));
+            "aVN0YXRlU2VhUmFjZRAfEhMKD1VpU3RhdGVWaW5lTGVhcBAgEhUKEVVpU3Rh",
+            "dGVTZWxmU2VsZWN0ECESFwoTVWlTdGF0ZUJvb3N0OFhHdWlkZRAiEhgKFFVp",
+            "U3RhdGVCb29zdDE2WEd1aWRlECMSFwoTVWlTdGF0ZUluZGVwZW5CaW5nbxAk",
+            "EhgKFFVpU3RhdGVNb25vcG9seUJvYXJkECVCPVotZ2l0bGFiLmZ1bnBsdXMu",
+            "aW8vZmF0L2NvbmYvZ2VuL2dvbGFuZy9yYXdkYXRhqgILZmF0LnJhd2RhdGFi",
+            "BnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::fat.rawdata.UiState), }, null, null));
@@ -180,6 +183,26 @@ namespace fat.rawdata {
     /// 飞跃藤蔓
     /// </summary>
     [pbr::OriginalName("UiStateVineLeap")] VineLeap = 32,
+    /// <summary>
+    /// 自选限时订单
+    /// </summary>
+    [pbr::OriginalName("UiStateSelfSelect")] SelfSelect = 33,
+    /// <summary>
+    /// 8倍加速引导弹出条件
+    /// </summary>
+    [pbr::OriginalName("UiStateBoost8XGuide")] Boost8Xguide = 34,
+    /// <summary>
+    /// 16倍加速引导弹出条件
+    /// </summary>
+    [pbr::OriginalName("UiStateBoost16XGuide")] Boost16Xguide = 35,
+    /// <summary>
+    /// 独立棋盘bingo
+    /// </summary>
+    [pbr::OriginalName("UiStateIndepenBingo")] IndepenBingo = 36,
+    /// <summary>
+    /// 大富翁棋盘
+    /// </summary>
+    [pbr::OriginalName("UiStateMonopolyBoard")] MonopolyBoard = 37,
   }
 
   #endregion

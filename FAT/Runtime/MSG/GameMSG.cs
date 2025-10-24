@@ -30,6 +30,8 @@ namespace FAT
         public class UI_NEWLY_FINISHED_ORDER_SHOW : MessageBase<Transform> { } // 订单transform
         public class UI_ORDER_REQUEST_SCROLL : MessageBase<Transform> { } // 订单transform
         public class BOARD_AREA_ADAPTER_COMPLETE : MessageBase<float> { }
+        public class GAME_ORDER_TOKEN_MULTI_BEGIN : MessageBase<Merge.Item> { }
+        public class GAME_ORDER_TOKEN_MULTI_END : MessageBase { }
 
         #endregion
 
@@ -117,6 +119,7 @@ namespace FAT
         public class ACTIVITY_SUCCESS : MessageBase<ActivityLike> { }
         public class ACTIVITY_TS_SYNC : MessageBase<ActivityLike> { }
         public class ACTIVITY_RANKING_DATA : MessageBase<ActivityRanking, RankingType> { }
+        public class ACTIVITY_QUERY_ENTRY : MessageBase<ActivityLike, Action<Transform>> { }
 
         #endregion activity
         #region IAP
@@ -233,7 +236,6 @@ namespace FAT
 
         public class GAME_CARD_DRAW_FINISH : MessageBase { }    //抽卡逻辑执行完毕
         public class GAME_CARD_REDPOINT_UPDATE : MessageBase<int> { } //卡册红点状态刷新 参数为发生状态变化的卡片id 默认0代表刷新全部卡片
-        public class GAME_CARD_GUIDE_DRAG_END : MessageBase<int> { }    //卡册引导界面拖拽结束
         public class GAME_CARD_JOKER_GET : MessageBase { }    //当获取到万能卡时
         public class GAME_CARD_JOKER_USE : MessageBase { }    //当使用完万能卡时
         public class GAME_CARD_JOKER_SELECT : MessageBase { }    //当界面中选中万能卡时
@@ -245,6 +247,7 @@ namespace FAT
         public class GAME_CARD_ADD : MessageBase<CardData> { }
 
         #endregion
+        public class GAME_HELP_GUIDE_DRAG_END : MessageBase<int> { }    //帮助引导界面拖拽结束
 
         #region wish upon
         public class WISH_UPON_ENERGY_UPDATE : MessageBase<int, int> { }
@@ -270,6 +273,13 @@ namespace FAT
         public class SCORE_ADD_DEBUG : MessageBase { }    //积分活动debug gm add score
         public class ACTIVITY_ENTRY_LAYOUT_REFRESH : MessageBase { }    //棋盘活动入口布局刷新
         public class BOARD_FLY_TEXT : MessageBase<Item, int, string> { }    //灯泡/特殊道具 飘字
+        public class ACTIVITY_SCORE_ROUND_CHANGE : MessageBase { }
+        #endregion
+
+        #region 积分活动变种(麦克风版)
+
+        public class SCORE_MIC_NUM_ADD : MessageBase<int, int> { }    // 积分数量增加
+
         #endregion
 
         #region 寻宝
@@ -578,6 +588,19 @@ namespace FAT
         public class TASK_SCORE_DUEL_WIN : MessageBase { }
         public class TASK_FARM_TOKEN_COST : MessageBase { }
         public class TASK_ACTIVITY_TOKEN_USE : MessageBase<int, int> { }
+        #endregion
+
+        #region 海上竞速
+        public class UI_SEA_RACE_SCORE_CHANGE : MessageBase { } // 海上竞速分数变化
+        public class UI_SEA_RACE_ENTRY_UPDATE : MessageBase { } // 海上竞速入口更新
+        public class SEA_RACE_ROBOT_ADD_ONLINE_SCORE : MessageBase { } // 海上竞速 机器人在线加分
+        #endregion
+        
+        #region 飞跃藤蔓
+
+        public class VINELEAP_STEP_START : MessageBase { }    // 当前Step开始
+        public class VINELEAP_STEP_END : MessageBase<bool> { }    // 当前Step结束
+
         #endregion
     }
 }

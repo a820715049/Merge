@@ -79,7 +79,7 @@ namespace FAT
         public ActivityDuel(ActivityLite lite_)
         {
             Lite = lite_;
-            Conf = Game.Manager.configMan.GetEventScoreDuelConfig(1);
+            Conf = Game.Manager.configMan.GetEventScoreDuelConfig(Lite.Param);
             Get<SCORE_ENTITY_ADD_COMPLETE>().AddListener(OnUpdateScore);
             Get<GAME_ONE_SECOND_DRIVER>().AddListener(UpdateRobotScore);
             SetupTheme();
@@ -89,8 +89,7 @@ namespace FAT
         {
             grpIndexMappingId = Game.Manager.userGradeMan.GetTargetConfigDataId(Conf.DetailId);
             ConfD = Game.Manager.configMan.GetEventScoreDuelDetailConfig(grpIndexMappingId);
-            //Visual.Theme.AssetInfo.TryGetValue("bgPrefab", out var prefab);
-            var prefab = "event_duel_default#UIFlyMergeScore.prefab";
+            Visual.Theme.AssetInfo.TryGetValue("score", out var prefab);
             scoreEntity.Setup(score, this, Conf.TokenId, ConfD.ExtraScore, ReasonString.duel, prefab, boardId);
             StartPopup = new PopupDuelStart(this, VisualStart.visual, VisualStart.res);
         }
@@ -98,16 +97,16 @@ namespace FAT
         public void SetupTheme()
         {
             VisualMain.Setup(Conf.EventTheme, this, active_: false);
-            VisualMain.popup.option = new IScreenPopup.Option { ignoreDelay = true };
             VisualStart.Setup(Conf.StartTheme, this);
             VisualStart.popup.option = new IScreenPopup.Option { ignoreDelay = true };
             VisualResult.Setup(Conf.ResultTheme);
+            VisualHelp.Setup(Conf.HelpTheme);
         }
 
         public string BoardEntryAsset()
         {
-            //Visual.Theme.AssetInfo.TryGetValue("boardEntry", out var s);
-            return "event_duel_default:ActivityDuelEntry.prefab";
+            Visual.Theme.AssetInfo.TryGetValue("boardEntry", out var s);
+            return s;
         }
 
         public bool IsComplete()
@@ -207,8 +206,7 @@ namespace FAT
             }
             if (!IsComplete())
             {
-                //Visual.Theme.AssetInfo.TryGetValue("bgPrefab", out var prefab);
-                var prefab = "event_duel_default#UIFlyMergeScore.prefab";
+                Visual.Theme.AssetInfo.TryGetValue("score", out var prefab);
                 scoreEntity.Setup(score, this, Conf.TokenId, ConfD.ExtraScore, ReasonString.duel, prefab, boardId);
             }
             if (visualRound != curRoundIndex)
@@ -244,10 +242,10 @@ namespace FAT
             any.Add(ToRecord(19, startPopup));
         }
 
-        public static void DebugAddScore()
+        public static void DebugAddScore(int value = 10)
         {
             var acti = (ActivityDuel)Game.Manager.activity.LookupAny(fat.rawdata.EventType.ScoreDuel);
-            var v = 10;
+            var v = value;
             var prev = acti.score;
             acti.score += v;
             Get<ACTIVITY_DUEL_SCORE>().Dispatch(prev, acti.score);
@@ -255,11 +253,30 @@ namespace FAT
             acti.CheckScore();
         }
 
-        public static void DebugAddRobotScore()
+        public static void DebugAddRobotScore(int value = 0)
         {
             var acti = (ActivityDuel)Game.Manager.activity.LookupAny(fat.rawdata.EventType.ScoreDuel);
-            acti.nextScoreTs = 0;
-            acti.UpdateRobotScore();
+            if (value > 0)
+            {
+                // 直接增加指定分数
+                var prev = acti.robotScore;
+                acti.robotScore += value;
+                Get<ACTIVITY_DUEL_ROBOT_SCORE>().Dispatch(prev, acti.robotScore);
+                Debug.LogWarning($"DebugAddRobotScore: {acti.robotScore} (added {value})");
+                // 检查是否达到回合目标分数
+                if (acti.robotScore >= acti.ConfD.RoundTarget[acti.curRoundIndex])
+                {
+                    Debug.LogWarning($"robot Win");
+                    acti.SetRoundEnd(false);
+                    acti.failCount++;
+                }
+            }
+            else
+            {
+                // 原来的行为：触发机器人自动加分逻辑
+                acti.nextScoreTs = 0;
+                acti.UpdateRobotScore();
+            }
         }
 
         #region Logic

@@ -74,7 +74,7 @@ namespace FAT
         {
             var ui = UIManager.Instance;
             var scene = Game.Manager.mapSceneMan;
-            if(!scene.scene.Ready)
+            if (!scene.scene.Ready)
                 return;
 
             void WhenFocus()
@@ -94,7 +94,7 @@ namespace FAT
             scene.Enter();
             scene.scene.RefreshArea();
             ui.Block(true);
-            scene.TryFocus(area_, WhenFocus_: WhenFocus, overview_:overview_);
+            scene.TryFocus(area_, WhenFocus_: WhenFocus, overview_: overview_);
             //棋盘进场景时播音效
             Game.Manager.audioMan.TriggerSound("BoardClose");
             MessageCenter.Get<MSG.MERGE_TO_SCENE>().Dispatch();
@@ -102,6 +102,7 @@ namespace FAT
 
         public static void SceneToMerge()
         {
+            if (Game.Manager.mergeBoardMan.activeWorld != null && Game.Manager.mergeBoardMan.activeWorld.activeBoard.EquivalentToMain) return;
             Game.Manager.mapSceneMan.Exit();
             UIConfig.UIMergeBoardMain.Open();
             //场景进棋盘时播音效

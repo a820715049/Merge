@@ -29,13 +29,7 @@ namespace FAT
         [SerializeField] private Transform helpRoot;       // 帮助界面根节点
         [SerializeField] private Button helpBtn;           // 帮助按钮
         [SerializeField] private Button block;             // 遮罩按钮
-        [SerializeField] private TextProOnACircle title;   // 标题文本
         [SerializeField] private TMP_Text cd;              // 倒计时文本
-        [SerializeField] private TMP_Text tip;             // 提示文本
-        [SerializeField] private UIImageRes bg;            // 背景图片
-        [SerializeField] private UIImageRes cdBg;          // 倒计时背景
-        [SerializeField] private UIImageRes titleBg;       // 标题背景
-
         [Header("里程碑相关")]
         [SerializeField] private GameObject cell;          // Cell预制体
         [SerializeField] private GameObject cellRoot;      // Cell根节点
@@ -55,6 +49,7 @@ namespace FAT
         [Tooltip("进度条充满动画时长")]
         [SerializeField] private float progressBarFillDuration = 0.8f;
 
+        [SerializeField] private string m_progressBarFillAnimName = "ProgressGroup_punch";
         #endregion
 
         #region 私有字段
@@ -194,7 +189,7 @@ namespace FAT
             }
             if (activity.HasComplete())
             {
-                UIManager.Instance.OpenWindow(UIConfig.UIScoreFinish_Track);
+                UIManager.Instance.OpenWindow(activity.EndRes.ActiveR);
             }
 
             // // 清理创建的Cell
@@ -439,7 +434,7 @@ namespace FAT
                     {
                         progressItemAnim.Stop();
                     }
-                    progressItemAnim.Play("ProgressGroup_punch");
+                    progressItemAnim.Play(m_progressBarFillAnimName);
                     yield return new WaitForSeconds(0.367f);
 
                     // 动画完成后刷新图标

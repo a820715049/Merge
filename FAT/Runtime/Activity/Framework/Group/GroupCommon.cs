@@ -18,7 +18,6 @@ namespace FAT
             {
                 EventType.MarketIapgift => (feature.IsFeatureEntryUnlocked(FeatureMarketIapgift), rf),
                 EventType.FlashOrder => (feature.IsFeatureEntryUnlocked(FeatureFlashOrder), rf),
-                EventType.OrderDiffChoice => (feature.IsFeatureEntryUnlocked(FeatureOrderDiffChoice), rf),
                 EventType.Score => (feature.IsFeatureEntryUnlocked(FeatureScore), rf),
                 EventType.Step => (feature.IsFeatureEntryUnlocked(FeatureStep), rf),
                 EventType.OrderExtra => (feature.IsFeatureEntryUnlocked(FeatureOrderExtra), rf),
@@ -50,12 +49,16 @@ namespace FAT
                 EventType.ThreeSign => (feature.IsFeatureEntryUnlocked(FeatureThreeSign), rf),
                 EventType.Community => (feature.IsFeatureEntryUnlocked(FeatureCommunity), rf),
                 EventType.BingoTask => (feature.IsFeatureEntryUnlocked(FeatureBingoTask), rf),
+                EventType.SeaRace => (feature.IsFeatureEntryUnlocked(FeatureSeaRace), rf),
                 EventType.Landmark => (feature.IsFeatureEntryUnlocked(FeatureLandmark), rf),
                 EventType.MultiplierRanking => (feature.IsFeatureEntryUnlocked(FeatureMultiplierRanking), rf),
                 EventType.FrozenItem => (feature.IsFeatureEntryUnlocked(FeatureFrozenItem), rf),
                 EventType.TrainMission => (feature.IsFeatureEntryUnlocked(FeatureTrainMission), rf),
                 EventType.LimitMerge => (feature.IsFeatureEntryUnlocked(FeatureLimitMerge), rf),
                 EventType.SevenDayTask => (feature.IsFeatureEntryUnlocked(FeatureSevenDayTask), rf),
+                EventType.MicMilestone => (feature.IsFeatureEntryUnlocked(FeatureMicMilestone), rf),
+                EventType.VineLeap => (feature.IsFeatureEntryUnlocked(FeatureVineLeap), rf),
+                EventType.RaceExtend => (feature.IsFeatureEntryUnlocked(FeatureRaceExtend), rf),
                 _ => (true, null),
             };
         }
@@ -65,7 +68,6 @@ namespace FAT
             {
                 EventType.MarketIapgift => new ActivityMIG(lite_),
                 EventType.FlashOrder => new ActivityFlashOrder(lite_),
-                EventType.OrderDiffChoice => new ActivityOrderDiffChoice(lite_),
                 EventType.Score => new ActivityScore(lite_),
                 EventType.Step => new ActivityStep(lite_),
                 EventType.OrderExtra => new ActivityExtraRewardOrder(lite_),
@@ -98,12 +100,16 @@ namespace FAT
                 EventType.ThreeSign => new ActivityThreeSign(lite_),
                 EventType.Community => new CommunityMailActivity(lite_),
                 EventType.BingoTask => new ActivityBingoTask(lite_),
+                EventType.SeaRace => new ActivitySeaRace(lite_),
                 EventType.Landmark => new LandMarkActivity(lite_),
                 EventType.MultiplierRanking => new ActivityMultiplierRanking(lite_),
                 EventType.FrozenItem => new ActivityFrozenItem(lite_),
                 EventType.TrainMission => new TrainMissionActivity(lite_),
                 EventType.LimitMerge => new ActivityLimitMergeOrder(lite_),
                 EventType.SevenDayTask => new ActivitySevenDayTask(lite_),
+                EventType.MicMilestone => new ActivityScoreMic(lite_),
+                EventType.VineLeap => new ActivityVineLeap(lite_),
+                EventType.RaceExtend => new ActivityRaceExtend(lite_),
                 _ => null,
             };
     }

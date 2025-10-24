@@ -183,42 +183,6 @@ namespace FAT
             return true;
         }
 
-        #region 农场棋盘接口
-
-        //供外部获取指定范围内的棋盘行配置 startRow从0开始
-        public static bool FillFarmBoardRowConfStr(int detailId, IList<string> container, int startRow, int needRowCount)
-        {
-            var configMan = Game.Manager.configMan;
-            var detailConf = configMan.GetEventFarmBoardDetailConfig(detailId);
-            if (detailConf == null || container == null)
-                return false;
-            var totalCount = detailConf.BoardRowId.Count;
-            if (startRow < 0 || totalCount <= 0 || needRowCount <= 0)
-                return false;
-            container.Clear();
-            //需要的行配置范围不超过总行数时 直接按index取配置；大于总行数时 不做处理
-            if (startRow + needRowCount <= totalCount)
-            {
-                for (int i = startRow; i < startRow + needRowCount; i++)
-                {
-                    var rowConf = configMan.GetEventFarmRowConfig(detailConf.BoardRowId[i]);
-                    if (rowConf != null)
-                        container.Add(rowConf.UpMiniRow);
-                }
-                DebugEx.FormatInfo("FillBoardRowConfStr 1, startIndex = {0}, needCount = {1}", startRow + 1, needRowCount);
-            }
-
-#if UNITY_EDITOR
-            foreach (var info in container)
-            {
-                DebugEx.FormatInfo("FillBoardRowConfStr 3, info = {0}", info);
-            }
-#endif
-            return true;
-        }
-
-        #endregion
-
         #region 棋盘查找逻辑
 
         /// <summary>

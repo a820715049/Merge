@@ -17,7 +17,7 @@ namespace FAT
     {
         [SerializeField] private UICardAlbumGuideTabScroll tabScrollView;
         [SerializeField] private int maxTabNum; //最大tab数
-        [SerializeField] private MBCardAlbumGuideDrag drag;
+        [SerializeField] private MBHelpGuideDrag drag;
         [SerializeField] private Transform pageRoot;
         [SerializeField] private Transform pageSpecial;
         private int _curSelectTabId = 0;
@@ -74,7 +74,7 @@ namespace FAT
 
         protected override void OnAddListener()
         {
-            MessageCenter.Get<MSG.GAME_CARD_GUIDE_DRAG_END>().AddListener(OnTabDragxEnd);
+            MessageCenter.Get<MSG.GAME_HELP_GUIDE_DRAG_END>().AddListener(OnTabDragxEnd);
         }
 
         protected override void OnRefresh()
@@ -84,12 +84,12 @@ namespace FAT
 
         protected override void OnRemoveListener()
         {
-            MessageCenter.Get<MSG.GAME_CARD_GUIDE_DRAG_END>().RemoveListener(OnTabDragxEnd);
+            MessageCenter.Get<MSG.GAME_HELP_GUIDE_DRAG_END>().RemoveListener(OnTabDragxEnd);
         }
 
         private void OnTabDragxEnd(int targeIdx)
         {
-            if (targeIdx > _maxShowTabNum)
+            if (targeIdx < 1 || targeIdx > _maxShowTabNum)
             {
                 return;
             }

@@ -15,38 +15,39 @@ namespace FAT
 {
     public class GuideRequireChecker
     {
-        public enum UIState
-        {
-            BoardMain = 0, // 主棋盘
-            SceneMain = 1, // 主场景
-            SceneBuilding = 2, // 主场景 且 特定建筑ui显示时
-            OutOfEnergy = 3, // 体力不足
-            MainShop = 4, // 主商店
-            Bag = 5, // 背包
-            CardPack = 6, // 卡包
-            CardAlbum = 7, // 卡册
-            CardSet = 8, //卡组
-            DailyEvent = 9, //每日任务里程碑
-            DecoratePick = 10, //装饰选择界面
-            MiniBoard = 11, //迷你棋盘界面
-            Digging = 12, //挖沙活动UI
-            Pachinko = 13, //弹珠界面
-            MiniBoardMulti = 14,
-            Guess = 15,
-            Bingo = 16, //bingo活动
-            MineBoard = 17, //矿洞活动
-            FishBoard = 18, //钓鱼活动
-            FarmBoard = 19, //农场棋盘
-            Fight = 20,
-            WishBoard = 21,
-            DecorateStart = 22,
-            WeeklyRaffle = 23, //签到抽奖
-            Boost4XGuide = 24, //是否满足4倍加速引导弹出条件
-            MultiRanking = 25,
-            MineCartBoard = 26, //矿车棋盘
-            Puzzle = 27, //拼图活动
-            TrainMission = 29, //火车任务
-        }
+        // public enum UIState
+        // {
+        //     BoardMain = 0, // 主棋盘
+        //     SceneMain = 1, // 主场景
+        //     SceneBuilding = 2, // 主场景 且 特定建筑ui显示时
+        //     OutOfEnergy = 3, // 体力不足
+        //     MainShop = 4, // 主商店
+        //     Bag = 5, // 背包
+        //     CardPack = 6, // 卡包
+        //     CardAlbum = 7, // 卡册
+        //     CardSet = 8, //卡组
+        //     DailyEvent = 9, //每日任务里程碑
+        //     DecoratePick = 10, //装饰选择界面
+        //     MiniBoard = 11, //迷你棋盘界面
+        //     Digging = 12, //挖沙活动UI
+        //     Pachinko = 13, //弹珠界面
+        //     MiniBoardMulti = 14,
+        //     Guess = 15,
+        //     Bingo = 16, //bingo活动
+        //     MineBoard = 17, //矿洞活动
+        //     FishBoard = 18, //钓鱼活动
+        //     FarmBoard = 19, //农场棋盘
+        //     Fight = 20,
+        //     WishBoard = 21,
+        //     DecorateStart = 22,
+        //     WeeklyRaffle = 23, //签到抽奖
+        //     Boost4XGuide = 24, //是否满足4倍加速引导弹出条件
+        //     MultiRanking = 25,
+        //     MineCartBoard = 26, //矿车棋盘
+        //     Puzzle = 27, //拼图活动
+        //     TrainMission = 29, //火车任务
+        //     SeaRace = 31, //海上竞赛
+        // }
 
         private UIManager uiMan => UIManager.Instance;
         private int mLastCollectedItemTid;
@@ -187,7 +188,6 @@ namespace FAT
         }
 
 
-
         public bool IsMatchUIState(int state, int extra)
         {
             return _IsRequireUIState(state, extra);
@@ -262,68 +262,85 @@ namespace FAT
         {
             if (UIManager.Instance.LoadingCount != 0)
                 return false;
-            switch ((UIState)value)
+            switch ((UiState)value)
             {
-                case UIState.BoardMain:
+                case UiState.BoardMain:
                     return _IsBoardReady(UIConfig.UIMergeBoardMain);
-                case UIState.SceneMain:
+                case UiState.SceneMain:
                     return _IsSceneReady();
-                case UIState.SceneBuilding:
+                case UiState.SceneBuilding:
                     return _IsSceneReady() && _IsSceneBuildingPopUp(extra);
-                case UIState.OutOfEnergy:
+                case UiState.OutOfEnergy:
                     return UIManager.Instance.IsOpen(UIConfig.UIOutOfEnergy);
-                case UIState.MainShop:
+                case UiState.MainShop:
                     return UIManager.Instance.IsOpen(UIConfig.UIShop);
-                case UIState.Bag:
+                case UiState.Bag:
                     return UIManager.Instance.IsOpen(UIConfig.UIBag);
-                case UIState.CardPack:
+                case UiState.CardPack:
                     return UIManager.Instance.IsOpen(UIConfig.UICardPackOpen);
-                case UIState.CardAlbum:
+                case UiState.CardAlbum:
                     return UIManager.Instance.IsOpen(UIConfig.UICardAlbum) && _isCardAlbumPanel();
-                case UIState.CardSet:
+                case UiState.CardSet:
                     return UIManager.Instance.IsOpen(UIConfig.UICardAlbum) && _isCardGroupInfoPanel();
-                case UIState.DailyEvent:
+                case UiState.DailyEvent:
                     return UIManager.Instance.IsOpen(Game.Manager.dailyEvent.ActivityD?.TaskRes.ActiveR ??
                                                      UIConfig.UIDailyEvent);
-                case UIState.DecoratePick:
+                case UiState.DecoratePick:
                     return Game.Manager.decorateMan.GuideRequireCheck(extra);
-                case UIState.MiniBoard:
+                case UiState.MiniBoard:
                     return Game.Manager.miniBoardMan.CheckMiniBoardOpen();
-                case UIState.Digging:
+                case UiState.Digging:
                     var actInst = Game.Manager.activity.LookupAny(EventType.Digging) as ActivityDigging;
                     return UIManager.Instance.IsOpen(actInst?.Res.ActiveR ?? UIConfig.UIDiggingMain);
-                case UIState.Pachinko:
+                case UiState.Pachinko:
                     return UIManager.Instance.IsOpen(Game.Manager.pachinkoMan.GetActivity()?.MainResAlt.ActiveR ??
                                                      UIConfig.UIPachinkoMain);
-                case UIState.MiniBoardMulti:
+                case UiState.MiniBoardMulti:
                     return Game.Manager.miniBoardMultiMan.CheckMiniBoardOpen();
-                case UIState.Guess:
+                case UiState.Guess:
                     var guess = Game.Manager.activity.LookupAny(EventType.Guess) as ActivityGuess;
                     return UIManager.Instance.IsOpen(guess?.VisualMain.res.ActiveR ?? UIConfig.UIActivityGuess);
-                case UIState.Bingo:
+                case UiState.Bingo:
                     return _CheckBingoUIState();
-                case UIState.MineBoard:
+                case UiState.MineBoard:
                     var mine = Game.Manager.activity.LookupAny(EventType.Mine) as MineBoardActivity;
                     return UIManager.Instance.IsOpen(mine?.BoardResAlt.ActiveR ?? UIConfig.UIMineBoardMain);
-                case UIState.FishBoard:
+                case UiState.FishBoard:
                     return _IsFishBoardReady();
-                case UIState.FarmBoard:
-                    var farm = Game.Manager.activity.LookupAny(EventType.FarmBoard) as FarmBoardActivity;
-                    return UIManager.Instance.IsOpen(farm?.VisualBoard.res.ActiveR ?? UIConfig.UIFarmBoardMain);
-                case UIState.Fight:
+                case UiState.FarmBoard:
+                    var farm001 = Game.Manager.activity.LookupAny(EventType.FarmBoard) as FarmBoardActivity;
+                    var isFarmOpen001 = UIManager.Instance.IsOpen(farm001?.VisualBoard.res.ActiveR ?? UIConfig.UIFarmBoardMain);
+                    if (!isFarmOpen001) { return false; }
+                    if (UIManager.Instance.TryGetUI(farm001?.VisualBoard.res.ActiveR) is UIFarmBoardMain main001)
+                    {
+                        var isFarmS001 = main001.mbAnimal is MBFarmBoardAnimal_Cow;
+                        return isFarmS001;
+                    }
+                    return false;
+                case UiState.FarmBoardS002:
+                    var farm002 = Game.Manager.activity.LookupAny(EventType.FarmBoard) as FarmBoardActivity;
+                    bool isFarmOpen002 = UIManager.Instance.IsOpen(farm002?.VisualBoard.res.ActiveR ?? UIConfig.UIFarmBoardMain);
+                    if (!isFarmOpen002) { return false; }
+                    if (UIManager.Instance.TryGetUI(farm002?.VisualBoard.res.ActiveR) is UIFarmBoardMain main)
+                    {
+                        bool isFarmS002 = main.mbAnimal is MBFarmBoardAnimal_Casher;
+                        return isFarmS002;
+                    }
+                    return false;
+                case UiState.Fight:
                     return _IsFightBoardReady();
-                case UIState.WishBoard:
+                case UiState.WishBoard:
                     var wish = Game.Manager.activity.LookupAny(EventType.WishBoard) as WishBoardActivity;
                     return UIManager.Instance.IsOpen(wish?.VisualUIBoardMain.res.ActiveR ?? UIConfig.UIWishBoardMain);
-                case UIState.DecorateStart:
+                case UiState.DecorateStart:
                     return Game.Manager.decorateMan.CheckGuideStart();
-                case UIState.TrainMission:
+                case UiState.TrainMission:
                     var train = (TrainMissionActivity)Game.Manager.activity.LookupAny(EventType.TrainMission);
                     return UIManager.Instance.IsOpen(train?.VisualMain.res.ActiveR ?? UIConfig.UITrainMissionMain);
-                case UIState.WeeklyRaffle:
+                case UiState.WeeklyRaffle:
                     var raffle = Game.Manager.activity.LookupAny(EventType.WeeklyRaffle) as ActivityWeeklyRaffle;
                     return UIManager.Instance.IsOpen(raffle?.MainPopUp.res.ActiveR ?? UIConfig.UIActivityWeeklyRaffleMain);
-                case UIState.Boost4XGuide:
+                case UiState.Boost4Xguide:
                     // 这里描述的是一个约束引导打开的条件，目的是限制引导不要意外打断其他UI
                     // 后续迷你棋盘也需要弹出这个引导的时候，在下面if里补个或的逻辑就可以了
                     bool isSuccess = false;
@@ -340,15 +357,23 @@ namespace FAT
                     }
 
                     return isSuccess;
-                case UIState.MineCartBoard:
+                case UiState.MineCartBoard:
                     var mineCart = Game.Manager.activity.LookupAny(EventType.MineCart) as MineCartActivity;
                     return UIManager.Instance.IsOpen(mineCart?.VisualBoard.res.ActiveR ?? UIConfig.UIMineCartBoardMain);
-                case UIState.MultiRanking:
+                case UiState.MultiRanking:
                     var multi = Game.Manager.activity.LookupAny(EventType.MultiplierRanking) as ActivityMultiplierRanking;
                     return UIManager.Instance.IsOpen(multi?.VisualUIRankingMain.res.ActiveR ?? UIConfig.UIMultiplyRankingMain);
-                case UIState.Puzzle:
+                case UiState.Puzzle:
                     var puzzle = Game.Manager.activity.LookupAny(EventType.Puzzle) as ActivityPuzzle;
                     return UIManager.Instance.IsOpen(puzzle?.VisualMain.res.ActiveR ?? UIConfig.UIActivityPuzzleMain);
+                case UiState.SeaRace:
+                    var seaRace = Game.Manager.activity.LookupAny(EventType.SeaRace) as ActivitySeaRace;
+                    var source = seaRace?.PopUpMain.res.ActiveR ?? UIConfig.UIActivitySeaRaceMain;
+                    var isOpen = UIManager.Instance.IsOpen(source);
+                    return isOpen;
+                case UiState.VineLeap:
+                    var vineLeap = Game.Manager.activity.LookupAny(EventType.VineLeap) as ActivityVineLeap;
+                    return UIManager.Instance.IsOpen(vineLeap?.VisualMain.res.ActiveR ?? UIConfig.UIVineLeapMain);
             }
 
             return false;
@@ -663,7 +688,7 @@ namespace FAT
             if (act == null)
                 return false;
             return UIManager.Instance.IsOpen(act.MainRes.ActiveR) && act.CheckGroupStart() && act.IsMain &&
-                UIManager.Instance.GetLayerRootByType(UILayer.SubStatus).childCount < 1;
+                   UIManager.Instance.GetLayerRootByType(UILayer.SubStatus).childCount < 1;
         }
 
         private bool _CheckMineBonusItemMax(int num)
@@ -677,6 +702,7 @@ namespace FAT
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -721,9 +747,10 @@ namespace FAT
             {
                 return Game.Manager.mergeLevelMan.level >= cfg.ActiveLv;
             }
+
             return false;
         }
-        
+
         private bool _CheckMineCartBoardRoundFinish()
         {
             if (!Game.Manager.activity.LookupAny(EventType.MineCart, out var acti) || acti is not MineCartActivity a)
@@ -747,7 +774,7 @@ namespace FAT
                 return false;
             }
 
-            if ( UIManager.Instance.IsOpen(_activity.VisualHelp.res.ActiveR))
+            if (UIManager.Instance.IsOpen(_activity.VisualHelp.res.ActiveR))
             {
                 return false;
             }

@@ -29,7 +29,7 @@ namespace fat.rawdata {
             "c2MYAiABKAkSEwoLZWRpdG9yUHJpY2UYECABKAISDwoHaWFwTmFtZRgDIAEo",
             "CRINCgVpbWFnZRgEIAEoCRIQCghpb3NUb2tlbhgSIAEoCRINCgVwcmljZRgF",
             "IAEoBRIRCglwcmljZVR5cGUYBiABKAUSEQoJcHJvZHVjdElkGAcgASgJEhMK",
-            "C3RpY2tldFByaWNlGBMgASgCEg0KBXRpdGxlGAggASgJIqoBChRJQVBQcm9k",
+            "C3RpY2tldFByaWNlGBMgASgFEg0KBXRpdGxlGAggASgJIqoBChRJQVBQcm9k",
             "dWN0TWFwQUJWYWx1ZRJHCg1JQVBQcm9kdWN0TWFwGAEgAygLMjAucmF3ZGF0",
             "YS5JQVBQcm9kdWN0TWFwQUJWYWx1ZS5JQVBQcm9kdWN0TWFwRW50cnkaSQoS",
             "SUFQUHJvZHVjdE1hcEVudHJ5EgsKA2tleRgBIAEoBRIiCgV2YWx1ZRgCIAEo",
@@ -268,12 +268,12 @@ namespace fat.rawdata {
 
     /// <summary>Field number for the "ticketPrice" field.</summary>
     public const int TicketPriceFieldNumber = 19;
-    private float ticketPrice_;
+    private int ticketPrice_;
     /// <summary>
     /// 支付代币价格
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public float TicketPrice {
+    public int TicketPrice {
       get { return ticketPrice_; }
       set {
         ticketPrice_ = value;
@@ -319,7 +319,7 @@ namespace fat.rawdata {
       if (Price != other.Price) return false;
       if (PriceType != other.PriceType) return false;
       if (ProductId != other.ProductId) return false;
-      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(TicketPrice, other.TicketPrice)) return false;
+      if (TicketPrice != other.TicketPrice) return false;
       if (Title != other.Title) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -337,7 +337,7 @@ namespace fat.rawdata {
       if (Price != 0) hash ^= Price.GetHashCode();
       if (PriceType != 0) hash ^= PriceType.GetHashCode();
       if (ProductId.Length != 0) hash ^= ProductId.GetHashCode();
-      if (TicketPrice != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(TicketPrice);
+      if (TicketPrice != 0) hash ^= TicketPrice.GetHashCode();
       if (Title.Length != 0) hash ^= Title.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -399,9 +399,9 @@ namespace fat.rawdata {
         output.WriteRawTag(146, 1);
         output.WriteString(IosToken);
       }
-      if (TicketPrice != 0F) {
-        output.WriteRawTag(157, 1);
-        output.WriteFloat(TicketPrice);
+      if (TicketPrice != 0) {
+        output.WriteRawTag(152, 1);
+        output.WriteInt32(TicketPrice);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -456,9 +456,9 @@ namespace fat.rawdata {
         output.WriteRawTag(146, 1);
         output.WriteString(IosToken);
       }
-      if (TicketPrice != 0F) {
-        output.WriteRawTag(157, 1);
-        output.WriteFloat(TicketPrice);
+      if (TicketPrice != 0) {
+        output.WriteRawTag(152, 1);
+        output.WriteInt32(TicketPrice);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -499,8 +499,8 @@ namespace fat.rawdata {
       if (ProductId.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(ProductId);
       }
-      if (TicketPrice != 0F) {
-        size += 2 + 4;
+      if (TicketPrice != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeInt32Size(TicketPrice);
       }
       if (Title.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Title);
@@ -546,7 +546,7 @@ namespace fat.rawdata {
       if (other.ProductId.Length != 0) {
         ProductId = other.ProductId;
       }
-      if (other.TicketPrice != 0F) {
+      if (other.TicketPrice != 0) {
         TicketPrice = other.TicketPrice;
       }
       if (other.Title.Length != 0) {
@@ -610,8 +610,8 @@ namespace fat.rawdata {
             IosToken = input.ReadString();
             break;
           }
-          case 157: {
-            TicketPrice = input.ReadFloat();
+          case 152: {
+            TicketPrice = input.ReadInt32();
             break;
           }
         }
@@ -672,8 +672,8 @@ namespace fat.rawdata {
             IosToken = input.ReadString();
             break;
           }
-          case 157: {
-            TicketPrice = input.ReadFloat();
+          case 152: {
+            TicketPrice = input.ReadInt32();
             break;
           }
         }

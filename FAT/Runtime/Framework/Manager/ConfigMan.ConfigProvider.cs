@@ -244,6 +244,11 @@ namespace FAT
         {
             return conf.Data.GetComMergeChoiceBoxMap().Values;
         }
+        
+        public IEnumerable<ComMergeTokenMultiplier> GetComMergeTokenMultiplierConfigs()
+        {
+            return conf.Data.GetComMergeTokenMultiplierMap().Values;
+        }
 
         public IEnumerable<ComMergeMixSource> GetComMergeMixSourceConfigs()
         {
@@ -273,6 +278,11 @@ namespace FAT
         public IDictionary<int, MergeBoard> GetMergeBoardConfigs()
         {
             return conf.Data.GetMergeBoardMap();
+        }
+
+        public MergeItemSeries GetMergeItemSeriesConfig(int id)
+        {
+            return conf.Data.GetMergeItemSeries(id);
         }
 
         #region 冰冻棋子相关
@@ -638,20 +648,6 @@ namespace FAT
         }
 
         #endregion
-        
-        #region 自选限时订单
-
-        public EventOrderDiffChoice GetEventOrderDiffChoiceConfig(int id)
-        {
-            return conf.Data.GetEventOrderDiffChoice(id);
-        }
-        
-        public OrderDiffChoiceInfo GetOrderDiffChoiceInfoConfig(int id)
-        {
-            return conf.Data.GetOrderDiffChoiceInfo(id);
-        }
-
-        #endregion
 
         #region 额外奖励订单
 
@@ -711,6 +707,30 @@ namespace FAT
         public EventScoreDetail GetEventScoreDetail(int id)
         {
             return conf.Data.GetEventScoreDetail(id);
+        }
+
+        #endregion
+
+        #region 积分活动变种(麦克风版)
+
+        public MicMilestone GetMicMilestoneConfig(int id)
+        {
+            return conf.Data.GetMicMilestone(id);
+        }
+        
+        public MicMilestoneDetail GetMicMilestoneDetailConfig(int id)
+        {
+            return conf.Data.GetMicMilestoneDetail(id);
+        }
+        
+        public MicMilestoneGroup GetMicMilestoneGroupConfig(int id)
+        {
+            return conf.Data.GetMicMilestoneGroup(id);
+        }
+        
+        public ComMergeTokenMultiplier GetComMergeTokenMultiplierConfig(int id)
+        {
+            return conf.Data.GetComMergeTokenMultiplier(id);
         }
 
         #endregion

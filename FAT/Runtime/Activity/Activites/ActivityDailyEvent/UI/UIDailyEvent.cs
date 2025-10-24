@@ -8,8 +8,10 @@ using static fat.conf.Data;
 using fat.rawdata;
 
 namespace FAT {
-    public class UIDailyEvent : UIBase {
-        public class Entry {
+    public class UIDailyEvent : UIBase
+    {
+        public class Entry
+        {
             public GameObject obj;
             public GameObject objLock;
             public RectTransform root;
@@ -21,12 +23,14 @@ namespace FAT {
             public Image tick;
             public UIVisualGroup visual;
         }
-        public struct EntryNext {
+        public struct EntryNext
+        {
             public GameObject obj;
             public RectTransform root;
             public TextMeshProUGUI name;
         }
-        public struct EntryTip {
+        public struct EntryTip
+        {
             public GameObject obj;
             public RectTransform root;
             public TextMeshProUGUI tip;
@@ -55,9 +59,11 @@ namespace FAT {
         private Action WhenTick;
         private Action WhenUpdate;
         private readonly string desc1Key = "#SysComDesc99";
+        private TextMeshProUGUI SevenDaysTaskDesc;
 
-        #if UNITY_EDITOR
-        public void OnValidate() {
+#if UNITY_EDITOR
+        public void OnValidate()
+        {
             if (Application.isPlaying) return;
             transform.Access(out visualGroup);
             transform.Access("Content", out Transform root);
@@ -96,41 +102,48 @@ namespace FAT {
             eVisual.Prepare(root.Access<UITextState>("reward/count"), "task", 0);
             eVisual.CollectTrim();
         }
-        #endif
+#endif
 
-        public static Entry ParseEntry(GameObject obj_) {
+        public static Entry ParseEntry(GameObject obj_)
+        {
             var root = (RectTransform)obj_.transform;
             var reward = root.Find("reward");
-            return new() {
+            return new()
+            {
                 obj = obj_, root = root,
                 objLock = root.TryFind("lock"),
                 name = root.Access<TextMeshProUGUI>("name"),
                 state = root.GetComponent<UIStateGroup>(),
                 rewardM = root.Access<MBRewardIcon>("rewardM"),
                 reward = root.Access<MBRewardIcon>("reward"),
-                progress = root.Access<MBRewardProgress>("reward/group", try_:true),
+                progress = root.Access<MBRewardProgress>("reward/group", try_: true),
                 tick = reward.Access<Image>("tick"),
                 visual = root.Access<UIVisualGroup>(),
             };
         }
 
-        public static EntryNext ParseEntryNext(GameObject obj_) {
+        public static EntryNext ParseEntryNext(GameObject obj_)
+        {
             var root = (RectTransform)obj_.transform;
-            return new() {
+            return new()
+            {
                 obj = obj_, root = root,
                 name = root.Access<TextMeshProUGUI>("name"),
             };
         }
 
-        public static EntryTip ParseEntryTip(GameObject obj_) {
+        public static EntryTip ParseEntryTip(GameObject obj_)
+        {
             var root = (RectTransform)obj_.transform;
-            return new() {
+            return new()
+            {
                 obj = obj_, root = root,
                 tip = root.Access<TextMeshProUGUI>("text"),
             };
         }
 
-        protected override void OnCreate() {
+        protected override void OnCreate()
+        {
             transform.Access("Content", out Transform root);
             root.Access("close", out MapButton close);
             root.Access("_cd/text", out cd);
@@ -151,11 +164,13 @@ namespace FAT {
             entryTip = ParseEntryTip(content.TryFind("tip"));
             entryTipHeight = entryTip.root.rect.height;
             root.Access("milestone", out milestone);
+            root.Access("SevenDaysTaskDesc", out SevenDaysTaskDesc);
             // transform.Access<MapButton>("Mask").WhenClick = Close;
             close.WithClickScale().FixPivot().WhenClick = Close;
         }
 
-        protected override void OnPreOpen() {
+        protected override void OnPreOpen()
+        {
             Refresh();
             RefreshCD();
             WhenTick ??= RefreshCD;
@@ -164,51 +179,62 @@ namespace FAT {
             MessageCenter.Get<MSG.DAILY_EVENT_TASK_UPDATE_ANY>().AddListener(WhenUpdate);
         }
 
-        protected override void OnPreClose() {
+        protected override void OnPreClose()
+        {
             MessageCenter.Get<MSG.GAME_ONE_SECOND_DRIVER>().RemoveListener(WhenTick);
             MessageCenter.Get<MSG.DAILY_EVENT_TASK_UPDATE_ANY>().RemoveListener(WhenUpdate);
         }
 
-        public void Refresh() {
+        public void Refresh()
+        {
             de = Game.Manager.dailyEvent;
             RefreshTheme();
             RefreshGroup();
             RefreshTask();
             RefreshMilestone();
+            RefreshSevenDaysTaskDesc();
         }
 
-        public void RefreshTheme() {
+        public void RefreshTheme()
+        {
             var visual = de.ActivityD.VisualTask;
             var vT = new VisualMap(visual.Theme.TextInfo);
             vT.TryReplace("complete", "#SysComDesc99");
             vT.TryCopy("mainTitle", "mainTitle1");
             visual.Refresh(visualGroup);
-            foreach(var e in list) {
+            foreach (var e in list)
+            {
                 visual.Refresh(e.visual);
             }
         }
 
-        public void RefreshCD() {
+        public void RefreshCD()
+        {
             var t = UIUtility.CountDownFormat(de.ActivityD.Countdown);
-            if (cd.text != t) {
+            if (cd.text != t)
+            {
                 cd.text = t;
                 desc1.text = I18N.FormatText(desc1Key, t);
             }
             milestone.RefreshCD();
         }
 
-        public void RefreshGroup() {
+        public void RefreshGroup()
+        {
             var r = de.groupReward;
             var valid = r != null && de.GroupValid;
             groupR.Enabled(valid);
-            if (valid) {
+            if (valid)
+            {
                 reward.Refresh(r);
                 progress.Refresh(de.TaskComplete, de.TaskCount);
             }
         }
 
-        public void RefreshTask() {
-            static int TaskSort(DailyEvent.Task a_, DailyEvent.Task b_) {
+        public void RefreshTask()
+        {
+            static int TaskSort(DailyEvent.Task a_, DailyEvent.Task b_)
+            {
                 if (a_.complete != b_.complete) return a_.complete ? 1 : -1;
                 return a_.Priority - b_.Priority;
             }
@@ -219,7 +245,8 @@ namespace FAT {
             taskList.Sort(TaskSort);
             var template = list[0];
             var parent = template.root.parent;
-            for (var n = list.Count; n < taskList.Count; ++n) {
+            for (var n = list.Count; n < taskList.Count; ++n)
+            {
                 var obj = GameObject.Instantiate(template.obj, parent);
                 list.Add(ParseEntry(obj));
             }
@@ -227,69 +254,81 @@ namespace FAT {
             var offset = padding.x;
             var next = false;
             var locked = false;
-            for (var n = 0; n < taskList.Count; ++n) {
+            for (var n = 0; n < taskList.Count; ++n)
+            {
                 var task = taskList[n];
                 var e = list[n];
-                if (!next && task.complete) {
+                if (!next && task.complete)
+                {
                     RefreshEntryNext(ref offset, vN);
                     next = true;
                 }
                 var lockedN = de.listN.Contains(task);
-                if (!locked && lockedN) {
+                if (!locked && lockedN)
+                {
                     RefreshEntryTip(ref offset, de.listN.Count);
                 }
                 locked = lockedN;
                 RefreshEntry(e, task, ref offset, lockedN);
             }
-            if (!next) {
+            if (!next)
+            {
                 RefreshEntryNext(ref offset, vN);
             }
             offset += padding.y - spacing;
             var content = scroll.content;
             content.sizeDelta = new(contentD, offset);
             content.anchoredPosition = new(contentX, 0);
-            for (var n = taskList.Count; n < list.Count; ++n) {
+            for (var n = taskList.Count; n < list.Count; ++n)
+            {
                 list[n].obj.SetActive(false);
             }
         }
 
-        public static void RefreshEntry(Entry e_, DailyEvent.Task task_, bool lock_, bool complete_) {
+        public static void RefreshEntry(Entry e_, DailyEvent.Task task_, bool lock_, bool complete_)
+        {
             var gold = task_.conf.IsGold;
             e_.obj.SetActive(true);
             e_.name.text = task_.Name;
             e_.progress.gameObject.SetActive(!complete_);
             e_.tick.gameObject.SetActive(complete_);
-            e_.state.Select((gold, complete_) switch {
+            e_.state.Select((gold, complete_) switch
+            {
                 (false, false) => 0,
                 (false, true) => 1,
                 (true, false) => 2,
                 (true, true) => 3,
             });
             e_.objLock.SetActive(lock_);
-            if (!complete_) {
+            if (!complete_)
+            {
                 e_.progress.Refresh(task_.value, task_.require);
             }
             e_.reward.Refresh(task_.reward);
             e_.rewardM.Refresh(task_.rewardM);
         }
 
-        public void RefreshEntry(Entry e_, DailyEvent.Task task_, ref float offset, bool lock_) {
+        public void RefreshEntry(Entry e_, DailyEvent.Task task_, ref float offset, bool lock_)
+        {
             RefreshEntry(e_, task_, lock_, task_.complete);
             e_.root.anchoredPosition = new(0, -offset);
             offset += entryHeight + spacing;
         }
 
-        public void RefreshEntryTip(ref float offset, int c_) {
+        public void RefreshEntryTip(ref float offset, int c_)
+        {
             entryTip.obj.SetActive(true);
             entryTip.tip.text = I18N.FormatText("#SysComDesc519", c_);
             entryTip.root.anchoredPosition = new(0, -offset);
             offset += entryTipHeight + spacing;
         }
 
-        public void RefreshEntryNext(ref float offset, bool v_) {
+        public void RefreshEntryNext(ref float offset, bool v_)
+        {
             var valid = de.NextGroupValid && v_;
             entryNext.obj.SetActive(valid);
-            if (!valid) {
+            if (!valid)
+            {
                 offset += spacing;
                 return;
             }
@@ -298,8 +337,22 @@ namespace FAT {
             offset += entryNextHeight + spacing;
         }
 
-        public void RefreshMilestone() {
+        public void RefreshMilestone()
+        {
             milestone.Refresh();
+        }
+
+        public void RefreshSevenDaysTaskDesc()
+        {
+            var de = Game.Manager.dailyEvent;
+            var valid = de.MilestoneValid && de.MilestoneUnlocked;
+            SevenDaysTaskDesc.gameObject.SetActive(false);
+            if (valid) return;
+            var str = de.active?.BottomTips;
+            if (String.IsNullOrEmpty(str)) return;
+            if (!Game.Manager.activity.LookupAny(fat.rawdata.EventType.SevenDayTask, out var acti_)) return;
+            SevenDaysTaskDesc.gameObject.SetActive(true);
+            SevenDaysTaskDesc.text = I18N.Text(str);
         }
     }
 }

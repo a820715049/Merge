@@ -252,17 +252,14 @@ namespace FAT
             return null;
         }
 
-        public void TapItem(int id)
+        public void TapItem(int id, bool isDelayHigh = false)
         {
-
             if (mItemViewDict.TryGetValue(id, out MBItemView view))
             {
-                view.PlayTap();
-                // if (ItemUtility.IsItemTapComboo(view.data))
-                // {
-                //     // 特殊动画
-                //     view.SetResAction((go) => _ShowClick(go, view.data));
-                // }
+                if (!isDelayHigh)
+                    view.PlayTap();
+                else
+                    view.PlayTapDelayHigh();
             }
         }
 

@@ -61,7 +61,7 @@ namespace fat.rawdata {
   /// <summary>
   /// annotation@annotation_type(type="rawdata")
   /// annotation@rawdata(row="ShopCommunity",table="ShopCommunityMap",table_wrapper="ShopCommunityConf",map="true",map_key_type="int32",data="ShopCommunityConf")
-  /// annotation@ab(table_ab="ShopCommunityMapAB",table_ab_patch="ShopCommunityMapABPatch",table_ab_value="ShopCommunityMapABValue",ab_patch="true")
+  /// annotation@ab(table_ab="ShopCommunityMapAB",table_ab_patch="ShopCommunityMapABPatch",table_ab_value="ShopCommunityMapABValue",ab_patch="false")
   /// annotation@filter(just_server="false",just_client="false")
   /// annotation@ShopCommunity(id="id")
   /// </summary>

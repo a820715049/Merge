@@ -13,6 +13,7 @@ using Config;
 using EL;
 using fat.conf;
 using fat.rawdata;
+using FAT.Merge;
 
 namespace FAT
 {
@@ -164,6 +165,21 @@ namespace FAT
             IsLoading = false;
         }
         #endregion
+
+        public static bool HasBoardItem()
+        {
+            var hasItem = false;
+            var cat1 = Game.Manager.mergeItemMan.GetCategoryConfig(actInst.trainChallenge.ConnectSpawner[0]);
+            var cat2 = Game.Manager.mergeItemMan.GetCategoryConfig(actInst.trainChallenge.ConnectSpawner[1]);
+            actInst.World.activeBoard.WalkAllItem((Item item) =>
+            {
+                if (!cat1.Progress.Contains(item.tid) && !cat2.Progress.Contains(item.tid))
+                {
+                    hasItem = true;
+                }
+            });
+            return hasItem;
+        }
 
         /// <summary>
         /// 判断主棋盘存在item

@@ -2,7 +2,7 @@
  * @Author: chaoran.zhang
  * @Date: 2025-07-21 17:46:21
  * @LastEditors: chaoran.zhang
- * @LastEditTime: 2025-08-26 12:21:30
+ * @LastEditTime: 2025-10-10 12:02:15
  */
 using System;
 using System.Collections.Generic;
@@ -680,7 +680,8 @@ namespace FAT
         {
             if (bot.data.ranking < myself.data.ranking || myself.data.score <= botGroup.RobotChasingPt) { return false; }
             if (_totalEnergy > MultiRankRewardVisitor.Get(detail.RankGroup[myself.data.ranking - 1]).RankRequiredConsume.ConvertToInt()) { return false; }
-            return _totalEnergy < MultiRankRewardVisitor.Get(detail.RankGroup[bot.data.ranking - 2]).RankRequiredConsume.ConvertToInt();
+            var idx = Math.Max(bot.data.ranking - 2, 0);
+            return _totalEnergy < MultiRankRewardVisitor.Get(detail.RankGroup[idx]).RankRequiredConsume.ConvertToInt();
         }
 
         /// <summary>

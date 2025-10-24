@@ -20,26 +20,20 @@ namespace FAT
         [SerializeField] public UICommonItem commonItem;
         [SerializeField] private float m_localPosOffset;
         [SerializeField] private Animation m_ani;
-        [Tooltip("消失动画时长")]
-        [SerializeField] private float hideDuration = 0.3f;
         [SerializeField] private GameObject effectNormal;
         [SerializeField] private GameObject effectPrime;
-        #region 公共属性
+        [SerializeField] private string m_idleAnimName = "ScoreItem_track_idle";
+        [SerializeField] private string m_hideAnimName = "ScoreItem_track_disappear";
 
-        /// <summary>
-        /// 消失动画时长
-        /// </summary>
-        public float HideDuration => hideDuration;
-
-
-        #endregion
-
+        [SerializeField] private bool mirrorUnder = false;
+        [SerializeField] private Transform mirrorRoot;
+        [SerializeField] private int fontNum = 17;
         //是否在左侧.
         public bool OnLeft { get; private set; }
 
         public void UpdateContent(ActivityScore.Node node, bool isLast)
         {
-            commonItem.Refresh(node.reward, 17);
+            commonItem.Refresh(node.reward, fontNum);
             //偶数在右侧,奇数在左侧.
             OnLeft = node.showNum % 2 == 0;
             m_rootLeft.gameObject.SetActive(!OnLeft && !isLast);
@@ -48,12 +42,16 @@ namespace FAT
             m_under.Select(node.isPrime ? 1 : 0);
             effectNormal.SetActive(!node.isPrime);
             effectPrime.SetActive(node.isPrime);
-            m_ani.Play("ScoreItem_track_idle");
+            m_ani.Play(m_idleAnimName);
+            if (mirrorUnder && mirrorRoot != null)
+            {
+                mirrorRoot.localScale = OnLeft ? new Vector3(-1, 1, 1) : Vector3.one;
+            }
         }
 
         public void PlayHide()
         {
-            m_ani.Play("ScoreItem_track_disappear");
+            m_ani.Play(m_hideAnimName);
         }
     }
 }

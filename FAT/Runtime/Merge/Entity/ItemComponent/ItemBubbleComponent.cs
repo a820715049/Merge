@@ -120,6 +120,7 @@ namespace FAT.Merge
                 var type = data.Type;
                 var bubbleType = type > 0 ? (ItemBubbleType)type : ItemBubbleType.Bubble;
                 _bubbleType = bubbleType;
+                _OnInit(_lifeTime, _lifeCounter);
             }
         }
 

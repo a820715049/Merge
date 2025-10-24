@@ -581,7 +581,6 @@ namespace FAT
         private void _CreateWorld()
         {
             World = new MergeWorld();
-            World.SetWorldParam(new() { giftboxUsable = false, EquivalentToMain = true });
             if (!mission.IsOnBonus) { World.UnRegisterConfigMergeBonusHandler(); }
             if (!mission.IsOnBubble) { World.UnRegisterBubbleMergeBonusHandler(); }
             Game.Manager.mergeBoardMan.RegisterMergeWorldEntry(new MergeWorldEntry() { world = World, type = MergeWorldEntry.EntryType.TrainMission, });

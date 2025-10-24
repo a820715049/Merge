@@ -107,6 +107,7 @@ namespace FAT.Platform {
                 userId = Game.Manager.networkMan.fpId;
                 paied = Game.Manager.iap.TotalIAPServer > 0;
                 level = Game.Manager.mergeLevelMan.level;
+                vipLevel = VIPGradeCalculator.GetCurrentUserVIPLevel().ToString();
             }
             DebugEx.FormatInfo("PlatformSDK.UpdateGameUserInfo ----> serverId:{0}, userId:{1}, userName:{2}, level:{3}, vipLevel:{4}, isPaid:{5}", serverId, userId, userName, level, vipLevel, paied);
             Adapter.LogUserInfoUpdate(serverId, userId, userName, level.ToString(), vipLevel, paied);

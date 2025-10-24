@@ -12,11 +12,14 @@ using System.Collections;
 using UnityEngine;
 using EL.Resource;
 
-namespace FAT {
+namespace FAT
+{
     using static PoolMapping;
 
-    public class ActivityStep : ActivityLike, IActivityOrderHandler, IActivityOrderGenerator {
-        public struct Task {
+    public class ActivityStep : ActivityLike, IActivityOrderHandler, IActivityOrderGenerator
+    {
+        public struct Task
+        {
             public EventStepTask conf;
             public MBRewardLayout.TupleList item;
             public List<RewardConfig> reward;
@@ -39,28 +42,32 @@ namespace FAT {
         public int DecorateScore => confG.DecorateScore;
         private readonly OutputSpawnBonusHandler bonusHandler = new();
 
-        public ActivityStep(ActivityLite lite_) {
+        public ActivityStep(ActivityLite lite_)
+        {
             Lite = lite_;
             confD = GetEventStep(lite_.Param);
             if (confD == null) return;
             VisualMain.Setup(confD.EventTheme, this);
-            VisualEnd.Setup(confD.RecycleTheme, this, active_:false);
+            VisualEnd.Setup(confD.RecycleTheme, this, active_: false);
             VisualComplete.Setup(confD.CompleteTheme);
             var map = VisualMain.visual.AssetMap;
-            if (map.TryGetValue("bg", out var s)) {
+            if (map.TryGetValue("bg", out var s))
+            {
                 rewardIcon = s.ConvertToAssetConfig();
             }
             Game.Manager.mergeBoardMan.RegisterGlobalSpawnBonusHandler(bonusHandler);
         }
 
-        public override void SaveSetup(ActivityInstance data_) {
+        public override void SaveSetup(ActivityInstance data_)
+        {
             var any = data_.AnyState;
             any.Add(ToRecord(1, TaskIndex));
             if (confG != null) any.Add(ToRecord(2, confG.Id));
             bonusHandler.Serialize(any, 1000);
         }
 
-        public override void LoadSetup(ActivityInstance data_) {
+        public override void LoadSetup(ActivityInstance data_)
+        {
             var any = data_.AnyState;
             TaskIndex = ReadInt(1, any);
             var gId = ReadInt(2, any);
@@ -69,34 +76,42 @@ namespace FAT {
             SetupDetail(gId);
         }
 
-        public override void SetupFresh() {
+        public override void SetupFresh()
+        {
             var gId = Game.Manager.userGradeMan.GetTargetConfigDataId(confD.GradeId);
             SetupDetail(gId);
         }
 
-        public void SetupDetail(int gId) {
-            if (gId == 0) {
+        public void SetupDetail(int gId)
+        {
+            if (gId == 0)
+            {
                 gId = 3;//HACK to fix legacy data before 14.0, to be deleted when 13.x is obselete
             }
             confG = GetEventStepDetail(gId);
-            if (confG == null) {
+            if (confG == null)
+            {
                 DebugEx.Error($"failed to find step detail {gId}");
                 return;
             }
-            foreach(var s in confG.MilestoneReward) {
+            foreach (var s in confG.MilestoneReward)
+            {
                 var r = s.ConvertToRewardConfig();
                 rewardM.Add(r);
             }
-            foreach(var id in confG.TaskId) {
+            foreach (var id in confG.TaskId)
+            {
                 var confT = GetEventStepTask(id);
-                if (confT == null) {
+                if (confT == null)
+                {
                     DebugEx.Warning($"failed to find step task {id}");
                     continue;
                 }
                 var itemList = confT.RequireItemId;
                 var item = Enumerable.ToList(itemList.GroupBy(v => v).Select(g => (g.First(), g.Count())));
                 var rewardList = confT.Reward;
-                var t = new Task {
+                var t = new Task
+                {
                     conf = confT,
                     item = new MBRewardLayout.TupleList { list = item },
                     reward = Enumerable.ToList(rewardList.Select(v => v.ConvertToRewardConfig())),
@@ -105,44 +120,54 @@ namespace FAT {
             }
         }
 
-        public override IEnumerable<(string, AssetTag)> ResEnumerate() {
+        public override IEnumerable<(string, AssetTag)> ResEnumerate()
+        {
             if (!Valid) yield break;
-            foreach(var v in Visual.ResEnumerate()) yield return v;
-            foreach(var v in VisualEnd.ResEnumerate()) yield return v;
-            foreach(var v in VisualComplete.ResEnumerate()) yield return v;
+            foreach (var v in Visual.ResEnumerate()) yield return v;
+            foreach (var v in VisualEnd.ResEnumerate()) yield return v;
+            foreach (var v in VisualComplete.ResEnumerate()) yield return v;
         }
 
-        public override void TryPopup(ScreenPopup popup_, PopupType state_) {
+        public override void TryPopup(ScreenPopup popup_, PopupType state_)
+        {
             VisualMain.Popup(popup_, state_);
         }
 
-        public override void Open() {
+        public override void Open()
+        {
             Open(VisualMain.res);
         }
 
-        public override void WhenEnd() {
+        public override void WhenEnd()
+        {
             Game.Manager.mergeBoardMan.UnregisterGlobalSpawnBonusHandler(bonusHandler);
             var listT = PoolMappingAccess.Take(out List<RewardCommitData> list);
             ActivityExpire.ConvertToReward(confD.ExpirePopup, list, ReasonString.step);
-            VisualEnd.Popup(custom_:listT);
+            VisualEnd.Popup(custom_: listT);
         }
 
-        public void DebugReset() {
+        public void DebugReset()
+        {
             TaskIndex = 0;
             VisualIndex = 0;
         }
 
-        public void DebugComplete() {
+        public void DebugComplete()
+        {
             CompleteTask(0);
         }
 
-        public void CompleteTask(float delay_ = 0.5f) {
+        public void CompleteTask(float delay_ = 0.5f)
+        {
             ++TaskIndex;
-            IEnumerator Delay() {
+            IEnumerator Delay()
+            {
                 yield return new WaitForSeconds(delay_);
                 var wait = Game.Manager.specialRewardMan.IsBusy();
-                if (wait) {
-                    void WaitA() {
+                if (wait)
+                {
+                    void WaitA()
+                    {
                         MessageCenter.Get<MSG.UI_SPECIAL_REWARD_FINISH>().RemoveListener(WaitA);
                         Open();
                     }
@@ -154,13 +179,15 @@ namespace FAT {
             Game.Instance.StartCoroutineGlobal(Delay());
         }
 
-        public void TryComplete() {
+        public void TryComplete()
+        {
             if (Claimed) return;
             DataTracker.event_step_milestone.Track(this, confG.Diff);
             MessageCenter.Get<MSG.ACTIVITY_SUCCESS>().Dispatch(this);
             var listT = PoolMappingAccess.Take(out List<RewardCommitData> list);
             var rewardMan = Game.Manager.rewardMan;
-            foreach(var r in rewardM) {
+            foreach (var r in rewardM)
+            {
                 var d = rewardMan.BeginReward(r.Id, r.Count, ReasonString.step);
                 list.Add(d);
             }
@@ -172,28 +199,32 @@ namespace FAT {
         public static readonly string orderPrefabKey = "bgOrder";
         public static string GetOrderThemeRes(int eventId, int paramId)
         {
-            if (paramId == 0) {
+            if (paramId == 0)
+            {
                 var cfg = GetOneEventTimeByFilter(x => x.Id == eventId && x.EventType == fat.rawdata.EventType.Step);
                 paramId = cfg?.EventParam ?? 0;
             }
-            if (paramId == 0) {
+            if (paramId == 0)
+            {
                 DebugEx.Warning($"failed to find theme for {eventId} {paramId}");
                 return string.Empty;
             }
             var cfgDetail = GetEventStep(paramId);
             var theme = GetOneEventThemeByFilter(x => x.Id == cfgDetail.EventTheme);
-            if (theme.AssetInfo.TryGetValue(orderPrefabKey, out var assetInfo)) {
+            if (theme.AssetInfo.TryGetValue(orderPrefabKey, out var assetInfo))
+            {
                 return assetInfo;
             }
             return cfgDetail?.OrderPrefab;
         }
 
-        void IActivityOrderHandler.HandlerCollected() {
+        void IActivityOrderHandler.HandlerCollected()
+        {
             if (TaskIndex < 0 || TaskIndex >= list.Count) return;
             var task = list[TaskIndex];
             var conf = task.conf;
             if (bonusHandler.id == conf.Id) return;
-            bonusHandler.Init(conf.Id, conf.OutputsOne, conf.OutputsTwo, conf.OutputsFour, conf.OutputsFixedOne, conf.OutputsFixedTwo, conf.OutputsFixedFour, conf.WithoutputTime, null);
+            bonusHandler.Init(conf.Id, conf.OutputsOne, conf.OutputsFixedOne, conf.WithoutputTime, null);
         }
 
         bool IActivityOrderHandler.IsValidForBoard(int boardId)

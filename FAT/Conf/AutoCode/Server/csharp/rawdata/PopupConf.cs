@@ -24,27 +24,28 @@ namespace fat.rawdata {
     static PopupConfReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChdyYXdkYXRhL1BvcHVwQ29uZi5wcm90bxIHcmF3ZGF0YSJgCgVQb3B1cBIK",
+            "ChdyYXdkYXRhL1BvcHVwQ29uZi5wcm90bxIHcmF3ZGF0YSJ7CgVQb3B1cBIK",
             "CgJpZBgBIAEoBRISCgpsaW1pdENvdW50GAIgASgFEhQKDG5vTGltaXRDb3Vu",
-            "dBgFIAEoCBIRCglwb3B1cFR5cGUYBCADKAUSDgoGd2VpZ2h0GAMgASgFIowB",
-            "Cg9Qb3B1cE1hcEFCVmFsdWUSOAoIUG9wdXBNYXAYASADKAsyJi5yYXdkYXRh",
-            "LlBvcHVwTWFwQUJWYWx1ZS5Qb3B1cE1hcEVudHJ5Gj8KDVBvcHVwTWFwRW50",
-            "cnkSCwoDa2V5GAEgASgFEh0KBXZhbHVlGAIgASgLMg4ucmF3ZGF0YS5Qb3B1",
-            "cDoCOAEimQMKCVBvcHVwQ29uZhIyCghQb3B1cE1hcBgBIAMoCzIgLnJhd2Rh",
-            "dGEuUG9wdXBDb25mLlBvcHVwTWFwRW50cnkSNgoKUG9wdXBNYXBBQhgCIAMo",
-            "CzIiLnJhd2RhdGEuUG9wdXBDb25mLlBvcHVwTWFwQUJFbnRyeRJACg9Qb3B1",
-            "cE1hcEFCUGF0Y2gYAyADKAsyJy5yYXdkYXRhLlBvcHVwQ29uZi5Qb3B1cE1h",
-            "cEFCUGF0Y2hFbnRyeRo/Cg1Qb3B1cE1hcEVudHJ5EgsKA2tleRgBIAEoBRId",
-            "CgV2YWx1ZRgCIAEoCzIOLnJhd2RhdGEuUG9wdXA6AjgBGksKD1BvcHVwTWFw",
-            "QUJFbnRyeRILCgNrZXkYASABKAkSJwoFdmFsdWUYAiABKAsyGC5yYXdkYXRh",
-            "LlBvcHVwTWFwQUJWYWx1ZToCOAEaUAoUUG9wdXBNYXBBQlBhdGNoRW50cnkS",
-            "CwoDa2V5GAEgASgJEicKBXZhbHVlGAIgASgLMhgucmF3ZGF0YS5Qb3B1cE1h",
-            "cEFCVmFsdWU6AjgBQj1aLWdpdGxhYi5mdW5wbHVzLmlvL2ZhdC9jb25mL2dl",
-            "bi9nb2xhbmcvcmF3ZGF0YaoCC2ZhdC5yYXdkYXRhYgZwcm90bzM="));
+            "dBgFIAEoCBIZChFwb3BFcXVhbE1haW5Cb2FyZBgGIAEoCBIRCglwb3B1cFR5",
+            "cGUYBCADKAUSDgoGd2VpZ2h0GAMgASgFIowBCg9Qb3B1cE1hcEFCVmFsdWUS",
+            "OAoIUG9wdXBNYXAYASADKAsyJi5yYXdkYXRhLlBvcHVwTWFwQUJWYWx1ZS5Q",
+            "b3B1cE1hcEVudHJ5Gj8KDVBvcHVwTWFwRW50cnkSCwoDa2V5GAEgASgFEh0K",
+            "BXZhbHVlGAIgASgLMg4ucmF3ZGF0YS5Qb3B1cDoCOAEimQMKCVBvcHVwQ29u",
+            "ZhIyCghQb3B1cE1hcBgBIAMoCzIgLnJhd2RhdGEuUG9wdXBDb25mLlBvcHVw",
+            "TWFwRW50cnkSNgoKUG9wdXBNYXBBQhgCIAMoCzIiLnJhd2RhdGEuUG9wdXBD",
+            "b25mLlBvcHVwTWFwQUJFbnRyeRJACg9Qb3B1cE1hcEFCUGF0Y2gYAyADKAsy",
+            "Jy5yYXdkYXRhLlBvcHVwQ29uZi5Qb3B1cE1hcEFCUGF0Y2hFbnRyeRo/Cg1Q",
+            "b3B1cE1hcEVudHJ5EgsKA2tleRgBIAEoBRIdCgV2YWx1ZRgCIAEoCzIOLnJh",
+            "d2RhdGEuUG9wdXA6AjgBGksKD1BvcHVwTWFwQUJFbnRyeRILCgNrZXkYASAB",
+            "KAkSJwoFdmFsdWUYAiABKAsyGC5yYXdkYXRhLlBvcHVwTWFwQUJWYWx1ZToC",
+            "OAEaUAoUUG9wdXBNYXBBQlBhdGNoRW50cnkSCwoDa2V5GAEgASgJEicKBXZh",
+            "bHVlGAIgASgLMhgucmF3ZGF0YS5Qb3B1cE1hcEFCVmFsdWU6AjgBQj1aLWdp",
+            "dGxhYi5mdW5wbHVzLmlvL2ZhdC9jb25mL2dlbi9nb2xhbmcvcmF3ZGF0YaoC",
+            "C2ZhdC5yYXdkYXRhYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.Popup), global::fat.rawdata.Popup.Parser, new[]{ "Id", "LimitCount", "NoLimitCount", "PopupType", "Weight" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.Popup), global::fat.rawdata.Popup.Parser, new[]{ "Id", "LimitCount", "NoLimitCount", "PopEqualMainBoard", "PopupType", "Weight" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.PopupMapABValue), global::fat.rawdata.PopupMapABValue.Parser, new[]{ "PopupMap" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.PopupConf), global::fat.rawdata.PopupConf.Parser, new[]{ "PopupMap", "PopupMapAB", "PopupMapABPatch" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, null, })
           }));
@@ -92,6 +93,7 @@ namespace fat.rawdata {
       id_ = other.id_;
       limitCount_ = other.limitCount_;
       noLimitCount_ = other.noLimitCount_;
+      popEqualMainBoard_ = other.popEqualMainBoard_;
       popupType_ = other.popupType_.Clone();
       weight_ = other.weight_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
@@ -147,6 +149,21 @@ namespace fat.rawdata {
       }
     }
 
+    /// <summary>Field number for the "popEqualMainBoard" field.</summary>
+    public const int PopEqualMainBoardFieldNumber = 6;
+    private bool popEqualMainBoard_;
+    /// <summary>
+    /// 是否在等价于主棋盘的棋盘活动弹出
+    /// （如火车、bingo）仅限于礼包
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool PopEqualMainBoard {
+      get { return popEqualMainBoard_; }
+      set {
+        popEqualMainBoard_ = value;
+      }
+    }
+
     /// <summary>Field number for the "popupType" field.</summary>
     public const int PopupTypeFieldNumber = 4;
     private static readonly pb::FieldCodec<int> _repeated_popupType_codec
@@ -192,6 +209,7 @@ namespace fat.rawdata {
       if (Id != other.Id) return false;
       if (LimitCount != other.LimitCount) return false;
       if (NoLimitCount != other.NoLimitCount) return false;
+      if (PopEqualMainBoard != other.PopEqualMainBoard) return false;
       if(!popupType_.Equals(other.popupType_)) return false;
       if (Weight != other.Weight) return false;
       return Equals(_unknownFields, other._unknownFields);
@@ -203,6 +221,7 @@ namespace fat.rawdata {
       if (Id != 0) hash ^= Id.GetHashCode();
       if (LimitCount != 0) hash ^= LimitCount.GetHashCode();
       if (NoLimitCount != false) hash ^= NoLimitCount.GetHashCode();
+      if (PopEqualMainBoard != false) hash ^= PopEqualMainBoard.GetHashCode();
       hash ^= popupType_.GetHashCode();
       if (Weight != 0) hash ^= Weight.GetHashCode();
       if (_unknownFields != null) {
@@ -238,6 +257,10 @@ namespace fat.rawdata {
         output.WriteRawTag(40);
         output.WriteBool(NoLimitCount);
       }
+      if (PopEqualMainBoard != false) {
+        output.WriteRawTag(48);
+        output.WriteBool(PopEqualMainBoard);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -264,6 +287,10 @@ namespace fat.rawdata {
         output.WriteRawTag(40);
         output.WriteBool(NoLimitCount);
       }
+      if (PopEqualMainBoard != false) {
+        output.WriteRawTag(48);
+        output.WriteBool(PopEqualMainBoard);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -280,6 +307,9 @@ namespace fat.rawdata {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(LimitCount);
       }
       if (NoLimitCount != false) {
+        size += 1 + 1;
+      }
+      if (PopEqualMainBoard != false) {
         size += 1 + 1;
       }
       size += popupType_.CalculateSize(_repeated_popupType_codec);
@@ -305,6 +335,9 @@ namespace fat.rawdata {
       }
       if (other.NoLimitCount != false) {
         NoLimitCount = other.NoLimitCount;
+      }
+      if (other.PopEqualMainBoard != false) {
+        PopEqualMainBoard = other.PopEqualMainBoard;
       }
       popupType_.Add(other.popupType_);
       if (other.Weight != 0) {
@@ -345,6 +378,10 @@ namespace fat.rawdata {
             NoLimitCount = input.ReadBool();
             break;
           }
+          case 48: {
+            PopEqualMainBoard = input.ReadBool();
+            break;
+          }
         }
       }
     #endif
@@ -378,6 +415,10 @@ namespace fat.rawdata {
           }
           case 40: {
             NoLimitCount = input.ReadBool();
+            break;
+          }
+          case 48: {
+            PopEqualMainBoard = input.ReadBool();
             break;
           }
         }

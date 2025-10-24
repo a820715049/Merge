@@ -341,7 +341,7 @@ namespace FAT
                 }
             });
             //设置是否必出冰冻棋子
-            _RegisterButton("MustSpawnFrozenItem",() =>
+            _RegisterButton("MustSpawnFrozenItem", () =>
             {
                 if ((Game.Manager.activity.LookupAny(EventType.FrozenItem) is ActivityFrozenItem frozen))
                 {
@@ -355,8 +355,16 @@ namespace FAT
             _RegisterButton("guess ready", ActivityGuess.DebugReady);
             _RegisterButton("invite reset", ActivityInvite.DebugReset);
             _RegisterButton("invite advance", ActivityInvite.DebugAdvance);
-            _RegisterButton("duel score", ActivityDuel.DebugAddScore);
-            _RegisterButton("duel robot", ActivityDuel.DebugAddRobotScore);
+            _RegisterButtonWithInput("duel score", (str) =>
+            {
+                int.TryParse(str, out var value);
+                ActivityDuel.DebugAddScore(value);
+            });
+            _RegisterButtonWithInput("duel robot", (str) =>
+            {
+                int.TryParse(str, out var value);
+                ActivityDuel.DebugAddRobotScore(value);
+            });
 
             _StartGroupA("火车");
             _RegisterButton("order item", _DebugTrainMissionOrderItem);
@@ -382,7 +390,6 @@ namespace FAT
 
             _StartGroupA("ClawOrder");
             _RegisterButton("clear", ActivityClawOrder.DebugReset);
-            _RegisterButton("order diffchoice window", () => UIManager.Instance.OpenWindow(UIConfig.UIOrderDiffchoice));
             _StartGroupA("倍率排行榜");
             _RegisterButtonWithInput("Add Score", (string str) =>
             {
@@ -398,6 +405,11 @@ namespace FAT
                     (multi as ActivityMultiplierRanking).SetEnergy(str.ConvertToInt());
                 }
             });
+
+            _StartGroupA("飞跃藤蔓");
+            _RegisterButtonWithInput("Level", ActivityVineLeap.DebugSetLevel);
+            _RegisterButtonWithInput("+Token", ActivityVineLeap.DebugAddToken);
+            _RegisterButtonWithInput("ReduceNum", ActivityVineLeap.DebugReduceLeftNum);
         }
 
         private void _UnfrozenAndUnlockAllItems()
@@ -407,6 +419,7 @@ namespace FAT
             {
                 return;
             }
+
             var board = world.activeBoard;
             var size = board.size;
 
@@ -423,6 +436,7 @@ namespace FAT
                             item.SetState(false, item.isFrozen);
                             board.TriggerItemStatusChange(item);
                         }
+
                         // 再解除冻结状态
                         if (item.isFrozen)
                         {
@@ -878,7 +892,7 @@ namespace FAT
             {
                 var items = new List<Item>();
                 board.WalkAllItem((item) => items.Add(item));
-                foreach (var item in items) board.DisposeItem(item);
+                foreach (var item in items) board.DisposeItem(item, ItemDeadType.Delete);
 
                 while (world.rewardCount > 0) world.RemoveItem(world.nextReward);
             }
@@ -976,6 +990,7 @@ namespace FAT
                     ? $"Gem true: {trueGem}, display: {displayGem}"
                     : $"Gem true: <color=#9f3a2c>{trueGem}</color>, display: {displayGem}");
             }
+
             text.text = logInfo.ToString();
         }
 
@@ -1019,7 +1034,7 @@ namespace FAT
                 UIFlyUtility.FlyRewardList(rewards, Vector3.zero);
             }
         }
-        
+
         private void _AddItemToBoard(int rewardID)
         {
             var board = Game.Manager.mergeBoardMan.activeWorld;
@@ -1088,7 +1103,7 @@ namespace FAT
         {
             var item = BoardViewManager.Instance?.GetCurrentBoardInfoItem();
             if (item != null) 
-                Game.Manager.mergeBoardMan.activeWorld?.activeBoard?.DisposeItem(item);
+                Game.Manager.mergeBoardMan.activeWorld?.activeBoard?.DisposeItem(item, ItemDeadType.Delete);
         }
         
         private void _OnBtnFreezeItem()
@@ -1457,6 +1472,7 @@ namespace FAT
                 toggle.onValueChanged.AddListener(isSelect => _OnToggleSelect(index, isSelect));
                 tabToggleList.Add(toggle);
             }
+
             curSelectTabIndex = 0;
             tabToggleList[curSelectTabIndex].SetIsOnWithoutNotify(true);
         }
@@ -1471,6 +1487,7 @@ namespace FAT
                 {
                     scrollViewList[i].SetRootActive(curSelectTabIndex == i);
                 }
+
                 scrollLog?.SetRootActive(curSelectTabIndex == 4);
             }
         }

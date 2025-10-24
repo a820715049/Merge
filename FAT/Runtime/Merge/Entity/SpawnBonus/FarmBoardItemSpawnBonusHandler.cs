@@ -18,8 +18,6 @@ namespace FAT.Merge
         private bool _isValid => _actInst != null && _actInst.Active;
         //权重随机配置信息 区分耗体1 耗体2 耗体4
         private List<(int itemId, int num, int weight)> _outputsOneInfo = new();
-        private List<(int itemId, int num, int weight)> _outputsTwoInfo = new();
-        private List<(int itemId, int num, int weight)> _outputsFourInfo = new();
 
         private bool _isDirty = true;
         private FarmBoardActivity _actInst;
@@ -47,8 +45,6 @@ namespace FAT.Merge
                 return;
             }
             _InitOutputs(_outputsOneInfo, curDropConf.OutputsOne);
-            _InitOutputs(_outputsTwoInfo, curDropConf.OutputsTwo);
-            _InitOutputs(_outputsFourInfo, curDropConf.OutputsFour);
         }
 
         private void _InitOutputs(IList<(int, int, int)> container, IList<string> outputs)
@@ -63,21 +59,21 @@ namespace FAT.Merge
         void ISpawnBonusHandler.OnRegister() { }
 
         void ISpawnBonusHandler.OnUnRegister() { }
-        
+
         void ISpawnBonusHandler.Process(SpawnBonusContext context)
         {
             if (!_isValid)
                 return;
             //限制生产来源只能是ClickSource或DieOutput
-            if (context.reason != ItemSpawnReason.ClickSource && context.reason != ItemSpawnReason.DieOutput) 
+            if (context.reason != ItemSpawnReason.ClickSource && context.reason != ItemSpawnReason.DieOutput)
                 return;
             SimulateSpawn(context);
         }
-        
+
         private void SimulateSpawn(SpawnBonusContext context)
         {
             //没有来源或者没有消耗体力时返回
-            if(context.from == null || context.energyCost <= 0)
+            if (context.from == null || context.energyCost <= 0)
                 return;
             var from = context.from;
             //没有click source组件时返回
@@ -90,23 +86,19 @@ namespace FAT.Merge
             if (_actInst.ConfD.Cost != comp.firstCost.Cost)
                 return;
             EnsureOutputMap();
-            //根据是否是n倍耗体 使用不同的产出权重配置
+            //统一从 OutputsOne 读取，根据能量加倍状态调整数量
             var state = Env.Instance.GetEnergyBoostState();
-            var outputsConf = !comp.config.IsBoostable ?
-                _outputsOneInfo :
-                state switch
-                {
-                    EnergyBoostState.X2 => _outputsTwoInfo,
-                    EnergyBoostState.X4 => _outputsFourInfo,
-                    _ => _outputsOneInfo,
-                };
+            var outputsConf = _outputsOneInfo;
             var output = outputsConf.RandomChooseByWeight(e => e.weight);
             //产出有效
             if (output.itemId > 0 && output.num > 0)
             {
-                DebugEx.Info($"FarmBoard Spawn : output ItemId: {output.itemId}, Num = {output.num}, BoostState = {state}");
+                var rate = comp.config.IsBoostable ? EnergyBoostUtility.GetEnergyRate() : 1;
+                var finalNum = output.num * rate;
+                DebugEx.Info($"FarmBoard Spawn : output ItemId: {output.itemId}, Num = {finalNum}, BoostState = {state}");
+                DebugEx.Info($"[EnergyBoost_opt] 活动{_actInst?.GetType().Name}，原始产出{output.num}，实际产出{finalNum}个，体力倍数{rate}。");
                 //往农场棋盘发代币
-                var reward = Game.Manager.rewardMan.BeginReward(output.itemId, output.num, ReasonString.farm_merge);
+                var reward = Game.Manager.rewardMan.BeginReward(output.itemId, finalNum, ReasonString.farm_merge);
                 var pos = BoardUtility.GetWorldPosByCoord(from.coord);
                 UIFlyUtility.FlyRewardSetType(reward, pos, FlyType.FarmToken);
             }

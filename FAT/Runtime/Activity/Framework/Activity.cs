@@ -857,7 +857,10 @@ namespace FAT
             WhenEnd(acti_, expire_);
             RemoveActive(acti_);
             changed = true;
-            CheckRefresh(0);
+            if (Game.Instance.isRunning)
+            {
+                CheckRefresh(0);
+            }
         }
 
         public void WhenEnd(ActivityLike acti_, bool expire_)

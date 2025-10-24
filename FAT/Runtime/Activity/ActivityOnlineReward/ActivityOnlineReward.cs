@@ -211,7 +211,17 @@ namespace FAT
             if (_onlineIndex < conf.IncludeReward.Count)
             {
                 confD = fat.conf.EventOnlineDetailVisitor.GetOneByFilter((c) => c.Id == conf.IncludeReward[_onlineIndex]);
-                _onlineTs = (int)(Game.Instance.GetTimestampSeconds() + confD.Time);
+                // 修复：只有在活动未结束时才设置下一档的倒计时
+                // 如果活动已结束，不应该设置新的_onlineTs，避免界面自动关闭
+                if (Countdown > 0)
+                {
+                    _onlineTs = (int)(Game.Instance.GetTimestampSeconds() + confD.Time);
+                }
+                else
+                {
+                    // 活动已结束，设置_onlineTs为当前时间，让HasReward()返回true
+                    _onlineTs = (int)Game.Instance.GetTimestampSeconds();
+                }
             }
             else
             {

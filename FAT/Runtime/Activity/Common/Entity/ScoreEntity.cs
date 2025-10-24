@@ -17,14 +17,20 @@ namespace FAT
 {
     public class ScoreEntity
     {
+        [Flags]
         public enum ScoreType
         {
-            Shop,
-            OrderLeft,
-            OrderRight,
-            Bubble,
-            Merge,
-            Joker,
+            None       = 0,
+            Shop       = 1 << 0, // 1
+            OrderLeft  = 1 << 1, // 2
+            OrderRight = 1 << 2, // 4
+            Bubble     = 1 << 3, // 8
+            Merge      = 1 << 4, // 16
+            Joker      = 1 << 5, // 32
+
+            // -- 以下枚举用做Tag，便于在具体逻辑中区分使用，后续有新增类型时记得维护 --
+            All = Shop | OrderLeft | OrderRight | Bubble | Merge | Joker,    //考虑所有积分来源
+            OnlyOrder = OrderLeft | OrderRight, //只考虑订单上的积分来源
         }
 
         public class ScoreFlyRewardData
@@ -40,6 +46,10 @@ namespace FAT
         private ReasonString ReasonString;
         private string MergeScorePrefab; //棋子合并后往上飘的积分prefab
         private bool NeedFlyCenter; //订单完成时是否需要积分飞向屏幕中心的表现
+        //计算积分时要考虑的类型.
+        //之所以要使用tag做额外区分，是因为原有逻辑特别是AddScore方法并没有把逻辑拆细，更像是积分活动一条龙定制版.
+        //而策划层面使用的EventExtraScore表，则更像是仅仅为算分提供服务的通用工具，二者之间有不小偏差.
+        private ScoreType ScoreCalcTag;
         private int Score;
         private int PrevScore;
         private ScoreMergeBonusHandler mergeHandler;
@@ -52,7 +62,7 @@ namespace FAT
         // 注意：这里注册的活动积分，需要明确：
         // 1.是否仅包含ScoreEntity逻辑范畴内的来源，如完成订单、合成、购买商店棋子等行为
         // 2.如果除了以上行为外还有其他来源，如直接购买获得或其他行为直接发放，这种情况需要活动内部进一步甄别
-        public void Setup(int score, ActivityLike activity, int requireCoinId, int eventExtraScoreId, ReasonString r, string mergeScorePrefab, int boardId = 0, bool needFlyCenter = true)
+        public void Setup(int score, ActivityLike activity, int requireCoinId, int eventExtraScoreId, ReasonString r, string mergeScorePrefab, int boardId = 0, bool needFlyCenter = true, ScoreType scoreCalcTag = ScoreType.All)
         {
             Score = score;
             Activity = activity;
@@ -62,6 +72,7 @@ namespace FAT
             ReasonString = r;
             MergeScorePrefab = mergeScorePrefab;
             NeedFlyCenter = needFlyCenter;
+            ScoreCalcTag = scoreCalcTag;
             MessageCenter.Get<MSG.ON_USE_JOKER_ITEM_UPGRADE>().AddListener(OnUseJokerItemTryAddScore);
             MessageCenter.Get<MSG.ON_USE_SPEED_UP_ITEM>().AddListener(OnUseSpeedUpItemTryAddScore);
             MessageCenter.Get<MSG.ON_BUY_SHOP_ITEM>().AddListener(OnBuyShopItemTryAddScore);
@@ -145,6 +156,13 @@ namespace FAT
         {
             if (!NeedFlyCenter) return;
             if (Activity is IActivityComplete c && !c.IsActive) return;
+            //积分活动麦克风版在发积分时，还要考虑当前是否有倍率buff
+            if (Activity is ActivityScoreMic scoreMic)
+            {
+                var isMulti = scoreMic.CheckTokenMultiRate(RequireCoinId, out var rate);
+                var oldScore = score;
+                score = isMulti ? oldScore * rate : oldScore;
+            }
             orderScoreReward = AddScore(ScoreType.OrderLeft, score);
         }
 
@@ -194,6 +212,11 @@ namespace FAT
         {
             Score = score;
         }
+        
+        private bool _IsIgnoreScoreType(ScoreType type)
+        {
+            return (ScoreCalcTag & type) != 0;
+        }
 
         /// <summary>
         /// 添加积分
@@ -203,6 +226,11 @@ namespace FAT
         /// <returns></returns>
         public ScoreFlyRewardData AddScore(ScoreType type, int param)
         {
+            //忽略不参与计算的类型
+            if (!_IsIgnoreScoreType(type))
+            {
+                return null;
+            }
             var activeWorld = Game.Manager.mergeBoardMan.activeWorld;
             //商店棋盘有自己的归属棋盘逻辑
             if (type != ScoreType.Shop && activeWorld != null && BoardId != 0)
@@ -250,6 +278,12 @@ namespace FAT
             return data;
         }
 
+        //根据ScoreType获取计算后的分数用于展示
+        public int GetCalcScoreByType(ScoreType type, int score)
+        {
+            return CalculateScoreByType(type, score);
+        }
+        
         private int CalculateScoreByType(ScoreType type, int score)
         {
             //策划不配代表不支持此积分来源

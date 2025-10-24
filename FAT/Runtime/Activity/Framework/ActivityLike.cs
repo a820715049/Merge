@@ -30,6 +30,7 @@ namespace FAT
 
         public virtual bool Valid => Lite.Valid;
         public virtual ActivityVisual Visual { get; } = new();
+        public virtual VisualRes GuideRes { get; } = new();
         public virtual bool EntryVisible => Visual.EntryVisible;
         public virtual string EntryIcon => Visual.EntryIcon;
         public virtual int Priority => Visual.Priority;
@@ -73,11 +74,13 @@ namespace FAT
                 RefreshTS(0, 0);
                 SetupFresh();
             }
+            AfterLoad(data_);
         }
 
         public abstract void SaveSetup(ActivityInstance data_);
         public abstract void LoadSetup(ActivityInstance data_);
 
+        public virtual void AfterLoad(ActivityInstance data_) { }
         public virtual bool SetupPending() => false;
         public virtual bool ResPending()
         {

@@ -33,10 +33,12 @@ namespace FAT.Merge
         public bool isReviving => reviveTotalMilli > 0 && totalItemCount < mConfig.LimitCount;
         public int totalItemCount => itemInRechargeCount + itemCount;
         public int reviveMilli => mReviveCounter;
-        public int reviveTotalMilli {
-            get {
+        public int reviveTotalMilli
+        {
+            get
+            {
                 int reviveSec = mConfig.ReviveTime;
-                if(mFirstRevive && mConfig.FirstOutputTime > 0)
+                if (mFirstRevive && mConfig.FirstOutputTime > 0)
                 {
                     reviveSec = mConfig.FirstOutputTime;
                 }
@@ -44,7 +46,7 @@ namespace FAT.Merge
             }
         }
         public int itemInRechargeCount => mItemInRechargeCount;
-        public int itemCount => isNoCD?100:mItemCount;
+        public int itemCount => isNoCD ? 100 : mItemCount;
         public ComMergeTapSource config => mConfig;
         private ComMergeTapSource mConfig = null;
         private int mItemTotalOutputToDead = 0;
@@ -66,7 +68,7 @@ namespace FAT.Merge
 
         public static bool SerializeDelta(MergeItem newData, MergeItem oldData)
         {
-            if(oldData.ComClickSource != null && oldData.ComClickSource.Equals(newData.ComClickSource))
+            if (oldData.ComClickSource != null && oldData.ComClickSource.Equals(newData.ComClickSource))
             {
                 newData.ComClickSource = null;
                 return false;
@@ -124,7 +126,7 @@ namespace FAT.Merge
         public override void OnDeserialize(MergeItem itemData)
         {
             base.OnDeserialize(itemData);
-            if(itemData.ComClickSource != null)
+            if (itemData.ComClickSource != null)
             {
                 mItemCount = itemData.ComClickSource.Item;
                 mItemInRechargeCount = itemData.ComClickSource.ItemInRecharge;
@@ -213,7 +215,7 @@ namespace FAT.Merge
             mBoostItemCount += count;
             wasBoostItem = true;
         }
-        
+
         public bool WasBoostItem()
         {
             var r = wasBoostItem;
@@ -224,17 +226,17 @@ namespace FAT.Merge
         public int ConsumeNextItem(out int oldItemId)
         {
             oldItemId = 0;
-            if(!IsNextItemReady())
+            if (!IsNextItemReady())
             {
                 return 0;
             }
-            if(!isNoCD)
+            if (!isNoCD)
             {
                 mItemCount--;
             }
-            if(mConfig.StageCount > 0)
+            if (mConfig.StageCount > 0)
             {
-                mItemTotalOutputToDead ++;
+                mItemTotalOutputToDead++;
             }
             var itemId = ConsumeNextOutput(out var sourceType);
             // 如果产出物品有受限配置 需要检查是否进行受限转换
@@ -250,10 +252,11 @@ namespace FAT.Merge
                 //逻辑上也区分出具有能量加倍功能的棋子
                 if (sourceType is ItemSourceType.RandomFixed or ItemSourceType.RandomWeight)
                 {
-                    var level_add = EnergyBoostUtility.GetBoostLevel((int)Env.Instance.GetEnergyBoostState());
+                    var level_add = EnergyBoostUtility.GetBoostLevel();
                     if (level_add > 0)
                     {
                         itemId = Env.Instance.GetNextLevelItemId(itemId, level_add);
+                        DebugEx.FormatInfo("<color=#00FFFF><生成器产出></color>多倍体力影响，初始棋子<color=#00BFFF>{0}</color>，升级后棋子<color=#00FF00>{1}</color>，等级+<color=#FFD700>{2}</color>。", oldItemId, itemId, level_add);
                     }
                 }
             }
@@ -261,12 +264,13 @@ namespace FAT.Merge
             {
                 var level_add = 1;
                 item.TryGetItemComponent<ItemSkillComponent>(out var skill);
-                if(skill != null)
+                if (skill != null)
                 {
                     level_add = skill.param[0];
                 }
                 itemId = Env.Instance.GetNextLevelItemId(itemId, level_add);
                 mBoostItemCount--;
+                DebugEx.FormatInfo("<color=#00FFFF><生成器产出></color>道具影响，初始棋子<color=#00BFFF>{0}</color>，升级后棋子<color=#00FF00>{1}</color>，等级+<color=#FFD700>{2}</color>。", oldItemId, itemId, level_add);
             }
             return itemId;
         }
@@ -290,17 +294,29 @@ namespace FAT.Merge
         /// <param name="realTid">实际产出id</param>
         public Toast GetToastTypeForItem(int itemTid, int realTid)
         {
-            if (config.IsBoostable && EnergyBoostUtility.Is4X() && config.MaxToast.TryGetValue(realTid, out var toast))
+            int toast;
+            bool isLast = Game.Manager.mergeItemMan.IsLastItemInChain(realTid);
+            //可以有Max.
+            if (EnergyBoostUtility.IsMaxToastBoost() && mConfig.IsBoostable)
             {
-                return (Toast)toast;
+                if (isLast || config.MaxToastNew.Contains(itemTid))
+                {
+                    return (Toast)Game.Manager.configMan.globalConfig.MaxToastId;
+                }
             }
-            config.OutputsToast.TryGetValue(itemTid, out var toastType);
-            return (Toast)toastType;
+
+            if (isLast)
+            {
+                return (Toast)Game.Manager.configMan.globalConfig.NormalToastId;
+            }
+
+            config.OutputsToast.TryGetValue(itemTid, out toast);
+            return (Toast)toast;
         }
 
         public int CalculateSpeedOutputCost()
         {
-            if(isOutputing)
+            if (isOutputing)
             {
                 return 1;       //TODO: check this logic
             }
@@ -318,7 +334,7 @@ namespace FAT.Merge
 
         public bool SpeedOutput()
         {
-            if(isOutputing)
+            if (isOutputing)
             {
                 var outputTotalMilli = mConfig.OutputTime * 1000;
                 Update(Mathf.Max(0, outputTotalMilli - mOutputCounter));
@@ -329,19 +345,21 @@ namespace FAT.Merge
 
         public int CalculateSpeedReviveCost()
         {
-            if(item.tid == Constant.kSpeedupGuideObjId && !Env.Instance.IsSpeedupGuidePassed())             //guide return 0
+            if (item.tid == Constant.kSpeedupGuideObjId && !Env.Instance.IsSpeedupGuidePassed())             //guide return 0
             {
                 return 0;
             }
-            if(isReviving)
+            if (isReviving)
             {
                 int baseTime = mConfig.ReviveTime;
-                if (mFirstRevive && mConfig.FirstOutputTime > 0) {
+                if (mFirstRevive && mConfig.FirstOutputTime > 0)
+                {
                     baseTime = mConfig.FirstOutputTime;
                 }
                 var factor = Mathf.Max(0, baseTime * 1000 - mReviveCounter);
                 var max = baseTime * 1000;
-                if (config.Id == Constant.kBingoGeneratorId && CalculateReviveCostBingo(factor, max, out var cost)) {
+                if (config.Id == Constant.kBingoGeneratorId && CalculateReviveCostBingo(factor, max, out var cost))
+                {
                     return cost;
                 }
                 return EL.MathUtility.LerpInteger(0, mConfig.SpeedCost, factor, max);
@@ -352,7 +370,8 @@ namespace FAT.Merge
             }
         }
 
-        public bool CalculateReviveCostBingo(int factor, int max, out int cost_) {
+        public bool CalculateReviveCostBingo(int factor, int max, out int cost_)
+        {
             cost_ = 0;
             // FAT_TODO
             // var bingo = Game.Instance.activityMan.BingoEvent;
@@ -368,7 +387,7 @@ namespace FAT.Merge
 
         public bool SpeedRevive()
         {
-            if(isReviving)
+            if (isReviving)
             {
                 Update(Mathf.Max(0, reviveTotalMilli - mReviveCounter));
                 item.world.TriggerItemEvent(item, ItemEventType.ItemEventSpeedUp);
@@ -386,11 +405,12 @@ namespace FAT.Merge
         protected override void OnInitRandomList(List<ItemOutputRandomList.OutputConstraitFixCount> container)
         {
             var comConfig = Env.Instance.GetItemComConfig(item.tid);
-            if(comConfig != null && comConfig.clickSourceConfig != null)
+            if (comConfig != null && comConfig.clickSourceConfig != null)
             {
-                for(int i = 0; i < comConfig.clickSourceConfig.OutputsFixed.Count; i++)
+                for (int i = 0; i < comConfig.clickSourceConfig.OutputsFixed.Count; i++)
                 {
-                    container.Add(new ItemOutputRandomList.OutputConstraitFixCount(){
+                    container.Add(new ItemOutputRandomList.OutputConstraitFixCount()
+                    {
                         id = comConfig.clickSourceConfig.OutputsFixed[i],
                         totalCount = comConfig.clickSourceConfig.OutputsFixedTime[2 * i],
                         targetCount = comConfig.clickSourceConfig.OutputsFixedTime[2 * i + 1]
@@ -401,7 +421,7 @@ namespace FAT.Merge
 
         protected override void OnPostMerge(Item src, Item dst)
         {
-            if(mConfig.FirstOutputTime <= 0)
+            if (mConfig.FirstOutputTime <= 0)
             {
                 var inheritedCountA = 0;
                 var inheritedCountB = 0;
@@ -415,7 +435,7 @@ namespace FAT.Merge
                     // DebugEx.FormatInfo("ItemClickSourceComponent::OnPostMerge ----> {0} add {1} item from merge", item, c.mItemCount);
                     // DebugEx.FormatInfo("ItemClickSourceComponent::OnPostMerge ----> {0} add {1} recharge from merge", item, c.mItemInRechargeCount);
                 }
-                if(!dst.isFrozen && dst.TryGetItemComponent<ItemClickSourceComponent>(out c, true))
+                if (!dst.isFrozen && dst.TryGetItemComponent<ItemClickSourceComponent>(out c, true))
                 {
                     inheritedCountB += c.itemCount;
                     inheritedCountB += c.mItemInRechargeCount;
@@ -438,7 +458,7 @@ namespace FAT.Merge
 
         private void TryAddBoostCount(Item src, Item dst)
         {
-            if (src.TryGetItemComponent<ItemClickSourceComponent>(out var boostSrc) && 
+            if (src.TryGetItemComponent<ItemClickSourceComponent>(out var boostSrc) &&
                 dst.TryGetItemComponent<ItemClickSourceComponent>(out var boostDst))
             {
                 if (boostSrc != null && boostSrc.isBoostItem)
@@ -463,7 +483,7 @@ namespace FAT.Merge
                 mFirstCost = Env.Instance.GetMergeTapCostConfig(cfg.CostId[0]);
             }
 
-            if(cfg.FirstOutputTime > 0)
+            if (cfg.FirstOutputTime > 0)
             {
                 mItemCount = 0;
             }
@@ -489,7 +509,7 @@ namespace FAT.Merge
 
         protected override void OnUpdate(int dt)
         {
-            if(isGridNotMatch)
+            if (isGridNotMatch)
             {
                 return;
             }
@@ -503,7 +523,7 @@ namespace FAT.Merge
 
         private void _UpdateRecharge(int milli)
         {
-            if(isReviving && mAllowCharging)
+            if (isReviving && mAllowCharging)
             {
                 while (milli >= reviveTotalMilli - mReviveCounter && totalItemCount < mConfig.LimitCount)
                 {
@@ -522,12 +542,12 @@ namespace FAT.Merge
 
                     mFirstRevive = false;
                 }
-                if(isReviving)
+                if (isReviving)
                 {
                     mReviveCounter += milli;
                 }
             }
-            if(milli > 0)
+            if (milli > 0)
             {
                 _TickRecharge(milli);
             }
@@ -546,10 +566,10 @@ namespace FAT.Merge
 
         private void _UpdateNoCD(int milli)
         {
-            if(isNoCD)
+            if (isNoCD)
             {
                 mNoCDCountDown -= milli;
-                if(mNoCDCountDown <= 0)
+                if (mNoCDCountDown <= 0)
                 {
                     DebugEx.FormatInfo("Merge::ItemTapSourceComponent ----> no cd time end");
                     mNoCDCountDown = 0;
@@ -560,18 +580,18 @@ namespace FAT.Merge
 
         private void _TickRecharge(int deltaMilli)
         {
-            if(isOutputing)
+            if (isOutputing)
             {
-                if(mConfig.OutputTime > 0)
+                if (mConfig.OutputTime > 0)
                 {
                     int outputTime = mConfig.OutputTime * 1000;
                     mOutputCounter += deltaMilli;
-                    if(mOutputCounter >= outputTime)
+                    if (mOutputCounter >= outputTime)
                     {
                         int newItemCount = mOutputCounter / outputTime;
                         newItemCount *= mConfig.OutputCount;
                         mOutputCounter = mOutputCounter % outputTime;
-                        if(newItemCount >= mItemInRechargeCount)
+                        if (newItemCount >= mItemInRechargeCount)
                         {
                             newItemCount = mItemInRechargeCount;
                             mOutputCounter = 0;
@@ -599,8 +619,7 @@ namespace FAT.Merge
             var baseCost = Constant.kMergeEnergyCostNum;
             if (!mConfig.IsBoostable)
                 return baseCost;
-            var state = Env.Instance.GetEnergyBoostState();
-            var rate = EnergyBoostUtility.GetEnergyRate((int)state);
+            var rate = EnergyBoostUtility.GetEnergyRate();
             return baseCost * rate;
         }
     }

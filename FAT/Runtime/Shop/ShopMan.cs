@@ -382,16 +382,16 @@ namespace FAT
         }
 
         //尝试购买订单棋子商品
-        public void TryBuyShopChessOrderGoods(ShopChessOrderData data, Vector3 flyFromPos, float size = 0)
+        public void TryBuyShopChessOrderGoods(ShopChessOrderData data, Vector3 flyFromPos, float size = 0, Action successCb = null)
         {
             if (data == null || !data.CheckCanBuy())
                 return;
             _rewardFromPos = flyFromPos;
             _rewardSize = size;
-            ProcessShopOrderChess(data);
+            ProcessShopOrderChess(data, successCb);
         }
 
-        private void ProcessShopOrderChess(ShopChessOrderData data)
+        private void ProcessShopOrderChess(ShopChessOrderData data, Action successCb = null)
         {
             if (Game.Manager.coinMan.CanUseCoin(CoinType.Gem, data.CurSellGoodsPrice))
             {
@@ -408,6 +408,8 @@ namespace FAT
                     }
                     //数据刷新
                     data.OnBuyGoodsSuccess();
+                    //执行回调
+                    successCb?.Invoke();
                     //Dispatch
                     MessageCenter.Get<MSG.GAME_SHOP_ITEM_INFO_CHANGE>().Dispatch();
                     //尝试积分活动加分
@@ -417,6 +419,28 @@ namespace FAT
                 .Execute();
             }
         }
+
+        //检查当前商店棋子上面是否有活动token 有的话收集
+        //目前仅支持积分活动(麦克风版)
+        public void TryCollectActivityToken(ShopChessOrderData chessOrderData, Vector3 fromPos)
+        {
+            Game.Manager.activity.LookupAny(fat.rawdata.EventType.MicMilestone, out var activity);
+            if (activity == null || !(activity is ActivityScoreMic _activityScoreMic))
+            {
+                return;
+            }
+            var tokenId = _activityScoreMic.GetTokenIdForShopItem(chessOrderData);
+            var cfg = Game.Manager.objectMan.GetBasicConfig(tokenId);
+            if (cfg != null)
+            {
+                var isMulti = _activityScoreMic.CheckMainBoardTokenMultiRate(tokenId, out var rate);
+                //发麦克风积分
+                var num = isMulti ? 1 * rate : 1;   //默认不加倍时就发1个
+                var reward = Game.Manager.rewardMan.BeginReward(tokenId, num, ReasonString.score_mic_shop);
+                UIFlyUtility.FlyReward(reward, fromPos);
+            }
+        }
+        
         #endregion
     }
 }

@@ -65,7 +65,7 @@ namespace fat.rawdata {
   /// <summary>
   /// annotation@annotation_type(type="rawdata")
   /// annotation@rawdata(row="EventFishMilestone",table="EventFishMilestoneMap",table_wrapper="EventFishMilestoneConf",map="true",map_key_type="int32",data="EventFishMilestoneConf")
-  /// annotation@ab(table_ab="EventFishMilestoneMapAB",table_ab_patch="EventFishMilestoneMapABPatch",table_ab_value="EventFishMilestoneMapABValue",ab_patch="true")
+  /// annotation@ab(table_ab="EventFishMilestoneMapAB",table_ab_patch="EventFishMilestoneMapABPatch",table_ab_value="EventFishMilestoneMapABValue",ab_patch="false")
   /// annotation@filter(just_server="false",just_client="false")
   /// annotation@EventFishMilestone(id="id")
   /// </summary>

@@ -24,7 +24,7 @@ namespace fat.rawdata {
     static FeatureEntryReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChpyYXdkYXRhL0ZlYXR1cmVFbnRyeS5wcm90bxIHcmF3ZGF0YSqfFQoMRmVh",
+            "ChpyYXdkYXRhL0ZlYXR1cmVFbnRyeS5wcm90bxIHcmF3ZGF0YSrhFgoMRmVh",
             "dHVyZUVudHJ5Eg8KC0ZlYXR1cmVOb25lEAASEwoPRmVhdHVyZUl0ZW1TYWxl",
             "EAESEgoORmVhdHVyZUJhZ0l0ZW0QAhIWChJGZWF0dXJlQmFnUHJvZHVjZXIQ",
             "AxISCg5GZWF0dXJlQmFnVG9vbBAEEhEKDUZlYXR1cmVCdWJibGUQBRIVChFG",
@@ -85,8 +85,13 @@ namespace fat.rawdata {
             "cmVNb25vcG9seUJvYXJkEHASHQoZRmVhdHVyZU1vbm9wb2x5T25lUGx1c09u",
             "ZRBxEhoKFkZlYXR1cmVXZWJzaG9wRW50cmFuY2UQchIUChBGZWF0dXJlVGlj",
             "a2V0VXNlEHMSFQoRRmVhdHVyZVJhbmRvbVNlZWQQdBIaChZGZWF0dXJlT3Jk",
-            "ZXJEaWZmQ2hvaWNlEHVCPVotZ2l0bGFiLmZ1bnBsdXMuaW8vZmF0L2NvbmYv",
-            "Z2VuL2dvbGFuZy9yYXdkYXRhqgILZmF0LnJhd2RhdGFiBnByb3RvMw=="));
+            "ZXJEaWZmQ2hvaWNlEHUSFAoQRmVhdHVyZUFyZWFCb2FyZBB2EhoKFkZlYXR1",
+            "cmVBcmVhRW5kbGVzc1BhY2sQdxIhCh1GZWF0dXJlUHJvbXB0QXJlYUl0ZW1M",
+            "ZXZlbE9wdBB4Eh4KGkZlYXR1cmVQcm9tcHRBcmVhQnViYmxlT3B0EHkSHQoZ",
+            "RmVhdHVyZVByb21wdEFyZWFUaW1lck9wdBB6EhUKEUZlYXR1cmVNeXN0ZXJp",
+            "b3VzEHsSFQoRRmVhdHVyZVJhY2VFeHRlbmQQfEI9Wi1naXRsYWIuZnVucGx1",
+            "cy5pby9mYXQvY29uZi9nZW4vZ29sYW5nL3Jhd2RhdGGqAgtmYXQucmF3ZGF0",
+            "YWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::fat.rawdata.FeatureEntry), }, null, null));
@@ -568,6 +573,34 @@ namespace fat.rawdata {
     /// 自选限时订单
     /// </summary>
     [pbr::OriginalName("FeatureOrderDiffChoice")] FeatureOrderDiffChoice = 117,
+    /// <summary>
+    /// 区域棋盘
+    /// </summary>
+    [pbr::OriginalName("FeatureAreaBoard")] FeatureAreaBoard = 118,
+    /// <summary>
+    /// 区域棋盘- 6格无限礼包
+    /// </summary>
+    [pbr::OriginalName("FeatureAreaEndlessPack")] FeatureAreaEndlessPack = 119,
+    /// <summary>
+    /// 提示区 - 等级描述
+    /// </summary>
+    [pbr::OriginalName("FeaturePromptAreaItemLevelOpt")] FeaturePromptAreaItemLevelOpt = 120,
+    /// <summary>
+    /// 提示区 - 打破泡泡按钮
+    /// </summary>
+    [pbr::OriginalName("FeaturePromptAreaBubbleOpt")] FeaturePromptAreaBubbleOpt = 121,
+    /// <summary>
+    /// 提示区 - 冷却倒计时
+    /// </summary>
+    [pbr::OriginalName("FeaturePromptAreaTimerOpt")] FeaturePromptAreaTimerOpt = 122,
+    /// <summary>
+    /// 神秘惊喜
+    /// </summary>
+    [pbr::OriginalName("FeatureMysterious")] FeatureMysterious = 123,
+    /// <summary>
+    /// 热气球活动拓展
+    /// </summary>
+    [pbr::OriginalName("FeatureRaceExtend")] FeatureRaceExtend = 124,
   }
 
   #endregion

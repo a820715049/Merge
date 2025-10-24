@@ -336,6 +336,7 @@ namespace FAT
                 }
                 else
                 {
+                    scroll.enabled = true;
                     // 判断是否活动结束
                     if (!_activity.Active)
                     {
@@ -344,7 +345,7 @@ namespace FAT
                 }
             });
 
-            _scrollOutSeq.OnKill(() => {  scroll.enabled = true;SetBlock(false); });
+            _scrollOutSeq.OnKill(() => { SetBlock(false); });
         }
 
         private bool CheckNextTrain(TrainType type)
@@ -424,6 +425,12 @@ namespace FAT
         private bool CheckAutoScroll(out float to)
         {
             to = 0;
+
+            // 火车正在移动中
+            if (scroll.enabled == false)
+            {
+                return false;
+            }
 
             var findIndex = -1;
             // 检查是否有可提交的棋子（状态为2）

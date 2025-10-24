@@ -2,6 +2,7 @@
  * @Author: qun.chao
  * @Date: 2023-11-23 14:13:37
  */
+
 using UnityEngine;
 using fat.rawdata;
 
@@ -30,8 +31,8 @@ namespace FAT
                 case "board_select_hand_pos": imp = new GuideActImpBoardSelectHandPos(); break;
                 case "board_tap": imp = new GuideActImpBoardTap(); break;
                 case "board_tap_boost": imp = new GuideActImpBoardTapBoost(); break;
-                case "board_to_bag": imp = new GuideActImpBoardToBag(); break;  // 自带mask显示
-                case "board_to_custom": imp = new GuideActImpBoardToCustom(); break;  // 自带mask显示
+                case "board_to_bag": imp = new GuideActImpBoardToBag(); break; // 自带mask显示
+                case "board_to_custom": imp = new GuideActImpBoardToCustom(); break; // 自带mask显示
                 case "board_unlock": imp = new GuideActImpBoardUnlock(); break;
                 case "board_use_hand": imp = new GuideActImpBoardUseHand(); break;
                 case "board_use_hand_crood": imp = new GuideActImpBoardUseHandCrood(); break;
@@ -85,6 +86,8 @@ namespace FAT
                 case "open_ui_wish_help": imp = new GuideActImpOpenWishHelp(); break;
                 case "open_ui_frozen_help": imp = new GuideActImpOpenFrozenHelp(); break;
                 case "open_ui_train_help": imp = new GuideActImpOpenTrainHelp(); break;
+                case "open_ui_activity_help": imp = new GuideActImpOpenActivityHelp(); break;
+                case "open_ui_vineleap_help": imp = new GuideActImpOpenVineLeapHelp(); break;
                 case "plot": imp = new GuideActImpPlot(); break;
                 case "save": imp = new GuideActImpSave(); break;
                 case "source_ctrl": imp = new GuideActImpSourceCtrl(); break;
@@ -100,18 +103,21 @@ namespace FAT
                 case "wait_uistate": imp = new GuideActWaitUIState(); break;
                 case "token_mask": imp = new GuideActImpTokenMask(); break; // 签到抽奖活动
                 case "hand_pro_train_spawner": imp = new GuideActImpHandProTrainSpawner(); break;
+                case "act_entry_mash_show": imp = new GuideActImpEntryMaskShow(); break;
 
                 #region sp
+
                 case "claw_order_mask_show": imp = new GuideActImpClawOrderMaskShow(); break;
                 case "claw_order_help": imp = new GuideActImpClawOrderHelp(); break;
                 case "gameplayhelp": imp = new GuideActImpSpShowGameplayHelp(); break;
                 case "merge_entry_hide": imp = new GuideActImpSpMergeEntryHide(); break;
                 case "merge_entry_hijack": imp = new GuideActImpSpMergeEntryHijack(); break;
                 case "merge_entry_show": imp = new GuideActImpSpMergeEntryShow(); break;
+
                 #endregion
             }
+
             return imp;
         }
-
     }
 }

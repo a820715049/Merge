@@ -94,7 +94,7 @@ namespace FAT
                 var idx = confD.MilestoneGroup[scorePhase];
                 var c = GetCastleMilestoneGroup(idx);
                 confG = c;
-                bonusHandler.Init(c.Id, c.OutputsOne, c.OutputsTwo, c.OutputsFour, c.OutputsFixedOne, c.OutputsFixedTwo, c.OutputsFixedFour, c.WithoutputTime, null);
+                bonusHandler.Init(c.Id, c.OutputsOne, c.OutputsFixedOne, c.WithoutputTime, null);
             }
         }
 
@@ -147,7 +147,7 @@ namespace FAT
         {
             if (IsComplete()) return;
             score += count;
-            
+
             // 循环处理所有可能的里程碑
             while (score >= confG.MilestoneScore && !IsComplete())
             {
@@ -169,7 +169,7 @@ namespace FAT
                 if (scorePhase < confD.MilestoneGroup.Count)
                 {
                     confG = GetCastleMilestoneGroup(confD.MilestoneGroup[scorePhase]);
-                    bonusHandler.Init(confG.Id, confG.OutputsOne, confG.OutputsTwo, confG.OutputsFour, confG.OutputsFixedOne, confG.OutputsFixedTwo, confG.OutputsFixedFour, confG.WithoutputTime, null);
+                    bonusHandler.Init(confG.Id, confG.OutputsOne, confG.OutputsFixedOne, confG.WithoutputTime, null);
                 }
                 else
                 {

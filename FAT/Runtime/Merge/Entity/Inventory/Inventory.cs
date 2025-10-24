@@ -260,12 +260,14 @@ namespace FAT.Merge
             }
         }
 
-        public void DisposeItem(Item i)
+        public void DisposeItem(Item i, ItemDeadType type = ItemDeadType.Common)
         {
             foreach (var bag in _GetBagListSorted())
             {
                 if (bag != null && bag.DisposeItem(i))
                 {
+                    //尝试销毁一个在背包里放着的棋子
+                    mParent.world.activeBoard?.DisposeItemInventory(i, type);
                     return;
                 }
             }

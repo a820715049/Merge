@@ -14,6 +14,8 @@ public class UICommonProgressBar : MonoBehaviour
     [Range(0.1f, 10f)] [SerializeField] private float animTime = 1f;
 
     public bool IsWaitNotify => mShouldNotify;
+    public float Cur => mCur;
+
     private Action mOnAnimFinishedHandler;
     private Func<long, long, string> mFormatter = FormatterASlashB;
     private bool mShouldNotify = false;

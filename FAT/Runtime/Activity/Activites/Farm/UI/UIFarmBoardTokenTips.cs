@@ -77,7 +77,7 @@ namespace FAT
 
         private void OnClickConfirm()
         {
-            var ui = UIManager.Instance.TryGetUI(UIConfig.UIFarmBoardMain);
+            var ui = UIManager.Instance.TryGetUI(_activity.VisualBoard.res.ActiveR);
             if (ui != null && ui is UIFarmBoardMain main)
             {
                 main.Exit(true); // 退出活动时默认返回主棋盘

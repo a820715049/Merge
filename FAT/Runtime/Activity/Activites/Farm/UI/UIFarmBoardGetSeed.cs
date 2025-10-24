@@ -91,7 +91,7 @@ namespace FAT
         {
             showPlaying = true;
             int farmIndex = _activity.UnlockFarmlandNum - 1;
-            var mainUI = UIManager.Instance.TryGetUI(UIConfig.UIFarmBoardMain);
+            var mainUI = UIManager.Instance.TryGetUI(_activity.VisualBoard.res.ActiveR);
             if (mainUI != null)
             {
                 var farmBoardMain = (UIFarmBoardMain)mainUI;

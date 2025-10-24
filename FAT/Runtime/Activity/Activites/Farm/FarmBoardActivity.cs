@@ -159,10 +159,8 @@ namespace FAT
         public VisualRes VisualBoard { get; } = new(UIConfig.UIFarmBoardMain); //棋盘UI
         public VisualRes VisualHelp { get; } = new(UIConfig.UIFarmBoardHelp);
         public VisualRes VisualTokenTip { get; } = new(UIConfig.UIFarmBoardTokenTips); //Tip
-        public VisualRes VisualAnimalTip { get; } = new(UIConfig.UIFarmBoardAnimalTips); //Tip
         public VisualRes VisualLoading { get; } = new(UIConfig.UIFarmBoardLoading);
         public VisualRes VisualComplete { get; } = new(UIConfig.UIFarmBoardComplete);
-        public VisualRes VisualGetSeed { get; } = new(UIConfig.UIFarmBoardGetSeed);
 
         // 弹脸
         public VisualPopup StartPopup { get; } = new(UIConfig.UIFarmBoardBegin); //活动开启theme

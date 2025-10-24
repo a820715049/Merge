@@ -21,21 +21,23 @@ namespace FAT
         [SerializeField] private UIImageRes _bubble;
         [SerializeField] private Animator lockAnim;
         public UIImageRes Bubble => _bubble;
+        private FarmBoardActivity _activity;
 
         public void SetUp()
         {
             lockBtn.onClick.AddListener(OnClickLock);
         }
 
-        public void Init(int id)
+        public void Init(int id, FarmBoardActivity act)
         {
+            _activity = act;
             var cfg = Env.Instance.GetItemConfig(id);
             _bubble.SetImage(cfg.Icon);
         }
 
         public void OnClickLock()
         {
-            var ui = UIManager.Instance.TryGetUI(UIConfig.UIFarmBoardMain);
+            var ui = UIManager.Instance.TryGetUI(_activity.VisualBoard.res.ActiveR);
             if (ui != null && ui is UIFarmBoardMain main)
             {
                 var cloud = main.CloudHolder.GetNextCloud();
@@ -74,7 +76,19 @@ namespace FAT
         public void PlayOpen()
         {
             // 播放音效 开锁
-            Game.Manager.audioMan.TriggerSound("FarmboardUnlock");
+            var ui = UIManager.Instance.TryGetUI(_activity.VisualBoard.res.ActiveR);
+            if (ui != null && ui is UIFarmBoardMain main)
+            {
+                if (main.mbFarm is MBFarmBoardFarm_Grass)
+                {
+                    Game.Manager.audioMan.TriggerSound("FarmboardUnlock");
+                }
+                else if (main.mbFarm is MBFarmBoardFarm_Goods)
+                {
+                    Game.Manager.audioMan.TriggerSound("FarmboardCloudUnlockBF");
+                }
+            }
+
             Play("Open");
         }
 

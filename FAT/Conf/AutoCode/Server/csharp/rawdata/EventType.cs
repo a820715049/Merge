@@ -24,7 +24,7 @@ namespace fat.rawdata {
     static EventTypeReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChdyYXdkYXRhL0V2ZW50VHlwZS5wcm90bxIHcmF3ZGF0YSqDEQoJRXZlbnRU",
+            "ChdyYXdkYXRhL0V2ZW50VHlwZS5wcm90bxIHcmF3ZGF0YSrrEQoJRXZlbnRU",
             "eXBlEhQKEEV2ZW50VHlwZURlZmF1bHQQABITCg9FdmVudFR5cGVFbmVyZ3kQ",
             "ARIVChFFdmVudFR5cGVEYWlseVBvcBACEhQKEEV2ZW50VHlwZU5ld1VzZXIQ",
             "AxIXChNFdmVudFR5cGVPbmVQbHVzT25lEAQSGAoURXZlbnRUeXBlRW5kbGVz",
@@ -73,8 +73,11 @@ namespace fat.rawdata {
             "YWNlEFMSFQoRRXZlbnRUeXBlVmluZUxlYXAQVBIZChVFdmVudFR5cGVJbmRl",
             "cGVuQmluZ28QVRIaChZFdmVudFR5cGVNb25vcG9seUJvYXJkEFYSHwobRXZl",
             "bnRUeXBlTW9ub3BvbHlPbmVQbHVzT25lEFcSHAoYRXZlbnRUeXBlT3JkZXJE",
-            "aWZmQ2hvaWNlEFhCPVotZ2l0bGFiLmZ1bnBsdXMuaW8vZmF0L2NvbmYvZ2Vu",
-            "L2dvbGFuZy9yYXdkYXRhqgILZmF0LnJhd2RhdGFiBnByb3RvMw=="));
+            "aWZmQ2hvaWNlEFgSFgoSRXZlbnRUeXBlQXJlYUJvYXJkEFkSHAoYRXZlbnRU",
+            "eXBlQXJlYUVuZGxlc3NQYWNrEFoSFwoTRXZlbnRUeXBlTXlzdGVyaW91cxBb",
+            "EhcKE0V2ZW50VHlwZVJhY2VFeHRlbmQQXEI9Wi1naXRsYWIuZnVucGx1cy5p",
+            "by9mYXQvY29uZi9nZW4vZ29sYW5nL3Jhd2RhdGGqAgtmYXQucmF3ZGF0YWIG",
+            "cHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::fat.rawdata.EventType), }, null, null));
@@ -433,6 +436,22 @@ namespace fat.rawdata {
     /// 自选限时订单
     /// </summary>
     [pbr::OriginalName("EventTypeOrderDiffChoice")] OrderDiffChoice = 88,
+    /// <summary>
+    /// 区域棋盘
+    /// </summary>
+    [pbr::OriginalName("EventTypeAreaBoard")] AreaBoard = 89,
+    /// <summary>
+    /// 区域棋盘6格无限礼包
+    /// </summary>
+    [pbr::OriginalName("EventTypeAreaEndlessPack")] AreaEndlessPack = 90,
+    /// <summary>
+    /// 神秘惊喜
+    /// </summary>
+    [pbr::OriginalName("EventTypeMysterious")] Mysterious = 91,
+    /// <summary>
+    /// 热气球活动拓展
+    /// </summary>
+    [pbr::OriginalName("EventTypeRaceExtend")] RaceExtend = 92,
   }
 
   #endregion

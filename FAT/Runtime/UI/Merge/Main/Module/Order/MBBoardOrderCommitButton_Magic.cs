@@ -11,6 +11,7 @@ using EL;
 using Spine.Unity;
 using DG.Tweening;
 using FAT.Merge;
+using fat.rawdata;
 
 namespace FAT
 {
@@ -118,7 +119,7 @@ namespace FAT
         private void UpdateProgress()
         {
             // TODO: 更合理的主界面判断方式
-            if (!Game.Manager.guideMan.IsMatchUIState((int)GuideRequireChecker.UIState.BoardMain, 0))
+            if (!Game.Manager.guideMan.IsMatchUIState((int)UiState.BoardMain, 0))
                 return;
             if (UIManager.Instance.GetLayerRootByType(UILayer.SubStatus).childCount > 0)
                 return;

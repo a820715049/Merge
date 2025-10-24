@@ -42,7 +42,7 @@ namespace FAT
             transform.AddButton("Content/Panel/Right/BtnClose", () => { base.Close(); });
             transform.AddButton("Content/Panel/Left/Help_Btn",
                 (() => { UIManager.Instance.OpenWindow(Game.Manager.decorateMan.Activity.HelpUI.ActiveR); }));
-            transform.AddButton("Content/Preview", ClickPreview);
+            transform.AddButton("Content/Preview", ClickPreview, false);
         }
 
         protected override void OnVisible(bool v_)

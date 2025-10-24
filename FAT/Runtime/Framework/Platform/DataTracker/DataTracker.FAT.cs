@@ -280,10 +280,10 @@ public partial class DataTracker
     [Serializable]
     internal class missing_item : MergeCommonData
     {
-        public List<int> category_list;
+        public string category_list;
         public string from;
 
-        public static void Track(List<int> _missList, ReasonString reason)
+        public static void Track(string _missList, ReasonString reason)
         {
             var data = _GetTrackData<missing_item>();
             data.category_list = _missList;
@@ -837,6 +837,66 @@ public partial class DataTracker
         }
     }
 
+    #endregion
+    
+    #region 积分活动变种(麦克风版)
+
+    //玩家成功领取里程碑奖励时记录
+    [Serializable]
+    internal class event_mic_milestone : MergeCommonData
+    {
+        public int event_id;
+        public int event_from; //活动来源（0：EventTime，1：EventTrigger）
+        public int event_param;
+        public int milestone_queue; //该奖励位于里程碑奖励的序数（从1开始，本次计算在内）
+        public int milestone_num;   //本轮里程碑的总个数
+        public int milestone_difficulty;   //本轮活动难度
+        public int round_num;   //活动期间的第几轮（固定为1）
+        public bool is_final;   //是否是本轮最后一个里程碑
+
+        public static void Track(ActivityLike acti_, int index, int milestoneNum, int diff, bool isFinal)
+        {
+            var data = _GetTrackData<event_mic_milestone>();
+            data.event_id = acti_.Id;
+            data.event_from = acti_.From;
+            data.event_param = acti_.Param;
+            data.milestone_queue = index;
+            data.milestone_num = milestoneNum;
+            data.milestone_difficulty = diff;
+            data.round_num = 1;
+            data.is_final = isFinal;
+            _TrackData(data);
+        }
+    }
+    
+    //玩家积分增长时记录
+    [Serializable]
+    internal class event_mic_token : MergeCommonData
+    {
+        public int event_id;
+        public int event_from; //活动来源（0：EventTime，1：EventTrigger）
+        public int event_param;
+        public int id; //获得token的id
+        public string from;   //积分来源
+        public bool is_add;   //是否是增加
+        public int amount_change;   //获得积分数量（按基础积分换算后的值）
+        public bool is_double;   //是否是双倍
+
+        public static void Track(ActivityLike acti_, int id, ReasonString reason, bool isAdd, int num, bool isDouble)
+        {
+            var data = _GetTrackData<event_mic_token>();
+            data.event_id = acti_.Id;
+            data.event_from = acti_.From;
+            data.event_param = acti_.Param;
+            data.id = id;
+            data.from = reason;
+            data.is_add = isAdd;
+            data.amount_change = num;
+            data.is_double = isDouble;
+            _TrackData(data);
+        }
+    }
+    
     #endregion
 
     #region 寻宝活动
@@ -1949,6 +2009,152 @@ public partial class DataTracker
         }
     }
 
+    #endregion
+
+    #region 海上赢家
+    
+    /// <summary>
+    /// 回合开始时（参与比赛）
+    /// </summary>
+    [Serializable]
+    internal class event_searace_roundstart : MergeCommonData
+    {
+        public int event_id; // 活动ID（EventTime.id）
+        public int event_from; // 活动来源（0：EventTime，1：EventTrigger）
+        public int milestone_difficulty; // 活动难度（对应RFM分层）
+        public int event_param; // 活动参数（EventTime.eventParam）
+        public int milestone_num; // 回合总数（计数EventSeaRaceDetail.includeRoundId）
+        public int milestone_queue; // 第几回合的竞赛（加工，序数从1开始）
+        public int round_times; // 该回合下的第几次尝试（从1开始）
+        public int round_num; // 本次活动的第几轮（固定为1）
+        public bool is_final; // 是否为最后一个回合
+        public string strategy_id; // 机器人id（EventSeaRaceRound.robotId）
+
+        public static void Track(ActivityLike acti_, int milestone_difficulty, int milestone_num, int milestone_queue,
+            int round_times, int round_num, bool is_final, string strategy)
+        {
+            var data = _GetTrackData<event_searace_roundstart>();
+            data.event_id = acti_.Id;
+            data.event_from = acti_.From;
+            data.event_param = acti_.Param;
+            data.milestone_difficulty = milestone_difficulty;
+            data.milestone_num = milestone_num;
+            data.milestone_queue = milestone_queue;
+            data.round_times = round_times;
+            data.round_num = round_num;
+            data.is_final = is_final;
+            data.strategy_id = strategy;
+            _TrackData(data);
+        }
+    }
+    
+    /// <summary>
+    /// 回合获胜时
+    /// </summary>
+    [Serializable]
+    internal class event_searace_roundwin : MergeCommonData
+    {
+        public int event_id; // 活动ID（EventTime.id）
+        public int event_from; // 活动来源（0：EventTime，1：EventTrigger）
+        public int milestone_difficulty; // 活动难度（对应RFM分层）
+        public int event_param; // 活动参数（EventTime.eventParam）
+        public int milestone_num; // 回合总数（计数EventSeaRaceDetail.includeRoundId）
+        public int milestone_queue; // 第几回合的竞赛（加工，序数从1开始）
+        public int round_times; // 该回合下的第几次尝试（从1开始）
+        public int round_num; // 本次活动的第几轮（固定为1）
+        public long last_time; // 获胜用时（获胜时刻-回合开始时刻）
+        public int rank; //获得名次（根据实际数据）
+        public bool is_final; // 是否为最后一个回合
+        public string strategy_id; // 机器人id（EventSeaRaceRound.robotId）
+
+        public static void Track(ActivityLike acti_, int milestone_difficulty, int milestone_num, int milestone_queue,
+            int round_times, int round_num, long last_time, int rank, bool is_final, string strategy)
+        {
+            var data = _GetTrackData<event_searace_roundwin>();
+            data.event_id = acti_.Id;
+            data.event_from = acti_.From;
+            data.event_param = acti_.Param;
+            data.milestone_difficulty = milestone_difficulty;
+            data.milestone_num = milestone_num;
+            data.milestone_queue = milestone_queue;
+            data.round_times = round_times;
+            data.round_num = round_num;
+            data.last_time = last_time;
+            data.rank = rank;
+            data.is_final = is_final;
+            data.strategy_id = strategy;
+            _TrackData(data);
+        }
+    }
+    
+    /// <summary>
+    /// 回合失败时
+    /// </summary>
+    [Serializable]
+    internal class event_searace_roundlose : MergeCommonData
+    {
+        public int event_id; // 活动ID（EventTime.id）
+        public int event_from; // 活动来源（0：EventTime，1：EventTrigger）
+        public int milestone_difficulty; // 活动难度（对应RFM分层）
+        public int event_param; // 活动参数（EventTime.eventParam）
+        public int milestone_num; // 回合总数（计数EventSeaRaceDetail.includeRoundId）
+        public int milestone_queue; // 第几回合的竞赛（加工，序数从1开始）
+        public int round_times; // 该回合下的第几次尝试（从1开始）
+        public int round_num; // 本次活动的第几轮（固定为1）
+        public int score_num; // 玩家最终分数
+        public bool is_final; // 是否为最后一个回合
+        public string strategy_id; // 机器人id（EventSeaRaceRound.robotId）
+
+        public static void Track(ActivityLike acti_, int milestone_difficulty, int milestone_num, int milestone_queue,
+            int round_times, int round_num, int score_num, bool is_final, string strategy)
+        {
+            var data = _GetTrackData<event_searace_roundlose>();
+            data.event_id = acti_.Id;
+            data.event_from = acti_.From;
+            data.event_param = acti_.Param;
+            data.milestone_difficulty = milestone_difficulty;
+            data.milestone_num = milestone_num;
+            data.milestone_queue = milestone_queue;
+            data.round_times = round_times;
+            data.round_num = round_num;
+            data.score_num = score_num;
+            data.is_final = is_final;
+            data.strategy_id = strategy;
+            _TrackData(data);
+        }
+    }
+    
+    /// <summary>
+    /// 领取里程碑奖励时
+    /// </summary>
+    [Serializable]
+    internal class event_searace_milestone : MergeCommonData
+    {
+        public int event_id; // 活动ID（EventTime.id）
+        public int event_from; // 活动来源（0：EventTime，1：EventTrigger）
+        public int milestone_difficulty; // 活动难度（对应RFM分层）
+        public int event_param; // 活动参数（EventTime.eventParam）
+        public int milestone_num; // 里程碑总数（计数EventSeaRaceDetail.milestoneScore）
+        public int milestone_queue; // 第几个里程碑奖励
+        public int round_num; // 本次活动的第几轮（固定为1）
+        public bool is_final; // 是否为最后一个里程碑奖励
+
+        public static void Track(ActivityLike acti_, int milestone_difficulty, int milestone_num, int milestone_queue,
+            int round_num, bool is_final)
+        {
+            var data = _GetTrackData<event_searace_milestone>();
+            data.event_id = acti_.Id;
+            data.event_from = acti_.From;
+            data.event_param = acti_.Param;
+            data.milestone_difficulty = milestone_difficulty;
+            data.milestone_num = milestone_num;
+            data.milestone_queue = milestone_queue;
+            data.round_num = round_num;
+            data.is_final = is_final;
+            _TrackData(data);
+        }
+    }
+    
     #endregion
 
     #region 迷你棋盘
@@ -5276,6 +5482,142 @@ public partial class DataTracker
             _TrackData(data);
         }
     }
+
+    #endregion
+
+    #region 飞跃藤蔓
+    [Serializable]
+    internal class event_vineleap_enter : MergeCommonData
+    {
+        public int event_id;
+        public int event_from;
+        public int event_param;
+        public int milestone_difficulty;
+        public int milestone_queue;
+        public int milestone_num;
+        public bool is_final;
+        public int select_diff;
+        public int select_diff_id;
+        public int challenge_num;
+        public static void Track(ActivityLike activityLike, int diff, int queue, int num, bool final, int select, int id, int challenge)
+        {
+            var data = _GetTrackData<event_vineleap_enter>();
+            (data.event_id, data.event_from, data.event_param) = activityLike.Info3;
+            data.milestone_difficulty = diff;
+            data.milestone_queue = queue;
+            data.milestone_num = num;
+            data.is_final = final;
+            data.select_diff = select;
+            data.select_diff_id = id;
+            data.challenge_num = challenge;
+            _TrackData(data);
+        }
+
+    }
+
+
+    [Serializable]
+    internal class event_vineleap_success : MergeCommonData
+    {
+        public int event_id;
+        public int event_from;
+        public int event_param;
+        public int milestone_difficulty;
+        public int milestone_queue;
+        public int milestone_num;
+        public bool is_final;
+        public int select_diff;
+        public int select_diff_id;
+        public int challenge_num;
+        public int rank;
+        public bool is_reward;
+        public bool is_final_reward;
+        public int reward_id;
+        public string rewardinfo;
+        public int last_time;
+        public static void Track(ActivityLike activityLike, int diff, int queue, int num, bool final, int select, int id, int challenge,
+            int rank, bool isReward, bool isFinalReward, int rewardId, string info, int time)
+        {
+            var data = _GetTrackData<event_vineleap_success>();
+            (data.event_id, data.event_from, data.event_param) = activityLike.Info3;
+            data.milestone_difficulty = diff;
+            data.milestone_queue = queue;
+            data.milestone_num = num;
+            data.is_final = final;
+            data.select_diff = select;
+            data.select_diff_id = id;
+            data.challenge_num = challenge;
+            data.rank = rank;
+            data.is_reward = isReward;
+            data.is_final_reward = isFinalReward;
+            data.reward_id = rewardId;
+            data.rewardinfo = info;
+            data.last_time = time;
+            _TrackData(data);
+        }
+
+    }
+
+    internal class event_vineleap_fail : MergeCommonData
+    {
+        public int event_id;
+        public int event_from;
+        public int event_param;
+        public int milestone_difficulty;
+        public int milestone_queue;
+        public int milestone_num;
+        public bool is_final;
+        public int select_diff;
+        public int select_diff_id;
+        public int challenge_num;
+        public int last_time;
+        public static void Track(ActivityLike activityLike, int diff, int queue, int num, bool final, int select, int id, int challenge, int time)
+        {
+            var data = _GetTrackData<event_vineleap_fail>();
+            (data.event_id, data.event_from, data.event_param) = activityLike.Info3;
+            data.milestone_difficulty = diff;
+            data.milestone_queue = queue;
+            data.milestone_num = num;
+            data.is_final = final;
+            data.select_diff = select;
+            data.select_diff_id = id;
+            data.challenge_num = challenge;
+            data.last_time = time;
+            _TrackData(data);
+        }
+
+    }
+
+    internal class event_vineleap_end : MergeCommonData
+    {
+        public int event_id;
+        public int event_from;
+        public int event_param;
+        public int milestone_difficulty;
+        public int milestone_queue;
+        public int milestone_num;
+        public bool is_final;
+        public int select_diff;
+        public int select_diff_id;
+        public int challenge_num;
+        public int end_reason;
+        public static void Track(ActivityLike activityLike, int diff, int queue, int num, bool final, int select, int id, int challenge, int reason)
+        {
+            var data = _GetTrackData<event_vineleap_end>();
+            (data.event_id, data.event_from, data.event_param) = activityLike.Info3;
+            data.milestone_difficulty = diff;
+            data.milestone_queue = queue;
+            data.milestone_num = num;
+            data.is_final = final;
+            data.select_diff = select;
+            data.select_diff_id = id;
+            data.challenge_num = challenge;
+            data.end_reason = reason;
+            _TrackData(data);
+        }
+
+    }
+
 
     #endregion
 

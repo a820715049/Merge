@@ -41,7 +41,10 @@ namespace FAT
         private float currentV;
         private bool addScoreByShop;
         private bool willSlide;
-        private DG.Tweening.Core.TweenerCore<Vector2, Vector2, DG.Tweening.Plugins.Options.VectorOptions> doTween;
+        private bool isAnimating; // 动画进行中标记
+        private DG.Tweening.Core.TweenerCore<Vector2, Vector2, DG.Tweening.Plugins.Options.VectorOptions> slideInTween;
+        private DG.Tweening.Core.TweenerCore<Vector2, Vector2, DG.Tweening.Plugins.Options.VectorOptions> slideOutTween;
+        private Coroutine slideCoroutine; // 当前滑动协程引用
 
 #if UNITY_EDITOR
         private void OnValidate()
@@ -70,6 +73,9 @@ namespace FAT
 
         public void OnDisable()
         {
+            // 停止所有动画和协程
+            StopAllAnimations();
+            
             MessageCenter.Get<MSG.GAME_SCORE_GET_PROGRESS_BOARD>().RemoveListener(ShowProgress);
             MessageCenter.Get<MSG.GAME_SCORE_GET_PROGRESS_SHOP>().RemoveListener(ShowShopProgress);
             MessageCenter.Get<MSG.BOARD_AREA_ADAPTER_COMPLETE>().RemoveListener(RefreshAdapter);
@@ -96,7 +102,11 @@ namespace FAT
 
         public void OnEnable()
         {
+            // 确保启用时状态完全重置
+            StopAllAnimations();
             Visible(false);
+            addScoreByShop = false;
+            
             whenCd ??= RefreshCD;
             MessageCenter.Get<MSG.GAME_SCORE_GET_PROGRESS_BOARD>().AddListener(ShowProgress);
             MessageCenter.Get<MSG.GAME_SCORE_GET_PROGRESS_SHOP>().AddListener(ShowShopProgress);
@@ -128,21 +138,55 @@ namespace FAT
             {
                 return;
             }
+            
+            // 防止重复触发 - 如果已经在动画中，忽略新的请求
+            if (isAnimating && willSlide)
+            {
+                return;
+            }
+            
+            // 停止所有正在进行的动画和协程
+            StopAllAnimations();
+            
             willSlide = true;
-            if (doTween != null)
-                doTween.Kill();
+            isAnimating = true;
             Refresh(currentValue, targetValue);
-            Game.Instance.StartCoroutineGlobal(CoScoreProgressMove());
+            slideCoroutine = Game.Instance.StartCoroutineGlobal(CoScoreProgressMove());
         }
 
         private IEnumerator CoScoreProgressMove()
         {
-            //等待进度条表演 无论成功与否 2s后自动划出界面外 避免残留
+            //等待进度条表演 无论成功与否 3s后自动划出界面外 避免残留
             yield return new WaitForSeconds(3f);
-            doTween = rect.DOAnchorPosX(-width * group.transform.localScale.x, 0.5f).OnComplete(
+            
+            // 检查是否仍需要滑出（可能被其他操作打断）
+            if (!willSlide || !isAnimating)
+            {
+                slideCoroutine = null;
+                yield break;
+            }
+            
+            // 如果正在滑入，等待滑入完成
+            if (slideInTween != null && slideInTween.IsActive())
+            {
+                yield return new WaitUntil(() => slideInTween == null || !slideInTween.IsActive());
+            }
+            
+            // 再次检查状态，确保仍需要滑出
+            if (!willSlide || !isAnimating)
+            {
+                slideCoroutine = null;
+                yield break;
+            }
+            
+            var targetX = -width * group.transform.localScale.x;
+            slideOutTween = rect.DOAnchorPosX(targetX, 0.5f).OnComplete(
                 () =>
                 {
                     willSlide = false;
+                    isAnimating = false;
+                    slideOutTween = null;
+                    slideCoroutine = null;
                     Visible(false);
                 }
             );
@@ -154,17 +198,56 @@ namespace FAT
             {
                 return;
             }
+            
+            // 防止重复触发 - 如果已经在动画中，忽略新的请求
+            if (isAnimating && willSlide)
+            {
+                return;
+            }
+            
+            // 停止所有正在进行的动画和协程
+            StopAllAnimations();
+            
             willSlide = true;
+            isAnimating = true;
             addScoreByShop = true;
-            if (doTween != null)
-                doTween.Kill();
             Refresh(currentValue, targetValue);
-            Game.Instance.StartCoroutineGlobal(CoScoreProgressMove());
+            slideCoroutine = Game.Instance.StartCoroutineGlobal(CoScoreProgressMove());
         }
 
         private void Visible(bool v_)
         {
             group.SetActive(v_);
+        }
+
+        /// <summary>
+        /// 停止所有正在进行的动画和协程
+        /// </summary>
+        private void StopAllAnimations()
+        {
+            // 停止DOTween动画
+            if (slideInTween != null && slideInTween.IsActive())
+            {
+                slideInTween.Kill();
+                slideInTween = null;
+            }
+            
+            if (slideOutTween != null && slideOutTween.IsActive())
+            {
+                slideOutTween.Kill();
+                slideOutTween = null;
+            }
+            
+            // 停止协程
+            if (slideCoroutine != null)
+            {
+                Game.Instance.StopCoroutineGlobal(slideCoroutine);
+                slideCoroutine = null;
+            }
+            
+            // 重置所有状态
+            isAnimating = false;
+            willSlide = false;
         }
 
         private void Refresh(int currentValue, int targetValue)
@@ -178,8 +261,13 @@ namespace FAT
 
             targetV = targetValue;
             currentV = currentValue;
-            //由于订单区域适配做了scale缩放 导致动画播完会残留 把scale影响算到动画偏移里
-            rect.anchoredPosition = new(-width * group.transform.localScale.x, rect.anchoredPosition.y);
+            
+            var scaleX = group.transform.localScale.x;
+            var startX = -width * scaleX;
+            var endX = (width * scaleX) - width;
+            
+            //设置初始位置（屏幕左侧外）
+            rect.anchoredPosition = new Vector2(startX, rect.anchoredPosition.y);
 
             CheckSpeed();
             Visible(true);
@@ -187,9 +275,18 @@ namespace FAT
             var next = activityScore.MilestoneNext((int)currentV);
             var (node, prev) = Node(next, 1);
             Progress(node.value, prev);
-            //不能直接偏移到0 因为订单区域所有元素适配后进行了缩放
-            rect.DOAnchorPosX(width * group.transform.localScale.x - width, 0.5f).OnComplete((() =>
+            
+            //滑入动画 - 从左侧滑入到目标位置
+            slideInTween = rect.DOAnchorPosX(endX, 0.5f).OnComplete(() =>
             {
+                slideInTween = null;
+                
+                // 确保状态仍然有效
+                if (!willSlide || !isAnimating)
+                {
+                    return;
+                }
+                
                 //进度条划入的两个场景：1商店购买2棋盘内入口被划出屏幕
                 //商店内购买时 只有进度条的表演 即直接Animate 棋盘内也需要同步表演 （不再等待飞积分等等表现结束 直接发表演事件）
                 //正常情况下 发表演事件时机为 棋盘内其他表现结束后
@@ -198,7 +295,7 @@ namespace FAT
                     MessageCenter.Get<MSG.SCORE_PROGRESS_ANIMATE>().Dispatch();
                     BeginProgressAnimate();
                 }
-            }));
+            });
             addNum.text = (targetValue - currentValue).ToString();
             RefreshTheme();
             scoreIcon.SetImage(Game.Manager.objectMan.GetBasicConfig(activityScore.ConfD.RequireCoinId).Icon);
@@ -324,6 +421,18 @@ namespace FAT
                 yield return null;
             }
 
+            if (activityScore.ShouldPopup())
+            {
+                activityScore.TryPopRewardUI();
+            }
+            else
+            {
+                foreach (var commitData in activityScore.commitRewardList)
+                {
+                    UIFlyUtility.FlyReward(commitData, reward.icon.transform.position);
+                }
+            }
+
             currentV = targetV;
             progress.Refresh(activityScore.CurShowScore, activityScore.CurMileStoneScore);
         }
@@ -344,7 +453,7 @@ namespace FAT
 
         private void BeginProgressAnimate()
         {
-            if (!willSlide)
+            if (!willSlide || !isAnimating)
             {
                 return;
             }
@@ -352,6 +461,12 @@ namespace FAT
             {
                 return;
             }
+            // 确保滑入动画已完成或没有滑入动画在进行
+            if (slideInTween != null && slideInTween.IsActive())
+            {
+                return;
+            }
+            
             if (currentV > 0 || addScoreByShop)
             {
                 Game.Instance.StartCoroutineGlobal(Animate());

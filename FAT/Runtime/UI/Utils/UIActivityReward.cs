@@ -30,6 +30,7 @@ namespace FAT
         private List<RewardConfig> showRewards = new();
         private string iconStr;
         private string descStr;
+        private string closeTipStr;
 
         protected override void OnCreate()
         {
@@ -44,6 +45,7 @@ namespace FAT
             rewards = items[1] as List<RewardCommitData>;
             iconStr = items[2] as string;
             descStr = items[3] as string;
+            closeTipStr = items.Length > 4 ? items[4] as string : I18N.Text("#SysComBtn7");
         }
 
         protected override void OnPreOpen()
@@ -58,6 +60,7 @@ namespace FAT
             _ShowRewards();
             icon.SetImage(iconStr);
             desc.text = descStr;
+            btnClaim.text.text.text = closeTipStr;
         }
 
         protected override void OnPostClose()

@@ -16,6 +16,7 @@ namespace FAT
             _activity = activity_;
             PopupId = visual_.PopupId;
             PopupRes = ui_.ActiveR;
+            option = new Option { ignoreDelay = true };
         }
 
         public override bool CheckValid(out string _)

@@ -68,7 +68,9 @@ namespace FAT
                 Reason = FlyReason.None;
             else if (Game.Manager.objectMan.IsType(ID, ObjConfigType.Coin) || ID == Constant.kMergeEnergyObjId ||
                      FlyType == FlyType.EventScore || FlyType == FlyType.DecorateToken || FlyType == FlyType.RaceToken
-                     || ID == DailyEvent.TokenId || FlyType == FlyType.EndlessToken || FlyType == FlyType.EndlessThreeToken)
+                     || ID == DailyEvent.TokenId || FlyType == FlyType.EndlessToken || FlyType == FlyType.EndlessThreeToken 
+                     || FlyType == FlyType.ScoreMicToken
+                     || FlyType == FlyType.VineLeapToken)
                 Reason = FlyReason.CoinChange;
             else if (ID == Constant.kMergeExpObjId)
                 Reason = FlyReason.ExpChange;
@@ -81,27 +83,27 @@ namespace FAT
             switch (Style)
             {
                 case FlyStyle.Cost:
-                    {
-                        Size = Reason == FlyReason.CoinChange ? 76f : 136f;
-                        break;
-                    }
+                {
+                    Size = Reason == FlyReason.CoinChange ? 76f : 136f;
+                    break;
+                }
                 case FlyStyle.Reward:
+                {
+                    Size = Reason switch
                     {
-                        Size = Reason switch
-                        {
-                            FlyReason.CoinChange => 85f,
-                            FlyReason.ExpChange => 100f,
-                            _ => 136f
-                        };
-                        Size = FlyType switch
-                        {
-                            FlyType.EventScore or FlyType.OrderLikeToken or FlyType.PuzzleToken => 70f,
-                            FlyType.FightBoardMonster or FlyType.FightBoardTreasure or FlyType.SevenDayToken => 85f,
-                            FlyType.Inventory => 136f,
-                            _ => Size,
-                        };
-                        break;
-                    }
+                        FlyReason.CoinChange => 85f,
+                        FlyReason.ExpChange => 100f,
+                        _ => 136f
+                    };
+                    Size = FlyType switch
+                    {
+                        FlyType.EventScore or FlyType.OrderLikeToken or FlyType.PuzzleToken or FlyType.VineLeapToken => 70f,
+                        FlyType.FightBoardMonster or FlyType.FightBoardTreasure or FlyType.SevenDayToken or FlyType.ScoreMicToken => 85f,
+                        FlyType.Inventory => 136f,
+                        _ => Size,
+                    };
+                    break;
+                }
             }
         }
     }

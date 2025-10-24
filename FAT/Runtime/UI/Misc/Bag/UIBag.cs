@@ -29,6 +29,7 @@ namespace FAT
         private int _curSelectTabIndex = 0;
         private int _curShowBagId = 1;
         private List<List<BagMan.BagGirdData>> _gridGroupList = new List<List<BagMan.BagGirdData>>();
+        private int _tryJumpItemId = 0;
 
         protected override void OnCreate()
         {
@@ -45,6 +46,10 @@ namespace FAT
                 int type = (int)(BagMan.BagType)items[0];
                 _curSelectTabIndex = type - 1;
                 _curShowBagId = _curSelectTabIndex + 1;
+            }
+            if (items.Length > 1)
+            {
+                _tryJumpItemId = (int)items[1];
             }
         }
 
@@ -71,6 +76,7 @@ namespace FAT
         protected override void OnPostClose()
         {
             BoardViewManager.Instance.OnInventoryClose();
+            _tryJumpItemId = 0;
         }
 
         private void _InitToggle()
@@ -150,6 +156,7 @@ namespace FAT
             _gridGroupList.Clear();
             var gidDataList = Game.Manager.bagMan.GetBagGirdDataList(_curShowBagId);
             List<BagMan.BagGirdData> tempList = new List<BagMan.BagGirdData>();
+            var jumpIndex = -1;  //scroll跳转
             if (gidDataList.Count < 4)
             {
                 _gridGroupList.Add(new List<BagMan.BagGirdData>(gidDataList));
@@ -170,6 +177,13 @@ namespace FAT
                         _gridGroupList.Add(new List<BagMan.BagGirdData>(tempList));
                         tempList.Clear();
                     }
+                    //确定要跳转的index
+                    var itemId = girdData.ItemTId;
+                    if (itemId > 0 && itemId == _tryJumpItemId && jumpIndex < 0)
+                    {
+                        jumpIndex = _gridGroupList.Count - 1;
+                        _tryJumpItemId = 0;
+                    }
                 }
                 //添加最后的末尾部分
                 if (tempList.Count > 0)
@@ -184,6 +198,9 @@ namespace FAT
                 _gridGroupList.Add(tempList);
             }
             girdGroupRect.UpdateData(_gridGroupList);
+            if (jumpIndex >= 0)
+                girdGroupRect.JumpTo(jumpIndex);
+            _tryJumpItemId = 0;
         }
     }
 

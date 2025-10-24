@@ -140,7 +140,7 @@ namespace FAT {
             if (tracer.world.activeBoard.emptyGridCount < 1)
                 return false;
 
-            order = CreateMagicHourOrder(cfg, tracer, info.reqNum, info.realDffy);
+            order = CreateMagicHourOrder(cfg, helper, tracer, info.reqNum, info.realDffy);
             if (order == null)
                 return false;
 
@@ -159,7 +159,7 @@ namespace FAT {
             return true;
         }
 
-        private OrderData CreateMagicHourOrder(OrderRandomer slotCfg, MergeWorldTracer tracer, int reqNum, int orderDffy)
+        private OrderData CreateMagicHourOrder(OrderRandomer slotCfg, IOrderHelper helper, MergeWorldTracer tracer, int reqNum, int orderDffy)
         {
             // 最终候选棋子 难度距离 / id
             using var _1 = PoolMapping.PoolMappingAccess.Borrow(out List<(int dist, int id)> candidateItemList);
@@ -230,7 +230,7 @@ namespace FAT {
             {
                 CalcOrderRequires(candidateItemList, diffMid, requireItemId);
             }
-            var data = OrderUtility.MakeOrder_Init(null, OrderProviderType.Random, slotCfg.Id, 0, 0);
+            var data = OrderUtility.MakeOrder_Init(helper, OrderProviderType.Random, slotCfg.Id, 0, 0);
             OrderUtility.MakeOrder_Require(data, requireItemId);
             OrderUtility.MakeOrder_Record(data);
 

@@ -198,6 +198,10 @@ namespace FAT
                 return false;
             if (Game.Manager.activity.LookupAny(EventType.MultiplierRanking) != null)
                 return false;
+            if (Game.Manager.activity.LookupAny(EventType.MicMilestone) != null)
+                return false;
+            if (Game.Manager.activity.LookupAny(EventType.VineLeap) != null)
+                return false;
             var changed = true;
             slot_score.ClearData(order);
             return changed;

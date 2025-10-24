@@ -382,6 +382,14 @@ namespace FAT
                                 sevenDayTask.AddToken(data.rewardId, data.rewardCount);
                             }
                             break;
+                        case FeatureEntry.FeatureMicMilestone:
+                            Game.Manager.activity.LookupAny(EventType.MicMilestone, out var actScoreMic);
+                            if (actScoreMic != null)
+                            {
+                                var activityMic = (ActivityScoreMic)actScoreMic;
+                                activityMic.TryAddToken(data.rewardId, data.rewardCount, data.reason);
+                            }
+                            break;
                         default:
                             DebugEx.Warning($"RewardMan.BeginReward ----> unknown token {tokenConf.Feature}");
                             //Game.Instance.activityMan.CommitToken(data, tokenConf);

@@ -161,6 +161,7 @@ namespace FAT
             var mixSourceConfig = Game.Manager.configMan.GetComMergeMixSourceConfigs();
             var trigAutoSourceConfig = Game.Manager.configMan.GetComTrigAutoSourceConfigs();
             var activeSourceConfig = Game.Manager.configMan.GetComMergeActiveSourceConfigs();
+            var tokenMultiConfig = Game.Manager.configMan.GetComMergeTokenMultiplierConfigs();
             mItemConfigs.Clear();
 
             foreach (var c in autoSource)
@@ -252,6 +253,11 @@ namespace FAT
             {
                 var config = _GetOrCreateItemConfig(c.Id, true);
                 config.activeSourceConfig = c;
+            }
+            foreach (var c in tokenMultiConfig)
+            {
+                var config = _GetOrCreateItemConfig(c.Id, true);
+                config.tokenMultiConfig = c;
             }
 
             var fixedConfg = Game.Manager.configMan.GetMergeFixedOutputConfigs();

@@ -2,7 +2,7 @@
  * @Author: lizhenpeng
  * @Date: 2025/8/1 19:08
  * @LastEditors: lizhenpeng
- * @LastEditTime: 2025/8/1 19:08
+ * @LastEditTime: 2025/10/17 15:08
  * @Description: 矿车活动帮助界面 —— 根据 EventMineCartDetail 的 dropId/orderItem 配置，
  *              判断产出类型（耗体 or 订单），动态设置多段说明文本及图标。
  */
@@ -16,16 +16,12 @@ namespace FAT
 {
     public class UIMineCartBoardHelp : UIActivityHelp
     {
-        [SerializeField]
-        private TMP_Text text1;
-        [SerializeField]
-        private TMP_Text entryinfo;
-        [SerializeField]
-        private TMP_Text text2;
-        [SerializeField]
-        private TMP_Text text3;
-        [SerializeField]
-        private TMP_Text text4;
+        [SerializeField] private TMP_Text text1;
+        [SerializeField] private TMP_Text entryinfo;
+
+        [SerializeField] private GameObject entry1Drop;   // entry1.1：耗体图
+        [SerializeField] private GameObject entry1Order;  // entry1.2：订单图
+        [SerializeField] private GameObject entryInfoRoot; // entryInfo 根节点
 
         private MineCartActivity activity;
 
@@ -67,13 +63,23 @@ namespace FAT
                 return;
             }
 
-            string descKey = isOrder ? "#SysComDesc904" : "#SysComDesc298"; // 订单 or 耗体
+            string descKey = isOrder ? "#SysComDesc904" : "#SysComDesc1938"; // 订单 or 耗体
+
+            // 显隐第一张图的两种样式与文案块
+            if (entry1Drop != null) entry1Drop.SetActive(isDrop);
+            if (entry1Order != null) entry1Order.SetActive(isOrder);
+            if (entryInfoRoot != null) entryInfoRoot.SetActive(isOrder);
 
             text1.SetText(I18N.FormatText(descKey, tokenStr));
-            entryinfo.SetText(I18N.FormatText("#SysComDesc1537"));
-            text2.SetText(I18N.FormatText("#SysComDesc86", tokenStr));
-            text3.SetText(I18N.FormatText("#SysComDesc1492", tokenStr));
-            text4.SetText(I18N.FormatText("#SysComDesc1492", tokenStr));
+
+            // 订单时才写入图中文案，耗体时清空
+            if (entryinfo != null)
+            {
+                if (isOrder)
+                    entryinfo.SetText(I18N.FormatText("#SysComDesc1537"));
+                else
+                    entryinfo.SetText(string.Empty);
+            }
         }
     }
 }

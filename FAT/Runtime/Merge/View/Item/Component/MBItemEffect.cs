@@ -61,6 +61,12 @@ namespace FAT
         Lightbulb,
         [Tooltip("瞬时 冰冻棋子合成及消失时要播的特效")]
         FrozenItem,
+        [Tooltip("瞬时 带有活动Token的棋子触发翻倍效果")]
+        TokenMultiTrigger,
+        [Tooltip("瞬时 活动Token翻倍棋子自身生效时的瞬时效果")]
+        TokenMultiSelfTrigger,
+        [Tooltip("状态 活动Token翻倍棋子自身生效时的背光效果")]
+        TokenMultiBg,
 
         //以下部分实际没用到
         TeslaSource,
@@ -108,6 +114,7 @@ namespace FAT
             {
                 TryRefreshOpenChestTip();
                 TryRefreshJumpCDState();
+                TryRefreshTokenMultiState();
             }
 
             // 初始化时判断一次是否可用特斯拉
@@ -232,6 +239,26 @@ namespace FAT
                 _RemoveEffect(ItemEffectType.JumpCDBg);
             }
         }
+        
+        //生效时的背光效果
+        public void TryRefreshTokenMultiState()
+        {
+            if (BoardViewManager.Instance.world.tokenMulti.hasActiveTokenMulti)
+            {
+                if (mView.data.TryGetItemComponent(out ItemTokenMultiComponent tokenMulti) && tokenMulti.item.id == BoardViewManager.Instance.world.tokenMulti.activeTokenMultiId)
+                {
+                    _AddEffect(ItemEffectType.TokenMultiBg);
+                }
+                else
+                {
+                    _RemoveEffect(ItemEffectType.TokenMultiBg);
+                }
+            }
+            else
+            {
+                _RemoveEffect(ItemEffectType.TokenMultiBg);
+            }
+        }
 
         public void TryRefreshOpenChestTip()
         {
@@ -352,6 +379,14 @@ namespace FAT
         public void AddOutOfInventoryEffect()
         {
             AddOnBoardEffect(3f);
+        }
+        
+        public void AddTokenMultiEffect()
+        {
+            var type = BoardUtility.EffTypeToPoolType(ItemEffectType.TokenMultiSelfTrigger);
+            var go = GameObjectPoolManager.Instance.CreateObject(type, backRoot);
+            go.transform.localPosition = Vector3.zero;
+            BoardUtility.AddAutoReleaseComponent(go, 3f, type);
         }
 
         #endregion

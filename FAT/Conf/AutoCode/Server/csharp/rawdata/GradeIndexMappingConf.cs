@@ -64,7 +64,7 @@ namespace fat.rawdata {
   /// <summary>
   /// annotation@annotation_type(type="rawdata")
   /// annotation@rawdata(row="GradeIndexMapping",table="GradeIndexMappingMap",table_wrapper="GradeIndexMappingConf",map="true",map_key_type="int32",data="GradeIndexMappingConf")
-  /// annotation@ab(table_ab="GradeIndexMappingMapAB",table_ab_patch="GradeIndexMappingMapABPatch",table_ab_value="GradeIndexMappingMapABValue",ab_patch="true")
+  /// annotation@ab(table_ab="GradeIndexMappingMapAB",table_ab_patch="GradeIndexMappingMapABPatch",table_ab_value="GradeIndexMappingMapABValue",ab_patch="false")
   /// annotation@filter(just_server="false",just_client="false")
   /// annotation@GradeIndexMapping(id="id")
   /// </summary>

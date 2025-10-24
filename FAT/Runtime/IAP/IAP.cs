@@ -322,6 +322,7 @@ namespace FAT {
             }
             if (IAPDelivery.Count > 0) DebugEx.Info($"iap delivery {IAPDelivery.Count}");
             DataTracker.TraceUser().TotalRevenue().Apply();
+            PlatformSDK.Instance.UpdateGameUserInfo();
         }
 
         private void DeliverComplete() {

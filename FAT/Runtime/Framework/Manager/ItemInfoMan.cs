@@ -9,6 +9,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using EL;
+using FAT.Merge;
 using fat.rawdata;
 using Google.Protobuf.Collections;
 using UnityEngine;
@@ -204,12 +205,90 @@ namespace FAT
             }
         }
 
+        //传入棋子id 获取其数量tag信息（检查主棋盘上和主棋盘对应的背包里，是否有和传入的棋子id一致的棋子，并传出相同棋子的数量）
+        public bool CheckItemNumTagInfo(int itemId, out int totalNum)
+        {
+            totalNum = 0;
+            if (itemId <= 0)
+                return false;
+            //feature没开启 return
+            if (!Game.Manager.featureUnlockMan.IsFeatureEntryUnlocked(FeatureEntry.FeatureCategroyInfo))
+                return false;
+            //商店界面正在打开或者不在主棋盘时 不允许显示tag
+            if (UIManager.Instance.IsOpen(UIConfig.UIShop) || !UIManager.Instance.IsOpen(UIConfig.UIMergeBoardMain))
+                return false;
+            var itemCompConfig = Game.Manager.mergeItemMan.GetItemComConfig(itemId);
+            if (itemCompConfig == null)
+                return false;
+            //排除autoSourceConfig和mixSourceConfig
+            if (itemCompConfig.autoSourceConfig != null || itemCompConfig.mixSourceConfig != null)
+                return false;
+            //如果检查的棋子具有clickSourceConfig，则进一步看配置是否允许显示, IsCategroyInfo为true时不显示
+            if (itemCompConfig.clickSourceConfig != null && itemCompConfig.clickSourceConfig.IsCategroyInfo) 
+                return false;
+            var itemCountDict = Game.Manager.mainMergeMan.worldTracer?.GetCurrentActiveBoardAndInventoryItemCount();
+            if (itemCountDict == null)
+                return false;
+            //查找itemId对应的数量
+            itemCountDict.TryGetValue(itemId, out totalNum);
+            //查找棋子是否有关联配置
+            var seriesConf = Game.Manager.configMan.GetMergeItemSeriesConfig(itemId);
+            if (seriesConf != null)
+            {
+                foreach (var findItemId in seriesConf.SeriesId)
+                {
+                    if (itemCountDict.TryGetValue(findItemId, out var findNum))
+                    {
+                        totalNum += findNum;
+                    }
+                }
+            }
+            return totalNum > 0;
+        }
+
+        //处理UIItemInfo界面中点击棋子数量tag后的逻辑
+        public void ProcessClickItemNumTag(int itemId)
+        {
+            if (Game.Manager.mainMergeMan.TryFindAndShowItem(itemId))
+            {
+                //成功时关闭棋子信息界面
+                UIManager.Instance.CloseWindow(UIConfig.UIItemInfo);
+            }
+        }
+        
+        //处理玩家主动关闭棋子信息界面时的后续逻辑
+        public void ProcessClosUIItemInfo()
+        {
+            if (CurShowItemData == null)
+                return;
+            //feature没开启 return
+            if (!Game.Manager.featureUnlockMan.IsFeatureEntryUnlocked(FeatureEntry.FeatureTapSourceInfo))
+                return;
+            //商店界面正在打开或者不在主棋盘时 不执行后续操作
+            if (UIManager.Instance.IsOpen(UIConfig.UIShop) || !UIManager.Instance.IsOpen(UIConfig.UIMergeBoardMain))
+                return;
+            //只有当前棋子有来源时，才执行后续操作
+            if (CurShowItemData.OriginChainId > 0 && CurShowItemData.DirectChainId > 0)
+            {
+                //根据OriginChainId获得当前合成链中已解锁的最高等级的棋子id
+                var showItemId = Game.Manager.mergeItemMan.GetMaxUnlockLevelItemIdInChain(CurShowItemData.OriginChainId);
+                var cfg = Game.Manager.objectMan.GetBasicConfig(showItemId);
+                if (cfg != null)
+                {
+                    Game.Manager.mainMergeMan.TryFindAndShowItem(showItemId);
+                }
+            }
+        }
+
         public void TryBuyShopChessGoods(int itemId, Vector3 flyFromPos)
         {
             var shopItemData = Game.Manager.shopMan.TryGetChessOrderDataById(itemId);
             if (shopItemData != null)
             {
-                Game.Manager.shopMan.TryBuyShopChessOrderGoods(shopItemData, flyFromPos, 128f);
+                Game.Manager.shopMan.TryBuyShopChessOrderGoods(shopItemData, flyFromPos, 128f, () =>
+                {
+                    Game.Manager.shopMan.TryCollectActivityToken(shopItemData, flyFromPos);
+                });
             }
         }
 

@@ -35,6 +35,8 @@ namespace fat.conf.conf_loader
 			_isInitialized = true;
 			AdSettingVisitor.Initialize();
 			AdsFeatureVisitor.Initialize();
+			AreaBoardPackVisitor.Initialize();
+			AreaBoardPackGroupVisitor.Initialize();
 			AutoFingerInfoVisitor.Initialize();
 			BGMVisitor.Initialize();
 			BpDetailVisitor.Initialize();
@@ -105,6 +107,13 @@ namespace fat.conf.conf_loader
 			ErgListDetailVisitor.Initialize();
 			ErgListPackVisitor.Initialize();
 			ErgListTaskVisitor.Initialize();
+			EventAreaBoardVisitor.Initialize();
+			EventAreaBoardDetailVisitor.Initialize();
+			EventAreaBoardGroupVisitor.Initialize();
+			EventAreaBoardRowVisitor.Initialize();
+			EventAreaDropVisitor.Initialize();
+			EventAreaMilestoneVisitor.Initialize();
+			EventAreaOrderItemVisitor.Initialize();
 			EventBingoTaskVisitor.Initialize();
 			EventBingoTaskDetailVisitor.Initialize();
 			EventBingoTaskInfoVisitor.Initialize();
@@ -188,6 +197,9 @@ namespace fat.conf.conf_loader
 			EventMiniBoardMultiInfoVisitor.Initialize();
 			EventMonopolyVisitor.Initialize();
 			EventMonopolyDetailVisitor.Initialize();
+			EventMysteriousVisitor.Initialize();
+			EventMysteriousDetailVisitor.Initialize();
+			EventMysteriousTokenVisitor.Initialize();
 			EventOnlineVisitor.Initialize();
 			EventOnlineDetailVisitor.Initialize();
 			EventOrderBonusVisitor.Initialize();
@@ -213,6 +225,7 @@ namespace fat.conf.conf_loader
 			EventPuzzleRewardsVisitor.Initialize();
 			EventPuzzleRoundVisitor.Initialize();
 			EventRaceVisitor.Initialize();
+			EventRaceExtendVisitor.Initialize();
 			EventRaceGroupVisitor.Initialize();
 			EventRaceRewardVisitor.Initialize();
 			EventRaceRobotVisitor.Initialize();
@@ -351,6 +364,7 @@ namespace fat.conf.conf_loader
 			MergeBoardEnergyVisitor.Initialize();
 			MergeBoardGrpVisitor.Initialize();
 			MergeBoardOrderVisitor.Initialize();
+			MergeCategorySpecialVisitor.Initialize();
 			MergeCloudVisitor.Initialize();
 			MergeDifficultyVisitor.Initialize();
 			MergeFixedItemVisitor.Initialize();
@@ -418,6 +432,7 @@ namespace fat.conf.conf_loader
 			OrderIgnoreVisitor.Initialize();
 			OrderRandomerVisitor.Initialize();
 			OrderRewardVisitor.Initialize();
+			PMTABVisitor.Initialize();
 			PachinkoMultipleVisitor.Initialize();
 			PlayerGroupVisitor.Initialize();
 			PlayerGroupRuleVisitor.Initialize();
@@ -426,8 +441,14 @@ namespace fat.conf.conf_loader
 			PlotStoryVisitor.Initialize();
 			PopupVisitor.Initialize();
 			ProgressPackVisitor.Initialize();
+			RaceExtendGroupVisitor.Initialize();
+			RaceExtendRewardVisitor.Initialize();
+			RaceExtendRobotVisitor.Initialize();
+			RaceExtendRobotIconVisitor.Initialize();
+			RaceExtendRoundVisitor.Initialize();
 			RandomRewardVisitor.Initialize();
 			RandomStarVisitor.Initialize();
+			ReplaceBundleVisitor.Initialize();
 			ReshipmentVisitor.Initialize();
 			RetentionPackVisitor.Initialize();
 			RoundCoinVisitor.Initialize();
@@ -596,6 +617,8 @@ namespace fat.conf.conf_loader
 		}
 		public AdSettingConf AdSettingMap = new AdSettingConf();
 		public AdsFeatureConf AdsFeatureSlice = new AdsFeatureConf();
+		public AreaBoardPackConf AreaBoardPackMap = new AreaBoardPackConf();
+		public AreaBoardPackGroupConf AreaBoardPackGroupMap = new AreaBoardPackGroupConf();
 		public AutoFingerInfoConf AutoFingerInfoSlice = new AutoFingerInfoConf();
 		public BGMConf BGMSlice = new BGMConf();
 		public BpDetailConf BpDetailMap = new BpDetailConf();
@@ -666,6 +689,13 @@ namespace fat.conf.conf_loader
 		public ErgListDetailConf ErgListDetailMap = new ErgListDetailConf();
 		public ErgListPackConf ErgListPackMap = new ErgListPackConf();
 		public ErgListTaskConf ErgListTaskMap = new ErgListTaskConf();
+		public EventAreaBoardConf EventAreaBoardMap = new EventAreaBoardConf();
+		public EventAreaBoardDetailConf EventAreaBoardDetailMap = new EventAreaBoardDetailConf();
+		public EventAreaBoardGroupConf EventAreaBoardGroupMap = new EventAreaBoardGroupConf();
+		public EventAreaBoardRowConf EventAreaBoardRowMap = new EventAreaBoardRowConf();
+		public EventAreaDropConf EventAreaDropMap = new EventAreaDropConf();
+		public EventAreaMilestoneConf EventAreaMilestoneMap = new EventAreaMilestoneConf();
+		public EventAreaOrderItemConf EventAreaOrderItemMap = new EventAreaOrderItemConf();
 		public EventBingoTaskConf EventBingoTaskMap = new EventBingoTaskConf();
 		public EventBingoTaskDetailConf EventBingoTaskDetailMap = new EventBingoTaskDetailConf();
 		public EventBingoTaskInfoConf EventBingoTaskInfoMap = new EventBingoTaskInfoConf();
@@ -749,6 +779,9 @@ namespace fat.conf.conf_loader
 		public EventMiniBoardMultiInfoConf EventMiniBoardMultiInfoMap = new EventMiniBoardMultiInfoConf();
 		public EventMonopolyConf EventMonopolyMap = new EventMonopolyConf();
 		public EventMonopolyDetailConf EventMonopolyDetailMap = new EventMonopolyDetailConf();
+		public EventMysteriousConf EventMysteriousMap = new EventMysteriousConf();
+		public EventMysteriousDetailConf EventMysteriousDetailMap = new EventMysteriousDetailConf();
+		public EventMysteriousTokenConf EventMysteriousTokenMap = new EventMysteriousTokenConf();
 		public EventOnlineConf EventOnlineMap = new EventOnlineConf();
 		public EventOnlineDetailConf EventOnlineDetailMap = new EventOnlineDetailConf();
 		public EventOrderBonusConf EventOrderBonusMap = new EventOrderBonusConf();
@@ -774,6 +807,7 @@ namespace fat.conf.conf_loader
 		public EventPuzzleRewardsConf EventPuzzleRewardsMap = new EventPuzzleRewardsConf();
 		public EventPuzzleRoundConf EventPuzzleRoundMap = new EventPuzzleRoundConf();
 		public EventRaceConf EventRaceMap = new EventRaceConf();
+		public EventRaceExtendConf EventRaceExtendMap = new EventRaceExtendConf();
 		public EventRaceGroupConf EventRaceGroupMap = new EventRaceGroupConf();
 		public EventRaceRewardConf EventRaceRewardMap = new EventRaceRewardConf();
 		public EventRaceRobotConf EventRaceRobotMap = new EventRaceRobotConf();
@@ -912,6 +946,7 @@ namespace fat.conf.conf_loader
 		public MergeBoardEnergyConf MergeBoardEnergyMap = new MergeBoardEnergyConf();
 		public MergeBoardGrpConf MergeBoardGrpMap = new MergeBoardGrpConf();
 		public MergeBoardOrderConf MergeBoardOrderMap = new MergeBoardOrderConf();
+		public MergeCategorySpecialConf MergeCategorySpecialMap = new MergeCategorySpecialConf();
 		public MergeCloudConf MergeCloudSlice = new MergeCloudConf();
 		public MergeDifficultyConf MergeDifficultyMap = new MergeDifficultyConf();
 		public MergeFixedItemConf MergeFixedItemSlice = new MergeFixedItemConf();
@@ -979,6 +1014,7 @@ namespace fat.conf.conf_loader
 		public OrderIgnoreConf OrderIgnoreMap = new OrderIgnoreConf();
 		public OrderRandomerConf OrderRandomerMap = new OrderRandomerConf();
 		public OrderRewardConf OrderRewardMap = new OrderRewardConf();
+		public PMTABConf PMTABSlice = new PMTABConf();
 		public PachinkoMultipleConf PachinkoMultipleMap = new PachinkoMultipleConf();
 		public PlayerGroupConf PlayerGroupMap = new PlayerGroupConf();
 		public PlayerGroupRuleConf PlayerGroupRuleSlice = new PlayerGroupRuleConf();
@@ -987,8 +1023,14 @@ namespace fat.conf.conf_loader
 		public PlotStoryConf PlotStoryMap = new PlotStoryConf();
 		public PopupConf PopupMap = new PopupConf();
 		public ProgressPackConf ProgressPackMap = new ProgressPackConf();
+		public RaceExtendGroupConf RaceExtendGroupMap = new RaceExtendGroupConf();
+		public RaceExtendRewardConf RaceExtendRewardMap = new RaceExtendRewardConf();
+		public RaceExtendRobotConf RaceExtendRobotMap = new RaceExtendRobotConf();
+		public RaceExtendRobotIconConf RaceExtendRobotIconMap = new RaceExtendRobotIconConf();
+		public RaceExtendRoundConf RaceExtendRoundMap = new RaceExtendRoundConf();
 		public RandomRewardConf RandomRewardMap = new RandomRewardConf();
 		public RandomStarConf RandomStarMap = new RandomStarConf();
+		public ReplaceBundleConf ReplaceBundleMap = new ReplaceBundleConf();
 		public ReshipmentConf ReshipmentMap = new ReshipmentConf();
 		public RetentionPackConf RetentionPackMap = new RetentionPackConf();
 		public RoundCoinConf RoundCoinSlice = new RoundCoinConf();
@@ -1024,6 +1066,8 @@ namespace fat.conf.conf_loader
 		public WebShopToIAPPackConf WebShopToIAPPackMap = new WebShopToIAPPackConf();
 		public WebshopCountryWhitelistConf WebshopCountryWhitelistMap = new WebshopCountryWhitelistConf();
 		public Dictionary<string, List<int>> AdSettingSortedKeys = new Dictionary<string, List<int>>();
+		public Dictionary<string, List<int>> AreaBoardPackSortedKeys = new Dictionary<string, List<int>>();
+		public Dictionary<string, List<int>> AreaBoardPackGroupSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> BpDetailSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> BpMilestoneSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> BpPackInfoSortedKeys = new Dictionary<string, List<int>>();
@@ -1089,6 +1133,13 @@ namespace fat.conf.conf_loader
 		public Dictionary<string, List<int>> ErgListDetailSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> ErgListPackSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> ErgListTaskSortedKeys = new Dictionary<string, List<int>>();
+		public Dictionary<string, List<int>> EventAreaBoardSortedKeys = new Dictionary<string, List<int>>();
+		public Dictionary<string, List<int>> EventAreaBoardDetailSortedKeys = new Dictionary<string, List<int>>();
+		public Dictionary<string, List<int>> EventAreaBoardGroupSortedKeys = new Dictionary<string, List<int>>();
+		public Dictionary<string, List<int>> EventAreaBoardRowSortedKeys = new Dictionary<string, List<int>>();
+		public Dictionary<string, List<int>> EventAreaDropSortedKeys = new Dictionary<string, List<int>>();
+		public Dictionary<string, List<int>> EventAreaMilestoneSortedKeys = new Dictionary<string, List<int>>();
+		public Dictionary<string, List<int>> EventAreaOrderItemSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> EventBingoTaskSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> EventBingoTaskDetailSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> EventBingoTaskInfoSortedKeys = new Dictionary<string, List<int>>();
@@ -1172,6 +1223,9 @@ namespace fat.conf.conf_loader
 		public Dictionary<string, List<int>> EventMiniBoardMultiInfoSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> EventMonopolySortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> EventMonopolyDetailSortedKeys = new Dictionary<string, List<int>>();
+		public Dictionary<string, List<int>> EventMysteriousSortedKeys = new Dictionary<string, List<int>>();
+		public Dictionary<string, List<int>> EventMysteriousDetailSortedKeys = new Dictionary<string, List<int>>();
+		public Dictionary<string, List<int>> EventMysteriousTokenSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> EventOnlineSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> EventOnlineDetailSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> EventOrderBonusSortedKeys = new Dictionary<string, List<int>>();
@@ -1197,6 +1251,7 @@ namespace fat.conf.conf_loader
 		public Dictionary<string, List<int>> EventPuzzleRewardsSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> EventPuzzleRoundSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> EventRaceSortedKeys = new Dictionary<string, List<int>>();
+		public Dictionary<string, List<int>> EventRaceExtendSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> EventRaceGroupSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> EventRaceRewardSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> EventRaceRobotSortedKeys = new Dictionary<string, List<int>>();
@@ -1317,6 +1372,7 @@ namespace fat.conf.conf_loader
 		public Dictionary<string, List<int>> MergeBoardEnergySortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> MergeBoardGrpSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> MergeBoardOrderSortedKeys = new Dictionary<string, List<int>>();
+		public Dictionary<string, List<int>> MergeCategorySpecialSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> MergeDifficultySortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> MergeGridSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<string>> MergeItemCategorySortedKeys = new Dictionary<string, List<string>>();
@@ -1384,8 +1440,14 @@ namespace fat.conf.conf_loader
 		public Dictionary<string, List<int>> PlotStorySortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> PopupSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> ProgressPackSortedKeys = new Dictionary<string, List<int>>();
+		public Dictionary<string, List<int>> RaceExtendGroupSortedKeys = new Dictionary<string, List<int>>();
+		public Dictionary<string, List<int>> RaceExtendRewardSortedKeys = new Dictionary<string, List<int>>();
+		public Dictionary<string, List<int>> RaceExtendRobotSortedKeys = new Dictionary<string, List<int>>();
+		public Dictionary<string, List<int>> RaceExtendRobotIconSortedKeys = new Dictionary<string, List<int>>();
+		public Dictionary<string, List<int>> RaceExtendRoundSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> RandomRewardSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> RandomStarSortedKeys = new Dictionary<string, List<int>>();
+		public Dictionary<string, List<int>> ReplaceBundleSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> ReshipmentSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> RetentionPackSortedKeys = new Dictionary<string, List<int>>();
 		public Dictionary<string, List<int>> SettingsCommunitySortedKeys = new Dictionary<string, List<int>>();

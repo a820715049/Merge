@@ -87,6 +87,10 @@ public class UIImageRes : MonoBehaviour
     private bool mCreateTask = false;
 
 #if UNITY_EDITOR
+    public string AssetConfig => new AssetConfig() { Group = mGroup, Asset = mAsset }.Key; //GM Tools 使用
+#endif
+
+#if UNITY_EDITOR
     private void OnValidate()
     {
         if (UnityEditor.EditorApplication.isPlaying) return;

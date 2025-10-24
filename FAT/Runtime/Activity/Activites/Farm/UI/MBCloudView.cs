@@ -28,7 +28,8 @@ namespace FAT
 
         private Cloud belongCloud;
         private (int, int) coord;
-        private MBBoardCloudHolder _cloudHolder;
+        private MBFarmBoardCloudHolder _cloudHolder;
+        private FarmBoardActivity _activity;
 
         public void Init(Cloud cloud, int x, int y)
         {
@@ -38,7 +39,13 @@ namespace FAT
             this.belongCloud = cloud;
             coord = (x, y);
 
-            if (UIManager.Instance.TryGetUI(UIConfig.UIFarmBoardMain) is UIFarmBoardMain main)
+            var act = Game.Manager.activity.LookupAny(EventType.FarmBoard) as FarmBoardActivity;
+            if (act != null)
+            {
+                _activity = act;
+            }
+
+            if (UIManager.Instance.TryGetUI(_activity.VisualBoard.res.ActiveR) is UIFarmBoardMain main)
             {
                 _cloudHolder = main.CloudHolder;
             }
@@ -48,8 +55,7 @@ namespace FAT
 
         public void RefreshMask()
         {
-            var act = Game.Manager.activity.LookupAny(EventType.FarmBoard) as FarmBoardActivity;
-            if (act == null)
+            if (_activity == null)
             {
                 return;
             }
@@ -68,7 +74,7 @@ namespace FAT
                 view.PlayPunch();
             }
 
-            var ui = UIManager.Instance.TryGetUI(UIConfig.UIFarmBoardMain);
+            var ui = UIManager.Instance.TryGetUI(_activity.VisualBoard.res.ActiveR);
             if (ui != null && ui is UIFarmBoardMain main)
             {
                 main.LockView.PlayHint();

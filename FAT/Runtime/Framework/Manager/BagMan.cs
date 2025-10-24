@@ -226,6 +226,31 @@ namespace FAT
             return produceId;
         }
 
+        //传入棋子id 找到背包中第一个与该id一致的棋子，若找到则打开背包界面同时跳转到对应位置
+        public bool FindItemAndJumpToUIBag(int itemId)
+        {
+            var targetBagType = BagType.None;
+            for (BagType i = 0; i <= BagType.Tool; i++)
+            {
+                if (!_allBagGirdData.TryGetValue(i, out var girdDataList)) 
+                    continue;
+                foreach (var girdData in girdDataList)
+                {
+                    if (girdData.ItemTId != itemId) 
+                        continue;
+                    targetBagType = i;
+                    break;
+                }
+            }
+            //如果找到了 则开界面
+            if (targetBagType != BagType.None)
+            {
+                UIManager.Instance.OpenWindow(UIConfig.UIBag, targetBagType, itemId);
+                return true;
+            }
+            return false;
+        }
+
         public void Reset()
         {
             _mergeInventory = null;

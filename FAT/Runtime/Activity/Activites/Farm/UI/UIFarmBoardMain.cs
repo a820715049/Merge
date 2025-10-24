@@ -38,10 +38,10 @@ namespace FAT
         private MBFarmBoardReward _reward;
 
         // 云
-        private MBBoardCloudHolder _cloudHolder;
+        private MBFarmBoardCloudHolder _cloudHolder;
         private MBLockView lockView;
         public MBLockView LockView => lockView;
-        public MBBoardCloudHolder CloudHolder => _cloudHolder;
+        public MBFarmBoardCloudHolder CloudHolder => _cloudHolder;
 
         // 进度条
         private MBFarmBoardProgress progress;
@@ -54,11 +54,11 @@ namespace FAT
         // 手指引导
         private MBAutoGuideController _autoGuideController;
         public MBAutoGuideController AutoGuideController => _autoGuideController;
-        private MBGuideTarget guideAnimal;
-        private MBGuideTarget guideFarm;
+        public MBGuideTarget guideAnimal;
+        public MBGuideTarget guideFarm;
 
         // 动物
-        private MBFarmBoardAnimal mbAnimal;
+        public MBFarmBoardAnimal mbAnimal;
 
         // 农场
         public MBFarmBoardFarm mbFarm;
@@ -73,15 +73,17 @@ namespace FAT
         private PackEndlessFarm _giftPack;
 
         // 主棋盘入口
-        private Image _boardEntry;
+        public Image _boardEntry;
 
         // cd
         private TextMeshProUGUI _cd;
 
+        private TextMeshProUGUI _title;
+        public TextProOnACircle _titleCircle;
+
         private readonly string TopBgPath = $"Content/Top/TopBg";
         private readonly string CompBoardPath = $"Content/Center/BoardNode/CompBoard";
         private readonly string ScrollPath = $"Content/Center/BoardNode/CompBoard/Root/Mask/Scroll";
-        private readonly string BottomPath = $"Content/Bottom";
 
         // 活动实例
         private FarmBoardActivity _activity;
@@ -220,6 +222,7 @@ namespace FAT
                     Destroy(_tempIcons[i].gameObject);
                 }
             }
+
             _tempIcons.Clear();
 
             var world = _activity?.World;
@@ -240,7 +243,7 @@ namespace FAT
             MessageCenter.Get<GAME_SHOP_ENTRY_STATE_CHANGE>().Dispatch(true);
             MessageCenter.Get<GAME_LEVEL_GO_STATE_CHANGE>().Dispatch(true);
             MessageCenter.Get<GAME_STATUS_UI_STATE_CHANGE>().Dispatch(true);
-            
+
             _StopCoroutine();
         }
         #endregion
@@ -255,14 +258,11 @@ namespace FAT
             transform.Access($"{ScrollPath}/LockBoard/Anchor/LockHolder", out lockView);
             transform.Access($"{CompBoardPath}/Root/ProgressNode", out progress);
             transform.Access($"Content/AutoguideControll", out _autoGuideController);
-            transform.Access($"{BottomPath}/Animal/animalBtn", out guideAnimal);
-            transform.Access($"{BottomPath}/Animal", out mbAnimal);
-            transform.Access($"{BottomPath}/Farm", out guideFarm);
             transform.Access($"{CompBoardPath}/Root/Pack", out packGroup);
             transform.Access($"{CompBoardPath}/Root/Pack/Icon", out packIcon);
             transform.Access($"{CompBoardPath}/Root/Pack/cd", out packCd);
-            transform.Access($"{BottomPath}/FlyTarget/Entry", out _boardEntry);
             transform.Access($"{TopBgPath}/cd/cd", out _cd);
+            transform.Access($"{TopBgPath}/Title", out _title);
         }
 
         private void Setup()
@@ -298,6 +298,12 @@ namespace FAT
 
         private void RefreshTheme()
         {
+            _activity.StartPopup.visual.Refresh(_title, "mainTitle");
+
+            if (_titleCircle != null)
+            {
+                _activity.StartPopup.visual.Refresh(_titleCircle, "mainTitle");
+            }
         }
 
         private void RefreshCd()
@@ -342,16 +348,20 @@ namespace FAT
 
         public void Exit(bool ignoreFrom = false)
         {
-            _activity.VisualAnimalTip.res.ActiveR.Close();
+            if (mbAnimal is MBFarmBoardAnimal_Cow)
+            {
+                UIConfig.UIFarmBoardAnimalTips.Close();
+            }
+
             _activity.VisualTokenTip.res.ActiveR.Close();
             ActivityTransit.Exit(_activity, ResConfig, null, ignoreFrom); // 退出活动时默认返回主棋盘
         }
 
         private void OnClickClose()
         {
-           Exit();
+            Exit();
         }
-        
+
         public void OnClickHelp()
         {
             _activity.VisualHelp.res.ActiveR.Open(_activity);
@@ -367,8 +377,17 @@ namespace FAT
 
             if (_activity.CheckHasConsumeItem() && mbAnimal.CurAnimalState == MBFarmBoardAnimal.AnimalState.Idle)
             {
-                _activity.VisualAnimalTip.res.ActiveR.Open(mbAnimal.bubbleTrans.position, 0f,
-                    _activity.GetConsumeItemId(), _activity);
+                if (mbAnimal is MBFarmBoardAnimal_Cow)
+                {
+                    // s001 奶牛
+                    UIConfig.UIFarmBoardAnimalTips.Open(mbAnimal.bubbleTrans.position, 0f,
+                        _activity.GetConsumeItemId(), _activity);
+                }
+                else if (mbAnimal is MBFarmBoardAnimal_Casher casher)
+                {
+                    // s002 黑五收银台
+                    casher.ComputerTransit(true, true);
+                }
             }
         }
 
@@ -582,19 +601,19 @@ namespace FAT
             switch (downRowCount)
             {
                 case 1:
-                    Game.Manager.audioMan.TriggerSound("FarmboardBoarddownOne");
+                    Game.Manager.audioMan.TriggerSound("FarmboardBoarddownOneCommon");
                     break;
                 case 2:
-                    Game.Manager.audioMan.TriggerSound("FarmboardBoarddownTwo");
+                    Game.Manager.audioMan.TriggerSound("FarmboardBoarddownTwoCommon");
                     break;
                 case 3:
-                    Game.Manager.audioMan.TriggerSound("FarmboardBoarddownThree");
+                    Game.Manager.audioMan.TriggerSound("FarmboardBoarddownThreeCommon");
                     break;
                 case 4:
-                    Game.Manager.audioMan.TriggerSound("FarmboardBoarddownFour");
+                    Game.Manager.audioMan.TriggerSound("FarmboardBoarddownFourCommon");
                     break;
                 default:
-                    Game.Manager.audioMan.TriggerSound("FarmboardBoarddownOne");
+                    Game.Manager.audioMan.TriggerSound("FarmboardBoarddownOneCommon");
 
                     break;
             }
@@ -652,9 +671,9 @@ namespace FAT
             UIManager.Instance.Block(false);
             // 释放被收集的ItemView
         }
-        
+
         private Coroutine _blockCoroutine;
-        
+
         //农场棋盘遇到极端情况时界面block
         private void OnBoardExtremeCase()
         {
@@ -677,20 +696,19 @@ namespace FAT
                 UIManager.Instance.Block(false);
             }
         }
-        
+
         private void _StopCoroutine()
         {
             if (_blockCoroutine != null)
             {
                 StopCoroutine(_blockCoroutine);
                 _blockCoroutine = null;
-                
+
                 //避免提前停掉 导致协程没走完
                 if (UIManager.Instance.IsBlocking() && !_isPlayingMove && !_isPlayingMoveCloudUnlock)
                     UIManager.Instance.Block(false);
             }
         }
-        
         #endregion
 
         #region 云层
@@ -739,7 +757,7 @@ namespace FAT
         {
             // 进度条动画1s + 飞棋子动画1s + 等待0.5s
             yield return new WaitForSeconds(2.5f);
-            _activity.VisualAnimalTip.res.ActiveR.Close();
+            UIConfig.UIFarmBoardAnimalTips.Close();
             _activity.VisualTokenTip.res.ActiveR.Close();
             _activity.VisualComplete.res.ActiveR.Open(_activity);
         }
@@ -770,7 +788,7 @@ namespace FAT
             {
                 // 有种子包 解除block
                 UIManager.Instance.Block(false);
-                UIManager.Instance.OpenWindow(UIConfig.UIFarmBoardGetSeed, _activity, lockView.transform.position);
+                UIManager.Instance.OpenWindow(GetSeed(), _activity, lockView.transform.position);
 
                 // 关闭tips
                 MessageCenter.Get<MSG.UI_CLOSE_LAYER>().Dispatch(UIConfig.UIFarmBoardAnimalTips.layer);
@@ -800,6 +818,21 @@ namespace FAT
                     SetCloudLockPos();
                 }
             }
+        }
+
+        // 根据换皮 打开不同的获得种子包界面
+        private UIResource GetSeed()
+        {
+            if (mbFarm is MBFarmBoardFarm_Grass)
+            {
+                return UIConfig.UIFarmBoardGetSeed;
+            }
+            else if (mbFarm is MBFarmBoardFarm_Goods)
+            {
+                return UIConfig.UIFarmBoardGetGood;
+            }
+
+            return null;
         }
 
         // 设置锁的世界坐标
@@ -862,7 +895,7 @@ namespace FAT
             }
 
             var id = idList[cloud.UnlockLevel - 1];
-            lockView.Init(id);
+            lockView.Init(id, _activity);
             lockView.transform.position = lockPos;
             lockView.gameObject.SetActive(true);
             // 播放锁的出现动画
@@ -875,7 +908,14 @@ namespace FAT
             }
 
             // 播放音效 云出现
-            Game.Manager.audioMan.TriggerSound("FarmboardCloudCover");
+            if (mbFarm is MBFarmBoardFarm_Grass)
+            {
+                Game.Manager.audioMan.TriggerSound("FarmboardCloudCover");
+            }
+            else if (mbFarm is MBFarmBoardFarm_Goods)
+            {
+                Game.Manager.audioMan.TriggerSound("FarmboardCloudCoverBF");
+            }
         }
 
         // 获得一组坐标中的最值
@@ -978,7 +1018,14 @@ namespace FAT
             }
 
             // 播放音效 云消失
-            Game.Manager.audioMan.TriggerSound("FarmboardCloudFade");
+            if (mbFarm is MBFarmBoardFarm_Grass)
+            {
+                Game.Manager.audioMan.TriggerSound("FarmboardCloudFade");
+            }
+            else if (mbFarm is MBFarmBoardFarm_Goods)
+            {
+                Game.Manager.audioMan.TriggerSound("FarmboardCloudFadeBF");
+            }
         }
         #endregion
     }

@@ -73,16 +73,22 @@ namespace FAT
         [Tooltip("订单消失动画的延迟")]
         [SerializeField]
         private float orderDieDelay = 0f;
+
         // 限时订单倒计时
         [SerializeField] private TextMeshProUGUI txtFlashCountdown;
+
         // 额外奖励挂接位置
         [SerializeField] private Transform extraRewardRoot;
+
         // 计数订单
         [SerializeField] private Counting countingGroup;
+
         // 订单积分
         [SerializeField] private Score scoreGroup;
+
         // 订单右下角积分
         [SerializeField] private Score scoreGroupBR;
+
         // 好评订单
         [SerializeField] private Transform orderLikeRoot;
 
@@ -97,12 +103,16 @@ namespace FAT
 
         // 额外奖励
         private MBBoardOrderAttachment att_extraRewardMini = new();
+
         // 好评订单
         private MBBoardOrderAttachment att_orderLike = new();
+
         // 进度礼盒
         private MBBoardOrderAttachment att_orderRate = new();
+
         // 订单助力
         private MBBoardOrderAttachment att_orderBonus = new();
+
         // 抓宝订单
         private MBBoardOrderAttachment att_clawOrder = new();
 
@@ -113,14 +123,16 @@ namespace FAT
 
         // 表示正在完成订单
         // 用于在收集棋子的操作发生时 识别具体是哪个订单需要响应
-        private bool isCommitting;      // 表示正在完成订单
-        private int consumeIdx = 0;     // 当前正在收集的item序号
-        private float commitFlyDelay;   // 收集棋盘item时的延迟fly时间
+        private bool isCommitting; // 表示正在完成订单
+        private int consumeIdx = 0; // 当前正在收集的item序号
+        private float commitFlyDelay; // 收集棋盘item时的延迟fly时间
         private ICommitButton commitButton;
 
         #region 星想事成
+
         private Item magicHourRewardItem;
         private IOrderData magicHourTargetOrder;
+
         #endregion
 
         public string GetItemThemeKey()
@@ -196,6 +208,7 @@ namespace FAT
                         _RefreshReward();
                     }
                 }
+
                 OrderUtility.TryTrackOrderShow(mData);
                 if (mData.State == OrderState.Finished)
                 {
@@ -293,6 +306,9 @@ namespace FAT
             MessageCenter.Get<MSG.ACTIVITY_ENTRY_LAYOUT_REFRESH>().AddListener(_RefreshScore);
             MessageCenter.Get<MSG.ROCKET_ANIM_COMPLETE>().AddListener(WhenBonusShowEnd);
             MessageCenter.Get<MSG.CLEAR_BONUS>().AddListener(ClearBonus);
+            MessageCenter.Get<MSG.GAME_ORDER_TOKEN_MULTI_BEGIN>().AddListener(_OnMessageTokenMultiBegin);
+            MessageCenter.Get<MSG.GAME_ORDER_TOKEN_MULTI_END>().AddListener(_OnMessageTokenMultiEnd);
+            MessageCenter.Get<MSG.ACTIVITY_SCORE_ROUND_CHANGE>().AddListener(_RefreshScore);
         }
 
         private void _UnRegister()
@@ -311,6 +327,9 @@ namespace FAT
             MessageCenter.Get<MSG.ACTIVITY_ENTRY_LAYOUT_REFRESH>().RemoveListener(_RefreshScore);
             MessageCenter.Get<MSG.ROCKET_ANIM_COMPLETE>().RemoveListener(WhenBonusShowEnd);
             MessageCenter.Get<MSG.CLEAR_BONUS>().RemoveListener(ClearBonus);
+            MessageCenter.Get<MSG.GAME_ORDER_TOKEN_MULTI_BEGIN>().RemoveListener(_OnMessageTokenMultiBegin);
+            MessageCenter.Get<MSG.GAME_ORDER_TOKEN_MULTI_END>().RemoveListener(_OnMessageTokenMultiEnd);
+            MessageCenter.Get<MSG.ACTIVITY_SCORE_ROUND_CHANGE>().RemoveListener(_RefreshScore);
         }
 
         private void _Refresh()
@@ -442,6 +461,7 @@ namespace FAT
                 if (mData.Rewards[i].Id == id && mData.Rewards[i].Count == num)
                     return i;
             }
+
             return -1;
         }
 
@@ -470,6 +490,7 @@ namespace FAT
                 att_extraRewardMini.Clear();
                 return;
             }
+
             var reward = mData.Rewards[extraSlotIdx];
             if (mData.TryGetExtraRewardMiniRes(out var res))
             {
@@ -509,9 +530,15 @@ namespace FAT
                 }
                 else if (act is ActivityRace && RaceManager.GetInstance().RaceStart)
                 {
-                    //act.Visual.RefreshStyle(scoreGroup.txtScore, act.themeFontStyleId_Score);
+                    // act.Visual.RefreshStyle(scoreGroup.txtScore, act.themeFontStyleId_Score);
                     var coinID = RaceManager.GetInstance().Race.ConfD.RequireScoreId;
                     scoreGroup.icon.SetImage(Game.Manager.objectMan.GetBasicConfig(coinID).Image);
+                    scoreGroup.txtScore.text = $"{score}";
+                    _SetScoreState(true);
+                }
+                else if (act is ActivityRaceExtend activityRaceExtend && activityRaceExtend.hasStart)
+                {
+                    scoreGroup.icon.SetImage(Game.Manager.objectMan.GetBasicConfig(activityRaceExtend.raceExtendConfig?.RequireScoreId ?? 0).Image);
                     scoreGroup.txtScore.text = $"{score}";
                     _SetScoreState(true);
                 }
@@ -526,6 +553,19 @@ namespace FAT
                 else if (act is ActivityMultiplierRanking ranking)
                 {
                     var coinID = ranking.conf.Token;
+                    scoreGroup.icon.SetImage(Game.Manager.objectMan.GetBasicConfig(coinID).Image);
+                    scoreGroup.txtScore.text = $"{score}";
+                    _SetScoreState(true);
+                }
+                else if (act is ActivityScoreMic activityScoreMic && !activityScoreMic.IsComplete())
+                {
+                    _RefreshScoreMic(activityScoreMic, score);
+                }
+                else if (act is ActivityVineLeap activityVineLeap && activityVineLeap.CurLevelState == LevelState.During)
+                {
+                    var vineLeap = act as ActivityVineLeap;
+                    vineLeap.Visual.RefreshStyle(scoreGroup.txtScore, vineLeap.themeFontStyleId_Score);
+                    var coinID = activityVineLeap.Conf.TokenId;
                     scoreGroup.icon.SetImage(Game.Manager.objectMan.GetBasicConfig(coinID).Image);
                     scoreGroup.txtScore.text = $"{score}";
                     _SetScoreState(true);
@@ -664,6 +704,7 @@ namespace FAT
             {
                 --defaultSlotCount;
             }
+
             return defaultSlotCount > 1 ? goBgMultiReward : goBgSimple;
         }
 
@@ -797,15 +838,27 @@ namespace FAT
             {
                 return false;
             }
+
             if (act is ActivityRace)
             {
                 // 分数来自竞赛活动 比赛进行中分数才有效
                 return RaceManager.GetInstance().RaceStart;
             }
+
             if (act is ActivityScore activityScore)
             {
                 return activityScore.HasCycleMilestone();
             }
+            if (act is ActivityScoreMic activityScoreMic)
+            {
+                return !activityScoreMic.IsComplete();
+            }
+
+            if (act is ActivityVineLeap activityVineLeap)
+            {
+                return activityVineLeap.IsCurStepRunning();
+            }
+
             // 其他情况分数都有效
             return true;
         }
@@ -856,6 +909,7 @@ namespace FAT
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -871,19 +925,23 @@ namespace FAT
                 //挖矿棋盘数据有效时才算分
                 return Game.Manager.mineBoardMan.IsValid;
             }
+
             if (act is FarmBoardActivity farmBoardActivity)
             {
                 //农场棋盘数据有效时才算分
                 return farmBoardActivity.Valid;
             }
+
             if (act is WishBoardActivity wish)
             {
                 return wish.Valid;
             }
+
             if (act is MineCartActivity mineCart)
             {
                 return mineCart.Valid;
             }
+
             // 其他情况分数都有效
             return true;
         }
@@ -897,9 +955,11 @@ namespace FAT
                 {
                     waitTime = magic.ShowMagicOutputEffect(magicHourRewardItem, magicHourTargetOrder);
                 }
+
                 magicHourRewardItem = null;
                 magicHourTargetOrder = null;
             }
+
             return waitTime;
         }
 
@@ -932,6 +992,7 @@ namespace FAT
                             UIFlyUtility.FlyReward(normalRewardsToCommit[i], item.GetChild(0).position);
                             item.gameObject.SetActive(false);
                         }
+
                         ++slotIdx;
                     }
                 }
@@ -1074,6 +1135,7 @@ namespace FAT
                         }
                     }
                 }
+
                 ++consumeIdx;
 
                 _CoDelayCollectBoardItem(tid, worldPos, commitFlyDelay, idx);
@@ -1109,6 +1171,7 @@ namespace FAT
                 var item = requireRoot.GetChild(idx);
                 return item.transform.position;
             }
+
             return Vector3.zero;
         }
 
@@ -1166,6 +1229,7 @@ namespace FAT
         }
 
         #region extra reward
+
         #endregion
 
         #region orderlike
@@ -1176,11 +1240,13 @@ namespace FAT
             {
                 return;
             }
+
             if (mData.LikeNum <= 0)
             {
                 att_orderLike.Clear();
                 return;
             }
+
             if (mData.TryGetOrderLikeRes(out var res))
             {
                 att_orderLike.RefreshAttachment(res, orderLikeRoot, obj =>
@@ -1225,11 +1291,13 @@ namespace FAT
             {
                 return;
             }
+
             if (mData.RateId <= 0 || mData.IsClawOrder)
             {
                 att_orderRate.Clear();
                 return;
             }
+
             if (mData.TryGetOrderRateRes(out var res))
             {
                 att_orderRate.RefreshAttachment(res, extraRewardRoot, obj =>
@@ -1260,6 +1328,7 @@ namespace FAT
             {
                 orderRate.TryClaimReward(mData.Id, id, extraRewardRoot.position);
             }
+
             att_orderRate.RefreshAttachment(res, extraRewardRoot, obj =>
             {
                 var rewardItem = obj.GetComponent<MBOrderRateReward>();
@@ -1285,11 +1354,13 @@ namespace FAT
             {
                 return;
             }
+
             if (mData.BonusID <= 0)
             {
                 att_orderBonus.Clear();
                 return;
             }
+
             if (mData.TryGetOrderBonusRes(out var res))
             {
                 att_orderBonus.RefreshAttachment(res, extraRewardRoot, obj =>
@@ -1304,6 +1375,7 @@ namespace FAT
                     {
                         role.SetReward(mData.BonusPhase);
                     }
+
                     _RefreshClaimOffset();
                 });
             }
@@ -1327,6 +1399,7 @@ namespace FAT
                 if (reward != null)
                     UIFlyUtility.FlyReward(reward, extraRewardRoot.GetChild(0).GetChild(0).position);
             }
+
             att_orderBonus.RefreshAttachment(res, extraRewardRoot, obj =>
             {
                 var rewardItem = obj.GetComponent<MBOrderRewardBonus>();
@@ -1488,6 +1561,74 @@ namespace FAT
                 magicHourTargetOrder = data.targetOrder;
                 magicHourRewardItem = data.item;
             }
+        }
+
+        #endregion
+
+        #region 活动token棋子翻倍
+
+        private void _OnMessageTokenMultiBegin(Item item)
+        {
+            var score = mData.Score;
+            if (score <= 0)
+            {
+                _SetScoreState(false);
+                return;
+            }
+            var seq = DOTween.Sequence();
+            // 棋子可能正在从礼物盒拿出 效果延迟到棋子落地再处理
+            float delay = 0.5f; //拖尾特效飞行时间
+            var itemView = BoardViewManager.Instance.GetItemView(item.id);
+            if (!itemView.IsViewIdle())
+            {
+                delay += 0.7f;
+            }
+            seq.AppendInterval(delay);
+            seq.AppendCallback(() =>
+            {
+                //先播特效
+                var effType_Disp = BoardUtility.EffTypeToPoolType(ItemEffectType.TokenMultiTrigger).ToString();
+                var disappear = GameObjectPoolManager.Instance.CreateObject(effType_Disp, BoardViewManager.Instance.boardView.topEffectRoot);
+                disappear.transform.position = scoreGroup.txtScore.transform.position;
+                BoardUtility.AddAutoReleaseComponent(disappear, 2f, effType_Disp);
+            });
+            //延迟一段时间 等特效播到一定程度后 再刷新UI
+            delay = 0.15f;
+            seq.AppendInterval(delay);
+            seq.AppendCallback(() =>
+            {
+                var act = Game.Manager.activity.Lookup(mData.GetValue(OrderParamType.ScoreEventId));
+                if (act is ActivityScoreMic activityScoreMic && !activityScoreMic.IsComplete())
+                {
+                    _RefreshScoreMic(activityScoreMic, score);
+                }
+                else
+                {
+                    _SetScoreState(false);
+                }
+            });
+            seq.Play();
+        }
+
+        private void _OnMessageTokenMultiEnd()
+        {
+            _RefreshScore();
+        }
+
+        private void _RefreshScoreMic(ActivityScoreMic activityScoreMic, int score)
+        {
+            if (activityScoreMic == null)
+                return;
+            var tokenId = activityScoreMic.Conf.Token;
+            //设置图片
+            scoreGroup.icon.SetImage(Game.Manager.objectMan.GetBasicConfig(tokenId).Image);
+            //根据是否有倍率决定不同颜色和样式
+            var isMulti = activityScoreMic.CheckTokenMultiRate(tokenId, out var rate);
+            var key = activityScoreMic.GetScoreTextStyleKey(isMulti);
+            activityScoreMic.Visual.RefreshStyle(scoreGroup.txtScore, key);
+            var scoreStr = isMulti ? score * rate : score;
+            scoreGroup.txtScore.text = $"{scoreStr}";
+            _SetScoreState(true);
         }
 
         #endregion

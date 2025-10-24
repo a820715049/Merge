@@ -24,9 +24,15 @@ namespace FAT.Merge
             X4 = 2,
         }
         #region 公共方法
-        public static bool Is4X()
+        public static bool IsMaxToastBoost()
         {
-            return Env.Instance.GetEnergyBoostState() == EnergyBoostState.X4;
+            var cfg = Game.Manager.configMan.GetEnergyBoostConfig((int)Env.Instance.GetEnergyBoostState());
+            if (cfg != null)
+            {
+                return cfg.IsToastMax;
+            }
+            return false;
+
         }
 
         public static bool AnyEnergyBoostFeatureReady()
@@ -46,8 +52,12 @@ namespace FAT.Merge
 
         public static bool IsBoost(int curState) => curState != (int)BetState.X1;
 
-        public static int GetEnergyRate(int state)
+        public static int GetEnergyRate(int state = -1)
         {
+            if (state == -1)
+            {
+                state = (int)Env.Instance.GetEnergyBoostState();
+            }
             var cfg = Game.Manager.configMan.GetEnergyBoostConfig(state);
             if (cfg != null)
             {
@@ -56,8 +66,12 @@ namespace FAT.Merge
             return 1;
         }
 
-        public static int GetBoostLevel(int state)
+        public static int GetBoostLevel(int state = -1)
         {
+            if (state == -1)
+            {
+                state = (int)Env.Instance.GetEnergyBoostState();
+            }
             var cfg = Game.Manager.configMan.GetEnergyBoostConfig(state);
             if (cfg != null)
             {

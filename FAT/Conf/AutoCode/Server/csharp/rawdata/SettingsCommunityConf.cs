@@ -65,7 +65,7 @@ namespace fat.rawdata {
   /// <summary>
   /// annotation@annotation_type(type="rawdata")
   /// annotation@rawdata(row="SettingsCommunity",table="SettingsCommunityMap",table_wrapper="SettingsCommunityConf",map="true",map_key_type="int32",data="SettingsCommunityConf")
-  /// annotation@ab(table_ab="SettingsCommunityMapAB",table_ab_patch="SettingsCommunityMapABPatch",table_ab_value="SettingsCommunityMapABValue",ab_patch="true")
+  /// annotation@ab(table_ab="SettingsCommunityMapAB",table_ab_patch="SettingsCommunityMapABPatch",table_ab_value="SettingsCommunityMapABValue",ab_patch="false")
   /// annotation@filter(just_server="false",just_client="false")
   /// annotation@SettingsCommunity(id="id")
   /// </summary>

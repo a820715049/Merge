@@ -161,6 +161,7 @@ namespace FAT
             switch (item.FlyType)
             {
                 case FlyType.EventScore:
+                case FlyType.ScoreMicToken:
                     break;
                 case FlyType.Handbook:
                     Game.Manager.audioMan.TriggerSound("AddGemShort");
@@ -349,7 +350,7 @@ namespace FAT
             if (item.Reason == FlyReason.ExpChange || item.FlyType == FlyType.EventScore ||
                 item.FlyType == FlyType.RaceToken || item.FlyType == FlyType.MiniBoard || item.FlyType == FlyType.MiniBoardMulti
                 || item.FlyType == FlyType.EndlessToken || item.FlyType == FlyType.EndlessThreeToken
-                || item.FlyType == FlyType.GuessMilestone || item.FlyType == FlyType.DuelToken)
+                || item.FlyType == FlyType.GuessMilestone || item.FlyType == FlyType.DuelToken || item.FlyType == FlyType.ScoreMicToken)
                 UIFlyFactory.CreateCurveTween(seq, trans, item.WorldTo);
             else
             {

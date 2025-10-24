@@ -142,7 +142,9 @@ namespace FAT
         MineCartRewardBubble, //矿车棋盘发奖气泡
         MultiRankingToken,
         PuzzleToken,
-        Default,
+        Default,    //默认飞行点：当场上找不到目标飞行点时，会再尝试找这个默认飞行点，如果还找不到就往Vector3.zero飞
         SevenDayToken,
+        ScoreMicToken,    //积分活动麦克风版 从订单或合成行为产出积分并飞到活动入口
+        VineLeapToken,  //飞跃藤蔓
     }
 }

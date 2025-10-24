@@ -4,14 +4,13 @@
  * @Date: 2023-11-07 15:11:35
  */
 
-using System;
 using System.Collections.Generic;
-using Config;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 using EL;
 using TMPro;
+using FAT.Merge;
 
 namespace FAT
 {
@@ -37,7 +36,7 @@ namespace FAT
         [SerializeField] private TMP_Text cdText;
         [SerializeField] private Button refreshBtn;
         [SerializeField] private TMP_Text refreshPrice;
-        [SerializeField] private List<UIShopChessCell> chessBottomItemList;
+        [SerializeField] private List<MBShopOrderItem> orderItemList;
         [SerializeField] private float moveDuration;    //点击页签后列表的滑动时间
         [SerializeField] private float originXLeft;    //由左到右滑动起始位置(滑动到界面中心前)
         [SerializeField] private float originXRight;    //由右到左滑动起始位置
@@ -76,13 +75,9 @@ namespace FAT
             //棋子商店刷新按钮
             refreshBtn.WithClickScale().FixPivot().onClick.AddListener(_OnRefreshChessBtnClick);
             //注册订单棋子商品购买按钮
-            index = 0;
-            foreach (var chessCell in chessBottomItemList)
+            foreach (var orderItem in orderItemList)
             {
-                int temp = index;
-                chessCell.buyBtn.WithClickScale().FixPivot().onClick.AddListener(() => _OnOrderChessBtnClick(temp));
-                chessCell.tipsBtn.WithClickScale().FixPivot().onClick.AddListener(() => _OnOrderChessTipsBtnClick(temp));
-                index++;
+                orderItem.Setup();
             }
             ColorUtility.TryParseHtmlString("#4A73AD", out _colorNormal);
             ColorUtility.TryParseHtmlString("#C0701E", out _colorHighlight);
@@ -119,6 +114,9 @@ namespace FAT
             MessageCenter.Get<MSG.IAP_INIT>().AddListener(_OnIapInit);
             MessageCenter.Get<MSG.GAME_ONE_SECOND_DRIVER>().AddListener(_OnSecondUpdate);
             MessageCenter.Get<MSG.APP_ENTER_FOREGROUND_EVENT>().AddListener(_RefreshCommunityLinkReward);
+            MessageCenter.Get<MSG.GAME_ORDER_TOKEN_MULTI_BEGIN>().AddListener(_OnMessageTokenMultiBegin);
+            MessageCenter.Get<MSG.GAME_ORDER_TOKEN_MULTI_END>().AddListener(_OnMessageTokenMultiEnd);
+            MessageCenter.Get<MSG.ACTIVITY_UPDATE>().AddListener(_OnMessageActivityUpdate);
         }
 
         protected override void OnRefresh()
@@ -145,6 +143,9 @@ namespace FAT
             MessageCenter.Get<MSG.IAP_INIT>().RemoveListener(_OnIapInit);
             MessageCenter.Get<MSG.GAME_ONE_SECOND_DRIVER>().RemoveListener(_OnSecondUpdate);
             MessageCenter.Get<MSG.APP_ENTER_FOREGROUND_EVENT>().RemoveListener(_RefreshCommunityLinkReward);
+            MessageCenter.Get<MSG.GAME_ORDER_TOKEN_MULTI_BEGIN>().RemoveListener(_OnMessageTokenMultiBegin);
+            MessageCenter.Get<MSG.GAME_ORDER_TOKEN_MULTI_END>().RemoveListener(_OnMessageTokenMultiEnd);
+            MessageCenter.Get<MSG.ACTIVITY_UPDATE>().RemoveListener(_OnMessageActivityUpdate);
         }
 
         protected override void OnPreClose()
@@ -260,6 +261,22 @@ namespace FAT
         {
             _RefreshChessShopCd();
         }
+        
+        private void _OnMessageTokenMultiBegin(Item item)
+        {
+            _RefreshUI();
+        }
+        
+        private void _OnMessageTokenMultiEnd()
+        {
+            _RefreshUI();
+        }
+
+        //活动开启/结束/刷新
+        private void _OnMessageActivityUpdate()
+        {
+            _RefreshUI();
+        }
 
         private void _RefreshUI(bool isMoveTop = false)
         {
@@ -365,44 +382,17 @@ namespace FAT
             }
             //底部订单随机棋子
             index = 0;
-            foreach (var chessCell in chessBottomItemList)
+            foreach (var orderItem in orderItemList)
             {
                 //当格子商品数据存在 且 格子上目前卖的商品合法时 格子才会显示
                 if (chessTabData.GetChessOrderData(index, out var chessOrderData) && chessOrderData.CurSellGoodsId > 0)
                 {
-                    chessCell.chessGo.SetActive(true);
-                    bool isNeedInOrder = chessOrderData.CheckIsNeedInOrder();
-                    chessCell.bgHighlightGo.SetActive(false);
-                    chessCell.bgNormalGo.SetActive(true);
-                    var image = chessOrderData.GetCurSellGoodsImage();
-                    if (image != null)
-                    {
-                        chessCell.chessIcon.SetImage(image.Group, image.Asset);
-                    }
-                    chessCell.chessName.text = chessOrderData.GetCurSellGoodsName();
-                    chessCell.chessStock.text = I18N.FormatText("#SysComDesc72", chessOrderData.GetStockNum());
-                    chessCell.tipsBtn.gameObject.SetActive(true);
-                    if (!chessOrderData.CheckCanBuy())
-                    {
-                        chessCell.buyBtn.interactable = false;
-                        GameUIUtility.SetGrayShader(chessCell.buyBtn.image);
-                        chessCell.normalGo.SetActive(false);
-                        chessCell.soldOutGo.SetActive(true);
-                        chessCell.chessFrameBg.Setup(1);
-                    }
-                    else
-                    {
-                        chessCell.buyBtn.interactable = true;
-                        GameUIUtility.SetDefaultShader(chessCell.buyBtn.image);
-                        chessCell.normalGo.SetActive(true);
-                        chessCell.soldOutGo.SetActive(false);
-                        chessCell.normalPrice.text = chessOrderData.CurSellGoodsPrice.ToString();
-                        chessCell.chessFrameBg.Setup(!isNeedInOrder ? 1 : 2);
-                    }
+                    orderItem.SetVisible(true);
+                    orderItem.Refresh(chessOrderData);
                 }
                 else
                 {
-                    chessCell.chessGo.SetActive(false);
+                    orderItem.SetVisible(false);
                 }
                 index++;
             }
@@ -456,23 +446,6 @@ namespace FAT
             if (chessTabData == null)
                 return;
             Game.Manager.shopMan.TryRefreshShopChessGoods(chessTabData);
-        }
-
-        private void _OnOrderChessBtnClick(int index)
-        {
-            var chessTabData = (ShopTabChessData)Game.Manager.shopMan.GetShopTabData(_curShowTabType);
-            if (!chessTabData.GetChessOrderData(index, out var chessOrderData))
-                return;
-            var from = chessBottomItemList[index].chessIcon.transform.position - new Vector3(0, (chessBottomItemList[index].chessIcon.transform as RectTransform).sizeDelta.y / 2, 0);
-            Game.Manager.shopMan.TryBuyShopChessOrderGoods(chessOrderData, from, 196f);
-        }
-
-        private void _OnOrderChessTipsBtnClick(int index)
-        {
-            var chessTabData = (ShopTabChessData)Game.Manager.shopMan.GetShopTabData(_curShowTabType);
-            if (!chessTabData.GetChessOrderData(index, out var chessOrderData))
-                return;
-            UIItemUtility.ShowItemPanelInfo(chessOrderData.CurSellGoodsId);
         }
 
         private void _OnRefreshCommunityShopLinkItem()

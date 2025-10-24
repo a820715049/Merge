@@ -22,13 +22,13 @@ public class MBI18NText : MonoBehaviour
     private Text mCachedText;
     private TextMesh mCached3DText;
     private TMPro.TMP_Text mCachedTMPText;
-    private TextProOnACircle mCachedCurveText;
+    private TextProOnACurve mCachedCurveText;
     public string Key => mKey;
 
     public static MBI18NText SetEmptyWhenNoText(GameObject gameObject, bool emptyWhenNoText)
     {
         MBI18NText mb = gameObject.GetComponent<MBI18NText>();
-        if(mb == null)
+        if (mb == null)
         {
             mb = gameObject.AddComponent<MBI18NText>();
         }
@@ -36,11 +36,11 @@ public class MBI18NText : MonoBehaviour
         mb._Refresh();
         return mb;
     }
-    
+
     public static MBI18NText SetPlainText(GameObject gameObject, string plain)
     {
         MBI18NText mb = gameObject.GetComponent<MBI18NText>();
-        if(mb == null)
+        if (mb == null)
         {
             mb = gameObject.AddComponent<MBI18NText>();
         }
@@ -55,7 +55,7 @@ public class MBI18NText : MonoBehaviour
     public static MBI18NText SetKey(GameObject gameObject, string key)
     {
         MBI18NText mb = gameObject.GetComponent<MBI18NText>();
-        if(mb == null)
+        if (mb == null)
         {
             mb = gameObject.AddComponent<MBI18NText>();
         }
@@ -69,7 +69,7 @@ public class MBI18NText : MonoBehaviour
     public static MBI18NText SetKey(Component com, string key)
     {
         MBI18NText mb = com.GetComponent<MBI18NText>();
-        if(mb == null)
+        if (mb == null)
         {
             mb = com.gameObject.AddComponent<MBI18NText>();
         }
@@ -83,7 +83,7 @@ public class MBI18NText : MonoBehaviour
     public static MBI18NText SetFormatKey(GameObject gameObject, string key, params object[] param)
     {
         MBI18NText mb = gameObject.GetComponent<MBI18NText>();
-        if(mb == null)
+        if (mb == null)
         {
             mb = gameObject.AddComponent<MBI18NText>();
         }
@@ -97,7 +97,7 @@ public class MBI18NText : MonoBehaviour
     public static MBI18NText SetDynamicText(GameObject gameObject, StringGetter oper)
     {
         MBI18NText mb = gameObject.GetComponent<MBI18NText>();
-        if(mb == null)
+        if (mb == null)
         {
             mb = gameObject.AddComponent<MBI18NText>();
         }
@@ -114,7 +114,7 @@ public class MBI18NText : MonoBehaviour
         mCachedText = GetComponent<Text>();
         mCached3DText = GetComponent<TextMesh>();
         mCachedTMPText = GetComponent<TMPro.TMP_Text>();
-        mCachedCurveText = GetComponent<TextProOnACircle>();
+        mCachedCurveText = GetComponent<TextProOnACurve>();
     }
 
     public void OnEnable()
@@ -130,22 +130,22 @@ public class MBI18NText : MonoBehaviour
 
     private void _Refresh()
     {
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         if (!Preview && !Application.isPlaying) return;
-        #endif
-        if(null != mCachedText || null != mCached3DText || null != mCachedTMPText)
+#endif
+        if (null != mCachedText || null != mCached3DText || null != mCachedTMPText)
         {
-            if(mOperator != null)
+            if (mOperator != null)
             {
                 _SetText(mOperator());
             }
-            else if(mParams != null)
+            else if (mParams != null)
             {
                 _SetText(I18N.FormatText(mKey, mParams));
             }
-            else if(mKey != null)
+            else if (mKey != null)
             {
-                if(mEmptyWhenNoText)
+                if (mEmptyWhenNoText)
                 {
                     _SetText(I18N.TextNoPlaceholder(mKey));
                 }
@@ -163,11 +163,11 @@ public class MBI18NText : MonoBehaviour
 
     private void _SetText(string text)
     {
-        if(mCachedText != null)
+        if (mCachedText != null)
         {
             mCachedText.text = text;
         }
-        if(mCached3DText != null)
+        if (mCached3DText != null)
         {
             mCached3DText.text = text;
         }
@@ -181,7 +181,7 @@ public class MBI18NText : MonoBehaviour
         }
     }
 
-    #if UNITY_EDITOR
+#if UNITY_EDITOR
     //editor环境下刷新inspector
     public void OnValidate()
     {
@@ -190,15 +190,17 @@ public class MBI18NText : MonoBehaviour
     }
 
     private const string MenuPath = "Tools/I18N Preview";
-    public static bool Preview {
+    public static bool Preview
+    {
         get => UnityEditor.EditorPrefs.GetBool(MenuPath, false);
         set => UnityEditor.EditorPrefs.SetBool(MenuPath, value);
     }
 
     [UnityEditor.MenuItem(MenuPath, priority = 11000)]
-    private static void TPreview() {
+    private static void TPreview()
+    {
         Preview = !Preview;
         UnityEditor.Menu.SetChecked(MenuPath, Preview);
     }
-    #endif
+#endif
 }

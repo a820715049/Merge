@@ -24,6 +24,7 @@ namespace FAT
     public class MBItemAnimation : MonoBehaviour
     {
         private static readonly string kAnimTriggerTap = "Tap";
+        private static readonly string kAnimTriggerTapDelayHigh = "TapDelayHigh";   //具有一定延迟 且幅度比较大的tap动画
         private static readonly string kAnimTriggerSpawn = "Spawn";
         private static readonly string kAnimTriggerDrop = "Drop";
 
@@ -62,6 +63,11 @@ namespace FAT
         public void PlayTap()
         {
             animator.SetTrigger(kAnimTriggerTap);
+        }
+        
+        public void PlayTapDelayHigh()
+        {
+            animator.SetTrigger(kAnimTriggerTapDelayHigh);
         }
 
         public void PlaySpawn()

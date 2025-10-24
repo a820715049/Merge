@@ -65,7 +65,7 @@ namespace FAT {
         public void RefreshTheme() {
             var visual = activity.VisualStart;
             visual.Refresh(visualGroup);
-            visual.visual.RefreshText(visualGroup, "subTitle", "\u0301");
+            visual.visual.RefreshText(visualGroup, "subTitle", UIUtility.FormatTMPString(activity.Conf.TokenId));
         }
 
         public void RefreshReward() {

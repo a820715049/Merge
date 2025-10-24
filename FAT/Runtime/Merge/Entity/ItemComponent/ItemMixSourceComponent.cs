@@ -101,7 +101,7 @@ namespace FAT.Merge
         /// <param name="realTid">实际产出id</param>
         public Toast GetToastTypeForItem(int itemTid, int realTid)
         {
-            if (config.IsBoostable && EnergyBoostUtility.Is4X() && config.MaxToast.TryGetValue(realTid, out var toast))
+            if (config.IsBoostable && EnergyBoostUtility.IsMaxToastBoost() && config.MaxToast.TryGetValue(realTid, out var toast))
             {
                 return (Toast)toast;
             }

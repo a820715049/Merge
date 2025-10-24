@@ -35,6 +35,7 @@ namespace FAT
 
         // cd
         private TextMeshProUGUI _cd;
+        private long mLastCloseTime = -1; // 生成器cd
 
         // 进度条
         public UITrainMissionProgressModule ProgressModule;
@@ -120,6 +121,7 @@ namespace FAT
             bag.InitOnPreOpen(_activity);
             detailCtrl.InitOnPreOpen();
             boardDragRoot.InitOnPreOpen();
+            _TickCloseTime();
 
             // 关闭进入动画
             _activity.ChangeAnimState(false);
@@ -186,6 +188,8 @@ namespace FAT
             {
                 SetBlock(false);
             }
+
+            mLastCloseTime = Game.Instance.GetTimestampSeconds();
 
             ProgressModule.Hide();
             TrainModule.Hide();
@@ -312,10 +316,19 @@ namespace FAT
             }
 
             var tokenConf = mgr.GetTokenConfig(data.rewardId);
-            if (tokenConf != null && tokenConf.Feature == FeatureEntry.FeatureScore)
+            if (tokenConf != null)
             {
-                // 排除积分活动 不飞入口 飞积分活动滑动条
-                return;
+                if (tokenConf.Feature == FeatureEntry.FeatureScore)
+                {
+                    // 排除积分活动 不飞入口 飞积分活动滑动条
+                    return;
+                }
+                if (tokenConf.Feature == FeatureEntry.FeatureMicMilestone)
+                {
+                    // 排除积分活动变种(麦克风版) 由活动相关逻辑自行控制飞积分
+                    // 但最终还是会经由CheckNewFly，调用CheckTapBonus方法，控制显示右下角主棋盘入口，找到积分的飞行终点
+                    return;
+                }
             }
 
             // 判断是否有对应图标的配置
@@ -419,16 +432,12 @@ namespace FAT
 
 
         #region 回收
-        private List<Item> _recycleItems;
-
         public void StartRecycle()
         {
-            // 获得棋盘上的棋子
-            _recycleItems = _activity.FinishRound();
-
             // 棋盘上没有棋子 直接退出
-            if (_recycleItems.Count == 0)
+            if (!TrainMissionUtility.HasBoardItem())
             {
+                _activity.FinishRound();
                 TrainMissionUtility.LeaveActivity();
                 return;
             }
@@ -457,16 +466,23 @@ namespace FAT
         // 点击回收按钮
         private void OnClickRecycleBtn()
         {
+            // 此时活动才结束
+            var recycleItems = _activity.FinishRound();
+
             recycle.SetActive(false);
+
+            // 棋盘上取消选中当前棋子
+            BoardViewManager.Instance.CancelSelectCurItem();
+            MessageCenter.Get<UI_BOARD_SELECT_ITEM>().Dispatch(null);
 
             // block
             SetBlock(true);
 
             // 开箱动画
-            TrainModule.BottomTrain.recycleTrain.OpenCover(_recycleItems.Count * recycleFlyTime, () =>
+            TrainModule.BottomTrain.recycleTrain.OpenCover(recycleItems.Count * recycleFlyTime, () =>
             {
                 // 使用DOTween实现飞棋子动画表现
-                _FlyItemsWithDOTween(_recycleItems);
+                _FlyItemsWithDOTween(recycleItems);
             });
         }
 
@@ -533,6 +549,13 @@ namespace FAT
         }
         #endregion
 
+        private void _TickCloseTime()
+        {
+            if (mLastCloseTime > 0)
+            {
+                BoardViewManager.Instance.SyncBoard(Game.Instance.GetTimestampSeconds() - mLastCloseTime);
+            }
+        }
 
         public bool IsBlock => _block.raycastTarget;
 

@@ -25,35 +25,35 @@ namespace fat.rawdata {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "CiVyYXdkYXRhL0V2ZW50TW9ub3BvbHlEZXRhaWxDb25mLnByb3RvEgdyYXdk",
-            "YXRhIpEBChNFdmVudE1vbm9wb2x5RGV0YWlsEgoKAmlkGAEgASgFEg8KB2Jv",
+            "YXRhIqMBChNFdmVudE1vbm9wb2x5RGV0YWlsEgoKAmlkGAEgASgFEg8KB2Jv",
             "YXJkSWQYAiABKAUSEgoKY3ljbGVTdGFnZRgDIAEoBRIMCgRkaWZmGAQgASgF",
             "EhAKCGZyZWVJdGVtGAUgAygFEhMKC29yZGVySXRlbUlkGAYgAygFEhQKDHJl",
-            "Z3VsYXJTdGFnZRgHIAMoBSLgAQodRXZlbnRNb25vcG9seURldGFpbE1hcEFC",
-            "VmFsdWUSYgoWRXZlbnRNb25vcG9seURldGFpbE1hcBgBIAMoCzJCLnJhd2Rh",
-            "dGEuRXZlbnRNb25vcG9seURldGFpbE1hcEFCVmFsdWUuRXZlbnRNb25vcG9s",
-            "eURldGFpbE1hcEVudHJ5GlsKG0V2ZW50TW9ub3BvbHlEZXRhaWxNYXBFbnRy",
-            "eRILCgNrZXkYASABKAUSKwoFdmFsdWUYAiABKAsyHC5yYXdkYXRhLkV2ZW50",
-            "TW9ub3BvbHlEZXRhaWw6AjgBIvkEChdFdmVudE1vbm9wb2x5RGV0YWlsQ29u",
-            "ZhJcChZFdmVudE1vbm9wb2x5RGV0YWlsTWFwGAEgAygLMjwucmF3ZGF0YS5F",
-            "dmVudE1vbm9wb2x5RGV0YWlsQ29uZi5FdmVudE1vbm9wb2x5RGV0YWlsTWFw",
-            "RW50cnkSYAoYRXZlbnRNb25vcG9seURldGFpbE1hcEFCGAIgAygLMj4ucmF3",
-            "ZGF0YS5FdmVudE1vbm9wb2x5RGV0YWlsQ29uZi5FdmVudE1vbm9wb2x5RGV0",
-            "YWlsTWFwQUJFbnRyeRJqCh1FdmVudE1vbm9wb2x5RGV0YWlsTWFwQUJQYXRj",
-            "aBgDIAMoCzJDLnJhd2RhdGEuRXZlbnRNb25vcG9seURldGFpbENvbmYuRXZl",
-            "bnRNb25vcG9seURldGFpbE1hcEFCUGF0Y2hFbnRyeRpbChtFdmVudE1vbm9w",
-            "b2x5RGV0YWlsTWFwRW50cnkSCwoDa2V5GAEgASgFEisKBXZhbHVlGAIgASgL",
-            "MhwucmF3ZGF0YS5FdmVudE1vbm9wb2x5RGV0YWlsOgI4ARpnCh1FdmVudE1v",
-            "bm9wb2x5RGV0YWlsTWFwQUJFbnRyeRILCgNrZXkYASABKAkSNQoFdmFsdWUY",
-            "AiABKAsyJi5yYXdkYXRhLkV2ZW50TW9ub3BvbHlEZXRhaWxNYXBBQlZhbHVl",
-            "OgI4ARpsCiJFdmVudE1vbm9wb2x5RGV0YWlsTWFwQUJQYXRjaEVudHJ5EgsK",
-            "A2tleRgBIAEoCRI1CgV2YWx1ZRgCIAEoCzImLnJhd2RhdGEuRXZlbnRNb25v",
-            "cG9seURldGFpbE1hcEFCVmFsdWU6AjgBQj1aLWdpdGxhYi5mdW5wbHVzLmlv",
-            "L2ZhdC9jb25mL2dlbi9nb2xhbmcvcmF3ZGF0YaoCC2ZhdC5yYXdkYXRhYgZw",
-            "cm90bzM="));
+            "Z3VsYXJTdGFnZRgHIAMoBRIQCgh0cm9waHlJZBgIIAMoBSLgAQodRXZlbnRN",
+            "b25vcG9seURldGFpbE1hcEFCVmFsdWUSYgoWRXZlbnRNb25vcG9seURldGFp",
+            "bE1hcBgBIAMoCzJCLnJhd2RhdGEuRXZlbnRNb25vcG9seURldGFpbE1hcEFC",
+            "VmFsdWUuRXZlbnRNb25vcG9seURldGFpbE1hcEVudHJ5GlsKG0V2ZW50TW9u",
+            "b3BvbHlEZXRhaWxNYXBFbnRyeRILCgNrZXkYASABKAUSKwoFdmFsdWUYAiAB",
+            "KAsyHC5yYXdkYXRhLkV2ZW50TW9ub3BvbHlEZXRhaWw6AjgBIvkEChdFdmVu",
+            "dE1vbm9wb2x5RGV0YWlsQ29uZhJcChZFdmVudE1vbm9wb2x5RGV0YWlsTWFw",
+            "GAEgAygLMjwucmF3ZGF0YS5FdmVudE1vbm9wb2x5RGV0YWlsQ29uZi5FdmVu",
+            "dE1vbm9wb2x5RGV0YWlsTWFwRW50cnkSYAoYRXZlbnRNb25vcG9seURldGFp",
+            "bE1hcEFCGAIgAygLMj4ucmF3ZGF0YS5FdmVudE1vbm9wb2x5RGV0YWlsQ29u",
+            "Zi5FdmVudE1vbm9wb2x5RGV0YWlsTWFwQUJFbnRyeRJqCh1FdmVudE1vbm9w",
+            "b2x5RGV0YWlsTWFwQUJQYXRjaBgDIAMoCzJDLnJhd2RhdGEuRXZlbnRNb25v",
+            "cG9seURldGFpbENvbmYuRXZlbnRNb25vcG9seURldGFpbE1hcEFCUGF0Y2hF",
+            "bnRyeRpbChtFdmVudE1vbm9wb2x5RGV0YWlsTWFwRW50cnkSCwoDa2V5GAEg",
+            "ASgFEisKBXZhbHVlGAIgASgLMhwucmF3ZGF0YS5FdmVudE1vbm9wb2x5RGV0",
+            "YWlsOgI4ARpnCh1FdmVudE1vbm9wb2x5RGV0YWlsTWFwQUJFbnRyeRILCgNr",
+            "ZXkYASABKAkSNQoFdmFsdWUYAiABKAsyJi5yYXdkYXRhLkV2ZW50TW9ub3Bv",
+            "bHlEZXRhaWxNYXBBQlZhbHVlOgI4ARpsCiJFdmVudE1vbm9wb2x5RGV0YWls",
+            "TWFwQUJQYXRjaEVudHJ5EgsKA2tleRgBIAEoCRI1CgV2YWx1ZRgCIAEoCzIm",
+            "LnJhd2RhdGEuRXZlbnRNb25vcG9seURldGFpbE1hcEFCVmFsdWU6AjgBQj1a",
+            "LWdpdGxhYi5mdW5wbHVzLmlvL2ZhdC9jb25mL2dlbi9nb2xhbmcvcmF3ZGF0",
+            "YaoCC2ZhdC5yYXdkYXRhYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EventMonopolyDetail), global::fat.rawdata.EventMonopolyDetail.Parser, new[]{ "Id", "BoardId", "CycleStage", "Diff", "FreeItem", "OrderItemId", "RegularStage" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EventMonopolyDetail), global::fat.rawdata.EventMonopolyDetail.Parser, new[]{ "Id", "BoardId", "CycleStage", "Diff", "FreeItem", "OrderItemId", "RegularStage", "TrophyId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EventMonopolyDetailMapABValue), global::fat.rawdata.EventMonopolyDetailMapABValue.Parser, new[]{ "EventMonopolyDetailMap" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EventMonopolyDetailConf), global::fat.rawdata.EventMonopolyDetailConf.Parser, new[]{ "EventMonopolyDetailMap", "EventMonopolyDetailMapAB", "EventMonopolyDetailMapABPatch" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, null, })
           }));
@@ -105,6 +105,7 @@ namespace fat.rawdata {
       freeItem_ = other.freeItem_.Clone();
       orderItemId_ = other.orderItemId_.Clone();
       regularStage_ = other.regularStage_.Clone();
+      trophyId_ = other.trophyId_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -211,6 +212,19 @@ namespace fat.rawdata {
       get { return regularStage_; }
     }
 
+    /// <summary>Field number for the "trophyId" field.</summary>
+    public const int TrophyIdFieldNumber = 8;
+    private static readonly pb::FieldCodec<int> _repeated_trophyId_codec
+        = pb::FieldCodec.ForInt32(66);
+    private readonly pbc::RepeatedField<int> trophyId_ = new pbc::RepeatedField<int>();
+    /// <summary>
+    /// 奖杯id
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<int> TrophyId {
+      get { return trophyId_; }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as EventMonopolyDetail);
@@ -231,6 +245,7 @@ namespace fat.rawdata {
       if(!freeItem_.Equals(other.freeItem_)) return false;
       if(!orderItemId_.Equals(other.orderItemId_)) return false;
       if(!regularStage_.Equals(other.regularStage_)) return false;
+      if(!trophyId_.Equals(other.trophyId_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -244,6 +259,7 @@ namespace fat.rawdata {
       hash ^= freeItem_.GetHashCode();
       hash ^= orderItemId_.GetHashCode();
       hash ^= regularStage_.GetHashCode();
+      hash ^= trophyId_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -279,6 +295,7 @@ namespace fat.rawdata {
       freeItem_.WriteTo(output, _repeated_freeItem_codec);
       orderItemId_.WriteTo(output, _repeated_orderItemId_codec);
       regularStage_.WriteTo(output, _repeated_regularStage_codec);
+      trophyId_.WriteTo(output, _repeated_trophyId_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -307,6 +324,7 @@ namespace fat.rawdata {
       freeItem_.WriteTo(ref output, _repeated_freeItem_codec);
       orderItemId_.WriteTo(ref output, _repeated_orderItemId_codec);
       regularStage_.WriteTo(ref output, _repeated_regularStage_codec);
+      trophyId_.WriteTo(ref output, _repeated_trophyId_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -331,6 +349,7 @@ namespace fat.rawdata {
       size += freeItem_.CalculateSize(_repeated_freeItem_codec);
       size += orderItemId_.CalculateSize(_repeated_orderItemId_codec);
       size += regularStage_.CalculateSize(_repeated_regularStage_codec);
+      size += trophyId_.CalculateSize(_repeated_trophyId_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -357,6 +376,7 @@ namespace fat.rawdata {
       freeItem_.Add(other.freeItem_);
       orderItemId_.Add(other.orderItemId_);
       regularStage_.Add(other.regularStage_);
+      trophyId_.Add(other.trophyId_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -402,6 +422,11 @@ namespace fat.rawdata {
             regularStage_.AddEntriesFrom(input, _repeated_regularStage_codec);
             break;
           }
+          case 66:
+          case 64: {
+            trophyId_.AddEntriesFrom(input, _repeated_trophyId_codec);
+            break;
+          }
         }
       }
     #endif
@@ -445,6 +470,11 @@ namespace fat.rawdata {
           case 58:
           case 56: {
             regularStage_.AddEntriesFrom(ref input, _repeated_regularStage_codec);
+            break;
+          }
+          case 66:
+          case 64: {
+            trophyId_.AddEntriesFrom(ref input, _repeated_trophyId_codec);
             break;
           }
         }

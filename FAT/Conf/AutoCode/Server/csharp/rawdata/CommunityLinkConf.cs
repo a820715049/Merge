@@ -60,7 +60,7 @@ namespace fat.rawdata {
   /// <summary>
   /// annotation@annotation_type(type="rawdata")
   /// annotation@rawdata(row="CommunityLink",table="CommunityLinkMap",table_wrapper="CommunityLinkConf",map="true",map_key_type="int32",data="CommunityLinkConf")
-  /// annotation@ab(table_ab="CommunityLinkMapAB",table_ab_patch="CommunityLinkMapABPatch",table_ab_value="CommunityLinkMapABValue",ab_patch="true")
+  /// annotation@ab(table_ab="CommunityLinkMapAB",table_ab_patch="CommunityLinkMapABPatch",table_ab_value="CommunityLinkMapABValue",ab_patch="false")
   /// annotation@filter(just_server="false",just_client="false")
   /// annotation@CommunityLink(id="id")
   /// </summary>

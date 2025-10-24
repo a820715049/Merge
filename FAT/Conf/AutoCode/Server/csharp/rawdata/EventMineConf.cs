@@ -63,7 +63,7 @@ namespace fat.rawdata {
   /// <summary>
   /// annotation@annotation_type(type="rawdata")
   /// annotation@rawdata(row="EventMine",table="EventMineMap",table_wrapper="EventMineConf",map="true",map_key_type="int32",data="EventMineConf")
-  /// annotation@ab(table_ab="EventMineMapAB",table_ab_patch="EventMineMapABPatch",table_ab_value="EventMineMapABValue",ab_patch="true")
+  /// annotation@ab(table_ab="EventMineMapAB",table_ab_patch="EventMineMapABPatch",table_ab_value="EventMineMapABValue",ab_patch="false")
   /// annotation@filter(just_server="false",just_client="false")
   /// annotation@EventMine(id="id")
   /// </summary>

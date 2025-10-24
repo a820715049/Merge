@@ -78,6 +78,8 @@ namespace FAT
             record.Clear();
             active = null;
             query = 0;
+            blockDelay = false;
+            blockIgnore = false;
         }
 
         public void Startup()

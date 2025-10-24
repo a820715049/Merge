@@ -80,6 +80,8 @@ namespace FAT
                     ft = FlyType.MultiRankingToken;
                 else if (tokenConf.Feature == FeatureEntry.FeatureSevenDayTask)
                     ft = FlyType.SevenDayToken;
+                else if (tokenConf.Feature == FeatureEntry.FeatureVineLeap)
+                    ft = FlyType.VineLeapToken;
                 else if (tokenConf.Feature == FeatureEntry.FeatureGuess)
                 {
                     var acti = (ActivityGuess)Game.Manager.activity.LookupAny(fat.rawdata.EventType.Guess);
@@ -113,6 +115,10 @@ namespace FAT
                 else if (tokenConf.Feature == FeatureEntry.FeatureBp)
                 {
                     ft = FlyType.BPExp;
+                }
+                else if (tokenConf.Feature == FeatureEntry.FeatureMicMilestone)
+                {
+                    ft = FlyType.ScoreMicToken;
                 }
             }
             else if (mgr.IsType(rewardId, ObjConfigType.Coin))

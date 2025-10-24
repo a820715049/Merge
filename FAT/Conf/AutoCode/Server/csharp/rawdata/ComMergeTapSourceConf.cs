@@ -316,7 +316,7 @@ namespace fat.rawdata {
     public const int IsCategroyInfoFieldNumber = 32;
     private bool isCategroyInfo_;
     /// <summary>
-    /// 是否显示数量角标提示
+    /// 是否不显示数量角标提示
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public bool IsCategroyInfo {

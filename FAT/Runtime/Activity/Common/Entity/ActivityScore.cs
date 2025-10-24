@@ -37,6 +37,7 @@ namespace FAT
         public override bool Valid => ConfD != null;
         public PopupActivity Popup { get; internal set; }
         public UIResAlt Res { get; } = new(UIConfig.UIScoreHelp);
+        public UIResAlt EndRes { get; } = new(UIConfig.UIScoreFinish_Track);//目前只有轨道用.
         public bool IsUnlock => Game.Manager.featureUnlockMan.IsFeatureEntryUnlocked(FeatureEntry.FeatureScore);
         public int CurShowScore;
         public int CurMileStoneScore;
@@ -67,7 +68,7 @@ namespace FAT
         private List<RewardConfig> rewardConfigList = new List<RewardConfig>();
         private List<RewardConfig> finalRewardConfigList = new List<RewardConfig>();
         private int curMileStoneIndex;
-        private List<RewardCommitData> commitRewardList = new();
+        public List<RewardCommitData> commitRewardList = new();
         private ScoreEntity scoreEntity = new();
         private IActivityOrderHandler activityOrderHandlerImplementation;
         private int cycleScoreShowCount;
@@ -126,6 +127,11 @@ namespace FAT
                 Popup = new(this, Visual, Res, false);
                 //如果后续需要和Popup不同的领奖弹窗,可以在这里改
                 PopupReward = new(this, Visual, Res);
+                // 结束弹窗资源：默认 UIConfig.UIScoreFinish_Track，支持通过主题 AssetInfo.endPrefab 覆盖
+                if (Visual.AssetMap.TryGetValue("endPrefab", out var endPrefab) && !string.IsNullOrEmpty(endPrefab))
+                {
+                    EndRes.Replace(endPrefab);
+                }
             }
             MessageCenter.Get<MSG.SCORE_ENTITY_ADD_COMPLETE>().AddListener(OnUpdateScore);
         }

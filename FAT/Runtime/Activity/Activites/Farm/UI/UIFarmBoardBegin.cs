@@ -19,6 +19,7 @@ namespace FAT
 
         // UI
         private TextMeshProUGUI leftTime;
+        private TextMeshProUGUI desc;
         private TextProOnACircle title;
 
 
@@ -26,6 +27,7 @@ namespace FAT
         protected override void OnCreate()
         {
             transform.Access("Content/Panel/TitleBg/Title", out title);
+            transform.Access("Content/Panel/Desc3", out desc);
             transform.Access("Content/Panel/_cd/text", out leftTime);
             transform.AddButton("Content/Panel/BtnConfirm", _ClickConfirm);
             transform.AddButton("Content/Panel/BtnClose", Close);
@@ -77,6 +79,8 @@ namespace FAT
 
         private void RefreshTheme()
         {
+            _activity.StartPopup.visual.Refresh(title,"mainTitle");
+            _activity.StartPopup.visual.Refresh(desc,"subTitle");
         }
 
         private void WhenEnd(ActivityLike act, bool expire)

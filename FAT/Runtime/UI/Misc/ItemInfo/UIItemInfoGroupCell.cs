@@ -27,6 +27,8 @@ namespace FAT
              public GameObject SelectNextGo;
              public GameObject NextLevelGo;
              public UIImageRes ItemIcon;
+             public GameObject ItemNumTag;
+             public TMP_Text ItemNumTagText;
              public GameObject BuyBtnGo;
              public TMP_Text BuyBtnPrice;
         }
@@ -64,6 +66,9 @@ namespace FAT
                 transform.AddButton(path + "NextLevelGo", () => OnItemNextLevelTipsBtnClick(index));
                 transform.AddButton(path + "BuyBtn", () => OnItemBuyBtnClick(index));
                 cell.ItemIcon = transform.FindEx<UIImageRes>(path + "Icon");
+                transform.FindEx(path + "NumTag", out cell.ItemNumTag);
+                transform.AddButton(path + "NumTag", () => OnItemNumTagBtnClick(index));
+                cell.ItemNumTagText = transform.FindEx<TMP_Text>(path + "NumTag/Count");
                 cell.BuyBtnPrice = transform.FindEx<TMP_Text>(path + "BuyBtn/Normal/Num");
                 _girdCellList.Add(cell);
             }
@@ -209,11 +214,16 @@ namespace FAT
                                 Color color = Color.white;
                                 color.a = !isPreview ? (!isCur && isNeedInorder && isLock ? 0.5f : 1f) : 0.5f;
                                 cell.ItemIcon.color = color;
+                                //刷新当前棋子的持有数量
+                                var canShow = itemInfoMan.CheckItemNumTagInfo(itemId, out var totalCount);
+                                cell.ItemNumTag.SetActive(canShow);
+                                cell.ItemNumTagText.text = totalCount.ToString();
                             }
                         }
                         else
                         {
                             cell.ItemIcon.gameObject.SetActive(false);
+                            cell.ItemNumTag.SetActive(false);
                         }
                         cell.BuyBtnGo.SetActive(isSell);
                         cell.BuyBtnPrice.text = price.ToString();
@@ -262,6 +272,13 @@ namespace FAT
             if (_curItemIdList == null || !_curItemIdList.TryGetByIndex(index, out var itemId))
                 return;
             Game.Manager.itemInfoMan.TryBuyShopChessGoods(itemId, _girdCellList[index].ItemIcon.transform.position);
+        }
+
+        private void OnItemNumTagBtnClick(int index)
+        {
+            if (_curItemIdList == null || !_curItemIdList.TryGetByIndex(index, out var itemId))
+                return;
+            Game.Manager.itemInfoMan.ProcessClickItemNumTag(itemId);
         }
 
         private void OnGoStoreBtnClick()

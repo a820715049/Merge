@@ -6,6 +6,7 @@
  * Description: Misc节点下的布局管理
  */
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using EL;
@@ -41,6 +42,7 @@ namespace FAT
             MessageCenter.Get<MSG.ACTIVITY_END>().AddListener(_OnActivityEnd);
             MessageCenter.Get<MSG.ACTIVITY_STATE>().AddListener(_RefreshLayout);
             MessageCenter.Get<MSG.ACTIVITY_ENTRY_LAYOUT_REFRESH>().AddListener(OnRefreshLayout);
+            MessageCenter.Get<MSG.ACTIVITY_QUERY_ENTRY>().AddListener(OnQueryEntry);
             BoardViewWrapper.GetCurrentWorld().onRewardListChange += OnMessageRewardListChange;
             MessageCenter.Get<MSG.GAME_MERGE_LEVEL_CHANGE>().AddListener(_RefreshRewardAndDERoot);
             _FirstTimeShow();
@@ -52,6 +54,7 @@ namespace FAT
             MessageCenter.Get<MSG.ACTIVITY_END>().RemoveListener(_OnActivityEnd);
             MessageCenter.Get<MSG.ACTIVITY_STATE>().RemoveListener(_RefreshLayout);
             MessageCenter.Get<MSG.ACTIVITY_ENTRY_LAYOUT_REFRESH>().RemoveListener(OnRefreshLayout);
+            MessageCenter.Get<MSG.ACTIVITY_QUERY_ENTRY>().RemoveListener(OnQueryEntry);
             BoardViewWrapper.GetCurrentWorld().onRewardListChange -= OnMessageRewardListChange;
             MessageCenter.Get<MSG.GAME_MERGE_LEVEL_CHANGE>().RemoveListener(_RefreshRewardAndDERoot);
             _Cleanup();
@@ -69,27 +72,27 @@ namespace FAT
             using (ObjectPool<List<ActivityLike>>.GlobalPool.AllocStub(out var activityLikes))
             {
                 foreach (var activityList in Game.Manager.activity.index)
-                    foreach (var act in activityList.Value)
-                        activityLikes.Add(act);
+                foreach (var act in activityList.Value)
+                    activityLikes.Add(act);
 
                 // 按 boardentWeight 排序，权重一致则按 EventType 排序
-                activityLikes.Sort((ActivityLike a, ActivityLike b) => 
+                activityLikes.Sort((ActivityLike a, ActivityLike b) =>
                 {
                     var weightA = GetActivityBoardWeight(a);
                     var weightB = GetActivityBoardWeight(b);
-                    
+
                     // 首先按权重排序（权重大的靠左）
                     if (weightA != weightB)
                         return weightB.CompareTo(weightA);
-                    
+
                     // 权重一致则按 EventType 排序
                     if (a.Type != b.Type)
                         return a.Type.CompareTo(b.Type);
-                    
+
                     // EventType 一致则按 activity.Id 排序
                     return a.Id.CompareTo(b.Id);
                 });
-                
+
                 foreach (var act in activityLikes)
                     if (act is IBoardEntry e && e.BoardEntryVisible && act.Valid)
                     {
@@ -117,7 +120,7 @@ namespace FAT
             // 积分活动特殊处理，给予最高权重确保在最左边
             if (activity.Type == EventType.Score)
                 return int.MaxValue;
-                
+
             // 从配置中获取权重
             var eventTypeInfo = EventTypeInfoVisitor.GetOneByFilter(info => info.EventType == activity.Type);
             return eventTypeInfo?.BoardEntWeight ?? 0;
@@ -209,7 +212,7 @@ namespace FAT
             var orderCha = (ActivityOrderChallenge)orderChaAct;
             specialEntry.GetComponent<HorizontalLayoutGroup>().padding.right =
                 orderCha is { Valid: true } && !orderCha.IsOver() ? 10 : 0;
-                
+
             // 重新排序活动入口
             ReorderActivityEntries();
         }
@@ -243,12 +246,13 @@ namespace FAT
                     return;
                 }
 
-                if (_HasEntry(key, act)) 
+                if (_HasEntry(key, act))
                 {
                     // 活动入口已存在，但仍然需要重新排序（可能权重配置发生了变化）
                     ReorderActivityEntries();
                     return;
                 }
+
                 CreateBoardEntry(key, act);
             }
         }
@@ -284,7 +288,7 @@ namespace FAT
                         entryToActivityMap.Remove(key);
                     }
             }
-            
+
             // 活动结束后重新排序
             ReorderActivityEntries();
         }
@@ -337,14 +341,15 @@ namespace FAT
             {
                 entry.transform.SetParent(activityEntry.transform);
             }
+
             entry.transform.localPosition = Vector3.zero;
             entry.transform.localScale = Vector3.one;
             entry.name = prefabName;
             entry.gameObject.SetActive(true);
-            
+
             // 维护映射关系
             entryToActivityMap[prefabName] = activity;
-            
+
             // 获取并刷新Entry组件
             var entryComponent = entry.GetComponent<IActivityBoardEntry>();
             if (entryComponent != null)
@@ -355,12 +360,13 @@ namespace FAT
             {
                 DebugEx.Warning($"Entry组件未实现IActivityBoardEntry接口: {activity.Type}");
             }
+
             entryPrefabs.Add(entry);
-            
+
             // 重新排序所有活动入口
             ReorderActivityEntries();
             _RefreshLayout();
-            
+
             // 红点位置适配
             entry.GetComponentInChildren<MBDotPosFit>(true)?.FitPos(entry);
         }
@@ -373,7 +379,7 @@ namespace FAT
         {
             // 获取所有活动入口并排序
             var activityEntries = new List<(Transform entry, ActivityLike activity)>();
-            
+
             // 收集 activityEntry 下的所有入口
             for (int i = 0; i < activityEntry.transform.childCount; i++)
             {
@@ -384,31 +390,31 @@ namespace FAT
                     activityEntries.Add((child, activity));
                 }
             }
-            
+
             // 按权重排序
-            activityEntries.Sort((a, b) => 
+            activityEntries.Sort((a, b) =>
             {
                 var weightA = GetActivityBoardWeight(a.activity);
                 var weightB = GetActivityBoardWeight(b.activity);
-                
+
                 // 首先按权重排序（权重大的靠左）
                 if (weightA != weightB)
                     return weightB.CompareTo(weightA);
-                
+
                 // 权重一致则按 EventType 排序
                 if (a.activity.Type != b.activity.Type)
                     return a.activity.Type.CompareTo(b.activity.Type);
-                
+
                 // EventType 一致则按 activity.Id 排序
                 return a.activity.Id.CompareTo(b.activity.Id);
             });
-            
+
             // 重新设置顺序
             for (int i = 0; i < activityEntries.Count; i++)
             {
                 activityEntries[i].entry.SetSiblingIndex(i);
             }
-            
+
             // 对 specialEntry 也进行相同的排序
             var specialEntries = new List<(Transform entry, ActivityLike activity)>();
             for (int i = 0; i < specialEntry.transform.childCount; i++)
@@ -420,22 +426,22 @@ namespace FAT
                     specialEntries.Add((child, activity));
                 }
             }
-            
-            specialEntries.Sort((a, b) => 
+
+            specialEntries.Sort((a, b) =>
             {
                 var weightA = GetActivityBoardWeight(a.activity);
                 var weightB = GetActivityBoardWeight(b.activity);
-                
+
                 if (weightA != weightB)
                     return weightB.CompareTo(weightA);
-                
+
                 if (a.activity.Type != b.activity.Type)
                     return a.activity.Type.CompareTo(b.activity.Type);
-                
+
                 // EventType 一致则按 activity.Id 排序
                 return a.activity.Id.CompareTo(b.activity.Id);
             });
-            
+
             for (int i = 0; i < specialEntries.Count; i++)
             {
                 specialEntries[i].entry.SetSiblingIndex(i);
@@ -452,9 +458,33 @@ namespace FAT
             var entryName = entry.name;
             if (string.IsNullOrEmpty(entryName) || !entryName.StartsWith(boardEntryPrefix))
                 return null;
-                
+
             // 直接从映射中获取活动对象
             return entryToActivityMap.TryGetValue(entryName, out var activity) ? activity : null;
+        }
+
+        private void OnQueryEntry(ActivityLike act, Action<Transform> callback)
+        {
+            if (act is not IBoardEntry boardEntry)
+            {
+                callback?.Invoke(null);
+                return;
+            }
+
+            var key = boardEntry.BoardEntryAsset();
+            var asset = key.ConvertToAssetConfig();
+            var entryName = asset.Asset.Split(".");
+            Transform target = null;
+            foreach (var prefab in entryPrefabs)
+            {
+                if (prefab.name == _GetBoardEntryKey(entryName[0], act))
+                {
+                    target = prefab.transform;
+                    break;
+                }
+            }
+
+            callback?.Invoke(target);
         }
     }
 }

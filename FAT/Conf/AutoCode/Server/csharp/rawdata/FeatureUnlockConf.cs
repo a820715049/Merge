@@ -61,7 +61,7 @@ namespace fat.rawdata {
   /// <summary>
   /// annotation@annotation_type(type="rawdata")
   /// annotation@rawdata(row="FeatureUnlock",table="FeatureUnlockSlice",table_wrapper="FeatureUnlockConf",map="false",map_key_type="",data="FeatureUnlockConf")
-  /// annotation@ab(table_ab="FeatureUnlockSliceAB",table_ab_patch="FeatureUnlockSliceABPatch",table_ab_value="FeatureUnlockSliceABValue",ab_patch="true")
+  /// annotation@ab(table_ab="FeatureUnlockSliceAB",table_ab_patch="FeatureUnlockSliceABPatch",table_ab_value="FeatureUnlockSliceABValue",ab_patch="false")
   /// annotation@filter(just_server="false",just_client="false")
   /// </summary>
   public sealed partial class FeatureUnlock : pb::IMessage<FeatureUnlock>

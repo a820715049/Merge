@@ -24,38 +24,38 @@ namespace fat.rawdata {
     static DailyEventListConfReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CiByYXdkYXRhL0RhaWx5RXZlbnRMaXN0Q29uZi5wcm90bxIHcmF3ZGF0YSLm",
+            "CiByYXdkYXRhL0RhaWx5RXZlbnRMaXN0Q29uZi5wcm90bxIHcmF3ZGF0YSL6",
             "AgoORGFpbHlFdmVudExpc3QSCgoCaWQYASABKAUSEwoLYWN0aXZlTGV2ZWwY",
             "AiABKAUSFQoNYWN0aXZlUmVxdWlyZRgLIAEoCRIVCg1hY3RpdmVXZWVrZGF5",
-            "GAMgASgFEhIKCmV2ZW50VGhlbWUYCSABKAUSOwoKZXhwaXJlSXRlbRgHIAMo",
-            "CzInLnJhd2RhdGEuRGFpbHlFdmVudExpc3QuRXhwaXJlSXRlbUVudHJ5EhYK",
-            "DmluY2x1ZGVHcm91cElkGAQgAygFEhQKDGluY2x1ZGVHcnBJZBgKIAEoBRIU",
-            "Cgxpc0Zvck5ld1VzZXIYCCABKAgSEwoLbm90aWNlVGhlbWUYDCABKAUSFQoN",
-            "c2h1dGRvd25MZXZlbBgFIAEoBRIRCgl0YXNrVGhlbWUYDSABKAUaMQoPRXhw",
-            "aXJlSXRlbUVudHJ5EgsKA2tleRgBIAEoBRINCgV2YWx1ZRgCIAEoBToCOAEi",
-            "wgEKGERhaWx5RXZlbnRMaXN0TWFwQUJWYWx1ZRJTChFEYWlseUV2ZW50TGlz",
-            "dE1hcBgBIAMoCzI4LnJhd2RhdGEuRGFpbHlFdmVudExpc3RNYXBBQlZhbHVl",
-            "LkRhaWx5RXZlbnRMaXN0TWFwRW50cnkaUQoWRGFpbHlFdmVudExpc3RNYXBF",
-            "bnRyeRILCgNrZXkYASABKAUSJgoFdmFsdWUYAiABKAsyFy5yYXdkYXRhLkRh",
-            "aWx5RXZlbnRMaXN0OgI4ASKpBAoSRGFpbHlFdmVudExpc3RDb25mEk0KEURh",
-            "aWx5RXZlbnRMaXN0TWFwGAEgAygLMjIucmF3ZGF0YS5EYWlseUV2ZW50TGlz",
-            "dENvbmYuRGFpbHlFdmVudExpc3RNYXBFbnRyeRJRChNEYWlseUV2ZW50TGlz",
-            "dE1hcEFCGAIgAygLMjQucmF3ZGF0YS5EYWlseUV2ZW50TGlzdENvbmYuRGFp",
-            "bHlFdmVudExpc3RNYXBBQkVudHJ5ElsKGERhaWx5RXZlbnRMaXN0TWFwQUJQ",
-            "YXRjaBgDIAMoCzI5LnJhd2RhdGEuRGFpbHlFdmVudExpc3RDb25mLkRhaWx5",
-            "RXZlbnRMaXN0TWFwQUJQYXRjaEVudHJ5GlEKFkRhaWx5RXZlbnRMaXN0TWFw",
-            "RW50cnkSCwoDa2V5GAEgASgFEiYKBXZhbHVlGAIgASgLMhcucmF3ZGF0YS5E",
-            "YWlseUV2ZW50TGlzdDoCOAEaXQoYRGFpbHlFdmVudExpc3RNYXBBQkVudHJ5",
-            "EgsKA2tleRgBIAEoCRIwCgV2YWx1ZRgCIAEoCzIhLnJhd2RhdGEuRGFpbHlF",
-            "dmVudExpc3RNYXBBQlZhbHVlOgI4ARpiCh1EYWlseUV2ZW50TGlzdE1hcEFC",
-            "UGF0Y2hFbnRyeRILCgNrZXkYASABKAkSMAoFdmFsdWUYAiABKAsyIS5yYXdk",
-            "YXRhLkRhaWx5RXZlbnRMaXN0TWFwQUJWYWx1ZToCOAFCPVotZ2l0bGFiLmZ1",
-            "bnBsdXMuaW8vZmF0L2NvbmYvZ2VuL2dvbGFuZy9yYXdkYXRhqgILZmF0LnJh",
-            "d2RhdGFiBnByb3RvMw=="));
+            "GAMgASgFEhIKCmJvdHRvbVRpcHMYDiABKAkSEgoKZXZlbnRUaGVtZRgJIAEo",
+            "BRI7CgpleHBpcmVJdGVtGAcgAygLMicucmF3ZGF0YS5EYWlseUV2ZW50TGlz",
+            "dC5FeHBpcmVJdGVtRW50cnkSFgoOaW5jbHVkZUdyb3VwSWQYBCADKAUSFAoM",
+            "aW5jbHVkZUdycElkGAogASgFEhQKDGlzRm9yTmV3VXNlchgIIAEoCBITCgtu",
+            "b3RpY2VUaGVtZRgMIAEoBRIVCg1zaHV0ZG93bkxldmVsGAUgASgFEhEKCXRh",
+            "c2tUaGVtZRgNIAEoBRoxCg9FeHBpcmVJdGVtRW50cnkSCwoDa2V5GAEgASgF",
+            "Eg0KBXZhbHVlGAIgASgFOgI4ASLCAQoYRGFpbHlFdmVudExpc3RNYXBBQlZh",
+            "bHVlElMKEURhaWx5RXZlbnRMaXN0TWFwGAEgAygLMjgucmF3ZGF0YS5EYWls",
+            "eUV2ZW50TGlzdE1hcEFCVmFsdWUuRGFpbHlFdmVudExpc3RNYXBFbnRyeRpR",
+            "ChZEYWlseUV2ZW50TGlzdE1hcEVudHJ5EgsKA2tleRgBIAEoBRImCgV2YWx1",
+            "ZRgCIAEoCzIXLnJhd2RhdGEuRGFpbHlFdmVudExpc3Q6AjgBIqkEChJEYWls",
+            "eUV2ZW50TGlzdENvbmYSTQoRRGFpbHlFdmVudExpc3RNYXAYASADKAsyMi5y",
+            "YXdkYXRhLkRhaWx5RXZlbnRMaXN0Q29uZi5EYWlseUV2ZW50TGlzdE1hcEVu",
+            "dHJ5ElEKE0RhaWx5RXZlbnRMaXN0TWFwQUIYAiADKAsyNC5yYXdkYXRhLkRh",
+            "aWx5RXZlbnRMaXN0Q29uZi5EYWlseUV2ZW50TGlzdE1hcEFCRW50cnkSWwoY",
+            "RGFpbHlFdmVudExpc3RNYXBBQlBhdGNoGAMgAygLMjkucmF3ZGF0YS5EYWls",
+            "eUV2ZW50TGlzdENvbmYuRGFpbHlFdmVudExpc3RNYXBBQlBhdGNoRW50cnka",
+            "UQoWRGFpbHlFdmVudExpc3RNYXBFbnRyeRILCgNrZXkYASABKAUSJgoFdmFs",
+            "dWUYAiABKAsyFy5yYXdkYXRhLkRhaWx5RXZlbnRMaXN0OgI4ARpdChhEYWls",
+            "eUV2ZW50TGlzdE1hcEFCRW50cnkSCwoDa2V5GAEgASgJEjAKBXZhbHVlGAIg",
+            "ASgLMiEucmF3ZGF0YS5EYWlseUV2ZW50TGlzdE1hcEFCVmFsdWU6AjgBGmIK",
+            "HURhaWx5RXZlbnRMaXN0TWFwQUJQYXRjaEVudHJ5EgsKA2tleRgBIAEoCRIw",
+            "CgV2YWx1ZRgCIAEoCzIhLnJhd2RhdGEuRGFpbHlFdmVudExpc3RNYXBBQlZh",
+            "bHVlOgI4AUI9Wi1naXRsYWIuZnVucGx1cy5pby9mYXQvY29uZi9nZW4vZ29s",
+            "YW5nL3Jhd2RhdGGqAgtmYXQucmF3ZGF0YWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.DailyEventList), global::fat.rawdata.DailyEventList.Parser, new[]{ "Id", "ActiveLevel", "ActiveRequire", "ActiveWeekday", "EventTheme", "ExpireItem", "IncludeGroupId", "IncludeGrpId", "IsForNewUser", "NoticeTheme", "ShutdownLevel", "TaskTheme" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
+            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.DailyEventList), global::fat.rawdata.DailyEventList.Parser, new[]{ "Id", "ActiveLevel", "ActiveRequire", "ActiveWeekday", "BottomTips", "EventTheme", "ExpireItem", "IncludeGroupId", "IncludeGrpId", "IsForNewUser", "NoticeTheme", "ShutdownLevel", "TaskTheme" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.DailyEventListMapABValue), global::fat.rawdata.DailyEventListMapABValue.Parser, new[]{ "DailyEventListMap" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.DailyEventListConf), global::fat.rawdata.DailyEventListConf.Parser, new[]{ "DailyEventListMap", "DailyEventListMapAB", "DailyEventListMapABPatch" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, null, })
           }));
@@ -104,6 +104,7 @@ namespace fat.rawdata {
       activeLevel_ = other.activeLevel_;
       activeRequire_ = other.activeRequire_;
       activeWeekday_ = other.activeWeekday_;
+      bottomTips_ = other.bottomTips_;
       eventTheme_ = other.eventTheme_;
       expireItem_ = other.expireItem_.Clone();
       includeGroupId_ = other.includeGroupId_.Clone();
@@ -175,6 +176,21 @@ namespace fat.rawdata {
       get { return activeWeekday_; }
       set {
         activeWeekday_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "bottomTips" field.</summary>
+    public const int BottomTipsFieldNumber = 14;
+    private string bottomTips_ = "";
+    /// <summary>
+    /// 每日任务下方的七天任务提示文案
+    /// 配空时不显示文案
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string BottomTips {
+      get { return bottomTips_; }
+      set {
+        bottomTips_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
@@ -312,6 +328,7 @@ namespace fat.rawdata {
       if (ActiveLevel != other.ActiveLevel) return false;
       if (ActiveRequire != other.ActiveRequire) return false;
       if (ActiveWeekday != other.ActiveWeekday) return false;
+      if (BottomTips != other.BottomTips) return false;
       if (EventTheme != other.EventTheme) return false;
       if (!ExpireItem.Equals(other.ExpireItem)) return false;
       if(!includeGroupId_.Equals(other.includeGroupId_)) return false;
@@ -330,6 +347,7 @@ namespace fat.rawdata {
       if (ActiveLevel != 0) hash ^= ActiveLevel.GetHashCode();
       if (ActiveRequire.Length != 0) hash ^= ActiveRequire.GetHashCode();
       if (ActiveWeekday != 0) hash ^= ActiveWeekday.GetHashCode();
+      if (BottomTips.Length != 0) hash ^= BottomTips.GetHashCode();
       if (EventTheme != 0) hash ^= EventTheme.GetHashCode();
       hash ^= ExpireItem.GetHashCode();
       hash ^= includeGroupId_.GetHashCode();
@@ -396,6 +414,10 @@ namespace fat.rawdata {
         output.WriteRawTag(104);
         output.WriteInt32(TaskTheme);
       }
+      if (BottomTips.Length != 0) {
+        output.WriteRawTag(114);
+        output.WriteString(BottomTips);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -447,6 +469,10 @@ namespace fat.rawdata {
         output.WriteRawTag(104);
         output.WriteInt32(TaskTheme);
       }
+      if (BottomTips.Length != 0) {
+        output.WriteRawTag(114);
+        output.WriteString(BottomTips);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -467,6 +493,9 @@ namespace fat.rawdata {
       }
       if (ActiveWeekday != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(ActiveWeekday);
+      }
+      if (BottomTips.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(BottomTips);
       }
       if (EventTheme != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(EventTheme);
@@ -510,6 +539,9 @@ namespace fat.rawdata {
       }
       if (other.ActiveWeekday != 0) {
         ActiveWeekday = other.ActiveWeekday;
+      }
+      if (other.BottomTips.Length != 0) {
+        BottomTips = other.BottomTips;
       }
       if (other.EventTheme != 0) {
         EventTheme = other.EventTheme;
@@ -594,6 +626,10 @@ namespace fat.rawdata {
             TaskTheme = input.ReadInt32();
             break;
           }
+          case 114: {
+            BottomTips = input.ReadString();
+            break;
+          }
         }
       }
     #endif
@@ -655,6 +691,10 @@ namespace fat.rawdata {
           }
           case 104: {
             TaskTheme = input.ReadInt32();
+            break;
+          }
+          case 114: {
+            BottomTips = input.ReadString();
             break;
           }
         }

@@ -94,7 +94,7 @@ namespace FAT
                 frame = root.Access<UIImageState>("icon/frame"),
                 up = root.Access<UIImageRes>("icon/_up"),
                 flag = root.Access<UIImageRes>("icon/flag"),
-                progress = root.Access<UICommonProgressBar>("progress", true)
+                progress = root.Access<UICommonProgressBar>("progress", true),
             };
         }
 
@@ -125,6 +125,7 @@ namespace FAT
                 e.setup = null;
                 e.activity = null;
             }
+
             foreach (var e in list) ClearE(e);
             Get<ACTIVITY_UPDATE>().RemoveListener(WhenUpdate);
             Get<MAP_FOCUS_CHANGE>().RemoveListener(WhenFocus);
@@ -188,7 +189,7 @@ namespace FAT
                 RefreshEntry(e, p);
             }
 
-        end:
+            end:
             for (var n = count; n < list.Count; ++n)
             {
                 var e = list[n];
@@ -268,9 +269,11 @@ namespace FAT
                 PackLevel packLevel => new PackLevelEntry(e_, packLevel),
                 FightBoardActivity fightBoard => new FightBoardEntry(e_, fightBoard),
                 ActivityBingoTask bingoTask => new BingoTaskEntry(e_, bingoTask),
+                ActivitySeaRace seaRace => new SeaRaceEntry(e_, seaRace),
                 ActivityMultiplierRanking multiplierRanking => new MultiplierRankingEntry(e_, multiplierRanking),
                 ActivityPuzzle puzzle => new PuzzleEntry(e_, puzzle),
                 ActivityOnlineReward onlineReward => new OnlineRewardEntry(e_, onlineReward),
+                ActivityVineLeap vineLeap => new VineLeapEntry(e_, vineLeap),
                 _ => null
             };
         }

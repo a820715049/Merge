@@ -220,6 +220,16 @@ namespace FAT
         //三日签到
         public static readonly ReasonString three_sign = new(nameof(three_sign));
 
+        #region 积分活动变种(麦克风版)
+
+        public static readonly ReasonString score_mic = new(nameof(score_mic)); //通过活动里程碑完成发出来的奖
+        public static readonly ReasonString score_mic_convert = new(nameof(score_mic_convert)); //通过活动结束回收棋子发出来的奖
+        public static readonly ReasonString score_mic_order = new(nameof(score_mic_order)); //完成订单时发积分
+        public static readonly ReasonString score_mic_board = new(nameof(score_mic_board)); //从棋盘上通过各种行为发积分
+        public static readonly ReasonString score_mic_shop = new(nameof(score_mic_shop)); //在商店购买棋子时发积分
+
+        #endregion
+
         #region 兑换商店
         public static readonly ReasonString redeem_Coin_change = new(nameof(redeem_Coin_change));  //兑换币变化
         public static readonly ReasonString redeem_token_energy = new(nameof(redeem_token_energy));  //兑换商店活动结束转化体力
@@ -244,6 +254,10 @@ namespace FAT
         public static readonly ReasonString giftLink_reward = new(nameof(giftLink_reward));  //礼物链接奖励
         #endregion
 
+        #region 飞跃藤蔓
+        public static readonly ReasonString vineleap_reward = new(nameof(vineleap_reward));
+        #endregion
+
         #region bingoTask
         public static readonly ReasonString bingo_task_milestone = new(nameof(bingo_task_milestone));
         #endregion
@@ -266,6 +280,11 @@ namespace FAT
         #region 七天任务
         public static readonly ReasonString seven_day_milestone = new(nameof(seven_day_milestone));
         public static readonly ReasonString seven_day_task = new(nameof(seven_day_task));
+        #endregion
+
+        #region 海上竞速
+        public static readonly ReasonString sea_race_rank_chest = new(nameof(sea_race_rank_chest));
+        public static readonly ReasonString sea_race_milestone_reward = new(nameof(sea_race_milestone_reward));
         #endregion
     }
 }

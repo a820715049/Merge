@@ -9,12 +9,15 @@ using DG.Tweening;
 using System.Collections;
 using Spine.Unity;
 
-namespace FAT {
+namespace FAT
+{
     using static MessageCenter;
     using static PoolMapping;
 
-    public class UIActivityDuelMain : UIBase {
-        public struct Player {
+    public class UIActivityDuelMain : UIBase
+    {
+        public struct Player
+        {
             public TextMeshProUGUI name;
             public TextMeshProUGUI score;
             public RectTransform avatar;
@@ -24,6 +27,8 @@ namespace FAT {
             public Animator crownA;
             public CanvasGroup bar;
             public Animator barA;
+            public Transform carEfx;
+            public Transform carWinEfx;
         }
 
         internal TextMeshProUGUI cd;
@@ -37,22 +42,27 @@ namespace FAT {
         internal float startY, finishY, rangeY;
         internal float xL, xR;
         public float speed = 100;
+        public float speedCar = 100;
         public float endDelay = 1.2f;
+        public float endDelayCar = 1.5f;
         public float winDelay = 0.5f;
+        [Range(0f, 1f)]
+        public float stopProgressRatio = 0.8f;
         public AnimationCurve moveCurve;
         public UIVisualGroup visualGroup;
         public bool closeOnInactive;
-
+        public bool isNew;
         private ActivityDuel activity;
         private Action WhenTick;
         private Action<int, int> ScoreUpdate;
         private BlockToken block = new();
 
-        private void OnValidate() {
+        private void OnValidate()
+        {
             if (Application.isPlaying) return;
             transform.Access(out visualGroup);
             var root = transform.Find("Content");
-            visualGroup.Prepare(root.Access<UIImageRes>("bg", try_:true), "bgPrefab");
+            visualGroup.Prepare(root.Access<UIImageRes>("bg", try_: true), "bgPrefab");
             visualGroup.Prepare(root.Access<UIImageRes>("bg1"), "titleBg");
             visualGroup.Prepare(root.Access<UIImageRes>("finish"), "bg2");
             visualGroup.Prepare(root.Access<TextProOnACircle>("title"), "mainTitle");
@@ -73,7 +83,8 @@ namespace FAT {
             visualGroup.CollectTrim();
         }
 
-        protected override void OnCreate() {
+        protected override void OnCreate()
+        {
             var root = transform.Find("Content");
             root.Access(out state);
             root.Access("prize", out prize);
@@ -96,6 +107,13 @@ namespace FAT {
             root.Access("active/avatarR", out playerR.avatar);
             root.Access("active/avatarL/pf_ufo/pf_ufo", out playerL.spine);
             root.Access("active/avatarR/pf_ufo/pf_ufo", out playerR.spine);
+            if (isNew)
+            {
+                root.Access("active/avatarR/pf_ufo/effect_car_smoke", out playerR.carEfx);
+                root.Access("active/avatarR/pf_ufo/effect_car", out playerR.carWinEfx);
+                root.Access("active/avatarL/pf_ufo/effect_car_smoke", out playerL.carEfx);
+                root.Access("active/avatarL/pf_ufo/effect_car", out playerL.carWinEfx);
+            }
             root.Access("active/_milestone", out milestoneA);
             root.Access("next/_milestone", out milestoneN);
             root.Access("start", out RectTransform start);
@@ -121,11 +139,17 @@ namespace FAT {
             slideR.gameObject.SetActive(false);
         }
 
-        protected override void OnParse(params object[] items) {
+        protected override void OnParse(params object[] items)
+        {
             activity = (ActivityDuel)items[0];
         }
 
-        protected override void OnPreOpen() {
+        protected override void OnPreOpen()
+        {
+            if (playerL.carEfx != null) playerL.carEfx.gameObject.SetActive(false);
+            if (playerR.carEfx != null) playerR.carEfx.gameObject.SetActive(false);
+            if (playerL.carWinEfx != null) playerL.carWinEfx.gameObject.SetActive(false);
+            if (playerR.carWinEfx != null) playerR.carWinEfx.gameObject.SetActive(false);
             RefreshTheme();
             RefreshRound();
             RefreshPlayer();
@@ -135,26 +159,30 @@ namespace FAT {
             Get<GAME_ONE_SECOND_DRIVER>().AddListener(WhenTick);
         }
 
-        protected override void OnPreClose() {
+        protected override void OnPreClose()
+        {
             Get<ACTIVITY_DUEL_SCORE>().RemoveListener(ScoreUpdate);
             Get<ACTIVITY_DUEL_ROBOT_SCORE>().RemoveListener(ScoreUpdate);
             Get<GAME_ONE_SECOND_DRIVER>().RemoveListener(WhenTick);
         }
 
-        public void Update() {
+        public void Update()
+        {
             if (!closeOnInactive) return;
             if (activity.IsComplete()) return;
             if (!activity.Active) Close();
         }
 
-        public void RefreshTheme() {
+        public void RefreshTheme()
+        {
             var visual = activity.VisualMain;
             visual.Refresh(visualGroup);
             playerL.name.text = I18N.Text("#SysComDesc459");
             playerR.name.text = I18N.FormatText("#SysComDesc431", 1);
         }
 
-        public void RefreshRound() {
+        public void RefreshRound()
+        {
             var r = activity.RoundReward;
             prize.Refresh(r);
             state.Enabled(activity.VisualActive);
@@ -164,7 +192,8 @@ namespace FAT {
             visual.visual.RefreshText(visualGroup, "subTitle", activity.visualTargetScore, UIUtility.FormatTMPString(activity.Conf.TokenId));
         }
 
-        public void RefreshPlayer() {
+        public void RefreshPlayer()
+        {
             var sL = activity.visualScore;
             var sR = activity.visualRobotScore;
             playerR.icon.Select(activity.robotIcon);
@@ -178,17 +207,20 @@ namespace FAT {
             A(playerR.bar, playerR.barA, active);
             playerR.icon.gameObject.SetActive(true);
             slideR.gameObject.SetActive(false);
-            Animate(playerL, "idle", refresh_:false);
-            Animate(playerR, "idle", refresh_:false);
+            Animate(playerL, "idle", refresh_: false);
+            Animate(playerR, "idle", refresh_: false);
             RefreshPlayerS(nL, nR);
-            if (nL != sL || nR != sR) {
+            if (nL != sL || nR != sR)
+            {
                 Animate();
             }
         }
 
-        public static void A(CanvasGroup g_, Animator a_, bool b_) {
+        public static void A(CanvasGroup g_, Animator a_, bool b_)
+        {
             var a = g_.gameObject.activeSelf && g_.alpha > 0;
-            if (a == b_) {
+            if (a == b_)
+            {
                 a_.Play("Common_Panel_Idle");
                 g_.gameObject.SetActive(b_);
                 return;
@@ -198,7 +230,8 @@ namespace FAT {
             a_.Play(anim);
         }
 
-        public void RefreshPlayerS(int sL, int sR) {
+        public void RefreshPlayerS(int sL, int sR)
+        {
             var active = activity.VisualActive;
             playerL.score.text = $"{sL}";
             A(playerL.crown, playerL.crownA, active && sL > 0 && sL >= sR);
@@ -206,103 +239,169 @@ namespace FAT {
             A(playerR.crown, playerR.crownA, active && sR > 0 && sR > sL);
         }
 
-        public void RefreshNextRound() {
+        public void RefreshNextRound()
+        {
             activity.SyncScore();
             RefreshRound();
             RefreshPlayer();
             if (!activity.Active || !activity.RoundValid) Close();
         }
 
-        public void RefreshCD() {
+        public void RefreshCD()
+        {
             var t = Game.TimestampNow();
             var diff = (long)Mathf.Max(0, activity.endTS - t);
             UIUtility.CountDownFormat(cd, diff);
         }
 
-        public void Animate(Player player_, string anim_, bool loop_ = true, bool refresh_ = true) {
+        public void Animate(Player player_, string anim_, bool loop_ = true, bool refresh_ = true)
+        {
             var s = player_.spine.AnimationState;
             var t = s.GetCurrent(0);
-            if (t != null && !refresh_) {
+            if (t != null && !refresh_)
+            {
                 t.Loop = false;
                 s.AddAnimation(0, anim_, loop_, 0);
             }
-            else {
+            else
+            {
                 s.SetAnimation(0, anim_, loop_);
             }
         }
 
-        public float Remain(Player player_) {
+        public float Remain(Player player_)
+        {
             var track = player_.spine.AnimationState.GetCurrent(0);
             return track.AnimationEnd - track.AnimationTime;
         }
 
-        public void Animate() {
+        public void Animate()
+        {
             var sL = activity.visualScore;
             var sR = activity.visualRobotScore;
             var nL = activity.GetPlayerScore();
             var nR = activity.GetRobotScore();
             var pA = nL >= nR;
             var sN = (float)activity.visualTargetScore;
-            DOTween.Kill(playerL.avatar, complete:true);
-            DOTween.Kill(playerR.avatar, complete:true);
+            DOTween.Kill(playerL.avatar, complete: true);
+            DOTween.Kill(playerR.avatar, complete: true);
             if (sN == 0) return;
             var audio = Game.Manager.audioMan;
             var aL = 0;
-            void M(Player playerA, Player playerB, int nA) {
-                block.Enter(wait_:false);
+            void M(Player playerA, Player playerB, int nA)
+            {
+                block.Enter(wait_: false);
                 Animate(playerA, "move");
-                audio.TriggerSound("DuelRise");
+                if (isNew)
+                {
+                    audio.TriggerSound("DuelFoward");
+                }
+                else
+                {
+                    audio.TriggerSound("DuelRise");
+                }
                 ++aL;
-                playerA.avatar.DOAnchorPosY(PosY(nA / sN), speed).SetSpeedBased().SetEase(moveCurve).OnComplete(() => {
-                    if (--aL <= 0) audio.StopLoopSound();
-                    if (pA && nA >= sN) {
-                        DOVirtual.DelayedCall(Remain(playerA), () => {
-                            Animate(playerA, "right", false);
-                            Animate(playerB, "fall", false);
-                        });
-                    }
-                    else {
-                        block.Exit();
-                        DOVirtual.DelayedCall(Remain(playerA), () => {
+                var targetY = PosY(nA / sN);
+                var currentY = playerA.avatar.anchoredPosition.y;
+                var tween = playerA.avatar.DOAnchorPosY(targetY, isNew ? speedCar : speed).SetSpeedBased().SetEase(moveCurve);
+                if (playerA.carEfx != null) playerA.carEfx.gameObject.SetActive(true);
+                // 基于移动进度百分比计算stop动画播放时机
+                if (isNew && !(pA && nA >= sN))
+                {
+                    // 计算移动距离和时间
+                    var distance = Mathf.Abs(targetY - currentY);
+                    var duration = distance / (isNew ? speedCar : speed);
+                    var stopTiming = duration * stopProgressRatio;
+
+                    DOVirtual.DelayedCall(stopTiming, () =>
+                    {
+                        Animate(playerA, "stop", false);
+                        // stop动画播放完成后立即播放idle
+                        DOVirtual.DelayedCall(Remain(playerA), () =>
+                        {
+                            if (playerA.carEfx != null) playerA.carEfx.gameObject.SetActive(false);
                             Animate(playerA, "idle");
                         });
+                    });
+                }
+
+                tween.OnComplete(() =>
+                {
+                    if (--aL <= 0) audio.StopLoopSound();
+                    if (pA && nA >= sN)
+                    {
+                        DOVirtual.DelayedCall(Remain(playerA), () =>
+                        {
+                            Animate(playerA, "right", isNew ? true : false);
+                            if (!isNew)
+                            {
+                                Animate(playerB, "fall", false);
+                            }
+                            else
+                            {
+                                if (playerA.carWinEfx != null) playerA.carWinEfx.gameObject.SetActive(true);
+                            }
+                        });
                     }
-                    if (nA >= sN) {
-                        DOVirtual.DelayedCall(winDelay, () => {
+                    else
+                    {
+                        block.Exit();
+                        if (!isNew)
+                        {
+                            // 非新版本依然使用原来的逻辑
+                            DOVirtual.DelayedCall(Remain(playerA), () =>
+                            {
+                                Animate(playerA, "idle");
+                            });
+                        }
+                        // 新版本的stop和idle动画已经在位移过程中处理了，这里不需要额外处理
+                    }
+                    if (nA >= sN)
+                    {
+                        DOVirtual.DelayedCall(winDelay, () =>
+                        {
                             RoundEnd(playerA.avatar == playerL.avatar);
                         });
                     }
                 });
             }
-            if (nL != sL) {
+            if (nL != sL)
+            {
                 M(playerL, playerR, nL);
             }
-            if (nR != sR) {
+            if (nR != sR)
+            {
                 M(playerR, playerL, nR);
             }
-            if (nR < sN && nL < sN) {
+            if (nR < sN && nL < sN)
+            {
                 activity.SyncScore();
             }
         }
 
-        public void RoundEnd(bool win_) {
-            void R() {
+        public void RoundEnd(bool win_)
+        {
+            void R()
+            {
                 block.Exit();
                 if (win_ && activity.ScoreCommitReward == null) return;
                 var ui = activity.VisualResult.res.ActiveR;
                 ui.Open(activity, win_, (Action)RefreshNextRound);
             }
-            DOVirtual.DelayedCall(endDelay, R);
+            DOVirtual.DelayedCall(isNew ? endDelayCar : endDelay, R);
         }
 
         public float PosY(float p_) => Mathf.Lerp(startY, finishY, p_);
 
-        internal void Info() {
+        internal void Info()
+        {
             UIManager.Instance.OpenWindow(activity.VisualHelp.res.ActiveR);
         }
 
-        public void AnimateR() {
-            IEnumerator R() {
+        public void AnimateR()
+        {
+            IEnumerator R()
+            {
                 slideR.gameObject.SetActive(true);
                 playerR.icon.gameObject.SetActive(false);
                 slideR.Preview(activity.robotIcon);
@@ -314,13 +413,17 @@ namespace FAT {
             StartCoroutine(R());
         }
 
-        internal void Duel() {
+        internal void Duel()
+        {
+            if (playerL.carWinEfx != null) playerL.carWinEfx.gameObject.SetActive(false);
+            if (playerR.carWinEfx != null) playerR.carWinEfx.gameObject.SetActive(false);
             activity.SetRoundStart();
             RefreshNextRound();
             AnimateR();
         }
 
-        internal void Later() {
+        internal void Later()
+        {
             Close();
         }
     }

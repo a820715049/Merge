@@ -153,6 +153,7 @@ namespace FAT
             _RefreshHandbookDot();
             //刷新小游戏入口红点
             _RefreshMiniGameDot();
+            _RefreshSettingDot();
         }
 
         private void _RefreshHandbookDot()

@@ -24,30 +24,31 @@ namespace fat.rawdata {
     static ErgListPackConfReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "Ch1yYXdkYXRhL0VyZ0xpc3RQYWNrQ29uZi5wcm90bxIHcmF3ZGF0YSJPCgtF",
+            "Ch1yYXdkYXRhL0VyZ0xpc3RQYWNrQ29uZi5wcm90bxIHcmF3ZGF0YSJ7CgtF",
             "cmdMaXN0UGFjaxIKCgJpZBgBIAEoBRIOCgZkZXRhaWwYAiABKAUSEAoIZW5k",
-            "VGhlbWUYBCABKAUSEgoKZXZlbnRUaGVtZRgDIAEoBSKwAQoVRXJnTGlzdFBh",
-            "Y2tNYXBBQlZhbHVlEkoKDkVyZ0xpc3RQYWNrTWFwGAEgAygLMjIucmF3ZGF0",
-            "YS5FcmdMaXN0UGFja01hcEFCVmFsdWUuRXJnTGlzdFBhY2tNYXBFbnRyeRpL",
-            "ChNFcmdMaXN0UGFja01hcEVudHJ5EgsKA2tleRgBIAEoBRIjCgV2YWx1ZRgC",
-            "IAEoCzIULnJhd2RhdGEuRXJnTGlzdFBhY2s6AjgBIvkDCg9FcmdMaXN0UGFj",
-            "a0NvbmYSRAoORXJnTGlzdFBhY2tNYXAYASADKAsyLC5yYXdkYXRhLkVyZ0xp",
-            "c3RQYWNrQ29uZi5FcmdMaXN0UGFja01hcEVudHJ5EkgKEEVyZ0xpc3RQYWNr",
-            "TWFwQUIYAiADKAsyLi5yYXdkYXRhLkVyZ0xpc3RQYWNrQ29uZi5FcmdMaXN0",
-            "UGFja01hcEFCRW50cnkSUgoVRXJnTGlzdFBhY2tNYXBBQlBhdGNoGAMgAygL",
-            "MjMucmF3ZGF0YS5FcmdMaXN0UGFja0NvbmYuRXJnTGlzdFBhY2tNYXBBQlBh",
-            "dGNoRW50cnkaSwoTRXJnTGlzdFBhY2tNYXBFbnRyeRILCgNrZXkYASABKAUS",
-            "IwoFdmFsdWUYAiABKAsyFC5yYXdkYXRhLkVyZ0xpc3RQYWNrOgI4ARpXChVF",
-            "cmdMaXN0UGFja01hcEFCRW50cnkSCwoDa2V5GAEgASgJEi0KBXZhbHVlGAIg",
-            "ASgLMh4ucmF3ZGF0YS5FcmdMaXN0UGFja01hcEFCVmFsdWU6AjgBGlwKGkVy",
-            "Z0xpc3RQYWNrTWFwQUJQYXRjaEVudHJ5EgsKA2tleRgBIAEoCRItCgV2YWx1",
-            "ZRgCIAEoCzIeLnJhd2RhdGEuRXJnTGlzdFBhY2tNYXBBQlZhbHVlOgI4AUI9",
-            "Wi1naXRsYWIuZnVucGx1cy5pby9mYXQvY29uZi9nZW4vZ29sYW5nL3Jhd2Rh",
-            "dGGqAgtmYXQucmF3ZGF0YWIGcHJvdG8z"));
+            "VGhlbWUYBCABKAUSEgoKZXZlbnRUaGVtZRgDIAEoBRIVCg1pc051bWJlclBv",
+            "aW50GAUgASgIEhMKC3BvcHVwVGltaW5nGAYgAygFIrABChVFcmdMaXN0UGFj",
+            "a01hcEFCVmFsdWUSSgoORXJnTGlzdFBhY2tNYXAYASADKAsyMi5yYXdkYXRh",
+            "LkVyZ0xpc3RQYWNrTWFwQUJWYWx1ZS5FcmdMaXN0UGFja01hcEVudHJ5GksK",
+            "E0VyZ0xpc3RQYWNrTWFwRW50cnkSCwoDa2V5GAEgASgFEiMKBXZhbHVlGAIg",
+            "ASgLMhQucmF3ZGF0YS5FcmdMaXN0UGFjazoCOAEi+QMKD0VyZ0xpc3RQYWNr",
+            "Q29uZhJECg5FcmdMaXN0UGFja01hcBgBIAMoCzIsLnJhd2RhdGEuRXJnTGlz",
+            "dFBhY2tDb25mLkVyZ0xpc3RQYWNrTWFwRW50cnkSSAoQRXJnTGlzdFBhY2tN",
+            "YXBBQhgCIAMoCzIuLnJhd2RhdGEuRXJnTGlzdFBhY2tDb25mLkVyZ0xpc3RQ",
+            "YWNrTWFwQUJFbnRyeRJSChVFcmdMaXN0UGFja01hcEFCUGF0Y2gYAyADKAsy",
+            "My5yYXdkYXRhLkVyZ0xpc3RQYWNrQ29uZi5FcmdMaXN0UGFja01hcEFCUGF0",
+            "Y2hFbnRyeRpLChNFcmdMaXN0UGFja01hcEVudHJ5EgsKA2tleRgBIAEoBRIj",
+            "CgV2YWx1ZRgCIAEoCzIULnJhd2RhdGEuRXJnTGlzdFBhY2s6AjgBGlcKFUVy",
+            "Z0xpc3RQYWNrTWFwQUJFbnRyeRILCgNrZXkYASABKAkSLQoFdmFsdWUYAiAB",
+            "KAsyHi5yYXdkYXRhLkVyZ0xpc3RQYWNrTWFwQUJWYWx1ZToCOAEaXAoaRXJn",
+            "TGlzdFBhY2tNYXBBQlBhdGNoRW50cnkSCwoDa2V5GAEgASgJEi0KBXZhbHVl",
+            "GAIgASgLMh4ucmF3ZGF0YS5FcmdMaXN0UGFja01hcEFCVmFsdWU6AjgBQj1a",
+            "LWdpdGxhYi5mdW5wbHVzLmlvL2ZhdC9jb25mL2dlbi9nb2xhbmcvcmF3ZGF0",
+            "YaoCC2ZhdC5yYXdkYXRhYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.ErgListPack), global::fat.rawdata.ErgListPack.Parser, new[]{ "Id", "Detail", "EndTheme", "EventTheme" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.ErgListPack), global::fat.rawdata.ErgListPack.Parser, new[]{ "Id", "Detail", "EndTheme", "EventTheme", "IsNumberPoint", "PopupTiming" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.ErgListPackMapABValue), global::fat.rawdata.ErgListPackMapABValue.Parser, new[]{ "ErgListPackMap" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.ErgListPackConf), global::fat.rawdata.ErgListPackConf.Parser, new[]{ "ErgListPackMap", "ErgListPackMapAB", "ErgListPackMapABPatch" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, null, })
           }));
@@ -96,6 +97,8 @@ namespace fat.rawdata {
       detail_ = other.detail_;
       endTheme_ = other.endTheme_;
       eventTheme_ = other.eventTheme_;
+      isNumberPoint_ = other.isNumberPoint_;
+      popupTiming_ = other.popupTiming_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -165,6 +168,38 @@ namespace fat.rawdata {
       }
     }
 
+    /// <summary>Field number for the "isNumberPoint" field.</summary>
+    public const int IsNumberPointFieldNumber = 5;
+    private bool isNumberPoint_;
+    /// <summary>
+    /// 活动入口的红点类型
+    /// True=使用红色数字标识
+    /// False=使用红点标识
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool IsNumberPoint {
+      get { return isNumberPoint_; }
+      set {
+        isNumberPoint_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "popupTiming" field.</summary>
+    public const int PopupTimingFieldNumber = 6;
+    private static readonly pb::FieldCodec<int> _repeated_popupTiming_codec
+        = pb::FieldCodec.ForInt32(50);
+    private readonly pbc::RepeatedField<int> popupTiming_ = new pbc::RepeatedField<int>();
+    /// <summary>
+    /// 活动主界面主动弹出的时机
+    /// 0=不弹出
+    /// 1=完成第1个任务时弹出...
+    /// 1,2,3,4,5=完成第1、2、3、4、5个任务时都弹出
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<int> PopupTiming {
+      get { return popupTiming_; }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as ErgListPack);
@@ -182,6 +217,8 @@ namespace fat.rawdata {
       if (Detail != other.Detail) return false;
       if (EndTheme != other.EndTheme) return false;
       if (EventTheme != other.EventTheme) return false;
+      if (IsNumberPoint != other.IsNumberPoint) return false;
+      if(!popupTiming_.Equals(other.popupTiming_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -192,6 +229,8 @@ namespace fat.rawdata {
       if (Detail != 0) hash ^= Detail.GetHashCode();
       if (EndTheme != 0) hash ^= EndTheme.GetHashCode();
       if (EventTheme != 0) hash ^= EventTheme.GetHashCode();
+      if (IsNumberPoint != false) hash ^= IsNumberPoint.GetHashCode();
+      hash ^= popupTiming_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -224,6 +263,11 @@ namespace fat.rawdata {
         output.WriteRawTag(32);
         output.WriteInt32(EndTheme);
       }
+      if (IsNumberPoint != false) {
+        output.WriteRawTag(40);
+        output.WriteBool(IsNumberPoint);
+      }
+      popupTiming_.WriteTo(output, _repeated_popupTiming_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -249,6 +293,11 @@ namespace fat.rawdata {
         output.WriteRawTag(32);
         output.WriteInt32(EndTheme);
       }
+      if (IsNumberPoint != false) {
+        output.WriteRawTag(40);
+        output.WriteBool(IsNumberPoint);
+      }
+      popupTiming_.WriteTo(ref output, _repeated_popupTiming_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -270,6 +319,10 @@ namespace fat.rawdata {
       if (EventTheme != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(EventTheme);
       }
+      if (IsNumberPoint != false) {
+        size += 1 + 1;
+      }
+      size += popupTiming_.CalculateSize(_repeated_popupTiming_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -293,6 +346,10 @@ namespace fat.rawdata {
       if (other.EventTheme != 0) {
         EventTheme = other.EventTheme;
       }
+      if (other.IsNumberPoint != false) {
+        IsNumberPoint = other.IsNumberPoint;
+      }
+      popupTiming_.Add(other.popupTiming_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -323,6 +380,15 @@ namespace fat.rawdata {
             EndTheme = input.ReadInt32();
             break;
           }
+          case 40: {
+            IsNumberPoint = input.ReadBool();
+            break;
+          }
+          case 50:
+          case 48: {
+            popupTiming_.AddEntriesFrom(input, _repeated_popupTiming_codec);
+            break;
+          }
         }
       }
     #endif
@@ -351,6 +417,15 @@ namespace fat.rawdata {
           }
           case 32: {
             EndTheme = input.ReadInt32();
+            break;
+          }
+          case 40: {
+            IsNumberPoint = input.ReadBool();
+            break;
+          }
+          case 50:
+          case 48: {
+            popupTiming_.AddEntriesFrom(ref input, _repeated_popupTiming_codec);
             break;
           }
         }

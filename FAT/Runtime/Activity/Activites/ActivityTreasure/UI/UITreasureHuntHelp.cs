@@ -21,7 +21,7 @@ namespace FAT
         [SerializeField] private TextMeshProUGUI help3;
         [SerializeField] private TextMeshProUGUI help4;
         [SerializeField] private TextMeshProUGUI tip;
-        [SerializeField] private MBTreasureHuntHelpDrag drag;
+        [SerializeField] private MBHelpGuideDrag drag;
         private int _curSelectTabId;
         private List<TreasureHuntHelpTabCellData> _tabCellDataList = new List<TreasureHuntHelpTabCellData>();   //底部页签cell数据
         private int page;
@@ -75,7 +75,7 @@ namespace FAT
 
         protected override void OnAddListener()
         {
-            MessageCenter.Get<MSG.TREASURE_HELP_DRAG_END>().AddListener(_OnTabDragxEnd);
+            MessageCenter.Get<MSG.GAME_HELP_GUIDE_DRAG_END>().AddListener(_OnTabDragxEnd);
         }
 
         protected override void OnRefresh()
@@ -85,12 +85,12 @@ namespace FAT
 
         protected override void OnRemoveListener()
         {
-            MessageCenter.Get<MSG.TREASURE_HELP_DRAG_END>().RemoveListener(_OnTabDragxEnd);
+            MessageCenter.Get<MSG.GAME_HELP_GUIDE_DRAG_END>().RemoveListener(_OnTabDragxEnd);
         }
 
         private void _OnTabDragxEnd(int targeIdx)
         {
-            if (targeIdx > maxTabNum)
+            if (targeIdx < 1 || targeIdx > maxTabNum)
             {
                 return;
             }

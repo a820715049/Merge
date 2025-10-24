@@ -184,6 +184,26 @@ namespace FAT
                 }
             }
         }
+        
+        //外部遍历所有世界中活跃棋盘的棋子
+        //onlyMainLike为true时表示只遍历主棋盘和主棋盘like
+        public void WalkAllWorldItem(System.Action<Item> func, bool onlyMainLike = false, MergeWorld.WalkItemMask walkMask = MergeWorld.WalkItemMask.All)
+        {
+            foreach (var worldEntry in mAllMergeWorld)
+            {
+                var world = worldEntry.world;
+                if (world == null)
+                    continue;
+                if (onlyMainLike)
+                {
+                    //当onlyMainLike为true时，若不是主棋盘且不等价于主棋盘 则跳过
+                    var boardId = world.activeBoard.boardId;
+                    if (boardId != Constant.MainBoardId && !worldEntry.world.isEquivalentToMain)
+                        continue;
+                }
+                worldEntry.world.WalkAllItem(func, walkMask);
+            }
+        }
 
         public void SetCurrentActiveWorld(MergeWorld world)
         {
@@ -345,6 +365,7 @@ namespace FAT
             }
             var board = world.activeBoard;
             board.Reset(boardId, boardConfig.ColCount, boardConfig.RowCount);
+            board.SetBoardParam(boardConfig.EqualMainBoard, boardConfig.GiftBoxunable);
             using (ObjectPool<List<MergeGridArea>>.GlobalPool.AllocStub(out var areas))
             {
                 FillMergeAreaForBoard(boardId, areas);
@@ -364,7 +385,7 @@ namespace FAT
             _InitBoardItemColumnFirst(board, boardConfig.Col, boardConfig.ColCount, boardConfig.RowCount);
             return true;
         }
-        
+
         //活动类棋盘在初始化棋盘数据时 如果需要用到活动实例 可以调用此接口 （如可以上下滚动的棋盘）
         public bool InitializeBoard(ActivityLike activityLike, MergeWorld world, int boardId, bool fillInitialItems = true)
         {
@@ -375,6 +396,7 @@ namespace FAT
             }
             var board = world.activeBoard;
             board.Reset(boardId, boardConfig.ColCount, boardConfig.RowCount);
+            board.SetBoardParam(boardConfig.EqualMainBoard, boardConfig.GiftBoxunable);
             using (ObjectPool<List<MergeGridArea>>.GlobalPool.AllocStub(out var areas))
             {
                 FillMergeAreaForBoard(boardId, areas);

@@ -393,6 +393,10 @@ namespace FAT
         public bool IsShowRedDot()
         {
             bool isShow = false;
+            if (!Game.Manager.featureUnlockMan.IsFeatureEntryUnlocked(FeatureEntry.FeatureCommunitySettingsRed))
+            {
+                return isShow;
+            }
             var communityList = GetCommunityList();
             foreach (var community in communityList)
             {

@@ -253,7 +253,7 @@ namespace FAT
                 var conf = fat.conf.Data.GetSpinPackRewardPool(_rewardIDList[Detail.FreeRewardGroup.Count + index]);
                 foreach (var str in conf.RewardList)
                 {
-                    reward.reward.Add(str.ConvertToRewardConfig());
+                    reward.reward.Insert(0,str.ConvertToRewardConfig());
                 }
             }
             return reward;

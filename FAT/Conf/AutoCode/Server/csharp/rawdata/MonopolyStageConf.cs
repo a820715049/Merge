@@ -24,36 +24,37 @@ namespace fat.rawdata {
     static MonopolyStageConfReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "Ch9yYXdkYXRhL01vbm9wb2x5U3RhZ2VDb25mLnByb3RvEgdyYXdkYXRhIroC",
-            "Cg1Nb25vcG9seVN0YWdlEgoKAmlkGAEgASgFEhAKCGNvbENvdW50GAIgASgF",
-            "EhEKCWRpY2VSb3V0ZRgDIAMoBRISCgppZkZpeFJvdXRlGAQgASgIEg8KB2tl",
-            "eUdyaWQYBSADKAkSCwoDbGFwGAYgASgFEhEKCWxhcFJld2FyZBgHIAMoCRIW",
-            "Cg5vdXRwdXRGaXhlZE9uZRgIIAEoCRISCgpvdXRwdXRzT25lGAkgAygJEhAK",
-            "CHJvd0NvdW50GAogASgFEhMKC3N0YWdlUmV3YXJkGAsgAygJEhcKD3N0YWdl",
-            "UmV3YXJkSWNvbhgMIAEoCRIbChNzdGFnZVJld2FyZEljb25EYXJrGA0gASgJ",
-            "EhIKCnN0YWdlUm91dGUYDiADKAkSFgoOd2l0aG91dHB1dFRpbWUYDyADKAUi",
-            "vAEKF01vbm9wb2x5U3RhZ2VNYXBBQlZhbHVlElAKEE1vbm9wb2x5U3RhZ2VN",
-            "YXAYASADKAsyNi5yYXdkYXRhLk1vbm9wb2x5U3RhZ2VNYXBBQlZhbHVlLk1v",
-            "bm9wb2x5U3RhZ2VNYXBFbnRyeRpPChVNb25vcG9seVN0YWdlTWFwRW50cnkS",
-            "CwoDa2V5GAEgASgFEiUKBXZhbHVlGAIgASgLMhYucmF3ZGF0YS5Nb25vcG9s",
-            "eVN0YWdlOgI4ASKZBAoRTW9ub3BvbHlTdGFnZUNvbmYSSgoQTW9ub3BvbHlT",
-            "dGFnZU1hcBgBIAMoCzIwLnJhd2RhdGEuTW9ub3BvbHlTdGFnZUNvbmYuTW9u",
-            "b3BvbHlTdGFnZU1hcEVudHJ5Ek4KEk1vbm9wb2x5U3RhZ2VNYXBBQhgCIAMo",
-            "CzIyLnJhd2RhdGEuTW9ub3BvbHlTdGFnZUNvbmYuTW9ub3BvbHlTdGFnZU1h",
-            "cEFCRW50cnkSWAoXTW9ub3BvbHlTdGFnZU1hcEFCUGF0Y2gYAyADKAsyNy5y",
-            "YXdkYXRhLk1vbm9wb2x5U3RhZ2VDb25mLk1vbm9wb2x5U3RhZ2VNYXBBQlBh",
-            "dGNoRW50cnkaTwoVTW9ub3BvbHlTdGFnZU1hcEVudHJ5EgsKA2tleRgBIAEo",
-            "BRIlCgV2YWx1ZRgCIAEoCzIWLnJhd2RhdGEuTW9ub3BvbHlTdGFnZToCOAEa",
-            "WwoXTW9ub3BvbHlTdGFnZU1hcEFCRW50cnkSCwoDa2V5GAEgASgJEi8KBXZh",
-            "bHVlGAIgASgLMiAucmF3ZGF0YS5Nb25vcG9seVN0YWdlTWFwQUJWYWx1ZToC",
-            "OAEaYAocTW9ub3BvbHlTdGFnZU1hcEFCUGF0Y2hFbnRyeRILCgNrZXkYASAB",
-            "KAkSLwoFdmFsdWUYAiABKAsyIC5yYXdkYXRhLk1vbm9wb2x5U3RhZ2VNYXBB",
-            "QlZhbHVlOgI4AUI9Wi1naXRsYWIuZnVucGx1cy5pby9mYXQvY29uZi9nZW4v",
-            "Z29sYW5nL3Jhd2RhdGGqAgtmYXQucmF3ZGF0YWIGcHJvdG8z"));
+            "Ch9yYXdkYXRhL01vbm9wb2x5U3RhZ2VDb25mLnByb3RvEgdyYXdkYXRhIt0C",
+            "Cg1Nb25vcG9seVN0YWdlEgoKAmlkGAEgASgFEhAKCGJvYXJkUG9zGBAgAygF",
+            "EhAKCGNvbENvdW50GAIgASgFEg8KB2RpY2VQb3MYESADKAUSEQoJZGljZVJv",
+            "dXRlGAMgAygFEhIKCmlmRml4Um91dGUYBCABKAgSDwoHa2V5R3JpZBgFIAMo",
+            "CRILCgNsYXAYBiABKAUSEQoJbGFwUmV3YXJkGAcgAygJEhYKDm91dHB1dEZp",
+            "eGVkT25lGAggASgJEhIKCm91dHB1dHNPbmUYCSADKAkSEAoIcm93Q291bnQY",
+            "CiABKAUSEwoLc3RhZ2VSZXdhcmQYCyADKAkSFwoPc3RhZ2VSZXdhcmRJY29u",
+            "GAwgASgJEhsKE3N0YWdlUmV3YXJkSWNvbkRhcmsYDSABKAkSEgoKc3RhZ2VS",
+            "b3V0ZRgOIAMoCRIWCg53aXRob3V0cHV0VGltZRgPIAMoBSK8AQoXTW9ub3Bv",
+            "bHlTdGFnZU1hcEFCVmFsdWUSUAoQTW9ub3BvbHlTdGFnZU1hcBgBIAMoCzI2",
+            "LnJhd2RhdGEuTW9ub3BvbHlTdGFnZU1hcEFCVmFsdWUuTW9ub3BvbHlTdGFn",
+            "ZU1hcEVudHJ5Gk8KFU1vbm9wb2x5U3RhZ2VNYXBFbnRyeRILCgNrZXkYASAB",
+            "KAUSJQoFdmFsdWUYAiABKAsyFi5yYXdkYXRhLk1vbm9wb2x5U3RhZ2U6AjgB",
+            "IpkEChFNb25vcG9seVN0YWdlQ29uZhJKChBNb25vcG9seVN0YWdlTWFwGAEg",
+            "AygLMjAucmF3ZGF0YS5Nb25vcG9seVN0YWdlQ29uZi5Nb25vcG9seVN0YWdl",
+            "TWFwRW50cnkSTgoSTW9ub3BvbHlTdGFnZU1hcEFCGAIgAygLMjIucmF3ZGF0",
+            "YS5Nb25vcG9seVN0YWdlQ29uZi5Nb25vcG9seVN0YWdlTWFwQUJFbnRyeRJY",
+            "ChdNb25vcG9seVN0YWdlTWFwQUJQYXRjaBgDIAMoCzI3LnJhd2RhdGEuTW9u",
+            "b3BvbHlTdGFnZUNvbmYuTW9ub3BvbHlTdGFnZU1hcEFCUGF0Y2hFbnRyeRpP",
+            "ChVNb25vcG9seVN0YWdlTWFwRW50cnkSCwoDa2V5GAEgASgFEiUKBXZhbHVl",
+            "GAIgASgLMhYucmF3ZGF0YS5Nb25vcG9seVN0YWdlOgI4ARpbChdNb25vcG9s",
+            "eVN0YWdlTWFwQUJFbnRyeRILCgNrZXkYASABKAkSLwoFdmFsdWUYAiABKAsy",
+            "IC5yYXdkYXRhLk1vbm9wb2x5U3RhZ2VNYXBBQlZhbHVlOgI4ARpgChxNb25v",
+            "cG9seVN0YWdlTWFwQUJQYXRjaEVudHJ5EgsKA2tleRgBIAEoCRIvCgV2YWx1",
+            "ZRgCIAEoCzIgLnJhd2RhdGEuTW9ub3BvbHlTdGFnZU1hcEFCVmFsdWU6AjgB",
+            "Qj1aLWdpdGxhYi5mdW5wbHVzLmlvL2ZhdC9jb25mL2dlbi9nb2xhbmcvcmF3",
+            "ZGF0YaoCC2ZhdC5yYXdkYXRhYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.MonopolyStage), global::fat.rawdata.MonopolyStage.Parser, new[]{ "Id", "ColCount", "DiceRoute", "IfFixRoute", "KeyGrid", "Lap", "LapReward", "OutputFixedOne", "OutputsOne", "RowCount", "StageReward", "StageRewardIcon", "StageRewardIconDark", "StageRoute", "WithoutputTime" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.MonopolyStage), global::fat.rawdata.MonopolyStage.Parser, new[]{ "Id", "BoardPos", "ColCount", "DicePos", "DiceRoute", "IfFixRoute", "KeyGrid", "Lap", "LapReward", "OutputFixedOne", "OutputsOne", "RowCount", "StageReward", "StageRewardIcon", "StageRewardIconDark", "StageRoute", "WithoutputTime" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.MonopolyStageMapABValue), global::fat.rawdata.MonopolyStageMapABValue.Parser, new[]{ "MonopolyStageMap" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.MonopolyStageConf), global::fat.rawdata.MonopolyStageConf.Parser, new[]{ "MonopolyStageMap", "MonopolyStageMapAB", "MonopolyStageMapABPatch" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, null, })
           }));
@@ -99,7 +100,9 @@ namespace fat.rawdata {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public MonopolyStage(MonopolyStage other) : this() {
       id_ = other.id_;
+      boardPos_ = other.boardPos_.Clone();
       colCount_ = other.colCount_;
+      dicePos_ = other.dicePos_.Clone();
       diceRoute_ = other.diceRoute_.Clone();
       ifFixRoute_ = other.ifFixRoute_;
       keyGrid_ = other.keyGrid_.Clone();
@@ -136,6 +139,19 @@ namespace fat.rawdata {
       }
     }
 
+    /// <summary>Field number for the "boardPos" field.</summary>
+    public const int BoardPosFieldNumber = 16;
+    private static readonly pb::FieldCodec<int> _repeated_boardPos_codec
+        = pb::FieldCodec.ForInt32(130);
+    private readonly pbc::RepeatedField<int> boardPos_ = new pbc::RepeatedField<int>();
+    /// <summary>
+    /// 圈数牌位置
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<int> BoardPos {
+      get { return boardPos_; }
+    }
+
     /// <summary>Field number for the "colCount" field.</summary>
     public const int ColCountFieldNumber = 2;
     private int colCount_;
@@ -148,6 +164,19 @@ namespace fat.rawdata {
       set {
         colCount_ = value;
       }
+    }
+
+    /// <summary>Field number for the "dicePos" field.</summary>
+    public const int DicePosFieldNumber = 17;
+    private static readonly pb::FieldCodec<int> _repeated_dicePos_codec
+        = pb::FieldCodec.ForInt32(138);
+    private readonly pbc::RepeatedField<int> dicePos_ = new pbc::RepeatedField<int>();
+    /// <summary>
+    /// 骰子落点位置
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<int> DicePos {
+      get { return dicePos_; }
     }
 
     /// <summary>Field number for the "diceRoute" field.</summary>
@@ -347,7 +376,9 @@ namespace fat.rawdata {
         return true;
       }
       if (Id != other.Id) return false;
+      if(!boardPos_.Equals(other.boardPos_)) return false;
       if (ColCount != other.ColCount) return false;
+      if(!dicePos_.Equals(other.dicePos_)) return false;
       if(!diceRoute_.Equals(other.diceRoute_)) return false;
       if (IfFixRoute != other.IfFixRoute) return false;
       if(!keyGrid_.Equals(other.keyGrid_)) return false;
@@ -368,7 +399,9 @@ namespace fat.rawdata {
     public override int GetHashCode() {
       int hash = 1;
       if (Id != 0) hash ^= Id.GetHashCode();
+      hash ^= boardPos_.GetHashCode();
       if (ColCount != 0) hash ^= ColCount.GetHashCode();
+      hash ^= dicePos_.GetHashCode();
       hash ^= diceRoute_.GetHashCode();
       if (IfFixRoute != false) hash ^= IfFixRoute.GetHashCode();
       hash ^= keyGrid_.GetHashCode();
@@ -437,6 +470,8 @@ namespace fat.rawdata {
       }
       stageRoute_.WriteTo(output, _repeated_stageRoute_codec);
       withoutputTime_.WriteTo(output, _repeated_withoutputTime_codec);
+      boardPos_.WriteTo(output, _repeated_boardPos_codec);
+      dicePos_.WriteTo(output, _repeated_dicePos_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -485,6 +520,8 @@ namespace fat.rawdata {
       }
       stageRoute_.WriteTo(ref output, _repeated_stageRoute_codec);
       withoutputTime_.WriteTo(ref output, _repeated_withoutputTime_codec);
+      boardPos_.WriteTo(ref output, _repeated_boardPos_codec);
+      dicePos_.WriteTo(ref output, _repeated_dicePos_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -497,9 +534,11 @@ namespace fat.rawdata {
       if (Id != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Id);
       }
+      size += boardPos_.CalculateSize(_repeated_boardPos_codec);
       if (ColCount != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(ColCount);
       }
+      size += dicePos_.CalculateSize(_repeated_dicePos_codec);
       size += diceRoute_.CalculateSize(_repeated_diceRoute_codec);
       if (IfFixRoute != false) {
         size += 1 + 1;
@@ -539,9 +578,11 @@ namespace fat.rawdata {
       if (other.Id != 0) {
         Id = other.Id;
       }
+      boardPos_.Add(other.boardPos_);
       if (other.ColCount != 0) {
         ColCount = other.ColCount;
       }
+      dicePos_.Add(other.dicePos_);
       diceRoute_.Add(other.diceRoute_);
       if (other.IfFixRoute != false) {
         IfFixRoute = other.IfFixRoute;
@@ -643,6 +684,16 @@ namespace fat.rawdata {
             withoutputTime_.AddEntriesFrom(input, _repeated_withoutputTime_codec);
             break;
           }
+          case 130:
+          case 128: {
+            boardPos_.AddEntriesFrom(input, _repeated_boardPos_codec);
+            break;
+          }
+          case 138:
+          case 136: {
+            dicePos_.AddEntriesFrom(input, _repeated_dicePos_codec);
+            break;
+          }
         }
       }
     #endif
@@ -717,6 +768,16 @@ namespace fat.rawdata {
           case 122:
           case 120: {
             withoutputTime_.AddEntriesFrom(ref input, _repeated_withoutputTime_codec);
+            break;
+          }
+          case 130:
+          case 128: {
+            boardPos_.AddEntriesFrom(ref input, _repeated_boardPos_codec);
+            break;
+          }
+          case 138:
+          case 136: {
+            dicePos_.AddEntriesFrom(ref input, _repeated_dicePos_codec);
             break;
           }
         }

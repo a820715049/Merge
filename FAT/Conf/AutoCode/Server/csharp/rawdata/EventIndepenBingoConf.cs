@@ -25,38 +25,39 @@ namespace fat.rawdata {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "CiNyYXdkYXRhL0V2ZW50SW5kZXBlbkJpbmdvQ29uZi5wcm90bxIHcmF3ZGF0",
-            "YSLOAgoRRXZlbnRJbmRlcGVuQmluZ28SCgoCaWQYASABKAUSEgoKYmluZ29U",
-            "aGVtZRgDIAEoBRIPCgdib2FyZElkGAQgASgFEhAKCGVuZFRoZW1lGAUgASgF",
-            "Eg8KB2dyYWRlSWQYBiABKAUSGAoQZ3JvdXBDaG9vc2VUaGVtZRgLIAEoBRIR",
-            "CgloZWxwVGhlbWUYDCABKAUSEQoJaXRlbVRoZW1lGAcgASgFEhUKDWxldmVs",
-            "Q29tcGxldGUYDSABKAUSFAoMbG9hZGluZ1RoZW1lGA4gASgFEhEKCW1haW5U",
-            "aGVtZRgPIAEoBRIMCgRuYW1lGAggASgJEhUKDW5ld1JvdW5kVGhlbWUYECAB",
-            "KAUSGwoTc3Bhd25lclByZXZpZXdUaGVtZRgRIAEoBRISCgpzdGFydFRoZW1l",
-            "GAogASgFEg8KB3N0b3JhZ2UYEiABKAUi1AEKG0V2ZW50SW5kZXBlbkJpbmdv",
-            "TWFwQUJWYWx1ZRJcChRFdmVudEluZGVwZW5CaW5nb01hcBgBIAMoCzI+LnJh",
-            "d2RhdGEuRXZlbnRJbmRlcGVuQmluZ29NYXBBQlZhbHVlLkV2ZW50SW5kZXBl",
-            "bkJpbmdvTWFwRW50cnkaVwoZRXZlbnRJbmRlcGVuQmluZ29NYXBFbnRyeRIL",
-            "CgNrZXkYASABKAUSKQoFdmFsdWUYAiABKAsyGi5yYXdkYXRhLkV2ZW50SW5k",
-            "ZXBlbkJpbmdvOgI4ASLZBAoVRXZlbnRJbmRlcGVuQmluZ29Db25mElYKFEV2",
-            "ZW50SW5kZXBlbkJpbmdvTWFwGAEgAygLMjgucmF3ZGF0YS5FdmVudEluZGVw",
-            "ZW5CaW5nb0NvbmYuRXZlbnRJbmRlcGVuQmluZ29NYXBFbnRyeRJaChZFdmVu",
-            "dEluZGVwZW5CaW5nb01hcEFCGAIgAygLMjoucmF3ZGF0YS5FdmVudEluZGVw",
-            "ZW5CaW5nb0NvbmYuRXZlbnRJbmRlcGVuQmluZ29NYXBBQkVudHJ5EmQKG0V2",
-            "ZW50SW5kZXBlbkJpbmdvTWFwQUJQYXRjaBgDIAMoCzI/LnJhd2RhdGEuRXZl",
-            "bnRJbmRlcGVuQmluZ29Db25mLkV2ZW50SW5kZXBlbkJpbmdvTWFwQUJQYXRj",
-            "aEVudHJ5GlcKGUV2ZW50SW5kZXBlbkJpbmdvTWFwRW50cnkSCwoDa2V5GAEg",
-            "ASgFEikKBXZhbHVlGAIgASgLMhoucmF3ZGF0YS5FdmVudEluZGVwZW5CaW5n",
-            "bzoCOAEaYwobRXZlbnRJbmRlcGVuQmluZ29NYXBBQkVudHJ5EgsKA2tleRgB",
-            "IAEoCRIzCgV2YWx1ZRgCIAEoCzIkLnJhd2RhdGEuRXZlbnRJbmRlcGVuQmlu",
-            "Z29NYXBBQlZhbHVlOgI4ARpoCiBFdmVudEluZGVwZW5CaW5nb01hcEFCUGF0",
-            "Y2hFbnRyeRILCgNrZXkYASABKAkSMwoFdmFsdWUYAiABKAsyJC5yYXdkYXRh",
-            "LkV2ZW50SW5kZXBlbkJpbmdvTWFwQUJWYWx1ZToCOAFCPVotZ2l0bGFiLmZ1",
-            "bnBsdXMuaW8vZmF0L2NvbmYvZ2VuL2dvbGFuZy9yYXdkYXRhqgILZmF0LnJh",
-            "d2RhdGFiBnByb3RvMw=="));
+            "YSKJAwoRRXZlbnRJbmRlcGVuQmluZ28SCgoCaWQYASABKAUSEgoKYmluZ29U",
+            "aGVtZRgDIAEoBRIPCgdib2FyZElkGAQgASgFEhIKCmVuZFJlY3ljbGUYEyAD",
+            "KAkSEAoIZW5kVGhlbWUYBSABKAUSDwoHZ3JhZGVJZBgGIAEoBRIYChBncm91",
+            "cENob29zZVRoZW1lGAsgASgFEhEKCWhlbHBUaGVtZRgMIAEoBRIRCglpc09u",
+            "Qm9udXMYFCABKAgSEgoKaXNPbkJ1YmJsZRgVIAEoCBIRCglpdGVtVGhlbWUY",
+            "ByABKAUSFQoNbGV2ZWxDb21wbGV0ZRgNIAEoBRIUCgxsb2FkaW5nVGhlbWUY",
+            "DiABKAUSEQoJbWFpblRoZW1lGA8gASgFEgwKBG5hbWUYCCABKAkSFQoNbmV3",
+            "Um91bmRUaGVtZRgQIAEoBRIbChNzcGF3bmVyUHJldmlld1RoZW1lGBEgASgF",
+            "EhIKCnN0YXJ0VGhlbWUYCiABKAUSDwoHc3RvcmFnZRgSIAEoBSLUAQobRXZl",
+            "bnRJbmRlcGVuQmluZ29NYXBBQlZhbHVlElwKFEV2ZW50SW5kZXBlbkJpbmdv",
+            "TWFwGAEgAygLMj4ucmF3ZGF0YS5FdmVudEluZGVwZW5CaW5nb01hcEFCVmFs",
+            "dWUuRXZlbnRJbmRlcGVuQmluZ29NYXBFbnRyeRpXChlFdmVudEluZGVwZW5C",
+            "aW5nb01hcEVudHJ5EgsKA2tleRgBIAEoBRIpCgV2YWx1ZRgCIAEoCzIaLnJh",
+            "d2RhdGEuRXZlbnRJbmRlcGVuQmluZ286AjgBItkEChVFdmVudEluZGVwZW5C",
+            "aW5nb0NvbmYSVgoURXZlbnRJbmRlcGVuQmluZ29NYXAYASADKAsyOC5yYXdk",
+            "YXRhLkV2ZW50SW5kZXBlbkJpbmdvQ29uZi5FdmVudEluZGVwZW5CaW5nb01h",
+            "cEVudHJ5EloKFkV2ZW50SW5kZXBlbkJpbmdvTWFwQUIYAiADKAsyOi5yYXdk",
+            "YXRhLkV2ZW50SW5kZXBlbkJpbmdvQ29uZi5FdmVudEluZGVwZW5CaW5nb01h",
+            "cEFCRW50cnkSZAobRXZlbnRJbmRlcGVuQmluZ29NYXBBQlBhdGNoGAMgAygL",
+            "Mj8ucmF3ZGF0YS5FdmVudEluZGVwZW5CaW5nb0NvbmYuRXZlbnRJbmRlcGVu",
+            "QmluZ29NYXBBQlBhdGNoRW50cnkaVwoZRXZlbnRJbmRlcGVuQmluZ29NYXBF",
+            "bnRyeRILCgNrZXkYASABKAUSKQoFdmFsdWUYAiABKAsyGi5yYXdkYXRhLkV2",
+            "ZW50SW5kZXBlbkJpbmdvOgI4ARpjChtFdmVudEluZGVwZW5CaW5nb01hcEFC",
+            "RW50cnkSCwoDa2V5GAEgASgJEjMKBXZhbHVlGAIgASgLMiQucmF3ZGF0YS5F",
+            "dmVudEluZGVwZW5CaW5nb01hcEFCVmFsdWU6AjgBGmgKIEV2ZW50SW5kZXBl",
+            "bkJpbmdvTWFwQUJQYXRjaEVudHJ5EgsKA2tleRgBIAEoCRIzCgV2YWx1ZRgC",
+            "IAEoCzIkLnJhd2RhdGEuRXZlbnRJbmRlcGVuQmluZ29NYXBBQlZhbHVlOgI4",
+            "AUI9Wi1naXRsYWIuZnVucGx1cy5pby9mYXQvY29uZi9nZW4vZ29sYW5nL3Jh",
+            "d2RhdGGqAgtmYXQucmF3ZGF0YWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EventIndepenBingo), global::fat.rawdata.EventIndepenBingo.Parser, new[]{ "Id", "BingoTheme", "BoardId", "EndTheme", "GradeId", "GroupChooseTheme", "HelpTheme", "ItemTheme", "LevelComplete", "LoadingTheme", "MainTheme", "Name", "NewRoundTheme", "SpawnerPreviewTheme", "StartTheme", "Storage" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EventIndepenBingo), global::fat.rawdata.EventIndepenBingo.Parser, new[]{ "Id", "BingoTheme", "BoardId", "EndRecycle", "EndTheme", "GradeId", "GroupChooseTheme", "HelpTheme", "IsOnBonus", "IsOnBubble", "ItemTheme", "LevelComplete", "LoadingTheme", "MainTheme", "Name", "NewRoundTheme", "SpawnerPreviewTheme", "StartTheme", "Storage" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EventIndepenBingoMapABValue), global::fat.rawdata.EventIndepenBingoMapABValue.Parser, new[]{ "EventIndepenBingoMap" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::fat.rawdata.EventIndepenBingoConf), global::fat.rawdata.EventIndepenBingoConf.Parser, new[]{ "EventIndepenBingoMap", "EventIndepenBingoMapAB", "EventIndepenBingoMapABPatch" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, null, })
           }));
@@ -104,10 +105,13 @@ namespace fat.rawdata {
       id_ = other.id_;
       bingoTheme_ = other.bingoTheme_;
       boardId_ = other.boardId_;
+      endRecycle_ = other.endRecycle_.Clone();
       endTheme_ = other.endTheme_;
       gradeId_ = other.gradeId_;
       groupChooseTheme_ = other.groupChooseTheme_;
       helpTheme_ = other.helpTheme_;
+      isOnBonus_ = other.isOnBonus_;
+      isOnBubble_ = other.isOnBubble_;
       itemTheme_ = other.itemTheme_;
       levelComplete_ = other.levelComplete_;
       loadingTheme_ = other.loadingTheme_;
@@ -170,6 +174,21 @@ namespace fat.rawdata {
       }
     }
 
+    /// <summary>Field number for the "endRecycle" field.</summary>
+    public const int EndRecycleFieldNumber = 19;
+    private static readonly pb::FieldCodec<string> _repeated_endRecycle_codec
+        = pb::FieldCodec.ForString(154);
+    private readonly pbc::RepeatedField<string> endRecycle_ = new pbc::RepeatedField<string>();
+    /// <summary>
+    /// 活动结束回收棋子
+    /// (≤难度值:奖励id:奖励数量,）
+    /// 难度区间闭口
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<string> EndRecycle {
+      get { return endRecycle_; }
+    }
+
     /// <summary>Field number for the "endTheme" field.</summary>
     public const int EndThemeFieldNumber = 5;
     private int endTheme_;
@@ -229,6 +248,36 @@ namespace fat.rawdata {
       get { return helpTheme_; }
       set {
         helpTheme_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "isOnBonus" field.</summary>
+    public const int IsOnBonusFieldNumber = 20;
+    private bool isOnBonus_;
+    /// <summary>
+    /// 开启mergeBonus
+    /// (空=FALSE)
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool IsOnBonus {
+      get { return isOnBonus_; }
+      set {
+        isOnBonus_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "isOnBubble" field.</summary>
+    public const int IsOnBubbleFieldNumber = 21;
+    private bool isOnBubble_;
+    /// <summary>
+    /// 开启合成气泡
+    /// (空=FALSE)
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool IsOnBubble {
+      get { return isOnBubble_; }
+      set {
+        isOnBubble_ = value;
       }
     }
 
@@ -381,10 +430,13 @@ namespace fat.rawdata {
       if (Id != other.Id) return false;
       if (BingoTheme != other.BingoTheme) return false;
       if (BoardId != other.BoardId) return false;
+      if(!endRecycle_.Equals(other.endRecycle_)) return false;
       if (EndTheme != other.EndTheme) return false;
       if (GradeId != other.GradeId) return false;
       if (GroupChooseTheme != other.GroupChooseTheme) return false;
       if (HelpTheme != other.HelpTheme) return false;
+      if (IsOnBonus != other.IsOnBonus) return false;
+      if (IsOnBubble != other.IsOnBubble) return false;
       if (ItemTheme != other.ItemTheme) return false;
       if (LevelComplete != other.LevelComplete) return false;
       if (LoadingTheme != other.LoadingTheme) return false;
@@ -403,10 +455,13 @@ namespace fat.rawdata {
       if (Id != 0) hash ^= Id.GetHashCode();
       if (BingoTheme != 0) hash ^= BingoTheme.GetHashCode();
       if (BoardId != 0) hash ^= BoardId.GetHashCode();
+      hash ^= endRecycle_.GetHashCode();
       if (EndTheme != 0) hash ^= EndTheme.GetHashCode();
       if (GradeId != 0) hash ^= GradeId.GetHashCode();
       if (GroupChooseTheme != 0) hash ^= GroupChooseTheme.GetHashCode();
       if (HelpTheme != 0) hash ^= HelpTheme.GetHashCode();
+      if (IsOnBonus != false) hash ^= IsOnBonus.GetHashCode();
+      if (IsOnBubble != false) hash ^= IsOnBubble.GetHashCode();
       if (ItemTheme != 0) hash ^= ItemTheme.GetHashCode();
       if (LevelComplete != 0) hash ^= LevelComplete.GetHashCode();
       if (LoadingTheme != 0) hash ^= LoadingTheme.GetHashCode();
@@ -496,6 +551,15 @@ namespace fat.rawdata {
         output.WriteRawTag(144, 1);
         output.WriteInt32(Storage);
       }
+      endRecycle_.WriteTo(output, _repeated_endRecycle_codec);
+      if (IsOnBonus != false) {
+        output.WriteRawTag(160, 1);
+        output.WriteBool(IsOnBonus);
+      }
+      if (IsOnBubble != false) {
+        output.WriteRawTag(168, 1);
+        output.WriteBool(IsOnBubble);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -569,6 +633,15 @@ namespace fat.rawdata {
         output.WriteRawTag(144, 1);
         output.WriteInt32(Storage);
       }
+      endRecycle_.WriteTo(ref output, _repeated_endRecycle_codec);
+      if (IsOnBonus != false) {
+        output.WriteRawTag(160, 1);
+        output.WriteBool(IsOnBonus);
+      }
+      if (IsOnBubble != false) {
+        output.WriteRawTag(168, 1);
+        output.WriteBool(IsOnBubble);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -587,6 +660,7 @@ namespace fat.rawdata {
       if (BoardId != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(BoardId);
       }
+      size += endRecycle_.CalculateSize(_repeated_endRecycle_codec);
       if (EndTheme != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(EndTheme);
       }
@@ -598,6 +672,12 @@ namespace fat.rawdata {
       }
       if (HelpTheme != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(HelpTheme);
+      }
+      if (IsOnBonus != false) {
+        size += 2 + 1;
+      }
+      if (IsOnBubble != false) {
+        size += 2 + 1;
       }
       if (ItemTheme != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(ItemTheme);
@@ -646,6 +726,7 @@ namespace fat.rawdata {
       if (other.BoardId != 0) {
         BoardId = other.BoardId;
       }
+      endRecycle_.Add(other.endRecycle_);
       if (other.EndTheme != 0) {
         EndTheme = other.EndTheme;
       }
@@ -657,6 +738,12 @@ namespace fat.rawdata {
       }
       if (other.HelpTheme != 0) {
         HelpTheme = other.HelpTheme;
+      }
+      if (other.IsOnBonus != false) {
+        IsOnBonus = other.IsOnBonus;
+      }
+      if (other.IsOnBubble != false) {
+        IsOnBubble = other.IsOnBubble;
       }
       if (other.ItemTheme != 0) {
         ItemTheme = other.ItemTheme;
@@ -763,6 +850,18 @@ namespace fat.rawdata {
             Storage = input.ReadInt32();
             break;
           }
+          case 154: {
+            endRecycle_.AddEntriesFrom(input, _repeated_endRecycle_codec);
+            break;
+          }
+          case 160: {
+            IsOnBonus = input.ReadBool();
+            break;
+          }
+          case 168: {
+            IsOnBubble = input.ReadBool();
+            break;
+          }
         }
       }
     #endif
@@ -839,6 +938,18 @@ namespace fat.rawdata {
           }
           case 144: {
             Storage = input.ReadInt32();
+            break;
+          }
+          case 154: {
+            endRecycle_.AddEntriesFrom(ref input, _repeated_endRecycle_codec);
+            break;
+          }
+          case 160: {
+            IsOnBonus = input.ReadBool();
+            break;
+          }
+          case 168: {
+            IsOnBubble = input.ReadBool();
             break;
           }
         }

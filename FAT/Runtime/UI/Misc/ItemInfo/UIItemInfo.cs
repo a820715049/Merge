@@ -29,7 +29,11 @@ namespace FAT
         [SerializeField] private GameObject middleInfoPanel;
         [SerializeField] private GameObject smallInfoPanel;
         [SerializeField] private UIImageRes mSingleItemIcon;
+        [SerializeField] private Button mSingleItemNumTagBtn;
+        [SerializeField] private TMP_Text mSingleItemNumTagText;
         [SerializeField] private UIImageRes sSingleItemIcon;
+        [SerializeField] private Button sSingleItemNumTagBtn;
+        [SerializeField] private TMP_Text sSingleItemNumTagText;
         [SerializeField] private GameObject normalBg1;
         [SerializeField] private GameObject normalBg2;
         [SerializeField] private GameObject boostBg1;
@@ -82,8 +86,8 @@ namespace FAT
 
         protected override void OnCreate()
         {
-            transform.AddButton("Mask", base.Close);
-            transform.AddButton("Content/Root/BtnClose", base.Close).FixPivot();
+            transform.AddButton("Mask", OnBtnCloseClick);
+            transform.AddButton("Content/Root/BtnClose", OnBtnCloseClick).FixPivot();
             mProduceBtn.onClick.AddListener(OnProduceBtnClick);
             var path = "Content/Root/Panel/Info/Big/ScrollArea";
             //3行 scroll
@@ -114,6 +118,9 @@ namespace FAT
             _sixSlider2 = transform.FindEx<UIImageState>(path6 + "/Scrollbar Vertical/Sliding Area/Handle");
             _sixGroupScroll.InitLayout();
             _sixGroupScroll.SetScrollableMax(5);
+            //NumTag
+            mSingleItemNumTagBtn.WithClickScale().onClick.AddListener(OnItemNumTagBtnClick);
+            sSingleItemNumTagBtn.WithClickScale().onClick.AddListener(OnItemNumTagBtnClick);
         }
 
         protected override void OnPreOpen()
@@ -251,13 +258,20 @@ namespace FAT
                     var cfg = Game.Manager.objectMan.GetBasicConfig(itemId);
                     if (cfg != null)
                     {
+                        var canShow = Game.Manager.itemInfoMan.CheckItemNumTagInfo(itemId, out var totalCount);
                         if (panelSize == 1)
                         {
                             mSingleItemIcon.SetImage(cfg.Icon.ConvertToAssetConfig());
+                            //刷新当前棋子的持有数量
+                            mSingleItemNumTagBtn.gameObject.SetActive(canShow);
+                            mSingleItemNumTagText.text = totalCount.ToString();
                         }
                         else if (panelSize == 0)
                         {
                             sSingleItemIcon.SetImage(cfg.Icon.ConvertToAssetConfig());
+                            //刷新当前棋子的持有数量
+                            sSingleItemNumTagBtn.gameObject.SetActive(canShow);
+                            sSingleItemNumTagText.text = totalCount.ToString();
                         }
                     }
                 }
@@ -546,6 +560,25 @@ namespace FAT
                     UIManager.Instance.OpenWindow(UIConfig.UIItemInfoWideTips, mProduceIcon.transform.position, 113f, curShowItemData.ItemId);
                 }
             }
+        }
+
+        private void OnItemNumTagBtnClick()
+        {
+            if (_chainGroupList.Count == 1 && _chainGroupList[0].Count == 1)
+            {
+                int itemId = _chainGroupList[0][0];
+                var cfg = Game.Manager.objectMan.GetBasicConfig(itemId);
+                if (cfg != null)
+                {
+                    Game.Manager.itemInfoMan.ProcessClickItemNumTag(itemId);
+                }
+            }
+        }
+
+        private void OnBtnCloseClick()
+        {
+            Game.Manager.itemInfoMan.ProcessClosUIItemInfo();
+            Close();
         }
 
         private void _OnSecondUpdate()

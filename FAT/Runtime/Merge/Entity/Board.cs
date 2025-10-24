@@ -13,7 +13,9 @@ namespace FAT.Merge
     public enum ItemDeadType
     {
         None,
-        Order,
+        Sell,       //棋子被卖掉
+        Delete,     //棋子被直接删掉
+        Order,      //棋子被订单收走
         Common,
         ClickOut,
         Eat,
@@ -26,6 +28,7 @@ namespace FAT.Merge
         JumpCDExpired,
         FarmAnimal, //农场棋盘中被动物直接吃掉
         WishBoard,
+        TokenMultiExpired,
     }
 
     // 服务于ISpawnBonusHandler
@@ -179,6 +182,8 @@ namespace FAT.Merge
         public event System.Action<Item> onUseTimeScaleSource;                  //when use tesla
         public event System.Action<Item> onJumpCDBegin;                //when use jumpcd
         public event System.Action onJumpCDEnd;                        //jumpcd expired
+        public event System.Action<Item> onTokenMultiBegin;                //when use tokenMulti
+        public event System.Action onTokenMultiEnd;                        //tokenMulti expired
         public event System.Action onLackOfEnergy;                  //when user lack of energy to do some operation
         public event System.Action<Item, FeatureEntry> onFeatureClicked; //when feature clicked
         public event System.Action<Item, List<int>, System.Action<int>> onChoiceBoxWaiting; //when choicebox clicked
@@ -202,6 +207,8 @@ namespace FAT.Merge
         private MergeWorld mParent;
         private HashSet<int> mLockedPosIdx = new HashSet<int>();            //提前被占据的格子，即便此时格子是空的，id在里面，它也不会在_FindEmptyPos里返回
         private ReasonString ProduceReason => EnergyBoostUtility.GetEnergyProduceReason(SettingManager.Instance.EnergyBoostState);
+        public bool EquivalentToMain { get; private set; }
+        public bool GiftBoxUnable { get; private set; }
 
         public Board(MergeWorld parent)
         {
@@ -212,6 +219,12 @@ namespace FAT.Merge
         {
             boardId = _boardId;
             _Reset(col, row);
+        }
+
+        public void SetBoardParam(bool EquivalentToMain, bool GiftBoxUnable)
+        {
+            this.EquivalentToMain = EquivalentToMain;
+            this.GiftBoxUnable = GiftBoxUnable;
         }
 
         public void Deserialize(IDictionary<int, Item> unusedItem)
@@ -387,6 +400,20 @@ namespace FAT.Merge
                 return false;
             }
             _DisposeItem(item, true, type);
+            _DisposeBonusProcess(item, item, type);
+            return true;
+        }
+        
+        //尝试销毁一个在背包里放着的棋子
+        public bool DisposeItemInventory(Item item, ItemDeadType type = ItemDeadType.Common)
+        {
+            //认为棋子在背包中时没有parent
+            if (item.parent != null)
+            {
+                DebugEx.FormatWarning("Merge::Board.DisposeItemInventory ----> item not in Inventory:{0}({1})", item.id, item.tid);
+                return false;
+            }
+            //因为棋子不在棋盘上，所以无需调用_DisposeItem，但为了外部handler正常工作需要调用_DisposeBonusProcess
             _DisposeBonusProcess(item, item, type);
             return true;
         }
@@ -1566,6 +1593,26 @@ namespace FAT.Merge
                 return false;
             }
         }
+        
+        public bool CanUseTokenMultiItem(Item item)
+        {
+            var com = item.GetItemComponent<ItemTokenMultiComponent>();
+            return com != null && item.isActive && !item.isDead;
+        }
+
+        public bool UseTokenMulti(Item item)
+        {
+            if (CanUseTokenMultiItem(item))
+            {
+                mParent.UseTokenMultiItem(item);
+                return true;
+            }
+            else
+            {
+                DebugEx.FormatInfo("Merge::Board.UseTokenMulti ----> no TokenMulti for item {0}", item.tid);
+                return false;
+            }
+        }
 
         public bool CanUseOrderBoxItem(Item item)
         {
@@ -1624,7 +1671,7 @@ namespace FAT.Merge
             var newItem = _SpawnItem(tid, _CalculateIdxByCoord(pos.x, pos.y), pos.x, pos.y, false, false, false);
             return newItem;
         }
-        
+
         public Item KillBubbleItem(Item item, ItemBubbleType type, out int transItemId)
         {
             transItemId = 0;
@@ -2024,6 +2071,19 @@ namespace FAT.Merge
                     return true;
                 }
             }
+            else if (item.HasComponent(ItemComponentType.TokenMulti))
+            {
+                // 物品是<token翻倍> 且当前没有正在激活的效果
+                if (!world.tokenMulti.hasActiveTokenMulti)
+                {
+                    if (UseTokenMulti(item))
+                    {
+                        Env.Instance.NotifyItemUse(item, ItemComponentType.TokenMulti);
+                        DebugEx.FormatInfo("Merge::Board::_TryUseRewardItemImmediately ----> use tokenMulti {0}", item);
+                    }
+                    return true;
+                }
+            }
             return false;
         }
 
@@ -2086,7 +2146,7 @@ namespace FAT.Merge
                 mGrids[itemIdx].item = null;
                 _ChangeEmptyGridCount(1);
                 // 卖出时结算可能获得的活动体力奖励
-                _DisposeBonusProcess(item, item);
+                _DisposeBonusProcess(item, item, ItemDeadType.Sell);
                 item.SetParent(null, null);
                 onItemLeave?.Invoke(item);
                 world.TriggerItemEvent(item, ItemEventType.ItemEventLeaveBoard);
@@ -2268,6 +2328,18 @@ namespace FAT.Merge
         public void TriggerJumpCDEnd()
         {
             onJumpCDEnd?.Invoke();
+        }
+        
+        public void TriggerTokenMultiBegin(Item item)
+        {
+            onTokenMultiBegin?.Invoke(item);
+            MessageCenter.Get<MSG.GAME_ORDER_TOKEN_MULTI_BEGIN>().Dispatch(item);
+        }
+
+        public void TriggerTokenMultiEnd()
+        {
+            onTokenMultiEnd?.Invoke();
+            MessageCenter.Get<MSG.GAME_ORDER_TOKEN_MULTI_END>().Dispatch();
         }
 
         private void _TriggerUnlockAround(int col, int row, ItemStateChangeContext context = null)
@@ -2758,7 +2830,7 @@ namespace FAT.Merge
             DebugEx.FormatInfo("Merge::Board._SpawnBubbleItem ----> item {0}({1},{2}) is spawned", item.id, item.coord.x, item.coord.y);
             return item;
         }
-        
+
         public Item TrySpawnFrozenItem(Item srcItem, int targetId, long lifeTime)
         {
             var emptyIdx = _FindEmptyIdx(new FindEmptyIndexParam() { centerCol = srcItem.coord.x, centerRow = srcItem.coord.y });       //泡泡不能放在特殊grid上，就视为普通item
