@@ -10,9 +10,12 @@ namespace FAT
         public bool hasReward;
         private int _index = -1;
         private int state = 0;
+        
+        private ActivityRaceExtend _activityRace;
 
-        public void InitState(int round)
+        public void InitState(ActivityRaceExtend activityRace, int round)
         {
+            _activityRace = activityRace;
             _index = int.Parse(name);
             UpdateState(round);
             if (hasReward)
@@ -36,10 +39,13 @@ namespace FAT
 
         private void OnClick()
         {
-            var round = RaceManager.GetInstance().Race.ConfD.NormalRoundId[5];
-            var group = fat.conf.Data.GetEventRaceGroup(round);
-            var rewardID = fat.conf.Data.GetEventRaceRound(Game.Manager.userGradeMan.GetTargetConfigDataId(group.IncludeRoundGrpId)).RaceGetGift[0];
-            var config = fat.conf.Data.GetEventRaceReward(rewardID);
+            var round = _activityRace.GetRoundConfigByIndex(_index);
+            if (round.MilestoneRwd == 0)
+            {
+                Debug.LogError($"not milestoneRwd on {_index} from id: {round.Id}");
+            }
+            var rewardID = fat.conf.Data.GetEventRaceRound(round.MilestoneRwd).RaceGetGift[0];
+            var config = fat.conf.Data.GetRaceExtendReward(rewardID);
             UIManager.Instance.OpenWindow(UIConfig.UICommonRewardTips, transform.Find("info/info").position, 50f, config.Reward);
         }
     }

@@ -316,20 +316,20 @@ namespace FAT
             if (_activityRace.raceExtendRoundConfig.RaceGetNum.Count == 1)
             {
                 if (!firstReward.hasInit)
-                    firstReward.Init(_firstTrack, true);
+                    firstReward.Init(_activityRace, _firstTrack, true);
                 if (!secondReward.hasInit)
-                    secondReward.Init(_secondTrack, false);
+                    secondReward.Init(_activityRace, _secondTrack, false);
                 if (!thirdReward.hasInit)
-                    thirdReward.Init(_thirdTrack, false);
+                    thirdReward.Init(_activityRace, _thirdTrack, false);
             }
             else
             {
                 if (!firstReward.hasInit)
-                    firstReward.Init(_firstTrack, true);
+                    firstReward.Init(_activityRace, _firstTrack, true);
                 if (!secondReward.hasInit)
-                    secondReward.Init(_secondTrack, true);
+                    secondReward.Init(_activityRace, _secondTrack, true);
                 if (!thirdReward.hasInit)
-                    thirdReward.Init(_thirdTrack, true);
+                    thirdReward.Init(_activityRace, _thirdTrack, true);
             }
         }
 

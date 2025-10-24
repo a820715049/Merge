@@ -21,14 +21,15 @@ namespace FAT
 
         protected override void OnCreate()
         {
-            transform.AddButton("Content/Common/ConfirmBtn", OnClickConfirm);
-            transform.AddButton("Content/Common/CancleBtn", OnClickCancel);
+            transform.AddButton("Content/Common/Group/ConfirmBtn", OnClickConfirm);
+            transform.AddButton("Content/Common/Group/CancelBtn", OnClickCancel);
             transform.AddButton("Content/Common/InfoBtn", () => UIManager.Instance.OpenWindow(UIConfig.UIRaceHelp, transform.Find("Content/Common/InfoBtn").position, 0f));
         }
 
         protected override void OnParse(params object[] items)
         {
             _activityRace = (ActivityRaceExtend)items[0];
+            transform.Find("Content/Common/Group/CancelBtn").gameObject.SetActive(_activityRace.raceExtendConfig.IsLater);
         }
 
         protected override void OnPreOpen()
@@ -49,7 +50,7 @@ namespace FAT
         {
             foreach (var t in treasureLevels)
             {
-                t.InitState(_activityRace.phase);
+                t.InitState(_activityRace, _activityRace.phase);
             }
 
             player.transform.position = treasureLevels[_activityRace.phase].transform.position;

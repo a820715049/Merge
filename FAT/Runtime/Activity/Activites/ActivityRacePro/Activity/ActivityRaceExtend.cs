@@ -48,10 +48,10 @@ namespace FAT
 
         #region Theme
 
-        public readonly VisualPopup startPopup = new();
-        public readonly VisualPopup mainPopup = new();
-        public readonly VisualPopup roundOverPopup = new();
-        public readonly VisualPopup endPopup = new();
+        public readonly VisualPopup startPopup = new(UIConfig.UIRaceProStart);
+        public readonly VisualPopup mainPopup = new(UIConfig.UIRaceProPanel);
+        public readonly VisualPopup roundOverPopup = new(UIConfig.UIRaceProReward);
+        public readonly VisualPopup endPopup = new(UIConfig.UIRaceProEnd);
 
         #endregion
 
@@ -136,6 +136,7 @@ namespace FAT
 
         public override void AfterLoad(ActivityInstance data_)
         {
+            if (data_ == null) { return; }
             _LoadRankingList(data_);
             _LoadRobotList(data_);
             _CheckOfflineScore();
@@ -223,6 +224,19 @@ namespace FAT
         /// </summary>
         /// <returns>当前分数</returns>
         public int GetCurScore() => raceExtendManager.myself.curScore;
+
+        /// <summary>
+        /// 获取指定索引的回合配置
+        /// </summary>
+        /// <param name="index">索引</param>
+        /// <returns>回合配置, 没有回合配置时返回null</returns>
+        public RaceExtendRound GetRoundConfigByIndex(int index)
+        {
+            if (index < 0 || index >= raceExtendConfig.NormalRoundId.Count) { return null; }
+            var groupID = raceExtendConfig.NormalRoundId[index];
+            var roundID = Game.Manager.userGradeMan.GetTargetConfigDataId(RaceExtendGroupVisitor.Get(groupID).IncludeRoundGrpId);
+            return RaceExtendRoundVisitor.Get(roundID);
+        }
 
         #endregion
 

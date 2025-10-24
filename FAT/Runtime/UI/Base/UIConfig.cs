@@ -240,11 +240,20 @@ namespace FAT
 
         #region 热气球活动
 
-        public static UIResource UIRaceStart = new UIResource("UIRaceProStart.prefab", AboveStatus, "event_racepro_default");
+        public static UIResource UIRaceStart = new UIResource("UIRaceStart.prefab", AboveStatus, "event_race_default");
         public static UIResource UIRaceEnd = new UIResource("UIRaceEnd.prefab", AboveStatus, "event_race_default");
-        public static UIResource UIRacePanel = new UIResource("UIRaceProPanel.prefab", AboveStatus, "event_racepro_default").SupportNavBack();
+        public static UIResource UIRacePanel = new UIResource("UIRacePanel.prefab", AboveStatus, "event_race_default").SupportNavBack();
         public static UIResource UIRaceReward = new UIResource("UIRaceReward.prefab", SubStatus, "event_race_default");
         public static UIResource UIRaceHelp = new UIResource("UIRaceHelp.prefab", SubStatus, "event_race_default").SupportNavBack();
+
+        #endregion
+
+        #region 热气球活动 - 里程碑
+
+        public static UIResource UIRaceProStart = new UIResource("UIRaceProStart.prefab", AboveStatus, "event_racepro_default");
+        public static UIResource UIRaceProEnd = new UIResource("UIRaceProEnd.prefab", AboveStatus, "event_racepro_default");
+        public static UIResource UIRaceProPanel = new UIResource("UIRaceProPanel.prefab", AboveStatus, "event_racepro_default").SupportNavBack();
+        public static UIResource UIRaceProReward = new UIResource("UIRaceProReward.prefab", SubStatus, "event_racepro_default");
 
         #endregion
 
